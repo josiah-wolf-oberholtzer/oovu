@@ -14,7 +14,7 @@ public class Environment {
     public static final OscAddressNode root_osc_address_node = new OscAddressNode("");
     
     public static OscAddressNode create_address(String[] osc_address_parts) {
-    	if (! OscAddress.all_are_valid_names(osc_address_parts)) {
+    	if (! OscAddress.all_are_node_name_tokens(osc_address_parts)) {
     		return null;
     	}
     	OscAddressNode parent_node = Environment.root_osc_address_node;

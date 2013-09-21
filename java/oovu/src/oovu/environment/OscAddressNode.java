@@ -10,7 +10,7 @@ import oovu.nodes.Node;
 
 public class OscAddressNode {
 
-    public final String name;
+    private final String name;
     private final Map<String, OscAddressNode> children = 
         new HashMap<String, OscAddressNode>();
     private OscAddressNode parent = null;
@@ -21,25 +21,31 @@ public class OscAddressNode {
     }
     
     public void add_child(OscAddressNode child) {
+    	OscAddressNode[] parentage = this.get_parentage();
+    	if (Arrays.asList(parentage).contains(child)) {
+    		return;
+    	}
+    	if (child.get_parent() != null) {
+    		child.get_parent().remove_child(child);
+    	}
         this.children.put(child.name, child);
         child.parent = this;
     }
     
     public void clear() {
-    	this.children.clear();
+    	OscAddressNode[] children = this.children.values().toArray(
+    		new OscAddressNode[0]);
+    	for (OscAddressNode child : children) {
+    		this.remove_child(child);
+    	}
     }
     
     public OscAddressNode get_child(String name) {
     	return this.children.get(name);
     }
     
-    public void remove_child(OscAddressNode child) {
-        this.children.remove(child.name);
-        child.parent = null;
-    }
-    
-    public void set_node(Node node) {
-        this.node = node;
+    public String get_name() {
+    	return this.name;
     }
     
     public Node get_node() {
@@ -63,6 +69,10 @@ public class OscAddressNode {
     	return parentage.toArray(new OscAddressNode[0]);
     }
     
+    public int get_reference_count() {
+    	return this.children.size();
+    }
+    
     public OscAddressNode get_root() {
     	OscAddressNode[] parentage = this.get_parentage();
     	return parentage[parentage.length - 1];
@@ -79,10 +89,6 @@ public class OscAddressNode {
     	return this.get_root() == Environment.root_osc_address_node;
     }
     
-    public int get_reference_count() {
-    	return this.children.size();
-    }
-    
     public void prune() {
     	OscAddressNode[] parentage = this.get_parentage();
     	parentage = Arrays.copyOf(parentage, parentage.length - 1);
@@ -92,6 +98,15 @@ public class OscAddressNode {
     		}
     		osc_address_node.get_parent().remove_child(osc_address_node);
     	}
+    }
+    
+    public void remove_child(OscAddressNode child) {
+        this.children.remove(child.name);
+        child.parent = null;
+    }
+    
+    public void set_node(Node node) {
+        this.node = node;
     }
     
 }

@@ -40,6 +40,9 @@ public class OscAddressNodeTest {
 		module_one_dsp.add_child(module_one_dsp_gain);
 		module_two_dsp.add_child(module_two_dsp_active);
 		module_two_dsp.add_child(module_two_dsp_gain);
+		assertEquals(root.get_reference_count(), 2);
+		Environment.reset();
+		assertEquals(root.get_reference_count(), 0);
 	}
 	
 	@Test
@@ -52,7 +55,7 @@ public class OscAddressNodeTest {
 		assertEquals(foo.get_reference_count(), 0);
 		assertEquals(foo.get_root(), foo);
 		assertEquals(foo.is_empty(), true);
-		assertEquals(foo.name, "foo");
+		assertEquals(foo.get_name(), "foo");
 
 		OscAddressNode bar = new OscAddressNode("bar");
 		foo.add_child(bar);
@@ -68,7 +71,7 @@ public class OscAddressNodeTest {
 		assertEquals(bar.get_reference_count(), 0);
 		assertEquals(bar.get_root(), foo);
 		assertEquals(bar.is_empty(), true);
-		assertEquals(bar.name, "bar");
+		assertEquals(bar.get_name(), "bar");
 
 		foo.remove_child(bar);
 		
@@ -78,14 +81,14 @@ public class OscAddressNodeTest {
 		assertEquals(foo.get_reference_count(), 0);
 		assertEquals(foo.get_root(), foo);
 		assertEquals(foo.is_empty(), true);
-		assertEquals(foo.name, "foo");
+		assertEquals(foo.get_name(), "foo");
 		
 		assertArrayEquals(bar.get_parentage(), new OscAddressNode[]{ bar });
 		assertEquals(bar.get_parent(), null);
 		assertEquals(bar.get_reference_count(), 0);
 		assertEquals(bar.get_root(), bar);
 		assertEquals(bar.is_empty(), true);
-		assertEquals(bar.name, "bar");
+		assertEquals(bar.get_name(), "bar");
 	}
 	
 	@Test
@@ -137,4 +140,21 @@ public class OscAddressNodeTest {
 		assertEquals(foo_osc_address_node.is_empty(), true);
 	}
 
+	@Test
+	public void test_06() {
+		OscAddressNode foo = new OscAddressNode("foo");
+		OscAddressNode bar = new OscAddressNode("bar");
+		OscAddressNode baz = new OscAddressNode("baz");
+		foo.add_child(bar);
+		assertEquals(bar.get_parent(), foo);
+		assertEquals(foo.get_child("bar"), bar);
+		baz.add_child(bar);
+		assertEquals(bar.get_parent(), baz);
+		assertEquals(foo.get_child("bar"), null);
+		assertEquals(baz.get_child("bar"), bar);
+		assertArrayEquals(bar.get_parentage(), new OscAddressNode[]{ bar, baz });
+		bar.add_child(baz);
+		assertArrayEquals(bar.get_parentage(), new OscAddressNode[]{ bar, baz });
+	}
+	
 }

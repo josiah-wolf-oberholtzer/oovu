@@ -21,7 +21,6 @@ public class EnvironmentTest {
 	
 	@Test
 	public void test_reset() {
-		Environment.reset();
 		assertEquals(Environment.osc_addresses.size(), 0);
 		assertEquals(Environment.modules_by_module_id.size(), 0);
 		assertEquals(Environment.pull_addresses.size(), 0);
