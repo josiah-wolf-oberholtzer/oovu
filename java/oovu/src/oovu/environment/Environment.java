@@ -36,21 +36,42 @@ public class Environment {
     public static void reset() {
         Environment.modules_by_module_id.clear();
         Environment.root_node.child_nodes.clear();
+        Environment.root_osc_address_node.clear();
         Environment.osc_addresses.clear();
         Environment.pull_addresses.clear();
         Environment.push_addresses.clear();
     }
     
     public static OscAddressNode create_address(String[] osc_address_parts) {
-    	return new OscAddressNode("");
+    	if (! OscAddress.all_are_valid_names(osc_address_parts)) {
+    		return null;
+    	}
+    	OscAddressNode parent_node = Environment.root_osc_address_node;
+    	OscAddressNode child_node = Environment.root_osc_address_node;
+    	for (String osc_address_part : osc_address_parts) {
+    		child_node = parent_node.get_child(osc_address_part);
+    		if (child_node == null) {
+    			child_node = new OscAddressNode(osc_address_part);
+    			parent_node.add_child(child_node);
+    		}
+    		parent_node = child_node;
+    	}
+    	return child_node;
     }
     
     public static void prune_address(OscAddressNode osc_address_node) {
-    	
+    	osc_address_node.prune();
     }
     
-    public static OscAddressNode find_address(String[] osc_address_parts, String[] relative_address_parts) {
-    	return new OscAddressNode("");
+    public static OscAddressNode find_address(String[] osc_address_parts) {
+    	OscAddressNode current_node = Environment.root_osc_address_node;
+    	for (String osc_address_part : osc_address_parts) {
+    		current_node = current_node.get_child(osc_address_part);
+    		if (current_node == null) {
+    			return null;
+    		}
+    	}
+    	return current_node;
     }
 
 }
