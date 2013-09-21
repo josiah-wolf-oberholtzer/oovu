@@ -96,6 +96,13 @@ public class OscAddressTest {
 	}
 	
 	@Test
+	public void test_all_are_node_name_tokens_11() {
+		String[] names = new String[]{ "*", "foo.*", "*.foo", "*.*" };
+		boolean result = OscAddress.all_are_node_name_tokens(names);
+		assertTrue(result);
+	}
+	
+	@Test
 	public void test_construct_01() {
         String address_string = "$#98535-_";
         thrown.expect(RuntimeException.class);
