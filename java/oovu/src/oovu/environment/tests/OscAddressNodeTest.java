@@ -3,6 +3,7 @@ package oovu.environment.tests;
 import static org.junit.Assert.*;
 import oovu.environment.Environment;
 import oovu.environment.OscAddressNode;
+import oovu.nodes.ModuleNode;
 
 import org.junit.After;
 import org.junit.Before;
@@ -118,6 +119,22 @@ public class OscAddressNodeTest {
 		assertArrayEquals(baz.get_parentage(), new OscAddressNode[]{ baz });
 		assertArrayEquals(quux.get_parentage(), new OscAddressNode[]{ quux, bar, foo });
 		quux.prune();
+	}
+	
+	@Test
+	public void test_05() {
+		OscAddressNode foo_osc_address_node = new OscAddressNode("foo");
+		OscAddressNode bar_osc_address_node = new OscAddressNode("bar");
+		ModuleNode foo_module_node = new ModuleNode(1001, null);
+		assertEquals(foo_osc_address_node.is_empty(), true);
+		foo_osc_address_node.set_node(foo_module_node);
+		assertEquals(foo_osc_address_node.is_empty(), false);
+		foo_osc_address_node.add_child(bar_osc_address_node);
+		assertEquals(foo_osc_address_node.is_empty(), false);
+		foo_osc_address_node.set_node(null);
+		assertEquals(foo_osc_address_node.is_empty(), false);
+		foo_osc_address_node.remove_child(bar_osc_address_node);
+		assertEquals(foo_osc_address_node.is_empty(), true);
 	}
 
 }
