@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: oovu
+Bundle-SymbolicName: oovu
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: oovu.jar,
+ lib/max.jar
+Export-Package: com.cycling74.io,
+ com.cycling74.max,
+ com.cycling74.msp,
+ com.cycling74.mxjedit,
+ com.cycling74.net,
+ com.cycling74.util,
+ oovu,
+ oovu.datatypes,
+ oovu.nodes
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
