@@ -237,7 +237,7 @@ abstract public class Node implements Dispatcher {
 
     abstract public Node get_parent_node();
 
-    abstract public Integer get_reference_count();
+    abstract public int get_reference_count();
 
     public String[] get_report_pieces() {
         return new String[0];

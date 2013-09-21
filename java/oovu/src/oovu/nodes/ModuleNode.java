@@ -55,7 +55,7 @@ public class ModuleNode extends Node {
     }
 
     @Override
-    public Integer get_reference_count() {
+    public int get_reference_count() {
         return this.node_proxies.size() + this.child_nodes.size();
     }
 

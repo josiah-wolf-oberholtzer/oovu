@@ -4,10 +4,8 @@ import java.util.regex.*;
 
 public class OscAddress {
 
-    static final String osc_name_regex = "([a-z][a-z0-9~]{2,}(.[a-z0-9]+))";
+    static final String osc_name_regex = "^([a-z][a-z0-9~]*(\\.[a-z0-9]+)?)$";
     static final Pattern osc_name_pattern = Pattern.compile(osc_name_regex);
-    static final Pattern interface_handler_name_pattern = Pattern.compile(
-        ".*(:" + osc_name_regex + "(/" + osc_name_regex + ")*)");    
     
     public String interface_handler_name;
     public String module_name;

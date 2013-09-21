@@ -79,6 +79,10 @@ public class OscAddressNode {
     	return this.get_root() == Environment.root_osc_address_node;
     }
     
+    public int get_reference_count() {
+    	return this.children.size();
+    }
+    
     public void prune() {
     	OscAddressNode[] parentage = this.get_parentage();
     	parentage = Arrays.copyOf(parentage, parentage.length - 1);
