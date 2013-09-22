@@ -157,20 +157,5 @@ public class Test_OscAddressNode_construct {
 		assertArrayEquals(bar.get_parentage(), new OscAddressNode[]{ bar, baz });
 	}
 	
-	@Test
-	public void test_07() {
-		OscAddressNode root = new OscAddressNode("");
-		OscAddressNode module_one = new OscAddressNode("module.1");
-		OscAddressNode module_two = new OscAddressNode("module.2");
-		OscAddressNode module_three = new OscAddressNode("module.3");
-		OscAddressNode module_one_child = new OscAddressNode("child");
-		OscAddressNode module_two_child = new OscAddressNode("child");
-		root.add_child(module_one);
-		root.add_child(module_two);
-		root.add_child(module_three);
-		module_one.add_child(module_one_child);
-		module_two.add_child(module_two_child);
-		
-	}
 
 }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.*;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class OscAddress {
 
     static final String osc_name_regex = 
@@ -84,4 +86,20 @@ public class OscAddress {
         this.address_items = new_address_items.toArray(new String[0]);
     }
     
+    public String toString() {
+    	StringBuilder string_builder = new StringBuilder();
+    	string_builder.append(this.getClass().getSimpleName() + "(\"");
+    	if (!this.is_relative) {
+    		string_builder.append("/");
+    	}
+    	string_builder.append(StringUtils.join(this.address_items, "/"));
+    	if (this.node_attribute_name != null) {
+    	    if (1 < string_builder.length()) {
+    		    string_builder.append("/");
+    	    }
+    	    string_builder.append(this.node_attribute_name);
+    	}
+    	string_builder.append("\")");
+    	return string_builder.toString();
+    }
 }

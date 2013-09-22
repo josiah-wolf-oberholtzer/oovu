@@ -7,6 +7,10 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.sun.tools.javac.util.List;
+
 import oovu.nodes.Node;
 
 
@@ -52,6 +56,16 @@ public class OscAddressNode {
     
     public Node get_node() {
         return this.node;
+    }
+    
+    public String get_osc_address() {
+    	ArrayList<String> names = new ArrayList<String>();
+    	for (OscAddressNode node : this.get_parentage()) {
+    		names.add(node.name);
+    	}
+    	List<String> reversed_names = List.from(names.toArray(new String[0]));
+    	reversed_names = reversed_names.reverse();
+    	return StringUtils.join(reversed_names, "/");
     }
     
     public OscAddressNode get_parent() {
@@ -131,13 +145,16 @@ public class OscAddressNode {
         this.node = node;
     }
     
-    public OscAddressNode[] search(OscAddress osc_address) {
+    public Set<OscAddressNode> search(OscAddress osc_address) {
     	Set<OscAddressNode> old_cursors = new HashSet<OscAddressNode>();
     	Set<OscAddressNode> new_cursors = new HashSet<OscAddressNode>();
     	if (osc_address.is_relative) {
     		old_cursors.add(this);
     	} else {
     		old_cursors.add(this.get_root());
+    	}
+    	if (osc_address.address_items.length < 1) {
+    		return old_cursors;
     	}
     	for (String current_address_item : osc_address.address_items) {
     		new_cursors.clear();
@@ -161,6 +178,11 @@ public class OscAddressNode {
     		old_cursors.clear();
     		old_cursors.addAll(new_cursors);
     	}
-    	return new OscAddressNode[0];
+    	return new_cursors;
+    }
+    
+    public String toString() {
+    	return this.getClass().getSimpleName() + "(\"" + 
+    		this.get_osc_address() + "\")";
     }
 }

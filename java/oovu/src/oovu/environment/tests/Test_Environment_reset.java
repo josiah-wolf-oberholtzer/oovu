@@ -7,7 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class EnvironmentTest {
+public class Test_Environment_reset {
 
 	@Before
 	public void setUp() throws Exception {
