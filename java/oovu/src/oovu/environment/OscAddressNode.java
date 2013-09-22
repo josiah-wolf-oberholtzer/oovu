@@ -3,7 +3,9 @@ package oovu.environment;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import oovu.nodes.Node;
 
@@ -89,6 +91,26 @@ public class OscAddressNode {
     	return this.get_root() == Environment.root_osc_address_node;
     }
     
+    public boolean matches(String token) {
+    	if (token.equals("*")) {
+    		return true;
+    	} else if (this.name.contains(".") && token.contains(".")) {
+    		String[] token_parts = token.split("\\.");
+    		String[] name_parts = this.name.split("\\.");
+    		boolean[] matches = new boolean[]{ false, false };
+    		if (token_parts[0].equals("*") || token_parts[0].equals(name_parts[0])) {
+    			matches[0] = true;
+    		}
+    		if (token_parts[1].equals("*") || token_parts[1].equals(name_parts[1])) {
+    			matches[1] = true;
+    		}
+    		if (matches[0] && matches[1]) {
+    			return true;
+    		}
+    	}
+    	return true;
+    }
+    
     public void prune() {
     	OscAddressNode[] parentage = this.get_parentage();
     	parentage = Arrays.copyOf(parentage, parentage.length - 1);
@@ -109,4 +131,36 @@ public class OscAddressNode {
         this.node = node;
     }
     
+    public OscAddressNode[] search(OscAddress osc_address) {
+    	Set<OscAddressNode> old_cursors = new HashSet<OscAddressNode>();
+    	Set<OscAddressNode> new_cursors = new HashSet<OscAddressNode>();
+    	if (osc_address.is_relative) {
+    		old_cursors.add(this);
+    	} else {
+    		old_cursors.add(this.get_root());
+    	}
+    	for (String current_address_item : osc_address.address_items) {
+    		new_cursors.clear();
+    		for (OscAddressNode current_cursor : old_cursors) {
+    			if (current_address_item.equals("..") && 
+    				current_cursor.get_parent() != null) {
+    				new_cursors.add(current_cursor.get_parent());
+    			} else if (current_address_item.contains("*")) {
+    				for (OscAddressNode child : current_cursor.children.values()) {
+    					if (child.matches(current_address_item)) {
+    						new_cursors.add(child);
+    					}
+    				}
+    			} else {
+    				OscAddressNode child = current_cursor.get_child(current_address_item);
+    				if (child != null) {
+    					new_cursors.add(child);
+    				}
+    			}
+    		}
+    		old_cursors.clear();
+    		old_cursors.addAll(new_cursors);
+    	}
+    	return new OscAddressNode[0];
+    }
 }
