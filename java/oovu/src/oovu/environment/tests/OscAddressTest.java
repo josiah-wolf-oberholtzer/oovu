@@ -260,4 +260,13 @@ public class OscAddressTest {
 		assertEquals(osc_address.node_attribute_name, "quux.1/wux");
 		assertArrayEquals(osc_address.address_items, new String[]{ "foo.x", ".." });
 	}
+	
+	@Test
+	public void test_construct_22() {
+		OscAddress osc_address = new OscAddress("/foo.*/../*.bar/baz/*/:quux.1/wux");
+		assertEquals(osc_address.is_relative, false);
+		assertEquals(osc_address.node_attribute_name, "quux.1/wux");
+		assertArrayEquals(osc_address.address_items, 
+			new String[]{ "foo.*", "..", "*.bar", "baz", "*" });
+	}
 }

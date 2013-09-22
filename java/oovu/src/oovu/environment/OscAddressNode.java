@@ -92,7 +92,7 @@ public class OscAddressNode {
     }
     
     public boolean matches(String token) {
-    	if (token.equals("*")) {
+    	if (token.equals("*") || this.name.equals(token)) {
     		return true;
     	} else if (this.name.contains(".") && token.contains(".")) {
     		String[] token_parts = token.split("\\.");
@@ -108,7 +108,7 @@ public class OscAddressNode {
     			return true;
     		}
     	}
-    	return true;
+    	return false;
     }
     
     public void prune() {
