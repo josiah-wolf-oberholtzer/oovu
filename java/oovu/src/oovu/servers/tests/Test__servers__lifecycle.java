@@ -8,8 +8,8 @@ import java.util.Set;
 import oovu.environment.Environment;
 import oovu.environment.OscAddress;
 import oovu.environment.OscAddressNode;
-import oovu.servers.ModuleNode;
-import oovu.servers.PropertyNode;
+import oovu.servers.ModuleServer;
+import oovu.servers.PropertyServer;
 
 import org.junit.After;
 import org.junit.Before;
@@ -17,7 +17,7 @@ import org.junit.Test;
 
 import com.cycling74.max.Atom;
 
-public class Test__node__lifecycle {
+public class Test__servers__lifecycle {
 
 	@Before
 	public void setUp() throws Exception {
@@ -72,11 +72,11 @@ public class Test__node__lifecycle {
 	public void test_construct_02() {
 		OscAddress osc_address = null;
 		Set<OscAddressNode> search_result = null;
-		ModuleNode foo_module_node = ModuleNode.allocate(1001);
+		ModuleServer foo_module_node = ModuleServer.allocate(1001);
 		foo_module_node.register_name("foo");
-		PropertyNode foo_bar_property_node = PropertyNode.allocate(
+		PropertyServer foo_bar_property_node = PropertyServer.allocate(
 			1001, "bar", new Atom[0]);
-		PropertyNode foo_baz_quux_property_node = PropertyNode.allocate(
+		PropertyServer foo_baz_quux_property_node = PropertyServer.allocate(
 			1001, "baz/quux", new Atom[0]);
 		assertArrayEquals(
 			Environment.root_osc_address_node.get_summary_pieces(),

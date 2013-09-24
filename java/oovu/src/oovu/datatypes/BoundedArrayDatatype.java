@@ -3,8 +3,8 @@ package oovu.datatypes;
 import java.util.Map;
 
 import oovu.environment.InterfaceHandler;
-import oovu.servers.AttributeNode;
-import oovu.servers.Node;
+import oovu.servers.AttributeServer;
+import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
 
@@ -18,7 +18,7 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
         }
 
         @Override
-        public Atom[][] run(Node node, Atom[] arguments) {
+        public Atom[][] run(Server node, Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             result[0] = Atom.newAtom("length", Atom
                 .newAtom(new int[] { BoundedArrayDatatype.this.get_length() }));
@@ -34,7 +34,7 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
         }
 
         @Override
-        public Atom[][] run(Node node, Atom[] arguments) {
+        public Atom[][] run(Server node, Atom[] arguments) {
             if (0 < arguments.length) {
                 if (arguments[0].isFloat() || arguments[0].isInt()) {
                     Integer length = arguments[0].getInt();
@@ -42,7 +42,7 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
                         BoundedArrayDatatype.this.set_length(length);
                     }
                 }
-                AttributeNode attribute = (AttributeNode) node;
+                AttributeServer attribute = (AttributeServer) node;
                 attribute.reoutput_value();
             }
             return null;
@@ -51,7 +51,7 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
 
     protected Integer length = 1;
 
-    public BoundedArrayDatatype(AttributeNode client,
+    public BoundedArrayDatatype(AttributeServer client,
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         this.initialize_length(argument_map);

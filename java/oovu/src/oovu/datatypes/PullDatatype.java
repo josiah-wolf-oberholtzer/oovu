@@ -5,8 +5,8 @@ import java.util.Map;
 
 import oovu.environment.Environment;
 import oovu.environment.InterfaceHandler;
-import oovu.servers.AttributeNode;
-import oovu.servers.Node;
+import oovu.servers.AttributeServer;
+import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
 
@@ -20,7 +20,7 @@ public class PullDatatype extends OscAddressDatatype {
         }
 
         @Override
-        public Atom[][] run(Node context, Atom[] arguments) {
+        public Atom[][] run(Server context, Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             String[] pull_addresses = Environment.pull_addresses.keySet()
                 .toArray(new String[0]);
@@ -30,7 +30,7 @@ public class PullDatatype extends OscAddressDatatype {
         }
     }
 
-    public PullDatatype(AttributeNode client, Map<String, Atom[]> argument_map) {
+    public PullDatatype(AttributeServer client, Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (client != null) {
             client

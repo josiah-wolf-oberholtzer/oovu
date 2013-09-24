@@ -7,23 +7,23 @@ import oovu.environment.ValueResponse;
 
 import com.cycling74.max.Atom;
 
-public class ReturnNode extends AttributeNode {
+public class ReturnServer extends AttributeServer {
 
-    public static ReturnNode allocate(Integer module_id, String desired_name,
+    public static ReturnServer allocate(Integer module_id, String desired_name,
         Atom[] argument_list) {
-        return (ReturnNode) ModuleMemberNode.allocate_from_label("ReturnNode",
+        return (ReturnServer) ModuleMemberServer.allocate_from_label("ReturnNode",
             module_id, desired_name, argument_list);
     }
 
-    public ReturnNode(ModuleNode module_node, Map<String, Atom[]> argument_map) {
+    public ReturnServer(ModuleServer module_node, Map<String, Atom[]> argument_map) {
         super(module_node, argument_map);
     }
 
     @Override
-    public ReturnNode new_instance(Integer module_id,
+    public ReturnServer new_instance(Integer module_id,
         Map<String, Atom[]> argument_map) {
-        ModuleNode module_node = ModuleNode.allocate(module_id);
-        return new ReturnNode(module_node, argument_map);
+        ModuleServer module_node = ModuleServer.allocate(module_id);
+        return new ReturnServer(module_node, argument_map);
     }
 
     @Override

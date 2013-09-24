@@ -1,21 +1,20 @@
 package oovu.proxies;
 
 import oovu.environment.Dispatcher;
-import oovu.environment.Environment;
 import oovu.environment.InterfaceRequest;
 import oovu.environment.InterfaceResponse;
 import oovu.environment.Request;
 import oovu.environment.Response;
 import oovu.environment.ValueRequest;
 import oovu.environment.ValueResponse;
-import oovu.servers.Node;
+import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
 
 abstract public class NodeProxy extends MaxObject implements Dispatcher {
 
-    protected Node node;
+    protected Server node;
 
     @Override
     public void anything(String message, Atom[] arguments) {
@@ -32,7 +31,7 @@ abstract public class NodeProxy extends MaxObject implements Dispatcher {
         this.handle_request(request);
     }
 
-    protected Node get_node() {
+    protected Server get_node() {
         return this.node;
     }
 
@@ -87,7 +86,7 @@ abstract public class NodeProxy extends MaxObject implements Dispatcher {
 
     @Override
     public void notifyDeleted() {
-        Node node = this.get_node();
+        Server node = this.get_node();
         if (node == null) {
             return;
         }

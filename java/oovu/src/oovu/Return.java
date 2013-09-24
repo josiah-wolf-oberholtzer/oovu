@@ -1,7 +1,7 @@
 package oovu;
 
 import oovu.proxies.NodeProxy;
-import oovu.servers.ReturnNode;
+import oovu.servers.ReturnServer;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
@@ -17,7 +17,7 @@ public class Return extends NodeProxy {
         this.declareIO(2, 2);
         Integer module_id = arguments[0].toInt();
         String desired_name = arguments[1].toString();
-        this.node = ReturnNode.allocate(module_id, desired_name,
+        this.node = ReturnServer.allocate(module_id, desired_name,
             Atom.removeFirst(arguments, 2));
         this.node.node_proxies.add(this);
     }

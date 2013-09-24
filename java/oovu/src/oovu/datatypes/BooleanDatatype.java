@@ -3,8 +3,8 @@ package oovu.datatypes;
 import java.util.Map;
 
 import oovu.environment.InterfaceHandler;
-import oovu.servers.AttributeNode;
-import oovu.servers.Node;
+import oovu.servers.AttributeServer;
+import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
 
@@ -18,15 +18,15 @@ public class BooleanDatatype extends GenericDatatype {
         }
 
         @Override
-        public Atom[][] run(Node node, Atom[] arguments) {
-            AttributeNode attribute_node = (AttributeNode) node;
+        public Atom[][] run(Server node, Atom[] arguments) {
+            AttributeServer attribute_node = (AttributeServer) node;
             BooleanDatatype.this.toggle();
             attribute_node.reoutput_value();
             return null;
         }
     }
 
-    public BooleanDatatype(AttributeNode client,
+    public BooleanDatatype(AttributeServer client,
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {

@@ -7,7 +7,7 @@ import oovu.environment.Environment;
 import oovu.environment.OscAddress;
 import oovu.environment.OscAddressNode;
 import oovu.proxies.NodeProxy;
-import oovu.servers.Node;
+import oovu.servers.Server;
 
 import com.cycling74.max.MaxObject;
 import com.google.common.collect.Sets;
@@ -31,7 +31,7 @@ public class Binding extends NodeProxy {
     	}
     	OscAddressNode target_osc_address_node = target_osc_address_node_set.toArray(
     		new OscAddressNode[0])[0];
-    	Node target_node = target_osc_address_node.get_node();
+    	Server target_node = target_osc_address_node.get_node();
     	if (target_node == null) {
     		return;
     	}
@@ -58,7 +58,7 @@ public class Binding extends NodeProxy {
     }
     
     public void unbind() {
-    	Node node = this.get_node();
+    	Server node = this.get_node();
     	if (node != null) {
     		node.remove_binding(this);
     		this.node = null;

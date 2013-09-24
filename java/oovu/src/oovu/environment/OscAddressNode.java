@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import oovu.servers.Node;
+import oovu.servers.Server;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -20,7 +20,7 @@ public class OscAddressNode {
     private final Map<String, OscAddressNode> children = 
         new HashMap<String, OscAddressNode>();
     private OscAddressNode parent = null;
-    private Node node = null;
+    private Server node = null;
     
     public OscAddressNode(String name) {
         this.name = name;
@@ -91,7 +91,7 @@ public class OscAddressNode {
     	return this.name;
     }
     
-    public Node get_node() {
+    public Server get_node() {
         return this.node;
     }
     
@@ -233,7 +233,7 @@ public class OscAddressNode {
     	return new_cursors;
     }
     
-    public void set_node(Node node) {
+    public void set_node(Server node) {
         this.node = node;
     }
     

@@ -10,7 +10,7 @@ import oovu.environment.InterfaceHandler;
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
 
-public abstract class ModuleMemberNode extends Node {
+public abstract class ModuleMemberServer extends Server {
 
     private class GetModuleNameInterfaceHandler extends InterfaceHandler {
 
@@ -20,49 +20,49 @@ public abstract class ModuleMemberNode extends Node {
         }
 
         @Override
-        public Atom[][] run(Node context, Atom[] arguments) {
+        public Atom[][] run(Server context, Atom[] arguments) {
             Atom[][] result = new Atom[1][];
-            AttributeNode attribute_node = (AttributeNode) context;
+            AttributeServer attribute_node = (AttributeServer) context;
             result[0] = Atom.newAtom(new String[] { "modulename",
                 attribute_node.module_node.get_name() });
             return result;
         }
     }
 
-    public final ModuleNode module_node;
+    public final ModuleServer module_node;
     public static final Map<String, Class<?>> member_nodes_by_label;
 
     static {
         Map<String, Class<?>> map = new HashMap<String, Class<?>>();
-        map.put("MethodNode", MethodNode.class);
-        map.put("PropertyNode", PropertyNode.class);
-        map.put("PullNode", PullNode.class);
-        map.put("PushNode", PushNode.class);
-        map.put("ReturnNode", ReturnNode.class);
+        map.put("MethodNode", MethodServer.class);
+        map.put("PropertyNode", PropertyServer.class);
+        map.put("PullNode", PullServer.class);
+        map.put("PushNode", PushServer.class);
+        map.put("ReturnNode", ReturnServer.class);
         member_nodes_by_label = Collections.unmodifiableMap(map);
     }
 
-    public static ModuleMemberNode allocate_from_label(String label,
+    public static ModuleMemberServer allocate_from_label(String label,
         Integer module_id, String desired_name, Atom[] argument_list) {
-        Class<?> member_node_class = ModuleMemberNode.member_nodes_by_label
+        Class<?> member_node_class = ModuleMemberServer.member_nodes_by_label
             .get(label);
         if (member_node_class == null) {
-            member_node_class = PropertyNode.class;
+            member_node_class = PropertyServer.class;
         }
-        ModuleNode module_node = ModuleNode.allocate(module_id);
+        ModuleServer module_node = ModuleServer.allocate(module_id);
         if (module_node.child_nodes.containsKey(desired_name)) {
-            ModuleMemberNode current_member_node = (ModuleMemberNode) module_node.child_nodes
+            ModuleMemberServer current_member_node = (ModuleMemberServer) module_node.child_nodes
                 .get(desired_name);
             if (current_member_node.getClass() == member_node_class) {
                 return current_member_node;
             }
         }
-        Map<String, Atom[]> argument_map = Node
+        Map<String, Atom[]> argument_map = Server
             .process_atom_arguments(argument_list);
-        ModuleMemberNode new_member_node = null;
+        ModuleMemberServer new_member_node = null;
         try {
-            new_member_node = (ModuleMemberNode) member_node_class
-                .getDeclaredConstructor(ModuleNode.class, Map.class)
+            new_member_node = (ModuleMemberServer) member_node_class
+                .getDeclaredConstructor(ModuleServer.class, Map.class)
                 .newInstance(module_node, argument_map);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
@@ -76,13 +76,13 @@ public abstract class ModuleMemberNode extends Node {
             e.printStackTrace();
         }
         if (new_member_node == null) {
-            new_member_node = new PropertyNode(module_node, argument_map);
+            new_member_node = new PropertyServer(module_node, argument_map);
         }
         new_member_node.register_name(desired_name);
         return new_member_node;
     }
 
-    public ModuleMemberNode(ModuleNode module_node,
+    public ModuleMemberServer(ModuleServer module_node,
         Map<String, Atom[]> argument_map) {
         super(argument_map);
         this.module_node = module_node;
@@ -110,7 +110,7 @@ public abstract class ModuleMemberNode extends Node {
     }
 
     @Override
-    public Node get_parent_node() {
+    public Server get_parent_node() {
         return this.module_node;
     }
 
@@ -119,7 +119,7 @@ public abstract class ModuleMemberNode extends Node {
         return this.node_proxies.size();
     }
 
-    abstract public ModuleMemberNode new_instance(Integer module_id,
+    abstract public ModuleMemberServer new_instance(Integer module_id,
         Map<String, Atom[]> argument_map);
 
     @Override
@@ -131,7 +131,7 @@ public abstract class ModuleMemberNode extends Node {
         if (desired_name == null) {
             return;
         }
-        String acquired_name = Node.find_unique_name(desired_name,
+        String acquired_name = Server.find_unique_name(desired_name,
             this.module_node.child_nodes.keySet());
         this.name = acquired_name;
         this.module_node.child_nodes.put(acquired_name, this);

@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import oovu.environment.InterfaceHandler;
-import oovu.servers.AttributeNode;
-import oovu.servers.Node;
+import oovu.servers.AttributeServer;
+import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
@@ -21,9 +21,9 @@ public abstract class Datatype {
         }
 
         @Override
-        public Atom[][] run(Node context, Atom[] arguments) {
+        public Atom[][] run(Server context, Atom[] arguments) {
             Atom[][] result = new Atom[1][];
-            AttributeNode node = (AttributeNode) context;
+            AttributeServer node = (AttributeServer) context;
             String datatype_name = node.datatype.getClass().getSimpleName()
                 .toLowerCase().replace("datatype", "");
             result[0] = Atom
@@ -42,7 +42,7 @@ public abstract class Datatype {
 
     protected Atom[] value = new Atom[0];
 
-    protected AttributeNode client = null;
+    protected AttributeServer client = null;
 
     private static final Map<String, Class<?>> datatype_classes_by_label;
 
@@ -65,7 +65,7 @@ public abstract class Datatype {
         datatype_classes_by_label = Collections.unmodifiableMap(map);
     }
 
-    public Datatype(AttributeNode client, Map<String, Atom[]> argument_map) {
+    public Datatype(AttributeServer client, Map<String, Atom[]> argument_map) {
         this.client = client;
         if (this.client != null) {
             this.client

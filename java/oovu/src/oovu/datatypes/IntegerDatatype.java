@@ -2,13 +2,13 @@ package oovu.datatypes;
 
 import java.util.Map;
 
-import oovu.servers.AttributeNode;
+import oovu.servers.AttributeServer;
 
 import com.cycling74.max.Atom;
 
 public class IntegerDatatype extends BoundedDatatype {
 
-    public IntegerDatatype(AttributeNode client,
+    public IntegerDatatype(AttributeServer client,
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
     }

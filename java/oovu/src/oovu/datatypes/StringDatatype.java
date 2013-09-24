@@ -3,13 +3,13 @@ package oovu.datatypes;
 import java.util.ArrayList;
 import java.util.Map;
 
-import oovu.servers.AttributeNode;
+import oovu.servers.AttributeServer;
 
 import com.cycling74.max.Atom;
 
 public class StringDatatype extends GenericDatatype {
 
-    public StringDatatype(AttributeNode client, Map<String, Atom[]> argument_map) {
+    public StringDatatype(AttributeServer client, Map<String, Atom[]> argument_map) {
         super(client, argument_map);
     }
 

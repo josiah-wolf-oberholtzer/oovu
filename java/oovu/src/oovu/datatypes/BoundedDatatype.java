@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.Map;
 
 import oovu.environment.InterfaceHandler;
-import oovu.servers.AttributeNode;
-import oovu.servers.Node;
+import oovu.servers.AttributeServer;
+import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
 
@@ -20,7 +20,7 @@ abstract public class BoundedDatatype extends GenericDatatype {
         }
 
         @Override
-        public Atom[][] run(Node node, Atom[] arguments) {
+        public Atom[][] run(Server node, Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             Float maximum = BoundedDatatype.this.get_maximum();
             String label = "maximum";
@@ -42,7 +42,7 @@ abstract public class BoundedDatatype extends GenericDatatype {
         }
 
         @Override
-        public Atom[][] run(Node node, Atom[] arguments) {
+        public Atom[][] run(Server node, Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             Float minimum = BoundedDatatype.this.get_minimum();
             String label = "minimum";
@@ -64,7 +64,7 @@ abstract public class BoundedDatatype extends GenericDatatype {
         }
 
         @Override
-        public Atom[][] run(Node node, Atom[] arguments) {
+        public Atom[][] run(Server node, Atom[] arguments) {
             Float maximum = null;
             if (0 < arguments.length) {
                 maximum = arguments[0].getFloat();
@@ -83,7 +83,7 @@ abstract public class BoundedDatatype extends GenericDatatype {
         }
 
         @Override
-        public Atom[][] run(Node node, Atom[] arguments) {
+        public Atom[][] run(Server node, Atom[] arguments) {
             Float minimum = null;
             if (0 < arguments.length) {
                 minimum = arguments[0].getFloat();
@@ -97,7 +97,7 @@ abstract public class BoundedDatatype extends GenericDatatype {
     protected Float minimum = null;
     protected Float maximum = null;
 
-    public BoundedDatatype(AttributeNode client,
+    public BoundedDatatype(AttributeServer client,
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {

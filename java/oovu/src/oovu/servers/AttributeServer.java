@@ -16,7 +16,7 @@ import oovu.proxies.NodeProxy;
 
 import com.cycling74.max.Atom;
 
-abstract public class AttributeNode extends ModuleMemberNode {
+abstract public class AttributeServer extends ModuleMemberServer {
 
     private class GetPriorityInterfaceHandler extends InterfaceHandler {
 
@@ -26,9 +26,9 @@ abstract public class AttributeNode extends ModuleMemberNode {
         }
 
         @Override
-        public Atom[][] run(Node node, Atom[] arguments) {
+        public Atom[][] run(Server node, Atom[] arguments) {
             Atom[][] result = new Atom[1][];
-            AttributeNode attribute_node = (AttributeNode) node;
+            AttributeServer attribute_node = (AttributeServer) node;
             Integer priority = attribute_node.get_priority();
             result[0] = Atom.newAtom(new int[] { priority });
             result[0] = Atom.newAtom("priority", result[0]);
@@ -44,9 +44,9 @@ abstract public class AttributeNode extends ModuleMemberNode {
         }
 
         @Override
-        public Atom[][] run(Node node, Atom[] arguments) {
+        public Atom[][] run(Server node, Atom[] arguments) {
             Atom[][] result = new Atom[1][];
-            result[0] = AttributeNode.this.get_value();
+            result[0] = AttributeServer.this.get_value();
             return result;
         }
     }
@@ -59,8 +59,8 @@ abstract public class AttributeNode extends ModuleMemberNode {
         }
 
         @Override
-        public Atom[][] run(Node node, Atom[] arguments) {
-            AttributeNode attribute_node = (AttributeNode) node;
+        public Atom[][] run(Server node, Atom[] arguments) {
+            AttributeServer attribute_node = (AttributeServer) node;
             Integer priority = null;
             if (0 < arguments.length) {
                 priority = arguments[0].toInt();
@@ -74,7 +74,7 @@ abstract public class AttributeNode extends ModuleMemberNode {
 
     public final Datatype datatype;
 
-    public AttributeNode(ModuleNode module_node,
+    public AttributeServer(ModuleServer module_node,
         Map<String, Atom[]> argument_map) {
         super(module_node, argument_map);
         this.datatype = this.setup_datatype();
@@ -154,7 +154,7 @@ abstract public class AttributeNode extends ModuleMemberNode {
         Datatype datatype = null;
         try {
             datatype = (Datatype) datatype_class.getDeclaredConstructor(
-                AttributeNode.class, Map.class).newInstance(this,
+                AttributeServer.class, Map.class).newInstance(this,
                 this.argument_map);
         } catch (IllegalArgumentException e) {
             // TODO Auto-generated catch block

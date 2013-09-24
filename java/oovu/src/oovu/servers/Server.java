@@ -22,7 +22,7 @@ import oovu.proxies.NodeProxy;
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
 
-abstract public class Node implements Dispatcher {
+abstract public class Server implements Dispatcher {
 
     private class DumpMetaInterfaceHandler extends InterfaceHandler {
 
@@ -32,7 +32,7 @@ abstract public class Node implements Dispatcher {
         }
 
         @Override
-        public Atom[][] run(Node context, Atom[] arguments) {
+        public Atom[][] run(Server context, Atom[] arguments) {
             ArrayList<Atom[]> result = new ArrayList<Atom[]>();
             InterfaceHandler getMetaInterfaceHandler = context.interface_handlers
                 .get("getmeta");
@@ -60,7 +60,7 @@ abstract public class Node implements Dispatcher {
         }
 
         @Override
-        public Atom[][] run(Node context, Atom[] arguments) {
+        public Atom[][] run(Server context, Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             String[] interface_handler_names = context.interface_handlers
                 .keySet().toArray(new String[0]);
@@ -79,7 +79,7 @@ abstract public class Node implements Dispatcher {
         }
 
         @Override
-        public Atom[][] run(Node context, Atom[] arguments) {
+        public Atom[][] run(Server context, Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             ArrayList<Atom> getters = new ArrayList<Atom>();
             String[] interface_handler_names = context.interface_handlers
@@ -103,7 +103,7 @@ abstract public class Node implements Dispatcher {
         }
 
         @Override
-        public Atom[][] run(Node context, Atom[] arguments) {
+        public Atom[][] run(Server context, Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             result[0] = Atom
                 .newAtom(new String[] { "name", context.get_name() });
@@ -119,7 +119,7 @@ abstract public class Node implements Dispatcher {
         }
 
         @Override
-        public Atom[][] run(Node context, Atom[] arguments) {
+        public Atom[][] run(Server context, Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             result[0] = Atom.newAtom(new String[] { "oscaddress",
                 context.get_osc_address() });
@@ -135,7 +135,7 @@ abstract public class Node implements Dispatcher {
         }
 
         @Override
-        public Atom[][] run(Node context, Atom[] arguments) {
+        public Atom[][] run(Server context, Atom[] arguments) {
             String[] report_pieces = context.get_report_pieces();
             for (String report_piece : report_pieces) {
                 MaxObject.post(report_piece + "\n");
@@ -152,7 +152,7 @@ abstract public class Node implements Dispatcher {
         }
 
         @Override
-        public Atom[][] run(Node context, Atom[] arguments) {
+        public Atom[][] run(Server context, Atom[] arguments) {
             for (NodeProxy node_proxy : context.node_proxies) {
                 node_proxy.getMaxBox().getPatcher().send("front", new Atom[0]);
             }
@@ -204,11 +204,11 @@ abstract public class Node implements Dispatcher {
 
     protected final Set<Binding> bindings = new HashSet<Binding>();
 
-    protected final Map<String, Node> child_nodes = new HashMap<String, Node>();
+    protected final Map<String, Server> child_nodes = new HashMap<String, Server>();
 
     protected final Map<String, InterfaceHandler> interface_handlers = new HashMap<String, InterfaceHandler>();
     
-    protected Node parent_node;
+    protected Server parent_node;
     
     protected String name = null;
 
@@ -216,7 +216,7 @@ abstract public class Node implements Dispatcher {
 
     public final Set<NodeProxy> node_proxies = new HashSet<NodeProxy>();
 
-    public Node(Map<String, Atom[]> argument_map) {
+    public Server(Map<String, Atom[]> argument_map) {
         if (argument_map != null) {
             this.argument_map = Collections.unmodifiableMap(argument_map);
         } else {
@@ -254,7 +254,7 @@ abstract public class Node implements Dispatcher {
     	return this.osc_address_node;
     }
     
-    public Node get_parent_node() {
+    public Server get_parent_node() {
     	return this.parent_node;
     }
 

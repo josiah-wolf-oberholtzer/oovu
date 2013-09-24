@@ -3,8 +3,8 @@ package oovu.datatypes;
 import java.util.Map;
 
 import oovu.environment.InterfaceHandler;
-import oovu.servers.AttributeNode;
-import oovu.servers.Node;
+import oovu.servers.AttributeServer;
+import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
 
@@ -18,7 +18,7 @@ public class OptionDatatype extends StringDatatype {
         }
 
         @Override
-        public Atom[][] run(Node node, Atom[] arguments) {
+        public Atom[][] run(Server node, Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             result[0] = Atom.newAtom(OptionDatatype.this.get_options());
             result[0] = Atom.newAtom("options", result[0]);
@@ -34,7 +34,7 @@ public class OptionDatatype extends StringDatatype {
         }
 
         @Override
-        public Atom[][] run(Node node, Atom[] arguments) {
+        public Atom[][] run(Server node, Atom[] arguments) {
             String[] options = OptionDatatype.this.extract_strings_from_atoms(arguments);
             OptionDatatype.this.set_options(options);
             return null;
@@ -43,7 +43,7 @@ public class OptionDatatype extends StringDatatype {
     
     protected String[] options = null;
 
-    public OptionDatatype(AttributeNode client, Map<String, Atom[]> argument_map) {
+    public OptionDatatype(AttributeServer client, Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {
             this.client.add_interface_handler(new GetOptionsInterfaceHandler());

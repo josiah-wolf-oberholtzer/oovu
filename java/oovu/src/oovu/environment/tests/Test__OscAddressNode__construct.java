@@ -4,7 +4,7 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import oovu.environment.Environment;
 import oovu.environment.OscAddressNode;
-import oovu.servers.ModuleNode;
+import oovu.servers.ModuleServer;
 
 import org.junit.After;
 import org.junit.Before;
@@ -129,7 +129,7 @@ public class Test__OscAddressNode__construct {
 	public void test_05() {
 		OscAddressNode foo_osc_address_node = new OscAddressNode("foo");
 		OscAddressNode bar_osc_address_node = new OscAddressNode("bar");
-		ModuleNode foo_module_node = new ModuleNode(1001, null);
+		ModuleServer foo_module_node = new ModuleServer(1001, null);
 		assertEquals(foo_osc_address_node.is_empty(), true);
 		foo_osc_address_node.set_node(foo_module_node);
 		assertEquals(foo_osc_address_node.is_empty(), false);

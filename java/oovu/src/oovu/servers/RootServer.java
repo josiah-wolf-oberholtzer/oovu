@@ -7,9 +7,9 @@ import oovu.environment.Request;
 import oovu.environment.Response;
 import oovu.proxies.NodeProxy;
 
-public class RootNode extends Node {
+public class RootServer extends Server {
 
-    public RootNode() {
+    public RootServer() {
         super(null);
         this.name = "OOVU";
     }
@@ -29,7 +29,7 @@ public class RootNode extends Node {
     }
     
     @Override
-    public Node get_parent_node() {
+    public Server get_parent_node() {
         return null;
     }
 
