@@ -23,7 +23,7 @@ public class Test__OscAddressNode__matches {
 
 	@Test
 	public void test_matches_01() {
-		OscAddressNode foo = new OscAddressNode("foo");
+		OscAddressNode foo = new OscAddressNode("foo", null);
 		assertTrue(foo.matches("foo"));
 		assertTrue(foo.matches("*"));
 		assertFalse(foo.matches("bar"));
@@ -33,7 +33,7 @@ public class Test__OscAddressNode__matches {
 	
 	@Test
 	public void test_matches_02() {
-		OscAddressNode send_one = new OscAddressNode("send.1");
+		OscAddressNode send_one = new OscAddressNode("send.1", null);
 		assertTrue(send_one.matches("*"));
 		assertTrue(send_one.matches("send.*"));
 	    assertTrue(send_one.matches("*.1"));
@@ -46,7 +46,7 @@ public class Test__OscAddressNode__matches {
 	
 	@Test
 	public void test_matches_03() {
-		OscAddressNode axis_orbital = new OscAddressNode("axis.orbital");
+		OscAddressNode axis_orbital = new OscAddressNode("axis.orbital", null);
 		assertTrue(axis_orbital.matches("*"));
 		assertTrue(axis_orbital.matches("axis.*"));
 		assertTrue(axis_orbital.matches("*.orbital"));

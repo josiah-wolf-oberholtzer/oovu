@@ -2,11 +2,13 @@ package oovu.environment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import oovu.Binding;
 import oovu.servers.Server;
 
 import org.apache.commons.lang3.StringUtils;
@@ -16,14 +18,19 @@ import com.sun.tools.javac.util.List;
 
 public class OscAddressNode {
 
-    private final String name;
+    private String name;
+    private Integer number;
+    private final Set<Binding> bindings = new HashSet<Binding>();
     private final Map<String, OscAddressNode> named_children = 
         new HashMap<String, OscAddressNode>();
+    private final Map<Integer, OscAddressNode> numbered_children =
+    	new HashMap<Integer, OscAddressNode>();
     private OscAddressNode parent = null;
     private Server server = null;
     
-    public OscAddressNode(String name) {
+    public OscAddressNode(String name, Integer number) {
         this.name = name;
+        this.number = number;
     }
     
     public void add_child(OscAddressNode child) {
@@ -60,9 +67,9 @@ public class OscAddressNode {
     		if ((i == (osc_address.address_items.length - 1)) && uniquely) {
     			name = parent.find_unique_name(name);
     		}
-    		child = parent.get_child(name);
+    		child = parent.get_named_child(name);
     		if (child == null) {
-    			child = new OscAddressNode(name);
+    			child = new OscAddressNode(name, null);
     			parent.add_child(child);
     		}
     		parent = child;
@@ -83,16 +90,28 @@ public class OscAddressNode {
         return acquired_name;
     }
     
-    public OscAddressNode get_child(String name) {
+    public OscAddressNode get_named_child(String name) {
     	return this.named_children.get(name);
+    }
+    
+    public OscAddressNode get_numbered_child(Integer number) {
+    	return this.numbered_children.get(number);
     }
     
     public String get_name() {
     	return this.name;
     }
     
+    public Integer get_number() {
+    	return this.number;
+    }
+    
     public Server get_server() {
         return this.server;
+    }
+    
+    public Set<Binding> get_bindings() {
+    	return Collections.unmodifiableSet(this.bindings);
     }
     
     public String get_osc_address() {
@@ -221,7 +240,7 @@ public class OscAddressNode {
     					}
     				}
     			} else {
-    				OscAddressNode child = current_cursor.get_child(current_address_item);
+    				OscAddressNode child = current_cursor.get_named_child(current_address_item);
     				if (child != null) {
     					new_cursors.add(child);
     				}

@@ -18,7 +18,7 @@ public class Test__OscAddressNode__create_address {
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 
-	public static final OscAddressNode root = new OscAddressNode("");
+	public static final OscAddressNode root = new OscAddressNode("", null);
 	
 	@Before
 	public void setUp() throws Exception {
@@ -35,7 +35,7 @@ public class Test__OscAddressNode__create_address {
 		OscAddress osc_address = OscAddress.from_cache("/foo");
 		OscAddressNode foo = root.create_address(osc_address, true);
 		assertEquals("foo", foo.get_name());
-		assertEquals(foo, root.get_child("foo"));
+		assertEquals(foo, root.get_named_child("foo"));
 		assertArrayEquals(
 			new String[]{ "/foo" },
 			root.get_summary_pieces()
@@ -45,7 +45,7 @@ public class Test__OscAddressNode__create_address {
 	@Test
 	public void test_02() {
 		OscAddress osc_address = OscAddress.from_cache("/foo");
-		OscAddressNode original = new OscAddressNode("foo");
+		OscAddressNode original = new OscAddressNode("foo", null);
 		OscAddressNode created = null;
 		root.add_child(original);
 		created = root.create_address(osc_address, false);

@@ -21,7 +21,7 @@ public class Environment {
     
     static {
     	root_server = new RootServer();
-    	root_osc_address_node = new OscAddressNode("");
+    	root_osc_address_node = new OscAddressNode("", null);
     	root_osc_address_node.set_server(root_server);
     }
     

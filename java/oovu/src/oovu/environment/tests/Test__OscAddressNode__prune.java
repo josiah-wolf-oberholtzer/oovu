@@ -10,7 +10,7 @@ import org.junit.Test;
 
 public class Test__OscAddressNode__prune {
 
-	public static final OscAddressNode root = new OscAddressNode("");
+	public static final OscAddressNode root = new OscAddressNode("", null);
 	
 	@Before
 	public void setUp() throws Exception {
