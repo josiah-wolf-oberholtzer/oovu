@@ -54,8 +54,12 @@ public class OscAddress {
     public final String node_attribute_name;
     public final String[] address_items;
     public final boolean is_relative;
+    public final boolean has_wildcard_tokens;
+    public final boolean has_parent_path_tokens;
     
     public OscAddress(String input) {
+    	boolean has_parent_path_tokens = false;
+    	boolean has_wildcard_tokens = false;
         Matcher matcher = OscAddress.node_attribute_pattern.matcher(input);
         if (matcher.matches()) {
         	this.node_attribute_name = matcher.group(1).substring(1);
@@ -82,7 +86,14 @@ public class OscAddress {
         	if (! OscAddress.is_current_node_token(address_item)) {
         		new_address_items.add(address_item);
         	}
+        	if (address_item.contains("*")) {
+        		has_wildcard_tokens = true;
+        	} else if (address_item.equals("..")) {
+        		has_parent_path_tokens = true;
+        	}
         }
+    	this.has_parent_path_tokens = has_parent_path_tokens;
+    	this.has_wildcard_tokens = has_wildcard_tokens;
         this.address_items = new_address_items.toArray(new String[0]);
     }
     

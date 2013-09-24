@@ -46,6 +46,43 @@ public class OscAddressNode {
     	}
     }
     
+    public OscAddressNode create_address(OscAddress osc_address, boolean uniquely) {
+    	if (osc_address.has_wildcard_tokens || osc_address.has_parent_path_tokens) {
+    		throw new RuntimeException("OSC address is ambiguous: " + osc_address);
+    	}
+    	OscAddressNode parent = this;
+    	if (! osc_address.is_relative) {
+    		parent = this.get_root();
+    	}
+    	OscAddressNode child = null;
+    	for (int i = 0; i < osc_address.address_items.length; i++) {
+    		String name = osc_address.address_items[i];
+    		if ((i == (osc_address.address_items.length - 1)) && uniquely) {
+    			name = parent.find_unique_name(name);
+    		}
+    		child = parent.get_child(name);
+    		if (child == null) {
+    			child = new OscAddressNode(name);
+    			parent.add_child(child);
+    		}
+    		parent = child;
+    	}
+    	return child;
+    }
+    
+    public String find_unique_name(String desired_name) {
+        if (!this.children.containsKey(desired_name)) {
+            return desired_name;
+        }
+        Integer counter = 1;
+        String acquired_name = desired_name + '.' + counter.toString();
+        while (this.children.containsKey(acquired_name)) {
+            counter += 1;
+            acquired_name = desired_name + '.' + counter.toString();
+        }
+        return acquired_name;
+    }
+    
     public OscAddressNode get_child(String name) {
     	return this.children.get(name);
     }
@@ -92,6 +129,25 @@ public class OscAddressNode {
     public OscAddressNode get_root() {
     	OscAddressNode[] parentage = this.get_parentage();
     	return parentage[parentage.length - 1];
+    }
+    
+    public String[] get_summary_pieces() {
+    	ArrayList<String> pieces = new ArrayList<String>();
+    	if (this.name != "") {
+    		pieces.add("/" + this.name);
+    	}
+    	for (OscAddressNode child : this.children.values()) {
+    		for (String piece : child.get_summary_pieces()) {
+    			if (this.name != "") {
+    				pieces.add("/" + this.name + piece);
+    			} else {
+    				pieces.add(piece);
+    			}
+    		}
+    	}
+    	String[] sorted_pieces = pieces.toArray(new String[0]);
+    	Arrays.sort(sorted_pieces);
+    	return sorted_pieces;
     }
     
     public boolean is_empty() {
@@ -141,10 +197,6 @@ public class OscAddressNode {
         child.parent = null;
     }
     
-    public void set_node(Node node) {
-        this.node = node;
-    }
-    
     public Set<OscAddressNode> search(OscAddress osc_address) {
     	Set<OscAddressNode> old_cursors = new HashSet<OscAddressNode>();
     	Set<OscAddressNode> new_cursors = new HashSet<OscAddressNode>();
@@ -179,6 +231,10 @@ public class OscAddressNode {
     		old_cursors.addAll(new_cursors);
     	}
     	return new_cursors;
+    }
+    
+    public void set_node(Node node) {
+        this.node = node;
     }
     
     public String toString() {

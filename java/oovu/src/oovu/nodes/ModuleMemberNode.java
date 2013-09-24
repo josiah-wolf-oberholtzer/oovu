@@ -30,18 +30,6 @@ public abstract class ModuleMemberNode extends Node {
     public final ModuleNode module_node;
     public static final Map<String, Class<?>> member_nodes_by_label;
 
-    public ModuleMemberNode(ModuleNode module_node,
-        Map<String, Atom[]> argument_map) {
-        super(argument_map);
-        this.module_node = module_node;
-        for (String key : argument_map.keySet().toArray(
-            new String[argument_map.size()])) {
-            MaxObject.post(key + ": " + Atom.toOneString(argument_map.get(key))
-                + "\n");
-        }
-        this.add_interface_handler(new GetModuleNameInterfaceHandler());
-    }
-
     static {
         Map<String, Class<?>> map = new HashMap<String, Class<?>>();
         map.put("MethodNode", MethodNode.class);
@@ -90,6 +78,18 @@ public abstract class ModuleMemberNode extends Node {
         }
         new_member_node.register_name(desired_name);
         return new_member_node;
+    }
+
+    public ModuleMemberNode(ModuleNode module_node,
+        Map<String, Atom[]> argument_map) {
+        super(argument_map);
+        this.module_node = module_node;
+        for (String key : argument_map.keySet().toArray(
+            new String[argument_map.size()])) {
+            MaxObject.post(key + ": " + Atom.toOneString(argument_map.get(key))
+                + "\n");
+        }
+        this.add_interface_handler(new GetModuleNameInterfaceHandler());
     }
 
     @Override
