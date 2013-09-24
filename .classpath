@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="java/oovu/lib/commons-lang3-3.1-tests.jar"/>
 	<classpathentry kind="lib" path="java/oovu/lib/commons-lang3-3.1.jar"/>
 	<classpathentry kind="lib" path="java/oovu/lib/guava-15.0.jar"/>
+	<classpathentry kind="lib" path="java/oovu/lib/antlr-4.1-complete.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
