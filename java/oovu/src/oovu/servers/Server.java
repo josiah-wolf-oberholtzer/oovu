@@ -12,11 +12,11 @@ import oovu.Binding;
 import oovu.clients.ServerClient;
 import oovu.environment.Dispatcher;
 import oovu.environment.Environment;
-import oovu.environment.InterfaceHandler;
 import oovu.environment.OscAddress;
 import oovu.environment.OscAddressNode;
 import oovu.messaging.InterfaceRequest;
 import oovu.messaging.InterfaceResponse;
+import oovu.messaging.MessageHandler;
 import oovu.messaging.Response;
 
 import com.cycling74.max.Atom;
@@ -24,7 +24,7 @@ import com.cycling74.max.MaxObject;
 
 abstract public class Server implements Dispatcher {
 
-    private class DumpMetaInterfaceHandler extends InterfaceHandler {
+    private class DumpMetaMessageHandler extends MessageHandler {
 
         @Override
         public String get_name() {
@@ -34,17 +34,17 @@ abstract public class Server implements Dispatcher {
         @Override
         public Atom[][] run(Server context, Atom[] arguments) {
             ArrayList<Atom[]> result = new ArrayList<Atom[]>();
-            InterfaceHandler getMetaInterfaceHandler = context.interface_handlers
+            MessageHandler getMetaMessageHandler = context.message_handlers
                 .get("getmeta");
-            Atom[] meta = Atom.removeFirst(getMetaInterfaceHandler.run(context,
+            Atom[] meta = Atom.removeFirst(getMetaMessageHandler.run(context,
                 arguments)[0]);
             for (Atom name : meta) {
-                InterfaceHandler interface_handler = context.interface_handlers
+                MessageHandler message_handler = context.message_handlers
                     .get(name.toString());
-                if (interface_handler == null) {
+                if (message_handler == null) {
                     continue;
                 }
-                for (Atom[] subresult : interface_handler.run(context, null)) {
+                for (Atom[] subresult : message_handler.run(context, null)) {
                     result.add(subresult);
                 }
             }
@@ -52,7 +52,7 @@ abstract public class Server implements Dispatcher {
         }
     }
 
-    private class GetInterfaceInterfaceHandler extends InterfaceHandler {
+    private class GetInterfaceMessageHandler extends MessageHandler {
 
         @Override
         public String get_name() {
@@ -62,16 +62,16 @@ abstract public class Server implements Dispatcher {
         @Override
         public Atom[][] run(Server context, Atom[] arguments) {
             Atom[][] result = new Atom[1][];
-            String[] interface_handler_names = context.interface_handlers
+            String[] message_handler_names = context.message_handlers
                 .keySet().toArray(new String[0]);
-            Arrays.sort(interface_handler_names);
+            Arrays.sort(message_handler_names);
             result[0] = Atom.newAtom("interface",
-                Atom.newAtom(interface_handler_names));
+                Atom.newAtom(message_handler_names));
             return result;
         }
     }
 
-    private class GetMetaInterfaceHandler extends InterfaceHandler {
+    private class GetMetaMessageHandler extends MessageHandler {
 
         @Override
         public String get_name() {
@@ -82,12 +82,12 @@ abstract public class Server implements Dispatcher {
         public Atom[][] run(Server context, Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             ArrayList<Atom> getters = new ArrayList<Atom>();
-            String[] interface_handler_names = context.interface_handlers
+            String[] message_handler_names = context.message_handlers
                 .keySet().toArray(new String[0]);
-            Arrays.sort(interface_handler_names);
-            for (String interface_handler_name : interface_handler_names) {
-                if (interface_handler_name.startsWith("get")) {
-                    getters.add(Atom.newAtom(interface_handler_name));
+            Arrays.sort(message_handler_names);
+            for (String message_handler_name : message_handler_names) {
+                if (message_handler_name.startsWith("get")) {
+                    getters.add(Atom.newAtom(message_handler_name));
                 }
             }
             result[0] = Atom.newAtom("meta", getters.toArray(new Atom[0]));
@@ -95,7 +95,7 @@ abstract public class Server implements Dispatcher {
         }
     }
 
-    private class GetNameInterfaceHandler extends InterfaceHandler {
+    private class GetNameMessageHandler extends MessageHandler {
 
         @Override
         public String get_name() {
@@ -111,7 +111,7 @@ abstract public class Server implements Dispatcher {
         }
     }
 
-    private class GetOscAddressInterfaceHandler extends InterfaceHandler {
+    private class GetOscAddressMessageHandler extends MessageHandler {
 
         @Override
         public String get_name() {
@@ -127,7 +127,7 @@ abstract public class Server implements Dispatcher {
         }
     }
 
-    private class ReportInterfaceHandler extends InterfaceHandler {
+    private class ReportMessageHandler extends MessageHandler {
 
         @Override
         public String get_name() {
@@ -144,7 +144,7 @@ abstract public class Server implements Dispatcher {
         }
     }
 
-    private class ShowInterfaceHandler extends InterfaceHandler {
+    private class ShowMessageHandler extends MessageHandler {
 
         @Override
         public String get_name() {
@@ -206,7 +206,7 @@ abstract public class Server implements Dispatcher {
 
     protected final Map<String, Server> child_nodes = new HashMap<String, Server>();
 
-    protected final Map<String, InterfaceHandler> interface_handlers = new HashMap<String, InterfaceHandler>();
+    protected final Map<String, MessageHandler> message_handlers = new HashMap<String, MessageHandler>();
     
     protected Server parent_node;
     
@@ -222,18 +222,18 @@ abstract public class Server implements Dispatcher {
         } else {
             this.argument_map = null;
         }
-        this.add_interface_handler(new DumpMetaInterfaceHandler());
-        this.add_interface_handler(new GetMetaInterfaceHandler());
-        this.add_interface_handler(new GetInterfaceInterfaceHandler());
-        this.add_interface_handler(new GetNameInterfaceHandler());
-        this.add_interface_handler(new GetOscAddressInterfaceHandler());
-        this.add_interface_handler(new ReportInterfaceHandler());
-        this.add_interface_handler(new ShowInterfaceHandler());
+        this.add_message_handler(new DumpMetaMessageHandler());
+        this.add_message_handler(new GetMetaMessageHandler());
+        this.add_message_handler(new GetInterfaceMessageHandler());
+        this.add_message_handler(new GetNameMessageHandler());
+        this.add_message_handler(new GetOscAddressMessageHandler());
+        this.add_message_handler(new ReportMessageHandler());
+        this.add_message_handler(new ShowMessageHandler());
     }
 
-    public void add_interface_handler(InterfaceHandler interface_handler) {
-        this.interface_handlers.put(interface_handler.get_name(),
-            interface_handler);
+    public void add_message_handler(MessageHandler message_handler) {
+        this.message_handlers.put(message_handler.get_name(),
+            message_handler);
     }
 
     abstract protected void deallocate();
@@ -265,12 +265,12 @@ abstract public class Server implements Dispatcher {
     }
 
     public void handle_interface_request(InterfaceRequest request) {
-        InterfaceHandler interface_handler = this.interface_handlers
-            .get(request.interface_handler_name);
-        if (interface_handler == null) {
+        MessageHandler message_handler = this.message_handlers
+            .get(request.message_handler_name);
+        if (message_handler == null) {
             return;
         }
-        Atom[][] payload = interface_handler.run(this, request.payload);
+        Atom[][] payload = message_handler.run(this, request.payload);
         if (payload == null) {
             return;
         }

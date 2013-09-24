@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import oovu.environment.InterfaceHandler;
+import oovu.messaging.MessageHandler;
 import oovu.servers.AttributeServer;
 import oovu.servers.Server;
 
@@ -13,7 +13,7 @@ import com.cycling74.max.MaxObject;
 
 public abstract class Datatype {
 
-    private class GetDatatypeInterfaceHandler extends InterfaceHandler {
+    private class GetDatatypeMessageHandler extends MessageHandler {
 
         @Override
         public String get_name() {
@@ -69,7 +69,7 @@ public abstract class Datatype {
         this.client = client;
         if (this.client != null) {
             this.client
-                .add_interface_handler(new GetDatatypeInterfaceHandler());
+                .add_message_handler(new GetDatatypeMessageHandler());
         }
     }
 

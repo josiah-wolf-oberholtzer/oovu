@@ -7,8 +7,8 @@ import oovu.Binding;
 import oovu.clients.ServerClient;
 import oovu.datatypes.Datatype;
 import oovu.datatypes.GenericDatatype;
-import oovu.environment.InterfaceHandler;
 import oovu.messaging.InterfaceRequest;
+import oovu.messaging.MessageHandler;
 import oovu.messaging.Request;
 import oovu.messaging.Response;
 import oovu.messaging.ValueRequest;
@@ -18,7 +18,7 @@ import com.cycling74.max.Atom;
 
 abstract public class AttributeServer extends ModuleMemberServer {
 
-    private class GetPriorityInterfaceHandler extends InterfaceHandler {
+    private class GetPriorityMessageHandler extends MessageHandler {
 
         @Override
         public String get_name() {
@@ -36,7 +36,7 @@ abstract public class AttributeServer extends ModuleMemberServer {
         }
     }
 
-    private class GetValueInterfaceHandler extends InterfaceHandler {
+    private class GetValueMessageHandler extends MessageHandler {
 
         @Override
         public String get_name() {
@@ -51,7 +51,7 @@ abstract public class AttributeServer extends ModuleMemberServer {
         }
     }
 
-    private class SetPriorityInterfaceHandler extends InterfaceHandler {
+    private class SetPriorityMessageHandler extends MessageHandler {
 
         @Override
         public String get_name() {
@@ -78,9 +78,9 @@ abstract public class AttributeServer extends ModuleMemberServer {
         Map<String, Atom[]> argument_map) {
         super(module_node, argument_map);
         this.datatype = this.setup_datatype();
-        this.add_interface_handler(new GetPriorityInterfaceHandler());
-        this.add_interface_handler(new GetValueInterfaceHandler());
-        this.add_interface_handler(new SetPriorityInterfaceHandler());
+        this.add_message_handler(new GetPriorityMessageHandler());
+        this.add_message_handler(new GetValueMessageHandler());
+        this.add_message_handler(new SetPriorityMessageHandler());
         this.initialize_value();
     }
 

@@ -2,7 +2,7 @@ package oovu.datatypes;
 
 import java.util.Map;
 
-import oovu.environment.InterfaceHandler;
+import oovu.messaging.MessageHandler;
 import oovu.servers.AttributeServer;
 import oovu.servers.Server;
 
@@ -10,7 +10,7 @@ import com.cycling74.max.Atom;
 
 public class OptionDatatype extends StringDatatype {
 
-    private class GetOptionsInterfaceHandler extends InterfaceHandler {
+    private class GetOptionsMessageHandler extends MessageHandler {
 
         @Override
         public String get_name() {
@@ -26,7 +26,7 @@ public class OptionDatatype extends StringDatatype {
         }
     }
 
-    private class SetOptionsInterfaceHandler extends InterfaceHandler {
+    private class SetOptionsMessageHandler extends MessageHandler {
 
         @Override
         public String get_name() {
@@ -46,8 +46,8 @@ public class OptionDatatype extends StringDatatype {
     public OptionDatatype(AttributeServer client, Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {
-            this.client.add_interface_handler(new GetOptionsInterfaceHandler());
-            this.client.add_interface_handler(new SetOptionsInterfaceHandler());
+            this.client.add_message_handler(new GetOptionsMessageHandler());
+            this.client.add_message_handler(new SetOptionsMessageHandler());
         }
         this.initialize_options(argument_map);
     }

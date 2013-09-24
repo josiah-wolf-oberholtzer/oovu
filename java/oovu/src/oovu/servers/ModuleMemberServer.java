@@ -5,14 +5,14 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import oovu.environment.InterfaceHandler;
+import oovu.messaging.MessageHandler;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
 
 public abstract class ModuleMemberServer extends Server {
 
-    private class GetModuleNameInterfaceHandler extends InterfaceHandler {
+    private class GetModuleNameMessageHandler extends MessageHandler {
 
         @Override
         public String get_name() {
@@ -91,7 +91,7 @@ public abstract class ModuleMemberServer extends Server {
             MaxObject.post(key + ": " + Atom.toOneString(argument_map.get(key))
                 + "\n");
         }
-        this.add_interface_handler(new GetModuleNameInterfaceHandler());
+        this.add_message_handler(new GetModuleNameMessageHandler());
     }
 
     @Override

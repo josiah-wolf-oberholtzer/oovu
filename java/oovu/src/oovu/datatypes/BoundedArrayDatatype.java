@@ -2,7 +2,7 @@ package oovu.datatypes;
 
 import java.util.Map;
 
-import oovu.environment.InterfaceHandler;
+import oovu.messaging.MessageHandler;
 import oovu.servers.AttributeServer;
 import oovu.servers.Server;
 
@@ -10,7 +10,7 @@ import com.cycling74.max.Atom;
 
 abstract public class BoundedArrayDatatype extends BoundedDatatype {
 
-    private class GetLengthInterfaceHandler extends InterfaceHandler {
+    private class GetLengthMessageHandler extends MessageHandler {
 
         @Override
         public String get_name() {
@@ -26,7 +26,7 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
         }
     }
 
-    private class SetLengthInterfaceHandler extends InterfaceHandler {
+    private class SetLengthMessageHandler extends MessageHandler {
 
         @Override
         public String get_name() {
@@ -56,8 +56,8 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
         super(client, argument_map);
         this.initialize_length(argument_map);
         if (this.client != null) {
-            client.add_interface_handler(new GetLengthInterfaceHandler());
-            client.add_interface_handler(new SetLengthInterfaceHandler());
+            client.add_message_handler(new GetLengthMessageHandler());
+            client.add_message_handler(new SetLengthMessageHandler());
         }
     }
 

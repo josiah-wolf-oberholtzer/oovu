@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 
-import oovu.environment.InterfaceHandler;
+import oovu.messaging.MessageHandler;
 import oovu.servers.AttributeServer;
 import oovu.servers.Server;
 
@@ -12,7 +12,7 @@ import com.cycling74.max.Atom;
 
 abstract public class BoundedDatatype extends GenericDatatype {
 
-    private class GetMaximumInterfaceHandler extends InterfaceHandler {
+    private class GetMaximumMessageHandler extends MessageHandler {
 
         @Override
         public String get_name() {
@@ -34,7 +34,7 @@ abstract public class BoundedDatatype extends GenericDatatype {
         }
     }
 
-    private class GetMinimumInterfaceHandler extends InterfaceHandler {
+    private class GetMinimumMessageHandler extends MessageHandler {
 
         @Override
         public String get_name() {
@@ -56,7 +56,7 @@ abstract public class BoundedDatatype extends GenericDatatype {
         }
     }
 
-    private class SetMaximumInterfaceHandler extends InterfaceHandler {
+    private class SetMaximumMessageHandler extends MessageHandler {
 
         @Override
         public String get_name() {
@@ -75,7 +75,7 @@ abstract public class BoundedDatatype extends GenericDatatype {
 
     }
 
-    private class SetMinimumInterfaceHandler extends InterfaceHandler {
+    private class SetMinimumMessageHandler extends MessageHandler {
 
         @Override
         public String get_name() {
@@ -101,10 +101,10 @@ abstract public class BoundedDatatype extends GenericDatatype {
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {
-            this.client.add_interface_handler(new GetMaximumInterfaceHandler());
-            this.client.add_interface_handler(new GetMinimumInterfaceHandler());
-            this.client.add_interface_handler(new SetMaximumInterfaceHandler());
-            this.client.add_interface_handler(new SetMinimumInterfaceHandler());
+            this.client.add_message_handler(new GetMaximumMessageHandler());
+            this.client.add_message_handler(new GetMinimumMessageHandler());
+            this.client.add_message_handler(new SetMaximumMessageHandler());
+            this.client.add_message_handler(new SetMinimumMessageHandler());
         }
         this.initialize_extrema(argument_map);
     }

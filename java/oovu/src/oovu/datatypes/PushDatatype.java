@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 import oovu.environment.Environment;
-import oovu.environment.InterfaceHandler;
+import oovu.messaging.MessageHandler;
 import oovu.servers.AttributeServer;
 import oovu.servers.Server;
 
@@ -12,7 +12,7 @@ import com.cycling74.max.Atom;
 
 public class PushDatatype extends OscAddressDatatype {
 
-    private class GetPushAddressesInterfaceHandler extends InterfaceHandler {
+    private class GetPushAddressesMessageHandler extends MessageHandler {
 
         @Override
         public String get_name() {
@@ -34,7 +34,7 @@ public class PushDatatype extends OscAddressDatatype {
         super(client, argument_map);
         if (this.client != null) {
             this.client
-                .add_interface_handler(new GetPushAddressesInterfaceHandler());
+                .add_message_handler(new GetPushAddressesMessageHandler());
         }
     }
 
