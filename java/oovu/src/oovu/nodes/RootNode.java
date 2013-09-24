@@ -1,6 +1,8 @@
 package oovu.nodes;
 
 import oovu.Binding;
+import oovu.environment.Environment;
+import oovu.environment.OscAddressNode;
 import oovu.environment.Request;
 import oovu.environment.Response;
 import oovu.proxies.NodeProxy;
@@ -21,6 +23,11 @@ public class RootNode extends Node {
         return "/";
     }
 
+    @Override
+    public OscAddressNode get_osc_address_node() {
+    	return Environment.root_osc_address_node;
+    }
+    
     @Override
     public Node get_parent_node() {
         return null;

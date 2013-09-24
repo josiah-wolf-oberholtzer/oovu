@@ -29,7 +29,46 @@ public class Test__node__lifecycle {
 	}
 
 	@Test
-	public void test_construct() {
+	public void test_construct_01() {
+		assertEquals(
+			Environment.root_node.get_osc_address_node(),
+			Environment.root_osc_address_node
+			);
+		assertEquals(
+			Environment.root_osc_address_node.get_node(),
+			Environment.root_node
+			);
+		Environment.reset();
+		assertEquals(
+			Environment.root_node.get_osc_address_node(),
+			Environment.root_osc_address_node
+			);
+		assertEquals(
+			Environment.root_osc_address_node.get_node(),
+			Environment.root_node
+			);
+		Environment.root_node.deallocate_if_necessary();
+		assertEquals(
+			Environment.root_node.get_osc_address_node(),
+			Environment.root_osc_address_node
+			);
+		assertEquals(
+			Environment.root_osc_address_node.get_node(),
+			Environment.root_node
+			);
+		Environment.root_osc_address_node.prune();
+		assertEquals(
+			Environment.root_node.get_osc_address_node(),
+			Environment.root_osc_address_node
+			);
+		assertEquals(
+			Environment.root_osc_address_node.get_node(),
+			Environment.root_node
+			);
+	}
+
+	@Test
+	public void test_construct_02() {
 		OscAddress osc_address = null;
 		Set<OscAddressNode> search_result = null;
 		ModuleNode foo_module_node = ModuleNode.allocate(1001);

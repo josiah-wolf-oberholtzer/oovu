@@ -241,6 +241,10 @@ abstract public class Node implements Dispatcher {
 
     abstract public String get_osc_address();
 
+    public OscAddressNode get_osc_address_node() {
+    	return this.osc_address_node;
+    }
+    
     abstract public Node get_parent_node();
 
     abstract public int get_reference_count();
