@@ -1,4 +1,4 @@
-package oovu.nodes;
+package oovu.servers;
 
 import java.util.Map;
 

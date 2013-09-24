@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import oovu.nodes.Node;
+import oovu.servers.Node;
 
 import org.apache.commons.lang3.StringUtils;
 

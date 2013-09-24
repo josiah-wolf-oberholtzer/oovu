@@ -1,4 +1,4 @@
-package oovu.nodes;
+package oovu.servers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -204,9 +204,11 @@ abstract public class Node implements Dispatcher {
 
     protected final Set<Binding> bindings = new HashSet<Binding>();
 
-    public final Map<String, Node> child_nodes = new HashMap<String, Node>();
+    protected final Map<String, Node> child_nodes = new HashMap<String, Node>();
 
     protected final Map<String, InterfaceHandler> interface_handlers = new HashMap<String, InterfaceHandler>();
+    
+    protected Node parent_node;
     
     protected String name = null;
 
@@ -252,7 +254,9 @@ abstract public class Node implements Dispatcher {
     	return this.osc_address_node;
     }
     
-    abstract public Node get_parent_node();
+    public Node get_parent_node() {
+    	return this.parent_node;
+    }
 
     abstract public int get_reference_count();
 
@@ -312,5 +316,11 @@ abstract public class Node implements Dispatcher {
     
     public void remove_binding(Binding binding) {
     	this.bindings.remove(binding);
+    }
+    
+    public void clear() {
+    	this.child_nodes.clear();
+    	this.bindings.clear();
+    	this.parent_node = null;
     }
 }

@@ -4,7 +4,7 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import oovu.environment.Environment;
 import oovu.environment.OscAddressNode;
-import oovu.nodes.ModuleNode;
+import oovu.servers.ModuleNode;
 
 import org.junit.After;
 import org.junit.Before;

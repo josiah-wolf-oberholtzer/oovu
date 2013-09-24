@@ -1,7 +1,7 @@
 package oovu;
 
-import oovu.nodes.PushNode;
 import oovu.proxies.AudioNodeProxy;
+import oovu.servers.PushNode;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;

@@ -1,6 +1,6 @@
 package oovu.environment;
 
-import oovu.nodes.Node;
+import oovu.servers.Node;
 
 import com.cycling74.max.Atom;
 

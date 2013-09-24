@@ -1,4 +1,4 @@
-package oovu.nodes.tests;
+package oovu.servers.tests;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -8,8 +8,8 @@ import java.util.Set;
 import oovu.environment.Environment;
 import oovu.environment.OscAddress;
 import oovu.environment.OscAddressNode;
-import oovu.nodes.ModuleNode;
-import oovu.nodes.PropertyNode;
+import oovu.servers.ModuleNode;
+import oovu.servers.PropertyNode;
 
 import org.junit.After;
 import org.junit.Before;

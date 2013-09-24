@@ -1,7 +1,7 @@
 package oovu;
 
-import oovu.nodes.PropertyNode;
 import oovu.proxies.NodeProxy;
+import oovu.servers.PropertyNode;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;

@@ -6,8 +6,8 @@ import java.util.Set;
 import oovu.environment.Environment;
 import oovu.environment.OscAddress;
 import oovu.environment.OscAddressNode;
-import oovu.nodes.Node;
 import oovu.proxies.NodeProxy;
+import oovu.servers.Node;
 
 import com.cycling74.max.MaxObject;
 import com.google.common.collect.Sets;

@@ -8,7 +8,7 @@ import oovu.environment.Request;
 import oovu.environment.Response;
 import oovu.environment.ValueRequest;
 import oovu.environment.ValueResponse;
-import oovu.nodes.Node;
+import oovu.servers.Node;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
@@ -30,11 +30,6 @@ abstract public class NodeProxy extends MaxObject implements Dispatcher {
             request = new ValueRequest(this, ".", input);
         }
         this.handle_request(request);
-    }
-
-    @Override
-    public void dblclick() {
-        Environment.report();
     }
 
     protected Node get_node() {

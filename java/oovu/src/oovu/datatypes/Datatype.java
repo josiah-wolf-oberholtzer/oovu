@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import oovu.environment.InterfaceHandler;
-import oovu.nodes.AttributeNode;
-import oovu.nodes.Node;
+import oovu.servers.AttributeNode;
+import oovu.servers.Node;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;

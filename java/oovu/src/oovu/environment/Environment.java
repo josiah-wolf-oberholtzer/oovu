@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import oovu.Binding;
-import oovu.nodes.AudioNode;
-import oovu.nodes.ModuleMemberNode;
-import oovu.nodes.ModuleNode;
-import oovu.nodes.RootNode;
+import oovu.servers.AudioNode;
+import oovu.servers.ModuleMemberNode;
+import oovu.servers.ModuleNode;
+import oovu.servers.RootNode;
 
 import com.cycling74.max.MaxObject;
 
@@ -28,29 +28,9 @@ public class Environment {
     	root_osc_address_node.set_node(root_node);
     }
     
-    public static void report() {
-        MaxObject.post("OOVU ENVIRONMENT [" + Environment.root_node.get_reference_count() + "]\n");
-        ModuleNode[] module_nodes = root_node.child_nodes.values().toArray(new ModuleNode[0]);
-        for (ModuleNode module_node : module_nodes) {
-            String message = "    [" + module_node.module_id + "]: "
-                + module_node.get_name() + " ["
-                + module_node.get_reference_count() + "]\n";
-            MaxObject.post(message);
-            ModuleMemberNode[] member_nodes = module_node.child_nodes.values().toArray(new ModuleMemberNode[0]);
-            for (ModuleMemberNode member_node : member_nodes) {
-                message = "        [" + module_node.module_id + "]: "
-                    + member_node.get_name() + " ("
-                    + member_node.getClass().getSimpleName() + " ["
-                    + member_node.get_reference_count() + "])";
-                message += "\n";
-                MaxObject.post(message);
-            }
-        }
-    }
-    
     public static void reset() {
         Environment.modules_by_module_id.clear();
-        Environment.root_node.child_nodes.clear();
+        Environment.root_node.clear();
         Environment.root_osc_address_node.clear();
         //Environment.osc_addresses.clear();
         Environment.pull_addresses.clear();

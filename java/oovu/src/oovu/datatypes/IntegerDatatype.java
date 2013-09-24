@@ -2,7 +2,7 @@ package oovu.datatypes;
 
 import java.util.Map;
 
-import oovu.nodes.AttributeNode;
+import oovu.servers.AttributeNode;
 
 import com.cycling74.max.Atom;
 
