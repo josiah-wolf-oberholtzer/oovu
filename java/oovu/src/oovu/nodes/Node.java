@@ -276,7 +276,7 @@ abstract public class Node implements Dispatcher {
         }
         OscAddressNode root = Environment.root_osc_address_node;
         this.osc_address_node = root.create_address(
-        	new OscAddress(osc_address), false);
+        	OscAddress.from_cache(osc_address), false);
         this.osc_address_node.set_node(this);
     }
 

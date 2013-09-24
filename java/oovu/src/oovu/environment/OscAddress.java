@@ -2,6 +2,8 @@ package oovu.environment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.*;
 
 import org.apache.commons.lang3.StringUtils;
@@ -16,6 +18,8 @@ public class OscAddress {
     	Pattern.compile(node_attribute_regex);
     static final Pattern osc_name_pattern = 
     	Pattern.compile("^" + osc_name_regex + "$");
+    private static final Map<String, OscAddress> cached_addresses =
+    	new HashMap<String, OscAddress>();
     
     public static boolean all_are_node_name_tokens(String[] tokens) {
     	for (String token : tokens) {
@@ -51,13 +55,24 @@ public class OscAddress {
         return false;
     }
     
+    public static OscAddress from_cache(String osc_address_string) {
+    	OscAddress osc_address = OscAddress.cached_addresses.get(osc_address_string);
+    	if (osc_address == null) {
+    		osc_address = new OscAddress(osc_address_string);
+    		OscAddress.cached_addresses.put(osc_address_string, osc_address);
+    	}
+    	return osc_address;
+    }
+    
     public final String node_attribute_name;
     public final String[] address_items;
+    public final String raw_address;
     public final boolean is_relative;
     public final boolean has_wildcard_tokens;
     public final boolean has_parent_path_tokens;
     
-    public OscAddress(String input) {
+    private OscAddress(String input) {
+        this.raw_address = input;
     	boolean has_parent_path_tokens = false;
     	boolean has_wildcard_tokens = false;
         Matcher matcher = OscAddress.node_attribute_pattern.matcher(input);
@@ -113,5 +128,9 @@ public class OscAddress {
     	}
     	string_builder.append("\")");
     	return string_builder.toString();
+    }
+    
+    public boolean is_cached() {
+    	return OscAddress.cached_addresses.containsKey(this.raw_address);
     }
 }

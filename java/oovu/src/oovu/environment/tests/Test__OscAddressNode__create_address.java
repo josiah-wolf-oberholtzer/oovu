@@ -29,7 +29,7 @@ public class Test__OscAddressNode__create_address {
 
 	@Test
 	public void test_01() {
-		OscAddress osc_address = new OscAddress("/foo");
+		OscAddress osc_address = OscAddress.from_cache("/foo");
 		OscAddressNode foo = root.create_address(osc_address, true);
 		assertEquals("foo", foo.get_name());
 		assertEquals(foo, root.get_child("foo"));
@@ -41,7 +41,7 @@ public class Test__OscAddressNode__create_address {
 	
 	@Test
 	public void test_02() {
-		OscAddress osc_address = new OscAddress("/foo");
+		OscAddress osc_address = OscAddress.from_cache("/foo");
 		OscAddressNode original = new OscAddressNode("foo");
 		OscAddressNode created = null;
 		root.add_child(original);
@@ -54,7 +54,7 @@ public class Test__OscAddressNode__create_address {
 	
 	@Test
 	public void test_03() {
-		OscAddress osc_address = new OscAddress("/foo/bar");
+		OscAddress osc_address = OscAddress.from_cache("/foo/bar");
 		OscAddressNode node_1 = root.create_address(osc_address, false);
 		assertEquals(node_1.get_osc_address(), "/foo/bar");
 		OscAddressNode node_2 = root.create_address(osc_address, false);
@@ -66,7 +66,7 @@ public class Test__OscAddressNode__create_address {
 
 	@Test
 	public void test_04() {
-		OscAddress osc_address = new OscAddress("/foo/bar/baz");
+		OscAddress osc_address = OscAddress.from_cache("/foo/bar/baz");
 		OscAddressNode node_1 = root.create_address(osc_address, true);
 		assertEquals(node_1.get_osc_address(), "/foo/bar/baz");
 		OscAddressNode node_2 = root.create_address(osc_address, true);
@@ -88,8 +88,8 @@ public class Test__OscAddressNode__create_address {
 	
 	@Test
 	public void test_05() {
-		OscAddress osc_address_one = new OscAddress("/foo/bar");
-		OscAddress osc_address_two = new OscAddress("baz/quux");
+		OscAddress osc_address_one = OscAddress.from_cache("/foo/bar");
+		OscAddress osc_address_two = OscAddress.from_cache("baz/quux");
 		OscAddressNode foo_bar = root.create_address(osc_address_one, false);
 		assertEquals(foo_bar.get_osc_address(), "/foo/bar");
 		OscAddressNode foo_bar_baz_quux = foo_bar.create_address(osc_address_two, false);
@@ -100,7 +100,7 @@ public class Test__OscAddressNode__create_address {
 	
 	@Test
 	public void test_06() {
-		OscAddress osc_address = new OscAddress("/foo/*/baz");
+		OscAddress osc_address = OscAddress.from_cache("/foo/*/baz");
         thrown.expect(RuntimeException.class);
         OscAddressNode created = root.create_address(osc_address, true);
         assertNull(created);
@@ -108,7 +108,7 @@ public class Test__OscAddressNode__create_address {
 
 	@Test
 	public void test_07() {
-		OscAddress osc_address = new OscAddress("/foo/../baz");
+		OscAddress osc_address = OscAddress.from_cache("/foo/../baz");
         thrown.expect(RuntimeException.class);
         OscAddressNode created = root.create_address(osc_address, true);
         assertNull(created);

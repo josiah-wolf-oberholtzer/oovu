@@ -24,7 +24,7 @@ public class Test__OscAddressNode__prune {
 
 	@Test
 	public void test_01() {
-		OscAddress osc_address = new OscAddress("/foo/bar/baz/quux");
+		OscAddress osc_address = OscAddress.from_cache("/foo/bar/baz/quux");
 		OscAddressNode node = root.create_address(osc_address, false);
 		assertArrayEquals(
 			root.get_summary_pieces(),
@@ -44,7 +44,7 @@ public class Test__OscAddressNode__prune {
 
 	@Test
 	public void test_02() {
-		OscAddress osc_address = new OscAddress("/foo/bar/baz/quux");
+		OscAddress osc_address = OscAddress.from_cache("/foo/bar/baz/quux");
 		OscAddressNode node = root.create_address(osc_address, false);
 		assertArrayEquals(
 			root.get_summary_pieces(),

@@ -85,25 +85,25 @@ public class Test__node__lifecycle {
 				"/foo/baz",
 				"/foo/baz/quux"
 			});
-		osc_address = new OscAddress("/foo");
+		osc_address = OscAddress.from_cache("/foo");
 		search_result = Environment.root_osc_address_node.search(osc_address);
 		assertEquals(
 			search_result.toArray(new OscAddressNode[0])[0].get_node(),
 			foo_module_node
 			);
-		osc_address = new OscAddress("/foo/bar");
+		osc_address = OscAddress.from_cache("/foo/bar");
 		search_result = Environment.root_osc_address_node.search(osc_address);
 		assertEquals(
 			search_result.toArray(new OscAddressNode[0])[0].get_node(),
 			foo_bar_property_node
 			);
-		osc_address = new OscAddress("/foo/baz");
+		osc_address = OscAddress.from_cache("/foo/baz");
 		search_result = Environment.root_osc_address_node.search(osc_address);
 		assertEquals(
 			search_result.toArray(new OscAddressNode[0])[0].get_node(),
 			null
 			);
-		osc_address = new OscAddress("/foo/baz/quux");
+		osc_address = OscAddress.from_cache("/foo/baz/quux");
 		search_result = Environment.root_osc_address_node.search(osc_address);
 		assertEquals(
 			search_result.toArray(new OscAddressNode[0])[0].get_node(),
