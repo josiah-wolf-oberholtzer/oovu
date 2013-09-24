@@ -37,7 +37,7 @@ public class Binding extends NodeProxy {
     	}
     	this.unregister_as_waiting();
         // unregister as waiting binding 
-    	target_node.bindings.add(this);
+    	target_node.add_binding(this);
     	this.node = target_node;
     }
     
@@ -60,7 +60,7 @@ public class Binding extends NodeProxy {
     public void unbind() {
     	Node node = this.get_node();
     	if (node != null) {
-    		node.bindings.remove(this);
+    		node.remove_binding(this);
     		this.node = null;
     	}
     }

@@ -202,7 +202,7 @@ abstract public class Node implements Dispatcher {
 
     public final Map<String, Atom[]> argument_map;
 
-    public final Set<Binding> bindings = new HashSet<Binding>();
+    protected final Set<Binding> bindings = new HashSet<Binding>();
 
     public final Map<String, Node> child_nodes = new HashMap<String, Node>();
 
@@ -304,5 +304,13 @@ abstract public class Node implements Dispatcher {
         for (Binding binding : this.bindings) {
         	binding.unbind();
         }
+    }
+    
+    public void add_binding(Binding binding) {
+    	this.bindings.add(binding);
+    }
+    
+    public void remove_binding(Binding binding) {
+    	this.bindings.remove(binding);
     }
 }
