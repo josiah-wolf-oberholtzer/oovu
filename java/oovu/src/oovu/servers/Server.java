@@ -290,7 +290,7 @@ abstract public class Server implements Dispatcher {
 
     abstract public void register_name(String desired_name);
 
-    public void register_osc_address() {
+    public void register_at_osc_address() {
     	String osc_address = this.get_osc_address();
         if (osc_address == null) {
             return;
@@ -312,7 +312,7 @@ abstract public class Server implements Dispatcher {
     
     abstract public void unregister_name();
     
-    public void unregister_osc_address() {
+    public void unregister_from_osc_address() {
         if (this.get_osc_address() == null) {
             return;
         }

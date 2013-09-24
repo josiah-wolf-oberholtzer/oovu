@@ -102,18 +102,18 @@ public class ModuleServer extends Server {
             Environment.root_server.child_nodes.keySet());
         this.name = acquired_name;
         Environment.root_server.child_nodes.put(acquired_name, this);
-        this.register_osc_address();
+        this.register_at_osc_address();
         for (Server member_node : this.child_nodes.values()) {
-            member_node.register_osc_address();
+            member_node.register_at_osc_address();
         }
     }
 
     @Override
     public void unregister_name() {
         for (Server member_node : this.child_nodes.values()) {
-            member_node.unregister_osc_address();
+            member_node.unregister_from_osc_address();
         }
-        this.unregister_osc_address();
+        this.unregister_from_osc_address();
         Environment.root_server.child_nodes.remove(this.name);
         this.name = null;
     }

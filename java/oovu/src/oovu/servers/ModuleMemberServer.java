@@ -135,12 +135,12 @@ public abstract class ModuleMemberServer extends Server {
             this.module_node.child_nodes.keySet());
         this.name = acquired_name;
         this.module_node.child_nodes.put(acquired_name, this);
-        this.register_osc_address();
+        this.register_at_osc_address();
     }
 
     @Override
     public void unregister_name() {
-        this.unregister_osc_address();
+        this.unregister_from_osc_address();
         this.module_node.child_nodes.remove(this.name);
         this.name = null;
     }
