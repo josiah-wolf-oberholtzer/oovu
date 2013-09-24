@@ -231,9 +231,19 @@ abstract public class Server implements Dispatcher {
         this.add_message_handler(new ShowMessageHandler());
     }
 
+    public void add_binding(Binding binding) {
+    	this.bindings.add(binding);
+    }
+
     public void add_message_handler(MessageHandler message_handler) {
         this.message_handlers.put(message_handler.get_name(),
             message_handler);
+    }
+
+    public void clear() {
+    	this.child_nodes.clear();
+    	this.bindings.clear();
+    	this.parent_node = null;
     }
 
     abstract protected void deallocate();
@@ -247,13 +257,13 @@ abstract public class Server implements Dispatcher {
     public String get_name() {
         return this.name;
     }
-
+    
     abstract public String get_osc_address();
 
     public OscAddressNode get_osc_address_node() {
     	return this.osc_address_node;
     }
-    
+
     public Server get_parent_node() {
     	return this.parent_node;
     }
@@ -291,13 +301,17 @@ abstract public class Server implements Dispatcher {
         this.osc_address_node.set_node(this);
     }
 
+    public void remove_binding(Binding binding) {
+    	this.bindings.remove(binding);
+    }
+    
     @Override
     public String toString() {
         return this.getClass() + ": " + this.get_name();
     }
-
+    
     abstract public void unregister_name();
-
+    
     public void unregister_osc_address() {
         if (this.get_osc_address() == null) {
             return;
@@ -308,19 +322,5 @@ abstract public class Server implements Dispatcher {
         for (Binding binding : this.bindings) {
         	binding.unbind();
         }
-    }
-    
-    public void add_binding(Binding binding) {
-    	this.bindings.add(binding);
-    }
-    
-    public void remove_binding(Binding binding) {
-    	this.bindings.remove(binding);
-    }
-    
-    public void clear() {
-    	this.child_nodes.clear();
-    	this.bindings.clear();
-    	this.parent_node = null;
     }
 }
