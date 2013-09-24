@@ -1,11 +1,11 @@
 package oovu.servers;
 
 import oovu.Binding;
+import oovu.clients.ServerClient;
 import oovu.environment.Environment;
 import oovu.environment.OscAddressNode;
 import oovu.environment.Request;
 import oovu.environment.Response;
-import oovu.proxies.NodeProxy;
 
 public class RootServer extends Server {
 
@@ -47,7 +47,7 @@ public class RootServer extends Server {
         if (response == null) {
             return;
         }
-        for (NodeProxy node_proxy : this.node_proxies) {
+        for (ServerClient node_proxy : this.node_proxies) {
             node_proxy.handle_response(response);
         }
         for (Binding binding : this.bindings) {

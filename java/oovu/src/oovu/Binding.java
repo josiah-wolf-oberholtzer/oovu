@@ -3,16 +3,16 @@ package oovu;
 import java.util.HashSet;
 import java.util.Set;
 
+import oovu.clients.AddressNodeClient;
 import oovu.environment.Environment;
 import oovu.environment.OscAddress;
 import oovu.environment.OscAddressNode;
-import oovu.proxies.NodeProxy;
 import oovu.servers.Server;
 
 import com.cycling74.max.MaxObject;
 import com.google.common.collect.Sets;
 
-public class Binding extends NodeProxy {
+public class Binding extends AddressNodeClient {
 
 	protected OscAddress target_osc_address = null;
 

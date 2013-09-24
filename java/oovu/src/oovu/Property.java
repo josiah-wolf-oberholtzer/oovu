@@ -1,12 +1,12 @@
 package oovu;
 
-import oovu.proxies.NodeProxy;
+import oovu.clients.ServerClient;
 import oovu.servers.PropertyServer;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
 
-public class Property extends NodeProxy {
+public class Property extends ServerClient {
 
     public Property(Atom[] arguments) {
         if (arguments.length < 2) {

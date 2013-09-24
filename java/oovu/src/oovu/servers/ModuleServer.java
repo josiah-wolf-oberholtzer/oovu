@@ -3,12 +3,12 @@ package oovu.servers;
 import java.util.Map;
 
 import oovu.Binding;
+import oovu.clients.ServerClient;
 import oovu.environment.Environment;
 import oovu.environment.InterfaceRequest;
 import oovu.environment.Request;
 import oovu.environment.Response;
 import oovu.environment.ValueRequest;
-import oovu.proxies.NodeProxy;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
@@ -80,7 +80,7 @@ public class ModuleServer extends Server {
         if (response == null) {
             return;
         }
-        for (NodeProxy node_proxy : this.node_proxies) {
+        for (ServerClient node_proxy : this.node_proxies) {
             node_proxy.handle_response(response);
         }
         for (Binding binding : this.bindings) {

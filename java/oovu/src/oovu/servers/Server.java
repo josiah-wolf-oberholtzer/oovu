@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 import oovu.Binding;
+import oovu.clients.ServerClient;
 import oovu.environment.Dispatcher;
 import oovu.environment.Environment;
 import oovu.environment.InterfaceHandler;
@@ -17,7 +18,6 @@ import oovu.environment.InterfaceResponse;
 import oovu.environment.OscAddress;
 import oovu.environment.OscAddressNode;
 import oovu.environment.Response;
-import oovu.proxies.NodeProxy;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
@@ -153,7 +153,7 @@ abstract public class Server implements Dispatcher {
 
         @Override
         public Atom[][] run(Server context, Atom[] arguments) {
-            for (NodeProxy node_proxy : context.node_proxies) {
+            for (ServerClient node_proxy : context.node_proxies) {
                 node_proxy.getMaxBox().getPatcher().send("front", new Atom[0]);
             }
             return null;
@@ -214,7 +214,7 @@ abstract public class Server implements Dispatcher {
 
     protected OscAddressNode osc_address_node = null;
 
-    public final Set<NodeProxy> node_proxies = new HashSet<NodeProxy>();
+    public final Set<ServerClient> node_proxies = new HashSet<ServerClient>();
 
     public Server(Map<String, Atom[]> argument_map) {
         if (argument_map != null) {

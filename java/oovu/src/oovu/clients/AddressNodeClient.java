@@ -1,4 +1,4 @@
-package oovu.proxies;
+package oovu.clients;
 
 import oovu.environment.Dispatcher;
 import oovu.environment.InterfaceRequest;
@@ -12,7 +12,7 @@ import oovu.servers.Server;
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
 
-abstract public class NodeProxy extends MaxObject implements Dispatcher {
+abstract public class AddressNodeClient extends MaxObject implements Dispatcher {
 
     protected Server node;
 

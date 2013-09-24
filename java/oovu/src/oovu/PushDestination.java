@@ -1,12 +1,12 @@
 package oovu;
 
-import oovu.proxies.AudioNodeProxy;
+import oovu.clients.AudioServerClient;
 import oovu.servers.PushServer;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
 
-public class PushDestination extends AudioNodeProxy {
+public class PushDestination extends AudioServerClient {
 
     public PushDestination(Atom[] arguments) {
         if (arguments.length < 2) {

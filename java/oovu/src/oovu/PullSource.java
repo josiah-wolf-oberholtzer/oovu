@@ -1,12 +1,12 @@
 package oovu;
 
-import oovu.proxies.AudioNodeProxy;
+import oovu.clients.AudioServerClient;
 import oovu.servers.PullServer;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
 
-public class PullSource extends AudioNodeProxy {
+public class PullSource extends AudioServerClient {
 
     public PullSource(Atom[] arguments) {
         if (arguments.length < 2) {

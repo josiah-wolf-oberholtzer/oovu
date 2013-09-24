@@ -1,12 +1,12 @@
 package oovu;
 
+import oovu.clients.ServerClient;
 import oovu.environment.Environment;
-import oovu.proxies.NodeProxy;
 
 import com.cycling74.max.Atom;
 
 
-public class Root extends NodeProxy {
+public class Root extends ServerClient {
 
     public Root() {
         this.declareIO(2, 1);

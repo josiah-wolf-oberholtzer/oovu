@@ -1,12 +1,12 @@
 package oovu;
 
-import oovu.proxies.NodeProxy;
+import oovu.clients.ServerClient;
 import oovu.servers.ReturnServer;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
 
-public class Return extends NodeProxy {
+public class Return extends ServerClient {
 
     public Return(Atom[] arguments) {
         if (arguments.length < 2) {

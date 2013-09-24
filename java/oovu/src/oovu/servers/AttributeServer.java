@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 import oovu.Binding;
+import oovu.clients.ServerClient;
 import oovu.datatypes.Datatype;
 import oovu.datatypes.GenericDatatype;
 import oovu.environment.InterfaceHandler;
@@ -12,7 +13,6 @@ import oovu.environment.Request;
 import oovu.environment.Response;
 import oovu.environment.ValueRequest;
 import oovu.environment.ValueResponse;
-import oovu.proxies.NodeProxy;
 
 import com.cycling74.max.Atom;
 
@@ -114,7 +114,7 @@ abstract public class AttributeServer extends ModuleMemberServer {
         if (response == null) {
             return;
         }
-        for (NodeProxy node_proxy : this.node_proxies) {
+        for (ServerClient node_proxy : this.node_proxies) {
             node_proxy.handle_response(response);
         }
         for (Binding binding : this.bindings) {
