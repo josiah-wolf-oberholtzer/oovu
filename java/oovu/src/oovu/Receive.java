@@ -1,6 +1,6 @@
 package oovu;
 
-import com.cycling74.max.*;
+import com.cycling74.max.MaxObject;
 
 public class Receive extends MaxObject {
 

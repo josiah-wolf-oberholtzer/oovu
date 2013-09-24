@@ -1,9 +1,15 @@
 package oovu.datatypes;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 import oovu.environment.InterfaceHandler;
-import oovu.nodes.*;
-import com.cycling74.max.*;
-import java.util.*;
+import oovu.nodes.AttributeNode;
+import oovu.nodes.Node;
+
+import com.cycling74.max.Atom;
+import com.cycling74.max.MaxObject;
 
 public abstract class Datatype {
 

@@ -1,9 +1,11 @@
 package oovu.datatypes;
 
 import java.util.Map;
+
 import oovu.environment.InterfaceHandler;
 import oovu.nodes.AttributeNode;
 import oovu.nodes.Node;
+
 import com.cycling74.max.Atom;
 
 abstract public class BoundedArrayDatatype extends BoundedDatatype {

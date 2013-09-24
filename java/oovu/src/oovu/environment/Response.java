@@ -1,7 +1,8 @@
 package oovu.environment;
 
-import com.cycling74.max.Atom;
 import oovu.nodes.Node;
+
+import com.cycling74.max.Atom;
 
 
 abstract public class Response {

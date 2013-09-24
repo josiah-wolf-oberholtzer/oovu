@@ -1,6 +1,6 @@
 package oovu.environment.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import oovu.environment.Environment;
 
 import org.junit.After;

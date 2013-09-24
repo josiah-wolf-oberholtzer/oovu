@@ -1,8 +1,9 @@
 package oovu;
 
-import com.cycling74.max.Atom;
 import oovu.environment.Environment;
 import oovu.proxies.NodeProxy;
+
+import com.cycling74.max.Atom;
 
 
 public class Root extends NodeProxy {

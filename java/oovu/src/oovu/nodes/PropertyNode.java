@@ -1,8 +1,10 @@
 package oovu.nodes;
 
 import java.util.Map;
+
 import oovu.environment.Response;
 import oovu.environment.ValueResponse;
+
 import com.cycling74.max.Atom;
 
 public class PropertyNode extends AttributeNode {

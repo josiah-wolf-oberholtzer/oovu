@@ -1,9 +1,15 @@
 package oovu.environment;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+
 import oovu.Binding;
-import oovu.nodes.*;
-import com.cycling74.max.*;
+import oovu.nodes.AudioNode;
+import oovu.nodes.ModuleMemberNode;
+import oovu.nodes.ModuleNode;
+import oovu.nodes.RootNode;
+
+import com.cycling74.max.MaxObject;
 
 public class Environment {
 

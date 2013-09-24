@@ -1,17 +1,16 @@
 package oovu;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
-
-import com.cycling74.max.MaxObject;
-import com.google.common.collect.Sets;
 
 import oovu.environment.Environment;
 import oovu.environment.OscAddress;
 import oovu.environment.OscAddressNode;
 import oovu.nodes.Node;
 import oovu.proxies.NodeProxy;
+
+import com.cycling74.max.MaxObject;
+import com.google.common.collect.Sets;
 
 public class Binding extends NodeProxy {
 

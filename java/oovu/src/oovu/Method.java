@@ -1,8 +1,10 @@
 package oovu;
 
-import com.cycling74.max.*;
-import oovu.nodes.*;
+import oovu.nodes.MethodNode;
 import oovu.proxies.NodeProxy;
+
+import com.cycling74.max.Atom;
+import com.cycling74.max.MaxObject;
 
 public class Method extends NodeProxy {
 

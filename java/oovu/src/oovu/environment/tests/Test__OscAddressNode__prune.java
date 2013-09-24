@@ -1,6 +1,6 @@
 package oovu.environment.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
 import oovu.environment.OscAddress;
 import oovu.environment.OscAddressNode;
 

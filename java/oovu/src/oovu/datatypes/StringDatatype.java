@@ -2,8 +2,10 @@ package oovu.datatypes;
 
 import java.util.ArrayList;
 import java.util.Map;
+
+import oovu.nodes.AttributeNode;
+
 import com.cycling74.max.Atom;
-import oovu.nodes.*;
 
 public class StringDatatype extends GenericDatatype {
 

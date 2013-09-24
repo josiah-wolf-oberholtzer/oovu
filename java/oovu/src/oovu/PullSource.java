@@ -1,9 +1,10 @@
 package oovu;
 
-import com.cycling74.max.Atom;
-import com.cycling74.max.MaxObject;
 import oovu.nodes.PullNode;
 import oovu.proxies.AudioNodeProxy;
+
+import com.cycling74.max.Atom;
+import com.cycling74.max.MaxObject;
 
 public class PullSource extends AudioNodeProxy {
 

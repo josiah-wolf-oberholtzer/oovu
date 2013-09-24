@@ -2,10 +2,13 @@ package oovu.datatypes;
 
 import java.util.Arrays;
 import java.util.Map;
-import com.cycling74.max.Atom;
+
 import oovu.environment.Environment;
 import oovu.environment.InterfaceHandler;
-import oovu.nodes.*;
+import oovu.nodes.AttributeNode;
+import oovu.nodes.Node;
+
+import com.cycling74.max.Atom;
 
 public class PullDatatype extends OscAddressDatatype {
 

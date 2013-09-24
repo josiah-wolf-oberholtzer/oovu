@@ -1,10 +1,14 @@
 package oovu.nodes;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
-import com.cycling74.max.*;
-
-import oovu.*;
+import oovu.Binding;
 import oovu.environment.Dispatcher;
 import oovu.environment.Environment;
 import oovu.environment.InterfaceHandler;
@@ -14,6 +18,9 @@ import oovu.environment.OscAddress;
 import oovu.environment.OscAddressNode;
 import oovu.environment.Response;
 import oovu.proxies.NodeProxy;
+
+import com.cycling74.max.Atom;
+import com.cycling74.max.MaxObject;
 
 abstract public class Node implements Dispatcher {
 

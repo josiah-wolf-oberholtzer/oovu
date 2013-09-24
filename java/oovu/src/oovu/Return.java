@@ -1,9 +1,10 @@
 package oovu;
 
+import oovu.nodes.ReturnNode;
+import oovu.proxies.NodeProxy;
+
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
-import oovu.nodes.*;
-import oovu.proxies.NodeProxy;
 
 public class Return extends NodeProxy {
 

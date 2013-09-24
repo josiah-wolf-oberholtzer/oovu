@@ -1,8 +1,10 @@
 package oovu.datatypes;
 
-import com.cycling74.max.*;
-import java.util.*;
-import oovu.nodes.*;
+import java.util.Map;
+
+import oovu.nodes.AttributeNode;
+
+import com.cycling74.max.Atom;
 
 public class GenericDatatype extends Datatype {
 

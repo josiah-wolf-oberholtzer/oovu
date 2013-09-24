@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -29,12 +30,21 @@ public class OscAddress {
     	}
     	return true;
     }
+    public static OscAddress from_cache(String osc_address_string) {
+    	OscAddress osc_address = OscAddress.cached_addresses.get(osc_address_string);
+    	if (osc_address == null) {
+    		osc_address = new OscAddress(osc_address_string);
+    		OscAddress.cached_addresses.put(osc_address_string, osc_address);
+    	}
+    	return osc_address;
+    }
     public static boolean is_current_node_token(String token) {
     	if (token.equals(".") || token.equals("")) {
     		return true;
     	}
     	return false;
     }
+    
     public static boolean is_node_name_token(String token) {
 		return OscAddress.osc_name_pattern.matcher(token).matches();
     }
@@ -53,15 +63,6 @@ public class OscAddress {
     		return true;
     	}
         return false;
-    }
-    
-    public static OscAddress from_cache(String osc_address_string) {
-    	OscAddress osc_address = OscAddress.cached_addresses.get(osc_address_string);
-    	if (osc_address == null) {
-    		osc_address = new OscAddress(osc_address_string);
-    		OscAddress.cached_addresses.put(osc_address_string, osc_address);
-    	}
-    	return osc_address;
     }
     
     public final String node_attribute_name;
@@ -112,6 +113,10 @@ public class OscAddress {
         this.address_items = new_address_items.toArray(new String[0]);
     }
     
+    public boolean is_cached() {
+    	return OscAddress.cached_addresses.containsKey(this.raw_address);
+    }
+    
     @Override
 	public String toString() {
     	StringBuilder string_builder = new StringBuilder();
@@ -128,9 +133,5 @@ public class OscAddress {
     	}
     	string_builder.append("\")");
     	return string_builder.toString();
-    }
-    
-    public boolean is_cached() {
-    	return OscAddress.cached_addresses.containsKey(this.raw_address);
     }
 }

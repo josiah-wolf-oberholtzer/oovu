@@ -1,9 +1,10 @@
 package oovu;
 
+import oovu.nodes.PushNode;
+import oovu.proxies.AudioNodeProxy;
+
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
-import oovu.nodes.*;
-import oovu.proxies.AudioNodeProxy;
 
 public class PushDestination extends AudioNodeProxy {
 

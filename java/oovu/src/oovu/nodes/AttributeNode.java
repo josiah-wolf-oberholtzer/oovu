@@ -2,9 +2,10 @@ package oovu.nodes;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
-import com.cycling74.max.Atom;
+
 import oovu.Binding;
-import oovu.datatypes.*;
+import oovu.datatypes.Datatype;
+import oovu.datatypes.GenericDatatype;
 import oovu.environment.InterfaceHandler;
 import oovu.environment.InterfaceRequest;
 import oovu.environment.Request;
@@ -12,6 +13,8 @@ import oovu.environment.Response;
 import oovu.environment.ValueRequest;
 import oovu.environment.ValueResponse;
 import oovu.proxies.NodeProxy;
+
+import com.cycling74.max.Atom;
 
 abstract public class AttributeNode extends ModuleMemberNode {
 

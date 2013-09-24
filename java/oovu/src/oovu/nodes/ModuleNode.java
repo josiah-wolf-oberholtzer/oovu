@@ -1,8 +1,7 @@
 package oovu.nodes;
 
 import java.util.Map;
-import com.cycling74.max.Atom;
-import com.cycling74.max.MaxObject;
+
 import oovu.Binding;
 import oovu.environment.Environment;
 import oovu.environment.InterfaceRequest;
@@ -10,6 +9,9 @@ import oovu.environment.Request;
 import oovu.environment.Response;
 import oovu.environment.ValueRequest;
 import oovu.proxies.NodeProxy;
+
+import com.cycling74.max.Atom;
+import com.cycling74.max.MaxObject;
 
 public class ModuleNode extends Node {
 
