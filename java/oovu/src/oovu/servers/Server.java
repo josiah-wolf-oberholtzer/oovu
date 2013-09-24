@@ -32,19 +32,19 @@ abstract public class Server implements Dispatcher {
         }
 
         @Override
-        public Atom[][] run(Server context, Atom[] arguments) {
+        public Atom[][] run(Server server, Atom[] arguments) {
             ArrayList<Atom[]> result = new ArrayList<Atom[]>();
-            MessageHandler getMetaMessageHandler = context.message_handlers
+            MessageHandler getMetaMessageHandler = server.message_handlers
                 .get("getmeta");
-            Atom[] meta = Atom.removeFirst(getMetaMessageHandler.run(context,
+            Atom[] meta = Atom.removeFirst(getMetaMessageHandler.run(server,
                 arguments)[0]);
             for (Atom name : meta) {
-                MessageHandler message_handler = context.message_handlers
+                MessageHandler message_handler = server.message_handlers
                     .get(name.toString());
                 if (message_handler == null) {
                     continue;
                 }
-                for (Atom[] subresult : message_handler.run(context, null)) {
+                for (Atom[] subresult : message_handler.run(server, null)) {
                     result.add(subresult);
                 }
             }
@@ -60,9 +60,9 @@ abstract public class Server implements Dispatcher {
         }
 
         @Override
-        public Atom[][] run(Server context, Atom[] arguments) {
+        public Atom[][] run(Server server, Atom[] arguments) {
             Atom[][] result = new Atom[1][];
-            String[] message_handler_names = context.message_handlers
+            String[] message_handler_names = server.message_handlers
                 .keySet().toArray(new String[0]);
             Arrays.sort(message_handler_names);
             result[0] = Atom.newAtom("interface",
@@ -79,10 +79,10 @@ abstract public class Server implements Dispatcher {
         }
 
         @Override
-        public Atom[][] run(Server context, Atom[] arguments) {
+        public Atom[][] run(Server server, Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             ArrayList<Atom> getters = new ArrayList<Atom>();
-            String[] message_handler_names = context.message_handlers
+            String[] message_handler_names = server.message_handlers
                 .keySet().toArray(new String[0]);
             Arrays.sort(message_handler_names);
             for (String message_handler_name : message_handler_names) {
@@ -103,10 +103,10 @@ abstract public class Server implements Dispatcher {
         }
 
         @Override
-        public Atom[][] run(Server context, Atom[] arguments) {
+        public Atom[][] run(Server server, Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             result[0] = Atom
-                .newAtom(new String[] { "name", context.get_name() });
+                .newAtom(new String[] { "name", server.get_name() });
             return result;
         }
     }
@@ -119,10 +119,10 @@ abstract public class Server implements Dispatcher {
         }
 
         @Override
-        public Atom[][] run(Server context, Atom[] arguments) {
+        public Atom[][] run(Server server, Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             result[0] = Atom.newAtom(new String[] { "oscaddress",
-                context.get_osc_address() });
+                server.get_osc_address() });
             return result;
         }
     }
@@ -135,8 +135,8 @@ abstract public class Server implements Dispatcher {
         }
 
         @Override
-        public Atom[][] run(Server context, Atom[] arguments) {
-            String[] report_pieces = context.get_report_pieces();
+        public Atom[][] run(Server server, Atom[] arguments) {
+            String[] report_pieces = server.get_report_pieces();
             for (String report_piece : report_pieces) {
                 MaxObject.post(report_piece + "\n");
             }
@@ -152,8 +152,8 @@ abstract public class Server implements Dispatcher {
         }
 
         @Override
-        public Atom[][] run(Server context, Atom[] arguments) {
-            for (ServerClient node_proxy : context.node_proxies) {
+        public Atom[][] run(Server server, Atom[] arguments) {
+            for (ServerClient node_proxy : server.node_proxies) {
                 node_proxy.getMaxBox().getPatcher().send("front", new Atom[0]);
             }
             return null;

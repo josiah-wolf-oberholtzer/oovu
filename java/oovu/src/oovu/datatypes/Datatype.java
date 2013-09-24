@@ -21,10 +21,10 @@ public abstract class Datatype {
         }
 
         @Override
-        public Atom[][] run(Server context, Atom[] arguments) {
+        public Atom[][] run(Server server, Atom[] arguments) {
             Atom[][] result = new Atom[1][];
-            AttributeServer node = (AttributeServer) context;
-            String datatype_name = node.datatype.getClass().getSimpleName()
+            AttributeServer attribute_server = (AttributeServer) server;
+            String datatype_name = attribute_server.datatype.getClass().getSimpleName()
                 .toLowerCase().replace("datatype", "");
             result[0] = Atom
                 .newAtom(new String[] { "datatype", datatype_name });

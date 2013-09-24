@@ -20,7 +20,7 @@ public class PullDatatype extends OscAddressDatatype {
         }
 
         @Override
-        public Atom[][] run(Server context, Atom[] arguments) {
+        public Atom[][] run(Server server, Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             String[] pull_addresses = Environment.pull_addresses.keySet()
                 .toArray(new String[0]);
