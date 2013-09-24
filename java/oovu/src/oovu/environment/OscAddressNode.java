@@ -237,7 +237,8 @@ public class OscAddressNode {
         this.node = node;
     }
     
-    public String toString() {
+    @Override
+	public String toString() {
     	return this.getClass().getSimpleName() + "(\"" + 
     		this.get_osc_address() + "\")";
     }

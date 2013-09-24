@@ -49,14 +49,14 @@ public class OptionDatatype extends StringDatatype {
         this.initialize_options(argument_map);
     }
     
+    protected String[] get_options() {
+        return this.options;
+    }
+    
     protected void initialize_options(Map<String, Atom[]> argument_map) {
         if (argument_map.containsKey("options")) {
             this.set_options(this.extract_strings_from_atoms(argument_map.get("options")));
         }
-    }
-    
-    protected String[] get_options() {
-        return this.options;
     }
     
     protected void set_options(String[] options) {

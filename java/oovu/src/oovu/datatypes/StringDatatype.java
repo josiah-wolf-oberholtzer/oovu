@@ -11,17 +11,17 @@ public class StringDatatype extends GenericDatatype {
         super(client, argument_map);
     }
 
-    @Override
-    public Atom[] get_default() {
-        return Atom.newAtom(new String[] { "" });
-    }
-
     protected String[] extract_strings_from_atoms(Atom[] atoms) {
         ArrayList<String> strings = new ArrayList<String>();
         for (Atom atom : atoms) {
             strings.add(atom.toString());
         }
         return strings.toArray(new String[0]);
+    }
+
+    @Override
+    public Atom[] get_default() {
+        return Atom.newAtom(new String[] { "" });
     }
     
 }

@@ -107,6 +107,22 @@ abstract public class BoundedDatatype extends GenericDatatype {
         this.initialize_extrema(argument_map);
     }
 
+    protected Float[] extract_floats_from_atoms(Atom[] atoms) {
+        ArrayList<Float> floats = new ArrayList<Float>();
+        for (Atom atom : atoms) {
+            floats.add(atom.toFloat());
+        }
+        return floats.toArray(new Float[0]);
+    }
+
+    protected Integer[] extract_ints_from_atoms(Atom[] atoms) {
+        ArrayList<Integer> ints = new ArrayList<Integer>();
+        for (Atom atom : atoms) {
+            ints.add(atom.toInt());
+        }
+        return ints.toArray(new Integer[0]);
+    }
+
     protected Float get_maximum() {
         return this.maximum;
     }
@@ -129,12 +145,12 @@ abstract public class BoundedDatatype extends GenericDatatype {
         this.maximum = maximum;
         this.sort_extrema();
     }
-
+    
     protected void set_minimum(Float minimum) {
         this.minimum = minimum;
         this.sort_extrema();
     }
-
+    
     protected void sort_extrema() {
         if ((this.minimum != null) && (this.maximum != null)) {
             Float[] extrema = new Float[] { this.minimum, this.maximum };
@@ -142,21 +158,5 @@ abstract public class BoundedDatatype extends GenericDatatype {
             this.minimum = extrema[0];
             this.maximum = extrema[1];
         }
-    }
-    
-    protected Float[] extract_floats_from_atoms(Atom[] atoms) {
-        ArrayList<Float> floats = new ArrayList<Float>();
-        for (Atom atom : atoms) {
-            floats.add(atom.toFloat());
-        }
-        return floats.toArray(new Float[0]);
-    }
-    
-    protected Integer[] extract_ints_from_atoms(Atom[] atoms) {
-        ArrayList<Integer> ints = new ArrayList<Integer>();
-        for (Atom atom : atoms) {
-            ints.add(atom.toInt());
-        }
-        return ints.toArray(new Integer[0]);
     }
 }

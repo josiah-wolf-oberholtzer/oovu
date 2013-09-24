@@ -5,14 +5,14 @@ import com.cycling74.max.Atom;
 
 public class PushNode extends AudioNode {
 
-    public PushNode(ModuleNode module_node, Map<String, Atom[]> argument_map) {
-        super(module_node, argument_map);
-    }
-
     public static PushNode allocate(Integer module_id, String desired_name,
         Atom[] argument_list) {
         return (PushNode) ModuleMemberNode.allocate_from_label("PushNode",
             module_id, desired_name, argument_list);
+    }
+
+    public PushNode(ModuleNode module_node, Map<String, Atom[]> argument_map) {
+        super(module_node, argument_map);
     }
 
     @Override

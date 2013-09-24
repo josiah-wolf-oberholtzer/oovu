@@ -26,19 +26,19 @@ public abstract class Datatype {
         }
     }
 
+    public static Class<?> from_label(String label) {
+        if (Datatype.datatype_classes_by_label.containsKey(label)) {
+            return Datatype.datatype_classes_by_label.get(label);
+        }
+        MaxObject.ouch("Bad datatype label: " + label + "\n");
+        return GenericDatatype.class;
+    }
+
     protected Atom[] value = new Atom[0];
 
     protected AttributeNode client = null;
 
     private static final Map<String, Class<?>> datatype_classes_by_label;
-
-    public Datatype(AttributeNode client, Map<String, Atom[]> argument_map) {
-        this.client = client;
-        if (this.client != null) {
-            this.client
-                .add_interface_handler(new GetDatatypeInterfaceHandler());
-        }
-    }
 
     static {
         Map<String, Class<?>> map = new HashMap<String, Class<?>>();
@@ -59,12 +59,12 @@ public abstract class Datatype {
         datatype_classes_by_label = Collections.unmodifiableMap(map);
     }
 
-    public static Class<?> from_label(String label) {
-        if (Datatype.datatype_classes_by_label.containsKey(label)) {
-            return Datatype.datatype_classes_by_label.get(label);
+    public Datatype(AttributeNode client, Map<String, Atom[]> argument_map) {
+        this.client = client;
+        if (this.client != null) {
+            this.client
+                .add_interface_handler(new GetDatatypeInterfaceHandler());
         }
-        MaxObject.ouch("Bad datatype label: " + label + "\n");
-        return GenericDatatype.class;
     }
 
     public String get_datatype() {

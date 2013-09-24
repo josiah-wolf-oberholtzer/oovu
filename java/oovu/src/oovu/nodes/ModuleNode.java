@@ -13,13 +13,6 @@ import oovu.proxies.NodeProxy;
 
 public class ModuleNode extends Node {
 
-    public final Integer module_id;
-
-    public ModuleNode(Integer module_id, Map<String, Atom[]> argument_map) {
-        super(argument_map);
-        this.module_id = module_id;
-    }
-
     public static ModuleNode allocate(Integer module_id) {
         ModuleNode module_node = Environment.modules_by_module_id
             .get(module_id);
@@ -29,6 +22,13 @@ public class ModuleNode extends Node {
         module_node = new ModuleNode(module_id, null);
         Environment.modules_by_module_id.put(module_id, module_node);
         return module_node;
+    }
+
+    public final Integer module_id;
+
+    public ModuleNode(Integer module_id, Map<String, Atom[]> argument_map) {
+        super(argument_map);
+        this.module_id = module_id;
     }
 
     @Override
@@ -100,6 +100,7 @@ public class ModuleNode extends Node {
             Environment.root_node.child_nodes.keySet());
         this.name = acquired_name;
         Environment.root_node.child_nodes.put(acquired_name, this);
+        this.register_osc_address();
         for (Node member_node : this.child_nodes.values()) {
             member_node.register_osc_address();
         }

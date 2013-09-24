@@ -7,14 +7,14 @@ import com.cycling74.max.Atom;
 
 public class ReturnNode extends AttributeNode {
 
-    public ReturnNode(ModuleNode module_node, Map<String, Atom[]> argument_map) {
-        super(module_node, argument_map);
-    }
-
     public static ReturnNode allocate(Integer module_id, String desired_name,
         Atom[] argument_list) {
         return (ReturnNode) ModuleMemberNode.allocate_from_label("ReturnNode",
             module_id, desired_name, argument_list);
+    }
+
+    public ReturnNode(ModuleNode module_node, Map<String, Atom[]> argument_map) {
+        super(module_node, argument_map);
     }
 
     @Override

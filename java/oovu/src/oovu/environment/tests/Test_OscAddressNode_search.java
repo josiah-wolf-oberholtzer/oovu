@@ -3,17 +3,12 @@ package oovu.environment.tests;
 import static org.junit.Assert.*;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
-import javax.swing.event.ListSelectionEvent;
 
 import oovu.environment.OscAddress;
 import oovu.environment.OscAddressNode;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.collect.Sets;

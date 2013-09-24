@@ -1,13 +1,17 @@
 package oovu.nodes;
 
 import java.util.*;
+
 import com.cycling74.max.*;
+
 import oovu.*;
 import oovu.environment.Dispatcher;
 import oovu.environment.Environment;
 import oovu.environment.InterfaceHandler;
 import oovu.environment.InterfaceRequest;
 import oovu.environment.InterfaceResponse;
+import oovu.environment.OscAddress;
+import oovu.environment.OscAddressNode;
 import oovu.environment.Response;
 import oovu.proxies.NodeProxy;
 
@@ -149,33 +153,6 @@ abstract public class Node implements Dispatcher {
         }
     }
 
-    public final Map<String, Atom[]> argument_map;
-
-    public final Set<Binding> bindings = new HashSet<Binding>();
-
-    public final Map<String, Node> child_nodes = new HashMap<String, Node>();
-
-    protected final Map<String, InterfaceHandler> interface_handlers = new HashMap<String, InterfaceHandler>();
-
-    protected String name = null;
-
-    public final Set<NodeProxy> node_proxies = new HashSet<NodeProxy>();
-
-    public Node(Map<String, Atom[]> argument_map) {
-        if (argument_map != null) {
-            this.argument_map = Collections.unmodifiableMap(argument_map);
-        } else {
-            this.argument_map = null;
-        }
-        this.add_interface_handler(new DumpMetaInterfaceHandler());
-        this.add_interface_handler(new GetMetaInterfaceHandler());
-        this.add_interface_handler(new GetInterfaceInterfaceHandler());
-        this.add_interface_handler(new GetNameInterfaceHandler());
-        this.add_interface_handler(new GetOscAddressInterfaceHandler());
-        this.add_interface_handler(new ReportInterfaceHandler());
-        this.add_interface_handler(new ShowInterfaceHandler());
-    }
-
     public static String
         find_unique_name(String desired_name, Set<String> names) {
         if (!names.contains(desired_name)) {
@@ -214,6 +191,35 @@ abstract public class Node implements Dispatcher {
                 current_list.toArray(new Atom[current_list.size()]));
         }
         return Collections.unmodifiableMap(argument_map);
+    }
+
+    public final Map<String, Atom[]> argument_map;
+
+    public final Set<Binding> bindings = new HashSet<Binding>();
+
+    public final Map<String, Node> child_nodes = new HashMap<String, Node>();
+
+    protected final Map<String, InterfaceHandler> interface_handlers = new HashMap<String, InterfaceHandler>();
+    
+    protected String name = null;
+
+    protected OscAddressNode osc_address_node = null;
+
+    public final Set<NodeProxy> node_proxies = new HashSet<NodeProxy>();
+
+    public Node(Map<String, Atom[]> argument_map) {
+        if (argument_map != null) {
+            this.argument_map = Collections.unmodifiableMap(argument_map);
+        } else {
+            this.argument_map = null;
+        }
+        this.add_interface_handler(new DumpMetaInterfaceHandler());
+        this.add_interface_handler(new GetMetaInterfaceHandler());
+        this.add_interface_handler(new GetInterfaceInterfaceHandler());
+        this.add_interface_handler(new GetNameInterfaceHandler());
+        this.add_interface_handler(new GetOscAddressInterfaceHandler());
+        this.add_interface_handler(new ReportInterfaceHandler());
+        this.add_interface_handler(new ShowInterfaceHandler());
     }
 
     public void add_interface_handler(InterfaceHandler interface_handler) {
@@ -260,10 +266,14 @@ abstract public class Node implements Dispatcher {
     abstract public void register_name(String desired_name);
 
     public void register_osc_address() {
-        if (this.get_osc_address() == null) {
+    	String osc_address = this.get_osc_address();
+        if (osc_address == null) {
             return;
         }
-        Environment.osc_addresses.put(this.get_osc_address(), this);
+        OscAddressNode root = Environment.root_osc_address_node;
+        this.osc_address_node = root.create_address(
+        	new OscAddress(osc_address), false);
+        this.osc_address_node.set_node(this);
     }
 
     @Override
@@ -277,6 +287,11 @@ abstract public class Node implements Dispatcher {
         if (this.get_osc_address() == null) {
             return;
         }
-        Environment.osc_addresses.remove(this.get_osc_address());
+        this.osc_address_node.set_node(null);
+        this.osc_address_node.prune();
+        this.osc_address_node = null;
+        for (Binding binding : this.bindings) {
+        	binding.unbind();
+        }
     }
 }
