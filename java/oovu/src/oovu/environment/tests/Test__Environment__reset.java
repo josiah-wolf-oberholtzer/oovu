@@ -25,7 +25,7 @@ public class Test__Environment__reset {
 		assertEquals(Environment.modules_by_module_id.size(), 0);
 		assertEquals(Environment.pull_addresses.size(), 0);
 		assertEquals(Environment.push_addresses.size(), 0);
-		assertEquals(Environment.root_node.get_reference_count(), 0);
+		assertEquals(Environment.root_server.get_reference_count(), 0);
 		assertEquals(Environment.root_osc_address_node.get_reference_count(), 0);
 	}
 

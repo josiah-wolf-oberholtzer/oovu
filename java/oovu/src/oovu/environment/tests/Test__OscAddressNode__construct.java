@@ -131,11 +131,11 @@ public class Test__OscAddressNode__construct {
 		OscAddressNode bar_osc_address_node = new OscAddressNode("bar");
 		ModuleServer foo_module_node = new ModuleServer(1001, null);
 		assertEquals(foo_osc_address_node.is_empty(), true);
-		foo_osc_address_node.set_node(foo_module_node);
+		foo_osc_address_node.set_server(foo_module_node);
 		assertEquals(foo_osc_address_node.is_empty(), false);
 		foo_osc_address_node.add_child(bar_osc_address_node);
 		assertEquals(foo_osc_address_node.is_empty(), false);
-		foo_osc_address_node.set_node(null);
+		foo_osc_address_node.set_server(null);
 		assertEquals(foo_osc_address_node.is_empty(), false);
 		foo_osc_address_node.remove_child(bar_osc_address_node);
 		assertEquals(foo_osc_address_node.is_empty(), true);

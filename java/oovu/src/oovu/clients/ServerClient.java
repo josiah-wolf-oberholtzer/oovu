@@ -14,7 +14,7 @@ import com.cycling74.max.MaxObject;
 
 abstract public class ServerClient extends MaxObject implements Dispatcher {
 
-    protected Server node;
+    protected Server server;
 
     @Override
     public void anything(String message, Atom[] arguments) {
@@ -32,7 +32,7 @@ abstract public class ServerClient extends MaxObject implements Dispatcher {
     }
 
     protected Server get_node() {
-        return this.node;
+        return this.server;
     }
 
     @Override

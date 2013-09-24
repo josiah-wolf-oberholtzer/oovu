@@ -298,7 +298,7 @@ abstract public class Server implements Dispatcher {
         OscAddressNode root = Environment.root_osc_address_node;
         this.osc_address_node = root.create_address(
         	OscAddress.from_cache(osc_address), false);
-        this.osc_address_node.set_node(this);
+        this.osc_address_node.set_server(this);
     }
 
     public void remove_binding(Binding binding) {
@@ -316,7 +316,7 @@ abstract public class Server implements Dispatcher {
         if (this.get_osc_address() == null) {
             return;
         }
-        this.osc_address_node.set_node(null);
+        this.osc_address_node.set_server(null);
         this.osc_address_node.prune();
         this.osc_address_node = null;
         for (Binding binding : this.bindings) {

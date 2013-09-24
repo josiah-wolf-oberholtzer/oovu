@@ -17,10 +17,10 @@ import com.sun.tools.javac.util.List;
 public class OscAddressNode {
 
     private final String name;
-    private final Map<String, OscAddressNode> children = 
+    private final Map<String, OscAddressNode> named_children = 
         new HashMap<String, OscAddressNode>();
     private OscAddressNode parent = null;
-    private Server node = null;
+    private Server server = null;
     
     public OscAddressNode(String name) {
         this.name = name;
@@ -34,12 +34,12 @@ public class OscAddressNode {
     	if (child.get_parent() != null) {
     		child.get_parent().remove_child(child);
     	}
-        this.children.put(child.name, child);
+        this.named_children.put(child.name, child);
         child.parent = this;
     }
     
     public void clear() {
-    	OscAddressNode[] children = this.children.values().toArray(
+    	OscAddressNode[] children = this.named_children.values().toArray(
     		new OscAddressNode[0]);
     	for (OscAddressNode child : children) {
     		this.remove_child(child);
@@ -71,12 +71,12 @@ public class OscAddressNode {
     }
     
     public String find_unique_name(String desired_name) {
-        if (!this.children.containsKey(desired_name)) {
+        if (!this.named_children.containsKey(desired_name)) {
             return desired_name;
         }
         Integer counter = 1;
         String acquired_name = desired_name + '.' + counter.toString();
-        while (this.children.containsKey(acquired_name)) {
+        while (this.named_children.containsKey(acquired_name)) {
             counter += 1;
             acquired_name = desired_name + '.' + counter.toString();
         }
@@ -84,21 +84,21 @@ public class OscAddressNode {
     }
     
     public OscAddressNode get_child(String name) {
-    	return this.children.get(name);
+    	return this.named_children.get(name);
     }
     
     public String get_name() {
     	return this.name;
     }
     
-    public Server get_node() {
-        return this.node;
+    public Server get_server() {
+        return this.server;
     }
     
     public String get_osc_address() {
     	ArrayList<String> names = new ArrayList<String>();
-    	for (OscAddressNode node : this.get_parentage()) {
-    		names.add(node.name);
+    	for (OscAddressNode osc_address_node : this.get_parentage()) {
+    		names.add(osc_address_node.name);
     	}
     	List<String> reversed_names = List.from(names.toArray(new String[0]));
     	reversed_names = reversed_names.reverse();
@@ -123,7 +123,7 @@ public class OscAddressNode {
     }
     
     public int get_reference_count() {
-    	return this.children.size();
+    	return this.named_children.size();
     }
     
     public OscAddressNode get_root() {
@@ -136,7 +136,7 @@ public class OscAddressNode {
     	if (this.name != "") {
     		pieces.add("/" + this.name);
     	}
-    	for (OscAddressNode child : this.children.values()) {
+    	for (OscAddressNode child : this.named_children.values()) {
     		for (String piece : child.get_summary_pieces()) {
     			if (this.name != "") {
     				pieces.add("/" + this.name + piece);
@@ -151,7 +151,7 @@ public class OscAddressNode {
     }
     
     public boolean is_empty() {
-        if (this.node == null && this.children.size() == 0) {
+        if (this.server == null && this.named_children.size() == 0) {
             return true;
         }
         return false;
@@ -193,7 +193,7 @@ public class OscAddressNode {
     }
     
     public void remove_child(OscAddressNode child) {
-        this.children.remove(child.name);
+        this.named_children.remove(child.name);
         child.parent = null;
     }
     
@@ -215,7 +215,7 @@ public class OscAddressNode {
     				current_cursor.get_parent() != null) {
     				new_cursors.add(current_cursor.get_parent());
     			} else if (current_address_item.contains("*")) {
-    				for (OscAddressNode child : current_cursor.children.values()) {
+    				for (OscAddressNode child : current_cursor.named_children.values()) {
     					if (child.matches(current_address_item)) {
     						new_cursors.add(child);
     					}
@@ -233,8 +233,8 @@ public class OscAddressNode {
     	return new_cursors;
     }
     
-    public void set_node(Server node) {
-        this.node = node;
+    public void set_server(Server server) {
+        this.server = server;
     }
     
     @Override

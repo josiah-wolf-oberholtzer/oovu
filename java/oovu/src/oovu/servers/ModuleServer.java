@@ -49,9 +49,9 @@ public class ModuleServer extends Server {
 
     @Override
     public Server get_parent_node() {
-        if (Environment.root_node.child_nodes.containsKey(this.name)
-            && (Environment.root_node.child_nodes.get(this.name) == this)) {
-            return Environment.root_node;
+        if (Environment.root_server.child_nodes.containsKey(this.name)
+            && (Environment.root_server.child_nodes.get(this.name) == this)) {
+            return Environment.root_server;
         }
         return null;
     }
@@ -86,7 +86,7 @@ public class ModuleServer extends Server {
         for (Binding binding : this.bindings) {
             binding.handle_response(response);
         }
-        Environment.root_node.handle_response(response);
+        Environment.root_server.handle_response(response);
     }
 
     @Override
@@ -99,9 +99,9 @@ public class ModuleServer extends Server {
             return;
         }
         String acquired_name = Server.find_unique_name(desired_name,
-            Environment.root_node.child_nodes.keySet());
+            Environment.root_server.child_nodes.keySet());
         this.name = acquired_name;
-        Environment.root_node.child_nodes.put(acquired_name, this);
+        Environment.root_server.child_nodes.put(acquired_name, this);
         this.register_osc_address();
         for (Server member_node : this.child_nodes.values()) {
             member_node.register_osc_address();
@@ -114,7 +114,7 @@ public class ModuleServer extends Server {
             member_node.unregister_osc_address();
         }
         this.unregister_osc_address();
-        Environment.root_node.child_nodes.remove(this.name);
+        Environment.root_server.child_nodes.remove(this.name);
         this.name = null;
     }
 

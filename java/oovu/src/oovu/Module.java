@@ -17,9 +17,9 @@ public class Module extends ServerClient {
         this.declareIO(2, 1);
         Integer module_id = arguments[0].toInt();
         String desired_name = arguments[1].toString();
-        this.node = ModuleServer.allocate(module_id);
-        this.node.register_name(desired_name);
-        this.node.node_proxies.add(this);
+        this.server = ModuleServer.allocate(module_id);
+        this.server.register_name(desired_name);
+        this.server.node_proxies.add(this);
     }
 
     @Override

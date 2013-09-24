@@ -17,9 +17,9 @@ public class PullSource extends AudioServerClient {
         this.declareIO(2, 1);
         Integer module_id = arguments[0].toInt();
         String desired_name = arguments[1].toString();
-        this.node = PullServer.allocate(module_id, desired_name,
+        this.server = PullServer.allocate(module_id, desired_name,
             Atom.removeFirst(arguments, 2));
-        this.node.node_proxies.add(this);
+        this.server.node_proxies.add(this);
     }
 
 }

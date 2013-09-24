@@ -10,8 +10,8 @@ public class Root extends ServerClient {
 
     public Root() {
         this.declareIO(2, 1);
-        this.node = Environment.root_node;
-        this.node.node_proxies.add(this);
+        this.server = Environment.root_server;
+        this.server.node_proxies.add(this);
     }
 
     @Override

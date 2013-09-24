@@ -31,14 +31,14 @@ public class Binding extends AddressNodeClient {
     	}
     	OscAddressNode target_osc_address_node = target_osc_address_node_set.toArray(
     		new OscAddressNode[0])[0];
-    	Server target_node = target_osc_address_node.get_node();
-    	if (target_node == null) {
+    	Server target_server = target_osc_address_node.get_server();
+    	if (target_server == null) {
     		return;
     	}
     	this.unregister_as_waiting();
         // unregister as waiting binding 
-    	target_node.add_binding(this);
-    	this.node = target_node;
+    	target_server.add_binding(this);
+    	this.node = target_server;
     }
     
     @Override
