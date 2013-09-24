@@ -17,13 +17,7 @@ public class BooleanDatatype extends GenericDatatype {
         @Override
         public Atom[][] run(Node node, Atom[] arguments) {
             AttributeNode attribute_node = (AttributeNode) node;
-            Atom[] quality = attribute_node.get_value();
-            boolean value = false;
-            if (quality != null) {
-                value = quality[0].toBoolean();
-            }
-            value = !value;
-            attribute_node.set_value(new Atom[] { Atom.newAtom(value) });
+            BooleanDatatype.this.toggle();
             attribute_node.reoutput_value();
             return null;
         }
@@ -53,6 +47,11 @@ public class BooleanDatatype extends GenericDatatype {
             }
         }
         return result;
+    }
+    
+    public void toggle()  {
+    	boolean value = this.get_value()[0].toBoolean();
+    	this.set_value(Atom.newAtom(new boolean[]{! value}));
     }
 
 }
