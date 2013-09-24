@@ -30,6 +30,7 @@ public class Test_OscAddress_construct {
         String address_string = "$#98535-_";
         thrown.expect(RuntimeException.class);
         OscAddress osc_address = new OscAddress(address_string);
+        assertNotNull(osc_address);
 	}
 	
 	@Test
