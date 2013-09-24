@@ -10,7 +10,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class Test_OscAddressNode_create_address {
+public class Test__OscAddressNode__create_address {
 
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
@@ -19,12 +19,12 @@ public class Test_OscAddressNode_create_address {
 	
 	@Before
 	public void setUp() throws Exception {
-		Test_OscAddressNode_create_address.root.clear();
+		Test__OscAddressNode__create_address.root.clear();
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		Test_OscAddressNode_create_address.root.clear();
+		Test__OscAddressNode__create_address.root.clear();
 	}
 
 	@Test

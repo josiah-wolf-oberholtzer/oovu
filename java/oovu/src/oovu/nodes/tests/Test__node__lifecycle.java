@@ -4,8 +4,6 @@ import static org.junit.Assert.*;
 
 import java.util.Set;
 
-import javax.naming.directory.SearchResult;
-
 import oovu.environment.Environment;
 import oovu.environment.OscAddress;
 import oovu.environment.OscAddressNode;
@@ -17,9 +15,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.cycling74.max.Atom;
-import com.google.common.collect.Sets;
 
-public class Test_nodes_construct {
+public class Test__node__lifecycle {
 
 	@Before
 	public void setUp() throws Exception {

@@ -8,7 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class Test_OscAddressNode_matches {
+public class Test__OscAddressNode__matches {
 
 	@Before
 	public void setUp() throws Exception {

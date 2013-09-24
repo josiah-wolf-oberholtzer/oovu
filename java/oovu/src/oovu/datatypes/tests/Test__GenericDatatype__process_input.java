@@ -6,7 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class Test_DecimalDatatype_process_input {
+public class Test__GenericDatatype__process_input {
 
 	@Before
 	public void setUp() throws Exception {

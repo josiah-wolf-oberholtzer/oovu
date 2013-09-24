@@ -6,7 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class Test_DecimalArrayDatatype_process_input {
+public class Test__FilesystemPathDatatype__process_input {
 
 	@Before
 	public void setUp() throws Exception {

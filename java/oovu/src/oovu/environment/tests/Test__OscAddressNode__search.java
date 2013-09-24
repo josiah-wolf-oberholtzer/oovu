@@ -13,7 +13,7 @@ import org.junit.Test;
 
 import com.google.common.collect.Sets;
 
-public class Test_OscAddressNode_search {
+public class Test__OscAddressNode__search {
 
 	public Map<String, OscAddressNode> create_node_tree() {
 		OscAddressNode root = new OscAddressNode("");

@@ -8,7 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class Test_OscAddressNode_prune {
+public class Test__OscAddressNode__prune {
 
 	public static final OscAddressNode root = new OscAddressNode("");
 	

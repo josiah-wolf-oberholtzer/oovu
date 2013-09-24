@@ -9,7 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class Test_OscAddressNode_construct {
+public class Test__OscAddressNode__construct {
 	
 	@Before
 	public void setUp() throws Exception {

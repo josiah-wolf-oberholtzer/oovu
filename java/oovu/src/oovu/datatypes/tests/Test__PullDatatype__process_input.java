@@ -6,7 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class Test_PushDatatype_process_input {
+public class Test__PullDatatype__process_input {
 
 	@Before
 	public void setUp() throws Exception {

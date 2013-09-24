@@ -10,7 +10,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class Test_OscAddress_construct {
+public class Test__OscAddress__construct {
 
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
