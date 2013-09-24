@@ -1,4 +1,4 @@
-package oovu.environment;
+package oovu.messaging;
 
 import oovu.servers.Server;
 

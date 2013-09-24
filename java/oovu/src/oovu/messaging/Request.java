@@ -1,4 +1,6 @@
-package oovu.environment;
+package oovu.messaging;
+
+import oovu.environment.Dispatcher;
 
 import com.cycling74.max.Atom;
 

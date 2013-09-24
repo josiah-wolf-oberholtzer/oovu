@@ -13,11 +13,11 @@ import oovu.clients.ServerClient;
 import oovu.environment.Dispatcher;
 import oovu.environment.Environment;
 import oovu.environment.InterfaceHandler;
-import oovu.environment.InterfaceRequest;
-import oovu.environment.InterfaceResponse;
 import oovu.environment.OscAddress;
 import oovu.environment.OscAddressNode;
-import oovu.environment.Response;
+import oovu.messaging.InterfaceRequest;
+import oovu.messaging.InterfaceResponse;
+import oovu.messaging.Response;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;

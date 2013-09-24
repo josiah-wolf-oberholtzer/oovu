@@ -5,10 +5,10 @@ import java.util.Map;
 import oovu.Binding;
 import oovu.clients.ServerClient;
 import oovu.environment.Environment;
-import oovu.environment.InterfaceRequest;
-import oovu.environment.Request;
-import oovu.environment.Response;
-import oovu.environment.ValueRequest;
+import oovu.messaging.InterfaceRequest;
+import oovu.messaging.Request;
+import oovu.messaging.Response;
+import oovu.messaging.ValueRequest;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;

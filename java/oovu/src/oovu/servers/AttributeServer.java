@@ -8,11 +8,11 @@ import oovu.clients.ServerClient;
 import oovu.datatypes.Datatype;
 import oovu.datatypes.GenericDatatype;
 import oovu.environment.InterfaceHandler;
-import oovu.environment.InterfaceRequest;
-import oovu.environment.Request;
-import oovu.environment.Response;
-import oovu.environment.ValueRequest;
-import oovu.environment.ValueResponse;
+import oovu.messaging.InterfaceRequest;
+import oovu.messaging.Request;
+import oovu.messaging.Response;
+import oovu.messaging.ValueRequest;
+import oovu.messaging.ValueResponse;
 
 import com.cycling74.max.Atom;
 

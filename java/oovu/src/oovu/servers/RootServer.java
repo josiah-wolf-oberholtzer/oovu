@@ -4,8 +4,8 @@ import oovu.Binding;
 import oovu.clients.ServerClient;
 import oovu.environment.Environment;
 import oovu.environment.OscAddressNode;
-import oovu.environment.Request;
-import oovu.environment.Response;
+import oovu.messaging.Request;
+import oovu.messaging.Response;
 
 public class RootServer extends Server {
 

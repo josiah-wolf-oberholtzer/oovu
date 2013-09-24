@@ -2,8 +2,8 @@ package oovu.servers;
 
 import java.util.Map;
 
-import oovu.environment.Response;
-import oovu.environment.ValueResponse;
+import oovu.messaging.Response;
+import oovu.messaging.ValueResponse;
 
 import com.cycling74.max.Atom;
 
