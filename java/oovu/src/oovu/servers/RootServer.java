@@ -45,5 +45,4 @@ public class RootServer extends Server {
             server_client.handle_response(response);
         }
     }
-
 }

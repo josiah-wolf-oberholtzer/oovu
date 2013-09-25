@@ -9,8 +9,6 @@ import java.util.Map;
 import java.util.Set;
 
 import oovu.clients.ServerClient;
-import oovu.environment.Environment;
-import oovu.environment.OscAddress;
 import oovu.environment.OscAddressNode;
 import oovu.messaging.InterfaceRequest;
 import oovu.messaging.InterfaceResponse;
@@ -211,21 +209,6 @@ abstract public class Server implements MessagePasser {
         this.add_message_handler(new ShowMessageHandler());
     }
 
-    public void attach_to_parent_server(Server parent_server) {
-        this.detach_from_parent_server();
-        this.parent_server = parent_server;
-        if (parent_server != null) {
-            parent_server.child_servers.add(this);
-        }
-    }
-    
-    public void detach_from_parent_server() {
-        if (this.parent_server != null) {
-            this.parent_server.child_servers.remove(this);
-        }
-        this.parent_server = null;
-    }
-    
     public void add_message_handler(MessageHandler message_handler) {
         this.message_handlers.put(message_handler.get_name(), message_handler);
     }
@@ -235,6 +218,14 @@ abstract public class Server implements MessagePasser {
         this.osc_address_node = osc_address_node;
         if (osc_address_node != null) {
             this.osc_address_node.set_server(this);
+        }
+    }
+
+    public void attach_to_parent_server(Server parent_server) {
+        this.detach_from_parent_server();
+        this.parent_server = parent_server;
+        if (parent_server != null) {
+            parent_server.child_servers.add(this);
         }
     }
 
@@ -267,6 +258,13 @@ abstract public class Server implements MessagePasser {
             this.osc_address_node.prune();
         }
         this.osc_address_node = null;
+    }
+
+    public void detach_from_parent_server() {
+        if (this.parent_server != null) {
+            this.parent_server.child_servers.remove(this);
+        }
+        this.parent_server = null;
     }
 
     public String get_name() {
@@ -323,8 +321,20 @@ abstract public class Server implements MessagePasser {
     }
 
     @Override
+    public void handle_response(Response response) {
+        if (response == null) {
+            return;
+        }
+        for (ServerClient server_client : this.server_clients) {
+            server_client.handle_response(response);
+        }
+        if (this.parent_server != null) {
+            this.parent_server.handle_response(response);
+        }
+    }
+
+    @Override
     public String toString() {
         return this.getClass() + ": " + this.get_name();
     }
-    
 }

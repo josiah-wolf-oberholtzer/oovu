@@ -3,7 +3,6 @@ package oovu.servers.members;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
-import oovu.clients.ServerClient;
 import oovu.datatypes.Datatype;
 import oovu.datatypes.GenericDatatype;
 import oovu.messaging.InterfaceRequest;
@@ -107,17 +106,6 @@ abstract public class AttributeServer extends ModuleMemberServer {
         } else if (InterfaceRequest.class.isInstance(request)) {
             this.handle_interface_request((InterfaceRequest) request);
         }
-    }
-
-    @Override
-    public void handle_response(Response response) {
-        if (response == null) {
-            return;
-        }
-        for (ServerClient server_client : this.server_clients) {
-            server_client.handle_response(response);
-        }
-        this.parent_server.handle_response(response);
     }
 
     private void initialize_value() {

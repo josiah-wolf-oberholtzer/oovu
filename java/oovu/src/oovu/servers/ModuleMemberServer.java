@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import oovu.environment.OscAddressNode;
 import oovu.messaging.MessageHandler;
 import oovu.servers.members.MethodServer;
 import oovu.servers.members.PropertyServer;
@@ -53,6 +52,29 @@ public abstract class ModuleMemberServer extends Server {
         member_nodes_by_label = Collections.unmodifiableMap(map);
     }
 
+    public static ModuleMemberServer allocate_from_label(
+        String label,
+        Integer module_id,
+        String desired_name,
+        Atom[] argument_list) {
+        Class<?> member_node_class = ModuleMemberServer.member_nodes_by_label
+            .get(label);
+        if (member_node_class == null) {
+            member_node_class = PropertyServer.class;
+        }
+        ModuleServer module_server = ModuleServer.allocate(module_id);
+        // if (module_server.named_child_servers.containsKey(desired_name)) {
+        // ModuleMemberServer current_member_node =
+        // (ModuleMemberServer) module_server.named_child_servers
+        // .get(desired_name);
+        // if (current_member_node.getClass() == member_node_class) {
+        // return current_member_node;
+        // }
+        // }
+        return ModuleMemberServer.allocate_new_from_label(module_server, label,
+            module_id, argument_list);
+    }
+
     private static ModuleMemberServer allocate_new_from_label(
         ModuleServer module_server,
         String label,
@@ -82,30 +104,6 @@ public abstract class ModuleMemberServer extends Server {
             new_member_node = new PropertyServer(module_server, argument_map);
         }
         return new_member_node;
-    
-    }
-
-    public static ModuleMemberServer allocate_from_label(
-        String label,
-        Integer module_id,
-        String desired_name,
-        Atom[] argument_list) {
-        Class<?> member_node_class = ModuleMemberServer.member_nodes_by_label
-            .get(label);
-        if (member_node_class == null) {
-            member_node_class = PropertyServer.class;
-        }
-        ModuleServer module_server = ModuleServer.allocate(module_id);
-//        if (module_server.named_child_servers.containsKey(desired_name)) {
-//            ModuleMemberServer current_member_node = 
-//                (ModuleMemberServer) module_server.named_child_servers
-//                .get(desired_name);
-//            if (current_member_node.getClass() == member_node_class) {
-//                return current_member_node;
-//            }
-//        }
-        return ModuleMemberServer.allocate_new_from_label(
-            module_server, label, module_id, argument_list);
     }
 
     public ModuleMemberServer(ModuleServer module_server,
@@ -135,5 +133,4 @@ public abstract class ModuleMemberServer extends Server {
     abstract public ModuleMemberServer new_instance(
         Integer module_id,
         Map<String, Atom[]> argument_map);
-
 }

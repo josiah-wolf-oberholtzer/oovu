@@ -31,6 +31,21 @@ abstract public class ServerClient extends MaxObject implements MessagePasser {
         this.handle_request(request);
     }
 
+    public void attach_to_server(Server server) {
+        this.detach_from_server();
+        if (server != null) {
+            this.server = server;
+            server.server_clients.add(this);
+        }
+    }
+
+    public void detach_from_server() {
+        if (this.server != null) {
+            this.server.server_clients.remove(this);
+        }
+        this.server = null;
+    }
+
     public Server get_server() {
         return this.server;
     }
@@ -103,20 +118,5 @@ abstract public class ServerClient extends MaxObject implements MessagePasser {
     public void output_value_response_payload(Atom[] payload) {
         this.outlet(1, payload);
         this.outlet(0, "set", payload);
-    }
-    
-    public void attach_to_server(Server server) {
-        this.detach_from_server();
-        if (server != null) {
-            this.server = server;
-            server.server_clients.add(this);
-        }
-    }
-    
-    public void detach_from_server() {
-        if (this.server != null) {
-            this.server.server_clients.remove(this);
-        }
-        this.server = null;
     }
 }

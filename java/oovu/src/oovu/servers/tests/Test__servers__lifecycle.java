@@ -55,7 +55,7 @@ public class Test__servers__lifecycle {
         OscAddress osc_address = null;
         Set<OscAddressNode> search_result = null;
         ModuleServer foo_module_server = ModuleServer.allocate(1001);
-        //foo_module_server.register_name("foo");
+        // foo_module_server.register_name("foo");
         PropertyServer foo_bar_property_server = PropertyServer.allocate(1001,
             "bar", new Atom[0]);
         PropertyServer foo_baz_quux_property_server = PropertyServer.allocate(

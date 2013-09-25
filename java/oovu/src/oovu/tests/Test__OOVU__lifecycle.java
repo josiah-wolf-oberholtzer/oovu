@@ -35,8 +35,8 @@ public class Test__OOVU__lifecycle {
         OscAddressNode osc_address_node = module_server.get_osc_address_node();
         Assert.assertNotNull(osc_address_node);
         Assert.assertEquals(1001, osc_address_node.get_number());
-        //Assert.assertEquals("foo", module_server.get_name());
-        //Assert.assertEquals("/foo", module_server.get_osc_address());
+        // Assert.assertEquals("foo", module_server.get_name());
+        // Assert.assertEquals("/foo", module_server.get_osc_address());
         Assert.assertEquals(1, module_server.get_reference_count());
         Assert.assertTrue(module_server.server_clients.contains(module_client));
     }

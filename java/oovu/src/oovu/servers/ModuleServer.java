@@ -2,7 +2,6 @@ package oovu.servers;
 
 import java.util.Map;
 
-import oovu.clients.ServerClient;
 import oovu.environment.Environment;
 import oovu.environment.OscAddressNode;
 import oovu.messaging.InterfaceRequest;
@@ -61,16 +60,4 @@ public class ModuleServer extends Server {
         }
         this.handle_response(response);
     }
-
-    @Override
-    public void handle_response(Response response) {
-        if (response == null) {
-            return;
-        }
-        for (ServerClient server_client : this.server_clients) {
-            server_client.handle_response(response);
-        }
-        Environment.root_server.handle_response(response);
-    }
-
 }
