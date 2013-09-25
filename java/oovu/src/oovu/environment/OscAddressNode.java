@@ -18,16 +18,6 @@ import com.sun.tools.javac.util.List;
 
 public class OscAddressNode {
 
-    private String name;
-    private Integer number;
-    private final Set<Binding> bindings = new HashSet<Binding>();
-    private final Map<String, OscAddressNode> named_children = 
-        new HashMap<String, OscAddressNode>();
-    private final Map<Integer, OscAddressNode> numbered_children =
-    	new HashMap<Integer, OscAddressNode>();
-    private OscAddressNode parent = null;
-    private Server server = null;
-    
     public static String
         find_unique_name(String desired_name, Set<String> names) {
         if (!names.contains(desired_name)) {
@@ -41,6 +31,16 @@ public class OscAddressNode {
         }
         return acquired_name;
     }
+    private String name;
+    private Integer number;
+    private final Set<Binding> bindings = new HashSet<Binding>();
+    private final Map<String, OscAddressNode> named_children = 
+        new HashMap<String, OscAddressNode>();
+    private final Map<Integer, OscAddressNode> numbered_children =
+    	new HashMap<Integer, OscAddressNode>();
+    private OscAddressNode parent = null;
+    
+    private Server server = null;
 
     public OscAddressNode(String name, Integer number) {
         this.name = name;
@@ -92,28 +92,24 @@ public class OscAddressNode {
     	return child;
     }
     
-    public OscAddressNode get_named_child(String name) {
-    	return this.named_children.get(name);
-    }
-    
-    public OscAddressNode get_numbered_child(Integer number) {
-    	return this.numbered_children.get(number);
+    public Set<Binding> get_bindings() {
+    	return Collections.unmodifiableSet(this.bindings);
     }
     
     public String get_name() {
     	return this.name;
     }
     
+    public OscAddressNode get_named_child(String name) {
+    	return this.named_children.get(name);
+    }
+    
     public Integer get_number() {
     	return this.number;
     }
     
-    public Server get_server() {
-        return this.server;
-    }
-    
-    public Set<Binding> get_bindings() {
-    	return Collections.unmodifiableSet(this.bindings);
+    public OscAddressNode get_numbered_child(Integer number) {
+    	return this.numbered_children.get(number);
     }
     
     public String get_osc_address() {
@@ -150,6 +146,10 @@ public class OscAddressNode {
     public OscAddressNode get_root() {
     	OscAddressNode[] parentage = this.get_parentage();
     	return parentage[parentage.length - 1];
+    }
+    
+    public Server get_server() {
+        return this.server;
     }
     
     public String[] get_summary_pieces() {

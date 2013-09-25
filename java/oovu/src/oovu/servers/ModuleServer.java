@@ -2,7 +2,6 @@ package oovu.servers;
 
 import java.util.Map;
 
-import oovu.Binding;
 import oovu.clients.ServerClient;
 import oovu.environment.Environment;
 import oovu.environment.OscAddressNode;
@@ -83,9 +82,6 @@ public class ModuleServer extends Server {
         }
         for (ServerClient node_proxy : this.node_proxies) {
             node_proxy.handle_response(response);
-        }
-        for (Binding binding : this.bindings) {
-            binding.handle_response(response);
         }
         Environment.root_server.handle_response(response);
     }

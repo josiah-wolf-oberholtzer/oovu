@@ -1,9 +1,6 @@
 package oovu.messaging;
 
 import oovu.servers.AttributeServer;
-import oovu.servers.Server;
-
-import com.cycling74.max.Atom;
 
 abstract public class DatatypeMessageHandler extends MessageHandler {
 

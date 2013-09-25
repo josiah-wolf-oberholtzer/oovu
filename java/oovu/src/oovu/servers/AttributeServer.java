@@ -3,7 +3,6 @@ package oovu.servers;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
-import oovu.Binding;
 import oovu.clients.ServerClient;
 import oovu.datatypes.Datatype;
 import oovu.datatypes.GenericDatatype;
@@ -114,9 +113,6 @@ abstract public class AttributeServer extends ModuleMemberServer {
         }
         for (ServerClient node_proxy : this.node_proxies) {
             node_proxy.handle_response(response);
-        }
-        for (Binding binding : this.bindings) {
-            binding.handle_response(response);
         }
         this.module_node.handle_response(response);
     }

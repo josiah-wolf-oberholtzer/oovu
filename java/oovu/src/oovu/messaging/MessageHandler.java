@@ -1,7 +1,5 @@
 package oovu.messaging;
 
-import oovu.servers.Server;
-
 import com.cycling74.max.Atom;
 
 abstract public class MessageHandler {

@@ -8,7 +8,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import oovu.Binding;
 import oovu.clients.ServerClient;
 import oovu.environment.Dispatcher;
 import oovu.environment.Environment;
@@ -188,8 +187,6 @@ abstract public class Server implements Dispatcher {
 
     public final Map<String, Atom[]> argument_map;
 
-    protected final Set<Binding> bindings = new HashSet<Binding>();
-
     protected final Map<String, Server> child_nodes = new HashMap<String, Server>();
 
     protected final Map<String, MessageHandler> message_handlers = new HashMap<String, MessageHandler>();
@@ -217,10 +214,6 @@ abstract public class Server implements Dispatcher {
         this.add_message_handler(new ShowMessageHandler());
     }
 
-    public void add_binding(Binding binding) {
-    	this.bindings.add(binding);
-    }
-
     public void add_message_handler(MessageHandler message_handler) {
         this.message_handlers.put(message_handler.get_name(),
             message_handler);
@@ -228,7 +221,6 @@ abstract public class Server implements Dispatcher {
 
     public void clear() {
     	this.child_nodes.clear();
-    	this.bindings.clear();
     	this.parent_node = null;
     }
 
@@ -274,8 +266,6 @@ abstract public class Server implements Dispatcher {
         request.source.handle_response(response);
     }
 
-    abstract public void register_name(String desired_name);
-
     public void register_at_osc_address() {
     	String osc_address = this.get_osc_address();
         if (osc_address == null) {
@@ -287,16 +277,12 @@ abstract public class Server implements Dispatcher {
         this.osc_address_node.set_server(this);
     }
 
-    public void remove_binding(Binding binding) {
-    	this.bindings.remove(binding);
-    }
-    
+    abstract public void register_name(String desired_name);
+
     @Override
     public String toString() {
         return this.getClass() + ": " + this.get_name();
     }
-    
-    abstract public void unregister_name();
     
     public void unregister_from_osc_address() {
         if (this.get_osc_address() == null) {
@@ -305,8 +291,7 @@ abstract public class Server implements Dispatcher {
         this.osc_address_node.set_server(null);
         this.osc_address_node.prune();
         this.osc_address_node = null;
-        for (Binding binding : this.bindings) {
-        	binding.unbind();
-        }
     }
+    
+    abstract public void unregister_name();
 }
