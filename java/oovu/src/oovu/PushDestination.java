@@ -19,7 +19,7 @@ public class PushDestination extends AudioServerClient {
         String desired_name = arguments[1].toString();
         this.server = PushServer.allocate(module_id, desired_name,
             Atom.removeFirst(arguments, 2));
-        this.server.node_proxies.add(this);
+        this.server.server_clients.add(this);
     }
 
 }

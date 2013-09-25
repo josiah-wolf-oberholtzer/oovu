@@ -152,8 +152,8 @@ abstract public class Server implements Dispatcher {
 
         @Override
         public Atom[][] run(Atom[] arguments) {
-            for (ServerClient node_proxy : Server.this.node_proxies) {
-                node_proxy.getMaxBox().getPatcher().send("front", new Atom[0]);
+            for (ServerClient server_client : Server.this.server_clients) {
+                server_client.getMaxBox().getPatcher().send("front", new Atom[0]);
             }
             return null;
         }
@@ -186,18 +186,12 @@ abstract public class Server implements Dispatcher {
     }
 
     public final Map<String, Atom[]> argument_map;
-
-    protected final Map<String, Server> child_nodes = new HashMap<String, Server>();
-
+    protected final Map<String, Server> child_servers = new HashMap<String, Server>();
     protected final Map<String, MessageHandler> message_handlers = new HashMap<String, MessageHandler>();
-    
-    protected Server parent_node;
-    
     protected String name = null;
-
+    protected Server parent_server = null;
     protected OscAddressNode osc_address_node = null;
-
-    public final Set<ServerClient> node_proxies = new HashSet<ServerClient>();
+    public final Set<ServerClient> server_clients = new HashSet<ServerClient>();
 
     public Server(Map<String, Atom[]> argument_map) {
         if (argument_map != null) {
@@ -220,8 +214,8 @@ abstract public class Server implements Dispatcher {
     }
 
     public void clear() {
-    	this.child_nodes.clear();
-    	this.parent_node = null;
+    	this.child_servers.clear();
+    	this.parent_server = null;
     }
 
     abstract protected void deallocate();
@@ -242,8 +236,8 @@ abstract public class Server implements Dispatcher {
     	return this.osc_address_node;
     }
 
-    public Server get_parent_node() {
-    	return this.parent_node;
+    public Server get_parent_server() {
+    	return this.parent_server;
     }
 
     abstract public int get_reference_count();

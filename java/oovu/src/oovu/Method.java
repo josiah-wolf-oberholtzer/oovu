@@ -19,7 +19,7 @@ public class Method extends ServerClient {
         String desired_name = arguments[1].toString();
         this.server = MethodServer.allocate(module_id, desired_name,
             Atom.removeFirst(arguments, 2));
-        this.server.node_proxies.add(this);
+        this.server.server_clients.add(this);
     }
 
 }

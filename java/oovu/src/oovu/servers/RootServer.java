@@ -28,13 +28,13 @@ public class RootServer extends Server {
     }
     
     @Override
-    public Server get_parent_node() {
+    public Server get_parent_server() {
         return null;
     }
 
     @Override
     public int get_reference_count() {
-        return this.node_proxies.size() + this.child_nodes.size();
+        return this.server_clients.size() + this.child_servers.size();
     }
 
     @Override
@@ -46,8 +46,8 @@ public class RootServer extends Server {
         if (response == null) {
             return;
         }
-        for (ServerClient node_proxy : this.node_proxies) {
-            node_proxy.handle_response(response);
+        for (ServerClient server_client : this.server_clients) {
+            server_client.handle_response(response);
         }
     }
 

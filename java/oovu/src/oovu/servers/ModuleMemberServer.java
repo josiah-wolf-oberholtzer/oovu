@@ -50,8 +50,8 @@ public abstract class ModuleMemberServer extends Server {
             member_node_class = PropertyServer.class;
         }
         ModuleServer module_node = ModuleServer.allocate(module_id);
-        if (module_node.child_nodes.containsKey(desired_name)) {
-            ModuleMemberServer current_member_node = (ModuleMemberServer) module_node.child_nodes
+        if (module_node.child_servers.containsKey(desired_name)) {
+            ModuleMemberServer current_member_node = (ModuleMemberServer) module_node.child_servers
                 .get(desired_name);
             if (current_member_node.getClass() == member_node_class) {
                 return current_member_node;
@@ -110,13 +110,13 @@ public abstract class ModuleMemberServer extends Server {
     }
 
     @Override
-    public Server get_parent_node() {
+    public Server get_parent_server() {
         return this.module_node;
     }
 
     @Override
     public int get_reference_count() {
-        return this.node_proxies.size();
+        return this.server_clients.size();
     }
 
     abstract public ModuleMemberServer new_instance(Integer module_id,
@@ -132,16 +132,16 @@ public abstract class ModuleMemberServer extends Server {
             return;
         }
         String acquired_name = OscAddressNode.find_unique_name(desired_name,
-            this.module_node.child_nodes.keySet());
+            this.module_node.child_servers.keySet());
         this.name = acquired_name;
-        this.module_node.child_nodes.put(acquired_name, this);
+        this.module_node.child_servers.put(acquired_name, this);
         this.register_at_osc_address();
     }
 
     @Override
     public void unregister_name() {
         this.unregister_from_osc_address();
-        this.module_node.child_nodes.remove(this.name);
+        this.module_node.child_servers.remove(this.name);
         this.name = null;
     }
 

@@ -90,7 +90,7 @@ abstract public class AddressNodeClient extends MaxObject implements Dispatcher 
         if (node == null) {
             return;
         }
-        node.node_proxies.remove(this);
+        node.server_clients.remove(this);
         MaxObject.post("DELETING: " + this.toString() + " / " + node.toString()
             + "\n");
         node.deallocate_if_necessary();

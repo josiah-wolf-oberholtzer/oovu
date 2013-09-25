@@ -48,9 +48,9 @@ public class ModuleServer extends Server {
     }
 
     @Override
-    public Server get_parent_node() {
-        if (Environment.root_server.child_nodes.containsKey(this.name)
-            && (Environment.root_server.child_nodes.get(this.name) == this)) {
+    public Server get_parent_server() {
+        if (Environment.root_server.child_servers.containsKey(this.name)
+            && (Environment.root_server.child_servers.get(this.name) == this)) {
             return Environment.root_server;
         }
         return null;
@@ -58,7 +58,7 @@ public class ModuleServer extends Server {
 
     @Override
     public int get_reference_count() {
-        return this.node_proxies.size() + this.child_nodes.size();
+        return this.server_clients.size() + this.child_servers.size();
     }
 
     @Override
@@ -80,8 +80,8 @@ public class ModuleServer extends Server {
         if (response == null) {
             return;
         }
-        for (ServerClient node_proxy : this.node_proxies) {
-            node_proxy.handle_response(response);
+        for (ServerClient server_client : this.server_clients) {
+            server_client.handle_response(response);
         }
         Environment.root_server.handle_response(response);
     }
@@ -96,22 +96,22 @@ public class ModuleServer extends Server {
             return;
         }
         String acquired_name = OscAddressNode.find_unique_name(desired_name,
-            Environment.root_server.child_nodes.keySet());
+            Environment.root_server.child_servers.keySet());
         this.name = acquired_name;
-        Environment.root_server.child_nodes.put(acquired_name, this);
+        Environment.root_server.child_servers.put(acquired_name, this);
         this.register_at_osc_address();
-        for (Server member_node : this.child_nodes.values()) {
+        for (Server member_node : this.child_servers.values()) {
             member_node.register_at_osc_address();
         }
     }
 
     @Override
     public void unregister_name() {
-        for (Server member_node : this.child_nodes.values()) {
+        for (Server member_node : this.child_servers.values()) {
             member_node.unregister_from_osc_address();
         }
         this.unregister_from_osc_address();
-        Environment.root_server.child_nodes.remove(this.name);
+        Environment.root_server.child_servers.remove(this.name);
         this.name = null;
     }
 

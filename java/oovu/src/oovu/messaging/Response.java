@@ -23,7 +23,7 @@ abstract public class Response {
             return null;
         } else if (relative_node == this.source) {
             return null;
-        } else if (relative_node == this.source.get_parent_node()) {
+        } else if (relative_node == this.source.get_parent_server()) {
             return "/" + this.source.get_name();
         } else if (relative_node == Environment.root_server) {
             return this.source.get_osc_address();

@@ -111,8 +111,8 @@ abstract public class AttributeServer extends ModuleMemberServer {
         if (response == null) {
             return;
         }
-        for (ServerClient node_proxy : this.node_proxies) {
-            node_proxy.handle_response(response);
+        for (ServerClient server_client : this.server_clients) {
+            server_client.handle_response(response);
         }
         this.module_node.handle_response(response);
     }

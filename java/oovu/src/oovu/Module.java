@@ -19,7 +19,7 @@ public class Module extends ServerClient {
         String desired_name = arguments[1].toString();
         this.server = ModuleServer.allocate(module_id);
         this.server.register_name(desired_name);
-        this.server.node_proxies.add(this);
+        this.server.server_clients.add(this);
     }
 
     @Override
