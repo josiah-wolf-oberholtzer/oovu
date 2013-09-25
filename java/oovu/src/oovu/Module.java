@@ -18,7 +18,6 @@ public class Module extends ServerClient {
         Integer module_id = arguments[0].toInt();
         String desired_name = arguments[1].toString();
         this.server = ModuleServer.allocate(module_id);
-        this.server.register_name(desired_name);
         this.server.server_clients.add(this);
     }
 

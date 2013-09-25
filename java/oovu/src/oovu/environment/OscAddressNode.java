@@ -47,6 +47,9 @@ public class OscAddressNode {
 
     public String acquire_name(String desired_name) {
         if (this.name != null) {
+            if (this.name == desired_name) {
+                return this.name;
+            }
             throw new RuntimeException("Already has name.");
         }
         if (this.parent == null) {
@@ -127,7 +130,7 @@ public class OscAddressNode {
         return this.named_children.get(name);
     }
 
-    public Integer get_number() {
+    public int get_number() {
         return this.number;
     }
 

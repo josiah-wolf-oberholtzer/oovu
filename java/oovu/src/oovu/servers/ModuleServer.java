@@ -39,15 +39,8 @@ public class ModuleServer extends Server {
 
     public ModuleServer(Integer module_id, Map<String, Atom[]> argument_map) {
         super(argument_map);
+        this.attach_to_parent_server(Environment.root_server);
         this.module_id = module_id;
-    }
-
-    @Override
-    public void deallocate() {
-        OscAddressNode osc_address_node = this.get_osc_address_node();
-        this.detach_from_osc_address_node();
-        osc_address_node.prune();
-        this.unregister_name();
     }
 
     @Override
@@ -80,32 +73,4 @@ public class ModuleServer extends Server {
         Environment.root_server.handle_response(response);
     }
 
-    @Override
-    public void register_name(String desired_name) {
-        if (desired_name == this.name) {
-            return;
-        }
-        this.unregister_name();
-        if (desired_name == null) {
-            return;
-        }
-        String acquired_name = OscAddressNode.find_unique_name(desired_name,
-            Environment.root_server.child_servers.keySet());
-        this.name = acquired_name;
-        Environment.root_server.child_servers.put(acquired_name, this);
-        this.register_at_osc_address();
-        for (Server member_node : this.child_servers.values()) {
-            member_node.register_at_osc_address();
-        }
-    }
-
-    @Override
-    public void unregister_name() {
-        for (Server member_node : this.child_servers.values()) {
-            member_node.unregister_from_osc_address();
-        }
-        this.unregister_from_osc_address();
-        Environment.root_server.child_servers.remove(this.name);
-        this.name = null;
-    }
 }

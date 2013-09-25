@@ -14,6 +14,12 @@ public class RootServer extends Server {
 
     @Override
     protected void deallocate() {
+        for (Server child_server : this.child_servers) {
+            child_server.detach_from_parent_server();
+        }
+        for (ServerClient server_client : this.server_clients) {
+            server_client.detach_from_server();
+        }
     }
 
     @Override
@@ -40,11 +46,4 @@ public class RootServer extends Server {
         }
     }
 
-    @Override
-    public void register_name(String desired_name) {
-    }
-
-    @Override
-    public void unregister_name() {
-    }
 }

@@ -189,7 +189,7 @@ abstract public class Server implements MessagePasser {
     }
 
     public final Map<String, Atom[]> argument_map;
-    protected final Map<String, Server> child_servers = new HashMap<String, Server>();
+    protected final Set<Server> child_servers = new HashSet<Server>();
     protected final Map<String, MessageHandler> message_handlers = new HashMap<String, MessageHandler>();
     protected String name = null;
     protected Server parent_server = null;
@@ -211,6 +211,21 @@ abstract public class Server implements MessagePasser {
         this.add_message_handler(new ShowMessageHandler());
     }
 
+    public void attach_to_parent_server(Server parent_server) {
+        this.detach_from_parent_server();
+        this.parent_server = parent_server;
+        if (parent_server != null) {
+            parent_server.child_servers.add(this);
+        }
+    }
+    
+    public void detach_from_parent_server() {
+        if (this.parent_server != null) {
+            this.parent_server.child_servers.remove(this);
+        }
+        this.parent_server = null;
+    }
+    
     public void add_message_handler(MessageHandler message_handler) {
         this.message_handlers.put(message_handler.get_name(), message_handler);
     }
@@ -224,12 +239,21 @@ abstract public class Server implements MessagePasser {
     }
 
     public void clear() {
-        this.child_servers.clear();
-        this.parent_server = null;
+        for (Server child_server : this.child_servers) {
+            child_server.detach_from_parent_server();
+        }
+        this.detach_from_parent_server();
+        for (ServerClient server_client : this.server_clients) {
+            server_client.detach_from_server();
+        }
         this.detach_from_osc_address_node();
     }
 
-    abstract protected void deallocate();
+    protected void deallocate() {
+        Server parent_server = this.get_parent_server();
+        parent_server.deallocate_if_necessary();
+        this.clear();
+    }
 
     public void deallocate_if_necessary() {
         if (this.get_reference_count() == 0) {
@@ -298,34 +322,9 @@ abstract public class Server implements MessagePasser {
         request.source.handle_response(response);
     }
 
-    public void register_at_osc_address() {
-        String osc_address = this.get_osc_address();
-        if (osc_address == null) {
-            return;
-        }
-        OscAddressNode root = Environment.root_osc_address_node;
-        this.osc_address_node = root.create_address(
-            OscAddress.from_cache(osc_address), false);
-        this.attach_to_osc_address_node(this.osc_address_node);
-    }
-
-    abstract public void register_name(String desired_name);
-
     @Override
     public String toString() {
         return this.getClass() + ": " + this.get_name();
     }
-
-    public void unregister_from_osc_address() {
-        if (this.get_osc_address() == null) {
-            return;
-        }
-        OscAddressNode osc_address_node = this.get_osc_address_node();
-        if (osc_address_node != null) {
-            this.detach_from_osc_address_node();
-            osc_address_node.prune();
-        }
-    }
-
-    abstract public void unregister_name();
+    
 }

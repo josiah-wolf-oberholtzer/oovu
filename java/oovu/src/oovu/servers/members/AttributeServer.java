@@ -117,7 +117,7 @@ abstract public class AttributeServer extends ModuleMemberServer {
         for (ServerClient server_client : this.server_clients) {
             server_client.handle_response(response);
         }
-        this.module_server.handle_response(response);
+        this.parent_server.handle_response(response);
     }
 
     private void initialize_value() {
