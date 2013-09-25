@@ -5,9 +5,7 @@ import java.util.Map;
 
 import oovu.datatypes.Datatype;
 import oovu.datatypes.GenericDatatype;
-import oovu.messaging.InterfaceRequest;
 import oovu.messaging.MessageHandler;
-import oovu.messaging.Request;
 import oovu.messaging.Response;
 import oovu.messaging.ValueRequest;
 import oovu.messaging.ValueResponse;
@@ -92,20 +90,11 @@ abstract public class AttributeServer extends ModuleMemberServer {
     }
 
     @Override
-    public void handle_request(Request request) {
-        if (request == null) {
-            return;
-        }
-        Response response = null;
-        if (ValueRequest.class.isInstance(request)) {
-            ValueRequest value_request = (ValueRequest) request;
-            Atom[][] payload = new Atom[1][value_request.payload.length];
-            payload[0] = this.datatype.process_input(value_request.payload);
-            response = new ValueResponse(this, payload, value_request);
-            this.handle_response(response);
-        } else if (InterfaceRequest.class.isInstance(request)) {
-            this.handle_interface_request((InterfaceRequest) request);
-        }
+    public void handle_value_request(ValueRequest value_request) {
+        Atom[][] payload = new Atom[1][value_request.payload.length];
+        payload[0] = this.datatype.process_input(value_request.payload);
+        Response response = new ValueResponse(this, payload, value_request);
+        this.handle_response(response);
     }
 
     private void initialize_value() {

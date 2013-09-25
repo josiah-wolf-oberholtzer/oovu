@@ -1,9 +1,7 @@
 package oovu.servers;
 
-import oovu.clients.ServerClient;
 import oovu.environment.Environment;
 import oovu.messaging.Request;
-import oovu.messaging.Response;
 
 public class RootServer extends Server {
 
@@ -20,5 +18,4 @@ public class RootServer extends Server {
     @Override
     public void handle_request(Request request) {
     }
-
 }

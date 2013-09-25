@@ -38,13 +38,8 @@ public class ModuleServer extends Server {
 
     public ModuleServer(Integer module_id, Map<String, Atom[]> argument_map) {
         super(argument_map);
-        this.attach_to_parent_server(Environment.root_server);
         this.module_id = module_id;
-    }
-
-    @Override
-    public int get_reference_count() {
-        return this.server_clients.size() + this.child_servers.size();
+        this.attach_to_parent_server(Environment.root_server);
     }
 
     @Override

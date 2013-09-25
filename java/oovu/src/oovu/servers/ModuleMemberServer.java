@@ -13,7 +13,6 @@ import oovu.servers.members.PushServer;
 import oovu.servers.members.ReturnServer;
 
 import com.cycling74.max.Atom;
-import com.cycling74.max.MaxObject;
 
 public abstract class ModuleMemberServer extends Server {
 
@@ -110,19 +109,7 @@ public abstract class ModuleMemberServer extends Server {
         Map<String, Atom[]> argument_map) {
         super(argument_map);
         this.attach_to_parent_server(module_server);
-        for (String key : argument_map.keySet().toArray(
-            new String[argument_map.size()])) {
-            MaxObject.post(key + ": " + Atom.toOneString(argument_map.get(key))
-                + "\n");
-        }
         this.add_message_handler(new GetModuleNameMessageHandler());
-    }
-
-    @Override
-    public void deallocate() {
-        Server parent_server = this.get_parent_server();
-        parent_server.deallocate_if_necessary();
-        this.clear();
     }
 
     abstract public ModuleMemberServer new_instance(
