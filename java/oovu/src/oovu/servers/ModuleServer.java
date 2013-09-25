@@ -5,6 +5,7 @@ import java.util.Map;
 import oovu.Binding;
 import oovu.clients.ServerClient;
 import oovu.environment.Environment;
+import oovu.environment.OscAddressNode;
 import oovu.messaging.InterfaceRequest;
 import oovu.messaging.Request;
 import oovu.messaging.Response;
@@ -98,7 +99,7 @@ public class ModuleServer extends Server {
         if (desired_name == null) {
             return;
         }
-        String acquired_name = Server.find_unique_name(desired_name,
+        String acquired_name = OscAddressNode.find_unique_name(desired_name,
             Environment.root_server.child_nodes.keySet());
         this.name = acquired_name;
         Environment.root_server.child_nodes.put(acquired_name, this);

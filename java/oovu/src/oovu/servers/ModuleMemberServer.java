@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import oovu.environment.OscAddressNode;
 import oovu.messaging.MessageHandler;
 
 import com.cycling74.max.Atom;
@@ -130,7 +131,7 @@ public abstract class ModuleMemberServer extends Server {
         if (desired_name == null) {
             return;
         }
-        String acquired_name = Server.find_unique_name(desired_name,
+        String acquired_name = OscAddressNode.find_unique_name(desired_name,
             this.module_node.child_nodes.keySet());
         this.name = acquired_name;
         this.module_node.child_nodes.put(acquired_name, this);

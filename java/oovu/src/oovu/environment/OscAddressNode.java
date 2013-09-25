@@ -28,6 +28,20 @@ public class OscAddressNode {
     private OscAddressNode parent = null;
     private Server server = null;
     
+    public static String
+        find_unique_name(String desired_name, Set<String> names) {
+        if (!names.contains(desired_name)) {
+            return desired_name;
+        }
+        Integer counter = 1;
+        String acquired_name = desired_name + '.' + counter.toString();
+        while (names.contains(acquired_name)) {
+            counter += 1;
+            acquired_name = desired_name + '.' + counter.toString();
+        }
+        return acquired_name;
+    }
+
     public OscAddressNode(String name, Integer number) {
         this.name = name;
         this.number = number;
@@ -65,7 +79,8 @@ public class OscAddressNode {
     	for (int i = 0; i < osc_address.address_items.length; i++) {
     		String name = osc_address.address_items[i];
     		if ((i == (osc_address.address_items.length - 1)) && uniquely) {
-    			name = parent.find_unique_name(name);
+    			Set<String> names = parent.named_children.keySet();
+    			name = OscAddressNode.find_unique_name(name, names);
     		}
     		child = parent.get_named_child(name);
     		if (child == null) {
@@ -75,19 +90,6 @@ public class OscAddressNode {
     		parent = child;
     	}
     	return child;
-    }
-    
-    public String find_unique_name(String desired_name) {
-        if (!this.named_children.containsKey(desired_name)) {
-            return desired_name;
-        }
-        Integer counter = 1;
-        String acquired_name = desired_name + '.' + counter.toString();
-        while (this.named_children.containsKey(acquired_name)) {
-            counter += 1;
-            acquired_name = desired_name + '.' + counter.toString();
-        }
-        return acquired_name;
     }
     
     public OscAddressNode get_named_child(String name) {

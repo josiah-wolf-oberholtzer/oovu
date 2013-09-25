@@ -160,20 +160,6 @@ abstract public class Server implements Dispatcher {
         }
     }
 
-    public static String
-        find_unique_name(String desired_name, Set<String> names) {
-        if (!names.contains(desired_name)) {
-            return desired_name;
-        }
-        Integer counter = 1;
-        String acquired_name = desired_name + '.' + counter.toString();
-        while (names.contains(acquired_name)) {
-            counter += 1;
-            acquired_name = desired_name + '.' + counter.toString();
-        }
-        return acquired_name;
-    }
-
     public static Map<String, Atom[]> process_atom_arguments(Atom[] arguments) {
         HashMap<String, Atom[]> argument_map = new HashMap<String, Atom[]>();
         String current_key = null;
