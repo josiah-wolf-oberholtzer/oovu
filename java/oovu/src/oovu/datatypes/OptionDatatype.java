@@ -2,6 +2,7 @@ package oovu.datatypes;
 
 import java.util.Map;
 
+import oovu.messaging.DatatypeMessageHandler;
 import oovu.messaging.MessageHandler;
 import oovu.servers.AttributeServer;
 import oovu.servers.Server;
@@ -10,7 +11,11 @@ import com.cycling74.max.Atom;
 
 public class OptionDatatype extends StringDatatype {
 
-    private class GetOptionsMessageHandler extends MessageHandler {
+    private class GetOptionsMessageHandler extends DatatypeMessageHandler {
+
+    	public GetOptionsMessageHandler(AttributeServer attribute_server) {
+    		super(attribute_server);
+    	}
 
         @Override
         public String get_name() {
@@ -18,7 +23,7 @@ public class OptionDatatype extends StringDatatype {
         }
 
         @Override
-        public Atom[][] run(Server node, Atom[] arguments) {
+        public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             result[0] = Atom.newAtom(OptionDatatype.this.get_options());
             result[0] = Atom.newAtom("options", result[0]);
@@ -26,7 +31,11 @@ public class OptionDatatype extends StringDatatype {
         }
     }
 
-    private class SetOptionsMessageHandler extends MessageHandler {
+    private class SetOptionsMessageHandler extends DatatypeMessageHandler {
+
+    	public SetOptionsMessageHandler(AttributeServer attribute_server) {
+    		super(attribute_server);
+    	}
 
         @Override
         public String get_name() {
@@ -34,10 +43,14 @@ public class OptionDatatype extends StringDatatype {
         }
 
         @Override
-        public Atom[][] run(Server node, Atom[] arguments) {
+        public Atom[][] run(Atom[] arguments) {
             String[] options = OptionDatatype.this.extract_strings_from_atoms(arguments);
             OptionDatatype.this.set_options(options);
             return null;
+        }
+        
+        public void call_after() {
+        	this.attribute_server.reoutput_value();
         }
     }
     
@@ -46,8 +59,8 @@ public class OptionDatatype extends StringDatatype {
     public OptionDatatype(AttributeServer client, Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {
-            this.client.add_message_handler(new GetOptionsMessageHandler());
-            this.client.add_message_handler(new SetOptionsMessageHandler());
+            this.client.add_message_handler(new GetOptionsMessageHandler(this.client));
+            this.client.add_message_handler(new SetOptionsMessageHandler(this.client));
         }
         this.initialize_options(argument_map);
     }

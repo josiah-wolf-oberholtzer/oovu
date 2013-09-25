@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 
+import oovu.messaging.DatatypeMessageHandler;
 import oovu.messaging.MessageHandler;
 import oovu.servers.AttributeServer;
 import oovu.servers.Server;
@@ -12,7 +13,11 @@ import com.cycling74.max.Atom;
 
 abstract public class BoundedDatatype extends GenericDatatype {
 
-    private class GetMaximumMessageHandler extends MessageHandler {
+    private class GetMaximumMessageHandler extends DatatypeMessageHandler {
+
+    	public GetMaximumMessageHandler(AttributeServer attribute_server) {
+    		super(attribute_server);
+    	}
 
         @Override
         public String get_name() {
@@ -20,7 +25,7 @@ abstract public class BoundedDatatype extends GenericDatatype {
         }
 
         @Override
-        public Atom[][] run(Server node, Atom[] arguments) {
+        public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             Float maximum = BoundedDatatype.this.get_maximum();
             String label = "maximum";
@@ -34,7 +39,11 @@ abstract public class BoundedDatatype extends GenericDatatype {
         }
     }
 
-    private class GetMinimumMessageHandler extends MessageHandler {
+    private class GetMinimumMessageHandler extends DatatypeMessageHandler {
+
+    	public GetMinimumMessageHandler(AttributeServer attribute_server) {
+    		super(attribute_server);
+    	}
 
         @Override
         public String get_name() {
@@ -42,7 +51,7 @@ abstract public class BoundedDatatype extends GenericDatatype {
         }
 
         @Override
-        public Atom[][] run(Server node, Atom[] arguments) {
+        public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             Float minimum = BoundedDatatype.this.get_minimum();
             String label = "minimum";
@@ -56,7 +65,11 @@ abstract public class BoundedDatatype extends GenericDatatype {
         }
     }
 
-    private class SetMaximumMessageHandler extends MessageHandler {
+    private class SetMaximumMessageHandler extends DatatypeMessageHandler {
+
+    	public SetMaximumMessageHandler(AttributeServer attribute_server) {
+    		super(attribute_server);
+    	}
 
         @Override
         public String get_name() {
@@ -64,7 +77,7 @@ abstract public class BoundedDatatype extends GenericDatatype {
         }
 
         @Override
-        public Atom[][] run(Server node, Atom[] arguments) {
+        public Atom[][] run(Atom[] arguments) {
             Float maximum = null;
             if (0 < arguments.length) {
                 maximum = arguments[0].getFloat();
@@ -73,9 +86,16 @@ abstract public class BoundedDatatype extends GenericDatatype {
             return null;
         }
 
+        public void call_after() {
+        	this.attribute_server.reoutput_value();
+        }
     }
 
-    private class SetMinimumMessageHandler extends MessageHandler {
+    private class SetMinimumMessageHandler extends DatatypeMessageHandler {
+
+    	public SetMinimumMessageHandler(AttributeServer attribute_server) {
+    		super(attribute_server);
+    	}
 
         @Override
         public String get_name() {
@@ -83,13 +103,17 @@ abstract public class BoundedDatatype extends GenericDatatype {
         }
 
         @Override
-        public Atom[][] run(Server node, Atom[] arguments) {
+        public Atom[][] run(Atom[] arguments) {
             Float minimum = null;
             if (0 < arguments.length) {
                 minimum = arguments[0].getFloat();
             }
             BoundedDatatype.this.set_minimum(minimum);
             return null;
+        }
+        
+        public void call_after() {
+        	this.attribute_server.reoutput_value();
         }
 
     }
@@ -101,10 +125,10 @@ abstract public class BoundedDatatype extends GenericDatatype {
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {
-            this.client.add_message_handler(new GetMaximumMessageHandler());
-            this.client.add_message_handler(new GetMinimumMessageHandler());
-            this.client.add_message_handler(new SetMaximumMessageHandler());
-            this.client.add_message_handler(new SetMinimumMessageHandler());
+            this.client.add_message_handler(new GetMaximumMessageHandler(this.client));
+            this.client.add_message_handler(new GetMinimumMessageHandler(this.client));
+            this.client.add_message_handler(new SetMaximumMessageHandler(this.client));
+            this.client.add_message_handler(new SetMinimumMessageHandler(this.client));
         }
         this.initialize_extrema(argument_map);
     }

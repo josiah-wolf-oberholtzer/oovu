@@ -20,11 +20,10 @@ public abstract class ModuleMemberServer extends Server {
         }
 
         @Override
-        public Atom[][] run(Server server, Atom[] arguments) {
+        public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
-            AttributeServer attribute_node = (AttributeServer) server;
             result[0] = Atom.newAtom(new String[] { "modulename",
-                attribute_node.module_node.get_name() });
+                ModuleMemberServer.this.module_node.get_name() });
             return result;
         }
     }

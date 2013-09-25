@@ -2,6 +2,7 @@ package oovu.datatypes;
 
 import java.util.Map;
 
+import oovu.messaging.DatatypeMessageHandler;
 import oovu.messaging.MessageHandler;
 import oovu.servers.AttributeServer;
 import oovu.servers.Server;
@@ -10,15 +11,19 @@ import com.cycling74.max.Atom;
 
 abstract public class BoundedArrayDatatype extends BoundedDatatype {
 
-    private class GetLengthMessageHandler extends MessageHandler {
+    private class GetLengthMessageHandler extends DatatypeMessageHandler {
 
+    	public GetLengthMessageHandler(AttributeServer attribute_server) {
+    		super(attribute_server);
+    	}
+    	
         @Override
         public String get_name() {
             return "getlength";
         }
 
         @Override
-        public Atom[][] run(Server node, Atom[] arguments) {
+        public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             result[0] = Atom.newAtom("length", Atom
                 .newAtom(new int[] { BoundedArrayDatatype.this.get_length() }));
@@ -26,7 +31,11 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
         }
     }
 
-    private class SetLengthMessageHandler extends MessageHandler {
+    private class SetLengthMessageHandler extends DatatypeMessageHandler {
+
+    	public SetLengthMessageHandler(AttributeServer attribute_server) {
+    		super(attribute_server);
+    	}
 
         @Override
         public String get_name() {
@@ -34,7 +43,7 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
         }
 
         @Override
-        public Atom[][] run(Server node, Atom[] arguments) {
+        public Atom[][] run(Atom[] arguments) {
             if (0 < arguments.length) {
                 if (arguments[0].isFloat() || arguments[0].isInt()) {
                     Integer length = arguments[0].getInt();
@@ -42,10 +51,12 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
                         BoundedArrayDatatype.this.set_length(length);
                     }
                 }
-                AttributeServer attribute = (AttributeServer) node;
-                attribute.reoutput_value();
             }
             return null;
+        }
+        
+        public void call_after() {
+        	this.attribute_server.reoutput_value();
         }
     }
 
@@ -56,8 +67,8 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
         super(client, argument_map);
         this.initialize_length(argument_map);
         if (this.client != null) {
-            client.add_message_handler(new GetLengthMessageHandler());
-            client.add_message_handler(new SetLengthMessageHandler());
+            client.add_message_handler(new GetLengthMessageHandler(this.client));
+            client.add_message_handler(new SetLengthMessageHandler(this.client));
         }
     }
 

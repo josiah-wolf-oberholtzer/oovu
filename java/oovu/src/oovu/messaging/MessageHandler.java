@@ -12,6 +12,6 @@ abstract public class MessageHandler {
     
     abstract public String get_name();
 
-    abstract public Atom[][] run(Server context, Atom[] arguments);
+    abstract public Atom[][] run(Atom[] arguments);
     
 }

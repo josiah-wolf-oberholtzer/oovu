@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import oovu.messaging.DatatypeMessageHandler;
 import oovu.messaging.MessageHandler;
 import oovu.servers.AttributeServer;
 import oovu.servers.Server;
@@ -13,7 +14,11 @@ import com.cycling74.max.MaxObject;
 
 public abstract class Datatype {
 
-    private class GetDatatypeMessageHandler extends MessageHandler {
+    private class GetDatatypeMessageHandler extends DatatypeMessageHandler {
+
+    	public GetDatatypeMessageHandler(AttributeServer attribute_server) {
+    		super(attribute_server);
+    	}
 
         @Override
         public String get_name() {
@@ -21,10 +26,9 @@ public abstract class Datatype {
         }
 
         @Override
-        public Atom[][] run(Server server, Atom[] arguments) {
+        public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
-            AttributeServer attribute_server = (AttributeServer) server;
-            String datatype_name = attribute_server.datatype.getClass().getSimpleName()
+            String datatype_name = this.attribute_server.datatype.getClass().getSimpleName()
                 .toLowerCase().replace("datatype", "");
             result[0] = Atom
                 .newAtom(new String[] { "datatype", datatype_name });
@@ -69,7 +73,7 @@ public abstract class Datatype {
         this.client = client;
         if (this.client != null) {
             this.client
-                .add_message_handler(new GetDatatypeMessageHandler());
+                .add_message_handler(new GetDatatypeMessageHandler(this.client));
         }
     }
 

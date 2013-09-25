@@ -26,10 +26,9 @@ abstract public class AttributeServer extends ModuleMemberServer {
         }
 
         @Override
-        public Atom[][] run(Server node, Atom[] arguments) {
+        public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
-            AttributeServer attribute_node = (AttributeServer) node;
-            Integer priority = attribute_node.get_priority();
+            Integer priority = AttributeServer.this.get_priority();
             result[0] = Atom.newAtom(new int[] { priority });
             result[0] = Atom.newAtom("priority", result[0]);
             return result;
@@ -44,7 +43,7 @@ abstract public class AttributeServer extends ModuleMemberServer {
         }
 
         @Override
-        public Atom[][] run(Server node, Atom[] arguments) {
+        public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             result[0] = AttributeServer.this.get_value();
             return result;
@@ -59,13 +58,12 @@ abstract public class AttributeServer extends ModuleMemberServer {
         }
 
         @Override
-        public Atom[][] run(Server node, Atom[] arguments) {
-            AttributeServer attribute_node = (AttributeServer) node;
+        public Atom[][] run(Atom[] arguments) {
             Integer priority = null;
             if (0 < arguments.length) {
                 priority = arguments[0].toInt();
             }
-            attribute_node.set_priority(priority);
+            AttributeServer.this.set_priority(priority);
             return null;
         }
     }
