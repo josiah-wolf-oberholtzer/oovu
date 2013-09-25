@@ -9,19 +9,19 @@ import java.util.Map;
 import java.util.Set;
 
 import oovu.clients.ServerClient;
-import oovu.environment.Dispatcher;
 import oovu.environment.Environment;
 import oovu.environment.OscAddress;
 import oovu.environment.OscAddressNode;
 import oovu.messaging.InterfaceRequest;
 import oovu.messaging.InterfaceResponse;
 import oovu.messaging.MessageHandler;
+import oovu.messaging.MessagePasser;
 import oovu.messaging.Response;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
 
-abstract public class Server implements Dispatcher {
+abstract public class Server implements MessagePasser {
 
     private class DumpMetaMessageHandler extends MessageHandler {
 

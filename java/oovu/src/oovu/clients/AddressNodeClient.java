@@ -1,8 +1,8 @@
 package oovu.clients;
 
-import oovu.environment.Dispatcher;
 import oovu.messaging.InterfaceRequest;
 import oovu.messaging.InterfaceResponse;
+import oovu.messaging.MessagePasser;
 import oovu.messaging.Request;
 import oovu.messaging.Response;
 import oovu.messaging.ValueRequest;
@@ -12,7 +12,7 @@ import oovu.servers.Server;
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
 
-abstract public class AddressNodeClient extends MaxObject implements Dispatcher {
+abstract public class AddressNodeClient extends MaxObject implements MessagePasser {
 
     protected Server node;
 
