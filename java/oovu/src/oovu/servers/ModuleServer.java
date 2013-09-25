@@ -16,13 +16,13 @@ import com.cycling74.max.MaxObject;
 public class ModuleServer extends Server {
 
     public static ModuleServer allocate(Integer module_id) {
-        OscAddressNode osc_address_node = 
-            Environment.root_osc_address_node.get_numbered_child(module_id);
+        OscAddressNode osc_address_node = Environment.root_osc_address_node
+            .get_numbered_child(module_id);
         if (osc_address_node != null) {
             Server server = osc_address_node.get_server();
             if (server != null) {
                 if (ModuleServer.class.isInstance(server)) {
-                    return (ModuleServer) server;  
+                    return (ModuleServer) server;
                 }
             }
             throw new RuntimeException("Bad module setup");

@@ -30,10 +30,13 @@ public abstract class ModuleMemberServer extends Server {
             Atom[][] result = new Atom[1][];
             if (ModuleMemberServer.this.module_server.get_name() != null) {
                 result[0] = Atom.newAtom(new String[] {
-                    "modulename", ModuleMemberServer.this.module_server.get_name()
+                    "modulename",
+                    ModuleMemberServer.this.module_server.get_name()
                 });
             } else {
-                result[0] = Atom.newAtom(new String[] { "modulename" });
+                result[0] = Atom.newAtom(new String[] {
+                    "modulename"
+                });
             }
             return result;
         }

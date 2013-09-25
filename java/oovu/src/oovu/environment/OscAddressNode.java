@@ -35,10 +35,8 @@ public class OscAddressNode {
     private String name;
     private Integer number;
     private final Set<Binding> bindings = new HashSet<Binding>();
-    private final Map<String, OscAddressNode> named_children = 
-        new HashMap<String, OscAddressNode>();
-    private final Map<Integer, OscAddressNode> numbered_children = 
-        new HashMap<Integer, OscAddressNode>();
+    private final Map<String, OscAddressNode> named_children = new HashMap<String, OscAddressNode>();
+    private final Map<Integer, OscAddressNode> numbered_children = new HashMap<Integer, OscAddressNode>();
     private OscAddressNode parent = null;
     private Server server = null;
 
@@ -56,12 +54,13 @@ public class OscAddressNode {
             return desired_name;
         }
         Set<String> names = this.parent.named_children.keySet();
-        String acquired_name = OscAddressNode.find_unique_name(desired_name, names); 
+        String acquired_name = OscAddressNode.find_unique_name(desired_name,
+            names);
         this.name = acquired_name;
         this.parent.named_children.put(acquired_name, this);
         return acquired_name;
     }
-    
+
     public void add_child(OscAddressNode child) {
         OscAddressNode[] parentage = this.get_parentage();
         if (Arrays.asList(parentage).contains(child)) {
