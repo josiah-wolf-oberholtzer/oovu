@@ -224,6 +224,7 @@ abstract public class Server implements MessagePasser {
     public void clear() {
         this.child_servers.clear();
         this.parent_server = null;
+        this.detach_from_osc_address_node();
     }
 
     abstract protected void deallocate();
@@ -237,6 +238,7 @@ abstract public class Server implements MessagePasser {
     public void detach_from_osc_address_node() {
         if (this.osc_address_node != null) {
             this.osc_address_node.set_server(null);
+            this.osc_address_node.prune();
         }
         this.osc_address_node = null;
     }
@@ -302,7 +304,7 @@ abstract public class Server implements MessagePasser {
         OscAddressNode root = Environment.root_osc_address_node;
         this.osc_address_node = root.create_address(
             OscAddress.from_cache(osc_address), false);
-        this.osc_address_node.set_server(this);
+        this.attach_to_osc_address_node(this.osc_address_node);
     }
 
     abstract public void register_name(String desired_name);
@@ -316,9 +318,11 @@ abstract public class Server implements MessagePasser {
         if (this.get_osc_address() == null) {
             return;
         }
-        this.osc_address_node.set_server(null);
-        this.osc_address_node.prune();
-        this.osc_address_node = null;
+        OscAddressNode osc_address_node = this.get_osc_address_node();
+        if (osc_address_node != null) {
+            this.detach_from_osc_address_node();
+            osc_address_node.prune();
+        }
     }
 
     abstract public void unregister_name();

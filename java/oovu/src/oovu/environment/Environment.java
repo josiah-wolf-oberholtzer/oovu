@@ -2,7 +2,6 @@ package oovu.environment;
 
 import java.util.HashMap;
 
-import oovu.servers.ModuleServer;
 import oovu.servers.RootServer;
 import oovu.servers.members.AudioServer;
 
@@ -17,8 +16,6 @@ public class Environment {
     static {
         root_osc_address_node = new OscAddressNode("", null);
         root_server = new RootServer();
-        Environment.root_server
-            .attach_to_osc_address_node(Environment.root_osc_address_node);
     }
 
     public static void reset() {

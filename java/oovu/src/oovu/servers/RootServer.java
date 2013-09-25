@@ -10,7 +10,7 @@ public class RootServer extends Server {
 
     public RootServer() {
         super(null);
-        this.name = "";
+        this.attach_to_osc_address_node(Environment.root_osc_address_node);
     }
 
     @Override
@@ -20,11 +20,6 @@ public class RootServer extends Server {
     @Override
     public String get_osc_address() {
         return "/";
-    }
-
-    @Override
-    public OscAddressNode get_osc_address_node() {
-        return Environment.root_osc_address_node;
     }
 
     @Override
