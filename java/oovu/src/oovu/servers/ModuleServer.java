@@ -16,14 +16,23 @@ import com.cycling74.max.MaxObject;
 public class ModuleServer extends Server {
 
     public static ModuleServer allocate(Integer module_id) {
-        ModuleServer module_node = Environment.modules_by_module_id
-            .get(module_id);
-        if (module_node != null) {
-            return module_node;
+        OscAddressNode osc_address_node = 
+            Environment.root_osc_address_node.get_numbered_child(module_id);
+        if (osc_address_node != null) {
+            Server server = osc_address_node.get_server();
+            if (server != null) {
+                if (ModuleServer.class.isInstance(server)) {
+                    return (ModuleServer) server;  
+                }
+            }
+            throw new RuntimeException("Bad module setup");
+        } else {
+            osc_address_node = new OscAddressNode("", module_id);
+            Environment.root_osc_address_node.add_child(osc_address_node);
+            ModuleServer module_server = new ModuleServer(module_id, null);
+            module_server.attach_to_osc_address_node(osc_address_node);
+            return module_server;
         }
-        module_node = new ModuleServer(module_id, null);
-        Environment.modules_by_module_id.put(module_id, module_node);
-        return module_node;
     }
 
     public final Integer module_id;
@@ -35,25 +44,10 @@ public class ModuleServer extends Server {
 
     @Override
     public void deallocate() {
-        Environment.modules_by_module_id.remove(this.module_id);
+        OscAddressNode osc_address_node = this.get_osc_address_node();
+        this.detach_from_osc_address_node();
+        osc_address_node.prune();
         this.unregister_name();
-    }
-
-    @Override
-    public String get_osc_address() {
-        if (this.name == null) {
-            return null;
-        }
-        return '/' + this.name;
-    }
-
-    @Override
-    public Server get_parent_server() {
-        if (Environment.root_server.child_servers.containsKey(this.name)
-            && (Environment.root_server.child_servers.get(this.name) == this)) {
-            return Environment.root_server;
-        }
-        return null;
     }
 
     @Override

@@ -6,7 +6,7 @@ import oovu.environment.Environment;
 import oovu.environment.OscAddress;
 import oovu.environment.OscAddressNode;
 import oovu.servers.ModuleServer;
-import oovu.servers.PropertyServer;
+import oovu.servers.members.PropertyServer;
 
 import org.junit.After;
 import org.junit.Assert;

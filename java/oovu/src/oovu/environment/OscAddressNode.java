@@ -35,8 +35,10 @@ public class OscAddressNode {
     private String name;
     private Integer number;
     private final Set<Binding> bindings = new HashSet<Binding>();
-    private final Map<String, OscAddressNode> named_children = new HashMap<String, OscAddressNode>();
-    private final Map<Integer, OscAddressNode> numbered_children = new HashMap<Integer, OscAddressNode>();
+    private final Map<String, OscAddressNode> named_children = 
+        new HashMap<String, OscAddressNode>();
+    private final Map<Integer, OscAddressNode> numbered_children = 
+        new HashMap<Integer, OscAddressNode>();
     private OscAddressNode parent = null;
     private Server server = null;
 
@@ -45,6 +47,21 @@ public class OscAddressNode {
         this.number = number;
     }
 
+    public String acquire_name(String desired_name) {
+        if (this.name != null) {
+            throw new RuntimeException("Already has name.");
+        }
+        if (this.parent == null) {
+            this.name = desired_name;
+            return desired_name;
+        }
+        Set<String> names = this.parent.named_children.keySet();
+        String acquired_name = OscAddressNode.find_unique_name(desired_name, names); 
+        this.name = acquired_name;
+        this.parent.named_children.put(acquired_name, this);
+        return acquired_name;
+    }
+    
     public void add_child(OscAddressNode child) {
         OscAddressNode[] parentage = this.get_parentage();
         if (Arrays.asList(parentage).contains(child)) {
@@ -53,7 +70,12 @@ public class OscAddressNode {
         if (child.get_parent() != null) {
             child.get_parent().remove_child(child);
         }
-        this.named_children.put(child.name, child);
+        if (child.name != null) {
+            this.named_children.put(child.name, child);
+        }
+        if (child.number != null) {
+            this.numbered_children.put(child.number, child);
+        }
         child.parent = this;
     }
 
@@ -142,7 +164,10 @@ public class OscAddressNode {
     }
 
     public int get_reference_count() {
-        return this.named_children.size();
+        Set<OscAddressNode> children = new HashSet<OscAddressNode>();
+        children.addAll(this.named_children.values());
+        children.addAll(this.numbered_children.values());
+        return children.size();
     }
 
     public OscAddressNode get_root() {
@@ -220,7 +245,19 @@ public class OscAddressNode {
     }
 
     public void remove_child(OscAddressNode child) {
-        this.named_children.remove(child.name);
+        if (child == null) {
+            return;
+        }
+        if (child.name != null) {
+            if (this.named_children.get(child.name) == child) {
+                this.named_children.remove(child.name);
+            }
+        }
+        if (child.number != null) {
+            if (this.numbered_children.get(child.number) == child) {
+                this.numbered_children.remove(child.number);
+            }
+        }
         child.parent = null;
     }
 

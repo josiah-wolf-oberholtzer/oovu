@@ -1,4 +1,4 @@
-package oovu.servers;
+package oovu.servers.members;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
@@ -12,6 +12,8 @@ import oovu.messaging.Request;
 import oovu.messaging.Response;
 import oovu.messaging.ValueRequest;
 import oovu.messaging.ValueResponse;
+import oovu.servers.ModuleMemberServer;
+import oovu.servers.ModuleServer;
 
 import com.cycling74.max.Atom;
 

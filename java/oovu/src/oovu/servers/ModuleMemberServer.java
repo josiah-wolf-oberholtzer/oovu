@@ -7,6 +7,11 @@ import java.util.Map;
 
 import oovu.environment.OscAddressNode;
 import oovu.messaging.MessageHandler;
+import oovu.servers.members.MethodServer;
+import oovu.servers.members.PropertyServer;
+import oovu.servers.members.PullServer;
+import oovu.servers.members.PushServer;
+import oovu.servers.members.ReturnServer;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
@@ -101,20 +106,6 @@ public abstract class ModuleMemberServer extends Server {
     public void deallocate() {
         this.unregister_name();
         this.module_node.deallocate_if_necessary();
-    }
-
-    @Override
-    public String get_osc_address() {
-        if ((this.module_node == null) || (this.module_node.name == null)
-            || (this.name == null)) {
-            return null;
-        }
-        return '/' + this.module_node.name + '/' + this.name;
-    }
-
-    @Override
-    public Server get_parent_server() {
-        return this.module_node;
     }
 
     @Override

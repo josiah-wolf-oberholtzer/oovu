@@ -1,7 +1,7 @@
 package oovu;
 
 import oovu.clients.AudioServerClient;
-import oovu.servers.PushServer;
+import oovu.servers.members.PushServer;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;

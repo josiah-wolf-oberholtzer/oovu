@@ -215,6 +215,12 @@ abstract public class Server implements MessagePasser {
         this.message_handlers.put(message_handler.get_name(), message_handler);
     }
 
+    public void attach_to_osc_address_node(OscAddressNode osc_address_node) {
+        this.detach_from_osc_address_node();
+        this.osc_address_node = osc_address_node;
+        this.osc_address_node.set_server(this);
+    }
+
     public void clear() {
         this.child_servers.clear();
         this.parent_server = null;
@@ -228,11 +234,37 @@ abstract public class Server implements MessagePasser {
         }
     }
 
+    public void detach_from_osc_address_node() {
+        if (this.osc_address_node != null) {
+            this.osc_address_node.set_server(null);
+        }
+        this.osc_address_node = null;
+    }
+
     public String get_name() {
         return this.name;
     }
 
-    abstract public String get_osc_address();
+    public String get_osc_address() {
+        if (this.get_osc_address_node() == null) {
+            return null;
+        } else if (this.get_name() == null) {
+            return null;
+        }
+        OscAddressNode[] parentage = this.get_osc_address_node()
+            .get_parentage();
+        StringBuilder string_builder = new StringBuilder();
+        for (int i = parentage.length - 1; i <= 0; i--) {
+            String name = parentage[i].get_name();
+            if (name == null) {
+                return null;
+            } else if (0 < name.length()) {
+                string_builder.append("/");
+                string_builder.append(name);
+            }
+        }
+        return string_builder.toString();
+    }
 
     public OscAddressNode get_osc_address_node() {
         return this.osc_address_node;

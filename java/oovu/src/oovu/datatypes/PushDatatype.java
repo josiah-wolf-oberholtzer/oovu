@@ -5,7 +5,7 @@ import java.util.Map;
 
 import oovu.environment.Environment;
 import oovu.messaging.DatatypeMessageHandler;
-import oovu.servers.AttributeServer;
+import oovu.servers.members.AttributeServer;
 
 import com.cycling74.max.Atom;
 
