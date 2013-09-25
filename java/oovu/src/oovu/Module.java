@@ -26,5 +26,4 @@ public class Module extends ServerClient {
     public void output_value_response_payload(Atom[] payload) {
         this.outlet(0, payload);
     }
-    
 }

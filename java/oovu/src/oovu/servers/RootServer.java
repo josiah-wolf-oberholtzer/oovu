@@ -24,9 +24,9 @@ public class RootServer extends Server {
 
     @Override
     public OscAddressNode get_osc_address_node() {
-    	return Environment.root_osc_address_node;
+        return Environment.root_osc_address_node;
     }
-    
+
     @Override
     public Server get_parent_server() {
         return null;
@@ -58,5 +58,4 @@ public class RootServer extends Server {
     @Override
     public void unregister_name() {
     }
-
 }

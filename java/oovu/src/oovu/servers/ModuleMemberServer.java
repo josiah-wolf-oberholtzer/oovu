@@ -23,15 +23,15 @@ public abstract class ModuleMemberServer extends Server {
         @Override
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
-            result[0] = Atom.newAtom(new String[] { "modulename",
-                ModuleMemberServer.this.module_node.get_name() });
+            result[0] = Atom.newAtom(new String[] {
+                "modulename", ModuleMemberServer.this.module_node.get_name()
+            });
             return result;
         }
     }
 
     public final ModuleServer module_node;
     public static final Map<String, Class<?>> member_nodes_by_label;
-
     static {
         Map<String, Class<?>> map = new HashMap<String, Class<?>>();
         map.put("MethodNode", MethodServer.class);
@@ -42,8 +42,11 @@ public abstract class ModuleMemberServer extends Server {
         member_nodes_by_label = Collections.unmodifiableMap(map);
     }
 
-    public static ModuleMemberServer allocate_from_label(String label,
-        Integer module_id, String desired_name, Atom[] argument_list) {
+    public static ModuleMemberServer allocate_from_label(
+        String label,
+        Integer module_id,
+        String desired_name,
+        Atom[] argument_list) {
         Class<?> member_node_class = ModuleMemberServer.member_nodes_by_label
             .get(label);
         if (member_node_class == null) {
@@ -119,7 +122,8 @@ public abstract class ModuleMemberServer extends Server {
         return this.server_clients.size();
     }
 
-    abstract public ModuleMemberServer new_instance(Integer module_id,
+    abstract public ModuleMemberServer new_instance(
+        Integer module_id,
         Map<String, Atom[]> argument_map);
 
     @Override
@@ -144,5 +148,4 @@ public abstract class ModuleMemberServer extends Server {
         this.module_node.child_servers.remove(this.name);
         this.name = null;
     }
-
 }

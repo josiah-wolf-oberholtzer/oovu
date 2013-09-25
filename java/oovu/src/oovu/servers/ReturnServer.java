@@ -9,18 +9,22 @@ import com.cycling74.max.Atom;
 
 public class ReturnServer extends AttributeServer {
 
-    public static ReturnServer allocate(Integer module_id, String desired_name,
+    public static ReturnServer allocate(
+        Integer module_id,
+        String desired_name,
         Atom[] argument_list) {
-        return (ReturnServer) ModuleMemberServer.allocate_from_label("ReturnNode",
-            module_id, desired_name, argument_list);
+        return (ReturnServer) ModuleMemberServer.allocate_from_label(
+            "ReturnNode", module_id, desired_name, argument_list);
     }
 
-    public ReturnServer(ModuleServer module_node, Map<String, Atom[]> argument_map) {
+    public ReturnServer(ModuleServer module_node,
+        Map<String, Atom[]> argument_map) {
         super(module_node, argument_map);
     }
 
     @Override
-    public ReturnServer new_instance(Integer module_id,
+    public ReturnServer new_instance(
+        Integer module_id,
         Map<String, Atom[]> argument_map) {
         ModuleServer module_node = ModuleServer.allocate(module_id);
         return new ReturnServer(module_node, argument_map);
@@ -35,5 +39,4 @@ public class ReturnServer extends AttributeServer {
         Response response = new ValueResponse(this, payload, null);
         this.handle_response(response);
     }
-
 }

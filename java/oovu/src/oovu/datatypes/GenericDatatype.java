@@ -15,12 +15,13 @@ public class GenericDatatype extends Datatype {
 
     @Override
     public Atom[] get_default() {
-        return Atom.newAtom(new double[] { 0. });
+        return Atom.newAtom(new double[] {
+            0.
+        });
     }
 
     @Override
     public Atom[] process_input(Atom[] input) {
         return input;
     }
-
 }

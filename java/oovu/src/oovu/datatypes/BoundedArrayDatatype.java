@@ -3,9 +3,7 @@ package oovu.datatypes;
 import java.util.Map;
 
 import oovu.messaging.DatatypeMessageHandler;
-import oovu.messaging.MessageHandler;
 import oovu.servers.AttributeServer;
-import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
 
@@ -13,10 +11,10 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
 
     private class GetLengthMessageHandler extends DatatypeMessageHandler {
 
-    	public GetLengthMessageHandler(AttributeServer attribute_server) {
-    		super(attribute_server);
-    	}
-    	
+        public GetLengthMessageHandler(AttributeServer attribute_server) {
+            super(attribute_server);
+        }
+
         @Override
         public String get_name() {
             return "getlength";
@@ -25,17 +23,23 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
         @Override
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
-            result[0] = Atom.newAtom("length", Atom
-                .newAtom(new int[] { BoundedArrayDatatype.this.get_length() }));
+            result[0] = Atom.newAtom("length", Atom.newAtom(new int[] {
+                BoundedArrayDatatype.this.get_length()
+            }));
             return result;
         }
     }
 
     private class SetLengthMessageHandler extends DatatypeMessageHandler {
 
-    	public SetLengthMessageHandler(AttributeServer attribute_server) {
-    		super(attribute_server);
-    	}
+        public SetLengthMessageHandler(AttributeServer attribute_server) {
+            super(attribute_server);
+        }
+
+        @Override
+        public void call_after() {
+            this.attribute_server.reoutput_value();
+        }
 
         @Override
         public String get_name() {
@@ -54,10 +58,6 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
             }
             return null;
         }
-        
-        public void call_after() {
-        	this.attribute_server.reoutput_value();
-        }
     }
 
     protected Integer length = 1;
@@ -67,8 +67,10 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
         super(client, argument_map);
         this.initialize_length(argument_map);
         if (this.client != null) {
-            client.add_message_handler(new GetLengthMessageHandler(this.client));
-            client.add_message_handler(new SetLengthMessageHandler(this.client));
+            client
+                .add_message_handler(new GetLengthMessageHandler(this.client));
+            client
+                .add_message_handler(new SetLengthMessageHandler(this.client));
         }
     }
 
@@ -88,5 +90,4 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
         }
         this.length = length;
     }
-
 }

@@ -28,7 +28,9 @@ abstract public class AttributeServer extends ModuleMemberServer {
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             Integer priority = AttributeServer.this.get_priority();
-            result[0] = Atom.newAtom(new int[] { priority });
+            result[0] = Atom.newAtom(new int[] {
+                priority
+            });
             result[0] = Atom.newAtom("priority", result[0]);
             return result;
         }
@@ -68,7 +70,6 @@ abstract public class AttributeServer extends ModuleMemberServer {
     }
 
     protected Integer priority = 0;
-
     public final Datatype datatype;
 
     public AttributeServer(ModuleServer module_node,
@@ -174,5 +175,4 @@ abstract public class AttributeServer extends ModuleMemberServer {
         }
         return datatype;
     }
-
 }

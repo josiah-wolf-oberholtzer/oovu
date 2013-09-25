@@ -9,7 +9,8 @@ import com.cycling74.max.Atom;
 
 abstract public class AudioServer extends ModuleMemberServer {
 
-    public AudioServer(ModuleServer module_node, Map<String, Atom[]> argument_map) {
+    public AudioServer(ModuleServer module_node,
+        Map<String, Atom[]> argument_map) {
         super(module_node, argument_map);
     }
 
@@ -20,5 +21,4 @@ abstract public class AudioServer extends ModuleMemberServer {
     @Override
     public void handle_response(Response response) {
     }
-
 }

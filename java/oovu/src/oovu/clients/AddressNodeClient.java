@@ -12,7 +12,8 @@ import oovu.servers.Server;
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
 
-abstract public class AddressNodeClient extends MaxObject implements MessagePasser {
+abstract public class AddressNodeClient extends MaxObject implements
+    MessagePasser {
 
     protected Server node;
 
@@ -104,5 +105,4 @@ abstract public class AddressNodeClient extends MaxObject implements MessagePass
         this.outlet(1, payload);
         this.outlet(0, "set", payload);
     }
-
 }

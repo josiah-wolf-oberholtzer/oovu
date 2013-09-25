@@ -104,5 +104,4 @@ abstract public class ServerClient extends MaxObject implements MessagePasser {
         this.outlet(1, payload);
         this.outlet(0, "set", payload);
     }
-
 }

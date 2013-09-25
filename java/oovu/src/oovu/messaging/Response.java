@@ -5,13 +5,12 @@ import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
 
-
 abstract public class Response {
 
     public final Server source;
     public final Atom[][] payload;
     public final Request original_request;
-    
+
     public Response(Server source, Atom[][] payload, Request original_request) {
         this.source = source;
         this.payload = payload;
@@ -19,7 +18,7 @@ abstract public class Response {
     }
 
     public String get_relative_osc_address(Server relative_node) {
-        if (relative_node == null || this.source == null) {
+        if ((relative_node == null) || (this.source == null)) {
             return null;
         } else if (relative_node == this.source) {
             return null;

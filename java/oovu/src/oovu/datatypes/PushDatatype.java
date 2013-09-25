@@ -5,9 +5,7 @@ import java.util.Map;
 
 import oovu.environment.Environment;
 import oovu.messaging.DatatypeMessageHandler;
-import oovu.messaging.MessageHandler;
 import oovu.servers.AttributeServer;
-import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
 
@@ -15,9 +13,9 @@ public class PushDatatype extends OscAddressDatatype {
 
     private class GetPushAddressesMessageHandler extends DatatypeMessageHandler {
 
-    	public GetPushAddressesMessageHandler(AttributeServer attribute_server) {
-    		super(attribute_server);
-    	}
+        public GetPushAddressesMessageHandler(AttributeServer attribute_server) {
+            super(attribute_server);
+        }
 
         @Override
         public String get_name() {
@@ -38,9 +36,8 @@ public class PushDatatype extends OscAddressDatatype {
     public PushDatatype(AttributeServer client, Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {
-            this.client
-                .add_message_handler(new GetPushAddressesMessageHandler(this.client));
+            this.client.add_message_handler(new GetPushAddressesMessageHandler(
+                this.client));
         }
     }
-
 }

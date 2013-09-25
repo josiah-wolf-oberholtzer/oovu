@@ -21,5 +21,4 @@ public class PushDestination extends AudioServerClient {
             Atom.removeFirst(arguments, 2));
         this.server.server_clients.add(this);
     }
-
 }

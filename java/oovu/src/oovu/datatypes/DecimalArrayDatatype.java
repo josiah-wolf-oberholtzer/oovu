@@ -15,7 +15,8 @@ public class DecimalArrayDatatype extends BoundedArrayDatatype {
 
     @Override
     public Atom[] get_default() {
-        return Atom.newAtom(new double[] { 0. });
+        return Atom.newAtom(new double[] {
+            0.
+        });
     }
-
 }

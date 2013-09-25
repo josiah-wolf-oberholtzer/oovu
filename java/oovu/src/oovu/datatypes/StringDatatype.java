@@ -9,7 +9,8 @@ import com.cycling74.max.Atom;
 
 public class StringDatatype extends GenericDatatype {
 
-    public StringDatatype(AttributeServer client, Map<String, Atom[]> argument_map) {
+    public StringDatatype(AttributeServer client,
+        Map<String, Atom[]> argument_map) {
         super(client, argument_map);
     }
 
@@ -23,7 +24,8 @@ public class StringDatatype extends GenericDatatype {
 
     @Override
     public Atom[] get_default() {
-        return Atom.newAtom(new String[] { "" });
+        return Atom.newAtom(new String[] {
+            ""
+        });
     }
-    
 }

@@ -12,5 +12,4 @@ public class FilesystemPathDatatype extends StringDatatype {
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
     }
-
 }

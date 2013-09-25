@@ -7,5 +7,4 @@ public class Send extends MaxObject {
     public Send() {
         this.declareIO(1, 1);
     }
-
 }

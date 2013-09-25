@@ -5,7 +5,6 @@ import oovu.environment.Environment;
 
 import com.cycling74.max.Atom;
 
-
 public class Root extends ServerClient {
 
     public Root() {
@@ -18,5 +17,4 @@ public class Root extends ServerClient {
     public void output_value_response_payload(Atom[] payload) {
         this.outlet(0, payload);
     }
-
 }

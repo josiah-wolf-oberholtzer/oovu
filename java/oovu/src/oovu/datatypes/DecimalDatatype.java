@@ -15,7 +15,8 @@ public class DecimalDatatype extends BoundedDatatype {
 
     @Override
     public Atom[] get_default() {
-        return Atom.newAtom(new double[] { 0. });
+        return Atom.newAtom(new double[] {
+            0.
+        });
     }
-
 }

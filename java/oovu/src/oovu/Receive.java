@@ -7,5 +7,4 @@ public class Receive extends MaxObject {
     public Receive() {
         this.declareIO(1, 1);
     }
-
 }

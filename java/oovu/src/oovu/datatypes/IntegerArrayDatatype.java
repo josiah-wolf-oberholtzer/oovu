@@ -15,7 +15,8 @@ public class IntegerArrayDatatype extends BoundedArrayDatatype {
 
     @Override
     public Atom[] get_default() {
-        return Atom.newAtom(new int[] { 0 });
+        return Atom.newAtom(new int[] {
+            0
+        });
     }
-
 }

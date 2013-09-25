@@ -35,8 +35,8 @@ abstract public class Server implements MessagePasser {
             ArrayList<Atom[]> result = new ArrayList<Atom[]>();
             MessageHandler getMetaMessageHandler = Server.this.message_handlers
                 .get("getmeta");
-            Atom[] meta = Atom.removeFirst(getMetaMessageHandler.run(
-                arguments)[0]);
+            Atom[] meta = Atom
+                .removeFirst(getMetaMessageHandler.run(arguments)[0]);
             for (Atom name : meta) {
                 MessageHandler message_handler = Server.this.message_handlers
                     .get(name.toString());
@@ -104,8 +104,9 @@ abstract public class Server implements MessagePasser {
         @Override
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
-            result[0] = Atom
-                .newAtom(new String[] { "name", Server.this.get_name() });
+            result[0] = Atom.newAtom(new String[] {
+                "name", Server.this.get_name()
+            });
             return result;
         }
     }
@@ -120,8 +121,9 @@ abstract public class Server implements MessagePasser {
         @Override
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
-            result[0] = Atom.newAtom(new String[] { "oscaddress",
-                Server.this.get_osc_address() });
+            result[0] = Atom.newAtom(new String[] {
+                "oscaddress", Server.this.get_osc_address()
+            });
             return result;
         }
     }
@@ -153,7 +155,8 @@ abstract public class Server implements MessagePasser {
         @Override
         public Atom[][] run(Atom[] arguments) {
             for (ServerClient server_client : Server.this.server_clients) {
-                server_client.getMaxBox().getPatcher().send("front", new Atom[0]);
+                server_client.getMaxBox().getPatcher()
+                    .send("front", new Atom[0]);
             }
             return null;
         }
@@ -209,13 +212,12 @@ abstract public class Server implements MessagePasser {
     }
 
     public void add_message_handler(MessageHandler message_handler) {
-        this.message_handlers.put(message_handler.get_name(),
-            message_handler);
+        this.message_handlers.put(message_handler.get_name(), message_handler);
     }
 
     public void clear() {
-    	this.child_servers.clear();
-    	this.parent_server = null;
+        this.child_servers.clear();
+        this.parent_server = null;
     }
 
     abstract protected void deallocate();
@@ -229,15 +231,15 @@ abstract public class Server implements MessagePasser {
     public String get_name() {
         return this.name;
     }
-    
+
     abstract public String get_osc_address();
 
     public OscAddressNode get_osc_address_node() {
-    	return this.osc_address_node;
+        return this.osc_address_node;
     }
 
     public Server get_parent_server() {
-    	return this.parent_server;
+        return this.parent_server;
     }
 
     abstract public int get_reference_count();
@@ -261,13 +263,13 @@ abstract public class Server implements MessagePasser {
     }
 
     public void register_at_osc_address() {
-    	String osc_address = this.get_osc_address();
+        String osc_address = this.get_osc_address();
         if (osc_address == null) {
             return;
         }
         OscAddressNode root = Environment.root_osc_address_node;
         this.osc_address_node = root.create_address(
-        	OscAddress.from_cache(osc_address), false);
+            OscAddress.from_cache(osc_address), false);
         this.osc_address_node.set_server(this);
     }
 
@@ -277,7 +279,7 @@ abstract public class Server implements MessagePasser {
     public String toString() {
         return this.getClass() + ": " + this.get_name();
     }
-    
+
     public void unregister_from_osc_address() {
         if (this.get_osc_address() == null) {
             return;
@@ -286,6 +288,6 @@ abstract public class Server implements MessagePasser {
         this.osc_address_node.prune();
         this.osc_address_node = null;
     }
-    
+
     abstract public void unregister_name();
 }
