@@ -125,11 +125,6 @@ public abstract class ModuleMemberServer extends Server {
         this.clear();
     }
 
-    @Override
-    public int get_reference_count() {
-        return this.server_clients.size();
-    }
-
     abstract public ModuleMemberServer new_instance(
         Integer module_id,
         Map<String, Atom[]> argument_map);

@@ -242,7 +242,9 @@ abstract public class Server implements MessagePasser {
 
     protected void deallocate() {
         Server parent_server = this.get_parent_server();
-        parent_server.deallocate_if_necessary();
+        if (this.parent_server != null) {
+            parent_server.deallocate_if_necessary();
+        }
         this.clear();
     }
 
@@ -300,7 +302,9 @@ abstract public class Server implements MessagePasser {
         return this.parent_server;
     }
 
-    abstract public int get_reference_count();
+    public int get_reference_count() {
+        return this.server_clients.size() + this.child_servers.size();
+    }
 
     public String[] get_report_pieces() {
         return new String[0];
