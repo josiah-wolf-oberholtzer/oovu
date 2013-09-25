@@ -31,7 +31,7 @@ abstract public class ServerClient extends MaxObject implements MessagePasser {
         this.handle_request(request);
     }
 
-    protected Server get_node() {
+    public Server get_server() {
         return this.server;
     }
 
@@ -40,7 +40,7 @@ abstract public class ServerClient extends MaxObject implements MessagePasser {
         if (request == null) {
             return;
         }
-        this.get_node().handle_request(request);
+        this.get_server().handle_request(request);
     }
 
     @Override
@@ -49,7 +49,7 @@ abstract public class ServerClient extends MaxObject implements MessagePasser {
             return;
         }
         String relative_osc_address = response.get_relative_osc_address(this
-            .get_node());
+            .get_server());
         if (ValueResponse.class.isInstance(response)) {
             if (relative_osc_address != null) {
                 for (Atom[] output : response.payload) {
@@ -86,7 +86,7 @@ abstract public class ServerClient extends MaxObject implements MessagePasser {
 
     @Override
     public void notifyDeleted() {
-        Server node = this.get_node();
+        Server node = this.get_server();
         if (node == null) {
             return;
         }

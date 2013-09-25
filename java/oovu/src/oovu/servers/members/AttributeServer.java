@@ -74,9 +74,9 @@ abstract public class AttributeServer extends ModuleMemberServer {
     protected Integer priority = 0;
     public final Datatype datatype;
 
-    public AttributeServer(ModuleServer module_node,
+    public AttributeServer(ModuleServer module_server,
         Map<String, Atom[]> argument_map) {
-        super(module_node, argument_map);
+        super(module_server, argument_map);
         this.datatype = this.setup_datatype();
         this.add_message_handler(new GetPriorityMessageHandler());
         this.add_message_handler(new GetValueMessageHandler());
@@ -117,7 +117,7 @@ abstract public class AttributeServer extends ModuleMemberServer {
         for (ServerClient server_client : this.server_clients) {
             server_client.handle_response(response);
         }
-        this.module_node.handle_response(response);
+        this.module_server.handle_response(response);
     }
 
     private void initialize_value() {

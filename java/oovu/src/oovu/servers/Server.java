@@ -218,7 +218,9 @@ abstract public class Server implements MessagePasser {
     public void attach_to_osc_address_node(OscAddressNode osc_address_node) {
         this.detach_from_osc_address_node();
         this.osc_address_node = osc_address_node;
-        this.osc_address_node.set_server(this);
+        if (osc_address_node != null) {
+            this.osc_address_node.set_server(this);
+        }
     }
 
     public void clear() {

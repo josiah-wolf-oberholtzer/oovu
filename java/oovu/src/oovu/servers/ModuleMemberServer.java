@@ -28,14 +28,18 @@ public abstract class ModuleMemberServer extends Server {
         @Override
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
-            result[0] = Atom.newAtom(new String[] {
-                "modulename", ModuleMemberServer.this.module_node.get_name()
-            });
+            if (ModuleMemberServer.this.module_server.get_name() != null) {
+                result[0] = Atom.newAtom(new String[] {
+                    "modulename", ModuleMemberServer.this.module_server.get_name()
+                });
+            } else {
+                result[0] = Atom.newAtom(new String[] { "modulename" });
+            }
             return result;
         }
     }
 
-    public final ModuleServer module_node;
+    public final ModuleServer module_server;
     public static final Map<String, Class<?>> member_nodes_by_label;
     static {
         Map<String, Class<?>> map = new HashMap<String, Class<?>>();
@@ -57,9 +61,9 @@ public abstract class ModuleMemberServer extends Server {
         if (member_node_class == null) {
             member_node_class = PropertyServer.class;
         }
-        ModuleServer module_node = ModuleServer.allocate(module_id);
-        if (module_node.child_servers.containsKey(desired_name)) {
-            ModuleMemberServer current_member_node = (ModuleMemberServer) module_node.child_servers
+        ModuleServer module_server = ModuleServer.allocate(module_id);
+        if (module_server.child_servers.containsKey(desired_name)) {
+            ModuleMemberServer current_member_node = (ModuleMemberServer) module_server.child_servers
                 .get(desired_name);
             if (current_member_node.getClass() == member_node_class) {
                 return current_member_node;
@@ -71,7 +75,7 @@ public abstract class ModuleMemberServer extends Server {
         try {
             new_member_node = (ModuleMemberServer) member_node_class
                 .getDeclaredConstructor(ModuleServer.class, Map.class)
-                .newInstance(module_node, argument_map);
+                .newInstance(module_server, argument_map);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {
@@ -84,16 +88,16 @@ public abstract class ModuleMemberServer extends Server {
             e.printStackTrace();
         }
         if (new_member_node == null) {
-            new_member_node = new PropertyServer(module_node, argument_map);
+            new_member_node = new PropertyServer(module_server, argument_map);
         }
         new_member_node.register_name(desired_name);
         return new_member_node;
     }
 
-    public ModuleMemberServer(ModuleServer module_node,
+    public ModuleMemberServer(ModuleServer module_server,
         Map<String, Atom[]> argument_map) {
         super(argument_map);
-        this.module_node = module_node;
+        this.module_server = module_server;
         for (String key : argument_map.keySet().toArray(
             new String[argument_map.size()])) {
             MaxObject.post(key + ": " + Atom.toOneString(argument_map.get(key))
@@ -105,7 +109,7 @@ public abstract class ModuleMemberServer extends Server {
     @Override
     public void deallocate() {
         this.unregister_name();
-        this.module_node.deallocate_if_necessary();
+        this.module_server.deallocate_if_necessary();
     }
 
     @Override
@@ -127,16 +131,16 @@ public abstract class ModuleMemberServer extends Server {
             return;
         }
         String acquired_name = OscAddressNode.find_unique_name(desired_name,
-            this.module_node.child_servers.keySet());
+            this.module_server.child_servers.keySet());
         this.name = acquired_name;
-        this.module_node.child_servers.put(acquired_name, this);
+        this.module_server.child_servers.put(acquired_name, this);
         this.register_at_osc_address();
     }
 
     @Override
     public void unregister_name() {
         this.unregister_from_osc_address();
-        this.module_node.child_servers.remove(this.name);
+        this.module_server.child_servers.remove(this.name);
         this.name = null;
     }
 }
