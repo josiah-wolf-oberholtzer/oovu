@@ -14,7 +14,7 @@ public class Test__OscAddressNode__create_address {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
-    public static final OscAddressNode root = new OscAddressNode("", null);
+    public static final OscAddressNode root = new OscAddressNode("");
 
     @Before
     public void setUp() throws Exception {
@@ -42,7 +42,7 @@ public class Test__OscAddressNode__create_address {
     @Test
     public void test_02() {
         OscAddress osc_address = OscAddress.from_cache("/foo");
-        OscAddressNode original = new OscAddressNode("foo", null);
+        OscAddressNode original = new OscAddressNode("foo");
         OscAddressNode created = null;
         Test__OscAddressNode__create_address.root.add_child(original);
         created = Test__OscAddressNode__create_address.root.create_address(

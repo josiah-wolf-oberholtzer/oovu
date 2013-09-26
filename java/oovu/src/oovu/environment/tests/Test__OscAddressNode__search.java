@@ -15,17 +15,16 @@ import com.google.common.collect.Sets;
 public class Test__OscAddressNode__search {
 
     public Map<String, OscAddressNode> create_node_tree() {
-        OscAddressNode root = new OscAddressNode("", null);
-        OscAddressNode synth_one = new OscAddressNode("synth.1", null);
-        OscAddressNode synth_two = new OscAddressNode("synth.2", null);
-        OscAddressNode synth_three = new OscAddressNode("synth.3", null);
-        OscAddressNode synth_one_child = new OscAddressNode("child", null);
-        OscAddressNode synth_one_grandchild = new OscAddressNode("grandchild",
-            null);
-        OscAddressNode synth_two_child = new OscAddressNode("child", null);
-        OscAddressNode effect_one = new OscAddressNode("effect.1", null);
-        OscAddressNode effect_two = new OscAddressNode("effect.2", null);
-        OscAddressNode effect_one_child = new OscAddressNode("child", null);
+        OscAddressNode root = new OscAddressNode("");
+        OscAddressNode synth_one = new OscAddressNode("synth.1");
+        OscAddressNode synth_two = new OscAddressNode("synth.2");
+        OscAddressNode synth_three = new OscAddressNode("synth.3");
+        OscAddressNode synth_one_child = new OscAddressNode("child");
+        OscAddressNode synth_one_grandchild = new OscAddressNode("grandchild");
+        OscAddressNode synth_two_child = new OscAddressNode("child");
+        OscAddressNode effect_one = new OscAddressNode("effect.1");
+        OscAddressNode effect_two = new OscAddressNode("effect.2");
+        OscAddressNode effect_one_child = new OscAddressNode("child");
         root.add_child(synth_one);
         synth_one.add_child(synth_one_child);
         synth_one_child.add_child(synth_one_grandchild);

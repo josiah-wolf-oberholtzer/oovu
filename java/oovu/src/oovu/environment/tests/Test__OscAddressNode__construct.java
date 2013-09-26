@@ -24,16 +24,14 @@ public class Test__OscAddressNode__construct {
     @Test
     public void test_01() {
         OscAddressNode root = Environment.root_osc_address_node;
-        OscAddressNode module_one = new OscAddressNode("module.one", null);
-        OscAddressNode module_one_dsp = new OscAddressNode("dsp", null);
-        OscAddressNode module_one_dsp_active = new OscAddressNode("active",
-            null);
-        OscAddressNode module_one_dsp_gain = new OscAddressNode("gain", null);
-        OscAddressNode module_two = new OscAddressNode("module.two", null);
-        OscAddressNode module_two_dsp = new OscAddressNode("dsp", null);
-        OscAddressNode module_two_dsp_active = new OscAddressNode("active",
-            null);
-        OscAddressNode module_two_dsp_gain = new OscAddressNode("gain", null);
+        OscAddressNode module_one = new OscAddressNode("module.one");
+        OscAddressNode module_one_dsp = new OscAddressNode("dsp");
+        OscAddressNode module_one_dsp_active = new OscAddressNode("active");
+        OscAddressNode module_one_dsp_gain = new OscAddressNode("gain");
+        OscAddressNode module_two = new OscAddressNode("module.two");
+        OscAddressNode module_two_dsp = new OscAddressNode("dsp");
+        OscAddressNode module_two_dsp_active = new OscAddressNode("active");
+        OscAddressNode module_two_dsp_gain = new OscAddressNode("gain");
         root.add_child(module_one);
         root.add_child(module_two);
         module_one.add_child(module_one_dsp);
@@ -49,7 +47,7 @@ public class Test__OscAddressNode__construct {
 
     @Test
     public void test_02() {
-        OscAddressNode foo = new OscAddressNode("foo", null);
+        OscAddressNode foo = new OscAddressNode("foo");
         Assert.assertArrayEquals(foo.get_parentage(), new OscAddressNode[] {
             foo
         });
@@ -59,7 +57,7 @@ public class Test__OscAddressNode__construct {
         Assert.assertEquals(foo.get_root(), foo);
         Assert.assertEquals(foo.is_empty(), true);
         Assert.assertEquals(foo.get_name(), "foo");
-        OscAddressNode bar = new OscAddressNode("bar", null);
+        OscAddressNode bar = new OscAddressNode("bar");
         foo.add_child(bar);
         Assert.assertArrayEquals(foo.get_parentage(), new OscAddressNode[] {
             foo
@@ -98,7 +96,7 @@ public class Test__OscAddressNode__construct {
 
     @Test
     public void test_03() {
-        OscAddressNode foo = new OscAddressNode("foo", null);
+        OscAddressNode foo = new OscAddressNode("foo");
         Assert.assertEquals(foo.is_in_environment(), false);
         Environment.root_osc_address_node.add_child(foo);
         Assert.assertEquals(foo.is_in_environment(), true);
@@ -108,10 +106,10 @@ public class Test__OscAddressNode__construct {
 
     @Test
     public void test_04() {
-        OscAddressNode foo = new OscAddressNode("foo", null);
-        OscAddressNode bar = new OscAddressNode("bar", null);
-        OscAddressNode baz = new OscAddressNode("baz", null);
-        OscAddressNode quux = new OscAddressNode("quux", null);
+        OscAddressNode foo = new OscAddressNode("foo");
+        OscAddressNode bar = new OscAddressNode("bar");
+        OscAddressNode baz = new OscAddressNode("baz");
+        OscAddressNode quux = new OscAddressNode("quux");
         foo.add_child(bar);
         bar.add_child(baz);
         bar.add_child(quux);
@@ -147,8 +145,8 @@ public class Test__OscAddressNode__construct {
 
     @Test
     public void test_05() {
-        OscAddressNode foo_osc_address_node = new OscAddressNode("foo", null);
-        OscAddressNode bar_osc_address_node = new OscAddressNode("bar", null);
+        OscAddressNode foo_osc_address_node = new OscAddressNode("foo");
+        OscAddressNode bar_osc_address_node = new OscAddressNode("bar");
         ModuleServer foo_module_node = new ModuleServer(1001, null);
         Assert.assertEquals(foo_osc_address_node.is_empty(), true);
         foo_osc_address_node.set_server(foo_module_node);
@@ -163,9 +161,9 @@ public class Test__OscAddressNode__construct {
 
     @Test
     public void test_06() {
-        OscAddressNode foo = new OscAddressNode("foo", null);
-        OscAddressNode bar = new OscAddressNode("bar", null);
-        OscAddressNode baz = new OscAddressNode("baz", null);
+        OscAddressNode foo = new OscAddressNode("foo");
+        OscAddressNode bar = new OscAddressNode("bar");
+        OscAddressNode baz = new OscAddressNode("baz");
         foo.add_child(bar);
         Assert.assertEquals(bar.get_parent(), foo);
         Assert.assertEquals(foo.get_named_child("bar"), bar);

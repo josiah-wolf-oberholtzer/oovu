@@ -12,7 +12,7 @@ public class Environment {
     public static final RootServer root_server;
     public static final OscAddressNode root_osc_address_node;
     static {
-        root_osc_address_node = new OscAddressNode("", null);
+        root_osc_address_node = new OscAddressNode("");
         root_server = new RootServer();
     }
 

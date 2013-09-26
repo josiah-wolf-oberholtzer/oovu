@@ -26,7 +26,7 @@ public class ModuleServer extends Server {
             }
             throw new RuntimeException("Bad module setup");
         } else {
-            osc_address_node = new OscAddressNode("", module_id);
+            osc_address_node = new OscAddressNode(module_id);
             Environment.root_osc_address_node.add_child(osc_address_node);
             ModuleServer module_server = new ModuleServer(module_id, null);
             module_server.attach_to_osc_address_node(osc_address_node);

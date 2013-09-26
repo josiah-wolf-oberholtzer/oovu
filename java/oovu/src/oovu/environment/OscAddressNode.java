@@ -40,7 +40,15 @@ public class OscAddressNode {
     private OscAddressNode parent = null;
     private Server server = null;
 
-    public OscAddressNode(String name, Integer number) {
+    public OscAddressNode(Integer number) {
+        this(null, number);
+    }
+    
+    public OscAddressNode(String name) {
+        this(name, null);
+    }
+
+    private OscAddressNode(String name, Integer number) {
         this.name = name;
         this.number = number;
     }
@@ -64,6 +72,10 @@ public class OscAddressNode {
         return acquired_name;
     }
 
+    public void merge_with(OscAddressNode other) {
+        
+    }
+    
     public void add_child(OscAddressNode child) {
         OscAddressNode[] parentage = this.get_parentage();
         if (Arrays.asList(parentage).contains(child)) {
