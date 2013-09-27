@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import com.cycling74.max.Atom;
 
-public class Test__DecimalDatatype__process_input {
+public class Test__DecimalDatatype {
 
     @Test
     public void test_01() {
