@@ -2,6 +2,7 @@
 package oovu.addressing;
 
 import java.util.HashMap;
+import java.util.concurrent.locks.ReentrantLock;
 
 import oovu.servers.RootServer;
 import oovu.servers.members.AudioServer;
@@ -12,6 +13,7 @@ import org.apache.log4j.Logger;
 
 public class Environment {
 
+    public static final ReentrantLock lock = new ReentrantLock();
     private static final Logger logger;
     public static final HashMap<String, AudioServer> pull_addresses = new HashMap<String, AudioServer>();
     public static final HashMap<String, AudioServer> push_addresses = new HashMap<String, AudioServer>();
@@ -26,12 +28,14 @@ public class Environment {
     }
 
     public static void reset() {
-        Environment.root_server.clear();
-        Environment.root_osc_address_node.clear();
-        Environment.pull_addresses.clear();
-        Environment.push_addresses.clear();
-        Environment.root_server
-            .attach_to_osc_address_node(Environment.root_osc_address_node);
+        synchronized(Environment.lock) {
+            Environment.root_server.clear();
+            Environment.root_osc_address_node.clear();
+            Environment.pull_addresses.clear();
+            Environment.push_addresses.clear();
+            Environment.root_server
+                .attach_to_osc_address_node(Environment.root_osc_address_node);
+        }
     }
     
     public static void log(Object message) {

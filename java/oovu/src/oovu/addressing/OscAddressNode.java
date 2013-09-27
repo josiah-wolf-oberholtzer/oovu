@@ -112,10 +112,7 @@ public class OscAddressNode {
     }
 
     public void clear() {
-        for (OscAddressNode child : this.named_children.values()) {
-            this.remove_child(child);
-        }
-        for (OscAddressNode child : this.numbered_children.values()) {
+        for (OscAddressNode child : this.get_all_children()) {
             this.remove_child(child);
         }
         if (this.parent != null) {
@@ -123,6 +120,13 @@ public class OscAddressNode {
         }
     }
 
+    public Set<OscAddressNode> get_all_children() {
+        Set<OscAddressNode> all_children = new HashSet<OscAddressNode>();
+        all_children.addAll(this.named_children.values());
+        all_children.addAll(this.numbered_children.values());
+        return all_children;
+    }
+    
     public OscAddressNode create_address(
         OscAddress osc_address,
         boolean uniquely) {
