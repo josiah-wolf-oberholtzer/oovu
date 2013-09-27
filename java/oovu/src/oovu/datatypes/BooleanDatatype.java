@@ -58,11 +58,7 @@ public class BooleanDatatype extends GenericDatatype {
     public Atom[] process_input(Atom[] input) {
         Atom[] result = new Atom[1];
         if (0 < input.length) {
-            if (input[0].isString()) {
-                result[0] = Atom.newAtom(true);
-            } else {
-                result[0] = Atom.newAtom(input[0].toBoolean());
-            }
+            result[0] = Atom.newAtom(input[0].toBoolean());
         }
         return result;
     }
