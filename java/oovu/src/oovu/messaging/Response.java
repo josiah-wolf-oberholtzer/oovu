@@ -1,6 +1,6 @@
 package oovu.messaging;
 
-import oovu.environment.Environment;
+import oovu.addressing.Environment;
 import oovu.servers.Server;
 
 import com.cycling74.max.Atom;

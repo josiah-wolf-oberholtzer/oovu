@@ -1,7 +1,7 @@
 package oovu;
 
+import oovu.addressing.Environment;
 import oovu.clients.ServerClient;
-import oovu.environment.Environment;
 
 import com.cycling74.max.Atom;
 

@@ -1,6 +1,6 @@
-package oovu.environment.tests;
+package oovu.addressing.tests;
 
-import oovu.environment.Environment;
+import oovu.addressing.Environment;
 
 import org.junit.After;
 import org.junit.Assert;

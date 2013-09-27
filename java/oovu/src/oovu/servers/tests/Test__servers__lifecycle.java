@@ -2,9 +2,9 @@ package oovu.servers.tests;
 
 import java.util.Set;
 
-import oovu.environment.Environment;
-import oovu.environment.OscAddress;
-import oovu.environment.OscAddressNode;
+import oovu.addressing.Environment;
+import oovu.addressing.OscAddress;
+import oovu.addressing.OscAddressNode;
 import oovu.servers.ModuleServer;
 import oovu.servers.members.PropertyServer;
 

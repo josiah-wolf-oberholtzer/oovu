@@ -1,8 +1,8 @@
 package oovu.tests;
 
 import oovu.Module;
-import oovu.environment.Environment;
-import oovu.environment.OscAddressNode;
+import oovu.addressing.Environment;
+import oovu.addressing.OscAddressNode;
 import oovu.servers.Server;
 
 import org.junit.After;

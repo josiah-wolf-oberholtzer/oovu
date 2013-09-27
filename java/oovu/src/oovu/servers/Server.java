@@ -8,8 +8,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import oovu.addressing.OscAddressNode;
 import oovu.clients.ServerClient;
-import oovu.environment.OscAddressNode;
 import oovu.messaging.InterfaceRequest;
 import oovu.messaging.InterfaceResponse;
 import oovu.messaging.MessageHandler;

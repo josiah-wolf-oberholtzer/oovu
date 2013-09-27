@@ -2,8 +2,8 @@ package oovu.servers;
 
 import java.util.Map;
 
-import oovu.environment.Environment;
-import oovu.environment.OscAddressNode;
+import oovu.addressing.Environment;
+import oovu.addressing.OscAddressNode;
 import oovu.messaging.InterfaceRequest;
 import oovu.messaging.Request;
 import oovu.messaging.Response;

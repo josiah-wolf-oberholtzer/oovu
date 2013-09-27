@@ -1,7 +1,7 @@
 package oovu;
 
+import oovu.addressing.OscAddress;
 import oovu.clients.AddressNodeClient;
-import oovu.environment.OscAddress;
 
 public class Binding extends AddressNodeClient {
 

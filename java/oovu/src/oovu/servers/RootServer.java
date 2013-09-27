@@ -1,6 +1,6 @@
 package oovu.servers;
 
-import oovu.environment.Environment;
+import oovu.addressing.Environment;
 import oovu.messaging.Request;
 
 public class RootServer extends Server {
