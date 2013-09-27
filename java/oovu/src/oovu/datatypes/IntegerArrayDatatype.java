@@ -24,4 +24,14 @@ public class IntegerArrayDatatype extends BoundedArrayDatatype {
             0
         });
     }
+
+    @Override
+    public Atom[] process_input(Atom[] input) {
+        Atom[] result = this.ensure_length(input);
+        Float[] floats = this.extract_bounded_floats_from_atoms(result);
+        for (Float f : floats) {
+            result[0] = Atom.newAtom(f.intValue());
+        }
+        return result;
+    }
 }

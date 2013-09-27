@@ -142,20 +142,17 @@ abstract public class BoundedDatatype extends GenericDatatype {
         this.initialize_extrema(argument_map);
     }
 
+    protected Float[] extract_bounded_floats_from_atoms(Atom[] atoms) {
+        Float[] floats = this.extract_floats_from_atoms(atoms);
+        return this.minimum_bound_floats(this.maximum_bound_floats(floats));
+    }
+
     protected Float[] extract_floats_from_atoms(Atom[] atoms) {
         ArrayList<Float> floats = new ArrayList<Float>();
         for (Atom atom : atoms) {
             floats.add(atom.toFloat());
         }
         return floats.toArray(new Float[0]);
-    }
-
-    protected Integer[] extract_ints_from_atoms(Atom[] atoms) {
-        ArrayList<Integer> ints = new ArrayList<Integer>();
-        for (Atom atom : atoms) {
-            ints.add(atom.toInt());
-        }
-        return ints.toArray(new Integer[0]);
     }
 
     protected Float get_maximum() {
@@ -174,6 +171,30 @@ abstract public class BoundedDatatype extends GenericDatatype {
         if (argument_map.containsKey("maximum")) {
             this.set_maximum(argument_map.get("maximum")[0].toFloat());
         }
+    }
+
+    protected Float[] maximum_bound_floats(Float[] floats) {
+        if (this.maximum == null) {
+            return floats;
+        }
+        for (int i = 0, j = floats.length; i < j; i++) {
+            if (this.maximum < floats[i]) {
+                floats[i] = this.maximum;
+            }
+        }
+        return floats;
+    }
+
+    protected Float[] minimum_bound_floats(Float[] floats) {
+        if (this.minimum == null) {
+            return floats;
+        }
+        for (int i = 0, j = floats.length; i < j; i++) {
+            if (floats[i] < this.minimum) {
+                floats[i] = this.minimum;
+            }
+        }
+        return floats;
     }
 
     protected void set_maximum(Float maximum) {

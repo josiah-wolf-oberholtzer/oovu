@@ -25,4 +25,14 @@ public class DecimalDatatype extends BoundedDatatype {
             0.
         });
     }
+
+    @Override
+    public Atom[] process_input(Atom[] input) {
+        Float[] floats = this.extract_bounded_floats_from_atoms(input);
+        Atom[] result = new Atom[1];
+        if (0 < input.length) {
+            result[0] = Atom.newAtom(floats[0].floatValue());
+        }
+        return result;
+    }
 }

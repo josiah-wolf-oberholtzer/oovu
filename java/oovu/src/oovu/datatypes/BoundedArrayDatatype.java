@@ -74,6 +74,27 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
         }
     }
 
+    protected Atom[] ensure_length(Atom[] input) {
+        if (this.length == input.length) {
+            return input;
+        }
+        Atom[] output = new Atom[this.length];
+        if (this.length < input.length) {
+            for (int i = 0, j = this.length; i < j; i++) {
+                output[i] = input[i];
+            }
+        } else {
+            int i = 0;
+            for (int j = input.length; i < j; i++) {
+                output[i] = input[i];
+            }
+            for (int j = output.length; i < j; i++) {
+                output[i] = Atom.newAtom(0.);
+            }
+        }
+        return output;
+    }
+
     protected Integer get_length() {
         return this.length;
     }
