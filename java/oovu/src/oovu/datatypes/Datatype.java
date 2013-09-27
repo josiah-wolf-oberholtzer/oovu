@@ -84,6 +84,14 @@ public abstract class Datatype {
         return this.value;
     }
 
+    public void initialize_default_value(Map<String, Atom[]> argument_map) {
+        if (argument_map.containsKey("default")) {
+            this.value = this.process_input(argument_map.get("default"));
+        } else {
+            this.value = this.process_input(this.get_default());
+        }
+    }
+
     public abstract Atom[] process_input(Atom[] input);
 
     public void set_value(Atom[] value) {

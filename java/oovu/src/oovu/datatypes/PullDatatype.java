@@ -5,6 +5,7 @@ import java.util.Map;
 
 import oovu.addressing.Environment;
 import oovu.messaging.DatatypeMessageHandler;
+import oovu.servers.Server;
 import oovu.servers.members.AttributeServer;
 
 import com.cycling74.max.Atom;
@@ -33,11 +34,16 @@ public class PullDatatype extends OscAddressDatatype {
         }
     }
 
+    public PullDatatype(Atom[] arguments) {
+        this(null, Server.process_atom_arguments(arguments));
+    }
+
     public PullDatatype(AttributeServer client, Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (client != null) {
             client.add_message_handler(new GetPullAddressesMessageHandler(
                 this.client));
         }
+        this.initialize_default_value(argument_map);
     }
 }

@@ -3,6 +3,7 @@ package oovu.datatypes;
 import java.util.Map;
 
 import oovu.messaging.DatatypeMessageHandler;
+import oovu.servers.Server;
 import oovu.servers.members.AttributeServer;
 
 import com.cycling74.max.Atom;
@@ -56,6 +57,10 @@ public class OptionDatatype extends StringDatatype {
 
     protected String[] options = null;
 
+    public OptionDatatype(Atom[] arguments) {
+        this(null, Server.process_atom_arguments(arguments));
+    }
+
     public OptionDatatype(AttributeServer client,
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
@@ -66,6 +71,7 @@ public class OptionDatatype extends StringDatatype {
                 this.client));
         }
         this.initialize_options(argument_map);
+        this.initialize_default_value(argument_map);
     }
 
     protected String[] get_options() {
