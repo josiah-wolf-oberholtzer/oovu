@@ -42,6 +42,13 @@ public class ModuleServer extends Server {
         this.attach_to_parent_server(Environment.root_server);
     }
 
+    public void acquire_name(String desired_name) {
+        if (this.name != null) {
+            return;
+        }
+        this.name = this.osc_address_node.acquire_name(desired_name);
+    }
+    
     @Override
     public void handle_request(Request request) {
         if (request == null) {

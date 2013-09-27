@@ -106,10 +106,14 @@ public class OscAddressNode {
     }
 
     public void clear() {
-        OscAddressNode[] children = this.named_children.values().toArray(
-            new OscAddressNode[0]);
-        for (OscAddressNode child : children) {
+        for (OscAddressNode child : this.named_children.values()) {
             this.remove_child(child);
+        }
+        for (OscAddressNode child : this.numbered_children.values()) {
+            this.remove_child(child);
+        }
+        if (this.parent != null) {
+            this.parent.remove_child(this);
         }
     }
 
@@ -290,10 +294,10 @@ public class OscAddressNode {
         OscAddressNode[] parentage = this.get_parentage();
         parentage = Arrays.copyOf(parentage, parentage.length - 1);
         for (OscAddressNode osc_address_node : parentage) {
-            if (!osc_address_node.is_empty()) {
+            if (! osc_address_node.is_empty()) {
                 break;
             }
-            osc_address_node.get_parent().remove_child(osc_address_node);
+            osc_address_node.clear();
         }
     }
 
@@ -368,6 +372,9 @@ public class OscAddressNode {
 
     public void set_server(Server server) {
         this.server = server;
+        if (server == null) {
+            this.prune();
+        }
     }
 
     @Override

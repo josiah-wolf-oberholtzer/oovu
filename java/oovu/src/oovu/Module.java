@@ -2,7 +2,6 @@ package oovu;
 
 import oovu.clients.ServerClient;
 import oovu.servers.ModuleServer;
-import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
@@ -17,8 +16,9 @@ public class Module extends ServerClient {
         }
         this.declareIO(2, 1);
         Integer module_id = arguments[0].toInt();
-        // String desired_name = arguments[1].toString();
-        Server module_server = ModuleServer.allocate(module_id);
+        String desired_name = arguments[1].toString();
+        ModuleServer module_server = ModuleServer.allocate(module_id);
+        module_server.acquire_name(desired_name);
         this.attach_to_server(module_server);
     }
 
