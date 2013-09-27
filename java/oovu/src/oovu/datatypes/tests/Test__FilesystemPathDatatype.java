@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class Test__FilesystemPathDatatype__process_input {
+public class Test__FilesystemPathDatatype {
 
     @Before
     public void setUp() throws Exception {

@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class Test__PullDatatype__process_input {
+public class Test__StringDatatype {
 
     @Before
     public void setUp() throws Exception {
