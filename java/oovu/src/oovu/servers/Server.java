@@ -10,7 +10,6 @@ import java.util.Set;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import oovu.addressing.Environment;
 import oovu.addressing.OscAddressNode;
 import oovu.clients.ServerClient;
 import oovu.messaging.InterfaceRequest;
@@ -246,7 +245,6 @@ abstract public class Server implements MessagePasser {
     }
 
     protected void deallocate() {
-        Environment.logger.info("Deallocating: " + this.toString());
         Server parent_server = this.get_parent_server();
         this.clear();
         if (parent_server != null) {

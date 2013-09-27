@@ -11,7 +11,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.cycling74.max.Atom;
-import com.cycling74.max.MaxContext;
 
 public class Test__OOVU__lifecycle {
 

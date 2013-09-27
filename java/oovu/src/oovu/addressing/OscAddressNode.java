@@ -11,6 +11,7 @@ import java.util.Set;
 import oovu.Binding;
 import oovu.servers.Server;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.sun.tools.javac.util.List;
@@ -398,5 +399,25 @@ public class OscAddressNode {
     public String toString() {
         return this.getClass().getSimpleName() + "(\"" + this.get_osc_address()
             + "\")";
+    }
+
+    public String get_relative_osc_address(OscAddressNode relative_osc_address_node) {
+        OscAddressNode[] source_parentage = this.get_parentage();
+        OscAddressNode[] relative_parentage = relative_osc_address_node.get_parentage();
+        ArrayUtils.reverse(source_parentage);
+        ArrayUtils.reverse(relative_parentage);
+        int counter = 0;
+        while (counter < source_parentage.length &&
+            counter < relative_parentage.length &&
+            source_parentage[counter] == relative_parentage[counter]) {
+            counter += 1;
+        }
+        StringBuilder string_builder = new StringBuilder();
+        while (counter < source_parentage.length) {
+            string_builder.append("/");
+            string_builder.append(source_parentage[counter].get_name());
+            counter += 1;
+        }
+        return string_builder.toString();
     }
 }

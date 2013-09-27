@@ -3,13 +3,15 @@ package oovu;
 import oovu.addressing.Environment;
 import oovu.addressing.OscAddress;
 import oovu.addressing.OscAddressNode;
-import oovu.clients.AddressNodeClient;
+import oovu.clients.MaxPeer;
+import oovu.messaging.MessagePasser;
+import oovu.messaging.Request;
 
 import com.cycling74.max.Atom;
 
-public class Binding extends AddressNodeClient {
+public class Binding extends MaxPeer implements MessagePasser {
 
-    protected OscAddressNode target_osc_address_node = null;
+    protected OscAddressNode osc_address_node = null;
 
     public Binding(Atom[] arguments) {
         if (arguments.length == 0) {
@@ -25,18 +27,42 @@ public class Binding extends AddressNodeClient {
         this.attach(osc_address_node);
     }
 
-    public void attach(OscAddressNode target_osc_address_node) {
+    public void attach(OscAddressNode osc_address_node) {
         this.detach();
-        if (target_osc_address_node != null) {
-            this.target_osc_address_node = target_osc_address_node;
-            this.target_osc_address_node.add_binding(this);
+        if (osc_address_node != null) {
+            this.osc_address_node = osc_address_node;
+            this.osc_address_node.add_binding(this);
         }
     }
 
     public void detach() {
-        if (this.target_osc_address_node != null) {
-            this.target_osc_address_node.remove_binding(this);
+        if (this.osc_address_node != null) {
+            this.osc_address_node.remove_binding(this);
         }
-        this.target_osc_address_node = null;
+        this.osc_address_node = null;
+    }
+
+    @Override
+    public String get_osc_address() {
+        if (this.osc_address_node == null) {
+            return null;
+        }
+        return this.osc_address_node.get_osc_address();
+    }
+
+    public OscAddressNode get_osc_address_node() {
+        return this.osc_address_node;
+    }
+
+    @Override
+    public void handle_request(Request request) {
+        if (request == null) {
+            return;
+        }
+        // this.get_osc_address_node().handle_request(request);
+    }
+
+    @Override
+    public void notifyDeleted() {
     }
 }

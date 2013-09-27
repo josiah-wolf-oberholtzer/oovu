@@ -7,11 +7,12 @@ import oovu.servers.RootServer;
 import oovu.servers.members.AudioServer;
 
 import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 public class Environment {
 
-    public static final Logger logger;
+    private static final Logger logger;
     public static final HashMap<String, AudioServer> pull_addresses = new HashMap<String, AudioServer>();
     public static final HashMap<String, AudioServer> push_addresses = new HashMap<String, AudioServer>();
     public static final RootServer root_server;
@@ -21,6 +22,7 @@ public class Environment {
         root_server = new RootServer();
         BasicConfigurator.configure();
         logger = Logger.getLogger("OOVU");
+        logger.setLevel(Level.ALL);
     }
 
     public static void reset() {
@@ -30,5 +32,9 @@ public class Environment {
         Environment.push_addresses.clear();
         Environment.root_server
             .attach_to_osc_address_node(Environment.root_osc_address_node);
+    }
+    
+    public static void log(Object message) {
+        Environment.logger.log(Environment.logger.getLevel(), message);
     }
 }
