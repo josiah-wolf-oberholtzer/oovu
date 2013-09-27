@@ -65,26 +65,26 @@ public abstract class ModuleMemberServer extends Server {
         }
         ModuleServer module_server = ModuleServer.allocate(module_id);
         OscAddress osc_address = OscAddress.from_cache(desired_name);
-        if (osc_address.has_parent_path_tokens || 
-            osc_address.has_wildcard_tokens ||
-            ! osc_address.is_relative) {
+        if (osc_address.has_parent_path_tokens
+            || osc_address.has_wildcard_tokens || !osc_address.is_relative) {
             throw new RuntimeException("Bad child address: " + desired_name);
         }
         OscAddressNode osc_address_node = module_server.get_osc_address_node()
             .search_for_one(osc_address);
         if (osc_address_node == null) {
             // address doesn't exist
-            ModuleMemberServer new_member_server = ModuleMemberServer.allocate_new_from_label( 
-                module_server, label, module_id, argument_list);
-            osc_address_node = module_server.get_osc_address_node().create_address(
-                osc_address, true);
+            ModuleMemberServer new_member_server = ModuleMemberServer
+                .allocate_new_from_label(module_server, label, module_id,
+                    argument_list);
+            osc_address_node = module_server.get_osc_address_node()
+                .create_address(osc_address, true);
             new_member_server.attach_to_osc_address_node(osc_address_node);
-            
             return new_member_server;
         } else if (osc_address_node.get_server() == null) {
             // address does exist but no server is attached
-            ModuleMemberServer new_member_server = ModuleMemberServer.allocate_new_from_label( 
-                module_server, label, module_id, argument_list);
+            ModuleMemberServer new_member_server = ModuleMemberServer
+                .allocate_new_from_label(module_server, label, module_id,
+                    argument_list);
             new_member_server.attach_to_osc_address_node(osc_address_node);
             return new_member_server;
         } else {
@@ -95,10 +95,11 @@ public abstract class ModuleMemberServer extends Server {
                 return (ModuleMemberServer) current_member_server;
             }
             // server is not of the desired type, so acquire a new address
-            ModuleMemberServer new_member_server = ModuleMemberServer.allocate_new_from_label( 
-                module_server, label, module_id, argument_list);
-            osc_address_node = module_server.get_osc_address_node().create_address(
-                osc_address, true);
+            ModuleMemberServer new_member_server = ModuleMemberServer
+                .allocate_new_from_label(module_server, label, module_id,
+                    argument_list);
+            osc_address_node = module_server.get_osc_address_node()
+                .create_address(osc_address, true);
             new_member_server.attach_to_osc_address_node(osc_address_node);
             return new_member_server;
         }

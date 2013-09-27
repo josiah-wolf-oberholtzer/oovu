@@ -48,7 +48,7 @@ public class ModuleServer extends Server {
         }
         this.name = this.osc_address_node.acquire_name(desired_name);
     }
-    
+
     @Override
     public void handle_request(Request request) {
         if (request == null) {

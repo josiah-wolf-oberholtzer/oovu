@@ -1,6 +1,5 @@
 package oovu.tests;
 
-import static org.junit.Assert.*;
 import oovu.Binding;
 import oovu.addressing.Environment;
 import oovu.addressing.OscAddress;
@@ -12,7 +11,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.cycling74.max.Atom;
-
 
 public class Test__Binding__lifecycle {
 
@@ -30,7 +28,9 @@ public class Test__Binding__lifecycle {
     public void test_01() {
         String osc_address_string = "/foo/bar";
         OscAddress osc_address = OscAddress.from_cache(osc_address_string);
-        Atom[] arguments = Atom.newAtom(new String[]{ osc_address_string });
+        Atom[] arguments = Atom.newAtom(new String[] {
+            osc_address_string
+        });
         Binding binding = new Binding(arguments);
         OscAddressNode osc_address_node = Environment.root_osc_address_node
             .search_for_one(osc_address);

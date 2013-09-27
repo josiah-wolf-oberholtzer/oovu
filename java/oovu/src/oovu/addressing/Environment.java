@@ -1,4 +1,3 @@
-
 package oovu.addressing;
 
 import java.util.HashMap;
@@ -24,11 +23,15 @@ public class Environment {
         root_server = new RootServer();
         BasicConfigurator.configure();
         logger = Logger.getLogger("OOVU");
-        logger.setLevel(Level.ALL);
+        Environment.logger.setLevel(Level.ALL);
+    }
+
+    public static void log(Object message) {
+        Environment.logger.log(Environment.logger.getLevel(), message);
     }
 
     public static void reset() {
-        synchronized(Environment.lock) {
+        synchronized (Environment.lock) {
             Environment.root_server.clear();
             Environment.root_osc_address_node.clear();
             Environment.pull_addresses.clear();
@@ -36,9 +39,5 @@ public class Environment {
             Environment.root_server
                 .attach_to_osc_address_node(Environment.root_osc_address_node);
         }
-    }
-    
-    public static void log(Object message) {
-        Environment.logger.log(Environment.logger.getLevel(), message);
     }
 }

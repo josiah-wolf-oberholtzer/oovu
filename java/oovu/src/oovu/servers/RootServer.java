@@ -10,7 +10,8 @@ public class RootServer extends Server {
         super(null);
         this.attach_to_osc_address_node(Environment.root_osc_address_node);
     }
-    
+
+    @Override
     public void clear() {
         for (Server child_server : this.child_servers) {
             child_server.detach_from_parent_server();

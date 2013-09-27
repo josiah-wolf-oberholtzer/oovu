@@ -1,14 +1,11 @@
 package oovu.servers.tests;
 
-import java.util.Set;
-
 import oovu.addressing.Environment;
 import oovu.addressing.OscAddress;
 import oovu.addressing.OscAddressNode;
 import oovu.servers.ModuleServer;
 import oovu.servers.members.PropertyServer;
 
-import org.apache.commons.lang3.StringUtils;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -66,37 +63,42 @@ public class Test__servers__lifecycle {
             new String[] {
                 "/foo", "/foo/bar", "/foo/baz", "/foo/baz/quux"
             });
-
         osc_address = OscAddress.from_cache("/foo");
-        osc_address_node = Environment.root_osc_address_node.search_for_one(osc_address);
+        osc_address_node = Environment.root_osc_address_node
+            .search_for_one(osc_address);
         Assert.assertEquals(osc_address_node.get_server(), foo_module_server);
-        Assert.assertEquals(foo_module_server.get_osc_address_node(), osc_address_node);
-
+        Assert.assertEquals(foo_module_server.get_osc_address_node(),
+            osc_address_node);
         osc_address = OscAddress.from_cache("/foo/bar");
-        osc_address_node = Environment.root_osc_address_node.search_for_one(osc_address);
-        Assert.assertEquals(osc_address_node.get_server(), foo_bar_property_server);
-        Assert.assertEquals(foo_bar_property_server.get_osc_address_node(), osc_address_node);
-
+        osc_address_node = Environment.root_osc_address_node
+            .search_for_one(osc_address);
+        Assert.assertEquals(osc_address_node.get_server(),
+            foo_bar_property_server);
+        Assert.assertEquals(foo_bar_property_server.get_osc_address_node(),
+            osc_address_node);
         osc_address = OscAddress.from_cache("/foo/baz");
-        osc_address_node = Environment.root_osc_address_node.search_for_one(osc_address);
+        osc_address_node = Environment.root_osc_address_node
+            .search_for_one(osc_address);
         Assert.assertEquals(osc_address_node.get_server(), null);
-
         osc_address = OscAddress.from_cache("/foo/baz/quux");
-        osc_address_node = Environment.root_osc_address_node.search_for_one(osc_address);
-        Assert.assertEquals(osc_address_node.get_server(), foo_baz_quux_property_server);
-        Assert.assertEquals(foo_baz_quux_property_server.get_osc_address_node(), osc_address_node);
-
+        osc_address_node = Environment.root_osc_address_node
+            .search_for_one(osc_address);
+        Assert.assertEquals(osc_address_node.get_server(),
+            foo_baz_quux_property_server);
+        Assert.assertEquals(
+            foo_baz_quux_property_server.get_osc_address_node(),
+            osc_address_node);
         Assert.assertEquals(foo_module_server.get_osc_address(), "/foo");
-        Assert.assertEquals(foo_bar_property_server.get_osc_address(), "/foo/bar");
-        Assert.assertEquals(foo_baz_quux_property_server.get_osc_address(), "/foo/baz/quux");
-        
+        Assert.assertEquals(foo_bar_property_server.get_osc_address(),
+            "/foo/bar");
+        Assert.assertEquals(foo_baz_quux_property_server.get_osc_address(),
+            "/foo/baz/quux");
         foo_bar_property_server.deallocate_if_necessary();
         Assert.assertArrayEquals(
             Environment.root_osc_address_node.get_summary_pieces(),
             new String[] {
                 "/foo", "/foo/baz", "/foo/baz/quux"
             });
-
         foo_baz_quux_property_server.deallocate_if_necessary();
         Assert.assertArrayEquals(
             Environment.root_osc_address_node.get_summary_pieces(),

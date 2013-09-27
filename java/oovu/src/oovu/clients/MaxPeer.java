@@ -14,10 +14,6 @@ import com.cycling74.max.MaxObject;
 
 abstract public class MaxPeer extends MaxObject implements MessagePasser {
 
-    abstract public String get_osc_address();
-    
-    abstract public OscAddressNode get_osc_address_node();
-    
     @Override
     public void anything(String message, Atom[] arguments) {
         Request request = null;
@@ -33,13 +29,17 @@ abstract public class MaxPeer extends MaxObject implements MessagePasser {
         this.handle_request(request);
     }
 
+    abstract public String get_osc_address();
+
+    abstract public OscAddressNode get_osc_address_node();
+
     @Override
     public void handle_response(Response response) {
         if (response == null) {
             return;
         }
-        String relative_osc_address = response.get_relative_osc_address(
-            this.get_osc_address_node());
+        String relative_osc_address = response.get_relative_osc_address(this
+            .get_osc_address_node());
         if (ValueResponse.class.isInstance(response)) {
             if (relative_osc_address != null) {
                 for (Atom[] output : response.payload) {
@@ -82,5 +82,4 @@ abstract public class MaxPeer extends MaxObject implements MessagePasser {
         this.outlet(1, payload);
         this.outlet(0, "set", payload);
     }
-
 }

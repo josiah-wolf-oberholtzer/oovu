@@ -8,8 +8,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 import oovu.addressing.OscAddressNode;
 import oovu.clients.ServerClient;
 import oovu.messaging.InterfaceRequest;
@@ -19,6 +17,8 @@ import oovu.messaging.MessagePasser;
 import oovu.messaging.Request;
 import oovu.messaging.Response;
 import oovu.messaging.ValueRequest;
+
+import org.apache.commons.lang3.ArrayUtils;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
@@ -290,7 +290,7 @@ abstract public class Server implements MessagePasser {
             if (osc_address_node.get_name() == null) {
                 return null;
             }
-            if (! osc_address_node.get_name().equals("")) {
+            if (!osc_address_node.get_name().equals("")) {
                 string_builder.append("/");
                 string_builder.append(osc_address_node.get_name());
             }
@@ -358,6 +358,7 @@ abstract public class Server implements MessagePasser {
 
     @Override
     public String toString() {
-        return "<" + this.getClass().getSimpleName() + ": " + this.get_osc_address() + ">";
+        return "<" + this.getClass().getSimpleName() + ": "
+            + this.get_osc_address() + ">";
     }
 }

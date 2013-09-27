@@ -51,6 +51,7 @@ public class Binding extends MaxPeer implements MessagePasser {
         return this.osc_address_node.get_osc_address();
     }
 
+    @Override
     public OscAddressNode get_osc_address_node() {
         return this.osc_address_node;
     }
