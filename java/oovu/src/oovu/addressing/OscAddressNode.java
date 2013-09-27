@@ -43,7 +43,7 @@ public class OscAddressNode {
     public OscAddressNode(Integer number) {
         this(null, number);
     }
-    
+
     public OscAddressNode(String name) {
         this(name, null);
     }
@@ -54,26 +54,38 @@ public class OscAddressNode {
     }
 
     public String acquire_name(String desired_name) {
-        if (this.name != null) {
-            if (this.name == desired_name) {
-                return this.name;
-            }
-            throw new RuntimeException("Already has name.");
+        if (desired_name == this.name) {
+            return desired_name;
+        } else if ((desired_name == null)
+            || ((this.name != null) && (this.server != null))) {
+            throw new RuntimeException();
         }
         if (this.parent == null) {
             this.name = desired_name;
             return desired_name;
+        } else if (!this.parent.named_children.containsKey(desired_name)) {
+            this.name = desired_name;
+            this.parent.named_children.put(desired_name, this);
+            return desired_name;
+        } else if (this.parent.named_children.get(desired_name).get_server() == null) {
+            this.parent.named_children.get(desired_name).merge_with(this);
+            return desired_name;
+        } else {
+            Set<String> names = this.parent.named_children.keySet();
+            String acquired_name = OscAddressNode.find_unique_name(
+                desired_name, names);
+            this.name = acquired_name;
+            this.parent.named_children.put(acquired_name, this);
+            return acquired_name;
         }
-        Set<String> names = this.parent.named_children.keySet();
-        String acquired_name = OscAddressNode.find_unique_name(desired_name,
-            names);
-        this.name = acquired_name;
-        this.parent.named_children.put(acquired_name, this);
-        return acquired_name;
     }
 
-    public void merge_with(OscAddressNode other) {
-        
+    public void add_binding(Binding binding) {
+        this.bindings.add(binding);
+    }
+    
+    public void remove_binding(Binding binding) {
+        this.bindings.remove(binding);
     }
     
     public void add_child(OscAddressNode child) {
@@ -181,7 +193,7 @@ public class OscAddressNode {
         Set<OscAddressNode> children = new HashSet<OscAddressNode>();
         children.addAll(this.named_children.values());
         children.addAll(this.numbered_children.values());
-        return children.size();
+        return children.size() + this.bindings.size();
     }
 
     public OscAddressNode get_root() {
@@ -223,6 +235,14 @@ public class OscAddressNode {
         return this.get_root() == Environment.root_osc_address_node;
     }
 
+    public boolean is_named() {
+        return this.name != null;
+    }
+
+    public boolean is_numbered() {
+        return this.number != null;
+    }
+
     public boolean matches(String token) {
         if (token.equals("*") || this.name.equals(token)) {
             return true;
@@ -247,6 +267,25 @@ public class OscAddressNode {
         return false;
     }
 
+    public void merge_with(OscAddressNode other) {
+        this.number = other.number;
+        if (other.server != null) {
+            other.server.attach_to_osc_address_node(this);
+        }
+        for (Binding binding : other.bindings) {
+            binding.attach(this);
+        }
+        for (String child_name : other.named_children.keySet()) {
+            OscAddressNode child = other.get_named_child(child_name);
+            if (this.named_children.containsKey(child_name)) {
+                this.named_children.get(child_name).merge_with(child);
+            } else {
+                this.add_child(child);
+            }
+        }
+        this.numbered_children.putAll(other.numbered_children);
+    }
+
     public void prune() {
         OscAddressNode[] parentage = this.get_parentage();
         parentage = Arrays.copyOf(parentage, parentage.length - 1);
@@ -256,6 +295,20 @@ public class OscAddressNode {
             }
             osc_address_node.get_parent().remove_child(osc_address_node);
         }
+    }
+
+    public void relinquish_name() {
+        if ((this.name != null) && (this.parent != null)) {
+            this.parent.named_children.remove(this.name);
+        }
+        this.name = null;
+    }
+
+    public void relinquish_number() {
+        if ((this.number != null) && (this.parent != null)) {
+            this.parent.numbered_children.remove(this.number);
+        }
+        this.number = null;
     }
 
     public void remove_child(OscAddressNode child) {
