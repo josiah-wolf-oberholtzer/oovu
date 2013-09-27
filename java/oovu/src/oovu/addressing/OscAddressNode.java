@@ -89,11 +89,7 @@ public class OscAddressNode {
     public void add_binding(Binding binding) {
         this.bindings.add(binding);
     }
-    
-    public void remove_binding(Binding binding) {
-        this.bindings.remove(binding);
-    }
-    
+
     public void add_child(OscAddressNode child) {
         OscAddressNode[] parentage = this.get_parentage();
         if (Arrays.asList(parentage).contains(child)) {
@@ -120,13 +116,6 @@ public class OscAddressNode {
         }
     }
 
-    public Set<OscAddressNode> get_all_children() {
-        Set<OscAddressNode> all_children = new HashSet<OscAddressNode>();
-        all_children.addAll(this.named_children.values());
-        all_children.addAll(this.numbered_children.values());
-        return all_children;
-    }
-    
     public OscAddressNode create_address(
         OscAddress osc_address,
         boolean uniquely) {
@@ -154,6 +143,13 @@ public class OscAddressNode {
             parent = child;
         }
         return child;
+    }
+
+    public Set<OscAddressNode> get_all_children() {
+        Set<OscAddressNode> all_children = new HashSet<OscAddressNode>();
+        all_children.addAll(this.named_children.values());
+        all_children.addAll(this.numbered_children.values());
+        return all_children;
     }
 
     public Set<Binding> get_bindings() {
@@ -204,10 +200,34 @@ public class OscAddressNode {
     }
 
     public int get_reference_count() {
-        Set<OscAddressNode> children = new HashSet<OscAddressNode>();
-        children.addAll(this.named_children.values());
-        children.addAll(this.numbered_children.values());
-        return children.size() + this.bindings.size();
+        int count = this.get_all_children().size();
+        count += this.bindings.size();
+        if (this.server != null) {
+            count += 1;
+        }
+        return count;
+    }
+
+    public String get_relative_osc_address(
+        OscAddressNode relative_osc_address_node) {
+        OscAddressNode[] source_parentage = this.get_parentage();
+        OscAddressNode[] relative_parentage = relative_osc_address_node
+            .get_parentage();
+        ArrayUtils.reverse(source_parentage);
+        ArrayUtils.reverse(relative_parentage);
+        int counter = 0;
+        while ((counter < source_parentage.length)
+            && (counter < relative_parentage.length)
+            && (source_parentage[counter] == relative_parentage[counter])) {
+            counter += 1;
+        }
+        StringBuilder string_builder = new StringBuilder();
+        while (counter < source_parentage.length) {
+            string_builder.append("/");
+            string_builder.append(source_parentage[counter].get_name());
+            counter += 1;
+        }
+        return string_builder.toString();
     }
 
     public OscAddressNode get_root() {
@@ -300,14 +320,20 @@ public class OscAddressNode {
         this.numbered_children.putAll(other.numbered_children);
     }
 
-    public void prune() {
+    private void prune() {
         OscAddressNode[] parentage = this.get_parentage();
         parentage = Arrays.copyOf(parentage, parentage.length - 1);
         for (OscAddressNode osc_address_node : parentage) {
-            if (! osc_address_node.is_empty()) {
+            if (!osc_address_node.is_empty()) {
                 break;
             }
             osc_address_node.clear();
+        }
+    }
+
+    public void prune_if_necessary() {
+        if (0 == this.get_reference_count()) {
+            this.prune();
         }
     }
 
@@ -325,6 +351,10 @@ public class OscAddressNode {
         this.number = null;
     }
 
+    public void remove_binding(Binding binding) {
+        this.bindings.remove(binding);
+    }
+
     public void remove_child(OscAddressNode child) {
         if (child == null) {
             return;
@@ -340,6 +370,7 @@ public class OscAddressNode {
             }
         }
         child.parent = null;
+        this.prune_if_necessary();
     }
 
     public Set<OscAddressNode> search(OscAddress osc_address) {
@@ -379,49 +410,26 @@ public class OscAddressNode {
         }
         return new_cursors;
     }
-    
+
     public OscAddressNode search_for_one(OscAddress osc_address) {
-         if (osc_address.has_wildcard_tokens) {
-             return null;
-         }
-         Set<OscAddressNode> search_results = this.search(osc_address);
-         if (0 == search_results.size()) {
-             return null;
-         } else {
-             return search_results.toArray(new OscAddressNode[0])[0];
-         }
+        if (osc_address.has_wildcard_tokens) {
+            return null;
+        }
+        Set<OscAddressNode> search_results = this.search(osc_address);
+        if (0 == search_results.size()) {
+            return null;
+        } else {
+            return search_results.toArray(new OscAddressNode[0])[0];
+        }
     }
 
     public void set_server(Server server) {
         this.server = server;
-        if (server == null) {
-            this.prune();
-        }
     }
 
     @Override
     public String toString() {
         return this.getClass().getSimpleName() + "(\"" + this.get_osc_address()
             + "\")";
-    }
-
-    public String get_relative_osc_address(OscAddressNode relative_osc_address_node) {
-        OscAddressNode[] source_parentage = this.get_parentage();
-        OscAddressNode[] relative_parentage = relative_osc_address_node.get_parentage();
-        ArrayUtils.reverse(source_parentage);
-        ArrayUtils.reverse(relative_parentage);
-        int counter = 0;
-        while (counter < source_parentage.length &&
-            counter < relative_parentage.length &&
-            source_parentage[counter] == relative_parentage[counter]) {
-            counter += 1;
-        }
-        StringBuilder string_builder = new StringBuilder();
-        while (counter < source_parentage.length) {
-            string_builder.append("/");
-            string_builder.append(source_parentage[counter].get_name());
-            counter += 1;
-        }
-        return string_builder.toString();
     }
 }

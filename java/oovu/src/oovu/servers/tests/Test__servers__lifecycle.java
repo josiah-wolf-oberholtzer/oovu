@@ -44,7 +44,7 @@ public class Test__servers__lifecycle {
             Environment.root_osc_address_node);
         Assert.assertEquals(Environment.root_osc_address_node.get_server(),
             Environment.root_server);
-        Environment.root_osc_address_node.prune();
+        Environment.root_osc_address_node.prune_if_necessary();
         Assert.assertEquals(Environment.root_server.get_osc_address_node(),
             Environment.root_osc_address_node);
         Assert.assertEquals(Environment.root_osc_address_node.get_server(),

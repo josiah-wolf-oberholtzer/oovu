@@ -38,6 +38,7 @@ public class Binding extends MaxPeer implements MessagePasser {
     public void detach() {
         if (this.osc_address_node != null) {
             this.osc_address_node.remove_binding(this);
+            this.osc_address_node.prune_if_necessary();
         }
         this.osc_address_node = null;
     }
@@ -64,5 +65,6 @@ public class Binding extends MaxPeer implements MessagePasser {
 
     @Override
     public void notifyDeleted() {
+        this.detach();
     }
 }

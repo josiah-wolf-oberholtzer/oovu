@@ -262,7 +262,7 @@ abstract public class Server implements MessagePasser {
         if (this.osc_address_node != null) {
             this.osc_address_node.relinquish_number();
             this.osc_address_node.set_server(null);
-            this.osc_address_node.prune();
+            this.osc_address_node.prune_if_necessary();
         }
         this.osc_address_node = null;
     }

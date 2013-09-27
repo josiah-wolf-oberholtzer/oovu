@@ -40,9 +40,9 @@ public class Test__OscAddressNode__construct {
         module_one_dsp.add_child(module_one_dsp_gain);
         module_two_dsp.add_child(module_two_dsp_active);
         module_two_dsp.add_child(module_two_dsp_gain);
-        Assert.assertEquals(root.get_reference_count(), 2);
+        Assert.assertEquals(root.get_reference_count(), 3);
         Environment.reset();
-        Assert.assertEquals(root.get_reference_count(), 0);
+        Assert.assertEquals(root.get_reference_count(), 1);
     }
 
     @Test
@@ -119,28 +119,28 @@ public class Test__OscAddressNode__construct {
         Assert.assertArrayEquals(quux.get_parentage(), new OscAddressNode[] {
             quux, bar, foo
         });
-        foo.prune();
+        foo.prune_if_necessary();
         Assert.assertArrayEquals(baz.get_parentage(), new OscAddressNode[] {
             baz, bar, foo
         });
         Assert.assertArrayEquals(quux.get_parentage(), new OscAddressNode[] {
             quux, bar, foo
         });
-        bar.prune();
+        bar.prune_if_necessary();
         Assert.assertArrayEquals(baz.get_parentage(), new OscAddressNode[] {
             baz, bar, foo
         });
         Assert.assertArrayEquals(quux.get_parentage(), new OscAddressNode[] {
             quux, bar, foo
         });
-        baz.prune();
+        baz.prune_if_necessary();
         Assert.assertArrayEquals(baz.get_parentage(), new OscAddressNode[] {
             baz
         });
         Assert.assertArrayEquals(quux.get_parentage(), new OscAddressNode[] {
             quux, bar, foo
         });
-        quux.prune();
+        quux.prune_if_necessary();
     }
 
     @Test
