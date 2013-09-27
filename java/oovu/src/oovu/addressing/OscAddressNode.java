@@ -55,22 +55,27 @@ public class OscAddressNode {
 
     public String acquire_name(String desired_name) {
         if (desired_name == this.name) {
+            System.out.print("A");
             return desired_name;
         } else if ((desired_name == null)
             || ((this.name != null) && (this.server != null))) {
             throw new RuntimeException();
         }
         if (this.parent == null) {
+            System.out.print("B");
             this.name = desired_name;
             return desired_name;
         } else if (!this.parent.named_children.containsKey(desired_name)) {
+            System.out.print("C");
             this.name = desired_name;
             this.parent.named_children.put(desired_name, this);
             return desired_name;
         } else if (this.parent.named_children.get(desired_name).get_server() == null) {
+            System.out.print("D");
             this.parent.named_children.get(desired_name).merge_with(this);
             return desired_name;
         } else {
+            System.out.print("E");
             Set<String> names = this.parent.named_children.keySet();
             String acquired_name = OscAddressNode.find_unique_name(
                 desired_name, names);
@@ -368,6 +373,18 @@ public class OscAddressNode {
             old_cursors.addAll(new_cursors);
         }
         return new_cursors;
+    }
+    
+    public OscAddressNode search_for_one(OscAddress osc_address) {
+         if (osc_address.has_wildcard_tokens) {
+             return null;
+         }
+         Set<OscAddressNode> search_results = this.search(osc_address);
+         if (0 == search_results.size()) {
+             return null;
+         } else {
+             return search_results.toArray(new OscAddressNode[0])[0];
+         }
     }
 
     public void set_server(Server server) {

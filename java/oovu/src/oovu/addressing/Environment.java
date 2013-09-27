@@ -1,3 +1,4 @@
+
 package oovu.addressing;
 
 import java.util.HashMap;
@@ -5,8 +6,12 @@ import java.util.HashMap;
 import oovu.servers.RootServer;
 import oovu.servers.members.AudioServer;
 
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
+
 public class Environment {
 
+    public static final Logger logger;
     public static final HashMap<String, AudioServer> pull_addresses = new HashMap<String, AudioServer>();
     public static final HashMap<String, AudioServer> push_addresses = new HashMap<String, AudioServer>();
     public static final RootServer root_server;
@@ -14,6 +19,8 @@ public class Environment {
     static {
         root_osc_address_node = new OscAddressNode("");
         root_server = new RootServer();
+        BasicConfigurator.configure();
+        logger = Logger.getLogger("OOVU");
     }
 
     public static void reset() {

@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import oovu.addressing.OscAddress;
+import oovu.addressing.OscAddressNode;
 import oovu.messaging.MessageHandler;
 import oovu.servers.members.MethodServer;
 import oovu.servers.members.PropertyServer;
@@ -62,16 +64,44 @@ public abstract class ModuleMemberServer extends Server {
             member_node_class = PropertyServer.class;
         }
         ModuleServer module_server = ModuleServer.allocate(module_id);
-        // if (module_server.named_child_servers.containsKey(desired_name)) {
-        // ModuleMemberServer current_member_node =
-        // (ModuleMemberServer) module_server.named_child_servers
-        // .get(desired_name);
-        // if (current_member_node.getClass() == member_node_class) {
-        // return current_member_node;
-        // }
-        // }
-        return ModuleMemberServer.allocate_new_from_label(module_server, label,
-            module_id, argument_list);
+        OscAddress osc_address = OscAddress.from_cache(desired_name);
+        if (osc_address.has_parent_path_tokens || 
+            osc_address.has_wildcard_tokens ||
+            ! osc_address.is_relative) {
+            throw new RuntimeException("Bad child address: " + desired_name);
+        }
+        OscAddressNode osc_address_node = module_server.get_osc_address_node()
+            .search_for_one(osc_address);
+        if (osc_address_node == null) {
+            // address doesn't exist
+            ModuleMemberServer new_member_server = ModuleMemberServer.allocate_new_from_label( 
+                module_server, label, module_id, argument_list);
+            osc_address_node = module_server.get_osc_address_node().create_address(
+                osc_address, true);
+            new_member_server.attach_to_osc_address_node(osc_address_node);
+            
+            return new_member_server;
+        } else if (osc_address_node.get_server() == null) {
+            // address does exist but no server is attached
+            ModuleMemberServer new_member_server = ModuleMemberServer.allocate_new_from_label( 
+                module_server, label, module_id, argument_list);
+            new_member_server.attach_to_osc_address_node(osc_address_node);
+            return new_member_server;
+        } else {
+            // address exists and a server is already attached
+            Server current_member_server = osc_address_node.get_server();
+            if (current_member_server.getClass() == member_node_class) {
+                // server is of the desired type
+                return (ModuleMemberServer) current_member_server;
+            }
+            // server is not of the desired type, so acquire a new address
+            ModuleMemberServer new_member_server = ModuleMemberServer.allocate_new_from_label( 
+                module_server, label, module_id, argument_list);
+            osc_address_node = module_server.get_osc_address_node().create_address(
+                osc_address, true);
+            new_member_server.attach_to_osc_address_node(osc_address_node);
+            return new_member_server;
+        }
     }
 
     private static ModuleMemberServer allocate_new_from_label(

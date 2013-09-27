@@ -8,6 +8,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.ArrayUtils;
+
+import oovu.addressing.Environment;
 import oovu.addressing.OscAddressNode;
 import oovu.clients.ServerClient;
 import oovu.messaging.InterfaceRequest;
@@ -243,11 +246,12 @@ abstract public class Server implements MessagePasser {
     }
 
     protected void deallocate() {
+        Environment.logger.info("Deallocating: " + this.toString());
         Server parent_server = this.get_parent_server();
-        if (this.parent_server != null) {
+        this.clear();
+        if (parent_server != null) {
             parent_server.deallocate_if_necessary();
         }
-        this.clear();
     }
 
     public void deallocate_if_necessary() {
@@ -279,19 +283,18 @@ abstract public class Server implements MessagePasser {
     public String get_osc_address() {
         if (this.get_osc_address_node() == null) {
             return null;
-        } else if (this.get_name() == null) {
-            return null;
         }
         OscAddressNode[] parentage = this.get_osc_address_node()
             .get_parentage();
+        ArrayUtils.reverse(parentage);
         StringBuilder string_builder = new StringBuilder();
-        for (int i = parentage.length - 1; i <= 0; i--) {
-            String name = parentage[i].get_name();
-            if (name == null) {
+        for (OscAddressNode osc_address_node : parentage) {
+            if (osc_address_node.get_name() == null) {
                 return null;
-            } else if (0 < name.length()) {
+            }
+            if (! osc_address_node.get_name().equals("")) {
                 string_builder.append("/");
-                string_builder.append(name);
+                string_builder.append(osc_address_node.get_name());
             }
         }
         return string_builder.toString();
@@ -357,6 +360,6 @@ abstract public class Server implements MessagePasser {
 
     @Override
     public String toString() {
-        return this.getClass() + ": " + this.get_name();
+        return "<" + this.getClass().getSimpleName() + ": " + this.get_osc_address() + ">";
     }
 }
