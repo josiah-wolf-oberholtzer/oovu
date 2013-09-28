@@ -156,6 +156,50 @@ public class OscAddressNode {
         return Collections.unmodifiableSet(this.bindings);
     }
 
+    public String get_debug_piece() {
+        StringBuilder string_builder = new StringBuilder();
+        string_builder.append("<Node ");
+        if (this.name != null) {
+            string_builder.append("\"" + this.name + "\"");
+        } else {
+            string_builder.append("null");
+        }
+        string_builder.append(":");
+        if (this.number != null) {
+            string_builder.append(this.number);
+        } else {
+            string_builder.append("null");
+        }
+        if ((0 < this.bindings.size()) || (this.server != null)) {
+            string_builder.append(" (");
+            if (0 < this.bindings.size()) {
+                string_builder.append("bindings: ");
+                string_builder.append(this.bindings.size());
+                if (this.server != null) {
+                    string_builder.append(", ");
+                }
+            }
+            if (this.server != null) {
+                string_builder.append("server: "
+                    + this.server.getClass().getSimpleName());
+            }
+            string_builder.append(")");
+        }
+        string_builder.append(">");
+        return string_builder.toString();
+    }
+
+    public String[] get_debug_pieces() {
+        ArrayList<String> pieces = new ArrayList<String>();
+        pieces.add(this.get_debug_piece());
+        for (OscAddressNode child : this.get_all_children()) {
+            for (String child_piece : child.get_debug_pieces()) {
+                pieces.add("    " + child_piece);
+            }
+        }
+        return pieces.toArray(new String[0]);
+    }
+
     public String get_name() {
         return this.name;
     }
