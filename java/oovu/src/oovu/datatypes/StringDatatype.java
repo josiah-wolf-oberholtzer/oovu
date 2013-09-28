@@ -33,9 +33,11 @@ public class StringDatatype extends GenericDatatype {
             ""
         });
     }
-    
+
     @Override
-    public Atom[] process_input(Atom[] input) { 
-        return Atom.newAtom(new String[]{ Atom.toOneString(input) });
+    public Atom[] process_input(Atom[] input) {
+        return Atom.newAtom(new String[] {
+            Atom.toOneString(input)
+        });
     }
 }

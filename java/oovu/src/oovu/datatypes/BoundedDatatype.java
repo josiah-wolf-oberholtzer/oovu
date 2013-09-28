@@ -1,6 +1,5 @@
 package oovu.datatypes;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -141,9 +140,38 @@ abstract public class BoundedDatatype extends Datatype {
         }
     }
 
+    protected double[] bound_doubles(double[] doubles) {
+        return this.bound_doubles_by_minimum(this
+            .bound_doubles_by_maximum(doubles));
+    }
+
+    protected double[] bound_doubles_by_maximum(double[] doubles) {
+        if (this.maximum == null) {
+            return doubles;
+        }
+        for (int i = 0, j = doubles.length; i < j; i++) {
+            if (this.maximum < doubles[i]) {
+                doubles[i] = this.maximum;
+            }
+        }
+        return doubles;
+    }
+
+    protected double[] bound_doubles_by_minimum(double[] doubles) {
+        if (this.minimum == null) {
+            return doubles;
+        }
+        for (int i = 0, j = doubles.length; i < j; i++) {
+            if (doubles[i] < this.minimum) {
+                doubles[i] = this.minimum;
+            }
+        }
+        return doubles;
+    }
+
     protected double[] extract_bounded_doubles_from_atoms(Atom[] atoms) {
         double[] doubles = this.extract_doubles_from_atoms(atoms);
-        return this.bound_doubles_by_minimum(this.bound_doubles_by_maximum(doubles));
+        return this.bound_doubles(doubles);
     }
 
     protected double[] extract_doubles_from_atoms(Atom[] atoms) {
@@ -175,30 +203,6 @@ abstract public class BoundedDatatype extends Datatype {
     @Override
     protected void initialize_prerequisites(Map<String, Atom[]> argument_map) {
         this.initialize_extrema(argument_map);
-    }
-
-    protected double[] bound_doubles_by_maximum(double[] doubles) {
-        if (this.maximum == null) {
-            return doubles;
-        }
-        for (int i = 0, j = doubles.length; i < j; i++) {
-            if (this.maximum < doubles[i]) {
-                doubles[i] = this.maximum;
-            }
-        }
-        return doubles;
-    }
-
-    protected double[] bound_doubles_by_minimum(double[] doubles) {
-        if (this.minimum == null) {
-            return doubles;
-        }
-        for (int i = 0, j = doubles.length; i < j; i++) {
-            if (doubles[i] < this.minimum) {
-                doubles[i] = this.minimum;
-            }
-        }
-        return doubles;
     }
 
     public void set_maximum(Double maximum) {
