@@ -145,8 +145,8 @@ public class Test__DecimalDatatype {
         DecimalDatatype datatype = new DecimalDatatype(arguments);
         Assert.assertEquals(Atom.newAtom(7.1), datatype.get_value()[0]);
         Atom[] input = Atom.parse("23");
-        datatype.set_maximum(new Float(25));
-        Assert.assertEquals(new Float(25), datatype.get_maximum());
+        datatype.set_maximum(new Double(25));
+        Assert.assertEquals(new Double(25), datatype.get_maximum());
         Assert.assertArrayEquals(Atom.newAtom(new float[] {
             23
         }), datatype.process_input(input));

@@ -27,10 +27,10 @@ public class IntegerDatatype extends BoundedDatatype {
 
     @Override
     public Atom[] process_input(Atom[] input) {
-        Float[] floats = this.extract_bounded_floats_from_atoms(input);
+        double[] doubles = this.extract_bounded_doubles_from_atoms(input);
         Atom[] result = new Atom[1];
         if (0 < input.length) {
-            result[0] = Atom.newAtom(floats[0].intValue());
+            result[0] = Atom.newAtom(new Double(doubles[0]).intValue());
         }
         return result;
     }

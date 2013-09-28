@@ -25,10 +25,10 @@ abstract public class BoundedDatatype extends Datatype {
         @Override
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
-            Float maximum = BoundedDatatype.this.get_maximum();
+            Double maximum = BoundedDatatype.this.get_maximum();
             String label = "maximum";
             if (maximum != null) {
-                result[0] = Atom.newAtom(label, Atom.newAtom(new float[] {
+                result[0] = Atom.newAtom(label, Atom.newAtom(new double[] {
                     maximum
                 }));
             } else {
@@ -54,10 +54,10 @@ abstract public class BoundedDatatype extends Datatype {
         @Override
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
-            Float minimum = BoundedDatatype.this.get_minimum();
+            Double minimum = BoundedDatatype.this.get_minimum();
             String label = "minimum";
             if (minimum != null) {
-                result[0] = Atom.newAtom(label, Atom.newAtom(new float[] {
+                result[0] = Atom.newAtom(label, Atom.newAtom(new double[] {
                     minimum
                 }));
             } else {
@@ -87,9 +87,9 @@ abstract public class BoundedDatatype extends Datatype {
 
         @Override
         public Atom[][] run(Atom[] arguments) {
-            Float maximum = null;
+            Double maximum = null;
             if (0 < arguments.length) {
-                maximum = arguments[0].getFloat();
+                maximum = arguments[0].toDouble();
             }
             BoundedDatatype.this.set_maximum(maximum);
             return null;
@@ -114,17 +114,17 @@ abstract public class BoundedDatatype extends Datatype {
 
         @Override
         public Atom[][] run(Atom[] arguments) {
-            Float minimum = null;
+            Double minimum = null;
             if (0 < arguments.length) {
-                minimum = arguments[0].getFloat();
+                minimum = arguments[0].toDouble();
             }
             BoundedDatatype.this.set_minimum(minimum);
             return null;
         }
     }
 
-    protected Float minimum;
-    protected Float maximum;
+    protected Double minimum;
+    protected Double maximum;
 
     public BoundedDatatype(AttributeServer client,
         Map<String, Atom[]> argument_map) {
@@ -141,36 +141,32 @@ abstract public class BoundedDatatype extends Datatype {
         }
     }
 
-    protected Float[] extract_bounded_floats_from_atoms(Atom[] atoms) {
-        Float[] floats = this.extract_floats_from_atoms(atoms);
-        return this.minimum_bound_floats(this.maximum_bound_floats(floats));
+    protected double[] extract_bounded_doubles_from_atoms(Atom[] atoms) {
+        double[] doubles = this.extract_doubles_from_atoms(atoms);
+        return this.bound_doubles_by_minimum(this.bound_doubles_by_maximum(doubles));
     }
 
-    protected Float[] extract_floats_from_atoms(Atom[] atoms) {
-        ArrayList<Float> floats = new ArrayList<Float>();
-        for (Atom atom : atoms) {
-            floats.add(atom.toFloat());
-        }
-        return floats.toArray(new Float[0]);
+    protected double[] extract_doubles_from_atoms(Atom[] atoms) {
+        return Atom.toDouble(atoms);
     }
 
-    public Float get_maximum() {
+    public Double get_maximum() {
         return this.maximum;
     }
 
-    public Float get_minimum() {
+    public Double get_minimum() {
         return this.minimum;
     }
 
     protected void initialize_extrema(Map<String, Atom[]> argument_map) {
         if (argument_map.containsKey("minimum")) {
-            this.set_minimum(this.extract_floats_from_atoms(argument_map
+            this.set_minimum(this.extract_doubles_from_atoms(argument_map
                 .get("minimum"))[0]);
         } else {
             this.minimum = null;
         }
         if (argument_map.containsKey("maximum")) {
-            this.set_maximum(argument_map.get("maximum")[0].toFloat());
+            this.set_maximum(argument_map.get("maximum")[0].toDouble());
         } else {
             this.maximum = null;
         }
@@ -181,43 +177,43 @@ abstract public class BoundedDatatype extends Datatype {
         this.initialize_extrema(argument_map);
     }
 
-    protected Float[] maximum_bound_floats(Float[] floats) {
+    protected double[] bound_doubles_by_maximum(double[] doubles) {
         if (this.maximum == null) {
-            return floats;
+            return doubles;
         }
-        for (int i = 0, j = floats.length; i < j; i++) {
-            if (this.maximum < floats[i]) {
-                floats[i] = this.maximum;
+        for (int i = 0, j = doubles.length; i < j; i++) {
+            if (this.maximum < doubles[i]) {
+                doubles[i] = this.maximum;
             }
         }
-        return floats;
+        return doubles;
     }
 
-    protected Float[] minimum_bound_floats(Float[] floats) {
+    protected double[] bound_doubles_by_minimum(double[] doubles) {
         if (this.minimum == null) {
-            return floats;
+            return doubles;
         }
-        for (int i = 0, j = floats.length; i < j; i++) {
-            if (floats[i] < this.minimum) {
-                floats[i] = this.minimum;
+        for (int i = 0, j = doubles.length; i < j; i++) {
+            if (doubles[i] < this.minimum) {
+                doubles[i] = this.minimum;
             }
         }
-        return floats;
+        return doubles;
     }
 
-    public void set_maximum(Float maximum) {
+    public void set_maximum(Double maximum) {
         this.maximum = maximum;
         this.sort_extrema();
     }
 
-    public void set_minimum(Float minimum) {
+    public void set_minimum(Double minimum) {
         this.minimum = minimum;
         this.sort_extrema();
     }
 
     protected void sort_extrema() {
         if ((this.minimum != null) && (this.maximum != null)) {
-            Float[] extrema = new Float[] {
+            Double[] extrema = new Double[] {
                 this.minimum, this.maximum
             };
             Arrays.sort(extrema);
