@@ -34,6 +34,13 @@ public class Environment {
         Environment.logger.log(Environment.logger.getLevel(), message);
     }
 
+    public static void report() {
+        for (String piece : Environment.root_osc_address_node
+            .get_debug_pieces()) {
+            Environment.log(piece);
+        }
+    }
+
     public static void reset() {
         synchronized (Environment.lock) {
             Environment.root_server.clear();

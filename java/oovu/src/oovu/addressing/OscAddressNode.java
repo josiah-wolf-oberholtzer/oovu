@@ -16,7 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.sun.tools.javac.util.List;
 
-public class OscAddressNode {
+public class OscAddressNode implements Comparable<OscAddressNode> {
 
     public static
         String
@@ -116,6 +116,23 @@ public class OscAddressNode {
         }
     }
 
+    @Override
+    public int compareTo(OscAddressNode other) {
+        if (this.name == null) {
+            if (other.name == null) {
+                return this.number - other.number;
+            } else {
+                return -1;
+            }
+        } else {
+            if (other.name != null) {
+                return this.name.compareTo(other.name);
+            } else {
+                return 1;
+            }
+        }
+    }
+
     public OscAddressNode create_address(
         OscAddress osc_address,
         boolean uniquely) {
@@ -160,7 +177,7 @@ public class OscAddressNode {
         StringBuilder string_builder = new StringBuilder();
         string_builder.append("<Node ");
         if (this.name != null) {
-            string_builder.append("\"" + this.name + "\"");
+            string_builder.append("'" + this.name + "'");
         } else {
             string_builder.append("null");
         }
@@ -192,7 +209,10 @@ public class OscAddressNode {
     public String[] get_debug_pieces() {
         ArrayList<String> pieces = new ArrayList<String>();
         pieces.add(this.get_debug_piece());
-        for (OscAddressNode child : this.get_all_children()) {
+        ArrayList<OscAddressNode> children = new ArrayList<OscAddressNode>();
+        children.addAll(this.get_all_children());
+        Collections.sort(children);
+        for (OscAddressNode child : children) {
             for (String child_piece : child.get_debug_pieces()) {
                 pieces.add("    " + child_piece);
             }
