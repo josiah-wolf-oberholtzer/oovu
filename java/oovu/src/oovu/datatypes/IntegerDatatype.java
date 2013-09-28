@@ -16,7 +16,6 @@ public class IntegerDatatype extends BoundedDatatype {
     public IntegerDatatype(AttributeServer client,
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
-        this.initialize_default_value(argument_map);
     }
 
     @Override

@@ -29,8 +29,8 @@ public class IntegerArrayDatatype extends BoundedArrayDatatype {
     public Atom[] process_input(Atom[] input) {
         Atom[] result = this.ensure_length(input);
         Float[] floats = this.extract_bounded_floats_from_atoms(result);
-        for (Float f : floats) {
-            result[0] = Atom.newAtom(f.intValue());
+        for (int i = 0, j = result.length; i < j; i++) {
+            result[i] = Atom.newAtom(floats[i].intValue());
         }
         return result;
     }

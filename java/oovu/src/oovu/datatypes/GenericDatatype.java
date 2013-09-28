@@ -16,7 +16,6 @@ public class GenericDatatype extends Datatype {
     public GenericDatatype(AttributeServer client,
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
-        this.initialize_default_value(argument_map);
     }
 
     @Override
@@ -24,6 +23,10 @@ public class GenericDatatype extends Datatype {
         return Atom.newAtom(new double[] {
             0.
         });
+    }
+
+    @Override
+    protected void initialize_prerequisites(Map<String, Atom[]> argument_map) {
     }
 
     @Override

@@ -16,7 +16,6 @@ public class RangeDatatype extends BoundedDatatype {
     public RangeDatatype(AttributeServer client,
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
-        this.initialize_default_value(argument_map);
     }
 
     @Override
@@ -24,5 +23,10 @@ public class RangeDatatype extends BoundedDatatype {
         return Atom.newAtom(new double[] {
             0., 1.
         });
+    }
+
+    @Override
+    public Atom[] process_input(Atom[] input) {
+        return new Atom[0];
     }
 }

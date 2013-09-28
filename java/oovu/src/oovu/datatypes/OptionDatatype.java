@@ -55,7 +55,7 @@ public class OptionDatatype extends StringDatatype {
         }
     }
 
-    protected String[] options = null;
+    protected String[] options;
 
     public OptionDatatype(Atom[] arguments) {
         this(null, Server.process_atom_arguments(arguments));
@@ -70,8 +70,6 @@ public class OptionDatatype extends StringDatatype {
             this.client.add_message_handler(new SetOptionsMessageHandler(
                 this.client));
         }
-        this.initialize_options(argument_map);
-        this.initialize_default_value(argument_map);
     }
 
     protected String[] get_options() {
@@ -83,6 +81,11 @@ public class OptionDatatype extends StringDatatype {
             this.set_options(this.extract_strings_from_atoms(argument_map
                 .get("options")));
         }
+    }
+
+    @Override
+    protected void initialize_prerequisites(Map<String, Atom[]> argument_map) {
+        this.initialize_options(argument_map);
     }
 
     protected void set_options(String[] options) {

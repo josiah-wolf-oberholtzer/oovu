@@ -1,6 +1,9 @@
 package oovu.addressing;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.locks.ReentrantLock;
 
 import oovu.servers.RootServer;
@@ -14,8 +17,9 @@ public class Environment {
 
     public static final ReentrantLock lock = new ReentrantLock();
     private static final Logger logger;
-    public static final HashMap<String, AudioServer> pull_addresses = new HashMap<String, AudioServer>();
-    public static final HashMap<String, AudioServer> push_addresses = new HashMap<String, AudioServer>();
+    public static final Set<AudioServer> audio_servers = new HashSet<AudioServer>();
+    public static final Map<String, AudioServer> pull_addresses = new HashMap<String, AudioServer>();
+    public static final Map<String, AudioServer> push_addresses = new HashMap<String, AudioServer>();
     public static final RootServer root_server;
     public static final OscAddressNode root_osc_address_node;
     static {

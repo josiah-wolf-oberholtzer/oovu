@@ -44,7 +44,6 @@ public class BooleanDatatype extends GenericDatatype {
             this.client.add_message_handler(new ToggleMessageHandler(
                 this.client));
         }
-        this.initialize_default_value(argument_map);
     }
 
     @Override

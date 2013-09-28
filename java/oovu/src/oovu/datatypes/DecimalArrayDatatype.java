@@ -16,7 +16,6 @@ public class DecimalArrayDatatype extends BoundedArrayDatatype {
     public DecimalArrayDatatype(AttributeServer client,
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
-        this.initialize_default_value(argument_map);
     }
 
     @Override
@@ -30,8 +29,8 @@ public class DecimalArrayDatatype extends BoundedArrayDatatype {
     public Atom[] process_input(Atom[] input) {
         Atom[] result = this.ensure_length(input);
         Float[] floats = this.extract_bounded_floats_from_atoms(result);
-        for (Float f : floats) {
-            result[0] = Atom.newAtom(f.floatValue());
+        for (int i = 0, j = result.length; i < j; i++) {
+            result[i] = Atom.newAtom(floats[i].floatValue());
         }
         return result;
     }

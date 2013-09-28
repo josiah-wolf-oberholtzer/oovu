@@ -9,7 +9,7 @@ import oovu.servers.members.AttributeServer;
 
 import com.cycling74.max.Atom;
 
-abstract public class BoundedDatatype extends GenericDatatype {
+abstract public class BoundedDatatype extends Datatype {
 
     private class GetMaximumMessageHandler extends DatatypeMessageHandler {
 
@@ -123,8 +123,8 @@ abstract public class BoundedDatatype extends GenericDatatype {
         }
     }
 
-    protected Float minimum = null;
-    protected Float maximum = null;
+    protected Float minimum;
+    protected Float maximum;
 
     public BoundedDatatype(AttributeServer client,
         Map<String, Atom[]> argument_map) {
@@ -139,7 +139,6 @@ abstract public class BoundedDatatype extends GenericDatatype {
             this.client.add_message_handler(new SetMinimumMessageHandler(
                 this.client));
         }
-        this.initialize_extrema(argument_map);
     }
 
     protected Float[] extract_bounded_floats_from_atoms(Atom[] atoms) {
@@ -155,11 +154,11 @@ abstract public class BoundedDatatype extends GenericDatatype {
         return floats.toArray(new Float[0]);
     }
 
-    protected Float get_maximum() {
+    public Float get_maximum() {
         return this.maximum;
     }
 
-    protected Float get_minimum() {
+    public Float get_minimum() {
         return this.minimum;
     }
 
@@ -167,10 +166,19 @@ abstract public class BoundedDatatype extends GenericDatatype {
         if (argument_map.containsKey("minimum")) {
             this.set_minimum(this.extract_floats_from_atoms(argument_map
                 .get("minimum"))[0]);
+        } else {
+            this.minimum = null;
         }
         if (argument_map.containsKey("maximum")) {
             this.set_maximum(argument_map.get("maximum")[0].toFloat());
+        } else {
+            this.maximum = null;
         }
+    }
+
+    @Override
+    protected void initialize_prerequisites(Map<String, Atom[]> argument_map) {
+        this.initialize_extrema(argument_map);
     }
 
     protected Float[] maximum_bound_floats(Float[] floats) {
@@ -197,12 +205,12 @@ abstract public class BoundedDatatype extends GenericDatatype {
         return floats;
     }
 
-    protected void set_maximum(Float maximum) {
+    public void set_maximum(Float maximum) {
         this.maximum = maximum;
         this.sort_extrema();
     }
 
-    protected void set_minimum(Float minimum) {
+    public void set_minimum(Float minimum) {
         this.minimum = minimum;
         this.sort_extrema();
     }

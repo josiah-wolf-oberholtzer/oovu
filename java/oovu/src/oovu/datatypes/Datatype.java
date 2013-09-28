@@ -43,8 +43,8 @@ public abstract class Datatype {
         return GenericDatatype.class;
     }
 
-    protected Atom[] value = new Atom[0];
-    protected AttributeServer client = null;
+    protected Atom[] value;
+    protected AttributeServer client;
     private static final Map<String, Class<?>> datatype_classes_by_label;
     static {
         Map<String, Class<?>> map = new HashMap<String, Class<?>>();
@@ -71,6 +71,8 @@ public abstract class Datatype {
             this.client.add_message_handler(new GetDatatypeMessageHandler(
                 this.client));
         }
+        this.initialize_prerequisites(argument_map);
+        this.initialize_default_value(argument_map);
     }
 
     public String get_datatype() {
@@ -91,6 +93,9 @@ public abstract class Datatype {
             this.value = this.process_input(this.get_default());
         }
     }
+
+    abstract protected void initialize_prerequisites(
+        Map<String, Atom[]> argument_map);
 
     public abstract Atom[] process_input(Atom[] input);
 

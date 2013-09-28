@@ -1,22 +1,84 @@
 package oovu.datatypes.tests;
 
-import org.junit.After;
+import oovu.addressing.Environment;
+import oovu.datatypes.DecimalArrayDatatype;
+
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
+
+import com.cycling74.max.Atom;
 
 public class Test__DecimalArrayDatatype {
 
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
+    @Test
+    public void test_01() {
+        Atom[] arguments = Atom.parse(":default 0");
+        DecimalArrayDatatype datatype = new DecimalArrayDatatype(arguments);
+        Assert.assertTrue(datatype.get_value()[0].isFloat());
+        Assert.assertArrayEquals(new double[] {
+            0
+        }, Atom.toDouble(datatype.get_value()), 0);
     }
 
     @Test
-    public void test() {
-        Assert.fail("Not yet implemented");
+    public void test_02() {
+        Atom[] arguments = Atom.parse(":default 5 4 3 :length 3");
+        DecimalArrayDatatype datatype = new DecimalArrayDatatype(arguments);
+        Assert.assertTrue(datatype.get_value()[0].isFloat());
+        Assert.assertArrayEquals(new double[] {
+            5, 4, 3
+        }, Atom.toDouble(datatype.get_value()), 0);
+    }
+
+    @Test
+    public void test_03() {
+        Atom[] arguments = Atom.parse(":default 5 4 3 2 1 :length 3");
+        DecimalArrayDatatype datatype = new DecimalArrayDatatype(arguments);
+        Assert.assertTrue(datatype.get_value()[0].isFloat());
+        Assert.assertArrayEquals(new double[] {
+            5, 4, 3
+        }, Atom.toDouble(datatype.get_value()), 0);
+    }
+
+    @Test
+    public void test_04() {
+        Atom[] arguments = Atom.parse(":default -1.1 :length 3");
+        DecimalArrayDatatype datatype = new DecimalArrayDatatype(arguments);
+        Assert.assertTrue(datatype.get_value()[0].isFloat());
+        Assert.assertArrayEquals(new float[] {
+            (float) -1.1, 0, 0
+        }, Atom.toFloat(datatype.get_value()), 0);
+    }
+
+    @Test
+    public void test_05() {
+        Atom[] arguments = Atom
+            .parse(":default 0 10 20 30 :length 3 :minimum 2 :maximum 19.5");
+        DecimalArrayDatatype datatype = new DecimalArrayDatatype(arguments);
+        Assert.assertTrue(datatype.get_value()[0].isFloat());
+        Assert.assertArrayEquals(new double[] {
+            2, 10, (float) 19.5
+        }, Atom.toDouble(datatype.get_value()), 0);
+    }
+
+    @Test
+    public void test_06() {
+        Atom[] arguments = Atom
+            .parse(":default 0 10 20 30 :length 3 :minimum 2 :maximum 19.5");
+        DecimalArrayDatatype datatype = new DecimalArrayDatatype(arguments);
+        Environment.log(datatype.get_length());
+        Assert.assertTrue(datatype.get_value()[0].isFloat());
+        Assert.assertArrayEquals(new double[] {
+            2, 10, (float) 19.5
+        }, Atom.toDouble(datatype.get_value()), 0);
+        datatype.set_length(7);
+        Assert.assertArrayEquals(new double[] {
+            2, 10, (float) 19.5
+        }, Atom.toDouble(datatype.get_value()), 0);
+        Atom[] input = Atom.parse("0 10 20 30");
+        Atom[] output = datatype.process_input(input);
+        Assert.assertArrayEquals(new double[] {
+            2, 10, (float) 19.5, (float) 19.5, 2, 2, 2
+        }, Atom.toDouble(output), 0);
     }
 }

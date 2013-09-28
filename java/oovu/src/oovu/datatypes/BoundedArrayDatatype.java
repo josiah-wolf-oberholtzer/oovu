@@ -50,22 +50,19 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
         public Atom[][] run(Atom[] arguments) {
             if (0 < arguments.length) {
                 if (arguments[0].isFloat() || arguments[0].isInt()) {
-                    Integer length = arguments[0].getInt();
-                    if (0 < length) {
-                        BoundedArrayDatatype.this.set_length(length);
-                    }
+                    Integer new_length = arguments[0].getInt();
+                    BoundedArrayDatatype.this.set_length(new_length);
                 }
             }
             return null;
         }
     }
 
-    protected Integer length = 1;
+    protected int length;
 
     public BoundedArrayDatatype(AttributeServer client,
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
-        this.initialize_length(argument_map);
         if (this.client != null) {
             client
                 .add_message_handler(new GetLengthMessageHandler(this.client));
@@ -80,7 +77,7 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
         }
         Atom[] output = new Atom[this.length];
         if (this.length < input.length) {
-            for (int i = 0, j = this.length; i < j; i++) {
+            for (int i = 0; i < this.length; i++) {
                 output[i] = input[i];
             }
         } else {
@@ -95,20 +92,29 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
         return output;
     }
 
-    protected Integer get_length() {
+    public Integer get_length() {
         return this.length;
     }
 
     protected void initialize_length(Map<String, Atom[]> argument_map) {
         if (argument_map.containsKey("length")) {
-            this.set_length(argument_map.get("length")[0].toInt());
+            int new_length = argument_map.get("length")[0].toInt();
+            this.set_length(new_length);
+        } else {
+            this.set_length(1);
         }
     }
 
-    protected void set_length(Integer length) {
-        if (length < 1) {
-            length = 1;
+    @Override
+    protected void initialize_prerequisites(Map<String, Atom[]> argument_map) {
+        this.initialize_extrema(argument_map);
+        this.initialize_length(argument_map);
+    }
+
+    public void set_length(int new_length) {
+        if (new_length < 1) {
+            new_length = 1;
         }
-        this.length = length;
+        this.length = new_length;
     }
 }
