@@ -77,5 +77,20 @@ public class Test__OOVU__lifecycle {
             "    <Node 'foo':1001 (server: ModuleServer)>",
             "        <Node 'bar':null (bindings: 1, server: PropertyServer)>"
         }, Environment.root_osc_address_node.get_debug_pieces());
+        module.detach_from_server();
+        Assert.assertArrayEquals(new String[] {
+            "<Node '':null (server: RootServer)>",
+            "    <Node 'foo':1001 (server: ModuleServer)>",
+            "        <Node 'bar':null (bindings: 1, server: PropertyServer)>"
+        }, Environment.root_osc_address_node.get_debug_pieces());
+        property.detach_from_server();
+        Assert.assertArrayEquals(new String[] {
+            "<Node '':null (server: RootServer)>", "    <Node 'foo':null>",
+            "        <Node 'bar':null (bindings: 1)>"
+        }, Environment.root_osc_address_node.get_debug_pieces());
+        binding.detach();
+        Assert.assertArrayEquals(new String[] {
+            "<Node '':null (server: RootServer)>"
+        }, Environment.root_osc_address_node.get_debug_pieces());
     }
 }

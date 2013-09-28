@@ -19,6 +19,7 @@ abstract public class ServerClient extends MaxPeer {
     public void detach_from_server() {
         if (this.server != null) {
             this.server.server_clients.remove(this);
+            this.server.deallocate_if_necessary();
         }
         this.server = null;
     }
@@ -47,11 +48,6 @@ abstract public class ServerClient extends MaxPeer {
 
     @Override
     public void notifyDeleted() {
-        Server node = this.get_server();
-        if (node == null) {
-            return;
-        }
-        node.server_clients.remove(this);
-        node.deallocate_if_necessary();
+        this.detach_from_server();
     }
 }
