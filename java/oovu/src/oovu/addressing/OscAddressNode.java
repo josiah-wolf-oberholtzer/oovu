@@ -214,7 +214,7 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
         Collections.sort(children);
         for (OscAddressNode child : children) {
             for (String child_piece : child.get_debug_pieces()) {
-                pieces.add("    " + child_piece);
+                pieces.add("...." + child_piece);
             }
         }
         return pieces.toArray(new String[0]);

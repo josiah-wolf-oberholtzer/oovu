@@ -87,8 +87,12 @@ public class Test__OscAddressNode__create_address {
         Assert.assertArrayEquals(
             Test__OscAddressNode__create_address.root.get_summary_pieces(),
             new String[] {
-                "/foo", "/foo/bar", "/foo/bar/baz", "/foo/bar/baz.1",
-                "/foo/bar/baz.2", "/foo/bar/baz.3"
+                "/foo",
+                "/foo/bar",
+                "/foo/bar/baz",
+                "/foo/bar/baz.1",
+                "/foo/bar/baz.2",
+                "/foo/bar/baz.3"
             });
     }
 
