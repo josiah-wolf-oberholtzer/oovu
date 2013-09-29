@@ -34,7 +34,6 @@ abstract public class MaxPeer extends MaxObject implements MessagePasser {
             }
         }
         Request request = new Request(this, osc_address, arguments);
-        MaxObject.post(request.toString());
         this.handle_request(request);
     }
 
@@ -54,8 +53,6 @@ abstract public class MaxPeer extends MaxObject implements MessagePasser {
         Set<OscAddressNode> osc_address_nodes = this.get_osc_address_node()
             .search(request.destination);
         for (OscAddressNode osc_address_node : osc_address_nodes) {
-            MaxObject.post(osc_address_node.toString() + " "
-                + osc_address_node.get_debug_piece());
             Server server = osc_address_node.get_server();
             if (server != null) {
                 server.handle_request(request);
@@ -79,7 +76,15 @@ abstract public class MaxPeer extends MaxObject implements MessagePasser {
                 }
                 this.output_value_response_payload(output);
             } else {
-                this.output_interface_response_payload(output);
+                if (relative_osc_address != null) {
+                    String message = output[0].getString();
+                    output = Atom.removeFirst(output);
+                    output = Atom.newAtom(
+                        relative_osc_address + "/:" + message, output);
+                    this.output_value_response_payload(output);
+                } else {
+                    this.output_interface_response_payload(output);
+                }
             }
         }
     }

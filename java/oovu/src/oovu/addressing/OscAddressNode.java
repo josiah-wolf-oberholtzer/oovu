@@ -295,7 +295,11 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
             string_builder.append(source_parentage[counter].get_name());
             counter += 1;
         }
-        return string_builder.toString();
+        String result = string_builder.toString();
+        if (result.equals("")) {
+            return null;
+        }
+        return result;
     }
 
     public OscAddressNode get_root() {

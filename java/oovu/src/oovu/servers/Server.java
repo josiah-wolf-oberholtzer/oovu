@@ -324,6 +324,9 @@ abstract public class Server implements MessagePasser {
             return;
         }
         Response response = new Response(this, payload, request);
+        if (payload[0][0].equals(Atom.newAtom("value"))) {
+            this.handle_response(response);
+        }
         request.source.handle_response(response);
     }
 
