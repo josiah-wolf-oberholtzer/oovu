@@ -1,5 +1,6 @@
 package oovu.clients;
 
+import oovu.addressing.Environment;
 import oovu.addressing.OscAddressNode;
 import oovu.messaging.InterfaceRequest;
 import oovu.messaging.InterfaceResponse;
@@ -27,6 +28,14 @@ abstract public class MaxPeer extends MaxObject implements MessagePasser {
             request = new ValueRequest(this, ".", input);
         }
         this.handle_request(request);
+    }
+
+    @Override
+    public void dblclick() {
+        for (String piece : Environment.root_osc_address_node
+            .get_debug_pieces()) {
+            MaxObject.post(piece);
+        }
     }
 
     abstract public String get_osc_address();
