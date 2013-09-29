@@ -88,10 +88,11 @@ public class Test__servers__lifecycle {
         Assert.assertEquals(
             foo_baz_quux_property_server.get_osc_address_node(),
             osc_address_node);
-        Assert.assertEquals(foo_module_server.get_osc_address(), "/foo");
-        Assert.assertEquals(foo_bar_property_server.get_osc_address(),
+        Assert.assertEquals("/foo", foo_module_server.get_osc_address_string());
+        Assert.assertEquals(foo_bar_property_server.get_osc_address_string(),
             "/foo/bar");
-        Assert.assertEquals(foo_baz_quux_property_server.get_osc_address(),
+        Assert.assertEquals(
+            foo_baz_quux_property_server.get_osc_address_string(),
             "/foo/baz/quux");
         foo_bar_property_server.deallocate_if_necessary();
         Assert.assertArrayEquals(

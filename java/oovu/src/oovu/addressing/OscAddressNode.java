@@ -236,7 +236,11 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
         return this.numbered_children.get(number);
     }
 
-    public String get_osc_address() {
+    public OscAddress get_osc_address() {
+        return OscAddress.from_cache(this.get_osc_address_string());
+    }
+
+    public String get_osc_address_string() {
         ArrayList<String> names = new ArrayList<String>();
         for (OscAddressNode osc_address_node : this.get_parentage()) {
             names.add(osc_address_node.name);
@@ -272,7 +276,7 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
         return count;
     }
 
-    public String get_relative_osc_address(
+    public String get_relative_osc_address_string(
         OscAddressNode relative_osc_address_node) {
         OscAddressNode[] source_parentage = this.get_parentage();
         OscAddressNode[] relative_parentage = relative_osc_address_node
@@ -493,7 +497,6 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
 
     @Override
     public String toString() {
-        return this.getClass().getSimpleName() + "(\"" + this.get_osc_address()
-            + "\")";
+        return this.get_osc_address_string();
     }
 }

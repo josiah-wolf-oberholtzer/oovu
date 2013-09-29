@@ -1,5 +1,6 @@
 package oovu.clients;
 
+import oovu.addressing.OscAddress;
 import oovu.addressing.OscAddressNode;
 import oovu.messaging.Request;
 import oovu.servers.Server;
@@ -25,13 +26,18 @@ abstract public class ServerClient extends MaxPeer {
     }
 
     @Override
-    public String get_osc_address() {
+    public OscAddress get_osc_address() {
         return this.server.get_osc_address();
     }
 
     @Override
     public OscAddressNode get_osc_address_node() {
         return this.server.get_osc_address_node();
+    }
+
+    @Override
+    public String get_osc_address_string() {
+        return this.get_osc_address().toString();
     }
 
     public Server get_server() {

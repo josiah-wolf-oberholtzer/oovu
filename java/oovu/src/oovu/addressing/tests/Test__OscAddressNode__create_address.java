@@ -59,14 +59,14 @@ public class Test__OscAddressNode__create_address {
         OscAddress osc_address = OscAddress.from_cache("/foo/bar");
         OscAddressNode node_1 = Test__OscAddressNode__create_address.root
             .create_address(osc_address, false);
-        Assert.assertEquals(node_1.get_osc_address(), "/foo/bar");
+        Assert.assertEquals(node_1.get_osc_address_string(), "/foo/bar");
         OscAddressNode node_2 = Test__OscAddressNode__create_address.root
             .create_address(osc_address, false);
         Assert.assertEquals(node_1, node_2);
         OscAddressNode node_3 = Test__OscAddressNode__create_address.root
             .create_address(osc_address, true);
         Assert.assertNotEquals(node_3, node_1);
-        Assert.assertEquals(node_3.get_osc_address(), "/foo/bar.1");
+        Assert.assertEquals(node_3.get_osc_address_string(), "/foo/bar.1");
     }
 
     @Test
@@ -74,16 +74,16 @@ public class Test__OscAddressNode__create_address {
         OscAddress osc_address = OscAddress.from_cache("/foo/bar/baz");
         OscAddressNode node_1 = Test__OscAddressNode__create_address.root
             .create_address(osc_address, true);
-        Assert.assertEquals(node_1.get_osc_address(), "/foo/bar/baz");
+        Assert.assertEquals(node_1.get_osc_address_string(), "/foo/bar/baz");
         OscAddressNode node_2 = Test__OscAddressNode__create_address.root
             .create_address(osc_address, true);
-        Assert.assertEquals(node_2.get_osc_address(), "/foo/bar/baz.1");
+        Assert.assertEquals(node_2.get_osc_address_string(), "/foo/bar/baz.1");
         OscAddressNode node_3 = Test__OscAddressNode__create_address.root
             .create_address(osc_address, true);
-        Assert.assertEquals(node_3.get_osc_address(), "/foo/bar/baz.2");
+        Assert.assertEquals(node_3.get_osc_address_string(), "/foo/bar/baz.2");
         OscAddressNode node_4 = Test__OscAddressNode__create_address.root
             .create_address(osc_address, true);
-        Assert.assertEquals(node_4.get_osc_address(), "/foo/bar/baz.3");
+        Assert.assertEquals(node_4.get_osc_address_string(), "/foo/bar/baz.3");
         Assert.assertArrayEquals(
             Test__OscAddressNode__create_address.root.get_summary_pieces(),
             new String[] {
@@ -102,14 +102,14 @@ public class Test__OscAddressNode__create_address {
         OscAddress osc_address_two = OscAddress.from_cache("baz/quux");
         OscAddressNode foo_bar = Test__OscAddressNode__create_address.root
             .create_address(osc_address_one, false);
-        Assert.assertEquals(foo_bar.get_osc_address(), "/foo/bar");
+        Assert.assertEquals(foo_bar.get_osc_address_string(), "/foo/bar");
         OscAddressNode foo_bar_baz_quux = foo_bar.create_address(
             osc_address_two, false);
-        Assert.assertEquals(foo_bar_baz_quux.get_osc_address(),
+        Assert.assertEquals(foo_bar_baz_quux.get_osc_address_string(),
             "/foo/bar/baz/quux");
         OscAddressNode baz_quux = Test__OscAddressNode__create_address.root
             .create_address(osc_address_two, false);
-        Assert.assertEquals(baz_quux.get_osc_address(), "/baz/quux");
+        Assert.assertEquals(baz_quux.get_osc_address_string(), "/baz/quux");
     }
 
     @Test

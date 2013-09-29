@@ -41,7 +41,7 @@ public class Test__OOVU__lifecycle {
         Assert.assertEquals(osc_address_node.get_parent(),
             Environment.root_osc_address_node);
         Assert.assertEquals("foo", module_server.get_name());
-        Assert.assertEquals("/foo", module_server.get_osc_address());
+        Assert.assertEquals("/foo", module_server.get_osc_address_string());
         Assert.assertEquals(1, module_server.get_reference_count());
         Assert.assertTrue(module_server.server_clients.contains(module_client));
         Assert.assertArrayEquals(new String[] {

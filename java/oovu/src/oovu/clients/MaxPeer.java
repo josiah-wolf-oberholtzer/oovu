@@ -1,7 +1,6 @@
 package oovu.clients;
 
 import oovu.addressing.Environment;
-import oovu.addressing.OscAddressNode;
 import oovu.messaging.InterfaceRequest;
 import oovu.messaging.InterfaceResponse;
 import oovu.messaging.MessagePasser;
@@ -37,12 +36,6 @@ abstract public class MaxPeer extends MaxObject implements MessagePasser {
             MaxObject.post(piece);
         }
     }
-
-    @Override
-    abstract public String get_osc_address();
-
-    @Override
-    abstract public OscAddressNode get_osc_address_node();
 
     @Override
     public void handle_response(Response response) {

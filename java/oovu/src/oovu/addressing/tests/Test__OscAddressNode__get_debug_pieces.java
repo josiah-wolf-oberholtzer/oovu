@@ -48,10 +48,10 @@ public class Test__OscAddressNode__get_debug_pieces {
         String[] debug_pieces = root.get_debug_pieces();
         Assert.assertArrayEquals(new String[] {
             "<Node '':null>",
-            "    <Node null:1001 (server: ModuleServer)>",
-            "        <Node '':null (server: PropertyServer)>",
-            "    <Node '':null>",
-            "        <Node '':null (bindings: 1)>"
+            "....<Node null:1001 (server: ModuleServer)>",
+            "........<Node 'bar':null (server: PropertyServer)>",
+            "....<Node 'foo':null>",
+            "........<Node 'bar':null (bindings: 1)>"
         }, debug_pieces);
     }
 }

@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import oovu.addressing.OscAddress;
 import oovu.addressing.OscAddressNode;
 import oovu.clients.ServerClient;
 import oovu.messaging.InterfaceRequest;
@@ -17,8 +18,6 @@ import oovu.messaging.MessagePasser;
 import oovu.messaging.Request;
 import oovu.messaging.Response;
 import oovu.messaging.ValueRequest;
-
-import org.apache.commons.lang3.ArrayUtils;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
@@ -124,7 +123,8 @@ abstract public class Server implements MessagePasser {
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             result[0] = Atom.newAtom(new String[] {
-                "oscaddress", Server.this.get_osc_address()
+                "oscaddress",
+                Server.this.get_osc_address_node().get_osc_address_string()
             });
             return result;
         }
@@ -279,29 +279,21 @@ abstract public class Server implements MessagePasser {
     }
 
     @Override
-    public String get_osc_address() {
+    public OscAddress get_osc_address() {
         if (this.get_osc_address_node() == null) {
             return null;
         }
-        OscAddressNode[] parentage = this.get_osc_address_node()
-            .get_parentage();
-        ArrayUtils.reverse(parentage);
-        StringBuilder string_builder = new StringBuilder();
-        for (OscAddressNode osc_address_node : parentage) {
-            if (osc_address_node.get_name() == null) {
-                return null;
-            }
-            if (!osc_address_node.get_name().equals("")) {
-                string_builder.append("/");
-                string_builder.append(osc_address_node.get_name());
-            }
-        }
-        return string_builder.toString();
+        return this.get_osc_address_node().get_osc_address();
     }
 
     @Override
     public OscAddressNode get_osc_address_node() {
         return this.osc_address_node;
+    }
+
+    @Override
+    public String get_osc_address_string() {
+        return this.get_osc_address().toString();
     }
 
     public Server get_parent_server() {

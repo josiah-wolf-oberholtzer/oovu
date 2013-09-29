@@ -123,7 +123,6 @@ public class OscAddress {
     @Override
     public String toString() {
         StringBuilder string_builder = new StringBuilder();
-        string_builder.append(this.getClass().getSimpleName() + "(\"");
         if (!this.is_relative) {
             string_builder.append("/");
         }
@@ -134,7 +133,6 @@ public class OscAddress {
             }
             string_builder.append(this.node_attribute_name);
         }
-        string_builder.append("\")");
         return string_builder.toString();
     }
 }

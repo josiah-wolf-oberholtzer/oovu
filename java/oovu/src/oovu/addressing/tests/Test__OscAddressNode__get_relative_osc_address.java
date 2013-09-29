@@ -25,11 +25,12 @@ public class Test__OscAddressNode__get_relative_osc_address {
             false);
         OscAddressNode bar = root.create_address(
             OscAddress.from_cache("/foo/bar"), false);
-        Assert.assertEquals("", root.get_relative_osc_address(root));
-        Assert.assertEquals("/foo", foo.get_relative_osc_address(root));
-        Assert.assertEquals("", foo.get_relative_osc_address(foo));
-        Assert.assertEquals("/foo/bar", bar.get_relative_osc_address(root));
-        Assert.assertEquals("/bar", bar.get_relative_osc_address(foo));
-        Assert.assertEquals("", bar.get_relative_osc_address(bar));
+        Assert.assertEquals("", root.get_relative_osc_address_string(root));
+        Assert.assertEquals("/foo", foo.get_relative_osc_address_string(root));
+        Assert.assertEquals("", foo.get_relative_osc_address_string(foo));
+        Assert.assertEquals("/foo/bar",
+            bar.get_relative_osc_address_string(root));
+        Assert.assertEquals("/bar", bar.get_relative_osc_address_string(foo));
+        Assert.assertEquals("", bar.get_relative_osc_address_string(bar));
     }
 }

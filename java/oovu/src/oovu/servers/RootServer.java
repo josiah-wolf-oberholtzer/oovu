@@ -1,6 +1,7 @@
 package oovu.servers;
 
 import oovu.addressing.Environment;
+import oovu.addressing.OscAddress;
 import oovu.clients.ServerClient;
 import oovu.messaging.Request;
 
@@ -23,7 +24,12 @@ public class RootServer extends Server {
     }
 
     @Override
-    public String get_osc_address() {
+    public OscAddress get_osc_address() {
+        return OscAddress.from_cache(this.get_osc_address_string());
+    }
+
+    @Override
+    public String get_osc_address_string() {
         return "/";
     }
 
