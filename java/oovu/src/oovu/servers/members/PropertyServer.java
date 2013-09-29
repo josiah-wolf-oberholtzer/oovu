@@ -3,7 +3,6 @@ package oovu.servers.members;
 import java.util.Map;
 
 import oovu.messaging.Response;
-import oovu.messaging.ValueResponse;
 import oovu.servers.ModuleMemberServer;
 import oovu.servers.ModuleServer;
 
@@ -38,7 +37,7 @@ public class PropertyServer extends AttributeServer {
         this.set_value(value);
         Atom[][] payload = new Atom[1][];
         payload[0] = this.get_value();
-        Response response = new ValueResponse(this, payload, null);
+        Response response = new Response(this, payload, null);
         this.handle_response(response);
     }
 }

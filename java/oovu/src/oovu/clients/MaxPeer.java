@@ -1,13 +1,10 @@
 package oovu.clients;
 
 import oovu.addressing.Environment;
-import oovu.messaging.InterfaceRequest;
-import oovu.messaging.InterfaceResponse;
+import oovu.addressing.OscAddress;
 import oovu.messaging.MessagePasser;
 import oovu.messaging.Request;
 import oovu.messaging.Response;
-import oovu.messaging.ValueRequest;
-import oovu.messaging.ValueResponse;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
@@ -16,16 +13,17 @@ abstract public class MaxPeer extends MaxObject implements MessagePasser {
 
     @Override
     public void anything(String message, Atom[] arguments) {
-        Request request = null;
+        String osc_address_string = null;
         if (this.getInlet() == 1) {
-            request = new InterfaceRequest(this, ".", message, arguments);
+            osc_address_string = "./:" + message;
         } else if ((1 < message.length()) && (message.charAt(0) == ':')) {
-            request = new InterfaceRequest(this, ".", message.substring(1),
-                arguments);
+            osc_address_string = "./" + message;
         } else {
-            Atom[] input = Atom.newAtom(message, arguments);
-            request = new ValueRequest(this, ".", input);
+            osc_address_string = "./:value";
+            arguments = Atom.newAtom(message, arguments);
         }
+        Request request = new Request(this,
+            OscAddress.from_cache(osc_address_string), arguments);
         this.handle_request(request);
     }
 
@@ -42,29 +40,18 @@ abstract public class MaxPeer extends MaxObject implements MessagePasser {
         if (response == null) {
             return;
         }
+        Atom value_atom = Atom.newAtom("value");
         String relative_osc_address = response.get_relative_osc_address(this
             .get_osc_address_node());
-        if (ValueResponse.class.isInstance(response)) {
-            if (relative_osc_address != null) {
-                for (Atom[] output : response.payload) {
-                    this.output_value_response_payload(Atom.newAtom(
-                        relative_osc_address, output));
+        for (Atom[] output : response.payload) {
+            if (output[0].equals(value_atom)) {
+                output = Atom.removeFirst(output);
+                if (relative_osc_address != null) {
+                    output = Atom.newAtom(relative_osc_address, output);
                 }
+                this.output_value_response_payload(output);
             } else {
-                for (Atom[] output : response.payload) {
-                    this.output_value_response_payload(output);
-                }
-            }
-        } else if (InterfaceResponse.class.isInstance(response)) {
-            if (relative_osc_address != null) {
-                for (Atom[] output : response.payload) {
-                    this.output_value_response_payload(Atom.newAtom(
-                        relative_osc_address, output));
-                }
-            } else {
-                for (Atom[] output : response.payload) {
-                    this.output_interface_response_payload(output);
-                }
+                this.output_interface_response_payload(output);
             }
         }
     }
@@ -73,7 +60,8 @@ abstract public class MaxPeer extends MaxObject implements MessagePasser {
     public void list(Atom[] input) {
         Request request = null;
         if (this.getInlet() == 0) {
-            request = new ValueRequest(this, ".", input);
+            request = new Request(this, OscAddress.from_cache("./:value"),
+                input);
         }
         this.handle_request(request);
     }

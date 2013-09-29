@@ -11,13 +11,10 @@ import java.util.Set;
 import oovu.addressing.OscAddress;
 import oovu.addressing.OscAddressNode;
 import oovu.clients.ServerClient;
-import oovu.messaging.InterfaceRequest;
-import oovu.messaging.InterfaceResponse;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessagePasser;
 import oovu.messaging.Request;
 import oovu.messaging.Response;
-import oovu.messaging.ValueRequest;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
@@ -308,9 +305,17 @@ abstract public class Server implements MessagePasser {
         return new String[0];
     }
 
-    public void handle_interface_request(InterfaceRequest request) {
+    @Override
+    public void handle_request(Request request) {
+        if (request == null) {
+            return;
+        }
+        String message_handler_name = request.destination.message_handler_name;
+        if (message_handler_name == null) {
+            message_handler_name = "value";
+        }
         MessageHandler message_handler = this.message_handlers
-            .get(request.message_handler_name);
+            .get(message_handler_name);
         if (message_handler == null) {
             return;
         }
@@ -318,20 +323,8 @@ abstract public class Server implements MessagePasser {
         if (payload == null) {
             return;
         }
-        Response response = new InterfaceResponse(this, payload, request);
+        Response response = new Response(this, payload, request);
         request.source.handle_response(response);
-    }
-
-    @Override
-    public void handle_request(Request request) {
-        if (request == null) {
-            return;
-        }
-        if (ValueRequest.class.isInstance(request)) {
-            this.handle_value_request((ValueRequest) request);
-        } else if (InterfaceRequest.class.isInstance(request)) {
-            this.handle_interface_request((InterfaceRequest) request);
-        }
     }
 
     @Override
@@ -345,9 +338,6 @@ abstract public class Server implements MessagePasser {
         if (this.parent_server != null) {
             this.parent_server.handle_response(response);
         }
-    }
-
-    public void handle_value_request(ValueRequest request) {
     }
 
     @Override

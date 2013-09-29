@@ -66,7 +66,7 @@ public class OscAddress {
         return false;
     }
 
-    public final String node_attribute_name;
+    public final String message_handler_name;
     public final String[] address_items;
     public final String raw_address;
     public final boolean is_relative;
@@ -79,14 +79,14 @@ public class OscAddress {
         boolean has_wildcard_tokens = false;
         Matcher matcher = OscAddress.node_attribute_pattern.matcher(input);
         if (matcher.matches()) {
-            this.node_attribute_name = matcher.group(1).substring(1);
+            this.message_handler_name = matcher.group(1).substring(1);
             input = input.replace(matcher.group(1), "");
             if ((0 < input.length())
                 && (input.charAt(input.length() - 1) != '/')) {
                 throw new RuntimeException("Bad address: " + input);
             }
         } else {
-            this.node_attribute_name = null;
+            this.message_handler_name = null;
         }
         if ((0 < input.length()) && (input.charAt(0) == '/')) {
             this.is_relative = false;
@@ -127,11 +127,11 @@ public class OscAddress {
             string_builder.append("/");
         }
         string_builder.append(StringUtils.join(this.address_items, "/"));
-        if (this.node_attribute_name != null) {
+        if (this.message_handler_name != null) {
             if (1 < string_builder.length()) {
                 string_builder.append("/");
             }
-            string_builder.append(this.node_attribute_name);
+            string_builder.append(this.message_handler_name);
         }
         return string_builder.toString();
     }

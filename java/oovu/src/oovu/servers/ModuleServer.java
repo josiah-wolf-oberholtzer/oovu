@@ -4,13 +4,8 @@ import java.util.Map;
 
 import oovu.addressing.Environment;
 import oovu.addressing.OscAddressNode;
-import oovu.messaging.InterfaceRequest;
-import oovu.messaging.Request;
-import oovu.messaging.Response;
-import oovu.messaging.ValueRequest;
 
 import com.cycling74.max.Atom;
-import com.cycling74.max.MaxObject;
 
 public class ModuleServer extends Server {
 
@@ -47,19 +42,5 @@ public class ModuleServer extends Server {
             return;
         }
         this.name = this.osc_address_node.acquire_name(desired_name);
-    }
-
-    @Override
-    public void handle_request(Request request) {
-        if (request == null) {
-            return;
-        }
-        Response response = null;
-        if (ValueRequest.class.isInstance(request)) {
-            MaxObject.post(request.toString() + "\n");
-        } else if (InterfaceRequest.class.isInstance(request)) {
-            MaxObject.post(request.toString() + "\n");
-        }
-        this.handle_response(response);
     }
 }
