@@ -122,4 +122,58 @@ public class Test__OOVU__lifecycle {
             "<Node '':null (server: RootServer)>",
         }, Environment.root_osc_address_node.get_debug_pieces());
     }
+
+    @Test
+    public void test_04() {
+        Property property_1001 = new Property(Atom.parse("1001 baz"));
+        Property property_2002 = new Property(Atom.parse("2002 quux"));
+        Module module_1001 = new Module(Atom.parse("1001 foo"));
+        Module module_2002 = new Module(Atom.parse("2002 foo"));
+        Assert.assertArrayEquals(new String[] {
+            "<Node '':null (server: RootServer)>",
+            "....<Node 'foo':1001 (server: ModuleServer)>",
+            "........<Node 'baz':null (server: PropertyServer)>",
+            "....<Node 'foo.1':2002 (server: ModuleServer)>",
+            "........<Node 'quux':null (server: PropertyServer)>"
+        }, Environment.root_osc_address_node.get_debug_pieces());
+        Binding binding = new Binding(Atom.parse("/foo/bar"));
+        Assert.assertArrayEquals(new String[] {
+            "<Node '':null (server: RootServer)>",
+            "....<Node 'foo':1001 (server: ModuleServer)>",
+            "........<Node 'bar':null (bindings: 1)>",
+            "........<Node 'baz':null (server: PropertyServer)>",
+            "....<Node 'foo.1':2002 (server: ModuleServer)>",
+            "........<Node 'quux':null (server: PropertyServer)>"
+        }, Environment.root_osc_address_node.get_debug_pieces());
+        property_1001.detach_from_server();
+        module_1001.detach_from_server();
+        Assert.assertArrayEquals(new String[] {
+            "<Node '':null (server: RootServer)>",
+            "....<Node 'foo':null>",
+            "........<Node 'bar':null (bindings: 1)>",
+            "....<Node 'foo.1':2002 (server: ModuleServer)>",
+            "........<Node 'quux':null (server: PropertyServer)>"
+        }, Environment.root_osc_address_node.get_debug_pieces());
+        Property property_3003 = new Property(Atom.parse("3003 baz"));
+        Module module_3003 = new Module(Atom.parse("3003 foo"));
+        module_2002.detach_from_server();
+        property_2002.detach_from_server();
+        Assert.assertArrayEquals(new String[] {
+            "<Node '':null (server: RootServer)>",
+            "....<Node 'foo':3003 (server: ModuleServer)>",
+            "........<Node 'bar':null (bindings: 1)>",
+            "........<Node 'baz':null (server: PropertyServer)>"
+        }, Environment.root_osc_address_node.get_debug_pieces());
+        binding.detach();
+        Assert.assertArrayEquals(new String[] {
+            "<Node '':null (server: RootServer)>",
+            "....<Node 'foo':3003 (server: ModuleServer)>",
+            "........<Node 'baz':null (server: PropertyServer)>",
+        }, Environment.root_osc_address_node.get_debug_pieces());
+        property_3003.detach_from_server();
+        module_3003.detach_from_server();
+        Assert.assertArrayEquals(new String[] {
+            "<Node '':null (server: RootServer)>"
+        }, Environment.root_osc_address_node.get_debug_pieces());
+    }
 }

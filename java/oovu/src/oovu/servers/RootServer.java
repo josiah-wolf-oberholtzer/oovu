@@ -13,7 +13,7 @@ public class RootServer extends Server {
 
     @Override
     public void clear() {
-        for (Server child_server : this.child_servers) {
+        for (Server child_server : this.child_servers.toArray(new Server[0])) {
             child_server.detach_from_parent_server();
         }
         this.detach_from_parent_server();
