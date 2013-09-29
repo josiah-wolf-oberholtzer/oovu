@@ -125,13 +125,15 @@ public class OscAddress {
         StringBuilder string_builder = new StringBuilder();
         if (!this.is_relative) {
             string_builder.append("/");
+        } else {
+            string_builder.append("./");
         }
         string_builder.append(StringUtils.join(this.address_items, "/"));
         if (this.message_handler_name != null) {
-            if (1 < string_builder.length()) {
+            if (string_builder.charAt(string_builder.length() - 1) != '/') {
                 string_builder.append("/");
             }
-            string_builder.append(this.message_handler_name);
+            string_builder.append(":" + this.message_handler_name);
         }
         return string_builder.toString();
     }

@@ -15,4 +15,13 @@ public class Request {
         this.destination = destination;
         this.payload = payload;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder string_builder = new StringBuilder();
+        string_builder.append(this.destination.toString());
+        string_builder.append(" ");
+        string_builder.append(Atom.toOneString(this.payload));
+        return string_builder.toString();
+    }
 }

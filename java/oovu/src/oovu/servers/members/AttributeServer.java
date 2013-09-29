@@ -43,6 +43,7 @@ abstract public class AttributeServer extends ModuleMemberServer {
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             result[0] = AttributeServer.this.get_value();
+            result[0] = Atom.newAtom("value", result[0]);
             return result;
         }
     }
@@ -65,6 +66,23 @@ abstract public class AttributeServer extends ModuleMemberServer {
         }
     }
 
+    private class SetValueMessageHandler extends MessageHandler {
+
+        @Override
+        public String get_name() {
+            return "value";
+        }
+
+        @Override
+        public Atom[][] run(Atom[] arguments) {
+            Atom[][] result = new Atom[1][];
+            AttributeServer.this.set_value(arguments);
+            result[0] = AttributeServer.this.get_value();
+            result[0] = Atom.newAtom("value", result[0]);
+            return result;
+        }
+    }
+
     protected Integer priority = 0;
     public final Datatype datatype;
 
@@ -75,6 +93,7 @@ abstract public class AttributeServer extends ModuleMemberServer {
         this.add_message_handler(new GetPriorityMessageHandler());
         this.add_message_handler(new GetValueMessageHandler());
         this.add_message_handler(new SetPriorityMessageHandler());
+        this.add_message_handler(new SetValueMessageHandler());
         this.initialize_value();
     }
 
