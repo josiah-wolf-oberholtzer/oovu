@@ -38,8 +38,10 @@ abstract public class MaxPeer extends MaxObject implements MessagePasser {
         }
     }
 
+    @Override
     abstract public String get_osc_address();
 
+    @Override
     abstract public OscAddressNode get_osc_address_node();
 
     @Override

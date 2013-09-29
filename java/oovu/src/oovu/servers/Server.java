@@ -278,6 +278,7 @@ abstract public class Server implements MessagePasser {
         return this.name;
     }
 
+    @Override
     public String get_osc_address() {
         if (this.get_osc_address_node() == null) {
             return null;
@@ -298,6 +299,7 @@ abstract public class Server implements MessagePasser {
         return string_builder.toString();
     }
 
+    @Override
     public OscAddressNode get_osc_address_node() {
         return this.osc_address_node;
     }

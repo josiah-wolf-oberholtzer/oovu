@@ -11,9 +11,10 @@ import com.cycling74.max.Atom;
 
 public class Binding extends MaxPeer implements MessagePasser {
 
-    protected OscAddressNode osc_address_node = null;
+    protected OscAddressNode osc_address_node;
 
     public Binding(Atom[] arguments) {
+        this.declareIO(2, 2);
         if (arguments.length == 0) {
             return;
         }
