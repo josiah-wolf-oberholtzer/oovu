@@ -5,7 +5,6 @@ import oovu.addressing.OscAddress;
 import oovu.addressing.OscAddressNode;
 import oovu.clients.MaxPeer;
 import oovu.messaging.MessagePasser;
-import oovu.messaging.Request;
 
 import com.cycling74.max.Atom;
 
@@ -15,17 +14,34 @@ public class Binding extends MaxPeer implements MessagePasser {
 
     public Binding(Atom[] arguments) {
         this.declareIO(2, 2);
+        OscAddress osc_address = null;
         if (arguments.length == 0) {
             return;
         }
-        String osc_address_string = arguments[0].getString();
-        OscAddress osc_address = OscAddress.from_cache(osc_address_string);
+        OscAddressNode osc_address_node = Environment.root_osc_address_node;
+        if (arguments[0].isInt()) {
+            int module_id = arguments[0].getInt();
+            OscAddressNode numbered_child = osc_address_node
+                .get_numbered_child(module_id);
+            if (numbered_child == null) {
+                numbered_child = new OscAddressNode(module_id);
+                osc_address_node.add_child(numbered_child);
+            }
+            osc_address_node = numbered_child;
+            if (1 < arguments.length) {
+                osc_address = OscAddress.from_cache(arguments[1].getString());
+            } else {
+                osc_address = OscAddress.from_cache(".");
+            }
+        } else {
+            osc_address = OscAddress.from_cache(arguments[0].getString());
+        }
         if (osc_address.has_wildcard_tokens) {
             return;
         }
-        OscAddressNode osc_address_node = Environment.root_osc_address_node
+        OscAddressNode found_osc_address_node = osc_address_node
             .create_address(osc_address, false);
-        this.attach(osc_address_node);
+        this.attach(found_osc_address_node);
     }
 
     public void attach(OscAddressNode osc_address_node) {
@@ -60,14 +76,6 @@ public class Binding extends MaxPeer implements MessagePasser {
     @Override
     public String get_osc_address_string() {
         return this.get_osc_address().toString();
-    }
-
-    @Override
-    public void handle_request(Request request) {
-        if (request == null) {
-            return;
-        }
-        // this.get_osc_address_node().handle_request(request);
     }
 
     @Override

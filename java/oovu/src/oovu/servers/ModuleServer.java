@@ -17,9 +17,15 @@ public class ModuleServer extends Server {
             if (server != null) {
                 if (ModuleServer.class.isInstance(server)) {
                     return (ModuleServer) server;
+                } else {
+                    throw new RuntimeException(
+                        "Non-module server attached to numbered node.");
                 }
+            } else {
+                ModuleServer module_server = new ModuleServer(module_id, null);
+                module_server.attach_to_osc_address_node(osc_address_node);
+                return module_server;
             }
-            throw new RuntimeException("Bad module setup");
         } else {
             osc_address_node = new OscAddressNode(module_id);
             Environment.root_osc_address_node.add_child(osc_address_node);

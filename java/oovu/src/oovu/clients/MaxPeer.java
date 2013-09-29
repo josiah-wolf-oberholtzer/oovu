@@ -96,7 +96,6 @@ abstract public class MaxPeer extends MaxObject implements MessagePasser {
             request = new Request(this, OscAddress.from_cache("./:value"),
                 input);
         }
-        MaxObject.post(request.toString());
         this.handle_request(request);
     }
 
