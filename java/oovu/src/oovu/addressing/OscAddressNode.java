@@ -377,7 +377,8 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
         for (Binding binding : other.bindings) {
             binding.attach(this);
         }
-        for (String child_name : other.named_children.keySet()) {
+        Set<String> other_named_children = other.named_children.keySet();
+        for (String child_name : other_named_children) {
             OscAddressNode child = other.get_named_child(child_name);
             if (this.named_children.containsKey(child_name)) {
                 this.named_children.get(child_name).merge_with(child);
