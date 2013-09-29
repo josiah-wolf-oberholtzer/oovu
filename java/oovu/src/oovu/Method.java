@@ -1,12 +1,12 @@
 package oovu;
 
-import oovu.clients.ServerClient;
+import oovu.clients.AttributeServerClient;
 import oovu.servers.members.MethodServer;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
 
-public class Method extends ServerClient {
+public class Method extends AttributeServerClient {
 
     public Method(Atom[] arguments) {
         if (arguments.length < 2) {

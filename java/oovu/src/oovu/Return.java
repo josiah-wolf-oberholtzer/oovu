@@ -1,12 +1,12 @@
 package oovu;
 
-import oovu.clients.ServerClient;
+import oovu.clients.AttributeServerClient;
 import oovu.servers.members.ReturnServer;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
 
-public class Return extends ServerClient {
+public class Return extends AttributeServerClient {
 
     public Return(Atom[] arguments) {
         if (arguments.length < 2) {
@@ -21,4 +21,5 @@ public class Return extends ServerClient {
             Atom.removeFirst(arguments, 2));
         this.server.server_clients.add(this);
     }
+
 }

@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import oovu.Binding;
 import oovu.addressing.OscAddress;
 import oovu.addressing.OscAddressNode;
 import oovu.clients.ServerClient;
@@ -337,6 +338,9 @@ abstract public class Server implements MessagePasser {
         }
         for (ServerClient server_client : this.server_clients) {
             server_client.handle_response(response);
+        }
+        for (Binding binding : this.osc_address_node.get_bindings()) {
+            binding.handle_response(response);
         }
         if (this.parent_server != null) {
             this.parent_server.handle_response(response);

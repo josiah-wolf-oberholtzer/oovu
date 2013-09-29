@@ -1,12 +1,12 @@
 package oovu;
 
-import oovu.clients.ServerClient;
+import oovu.clients.AttributeServerClient;
 import oovu.servers.members.PropertyServer;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
 
-public class Property extends ServerClient {
+public class Property extends AttributeServerClient {
 
     public Property(Atom[] arguments) {
         if (arguments.length < 2) {
