@@ -26,10 +26,10 @@ abstract public class ServerClient extends MaxPeer {
         this.server = null;
     }
 
-    protected void generate_server_client_creation_callback() {
+    protected void generate_message_passer_callback() {
         try {
-            ServerClientCreationCallback callback = new ServerClientCreationCallback(
-                this);
+            MessagePasserCallback callback = new MessagePasserCallback(this,
+                this.get_server().generate_dumpmeta_response());
             MaxSystem.deferLow(callback);
         } catch (UnsatisfiedLinkError e) {
         }

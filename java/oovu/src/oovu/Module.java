@@ -22,7 +22,7 @@ public class Module extends ServerClient {
         module_server.acquire_name(desired_name);
         this.attach_to_server(module_server);
         this.handle_response(this.server.generate_dumpmeta_response());
-        this.generate_server_client_creation_callback();
+        this.generate_message_passer_callback();
     }
 
     @Override

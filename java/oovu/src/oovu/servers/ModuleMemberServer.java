@@ -5,9 +5,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import oovu.Binding;
 import oovu.addressing.OscAddress;
 import oovu.addressing.OscAddressNode;
+import oovu.clients.MessagePasserCallback;
 import oovu.messaging.MessageHandler;
+import oovu.messaging.Response;
 import oovu.servers.members.MethodServer;
 import oovu.servers.members.PropertyServer;
 import oovu.servers.members.PullServer;
@@ -15,6 +18,7 @@ import oovu.servers.members.PushServer;
 import oovu.servers.members.ReturnServer;
 
 import com.cycling74.max.Atom;
+import com.cycling74.max.MaxSystem;
 
 public abstract class ModuleMemberServer extends Server {
 
@@ -72,6 +76,7 @@ public abstract class ModuleMemberServer extends Server {
         ModuleMemberServer member_server = null;
         OscAddressNode osc_address_node = module_server.get_osc_address_node()
             .search_for_one(osc_address);
+        boolean server_is_new = false;
         if (osc_address_node == null) {
             // address doesn't exist
             member_server = ModuleMemberServer.allocate_new_from_label(
@@ -79,17 +84,20 @@ public abstract class ModuleMemberServer extends Server {
             osc_address_node = module_server.get_osc_address_node()
                 .create_address(osc_address, true);
             member_server.attach_to_osc_address_node(osc_address_node);
+            server_is_new = true;
         } else if (osc_address_node.get_server() == null) {
             // address does exist but no server is attached
             member_server = ModuleMemberServer.allocate_new_from_label(
                 module_server, label, module_id, argument_list);
             member_server.attach_to_osc_address_node(osc_address_node);
+            server_is_new = true;
         } else {
             // address exists and a server is already attached
             Server current_member_server = osc_address_node.get_server();
             if (current_member_server.getClass() == member_node_class) {
                 // server is of the desired type
                 member_server = (ModuleMemberServer) current_member_server;
+                server_is_new = false;
             } else {
                 // server is not of the desired type, so acquire a new address
                 member_server = ModuleMemberServer.allocate_new_from_label(
@@ -97,6 +105,14 @@ public abstract class ModuleMemberServer extends Server {
                 osc_address_node = module_server.get_osc_address_node()
                     .create_address(osc_address, true);
                 member_server.attach_to_osc_address_node(osc_address_node);
+                server_is_new = true;
+            }
+        }
+        if (server_is_new) {
+            Response response = member_server.generate_dumpmeta_response();
+            for (Binding binding : osc_address_node.get_bindings()) {
+                MaxSystem
+                    .deferLow(new MessagePasserCallback(binding, response));
             }
         }
         return member_server;

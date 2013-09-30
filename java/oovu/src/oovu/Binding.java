@@ -4,9 +4,12 @@ import oovu.addressing.Environment;
 import oovu.addressing.OscAddress;
 import oovu.addressing.OscAddressNode;
 import oovu.clients.MaxPeer;
+import oovu.clients.MessagePasserCallback;
 import oovu.messaging.MessagePasser;
+import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
+import com.cycling74.max.MaxSystem;
 
 public class Binding extends MaxPeer implements MessagePasser {
 
@@ -42,6 +45,15 @@ public class Binding extends MaxPeer implements MessagePasser {
         OscAddressNode found_osc_address_node = osc_address_node
             .create_address(osc_address, false);
         this.attach(found_osc_address_node);
+        if (this.osc_address_node.get_server() != null) {
+            try {
+                Server server = this.osc_address_node.get_server();
+                MessagePasserCallback callback = new MessagePasserCallback(
+                    this, server.generate_dumpmeta_response());
+                MaxSystem.deferLow(callback);
+            } catch (UnsatisfiedLinkError e) {
+            }
+        }
     }
 
     public void attach(OscAddressNode osc_address_node) {
