@@ -69,14 +69,7 @@ public class Line extends MaxObject {
         this.outlet(0, (float) this.find_value_at_time(current_time));
     }
 
-    public void execute(double current_time) {
-        this.outlet(0, this.find_value_at_time(current_time));
-        if (this.time_points.size() == 1) {
-            this.stop_watching_clock();
-        }
-    }
-
-    public double find_value_at_time(double current_time) {
+    private void cleanup_time_points(double current_time) {
         while ((1 < this.time_points.size())
             && ((this.time_points.get(1).time) < current_time)) {
             this.time_points.remove(0);
@@ -85,6 +78,17 @@ public class Line extends MaxObject {
             && (this.time_points.get(1).time < current_time)) {
             this.time_points.remove(0);
         }
+    }
+
+    public void execute(double current_time) {
+        this.outlet(0, this.find_value_at_time(current_time));
+        if (this.time_points.size() == 1) {
+            this.stop_watching_clock();
+        }
+    }
+
+    public double find_value_at_time(double current_time) {
+        this.cleanup_time_points(current_time);
         if (this.time_points.size() == 1) {
             return this.time_points.get(0).value;
         }
@@ -123,7 +127,7 @@ public class Line extends MaxObject {
         this.time_points.add(new TimePoint(time, value));
         for (int i = 0, j = values.length; i < (j - 1); i += 2) {
             value = values[i];
-            time = values[i + 1] + time;
+            time = Math.abs(values[i + 1]) + time;
             this.time_points.add(new TimePoint(time, value));
         }
         this.start_watching_clock();
