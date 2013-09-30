@@ -4,6 +4,8 @@ import oovu.addressing.OscAddress;
 import oovu.addressing.OscAddressNode;
 import oovu.servers.Server;
 
+import com.cycling74.max.MaxSystem;
+
 abstract public class ServerClient extends MaxPeer {
 
     protected Server server;
@@ -22,6 +24,15 @@ abstract public class ServerClient extends MaxPeer {
             this.server.deallocate_if_necessary();
         }
         this.server = null;
+    }
+
+    protected void generate_server_client_creation_callback() {
+        try {
+            ServerClientCreationCallback callback = new ServerClientCreationCallback(
+                this);
+            MaxSystem.deferLow(callback);
+        } catch (UnsatisfiedLinkError e) {
+        }
     }
 
     @Override

@@ -20,5 +20,7 @@ public class Method extends AttributeServerClient {
         this.server = MethodServer.allocate(module_id, desired_name,
             Atom.removeFirst(arguments, 2));
         this.server.server_clients.add(this);
+        this.handle_response(this.server.generate_dumpmeta_response());
+        this.generate_server_client_creation_callback();
     }
 }

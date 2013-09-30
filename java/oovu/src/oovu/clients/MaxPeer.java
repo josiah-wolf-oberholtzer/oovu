@@ -100,11 +100,17 @@ abstract public class MaxPeer extends MaxObject implements MessagePasser {
     }
 
     public void output_interface_response_payload(Atom[] payload) {
-        this.outlet(this.getInfoIdx(), payload);
+        try {
+            this.outlet(this.getInfoIdx(), payload);
+        } catch (UnsatisfiedLinkError e) {
+        }
     }
 
     public void output_value_response_payload(Atom[] payload) {
-        this.outlet(1, payload);
-        this.outlet(0, "set", payload);
+        try {
+            this.outlet(1, payload);
+            this.outlet(0, "set", payload);
+        } catch (UnsatisfiedLinkError e) {
+        }
     }
 }

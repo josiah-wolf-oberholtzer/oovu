@@ -93,23 +93,22 @@ abstract public class Server implements MessagePasser {
         }
     }
 
-    private class GetNameMessageHandler extends MessageHandler {
-
-        @Override
-        public String get_name() {
-            return "getname";
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            Atom[][] result = new Atom[1][];
-            result[0] = Atom.newAtom(new String[] {
-                "name", Server.this.get_name()
-            });
-            return result;
-        }
-    }
-
+    // private class GetNameMessageHandler extends MessageHandler {
+    //
+    // @Override
+    // public String get_name() {
+    // return "getname";
+    // }
+    //
+    // @Override
+    // public Atom[][] run(Atom[] arguments) {
+    // Atom[][] result = new Atom[1][];
+    // result[0] = Atom.newAtom(new String[] {
+    // "name", Server.this.get_name()
+    // });
+    // return result;
+    // }
+    // }
     private class GetOscAddressMessageHandler extends MessageHandler {
 
         @Override
@@ -205,7 +204,7 @@ abstract public class Server implements MessagePasser {
         this.add_message_handler(new DumpMetaMessageHandler());
         this.add_message_handler(new GetMetaMessageHandler());
         this.add_message_handler(new GetInterfaceMessageHandler());
-        this.add_message_handler(new GetNameMessageHandler());
+        // this.add_message_handler(new GetNameMessageHandler());
         this.add_message_handler(new GetOscAddressMessageHandler());
         this.add_message_handler(new ReportMessageHandler());
         this.add_message_handler(new ShowMessageHandler());
@@ -270,6 +269,14 @@ abstract public class Server implements MessagePasser {
             this.parent_server.child_servers.remove(this);
         }
         this.parent_server = null;
+    }
+
+    public Response generate_dumpmeta_response() {
+        MessageHandler message_handler = this.message_handlers.get("dumpmeta");
+        Atom[][] payload = message_handler.run(null);
+        Request request = new Request(this, OscAddress.from_cache("."), null);
+        Response response = new Response(this, payload, request);
+        return response;
     }
 
     public String get_name() {
