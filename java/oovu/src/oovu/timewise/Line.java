@@ -1,15 +1,37 @@
 package oovu.timewise;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.Executable;
 import com.cycling74.max.MaxClock;
 import com.cycling74.max.MaxObject;
 
-public class Line extends MaxObject implements Executable {
+public class Line extends MaxObject {
 
-    private class TimePoint {
+    public static class ClockCallback implements Executable {
+
+        @Override
+        public void execute() {
+            double current_time = System.currentTimeMillis();
+            Line[] lines = null;
+            synchronized (Line.lock) {
+                lines = Line.clock_watchers.toArray(new Line[0]);
+            }
+            for (Line clock_watcher : lines) {
+                clock_watcher.execute(current_time);
+            }
+            if (0 < Line.clock_watchers.size()) {
+                Line.clock.delay(Line.output_granularity);
+            }
+        }
+    }
+
+    public class TimePoint {
 
         public final double time;
         public final double value;
@@ -20,8 +42,11 @@ public class Line extends MaxObject implements Executable {
         }
     }
 
-    private MaxClock clock = new MaxClock(this);
-    private int output_granularity = 20;
+    private static Lock lock = new ReentrantLock();
+    private static MaxClock clock = null;
+    private static ClockCallback clock_callback;
+    private static Set<Line> clock_watchers = new HashSet<Line>();
+    private static int output_granularity = 20;
     private ArrayList<TimePoint> time_points;
 
     public Line(Atom[] arguments) {
@@ -33,6 +58,9 @@ public class Line extends MaxObject implements Executable {
         }
         double current_time = System.currentTimeMillis();
         this.time_points.add(new TimePoint(current_time, value));
+        if (Line.clock_callback == null) {
+            Line.clock_callback = new ClockCallback();
+        }
     }
 
     @Override
@@ -41,12 +69,10 @@ public class Line extends MaxObject implements Executable {
         this.outlet(0, (float) this.find_value_at_time(current_time));
     }
 
-    @Override
-    public void execute() {
-        double current_time = System.currentTimeMillis();
+    public void execute(double current_time) {
         this.outlet(0, this.find_value_at_time(current_time));
-        if (1 < this.time_points.size()) {
-            this.clock.delay(this.output_granularity);
+        if (this.time_points.size() == 1) {
+            this.stop_watching_clock();
         }
     }
 
@@ -100,16 +126,38 @@ public class Line extends MaxObject implements Executable {
             time = values[i + 1] + time;
             this.time_points.add(new TimePoint(time, value));
         }
-        this.clock.delay(this.output_granularity);
+        this.start_watching_clock();
     }
 
     @Override
     public void notifyDeleted() {
-        this.clock.unset();
-        this.clock.release();
+        this.stop_watching_clock();
+    }
+
+    private void start_watching_clock() {
+        synchronized (Line.lock) {
+            Line.clock_watchers.add(this);
+            if (Line.clock == null) {
+                Line.clock = new MaxClock(Line.clock_callback);
+            }
+            if (Line.clock_watchers.size() == 1) {
+                Line.clock.delay(Line.output_granularity);
+            }
+        }
     }
 
     public void stop() {
-        this.clock.unset();
+        this.stop_watching_clock();
+    }
+
+    private void stop_watching_clock() {
+        synchronized (Line.lock) {
+            Line.clock_watchers.remove(this);
+            if ((Line.clock_watchers.size() == 0) && (Line.clock != null)) {
+                Line.clock.unset();
+                Line.clock.release();
+                Line.clock = null;
+            }
+        }
     }
 }
