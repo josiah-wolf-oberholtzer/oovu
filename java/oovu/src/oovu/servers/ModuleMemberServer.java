@@ -133,15 +133,15 @@ public abstract class ModuleMemberServer extends Server {
                 .getDeclaredConstructor(ModuleServer.class, Map.class)
                 .newInstance(module_server, argument_map);
         } catch (IllegalArgumentException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
         } catch (NoSuchMethodException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
         } catch (InvocationTargetException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
         }
         if (new_member_node == null) {
             new_member_node = new PropertyServer(module_server, argument_map);

@@ -124,32 +124,17 @@ public class RangeDatatype extends BoundedDatatype {
         this.client.handle_asynchronous_datatype_value_output(value);
     }
 
-//    @Override
-//    public void initialize_default_value(Map<String, Atom[]> argument_map) {
-//        Atom[] value = this.get_default();
-//        if (argument_map.containsKey("default")) {
-//            Atom[] default_value = argument_map.get("default");
-//            if (1 < default_value.length) {
-//                value = default_value;
-//            }
-//        }
-//        this.set_value(value);
-//    }
-
     @Override
-    public Atom[] process_input(Atom[] input) {
-        double[] doubles = this.extract_doubles_from_atoms(input);
-        if (this.multi_envelope != null) {
-            doubles = this.preprocess_doubles(doubles);
-            doubles = this.multi_envelope.control_all_envelopes(doubles);
+    public void initialize_default_value(Map<String, Atom[]> argument_map) {
+        Atom[] value = this.get_default();
+        if (argument_map.containsKey("default")) {
+            Atom[] default_value = argument_map.get("default");
+            if (1 < default_value.length) {
+                value[0] = default_value[0];
+                value[1] = default_value[1];
+            }
         }
-        doubles = this.bound_doubles(doubles);
-        Arrays.sort(doubles);
-        Atom[] result = new Atom[1];
-        if (0 < input.length) {
-            result[0] = Atom.newAtom(doubles[0]);
-        }
-        return result;
+        this.set_value(value);
     }
 
     protected double[] preprocess_doubles(double[] doubles) {
@@ -159,11 +144,26 @@ public class RangeDatatype extends BoundedDatatype {
             return this.range_to_center_width(doubles[0], doubles[1]);
         }
         for (int i = 0, j = doubles.length; (i + 2) < j; i += 3) {
-            double[] center_width = this.range_to_center_width(doubles[i], doubles[i + 1]);
+            double[] center_width = this.range_to_center_width(doubles[i],
+                doubles[i + 1]);
             doubles[i] = center_width[0];
             doubles[i + 1] = center_width[1];
         }
         return doubles;
+    }
+
+    @Override
+    public Atom[] process_input(Atom[] input) {
+        double[] doubles = this.extract_doubles_from_atoms(input);
+        if (this.multi_envelope != null) {
+            doubles = this.preprocess_doubles(doubles);
+            doubles = this.multi_envelope.control_all_envelopes(doubles);
+            doubles = this.center_width_to_range(doubles[0], doubles[1]);
+        }
+        doubles = this.bound_doubles(doubles);
+        Arrays.sort(doubles);
+        Atom[] result = Atom.newAtom(doubles);
+        return result;
     }
 
     protected

@@ -52,7 +52,7 @@ public class Binding extends MaxPeer implements MessagePasser {
                     this, server.generate_dumpmeta_response());
                 MaxSystem.deferLow(callback);
             } catch (UnsatisfiedLinkError e) {
-                Environment.log(e);
+                // Environment.log(e);
             }
         }
     }

@@ -154,23 +154,17 @@ abstract public class AttributeServer extends ModuleMemberServer {
                 AttributeServer.class, Map.class).newInstance(this,
                 this.argument_map);
         } catch (IllegalArgumentException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            // e.printStackTrace();
         } catch (SecurityException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            // e.printStackTrace();
         } catch (InstantiationException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            // e.printStackTrace();
         } catch (IllegalAccessException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            // e.printStackTrace();
         } catch (InvocationTargetException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            // e.printStackTrace();
         } catch (NoSuchMethodException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            // e.printStackTrace();
         }
         if (datatype == null) {
             datatype = new GenericDatatype(this, this.argument_map);
