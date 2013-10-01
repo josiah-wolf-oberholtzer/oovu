@@ -68,9 +68,6 @@ public class RangeDatatype extends BoundedDatatype {
 
     public RangeDatatype(Atom[] arguments) {
         this(null, Server.process_atom_arguments(arguments));
-        double[] range = Atom.toDouble(this.value);
-        double[] center_width = this.range_to_center_width(range[0], range[1]);
-        this.multi_envelope = new MultiEnvelope(this, center_width);
     }
 
     public RangeDatatype(AttributeServer client,
@@ -82,6 +79,9 @@ public class RangeDatatype extends BoundedDatatype {
             this.client
                 .add_message_handler(new WidthMessageHandler(this.client));
         }
+        double[] range = Atom.toDouble(this.value);
+        double[] center_width = this.range_to_center_width(range[0], range[1]);
+        this.multi_envelope = new MultiEnvelope(this, center_width);
     }
 
     public void apply_new_center(double new_center) {
@@ -124,29 +124,46 @@ public class RangeDatatype extends BoundedDatatype {
         this.client.handle_asynchronous_datatype_value_output(value);
     }
 
-    @Override
-    public void initialize_default_value(Map<String, Atom[]> argument_map) {
-        Atom[] value = this.get_default();
-        if (argument_map.containsKey("default")) {
-            Atom[] default_value = argument_map.get("default");
-            if (1 < default_value.length) {
-                value = default_value;
-            }
-        }
-        this.set_value(value);
-    }
+//    @Override
+//    public void initialize_default_value(Map<String, Atom[]> argument_map) {
+//        Atom[] value = this.get_default();
+//        if (argument_map.containsKey("default")) {
+//            Atom[] default_value = argument_map.get("default");
+//            if (1 < default_value.length) {
+//                value = default_value;
+//            }
+//        }
+//        this.set_value(value);
+//    }
 
     @Override
     public Atom[] process_input(Atom[] input) {
-        if (input.length < 2) {
-            return this.get_value();
+        double[] doubles = this.extract_doubles_from_atoms(input);
+        if (this.multi_envelope != null) {
+            doubles = this.preprocess_doubles(doubles);
+            doubles = this.multi_envelope.control_all_envelopes(doubles);
         }
-        double[] values = this.extract_bounded_doubles_from_atoms(input);
-        double[] range = new double[] {
-            values[0], values[1]
-        };
-        Arrays.sort(range);
-        return Atom.newAtom(range);
+        doubles = this.bound_doubles(doubles);
+        Arrays.sort(doubles);
+        Atom[] result = new Atom[1];
+        if (0 < input.length) {
+            result[0] = Atom.newAtom(doubles[0]);
+        }
+        return result;
+    }
+
+    protected double[] preprocess_doubles(double[] doubles) {
+        if (doubles.length < 2) {
+            return doubles;
+        } else if (doubles.length == 2) {
+            return this.range_to_center_width(doubles[0], doubles[1]);
+        }
+        for (int i = 0, j = doubles.length; (i + 2) < j; i += 3) {
+            double[] center_width = this.range_to_center_width(doubles[i], doubles[i + 1]);
+            doubles[i] = center_width[0];
+            doubles[i + 1] = center_width[1];
+        }
+        return doubles;
     }
 
     protected
