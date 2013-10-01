@@ -30,7 +30,9 @@ public class DecimalDatatype extends BoundedDatatype {
     @Override
     public Atom[] process_input(Atom[] input) {
         double[] doubles = this.extract_doubles_from_atoms(input);
-        doubles = this.multi_envelope.control_all_envelopes(doubles);
+        if (this.multi_envelope != null) {
+            doubles = this.multi_envelope.control_all_envelopes(doubles);
+        }
         doubles = this.bound_doubles(doubles);
         Atom[] result = new Atom[1];
         if (0 < input.length) {

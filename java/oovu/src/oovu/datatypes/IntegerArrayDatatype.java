@@ -29,13 +29,18 @@ public class IntegerArrayDatatype extends BoundedArrayDatatype {
 
     @Override
     public Atom[] process_input(Atom[] input) {
-        Atom[] result = this.ensure_length(input);
-        double[] doubles = this.extract_doubles_from_atoms(result);
-        doubles = this.multi_envelope.control_all_envelopes(doubles);
-        doubles = this.bound_doubles(doubles);
-        for (int i = 0, j = result.length; i < j; i++) {
-            result[i] = Atom.newAtom(new Double(doubles[i]).intValue());
+        if (this.multi_envelope == null) {
+            input = this.ensure_length(input);
         }
-        return result;
+        double[] doubles = this.extract_doubles_from_atoms(input);
+        if (this.multi_envelope != null) {
+            doubles = this.multi_envelope.control_all_envelopes(doubles);
+        }
+        doubles = this.bound_doubles(doubles);
+        Atom[] output = new Atom[doubles.length];
+        for (int i = 0, j = doubles.length; i < j; i++) {
+            output[i] = Atom.newAtom(new Double(doubles[i]).intValue());
+        }
+        return output;
     }
 }

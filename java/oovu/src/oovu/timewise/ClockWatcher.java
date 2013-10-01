@@ -5,6 +5,8 @@ import java.util.Set;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import oovu.addressing.Environment;
+
 import com.cycling74.max.Executable;
 import com.cycling74.max.MaxClock;
 import com.cycling74.max.MaxObject;
@@ -51,9 +53,15 @@ abstract public class ClockWatcher {
                 ClockWatcher.clock_callback = new ClockCallback();
             }
             if (ClockWatcher.clock == null) {
-                ClockWatcher.clock = new MaxClock(ClockWatcher.clock_callback);
+                try {
+                    ClockWatcher.clock = new MaxClock(
+                        ClockWatcher.clock_callback);
+                } catch (UnsatisfiedLinkError e) {
+                    Environment.log(e);
+                }
             }
-            if (original_clock_watchers_count == 0) {
+            if ((original_clock_watchers_count == 0)
+                && (ClockWatcher.clock != null)) {
                 ClockWatcher.clock.delay(ClockWatcher.output_granularity);
             }
         }

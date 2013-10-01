@@ -48,12 +48,22 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
 
         @Override
         public Atom[][] run(Atom[] arguments) {
+            int new_length = BoundedArrayDatatype.this.length;
             if (0 < arguments.length) {
-                if (arguments[0].isFloat() || arguments[0].isInt()) {
-                    Integer new_length = arguments[0].getInt();
-                    BoundedArrayDatatype.this.set_length(new_length);
-                }
+                new_length = arguments[0].toInt();
             }
+            if (new_length < 1) {
+                new_length = BoundedArrayDatatype.this.length;
+            }
+            if (new_length == BoundedArrayDatatype.this.length) {
+                return null;
+            }
+            BoundedArrayDatatype.this.set_length(new_length);
+            Atom[] resized_value = BoundedArrayDatatype.this
+                .ensure_length(BoundedArrayDatatype.this.value);
+            BoundedArrayDatatype.this.multi_envelope.resize(new_length);
+            BoundedArrayDatatype.this.multi_envelope.control_all_envelopes(Atom
+                .toDouble(resized_value));
             return null;
         }
     }
