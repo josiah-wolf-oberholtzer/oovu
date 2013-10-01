@@ -85,17 +85,36 @@ public class RangeDatatype extends BoundedDatatype {
     }
 
     public void apply_new_center(double[] control_values) {
-        this.multi_envelope.control_one_envelope(0, control_values);
+        double[] response = this.multi_envelope.control_one_envelope(0,
+            control_values);
+        double[] range = this.bound_doubles(this.center_width_to_range(
+            response[0], response[1]));
+        this.value = Atom.newAtom(range);
+        this.fix_multi_envelope_values();
     }
 
     public void apply_new_width(double[] control_values) {
-        this.multi_envelope.control_one_envelope(1, control_values);
+        double[] response = this.multi_envelope.control_one_envelope(1,
+            control_values);
+        double[] range = this.bound_doubles(this.center_width_to_range(
+            response[0], response[1]));
+        this.value = Atom.newAtom(range);
+        this.fix_multi_envelope_values();
     }
 
     protected double[] center_width_to_range(double center, double width) {
         return new double[] {
             center - width, center + width
         };
+    }
+
+    protected void fix_multi_envelope_values() {
+        double[] range = Atom.toDouble(this.value);
+        if (!this.multi_envelope.has_active_envelopes()) {
+            double[] center_width = this.range_to_center_width(range[0],
+                range[1]);
+            this.multi_envelope.control_all_envelopes(center_width);
+        }
     }
 
     @Override
@@ -111,6 +130,7 @@ public class RangeDatatype extends BoundedDatatype {
             response[0], response[1]));
         Atom[] value = Atom.newAtom(range);
         this.value = value;
+        this.fix_multi_envelope_values();
         this.client.handle_asynchronous_datatype_value_output(value);
     }
 
