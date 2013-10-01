@@ -20,6 +20,7 @@ public class MultiEnvelope extends ClockWatcher {
             ArrayList<TimePoint> envelope = new ArrayList<TimePoint>();
             TimePoint time_point = new TimePoint(current_time, initial_value);
             envelope.add(time_point);
+            this.envelopes.add(envelope);
         }
     }
 
@@ -39,12 +40,29 @@ public class MultiEnvelope extends ClockWatcher {
     public void control_all_envelopes(double[] control_values) {
         double current_time = System.currentTimeMillis();
         if (control_values.length == this.envelopes.size()) {
+            for (int i = 0, j = this.envelopes.size(); i < j; i++) {
+                ArrayList<TimePoint> envelope = this.envelopes.get(i);
+                envelope.clear();
+                envelope.add(new TimePoint(current_time, control_values[i]));
+            }
         } else if (this.envelopes.size() < control_values.length) {
+            TimePoint[][] unlaced = this.unlace(control_values, current_time,
+                this.envelopes.size());
+            for (int i = 0, j = this.envelopes.size(); i < j; i++) {
+                ArrayList<TimePoint> envelope = this.envelopes.get(i);
+                double current_value = this.find_value_at_time(envelope,
+                    current_time);
+                envelope.clear();
+                envelope.add(new TimePoint(current_time, current_value));
+                for (TimePoint time_point : unlaced[i]) {
+                    envelope.add(time_point);
+                }
+            }
         }
         if (this.has_active_envelopes()) {
-            ClockWatcher.start_watching_clock(this);
+            this.start_watching_clock(this);
         } else {
-            ClockWatcher.stop_watching_clock(this);
+            this.stop_watching_clock(this);
         }
         this.notify_client(current_time);
     }
@@ -59,28 +77,31 @@ public class MultiEnvelope extends ClockWatcher {
             envelope.clear();
             envelope.add(new TimePoint(time, control_values[0]));
         } else if (1 < control_values.length) {
-            for (int i = 0, j = control_values.length; i < (j - 1); i += 2) {
-                time = Math.abs(control_values[i + 1]) + time;
-                envelope.add(new TimePoint(time, control_values[i]));
+            TimePoint[][] unlaced = this
+                .unlace(control_values, current_time, 1);
+            double current_value = this.find_value_at_time(envelope,
+                current_time);
+            envelope.clear();
+            envelope.add(new TimePoint(current_time, current_value));
+            for (TimePoint time_point : unlaced[0]) {
+                envelope.add(time_point);
             }
         }
         if (this.has_active_envelopes()) {
-            ClockWatcher.start_watching_clock(this);
+            this.start_watching_clock(this);
         } else {
-            ClockWatcher.stop_watching_clock(this);
+            this.stop_watching_clock(this);
         }
         this.notify_client(current_time);
     }
 
     @Override
     public void execute(double current_time) {
-        double[] result = new double[this.envelopes.size()];
-        for (int i = 0, j = this.envelopes.size(); i < j; i++) {
-            ArrayList<TimePoint> envelope = this.envelopes.get(i);
-            result[i] = this.find_value_at_time(envelope, current_time);
-        }
-        if (!this.has_active_envelopes()) {
-            ClockWatcher.stop_watching_clock(this);
+        synchronized (ClockWatcher.class) {
+            this.notify_client(current_time);
+            if (!this.has_active_envelopes()) {
+                this.stop_watching_clock(this);
+            }
         }
     }
 
@@ -99,6 +120,16 @@ public class MultiEnvelope extends ClockWatcher {
         return (slope * (current_time - one.time)) + one.value;
     }
 
+    public double[] get_current_values(double current_time) {
+        ArrayList<TimePoint> envelope = null;
+        double[] current_values = new double[this.envelopes.size()];
+        for (int i = 0, j = this.envelopes.size(); i < j; i++) {
+            envelope = this.envelopes.get(i);
+            current_values[i] = this.find_value_at_time(envelope, current_time);
+        }
+        return current_values;
+    }
+
     public boolean has_active_envelopes() {
         for (ArrayList<TimePoint> envelope : this.envelopes) {
             if (1 < envelope.size()) {
@@ -109,13 +140,8 @@ public class MultiEnvelope extends ClockWatcher {
     }
 
     private void notify_client(double current_time) {
-        ArrayList<TimePoint> envelope = null;
-        double[] response = new double[this.envelopes.size()];
-        for (int i = 0, j = this.envelopes.size(); i < j; i++) {
-            envelope = this.envelopes.get(i);
-            response[i] = this.find_value_at_time(envelope, current_time);
-        }
-        this.client.handle_envelope_response(response);
+        double[] current_values = this.get_current_values(current_time);
+        this.client.handle_envelope_response(current_values);
     }
 
     public void resize(int new_size) {

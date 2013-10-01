@@ -7,6 +7,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import com.cycling74.max.Executable;
 import com.cycling74.max.MaxClock;
+import com.cycling74.max.MaxObject;
 
 abstract public class ClockWatcher {
 
@@ -15,12 +16,12 @@ abstract public class ClockWatcher {
         @Override
         public void execute() {
             double current_time = System.currentTimeMillis();
-            ClockWatcher[] lines = null;
+            ClockWatcher[] current_clock_watchers = null;
             synchronized (ClockWatcher.lock) {
-                lines = ClockWatcher.clock_watchers
+                current_clock_watchers = ClockWatcher.clock_watchers
                     .toArray(new ClockWatcher[0]);
             }
-            for (ClockWatcher clock_watcher : lines) {
+            for (ClockWatcher clock_watcher : current_clock_watchers) {
                 clock_watcher.execute(current_time);
             }
             if (0 < ClockWatcher.clock_watchers.size()) {
@@ -35,33 +36,38 @@ abstract public class ClockWatcher {
     protected static final int output_granularity = 20;
     protected static ClockCallback clock_callback = null;
 
-    protected static void start_watching_clock(ClockWatcher clock_watcher) {
-        synchronized (ClockWatcher.lock) {
+    public void cleanup_resources() {
+        this.stop_watching_clock(this);
+    }
+
+    abstract public void execute(double current_time);
+
+    protected void start_watching_clock(ClockWatcher clock_watcher) {
+        synchronized (ClockWatcher.class) {
+            int original_clock_watchers_count = ClockWatcher.clock_watchers
+                .size();
             ClockWatcher.clock_watchers.add(clock_watcher);
+            if (ClockWatcher.clock_callback == null) {
+                ClockWatcher.clock_callback = new ClockCallback();
+            }
             if (ClockWatcher.clock == null) {
                 ClockWatcher.clock = new MaxClock(ClockWatcher.clock_callback);
             }
-            if (ClockWatcher.clock_watchers.size() == 1) {
+            if (original_clock_watchers_count == 0) {
                 ClockWatcher.clock.delay(ClockWatcher.output_granularity);
             }
         }
     }
 
-    protected static void stop_watching_clock(ClockWatcher clock_watcher) {
-        synchronized (ClockWatcher.lock) {
+    protected void stop_watching_clock(ClockWatcher clock_watcher) {
+        synchronized (ClockWatcher.class) {
             ClockWatcher.clock_watchers.remove(clock_watcher);
             if ((ClockWatcher.clock_watchers.size() == 0)
                 && (ClockWatcher.clock != null)) {
                 ClockWatcher.clock.unset();
-                ClockWatcher.clock.release();
-                ClockWatcher.clock = null;
+                // ClockWatcher.clock.release();
+                MaxObject.post("Freeing Clock");
             }
         }
     }
-
-    public void cleanup_resources() {
-        ClockWatcher.stop_watching_clock(this);
-    }
-
-    abstract public void execute(double current_time);
 }
