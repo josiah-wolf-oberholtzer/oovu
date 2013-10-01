@@ -22,7 +22,10 @@ public class Binding extends MaxPeer implements MessagePasser {
             return;
         }
         OscAddressNode osc_address_node = Environment.root_osc_address_node;
-        if (arguments[0].isInt()) {
+        if (arguments[0].isString()
+            && (arguments[0].getString().charAt(0) == '#')) {
+            return;
+        } else if (arguments[0].isInt()) {
             int module_id = arguments[0].getInt();
             OscAddressNode numbered_child = osc_address_node
                 .get_numbered_child(module_id);

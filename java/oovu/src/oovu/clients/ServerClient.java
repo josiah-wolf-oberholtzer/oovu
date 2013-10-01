@@ -22,10 +22,10 @@ abstract public class ServerClient extends MaxPeer {
 
     public void check_arguments(Atom[] arguments) {
         if (arguments.length < 2) {
-            MaxObject.bail("Bad arguments.");
+            MaxObject.bail("OOVU server clients require a server ID and name.");
         } else if (!arguments[0].isInt()
             && (arguments[0].getString().charAt(0) != '#')) {
-            MaxObject.bail("Bad arguments.");
+            MaxObject.bail("Invalid OOVU server ID.");
         }
     }
 
