@@ -3,9 +3,12 @@ package oovu.servers;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
+import oovu.addressing.OscAddress;
 import oovu.datatypes.Datatype;
 import oovu.datatypes.GenericDatatype;
 import oovu.messaging.MessageHandler;
+import oovu.messaging.Request;
+import oovu.messaging.Response;
 
 import com.cycling74.max.Atom;
 
@@ -109,6 +112,12 @@ abstract public class AttributeServer extends ModuleMemberServer {
     }
 
     public void handle_asynchronous_datatype_value_output(Atom[] output) {
+        Atom[][] payload = new Atom[1][];
+        payload[0] = Atom.newAtom("value", output);
+        Request request = new Request(this,
+            OscAddress.from_cache("./:getvalue"), new Atom[0]);
+        Response response = new Response(this, payload, request);
+        this.handle_response(response);
     }
 
     private void initialize_value() {

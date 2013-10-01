@@ -111,6 +111,7 @@ abstract public class MaxPeer extends MaxObject implements MessagePasser {
             this.outlet(1, payload);
             this.outlet(0, "set", payload);
         } catch (UnsatisfiedLinkError e) {
+            Environment.log(e);
         }
     }
 }

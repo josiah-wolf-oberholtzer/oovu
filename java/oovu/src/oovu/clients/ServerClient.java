@@ -1,5 +1,6 @@
 package oovu.clients;
 
+import oovu.addressing.Environment;
 import oovu.addressing.OscAddress;
 import oovu.addressing.OscAddressNode;
 import oovu.servers.Server;
@@ -32,6 +33,7 @@ abstract public class ServerClient extends MaxPeer {
                 this.get_server().generate_dumpmeta_response());
             MaxSystem.deferLow(callback);
         } catch (UnsatisfiedLinkError e) {
+            Environment.log(e);
         }
     }
 

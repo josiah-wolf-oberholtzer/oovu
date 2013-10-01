@@ -1,6 +1,5 @@
 package oovu.datatypes.tests;
 
-import oovu.addressing.Environment;
 import oovu.datatypes.DecimalArrayDatatype;
 
 import org.junit.Assert;
@@ -66,7 +65,6 @@ public class Test__DecimalArrayDatatype {
         Atom[] arguments = Atom
             .parse(":default 0 10 20 30 :length 3 :minimum 2 :maximum 19.5");
         DecimalArrayDatatype datatype = new DecimalArrayDatatype(arguments);
-        Environment.log(datatype.get_length());
         Assert.assertTrue(datatype.get_value()[0].isFloat());
         Assert.assertArrayEquals(new double[] {
             2, 10, 19.5

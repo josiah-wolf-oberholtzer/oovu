@@ -2,7 +2,6 @@ package oovu.datatypes;
 
 import java.util.Map;
 
-import oovu.addressing.Environment;
 import oovu.messaging.DatatypeMessageHandler;
 import oovu.servers.AttributeServer;
 
@@ -125,7 +124,6 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
             if (this.multi_envelope != null) {
                 this.multi_envelope.resize(new_length);
                 doubles = this.multi_envelope.control_all_envelopes(doubles);
-                Environment.log(Atom.toOneString(Atom.newAtom(doubles)));
             }
             this.value = Atom.newAtom(doubles);
         }
