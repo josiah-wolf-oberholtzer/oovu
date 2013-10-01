@@ -58,11 +58,15 @@ public class Test__RangeDatatype {
         Assert.assertArrayEquals(Atom.newAtom(new double[] {
             0, 1
         }), datatype.get_value());
-        datatype.apply_new_center(0.75);
+        datatype.apply_new_center(new double[] {
+            0.75
+        });
         Assert.assertArrayEquals(Atom.newAtom(new double[] {
             0.25, 1.25
         }), datatype.get_value());
-        datatype.apply_new_width(0.125);
+        datatype.apply_new_width(new double[] {
+            0.125
+        });
         Assert.assertArrayEquals(Atom.newAtom(new double[] {
             0.625, 0.875
         }), datatype.get_value());
@@ -77,11 +81,15 @@ public class Test__RangeDatatype {
         Assert.assertArrayEquals(Atom.newAtom(new double[] {
             0.5, 1.
         }), datatype.get_value());
-        datatype.apply_new_center(1.);
+        datatype.apply_new_center(new double[] {
+            1.
+        });
         Assert.assertArrayEquals(Atom.newAtom(new double[] {
             0.75, 1.
         }), datatype.get_value());
-        datatype.apply_new_width(0.5);
+        datatype.apply_new_width(new double[] {
+            0.5
+        });
         Assert.assertArrayEquals(Atom.newAtom(new double[] {
             0.375, 1.
         }), datatype.get_value());

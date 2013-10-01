@@ -33,8 +33,8 @@ public class RangeDatatype extends BoundedDatatype {
             if (0 == arguments.length) {
                 return null;
             }
-            double new_center = arguments[0].toDouble();
-            RangeDatatype.this.apply_new_center(new_center);
+            double[] control_values = Atom.toDouble(arguments);
+            RangeDatatype.this.apply_new_center(control_values);
             return null;
         }
     }
@@ -60,8 +60,8 @@ public class RangeDatatype extends BoundedDatatype {
             if (0 == arguments.length) {
                 return null;
             }
-            double new_width = arguments[0].toDouble();
-            RangeDatatype.this.apply_new_width(new_width);
+            double[] control_values = Atom.toDouble(arguments);
+            RangeDatatype.this.apply_new_width(control_values);
             return null;
         }
     }
@@ -84,22 +84,12 @@ public class RangeDatatype extends BoundedDatatype {
         this.multi_envelope = new MultiEnvelope(this, center_width);
     }
 
-    public void apply_new_center(double new_center) {
-        double[] current_range = Atom.toDouble(this.get_value());
-        double[] center_width = this.range_to_center_width(current_range[0],
-            current_range[1]);
-        double[] new_range = this.center_width_to_range(new_center,
-            center_width[1]);
-        this.set_value(Atom.newAtom(new_range));
+    public void apply_new_center(double[] control_values) {
+        this.multi_envelope.control_one_envelope(0, control_values);
     }
 
-    public void apply_new_width(double new_width) {
-        double[] current_range = Atom.toDouble(this.get_value());
-        double[] center_width = this.range_to_center_width(current_range[0],
-            current_range[1]);
-        double[] new_range = this.center_width_to_range(center_width[0],
-            Math.abs(new_width));
-        this.set_value(Atom.newAtom(new_range));
+    public void apply_new_width(double[] control_values) {
+        this.multi_envelope.control_one_envelope(1, control_values);
     }
 
     protected double[] center_width_to_range(double center, double width) {
