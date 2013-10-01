@@ -59,5 +59,9 @@ abstract public class ClockWatcher {
         }
     }
 
+    public void cleanup_resources() {
+        ClockWatcher.stop_watching_clock(this);
+    }
+
     abstract public void execute(double current_time);
 }
