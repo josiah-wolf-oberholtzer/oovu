@@ -4,8 +4,9 @@ import java.util.Arrays;
 import java.util.Map;
 
 import oovu.messaging.DatatypeMessageHandler;
+import oovu.servers.AttributeServer;
 import oovu.servers.Server;
-import oovu.servers.members.AttributeServer;
+import oovu.timewise.MultiEnvelope;
 
 import com.cycling74.max.Atom;
 
@@ -67,6 +68,9 @@ public class RangeDatatype extends BoundedDatatype {
 
     public RangeDatatype(Atom[] arguments) {
         this(null, Server.process_atom_arguments(arguments));
+        double[] range = Atom.toDouble(this.value);
+        double[] center_width = this.range_to_center_width(range[0], range[1]);
+        this.multi_envelope = new MultiEnvelope(this, center_width);
     }
 
     public RangeDatatype(AttributeServer client,
@@ -109,6 +113,15 @@ public class RangeDatatype extends BoundedDatatype {
         return Atom.newAtom(new double[] {
             0., 1.
         });
+    }
+
+    @Override
+    public void handle_envelope_response(double[] response) {
+        double[] range = this.bound_doubles(this.center_width_to_range(
+            response[0], response[1]));
+        Atom[] value = Atom.newAtom(range);
+        this.value = value;
+        this.client.handle_asynchronous_datatype_value_output(value);
     }
 
     @Override

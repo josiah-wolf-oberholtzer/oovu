@@ -35,7 +35,8 @@ public class MaxEnvelopeHandler extends MaxObject implements EnvelopeHandler {
         double[] control_values = new double[] {
             value
         };
-        this.multi_envelope.control_all_envelopes(control_values);
+        this.outlet(0,
+            this.multi_envelope.control_all_envelopes(control_values));
     }
 
     @Override
@@ -43,13 +44,15 @@ public class MaxEnvelopeHandler extends MaxObject implements EnvelopeHandler {
         double[] control_values = new double[] {
             value
         };
-        this.multi_envelope.control_all_envelopes(control_values);
+        this.outlet(0,
+            this.multi_envelope.control_all_envelopes(control_values));
     }
 
     @Override
     public void list(Atom[] values) {
         double[] control_values = Atom.toDouble(values);
-        this.multi_envelope.control_all_envelopes(control_values);
+        this.outlet(0,
+            this.multi_envelope.control_all_envelopes(control_values));
     }
 
     @Override

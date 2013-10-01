@@ -1,6 +1,6 @@
 package oovu.messaging;
 
-import oovu.servers.members.AttributeServer;
+import oovu.servers.AttributeServer;
 
 abstract public class DatatypeMessageHandler extends MessageHandler {
 

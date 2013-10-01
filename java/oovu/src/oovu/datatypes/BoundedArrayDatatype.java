@@ -3,7 +3,7 @@ package oovu.datatypes;
 import java.util.Map;
 
 import oovu.messaging.DatatypeMessageHandler;
-import oovu.servers.members.AttributeServer;
+import oovu.servers.AttributeServer;
 
 import com.cycling74.max.Atom;
 

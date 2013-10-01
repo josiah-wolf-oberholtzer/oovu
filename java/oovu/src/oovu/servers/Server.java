@@ -230,6 +230,9 @@ abstract public class Server implements MessagePasser {
         }
     }
 
+    protected void cleanup_resources() {
+    }
+
     public void clear() {
         for (Server child_server : this.child_servers.toArray(new Server[0])) {
             child_server.detach_from_parent_server();
@@ -247,6 +250,7 @@ abstract public class Server implements MessagePasser {
         if (parent_server != null) {
             parent_server.deallocate_if_necessary();
         }
+        this.cleanup_resources();
     }
 
     public void deallocate_if_necessary() {

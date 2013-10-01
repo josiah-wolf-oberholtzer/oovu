@@ -2,6 +2,7 @@ package oovu.servers.members;
 
 import java.util.Map;
 
+import oovu.servers.AttributeServer;
 import oovu.servers.ModuleMemberServer;
 import oovu.servers.ModuleServer;
 

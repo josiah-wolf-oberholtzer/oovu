@@ -1,4 +1,4 @@
-package oovu.servers.members;
+package oovu.servers;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
@@ -6,8 +6,6 @@ import java.util.Map;
 import oovu.datatypes.Datatype;
 import oovu.datatypes.GenericDatatype;
 import oovu.messaging.MessageHandler;
-import oovu.servers.ModuleMemberServer;
-import oovu.servers.ModuleServer;
 
 import com.cycling74.max.Atom;
 
@@ -97,12 +95,20 @@ abstract public class AttributeServer extends ModuleMemberServer {
         this.initialize_value();
     }
 
+    @Override
+    protected void cleanup_resources() {
+        this.datatype.cleanup_resources();
+    }
+
     public Integer get_priority() {
         return this.priority;
     }
 
     public Atom[] get_value() {
         return this.datatype.get_value();
+    }
+
+    public void handle_asynchronous_datatype_value_output(Atom[] output) {
     }
 
     private void initialize_value() {

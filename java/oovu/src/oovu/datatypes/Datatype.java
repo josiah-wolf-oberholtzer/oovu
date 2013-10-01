@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import oovu.messaging.DatatypeMessageHandler;
-import oovu.servers.members.AttributeServer;
+import oovu.servers.AttributeServer;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
@@ -73,6 +73,9 @@ public abstract class Datatype {
         }
         this.initialize_prerequisites(argument_map);
         this.initialize_default_value(argument_map);
+    }
+
+    public void cleanup_resources() {
     }
 
     public String get_datatype() {

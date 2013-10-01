@@ -37,7 +37,7 @@ public class MultiEnvelope extends ClockWatcher {
         }
     }
 
-    public void control_all_envelopes(double[] control_values) {
+    public double[] control_all_envelopes(double[] control_values) {
         double current_time = System.currentTimeMillis();
         if (control_values.length == this.envelopes.size()) {
             for (int i = 0, j = this.envelopes.size(); i < j; i++) {
@@ -64,12 +64,12 @@ public class MultiEnvelope extends ClockWatcher {
         } else {
             this.stop_watching_clock(this);
         }
-        this.notify_client(current_time);
+        return this.get_current_values(current_time);
     }
 
-    public
-        void
-        control_one_envelope(int envelope_index, double[] control_values) {
+    public double[] control_one_envelope(
+        int envelope_index,
+        double[] control_values) {
         double current_time = System.currentTimeMillis();
         double time = current_time;
         ArrayList<TimePoint> envelope = this.envelopes.get(envelope_index);
@@ -92,7 +92,7 @@ public class MultiEnvelope extends ClockWatcher {
         } else {
             this.stop_watching_clock(this);
         }
-        this.notify_client(current_time);
+        return this.get_current_values(current_time);
     }
 
     @Override

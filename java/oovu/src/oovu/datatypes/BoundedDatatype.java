@@ -4,11 +4,14 @@ import java.util.Arrays;
 import java.util.Map;
 
 import oovu.messaging.DatatypeMessageHandler;
-import oovu.servers.members.AttributeServer;
+import oovu.servers.AttributeServer;
+import oovu.timewise.EnvelopeHandler;
+import oovu.timewise.MultiEnvelope;
 
 import com.cycling74.max.Atom;
 
-abstract public class BoundedDatatype extends Datatype {
+abstract public class BoundedDatatype extends Datatype implements
+    EnvelopeHandler {
 
     private class GetMaximumMessageHandler extends DatatypeMessageHandler {
 
@@ -124,6 +127,7 @@ abstract public class BoundedDatatype extends Datatype {
 
     protected Double minimum;
     protected Double maximum;
+    protected MultiEnvelope multi_envelope;
 
     public BoundedDatatype(AttributeServer client,
         Map<String, Atom[]> argument_map) {
@@ -169,6 +173,11 @@ abstract public class BoundedDatatype extends Datatype {
         return doubles;
     }
 
+    @Override
+    public void cleanup_resources() {
+        this.multi_envelope.cleanup_resources();
+    }
+
     protected double[] extract_bounded_doubles_from_atoms(Atom[] atoms) {
         double[] doubles = this.extract_doubles_from_atoms(atoms);
         return this.bound_doubles(doubles);
@@ -184,6 +193,13 @@ abstract public class BoundedDatatype extends Datatype {
 
     public Double get_minimum() {
         return this.minimum;
+    }
+
+    @Override
+    public void handle_envelope_response(double[] response) {
+        Atom[] value = Atom.newAtom(response);
+        this.value = value;
+        this.client.handle_asynchronous_datatype_value_output(value);
     }
 
     protected void initialize_extrema(Map<String, Atom[]> argument_map) {
