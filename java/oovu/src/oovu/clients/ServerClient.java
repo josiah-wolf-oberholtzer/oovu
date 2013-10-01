@@ -4,6 +4,8 @@ import oovu.addressing.OscAddress;
 import oovu.addressing.OscAddressNode;
 import oovu.servers.Server;
 
+import com.cycling74.max.Atom;
+import com.cycling74.max.MaxObject;
 import com.cycling74.max.MaxSystem;
 
 abstract public class ServerClient extends MaxPeer {
@@ -15,6 +17,15 @@ abstract public class ServerClient extends MaxPeer {
         if (server != null) {
             this.server = server;
             server.server_clients.add(this);
+        }
+    }
+
+    public void check_arguments(Atom[] arguments) {
+        if (arguments.length < 2) {
+            MaxObject.bail("Bad arguments.");
+        } else if (!arguments[0].isInt()
+            && (arguments[0].getString().charAt(0) != '#')) {
+            MaxObject.bail("Bad arguments.");
         }
     }
 

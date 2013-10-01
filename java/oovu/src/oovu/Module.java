@@ -4,17 +4,12 @@ import oovu.clients.ServerClient;
 import oovu.servers.ModuleServer;
 
 import com.cycling74.max.Atom;
-import com.cycling74.max.MaxObject;
 
 public class Module extends ServerClient {
 
     public Module(Atom[] arguments) {
-        if (arguments.length < 2) {
-            MaxObject.bail("Bad arguments.");
-        } else if (!arguments[0].isInt()) {
-            MaxObject.bail("Bad arguments.");
-        }
         this.declareIO(2, 1);
+        this.check_arguments(arguments);
         Integer module_id = arguments[0].toInt();
         String desired_name = arguments[1].toString();
         System.out.print("OK!");
