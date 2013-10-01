@@ -9,6 +9,7 @@ import oovu.messaging.MessagePasser;
 import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
+import com.cycling74.max.MaxObject;
 import com.cycling74.max.MaxSystem;
 
 public class Binding extends MaxPeer implements MessagePasser {
@@ -47,6 +48,11 @@ public class Binding extends MaxPeer implements MessagePasser {
         }
         OscAddressNode found_osc_address_node = osc_address_node
             .create_address(osc_address, false);
+        if (found_osc_address_node == null) {
+            MaxObject.error("Couldn't create address node: "
+                + osc_address.toString());
+            return;
+        }
         this.attach(found_osc_address_node);
         if (this.osc_address_node.get_server() != null) {
             try {

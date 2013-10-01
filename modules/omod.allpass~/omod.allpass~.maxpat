@@ -31,12 +31,12 @@
 		"boxes" : [ 			{
 				"box" : 				{
 					"args" : [ "#0" ],
-					"id" : "obj-13",
+					"id" : "obj-5",
 					"maxclass" : "bpatcher",
 					"name" : "omod.allpass~.view.maxpat",
 					"numinlets" : 0,
 					"numoutlets" : 0,
-					"patching_rect" : [ 55.0, 70.0, 240.0, 190.0 ],
+					"patching_rect" : [ 55.0, 70.0, 240.0, 210.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 0.0, 0.0, 240.0, 210.0 ]
 				}
@@ -50,7 +50,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 0,
 					"numoutlets" : 0,
-					"patching_rect" : [ 55.0, 40.0, 195.0, 20.0 ],
+					"patching_rect" : [ 55.0, 40.0, 154.0, 20.0 ],
 					"text" : "omod.allpass~.model #0"
 				}
 
@@ -88,7 +88,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 55.0, 10.0, 194.0, 20.0 ],
-					"text" : "oovu.module #0 #1"
+					"text" : "mxj oovu.Module #0 #1"
 				}
 
 			}

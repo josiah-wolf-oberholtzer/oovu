@@ -143,11 +143,11 @@
 					"fontsize" : 12.0,
 					"id" : "obj-2",
 					"maxclass" : "newobj",
-					"numinlets" : 3,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "bang" ],
+					"numinlets" : 2,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 285.0, 10.0, 223.0, 20.0 ],
-					"text" : "oovu.binding #1 output/sendcount"
+					"text" : "mxj oovu.Binding #1 output/sendcount"
 				}
 
 			}

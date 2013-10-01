@@ -148,11 +148,11 @@
 					"fontsize" : 12.0,
 					"id" : "obj-5",
 					"maxclass" : "newobj",
-					"numinlets" : 3,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "bang" ],
-					"patching_rect" : [ 30.0, 35.0, 205.0, 20.0 ],
-					"text" : "oovu.binding #1 dsp/channelcount"
+					"numinlets" : 2,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 30.0, 35.0, 216.0, 20.0 ],
+					"text" : "mxj oovu.Binding #1 dsp/channelcount"
 				}
 
 			}
@@ -190,11 +190,11 @@
 					"fontsize" : 12.0,
 					"id" : "obj-1",
 					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"numinlets" : 2,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 10.0, 10.0, 233.0, 20.0 ],
-					"text" : "oovu.push.destination.dispatch #1 #2"
+					"text" : "mxj oovu.PushDestination #1 #2"
 				}
 
 			}

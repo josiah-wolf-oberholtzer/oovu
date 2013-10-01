@@ -6,12 +6,34 @@ import oovu.Binding;
 import oovu.addressing.Environment;
 import oovu.addressing.OscAddressNode;
 import oovu.clients.MessagePasserCallback;
+import oovu.messaging.MessageHandler;
 import oovu.messaging.Response;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxSystem;
 
 public class ModuleServer extends Server {
+
+    private class GetNameMessageHandler extends MessageHandler {
+
+        @Override
+        public String get_name() {
+            return "getname";
+        }
+
+        @Override
+        public Atom[][] run(Atom[] arguments) {
+            String name = ModuleServer.this.get_name();
+            if (name != null) {
+                Atom[][] result = new Atom[1][];
+                result[0] = Atom.newAtom(new String[] {
+                    "name", name
+                });
+                return result;
+            }
+            return null;
+        }
+    }
 
     public static ModuleServer allocate(Integer module_id) {
         boolean server_is_new = false;
@@ -56,6 +78,7 @@ public class ModuleServer extends Server {
         super(argument_map);
         this.module_id = module_id;
         this.attach_to_parent_server(Environment.root_server);
+        this.add_message_handler(new GetNameMessageHandler());
     }
 
     public void acquire_name(String desired_name) {

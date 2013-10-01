@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 233.0, 44.0, 210.0, 685.0 ],
+		"rect" : [ 4.0, 44.0, 1276.0, 756.0 ],
 		"bgcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 		"bglocked" : 1,
 		"openinpresentation" : 1,
@@ -52,7 +52,6 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 320.0, 600.0, 69.0, 20.0 ],
-					"presentation_rect" : [ 478.0, 121.0, 0.0, 0.0 ],
 					"save" : [ "#N", "thispatcher", ";", "#Q", "end", ";" ],
 					"text" : "thispatcher"
 				}
@@ -179,11 +178,11 @@
 					"fontsize" : 12.0,
 					"id" : "obj-214",
 					"maxclass" : "newobj",
-					"numinlets" : 3,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "bang" ],
-					"patching_rect" : [ 235.0, 490.0, 120.0, 20.0 ],
-					"text" : "oovu.binding #1 ."
+					"numinlets" : 2,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 235.0, 490.0, 125.0, 20.0 ],
+					"text" : "mxj oovu.Binding #1 ."
 				}
 
 			}
@@ -419,11 +418,11 @@
 					"fontsize" : 12.0,
 					"id" : "obj-1",
 					"maxclass" : "newobj",
-					"numinlets" : 3,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "bang" ],
-					"patching_rect" : [ 235.0, 65.0, 209.0, 20.0 ],
-					"text" : "oovu.binding #1 output/sendcount"
+					"numinlets" : 2,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 235.0, 65.0, 214.0, 20.0 ],
+					"text" : "mxj oovu.Binding #1 output/sendcount"
 				}
 
 			}
@@ -697,6 +696,33 @@
 					"source" : [ "obj-7", 0 ]
 				}
 
+			}
+ ],
+		"parameters" : 		{
+			"obj-18::obj-4" : [ "live.slider", "live.slider", 0 ],
+			"obj-204" : [ "live.numbox[3]", "live.numbox", 0 ]
+		}
+,
+		"dependency_cache" : [ 			{
+				"name" : "oovu.gui.send.1x.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/gui",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.guibackground.js",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/gui",
+				"patcherrelativepath" : ".",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.util.makeumenu.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/utilities",
+				"patcherrelativepath" : "../utilities",
+				"type" : "JSON",
+				"implicit" : 1
 			}
  ]
 	}

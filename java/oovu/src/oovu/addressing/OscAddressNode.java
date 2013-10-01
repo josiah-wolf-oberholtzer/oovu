@@ -140,6 +140,9 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
             || osc_address.has_parent_path_tokens) {
             throw new RuntimeException("OSC address is ambiguous: "
                 + osc_address);
+        } else if (osc_address.is_relative
+            && (osc_address.address_items.length == 0)) {
+            return this;
         }
         OscAddressNode parent = this;
         if (!osc_address.is_relative) {

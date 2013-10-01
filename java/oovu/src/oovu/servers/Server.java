@@ -42,8 +42,11 @@ abstract public class Server implements MessagePasser {
                 if (message_handler == null) {
                     continue;
                 }
-                for (Atom[] subresult : message_handler.run(null)) {
-                    result.add(subresult);
+                Atom[][] message_handler_run_result = message_handler.run(null);
+                if (message_handler_run_result != null) {
+                    for (Atom[] subresult : message_handler_run_result) {
+                        result.add(subresult);
+                    }
                 }
             }
             return result.toArray(new Atom[0][]);
@@ -93,22 +96,6 @@ abstract public class Server implements MessagePasser {
         }
     }
 
-    // private class GetNameMessageHandler extends MessageHandler {
-    //
-    // @Override
-    // public String get_name() {
-    // return "getname";
-    // }
-    //
-    // @Override
-    // public Atom[][] run(Atom[] arguments) {
-    // Atom[][] result = new Atom[1][];
-    // result[0] = Atom.newAtom(new String[] {
-    // "name", Server.this.get_name()
-    // });
-    // return result;
-    // }
-    // }
     private class GetOscAddressMessageHandler extends MessageHandler {
 
         @Override
@@ -278,7 +265,8 @@ abstract public class Server implements MessagePasser {
     public Response generate_dumpmeta_response() {
         MessageHandler message_handler = this.message_handlers.get("dumpmeta");
         Atom[][] payload = message_handler.run(null);
-        Request request = new Request(this, OscAddress.from_cache("."), null);
+        Request request = new Request(this, OscAddress.from_cache("."),
+            new Atom[0]);
         Response response = new Response(this, payload, request);
         return response;
     }
