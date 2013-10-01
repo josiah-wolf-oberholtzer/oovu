@@ -4,17 +4,6 @@ import java.util.ArrayList;
 
 public class MultiEnvelope extends ClockWatcher {
 
-    private class TimePoint {
-
-        public final double time;
-        public final double value;
-
-        public TimePoint(double time, double value) {
-            this.time = time;
-            this.value = value;
-        }
-    }
-
     private final EnvelopeHandler client;
     private final ArrayList<ArrayList<TimePoint>> envelopes;
 
@@ -152,7 +141,7 @@ public class MultiEnvelope extends ClockWatcher {
         TimePoint[][] result = new TimePoint[envelope_count][groups];
         for (int i = 0, j = control_values.length, group_index = 0; i < j; i += envelope_count + 1, group_index++) {
             time += control_values[i + envelope_count];
-            for (int envelope_index = 0, l = this.envelopes.size(); envelope_index < l; envelope_index++) {
+            for (int envelope_index = 0; envelope_index < envelope_count; envelope_index++) {
                 result[envelope_index][group_index] = new TimePoint(time,
                     control_values[i + envelope_index]);
             }
