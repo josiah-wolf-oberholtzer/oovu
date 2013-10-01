@@ -139,7 +139,7 @@ public class MultiEnvelope extends ClockWatcher {
         int groups = (int) Math.floor((double) control_values.length
             / (double) (envelope_count + 1));
         TimePoint[][] result = new TimePoint[envelope_count][groups];
-        for (int i = 0, j = control_values.length, group_index = 0; i < j; i += envelope_count + 1, group_index++) {
+        for (int i = 0, j = control_values.length, group_index = 0; (i + envelope_count) < j; i += envelope_count + 1, group_index++) {
             time += control_values[i + envelope_count];
             for (int envelope_index = 0; envelope_index < envelope_count; envelope_index++) {
                 result[envelope_index][group_index] = new TimePoint(time,
