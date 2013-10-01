@@ -69,16 +69,21 @@ public class Test__DecimalArrayDatatype {
         Environment.log(datatype.get_length());
         Assert.assertTrue(datatype.get_value()[0].isFloat());
         Assert.assertArrayEquals(new double[] {
-            2, 10, (float) 19.5
+            2, 10, 19.5
         }, Atom.toDouble(datatype.get_value()), 0);
         datatype.set_length(7);
         Assert.assertArrayEquals(new double[] {
-            2, 10, (float) 19.5
+            2, 10, 19.5, 2, 2, 2, 2
         }, Atom.toDouble(datatype.get_value()), 0);
         Atom[] input = Atom.parse("0 10 20 30");
         Atom[] output = datatype.process_input(input);
         Assert.assertArrayEquals(new double[] {
-            2, 10, (float) 19.5, (float) 19.5, 2, 2, 2
+            2, 10, 19.5, 2, 2, 2, 2
+        }, Atom.toDouble(output), 0);
+        input = Atom.parse("0 10 20 30 40 50 60");
+        output = datatype.process_input(input);
+        Assert.assertArrayEquals(new double[] {
+            2, 10, 19.5, 19.5, 19.5, 19.5, 19.5
         }, Atom.toDouble(output), 0);
     }
 }

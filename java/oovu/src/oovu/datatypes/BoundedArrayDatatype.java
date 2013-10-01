@@ -2,6 +2,7 @@ package oovu.datatypes;
 
 import java.util.Map;
 
+import oovu.addressing.Environment;
 import oovu.messaging.DatatypeMessageHandler;
 import oovu.servers.AttributeServer;
 
@@ -52,18 +53,7 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
             if (0 < arguments.length) {
                 new_length = arguments[0].toInt();
             }
-            if (new_length < 1) {
-                new_length = BoundedArrayDatatype.this.length;
-            }
-            if (new_length == BoundedArrayDatatype.this.length) {
-                return null;
-            }
             BoundedArrayDatatype.this.set_length(new_length);
-            Atom[] resized_value = BoundedArrayDatatype.this
-                .ensure_length(BoundedArrayDatatype.this.value);
-            BoundedArrayDatatype.this.multi_envelope.resize(new_length);
-            BoundedArrayDatatype.this.multi_envelope.control_all_envelopes(Atom
-                .toDouble(resized_value));
             return null;
         }
     }
@@ -125,6 +115,19 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
         if (new_length < 1) {
             new_length = 1;
         }
+        if (new_length == this.length) {
+            return;
+        }
         this.length = new_length;
+        if (this.value != null) {
+            double[] doubles = Atom.toDouble(this.ensure_length(this.value));
+            doubles = this.bound_doubles(doubles);
+            if (this.multi_envelope != null) {
+                this.multi_envelope.resize(new_length);
+                doubles = this.multi_envelope.control_all_envelopes(doubles);
+                Environment.log(Atom.toOneString(Atom.newAtom(doubles)));
+            }
+            this.value = Atom.newAtom(doubles);
+        }
     }
 }

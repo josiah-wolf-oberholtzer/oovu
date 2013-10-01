@@ -148,12 +148,14 @@ public class MultiEnvelope extends ClockWatcher {
         if (new_size < 1) {
             return;
         }
+        this.stop_watching_clock(this);
         double current_time = System.currentTimeMillis();
         this.envelopes.clear();
         for (int i = 0; i < new_size; i++) {
             ArrayList<TimePoint> envelope = new ArrayList<TimePoint>();
             TimePoint time_point = new TimePoint(current_time, 0);
             envelope.add(time_point);
+            this.envelopes.add(envelope);
         }
     }
 
