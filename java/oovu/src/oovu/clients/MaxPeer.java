@@ -2,10 +2,10 @@ package oovu.clients;
 
 import java.util.Set;
 
+import oovu.adapters.MaxAdapter;
 import oovu.addressing.Environment;
 import oovu.addressing.OscAddress;
 import oovu.addressing.OscAddressNode;
-import oovu.maxadapters.MaxAdapter;
 import oovu.messaging.MessagePasser;
 import oovu.messaging.Request;
 import oovu.messaging.Response;

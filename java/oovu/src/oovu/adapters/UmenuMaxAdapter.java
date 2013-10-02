@@ -1,4 +1,4 @@
-package oovu.maxadapters;
+package oovu.adapters;
 
 import oovu.clients.MaxPeer;
 
