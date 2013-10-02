@@ -8,7 +8,7 @@ import com.cycling74.max.Atom;
 public class Module extends ServerClient {
 
     public Module(Atom[] arguments) {
-        this.declareIO(2, 1);
+        this.declareIO(2, 2);
         this.check_arguments(arguments);
         Integer module_id = arguments[0].toInt();
         String desired_name = arguments[1].toString();
@@ -18,10 +18,5 @@ public class Module extends ServerClient {
         this.attach_to_server(module_server);
         // this.handle_response(this.server.generate_dumpmeta_response());
         this.generate_message_passer_callback();
-    }
-
-    @Override
-    public void output_value_response_payload(Atom[] payload) {
-        this.outlet(0, payload);
     }
 }
