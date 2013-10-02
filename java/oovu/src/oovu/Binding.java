@@ -6,6 +6,7 @@ import oovu.addressing.OscAddressNode;
 import oovu.clients.MaxPeer;
 import oovu.clients.MessagePasserCallback;
 import oovu.messaging.MessagePasser;
+import oovu.messaging.Request;
 import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
@@ -34,12 +35,40 @@ public class Binding extends MaxPeer implements MessagePasser {
     protected OscAddressNode osc_address_node;
 
     public Binding(Atom[] arguments) {
-        this.declareIO(2, 2);
+        this.declareIO(3, 2);
         this.osc_address_node = null;
         try {
             MaxSystem.deferLow(new RebindCallback(this, arguments));
         } catch (UnsatisfiedLinkError e) {
             this.bind(arguments);
+        }
+    }
+
+    @Override
+    public void anything(String message, Atom[] arguments) {
+        if (this.getInlet() == 2) {
+            if (message.equals("bind")) {
+                this.bind(arguments);
+            }
+        } else {
+            OscAddress osc_address = null;
+            if (this.getInlet() == 1) {
+                osc_address = OscAddress.from_cache("./:" + message);
+            } else if ((1 < message.length()) && (message.charAt(0) == ':')) {
+                osc_address = OscAddress.from_cache("./" + message);
+            } else {
+                if (message.charAt(0) == '/') {
+                    osc_address = OscAddress.from_cache("." + message);
+                } else {
+                    osc_address = OscAddress.from_cache(message);
+                }
+                if (osc_address.message_handler_name == null) {
+                    osc_address = OscAddress.from_cache(osc_address.toString()
+                        + "/:value");
+                }
+            }
+            Request request = new Request(this, osc_address, arguments);
+            this.handle_request(request);
         }
     }
 
@@ -52,6 +81,7 @@ public class Binding extends MaxPeer implements MessagePasser {
     }
 
     public void bind(Atom[] arguments) {
+        this.detach();
         OscAddress osc_address = null;
         if (arguments.length == 0) {
             return;
