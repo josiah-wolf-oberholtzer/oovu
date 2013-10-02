@@ -114,6 +114,22 @@ abstract public class Server implements MessagePasser {
         }
     }
 
+    private class GetUniqueIdMessageHandler extends MessageHandler {
+
+        @Override
+        public String get_name() {
+            return "getuniqueid";
+        }
+
+        @Override
+        public Atom[][] run(Atom[] arguments) {
+            Atom[][] result = new Atom[1][2];
+            result[0][0] = Atom.newAtom("uniqueid");
+            result[0][1] = Atom.newAtom(System.identityHashCode(Server.this));
+            return result;
+        }
+    }
+
     private class ReportMessageHandler extends MessageHandler {
 
         @Override
@@ -193,6 +209,7 @@ abstract public class Server implements MessagePasser {
         this.add_message_handler(new GetInterfaceMessageHandler());
         // this.add_message_handler(new GetNameMessageHandler());
         this.add_message_handler(new GetOscAddressMessageHandler());
+        this.add_message_handler(new GetUniqueIdMessageHandler());
         this.add_message_handler(new ReportMessageHandler());
         this.add_message_handler(new ShowMessageHandler());
     }

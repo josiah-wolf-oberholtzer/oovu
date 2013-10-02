@@ -4,19 +4,23 @@ import oovu.addressing.OscAddress;
 import oovu.messaging.Request;
 
 import com.cycling74.max.Atom;
+import com.cycling74.max.MaxObject;
 
 abstract public class LazyServerClient extends ServerClient {
 
-    protected Atom lazy_module_id;
-    protected Atom lazy_name;
+    protected int lazy_module_id;
+    protected String lazy_name;
     protected Atom[] lazy_arguments;
 
-    public LazyServerClient(Atom lazy_module_id, Atom lazy_name,
-        Atom[] lazy_arguments) {
-        this.declareIO(3, 3);
-        this.lazy_module_id = lazy_module_id;
-        this.lazy_name = lazy_name;
-        this.lazy_arguments = lazy_arguments;
+    public LazyServerClient(Atom[] arguments) {
+        this.declareIO(3, 2);
+        if (arguments.length < 2) {
+            MaxObject
+                .bail("Lazy clients require a module ID and name template.");
+        }
+        this.lazy_module_id = arguments[0].toInt();
+        this.lazy_name = arguments[1].toString();
+        this.lazy_arguments = Atom.removeFirst(arguments, 2);
     }
 
     @Override
@@ -50,7 +54,7 @@ abstract public class LazyServerClient extends ServerClient {
     abstract public void bind(Atom[] arguments);
 
     public String complete_lazy_name(Atom[] arguments) {
-        String lazy_name = this.lazy_name.getString();
+        String lazy_name = this.lazy_name;
         while (lazy_name.contains("{}") && (0 < arguments.length)) {
             String substitution = arguments[0].toString();
             lazy_name = lazy_name.replace("{}", substitution);
