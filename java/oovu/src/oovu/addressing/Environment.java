@@ -20,8 +20,8 @@ public class Environment {
     public static final ReentrantLock lock = new ReentrantLock();
     private static final Logger logger;
     public static final Set<AudioServer> audio_servers = new HashSet<AudioServer>();
-    public static final Map<String, AudioServer> pull_addresses = new HashMap<String, AudioServer>();
-    public static final Map<String, AudioServer> push_addresses = new HashMap<String, AudioServer>();
+    public static final Map<OscAddress, AudioServer> pull_addresses = new HashMap<OscAddress, AudioServer>();
+    public static final Map<OscAddress, AudioServer> push_addresses = new HashMap<OscAddress, AudioServer>();
     public static final RootServer root_server;
     public static final OscAddressNode root_osc_address_node;
     static {
