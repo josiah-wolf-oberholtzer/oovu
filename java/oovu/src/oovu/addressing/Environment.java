@@ -13,6 +13,8 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+import com.cycling74.max.MaxObject;
+
 public class Environment {
 
     public static final ReentrantLock lock = new ReentrantLock();
@@ -31,7 +33,11 @@ public class Environment {
     }
 
     public static void log(Object message) {
-        Environment.logger.log(Environment.logger.getLevel(), message);
+        try {
+            MaxObject.post(message.toString());
+        } catch (UnsatisfiedLinkError e) {
+            Environment.logger.log(Environment.logger.getLevel(), message);
+        }
     }
 
     public static void report() {

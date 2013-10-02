@@ -9,15 +9,49 @@ import oovu.messaging.MessagePasser;
 import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
+import com.cycling74.max.Executable;
 import com.cycling74.max.MaxObject;
 import com.cycling74.max.MaxSystem;
 
 public class Binding extends MaxPeer implements MessagePasser {
 
+    private class RebindCallback implements Executable {
+
+        public final Binding client;
+        public final Atom[] arguments;
+
+        public RebindCallback(Binding client, Atom[] arguments) {
+            this.client = client;
+            this.arguments = arguments;
+        }
+
+        @Override
+        public void execute() {
+            this.client.bind(this.arguments);
+        }
+    }
+
     protected OscAddressNode osc_address_node;
 
     public Binding(Atom[] arguments) {
         this.declareIO(2, 2);
+        this.osc_address_node = null;
+        try {
+            MaxSystem.deferLow(new RebindCallback(this, arguments));
+        } catch (UnsatisfiedLinkError e) {
+            this.bind(arguments);
+        }
+    }
+
+    public void attach(OscAddressNode osc_address_node) {
+        this.detach();
+        if (osc_address_node != null) {
+            this.osc_address_node = osc_address_node;
+            this.osc_address_node.add_binding(this);
+        }
+    }
+
+    public void bind(Atom[] arguments) {
         OscAddress osc_address = null;
         if (arguments.length == 0) {
             return;
@@ -66,14 +100,6 @@ public class Binding extends MaxPeer implements MessagePasser {
         }
     }
 
-    public void attach(OscAddressNode osc_address_node) {
-        this.detach();
-        if (osc_address_node != null) {
-            this.osc_address_node = osc_address_node;
-            this.osc_address_node.add_binding(this);
-        }
-    }
-
     public void detach() {
         if (this.osc_address_node != null) {
             this.osc_address_node.remove_binding(this);
@@ -97,6 +123,9 @@ public class Binding extends MaxPeer implements MessagePasser {
 
     @Override
     public String get_osc_address_string() {
+        if (this.osc_address_node == null) {
+            return null;
+        }
         return this.get_osc_address().toString();
     }
 
