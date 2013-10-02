@@ -5,6 +5,7 @@ import java.util.Set;
 import oovu.addressing.Environment;
 import oovu.addressing.OscAddress;
 import oovu.addressing.OscAddressNode;
+import oovu.maxadapters.MaxAdapter;
 import oovu.messaging.MessagePasser;
 import oovu.messaging.Request;
 import oovu.messaging.Response;
@@ -14,6 +15,8 @@ import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
 
 abstract public class MaxPeer extends MaxObject implements MessagePasser {
+
+    protected MaxAdapter max_adapter;
 
     @Override
     public void anything(String message, Atom[] arguments) {
