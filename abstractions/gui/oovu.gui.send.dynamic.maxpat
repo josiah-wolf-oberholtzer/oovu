@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 4.0, 44.0, 1276.0, 756.0 ],
+		"rect" : [ 839.0, 44.0, 210.0, 684.0 ],
 		"bgcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 		"bglocked" : 1,
 		"openinpresentation" : 1,
@@ -28,6 +28,7 @@
 		"description" : "",
 		"digest" : "",
 		"tags" : "",
+		"title" : "/allpass~ Sends",
 		"boxes" : [ 			{
 				"box" : 				{
 					"fontname" : "Arial",
@@ -136,7 +137,7 @@
 					"presentation_rect" : [ 10.0, 5.0, 90.0, 25.0 ],
 					"prototypename" : "M4L.display",
 					"rounded" : 0.0,
-					"text" : "/in~",
+					"text" : "/allpass~",
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"texton" : "Text",
 					"textovercolor" : [ 1.0, 1.0, 1.0, 1.0 ],
@@ -177,8 +178,9 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-214",
+					"linecount" : 2,
 					"maxclass" : "newobj",
-					"numinlets" : 2,
+					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 235.0, 490.0, 125.0, 20.0 ],
@@ -417,8 +419,9 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-1",
+					"linecount" : 2,
 					"maxclass" : "newobj",
-					"numinlets" : 2,
+					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 235.0, 65.0, 214.0, 20.0 ],
@@ -696,33 +699,6 @@
 					"source" : [ "obj-7", 0 ]
 				}
 
-			}
- ],
-		"parameters" : 		{
-			"obj-18::obj-4" : [ "live.slider", "live.slider", 0 ],
-			"obj-204" : [ "live.numbox[3]", "live.numbox", 0 ]
-		}
-,
-		"dependency_cache" : [ 			{
-				"name" : "oovu.gui.send.1x.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/gui",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.guibackground.js",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/gui",
-				"patcherrelativepath" : ".",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.util.makeumenu.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/utilities",
-				"patcherrelativepath" : "../utilities",
-				"type" : "JSON",
-				"implicit" : 1
 			}
  ]
 	}

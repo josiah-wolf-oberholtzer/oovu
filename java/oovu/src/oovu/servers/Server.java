@@ -18,7 +18,9 @@ import oovu.messaging.Request;
 import oovu.messaging.Response;
 
 import com.cycling74.max.Atom;
+import com.cycling74.max.MaxBox;
 import com.cycling74.max.MaxObject;
+import com.cycling74.max.MaxPatcher;
 
 abstract public class Server implements MessagePasser {
 
@@ -157,8 +159,9 @@ abstract public class Server implements MessagePasser {
         @Override
         public Atom[][] run(Atom[] arguments) {
             for (ServerClient server_client : Server.this.server_clients) {
-                server_client.getMaxBox().getPatcher()
-                    .send("front", new Atom[0]);
+                MaxBox box = server_client.getMaxBox();
+                MaxPatcher patcher = box.getPatcher();
+                patcher.send("front", new Atom[0]);
             }
             return null;
         }
