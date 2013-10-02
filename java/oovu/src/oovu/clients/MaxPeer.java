@@ -67,34 +67,7 @@ abstract public class MaxPeer extends MaxObject implements MessagePasser {
 
     @Override
     public void handle_response(Response response) {
-        if (response == null) {
-            return;
-        }
-        Atom value_atom = Atom.newAtom("value");
-        if (this.get_osc_address_node() == null) {
-            return;
-        }
-        String relative_osc_address = response.get_relative_osc_address(this
-            .get_osc_address_node());
-        for (Atom[] output : response.payload) {
-            if (output[0].equals(value_atom)) {
-                output = Atom.removeFirst(output);
-                if (relative_osc_address != null) {
-                    output = Atom.newAtom(relative_osc_address, output);
-                }
-                this.output_value_response_payload(output);
-            } else {
-                if (relative_osc_address != null) {
-                    String message = output[0].getString();
-                    output = Atom.removeFirst(output);
-                    output = Atom.newAtom(
-                        relative_osc_address + "/:" + message, output);
-                    this.output_value_response_payload(output);
-                } else {
-                    this.output_interface_response_payload(output);
-                }
-            }
-        }
+        this.max_adapter.handle_response(response);
     }
 
     @Override
@@ -105,21 +78,5 @@ abstract public class MaxPeer extends MaxObject implements MessagePasser {
                 input);
         }
         this.handle_request(request);
-    }
-
-    public void output_interface_response_payload(Atom[] payload) {
-        try {
-            this.outlet(this.getInfoIdx(), payload);
-        } catch (UnsatisfiedLinkError e) {
-        }
-    }
-
-    public void output_value_response_payload(Atom[] payload) {
-        try {
-            this.outlet(1, payload);
-            this.outlet(0, "set", payload);
-        } catch (UnsatisfiedLinkError e) {
-            // Environment.log(e);
-        }
     }
 }

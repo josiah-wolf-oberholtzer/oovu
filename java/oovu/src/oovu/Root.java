@@ -3,18 +3,11 @@ package oovu;
 import oovu.addressing.Environment;
 import oovu.clients.ServerClient;
 
-import com.cycling74.max.Atom;
-
 public class Root extends ServerClient {
 
     public Root() {
-        this.declareIO(2, 1);
+        this.declareIO(2, 2);
         this.server = Environment.root_server;
         this.server.server_clients.add(this);
-    }
-
-    @Override
-    public void output_value_response_payload(Atom[] payload) {
-        this.outlet(0, payload);
     }
 }

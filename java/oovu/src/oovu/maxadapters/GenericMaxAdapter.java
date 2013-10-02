@@ -16,14 +16,13 @@ public class GenericMaxAdapter extends MaxAdapter {
         if (response == null) {
             return;
         }
-        Atom value_atom = Atom.newAtom("value");
         if (this.max_peer.get_osc_address_node() == null) {
             return;
         }
         String relative_osc_address = response
             .get_relative_osc_address(this.max_peer.get_osc_address_node());
         for (Atom[] output : response.payload) {
-            if (output[0].equals(value_atom)) {
+            if (output[0].equals(MaxAdapter.value_atom)) {
                 output = Atom.removeFirst(output);
                 if (relative_osc_address != null) {
                     output = Atom.newAtom(relative_osc_address, output);
