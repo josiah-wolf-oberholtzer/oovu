@@ -5,9 +5,9 @@ import oovu.messaging.Response;
 
 import com.cycling74.max.Atom;
 
-public class GenericAdapter extends MaxAdapter {
+public class GenericMaxAdapter extends MaxAdapter {
 
-    public GenericAdapter(MaxPeer max_peer) {
+    public GenericMaxAdapter(MaxPeer max_peer) {
         super(max_peer);
     }
 
