@@ -1,4 +1,4 @@
-package oovu.timewise;
+package oovu.timing;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;

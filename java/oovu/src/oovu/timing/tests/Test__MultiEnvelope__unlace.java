@@ -1,7 +1,7 @@
-package oovu.timewise.tests;
+package oovu.timing.tests;
 
-import oovu.timewise.MultiEnvelope;
-import oovu.timewise.TimePoint;
+import oovu.timing.MultiEnvelope;
+import oovu.timing.TimePoint;
 
 import org.junit.Assert;
 import org.junit.Test;

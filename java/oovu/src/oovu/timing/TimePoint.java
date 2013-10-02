@@ -1,4 +1,4 @@
-package oovu.timewise;
+package oovu.timing;
 
 public class TimePoint {
 

@@ -6,7 +6,7 @@ import java.util.Map;
 import oovu.messaging.DatatypeMessageHandler;
 import oovu.servers.AttributeServer;
 import oovu.servers.Server;
-import oovu.timewise.MultiEnvelope;
+import oovu.timing.MultiEnvelope;
 
 import com.cycling74.max.Atom;
 
