@@ -274,7 +274,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 85.0, 355.0, 139.0, 20.0 ],
-					"text" : "oovu.binding"
+					"text" : "mxj oovu.Binding"
 				}
 
 			}

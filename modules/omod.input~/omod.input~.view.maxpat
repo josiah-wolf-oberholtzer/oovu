@@ -623,7 +623,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 405.0, 185.0, 171.0, 20.0 ],
-					"text" : "oovu.binding #1 source"
+					"text" : "mxj oovu.Binding #1 source"
 				}
 
 			}
@@ -713,7 +713,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 340.0, 115.0, 176.0, 20.0 ],
-					"text" : "oovu.binding #1 output/gain"
+					"text" : "mxj oovu.Binding #1 output/gain"
 				}
 
 			}
@@ -727,7 +727,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 290.0, 85.0, 171.0, 20.0 ],
-					"text" : "oovu.binding #1 dsp/active"
+					"text" : "mxj oovu.Binding #1 dsp/active"
 				}
 
 			}
@@ -741,7 +741,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 10.0, 55.0, 120.0, 20.0 ],
-					"text" : "oovu.binding #1 ."
+					"text" : "mxj oovu.Binding #1 ."
 				}
 
 			}

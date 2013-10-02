@@ -38,7 +38,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 10.0, 165.0, 110.0, 33.0 ],
-					"text" : "oovu.binding #1 source"
+					"text" : "mxj oovu.Binding #1 source"
 				}
 
 			}
@@ -327,7 +327,7 @@
 									"numoutlets" : 4,
 									"outlettype" : [ "", "", "", "bang" ],
 									"patching_rect" : [ 10.0, 90.0, 115.0, 33.0 ],
-									"text" : "oovu.binding #1 oscillator/waveform"
+									"text" : "mxj oovu.Binding #1 oscillator/waveform"
 								}
 
 							}
@@ -1126,7 +1126,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 10.0, 35.0, 285.0, 20.0 ],
-					"text" : "oovu.binding #1 ."
+					"text" : "mxj oovu.Binding #1 ."
 				}
 
 			}

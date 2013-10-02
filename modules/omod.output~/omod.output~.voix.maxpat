@@ -37,7 +37,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 660.0, 190.0, 205.0, 20.0 ],
-					"text" : "oovu.binding #1 record/start"
+					"text" : "mxj oovu.Binding #1 record/start"
 				}
 
 			}
@@ -79,7 +79,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 690.0, 220.0, 205.0, 20.0 ],
-					"text" : "oovu.binding #1 record/stop"
+					"text" : "mxj oovu.Binding #1 record/stop"
 				}
 
 			}
@@ -107,7 +107,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 645.0, 135.0, 205.0, 20.0 ],
-					"text" : "oovu.binding #1 record/open"
+					"text" : "mxj oovu.Binding #1 record/open"
 				}
 
 			}
@@ -135,7 +135,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 630.0, 80.0, 205.0, 20.0 ],
-					"text" : "oovu.binding #1 dsp/channelcount"
+					"text" : "mxj oovu.Binding #1 dsp/channelcount"
 				}
 
 			}
@@ -177,7 +177,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 410.0, 80.0, 205.0, 20.0 ],
-					"text" : "oovu.binding #1 dsp/active"
+					"text" : "mxj oovu.Binding #1 dsp/active"
 				}
 
 			}
@@ -573,7 +573,7 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "oovu.binding.maxpat",
+				"name" : "mxj oovu.Binding.maxpat",
 				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
 				"patcherrelativepath" : "../../abstractions/core",
 				"type" : "JSON",

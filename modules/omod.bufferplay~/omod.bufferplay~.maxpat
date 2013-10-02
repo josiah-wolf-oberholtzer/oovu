@@ -88,7 +88,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 55.0, 10.0, 194.0, 20.0 ],
-					"text" : "oovu.module #0 #1"
+					"text" : "mxj oovu.Module #0 #1"
 				}
 
 			}

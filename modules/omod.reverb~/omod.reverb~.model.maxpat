@@ -162,7 +162,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 135.0, 600.0, 20.0 ],
-					"text" : "oovu.property #1 spread @datatype decimal @range 0. 400. @default 400."
+					"text" : "mxj oovu.Property #1 spread :datatype decimal :range 0. 400. :default 400."
 				}
 
 			}
@@ -176,7 +176,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 110.0, 600.0, 20.0 ],
-					"text" : "oovu.property #1 feedback/secondary @datatype decimal @range 0. 1. @default 0.9"
+					"text" : "mxj oovu.Property #1 feedback/secondary :datatype decimal :range 0. 1. :default 0.9"
 				}
 
 			}
@@ -190,7 +190,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 85.0, 600.0, 20.0 ],
-					"text" : "oovu.property #1 feedback/primary @datatype decimal @range 0. 1. @default 0.95"
+					"text" : "mxj oovu.Property #1 feedback/primary :datatype decimal :range 0. 1. :default 0.95"
 				}
 
 			}
@@ -204,7 +204,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 60.0, 600.0, 20.0 ],
-					"text" : "oovu.property #1 damping @datatype decimal @range 0. 1. @default 0.9"
+					"text" : "mxj oovu.Property #1 damping :datatype decimal :range 0. 1. :default 0.9"
 				}
 
 			}
@@ -393,7 +393,7 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "oovu.property.maxpat",
+				"name" : "mxj oovu.Property.maxpat",
 				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
 				"patcherrelativepath" : "../../abstractions/core",
 				"type" : "JSON",
@@ -582,7 +582,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "oovu.binding.maxpat",
+				"name" : "mxj oovu.Binding.maxpat",
 				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
 				"patcherrelativepath" : "../../abstractions/core",
 				"type" : "JSON",

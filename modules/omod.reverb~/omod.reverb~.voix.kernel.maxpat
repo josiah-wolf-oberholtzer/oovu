@@ -37,7 +37,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 80.0, 90.0, 191.0, 20.0 ],
-					"text" : "oovu.binding #1 feedback/primary"
+					"text" : "mxj oovu.Binding #1 feedback/primary"
 				}
 
 			}
@@ -51,7 +51,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 80.0, 150.0, 206.0, 20.0 ],
-					"text" : "oovu.binding #1 feedback/secondary"
+					"text" : "mxj oovu.Binding #1 feedback/secondary"
 				}
 
 			}
@@ -94,7 +94,7 @@
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 80.0, 210.0, 145.0, 20.0 ],
 					"presentation_rect" : [ 50.0, 205.0, 0.0, 0.0 ],
-					"text" : "oovu.binding #1 damping"
+					"text" : "mxj oovu.Binding #1 damping"
 				}
 
 			}
@@ -108,7 +108,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 80.0, 270.0, 145.0, 20.0 ],
-					"text" : "oovu.binding #1 damping"
+					"text" : "mxj oovu.Binding #1 damping"
 				}
 
 			}
@@ -164,7 +164,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 60.0, 330.0, 120.0, 20.0 ],
-					"text" : "gen~ @gen freeverb"
+					"text" : "gen~ :gen freeverb"
 				}
 
 			}

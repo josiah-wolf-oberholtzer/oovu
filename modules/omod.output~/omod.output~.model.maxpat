@@ -135,7 +135,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 260.0, 600.0, 20.0 ],
-					"text" : "oovu.property #1 dac/active @datatype boolean @default 0"
+					"text" : "mxj oovu.Property #1 dac/active :datatype boolean :default 0"
 				}
 
 			}
@@ -149,7 +149,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 315.0, 600.0, 20.0 ],
-					"text" : "oovu.property #1 dac/routing @datatype intarray @length 8 @range 1 NULL @default 1 2 3 4 5 6 7 8"
+					"text" : "mxj oovu.Property #1 dac/routing :datatype intarray :length 8 :range 1 NULL :default 1 2 3 4 5 6 7 8"
 				}
 
 			}
@@ -163,7 +163,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 80.0, 600.0, 20.0 ],
-					"text" : "oovu.method #1 record/recording @datatype boolean"
+					"text" : "mxj oovu.Method #1 record/recording :datatype boolean"
 				}
 
 			}
@@ -177,7 +177,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 55.0, 600.0, 20.0 ],
-					"text" : "oovu.method #1 record/open @datatype filesystempath"
+					"text" : "mxj oovu.Method #1 record/open :datatype filesystempath"
 				}
 
 			}
@@ -379,7 +379,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "oovu.binding.maxpat",
+				"name" : "mxj oovu.Binding.maxpat",
 				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
 				"patcherrelativepath" : "../../abstractions/core",
 				"type" : "JSON",
@@ -414,7 +414,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "oovu.property.maxpat",
+				"name" : "mxj oovu.Property.maxpat",
 				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
 				"patcherrelativepath" : "../../abstractions/core",
 				"type" : "JSON",
@@ -526,7 +526,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "oovu.method.maxpat",
+				"name" : "mxj oovu.Method.maxpat",
 				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
 				"patcherrelativepath" : "../../abstractions/core",
 				"type" : "JSON",

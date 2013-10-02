@@ -148,7 +148,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 30.0, 270.0, 290.0, 20.0 ],
-					"text" : "oovu.method #1 view"
+					"text" : "mxj oovu.Method #1 view"
 				}
 
 			}
@@ -176,7 +176,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 30.0, 150.0, 290.0, 20.0 ],
-					"text" : "oovu.method #1 read @datatype filesystempath"
+					"text" : "mxj oovu.Method #1 read :datatype filesystempath"
 				}
 
 			}
@@ -190,7 +190,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 30.0, 210.0, 290.0, 20.0 ],
-					"text" : "oovu.method #1 getstate"
+					"text" : "mxj oovu.Method #1 getstate"
 				}
 
 			}
@@ -204,7 +204,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 30.0, 90.0, 290.0, 20.0 ],
-					"text" : "oovu.method #1 cue @datatype option"
+					"text" : "mxj oovu.Method #1 cue :datatype option"
 				}
 
 			}

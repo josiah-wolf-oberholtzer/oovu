@@ -144,7 +144,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 10.0, 65.0, 97.0, 20.0 ],
-					"text" : "oovu.binding"
+					"text" : "mxj oovu.Binding"
 				}
 
 			}
@@ -241,7 +241,7 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "oovu.binding.maxpat",
+				"name" : "mxj oovu.Binding.maxpat",
 				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",

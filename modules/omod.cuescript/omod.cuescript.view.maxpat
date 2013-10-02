@@ -686,7 +686,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 10.0, 390.0, 141.0, 20.0 ],
-					"text" : "oovu.binding #1 view"
+					"text" : "mxj oovu.Binding #1 view"
 				}
 
 			}
@@ -700,7 +700,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 10.0, 340.0, 159.0, 20.0 ],
-					"text" : "oovu.binding #1 getstate"
+					"text" : "mxj oovu.Binding #1 getstate"
 				}
 
 			}
@@ -714,7 +714,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 170.0, 145.0, 141.0, 20.0 ],
-					"text" : "oovu.binding #1 read"
+					"text" : "mxj oovu.Binding #1 read"
 				}
 
 			}
@@ -788,7 +788,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 170.0, 230.0, 236.0, 20.0 ],
-					"text" : "oovu.binding #1 cue"
+					"text" : "mxj oovu.Binding #1 cue"
 				}
 
 			}
@@ -802,7 +802,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 10.0, 65.0, 120.0, 20.0 ],
-					"text" : "oovu.binding #1 ."
+					"text" : "mxj oovu.Binding #1 ."
 				}
 
 			}

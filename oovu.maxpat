@@ -287,7 +287,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "oovu.binding.maxpat",
+				"name" : "mxj oovu.Binding.maxpat",
 				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
 				"patcherrelativepath" : "./abstractions/core",
 				"type" : "JSON",
@@ -322,7 +322,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "oovu.property.maxpat",
+				"name" : "mxj oovu.Property.maxpat",
 				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
 				"patcherrelativepath" : "./abstractions/core",
 				"type" : "JSON",
@@ -455,7 +455,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "oovu.method.maxpat",
+				"name" : "mxj oovu.Method.maxpat",
 				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
 				"patcherrelativepath" : "./abstractions/core",
 				"type" : "JSON",
@@ -532,7 +532,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "oovu.module.maxpat",
+				"name" : "mxj oovu.Module.maxpat",
 				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
 				"patcherrelativepath" : "./abstractions/core",
 				"type" : "JSON",

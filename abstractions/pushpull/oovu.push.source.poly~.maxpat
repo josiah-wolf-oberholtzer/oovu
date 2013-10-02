@@ -569,7 +569,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 520.0, 260.0, 368.0, 20.0 ],
-					"text" : "oovu.lazyproperty #1 send.{}/destination @datatype push"
+					"text" : "oovu.lazyproperty #1 send.{}/destination :datatype push"
 				}
 
 			}
@@ -583,7 +583,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 415.0, 145.0, 459.0, 20.0 ],
-					"text" : "oovu.lazyproperty #1 send.{}/amplitude @datatype decimal @default 0."
+					"text" : "oovu.lazyproperty #1 send.{}/amplitude :datatype decimal @default 0."
 				}
 
 			}

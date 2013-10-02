@@ -307,7 +307,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 440.0, 550.0, 168.0, 20.0 ],
-					"text" : "oovu.binding /foo/hoo/hah"
+					"text" : "mxj oovu.Binding /foo/hoo/hah"
 				}
 
 			}
@@ -335,7 +335,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 440.0, 580.0, 199.0, 20.0 ],
-					"text" : "oovu.binding 1001 hoo/hah"
+					"text" : "mxj oovu.Binding 1001 hoo/hah"
 				}
 
 			}
@@ -363,7 +363,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 440.0, 520.0, 179.0, 20.0 ],
-					"text" : "oovu.property 1001 hoo/hah"
+					"text" : "mxj oovu.Property 1001 hoo/hah"
 				}
 
 			}
@@ -405,7 +405,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 440.0, 390.0, 182.0, 20.0 ],
-					"text" : "oovu.binding 1001 baz"
+					"text" : "mxj oovu.Binding 1001 baz"
 				}
 
 			}
@@ -419,7 +419,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 440.0, 360.0, 182.0, 20.0 ],
-					"text" : "oovu.binding 1001 baz"
+					"text" : "mxj oovu.Binding 1001 baz"
 				}
 
 			}
@@ -447,7 +447,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 440.0, 470.0, 151.0, 20.0 ],
-					"text" : "oovu.binding /foo/quux"
+					"text" : "mxj oovu.Binding /foo/quux"
 				}
 
 			}
@@ -489,7 +489,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 440.0, 440.0, 162.0, 20.0 ],
-					"text" : "oovu.property 1001 quux"
+					"text" : "mxj oovu.Property 1001 quux"
 				}
 
 			}
@@ -503,7 +503,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 440.0, 200.0, 148.0, 20.0 ],
-					"text" : "oovu.module 1001 foo"
+					"text" : "mxj oovu.Module 1001 foo"
 				}
 
 			}
@@ -517,7 +517,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 440.0, 280.0, 169.0, 20.0 ],
-					"text" : "oovu.property 1001 bar"
+					"text" : "mxj oovu.Property 1001 bar"
 				}
 
 			}
@@ -531,7 +531,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 440.0, 330.0, 155.0, 20.0 ],
-					"text" : "oovu.property 1001 baz"
+					"text" : "mxj oovu.Property 1001 baz"
 				}
 
 			}
@@ -1028,7 +1028,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "oovu.property.maxpat",
+				"name" : "mxj oovu.Property.maxpat",
 				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
@@ -1154,7 +1154,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "oovu.module.maxpat",
+				"name" : "mxj oovu.Module.maxpat",
 				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
@@ -1189,7 +1189,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "oovu.binding.maxpat",
+				"name" : "mxj oovu.Binding.maxpat",
 				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",

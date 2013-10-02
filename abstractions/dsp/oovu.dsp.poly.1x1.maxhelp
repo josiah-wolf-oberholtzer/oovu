@@ -49,7 +49,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 295.0, 170.0, 282.0, 20.0 ],
-					"text" : "oovu.property 1001 dsp/active @datatype boolean"
+					"text" : "mxj oovu.Property 1001 dsp/active :datatype boolean"
 				}
 
 			}
@@ -92,7 +92,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 165.0, 80.0, 129.0, 20.0 ],
-					"text" : "oovu.module 1001 foo"
+					"text" : "mxj oovu.Module 1001 foo"
 				}
 
 			}
@@ -283,7 +283,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "oovu.binding.maxpat",
+				"name" : "mxj oovu.Binding.maxpat",
 				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
 				"patcherrelativepath" : "../core",
 				"type" : "JSON",
@@ -318,7 +318,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "oovu.module.maxpat",
+				"name" : "mxj oovu.Module.maxpat",
 				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
 				"patcherrelativepath" : "../core",
 				"type" : "JSON",
@@ -416,7 +416,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "oovu.property.maxpat",
+				"name" : "mxj oovu.Property.maxpat",
 				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
 				"patcherrelativepath" : "../core",
 				"type" : "JSON",

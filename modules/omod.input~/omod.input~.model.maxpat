@@ -94,7 +94,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 290.0, 600.0, 20.0 ],
-					"text" : "oovu.property #1 soundfile/looping @datatype boolean @default 0"
+					"text" : "mxj oovu.Property #1 soundfile/looping :datatype boolean :default 0"
 				}
 
 			}
@@ -122,7 +122,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 340.0, 600.0, 20.0 ],
-					"text" : "oovu.property #1 dsp/active @datatype boolean @default 0"
+					"text" : "mxj oovu.Property #1 dsp/active :datatype boolean :default 0"
 				}
 
 			}
@@ -136,7 +136,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 185.0, 600.0, 20.0 ],
-					"text" : "oovu.property #1 oscillator/pulserate @datatype decimal @default 500 @range 0. NULL"
+					"text" : "mxj oovu.Property #1 oscillator/pulserate :datatype decimal :default 500 :range 0. NULL"
 				}
 
 			}
@@ -150,7 +150,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 160.0, 600.0, 20.0 ],
-					"text" : "oovu.property #1 oscillator/pulsing @datatype boolean @default 0"
+					"text" : "mxj oovu.Property #1 oscillator/pulsing :datatype boolean :default 0"
 				}
 
 			}
@@ -164,7 +164,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 135.0, 600.0, 20.0 ],
-					"text" : "oovu.property #1 oscillator/frequency @datatype decimal @range 0. NULL @default 440"
+					"text" : "mxj oovu.Property #1 oscillator/frequency :datatype decimal :range 0. NULL :default 440"
 				}
 
 			}
@@ -178,7 +178,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 110.0, 600.0, 20.0 ],
-					"text" : "oovu.property #1 oscillator/waveform @datatype option @options sine triangle rectangle noise @default sine"
+					"text" : "mxj oovu.Property #1 oscillator/waveform :datatype option :options sine triangle rectangle noise :default sine"
 				}
 
 			}
@@ -192,7 +192,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 85.0, 600.0, 20.0 ],
-					"text" : "oovu.property #1 adc/channel @datatype integer @range 1 NULL @default 1"
+					"text" : "mxj oovu.Property #1 adc/channel :datatype integer :range 1 NULL :default 1"
 				}
 
 			}
@@ -206,7 +206,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 315.0, 600.0, 20.0 ],
-					"text" : "oovu.method #1 soundfile/seek @datatype decimal @range 0 NULL"
+					"text" : "mxj oovu.Method #1 soundfile/seek :datatype decimal :range 0 NULL"
 				}
 
 			}
@@ -220,7 +220,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 265.0, 600.0, 20.0 ],
-					"text" : "oovu.property #1 soundfile/playing @datatype boolean @priority 98 @default 0"
+					"text" : "mxj oovu.Property #1 soundfile/playing :datatype boolean :priority 98 :default 0"
 				}
 
 			}
@@ -234,7 +234,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 210.0, 600.0, 20.0 ],
-					"text" : "oovu.property #1 soundfile/filepath @datatype filesystempath @priority 99"
+					"text" : "mxj oovu.Property #1 soundfile/filepath :datatype filesystempath :priority 99"
 				}
 
 			}
@@ -248,7 +248,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 60.0, 600.0, 20.0 ],
-					"text" : "oovu.property #1 source @datatype option @options adc oscillator soundfile @priority 100 @default adc"
+					"text" : "mxj oovu.Property #1 source :datatype option :options adc oscillator soundfile :priority 100 :default adc"
 				}
 
 			}
@@ -407,7 +407,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "oovu.property.maxpat",
+				"name" : "mxj oovu.Property.maxpat",
 				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
 				"patcherrelativepath" : "../../abstractions/core",
 				"type" : "JSON",
@@ -582,7 +582,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "oovu.binding.maxpat",
+				"name" : "mxj oovu.Binding.maxpat",
 				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
 				"patcherrelativepath" : "../../abstractions/core",
 				"type" : "JSON",
@@ -610,7 +610,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "oovu.method.maxpat",
+				"name" : "mxj oovu.Method.maxpat",
 				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
 				"patcherrelativepath" : "../../abstractions/core",
 				"type" : "JSON",
