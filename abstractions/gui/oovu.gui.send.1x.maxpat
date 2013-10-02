@@ -379,6 +379,25 @@
 				}
 
 			}
+ ],
+		"parameters" : 		{
+			"obj-4" : [ "live.slider", "live.slider", 0 ]
+		}
+,
+		"dependency_cache" : [ 			{
+				"name" : "oovu.guibackground.js",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/gui",
+				"patcherrelativepath" : ".",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.util.makeumenu.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/utilities",
+				"patcherrelativepath" : "../utilities",
+				"type" : "JSON",
+				"implicit" : 1
+			}
  ]
 	}
 

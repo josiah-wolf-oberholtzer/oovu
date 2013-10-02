@@ -559,65 +559,9 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "oovu.push.destination.dispatch.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/pushpull",
-				"patcherrelativepath" : "../pushpull",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.obj.audionode.constructor.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/internals",
-				"patcherrelativepath" : "../internals",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.obj.argssetup.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/internals",
-				"patcherrelativepath" : "../internals",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.environment.js",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/core",
-				"patcherrelativepath" : "../core",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "oovu.push.destination.poly~.maxpat",
 				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/pushpull",
 				"patcherrelativepath" : "../pushpull",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "mxj oovu.Binding.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/core",
-				"patcherrelativepath" : "../core",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.messaging.call.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/messaging",
-				"patcherrelativepath" : "../messaging",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.util.queue.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/utilities",
-				"patcherrelativepath" : "../utilities",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.updated.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/core",
-				"patcherrelativepath" : "../core",
 				"type" : "JSON",
 				"implicit" : 1
 			}
