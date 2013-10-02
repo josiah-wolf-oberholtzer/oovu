@@ -1,6 +1,7 @@
 package oovu;
 
 import oovu.clients.LazyServerClient;
+import oovu.maxadapters.GenericMaxAdapter;
 import oovu.servers.members.ReturnServer;
 
 import com.cycling74.max.Atom;
@@ -9,6 +10,7 @@ public class LazyReturn extends LazyServerClient {
 
     public LazyReturn(Atom[] arguments) {
         super(arguments);
+        this.max_adapter = new GenericMaxAdapter(this);
     }
 
     @Override

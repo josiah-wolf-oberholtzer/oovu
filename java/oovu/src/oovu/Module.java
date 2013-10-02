@@ -1,6 +1,7 @@
 package oovu;
 
 import oovu.clients.ServerClient;
+import oovu.maxadapters.GenericMaxAdapter;
 import oovu.servers.ModuleServer;
 
 import com.cycling74.max.Atom;
@@ -10,6 +11,7 @@ public class Module extends ServerClient {
     public Module(Atom[] arguments) {
         this.declareIO(2, 2);
         this.check_arguments(arguments);
+        this.max_adapter = new GenericMaxAdapter(this);
         Integer module_id = arguments[0].toInt();
         String desired_name = arguments[1].toString();
         System.out.print("OK!");

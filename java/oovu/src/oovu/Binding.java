@@ -5,6 +5,7 @@ import oovu.addressing.OscAddress;
 import oovu.addressing.OscAddressNode;
 import oovu.clients.MaxPeer;
 import oovu.clients.MessagePasserCallback;
+import oovu.maxadapters.GenericMaxAdapter;
 import oovu.messaging.MessagePasser;
 import oovu.messaging.Request;
 import oovu.servers.Server;
@@ -36,6 +37,7 @@ public class Binding extends MaxPeer implements MessagePasser {
 
     public Binding(Atom[] arguments) {
         this.declareIO(3, 2);
+        this.max_adapter = new GenericMaxAdapter(this);
         this.osc_address_node = null;
         try {
             MaxSystem.deferLow(new RebindCallback(this, arguments));
