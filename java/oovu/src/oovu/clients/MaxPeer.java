@@ -68,16 +68,6 @@ abstract public class MaxPeer extends MaxObject implements MessagePasser {
             return;
         }
         Atom value_atom = Atom.newAtom("value");
-        // String debug_message = response.source.toString();
-        // debug_message += " (" + System.identityHashCode(this) + ")";
-        // if (this.get_osc_address_node() == null) {
-        // debug_message += " : null : " + this.getClass().getSimpleName();
-        // } else {
-        // debug_message += " : "
-        // + this.get_osc_address_node().get_debug_piece() + " "
-        // + this.getClass().getSimpleName();
-        // }
-        // Environment.log(debug_message);
         if (this.get_osc_address_node() == null) {
             return;
         }
