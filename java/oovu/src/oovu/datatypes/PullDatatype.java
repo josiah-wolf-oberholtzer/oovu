@@ -7,6 +7,7 @@ import oovu.addressing.Environment;
 import oovu.messaging.DatatypeMessageHandler;
 import oovu.servers.AttributeServer;
 import oovu.servers.Server;
+import oovu.servers.members.AudioServer;
 
 import com.cycling74.max.Atom;
 
@@ -34,6 +35,33 @@ public class PullDatatype extends OscAddressDatatype {
         }
     }
 
+    private class GetPullIdMessageHandler extends DatatypeMessageHandler {
+
+        public GetPullIdMessageHandler(AttributeServer attribute_server) {
+            super(attribute_server);
+        }
+
+        @Override
+        public String get_name() {
+            return "getpullid";
+        }
+
+        @Override
+        public Atom[][] run(Atom[] arguments) {
+            String osc_address_string = PullDatatype.this.value[0].getString();
+            int id = System.identityHashCode(this.attribute_server);
+            AudioServer audio_server = Environment.pull_addresses
+                .get(osc_address_string);
+            if (audio_server != null) {
+                id = System.identityHashCode(audio_server);
+            }
+            Atom[][] result = new Atom[1][2];
+            result[0][0] = Atom.newAtom("pullid");
+            result[0][1] = Atom.newAtom(id);
+            return result;
+        }
+    }
+
     public PullDatatype(Atom[] arguments) {
         this(null, Server.process_atom_arguments(arguments));
     }
@@ -42,6 +70,8 @@ public class PullDatatype extends OscAddressDatatype {
         super(client, argument_map);
         if (client != null) {
             client.add_message_handler(new GetPullAddressesMessageHandler(
+                this.client));
+            this.client.add_message_handler(new GetPullIdMessageHandler(
                 this.client));
         }
         this.initialize_default_value(argument_map);
