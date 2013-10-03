@@ -1,5 +1,6 @@
 package oovu.servers;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import oovu.Binding;
@@ -8,6 +9,7 @@ import oovu.addressing.OscAddressNode;
 import oovu.clients.MessagePasserCallback;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.Response;
+import oovu.servers.members.PropertyServer;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxSystem;
@@ -87,4 +89,9 @@ public class ModuleServer extends Server {
         }
         this.name = this.osc_address_node.acquire_name(desired_name);
     }
+    
+    public PropertyServer[] get_property_servers() {
+        return null;
+    }
+    
 }

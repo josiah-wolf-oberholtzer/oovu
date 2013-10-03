@@ -36,7 +36,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 175.0, 390.0, 100.0, 20.0 ],
-					"text" : "print bza"
+					"text" : "print baz"
 				}
 
 			}
@@ -92,8 +92,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 15.0, 265.0, 305.0, 18.0 ],
-					"text" : "set /feedback/gain/frequency 0.101141"
+					"patching_rect" : [ 15.0, 255.0, 305.0, 18.0 ],
+					"text" : "/feedback/gain/range 0.757764 0.813665"
 				}
 
 			}
@@ -113,10 +113,9 @@
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
-					"destination" : [ "obj-3", 1 ],
+					"destination" : [ "obj-3", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 24.5, 254.5, 310.5, 254.5 ],
 					"source" : [ "obj-1", 0 ]
 				}
 
@@ -159,18 +158,18 @@
 			}
  ],
 		"parameters" : 		{
-			"obj-1::obj-5::obj-26" : [ "live.numbox[44]", "live.numbox[4]", 0 ],
 			"obj-1::obj-5::obj-38" : [ "live.numbox[41]", "live.numbox[4]", 0 ],
 			"obj-1::obj-5::obj-36" : [ "live.numbox[43]", "live.numbox[4]", 0 ],
-			"obj-1::obj-5::obj-18::obj-18::obj-4" : [ "live.slider", "live.slider", 0 ],
-			"obj-1::obj-5::obj-18::obj-204" : [ "live.numbox[3]", "live.numbox", 0 ],
 			"obj-1::obj-5::obj-12" : [ "live.slider[14]", "live.slider", 0 ],
-			"obj-1::obj-5::obj-6" : [ "live.slider[15]", "live.slider", 0 ],
 			"obj-1::obj-5::obj-31" : [ "live.numbox[42]", "live.numbox[4]", 0 ],
 			"obj-1::obj-5::obj-49" : [ "live.numbox[39]", "live.numbox[4]", 0 ],
 			"obj-1::obj-5::obj-21" : [ "live.numbox[12]", "live.numbox[4]", 0 ],
+			"obj-1::obj-5::obj-40" : [ "live.numbox[40]", "live.numbox[4]", 0 ],
+			"obj-1::obj-5::obj-18::obj-18::obj-4" : [ "live.slider", "live.slider", 0 ],
+			"obj-1::obj-5::obj-18::obj-204" : [ "live.numbox[3]", "live.numbox", 0 ],
+			"obj-1::obj-5::obj-26" : [ "live.numbox[44]", "live.numbox[4]", 0 ],
 			"obj-1::obj-5::obj-204" : [ "live.numbox[46]", "live.numbox", 0 ],
-			"obj-1::obj-5::obj-40" : [ "live.numbox[40]", "live.numbox[4]", 0 ]
+			"obj-1::obj-5::obj-6" : [ "live.slider[15]", "live.slider", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{

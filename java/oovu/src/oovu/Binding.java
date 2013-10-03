@@ -8,6 +8,7 @@ import oovu.clients.MaxPeer;
 import oovu.clients.MessagePasserCallback;
 import oovu.messaging.MessagePasser;
 import oovu.messaging.Request;
+import oovu.servers.ModuleMemberServer;
 import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
@@ -59,17 +60,24 @@ public class Binding extends MaxPeer implements MessagePasser {
             } else if ((1 < message.length()) && (message.charAt(0) == ':')) {
                 osc_address = OscAddress.from_cache("./" + message);
             } else {
-                if (message.charAt(0) == '/') {
-                    osc_address = OscAddress.from_cache("." + message);
+                Server server = this.get_osc_address_node().get_server();
+                if (server instanceof ModuleMemberServer) {
+                    osc_address = OscAddress.from_cache("./:value");
+                    arguments = Atom.newAtom(message, arguments);
                 } else {
-                    osc_address = OscAddress.from_cache(message);
-                }
-                if (osc_address.message_handler_name == null) {
-                    osc_address = OscAddress.from_cache(osc_address.toString()
-                        + "/:value");
+                    if (message.charAt(0) == '/') {
+                        osc_address = OscAddress.from_cache("." + message);
+                    } else {
+                        osc_address = OscAddress.from_cache(message);
+                    }
+                    if (osc_address.message_handler_name == null) {
+                        osc_address = OscAddress.from_cache(osc_address.toString()
+                            + "/:value");
+                    }
                 }
             }
             Request request = new Request(this, osc_address, arguments);
+            Environment.log(request.toString());
             this.handle_request(request);
         }
     }

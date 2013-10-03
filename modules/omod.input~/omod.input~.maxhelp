@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 401.0, 44.0, 800.0, 684.0 ],
+		"rect" : [ 480.0, 44.0, 800.0, 684.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -29,12 +29,12 @@
 		"tags" : "",
 		"boxes" : [ 			{
 				"box" : 				{
-					"id" : "obj-35",
+					"id" : "obj-28",
 					"maxclass" : "button",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 35.0, 530.0, 20.0, 20.0 ]
+					"patching_rect" : [ 85.0, 325.0, 20.0, 20.0 ]
 				}
 
 			}
@@ -42,13 +42,41 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
-					"id" : "obj-33",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
+					"id" : "obj-18",
+					"maxclass" : "message",
+					"numinlets" : 2,
 					"numoutlets" : 1,
-					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 35.0, 555.0, 100.0, 20.0 ],
-					"text" : "oovu.updated"
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 85.0, 485.0, 90.0, 18.0 ],
+					"text" : "adc"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-24",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 125.0, 510.0, 90.0, 18.0 ],
+					"text" : "oscillator"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-6",
+					"maxclass" : "newobj",
+					"numinlets" : 3,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 95.0, 550.0, 191.0, 20.0 ],
+					"text" : "mxj oovu.Binding /input~.1/source"
 				}
 
 			}
@@ -70,26 +98,12 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
-					"id" : "obj-18",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 360.0, 575.0, 225.0, 20.0 ],
-					"text" : "oovu.push.destination.dispatch 9000 foo"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
 					"id" : "obj-23",
 					"maxclass" : "newobj",
 					"numinlets" : 2,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 360.0, 545.0, 132.0, 20.0 ],
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 360.0, 545.0, 152.0, 20.0 ],
 					"text" : "mxj oovu.Module 9000 baz"
 				}
 
@@ -135,20 +149,6 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 490.0, 450.0, 126.0, 33.0 ],
 					"text" : "oovu.util.makeumenu interface"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"id" : "obj-13",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 270.0, 45.0, 81.0, 18.0 ],
-					"text" : "getinterface"
 				}
 
 			}
@@ -308,20 +308,6 @@
 			}
 , 			{
 				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"id" : "obj-8",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 180.0, 45.0, 81.0, 18.0 ],
-					"text" : "getproperties"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"id" : "obj-2",
 					"maxclass" : "ezdac~",
 					"numinlets" : 2,
@@ -366,8 +352,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 55.0, 325.0, 217.0, 18.0 ],
-					"text" : "/send.1/destination /baz/push/foo"
+					"patching_rect" : [ 55.0, 360.0, 217.0, 18.0 ],
+					"text" : "/output/gain 1."
 				}
 
 			}
@@ -380,7 +366,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 50.0, 110.0, 190.0, 130.0 ]
+					"patching_rect" : [ 50.0, 110.0, 140.0, 210.0 ]
 				}
 
 			}
@@ -396,7 +382,16 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-3", 1 ],
+					"destination" : [ "obj-28", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-1", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-3", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-1", 0 ]
@@ -441,15 +436,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-1", 1 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-13", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-12", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -472,6 +458,15 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-17", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-6", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-18", 0 ]
 				}
 
 			}
@@ -513,6 +508,15 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-6", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-24", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-21", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -526,15 +530,6 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-26", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-33", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-35", 0 ]
 				}
 
 			}
@@ -565,381 +560,100 @@
 				}
 
 			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-1", 1 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-8", 0 ]
-				}
-
-			}
  ],
 		"parameters" : 		{
-			"obj-1::obj-13::obj-58::obj-21" : [ "live.numbox[2]", "live.numbox", 0 ],
-			"obj-1::obj-13::obj-11::obj-204" : [ "live.numbox[3]", "live.numbox", 0 ],
-			"obj-1::obj-13::obj-56::obj-33" : [ "live.tab[3]", "live.tab[1]", 0 ],
-			"obj-1::obj-13::obj-11::obj-18::obj-4" : [ "live.slider", "live.slider", 0 ],
-			"obj-1::obj-13::obj-6" : [ "live.slider[3]", "live.slider", 0 ],
+			"obj-1::obj-13::obj-62::obj-36" : [ "live.numbox[3]", "live.numbox[1]", 0 ],
 			"obj-1::obj-13::obj-56::obj-41" : [ "live.numbox", "live.numbox", 0 ],
-			"obj-1::obj-13::obj-62::obj-51" : [ "live.numbox[4]", "live.numbox", 0 ],
+			"obj-1::obj-13::obj-56::obj-42" : [ "live.numbox[1]", "live.numbox", 0 ],
 			"obj-1::obj-13::obj-9" : [ "live.tab", "live.tab", 0 ],
-			"obj-1::obj-13::obj-56::obj-42" : [ "live.numbox[1]", "live.numbox", 0 ]
+			"obj-1::obj-13::obj-11::obj-204" : [ "live.numbox[5]", "live.numbox", 0 ],
+			"obj-1::obj-13::obj-58::obj-21" : [ "live.numbox[2]", "live.numbox", 0 ],
+			"obj-1::obj-13::obj-62::obj-51" : [ "live.numbox[4]", "live.numbox", 0 ],
+			"obj-1::obj-13::obj-6" : [ "live.slider[3]", "live.slider", 0 ],
+			"obj-1::obj-13::obj-11::obj-18::obj-4" : [ "live.slider", "live.slider", 0 ],
+			"obj-1::obj-13::obj-56::obj-33" : [ "live.tab[3]", "live.tab[1]", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{
 				"name" : "omod.input~.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/modules/omod.input~",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/modules/omod.input~",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "omod.input~.model.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/modules/omod.input~",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/modules/omod.input~",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "oovu.bundle.dsp.sender.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/bundles",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/bundles",
 				"patcherrelativepath" : "../../abstractions/bundles",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "mxj oovu.Property.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
-				"patcherrelativepath" : "../../abstractions/core",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.obj.argssetup.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/internals",
-				"patcherrelativepath" : "../../abstractions/internals",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.obj.attribute.dispatch.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/internals",
-				"patcherrelativepath" : "../../abstractions/internals",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.obj.route.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/internals",
-				"patcherrelativepath" : "../../abstractions/internals",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.util.re.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/utilities",
-				"patcherrelativepath" : "../../abstractions/utilities",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.messaging.call.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/messaging",
-				"patcherrelativepath" : "../../abstractions/messaging",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.util.queue.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/utilities",
-				"patcherrelativepath" : "../../abstractions/utilities",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.messaging.reply.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/messaging",
-				"patcherrelativepath" : "../../abstractions/messaging",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.obj.get.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/internals",
-				"patcherrelativepath" : "../../abstractions/internals",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.util.silentdict.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/utilities",
-				"patcherrelativepath" : "../../abstractions/utilities",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.datatype.integer.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/datatypes",
-				"patcherrelativepath" : "../../abstractions/datatypes",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.util.clip.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/utilities",
-				"patcherrelativepath" : "../../abstractions/utilities",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.interface.extremum.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/interfaces",
-				"patcherrelativepath" : "../../abstractions/interfaces",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.obj.this.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/internals",
-				"patcherrelativepath" : "../../abstractions/internals",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.util.rv.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/utilities",
-				"patcherrelativepath" : "../../abstractions/utilities",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.util.map.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/utilities",
-				"patcherrelativepath" : "../../abstractions/utilities",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.obj.attribute.constructor.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/internals",
-				"patcherrelativepath" : "../../abstractions/internals",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.environment.js",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
-				"patcherrelativepath" : "../../abstractions/core",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.interface.attribute.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/interfaces",
-				"patcherrelativepath" : "../../abstractions/interfaces",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.interface.common.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/interfaces",
-				"patcherrelativepath" : "../../abstractions/interfaces",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.obj.property.dispatch.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/internals",
-				"patcherrelativepath" : "../../abstractions/internals",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.interface.value.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/interfaces",
-				"patcherrelativepath" : "../../abstractions/interfaces",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "oovu.push.source.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/pushpull",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/pushpull",
 				"patcherrelativepath" : "../../abstractions/pushpull",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "oovu.push.source.poly~.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/pushpull",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/pushpull",
 				"patcherrelativepath" : "../../abstractions/pushpull",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.lazyproperty.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
-				"patcherrelativepath" : "../../abstractions/core",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.util.dictsub.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/utilities",
-				"patcherrelativepath" : "../../abstractions/utilities",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.datatype.decimal.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/datatypes",
-				"patcherrelativepath" : "../../abstractions/datatypes",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.datatype.push.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/datatypes",
-				"patcherrelativepath" : "../../abstractions/datatypes",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.updated.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
-				"patcherrelativepath" : "../../abstractions/core",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.interface.push.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/interfaces",
-				"patcherrelativepath" : "../../abstractions/interfaces",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.push.source.dispatch.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/pushpull",
-				"patcherrelativepath" : "../../abstractions/pushpull",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "mxj oovu.Binding.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
-				"patcherrelativepath" : "../../abstractions/core",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.datatype.generic.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/datatypes",
-				"patcherrelativepath" : "../../abstractions/datatypes",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "oovu.dsp.8chlevels.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/dsp",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/dsp",
 				"patcherrelativepath" : "../../abstractions/dsp",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "omod.input~.voix.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/modules/omod.input~",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/modules/omod.input~",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "oovu.dsp.thispoly~.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/dsp",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/dsp",
 				"patcherrelativepath" : "../../abstractions/dsp",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "mxj oovu.Method.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
-				"patcherrelativepath" : "../../abstractions/core",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.datatype.boolean.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/datatypes",
-				"patcherrelativepath" : "../../abstractions/datatypes",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.interface.boolean.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/interfaces",
-				"patcherrelativepath" : "../../abstractions/interfaces",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "mxj oovu.Module.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
-				"patcherrelativepath" : "../../abstractions/core",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.obj.module.dispatch.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/internals",
-				"patcherrelativepath" : "../../abstractions/internals",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.obj.module.constructor.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/internals",
-				"patcherrelativepath" : "../../abstractions/internals",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.obj.randdelay.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/internals",
-				"patcherrelativepath" : "../../abstractions/internals",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.interface.module.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/interfaces",
-				"patcherrelativepath" : "../../abstractions/interfaces",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "omod.input~.view.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/modules/omod.input~",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/modules/omod.input~",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "oovu.guibackground.js",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/gui",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/gui",
 				"patcherrelativepath" : "../../abstractions/gui",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "oovu.gui.meters.8x.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/gui",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/gui",
 				"patcherrelativepath" : "../../abstractions/gui",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "omod.input~.view.oscillator.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/modules/omod.input~",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/modules/omod.input~",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
@@ -947,77 +661,63 @@
 , 			{
 				"name" : "sine.svg",
 				"bootpath" : "/Applications/Max 6.1/patches/picts/m4l-picts",
-				"patcherrelativepath" : "../../../../../../../../Applications/Max 6.1/patches/picts/m4l-picts",
+				"patcherrelativepath" : "../../../../../../../Applications/Max 6.1/patches/picts/m4l-picts",
 				"type" : "svg ",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "saw.svg",
 				"bootpath" : "/Applications/Max 6.1/patches/picts/m4l-picts",
-				"patcherrelativepath" : "../../../../../../../../Applications/Max 6.1/patches/picts/m4l-picts",
+				"patcherrelativepath" : "../../../../../../../Applications/Max 6.1/patches/picts/m4l-picts",
 				"type" : "svg ",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "square.svg",
 				"bootpath" : "/Applications/Max 6.1/patches/picts/m4l-picts",
-				"patcherrelativepath" : "../../../../../../../../Applications/Max 6.1/patches/picts/m4l-picts",
+				"patcherrelativepath" : "../../../../../../../Applications/Max 6.1/patches/picts/m4l-picts",
 				"type" : "svg ",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "random.svg",
 				"bootpath" : "/Applications/Max 6.1/patches/picts/m4l-picts",
-				"patcherrelativepath" : "../../../../../../../../Applications/Max 6.1/patches/picts/m4l-picts",
+				"patcherrelativepath" : "../../../../../../../Applications/Max 6.1/patches/picts/m4l-picts",
 				"type" : "svg ",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "omod.input~.view.soundfile.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/modules/omod.input~",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/modules/omod.input~",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "omod.input~.view.adc.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/modules/omod.input~",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/modules/omod.input~",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "oovu.gui.send.dynamic.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/gui",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/gui",
 				"patcherrelativepath" : "../../abstractions/gui",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "oovu.gui.send.1x.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/gui",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/gui",
 				"patcherrelativepath" : "../../abstractions/gui",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "oovu.util.makeumenu.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/utilities",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/utilities",
 				"patcherrelativepath" : "../../abstractions/utilities",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.push.destination.dispatch.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/pushpull",
-				"patcherrelativepath" : "../../abstractions/pushpull",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.obj.audionode.constructor.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/internals",
-				"patcherrelativepath" : "../../abstractions/internals",
 				"type" : "JSON",
 				"implicit" : 1
 			}
