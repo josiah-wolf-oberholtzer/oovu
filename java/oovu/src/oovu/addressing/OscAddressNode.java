@@ -56,32 +56,36 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
 
     public String acquire_name(String desired_name) {
         if (desired_name == this.name) {
-            System.out.print("A");
             return desired_name;
         } else if ((desired_name == null)
             || ((this.name != null) && (this.server != null))) {
             throw new RuntimeException();
         }
         if (this.parent == null) {
-            System.out.print("B");
             this.name = desired_name;
             return desired_name;
         } else if (!this.parent.named_children.containsKey(desired_name)) {
-            System.out.print("C");
             this.name = desired_name;
             this.parent.named_children.put(desired_name, this);
             return desired_name;
         } else if (this.parent.named_children.get(desired_name).get_server() == null) {
-            System.out.print("D");
             this.parent.named_children.get(desired_name).merge_with(this);
             return desired_name;
         } else {
-            System.out.print("E");
-            Set<String> names = this.parent.named_children.keySet();
+            Set<String> names = new HashSet<String>();
+            for (String name : this.parent.named_children.keySet()) {
+                if (this.parent.named_children.get(name).get_server() != null) {
+                    names.add(name);
+                }
+            }
             String acquired_name = OscAddressNode.find_unique_name(
                 desired_name, names);
-            this.name = acquired_name;
-            this.parent.named_children.put(acquired_name, this);
+            if (this.parent.named_children.containsKey(acquired_name)) {
+                this.parent.named_children.get(acquired_name).merge_with(this);
+            } else {
+                this.name = acquired_name;
+                this.parent.add_child(this);
+            }
             return acquired_name;
         }
     }
@@ -99,9 +103,17 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
             child.get_parent().remove_child(child);
         }
         if (child.name != null) {
+            if (this.named_children.get(child.name) != null) {
+                throw new RuntimeException("Named child already exists!: "
+                    + child.name);
+            }
             this.named_children.put(child.name, child);
         }
         if (child.number != null) {
+            if (this.numbered_children.get(child.number) != null) {
+                throw new RuntimeException("Numbered child already exists!: "
+                    + child.number);
+            }
             this.numbered_children.put(child.number, child);
         }
         child.parent = this;
@@ -212,10 +224,10 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
     public String[] get_debug_pieces() {
         ArrayList<String> pieces = new ArrayList<String>();
         pieces.add(this.get_debug_piece());
-        ArrayList<OscAddressNode> children = new ArrayList<OscAddressNode>();
-        children.addAll(this.get_all_children());
-        Collections.sort(children);
-        for (OscAddressNode child : children) {
+        ArrayList<OscAddressNode> all_children = new ArrayList<OscAddressNode>(
+            this.get_all_children());
+        Collections.sort(all_children);
+        for (OscAddressNode child : all_children) {
             for (String child_piece : child.get_debug_pieces()) {
                 pieces.add("...." + child_piece);
             }
@@ -377,6 +389,7 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
     }
 
     public void merge_with(OscAddressNode other) {
+        other.parent.remove_child(other);
         this.number = other.number;
         if (other.server != null) {
             other.server.attach_to_osc_address_node(this);
@@ -394,6 +407,7 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
             }
         }
         this.numbered_children.putAll(other.numbered_children);
+        this.parent.add_child(this);
     }
 
     private void prune() {

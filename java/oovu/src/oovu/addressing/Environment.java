@@ -13,7 +13,10 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+import com.cycling74.max.Atom;
+import com.cycling74.max.Executable;
 import com.cycling74.max.MaxObject;
+import com.cycling74.max.MaxSystem;
 
 public class Environment {
 
@@ -32,11 +35,30 @@ public class Environment {
         Environment.logger.setLevel(Level.ALL);
     }
 
+    public static void defer_low(Executable executable) {
+        try {
+            MaxSystem.deferLow(executable);
+        } catch (UnsatisfiedLinkError e) {
+            Environment.log(e);
+        }
+    }
+
     public static void log(Object message) {
         try {
             MaxObject.post(message.toString());
         } catch (UnsatisfiedLinkError e) {
             Environment.logger.log(Environment.logger.getLevel(), message);
+        }
+    }
+
+    public static void outlet(
+        MaxObject max_object,
+        int outlet_index,
+        Atom[] payload) {
+        try {
+            max_object.outlet(outlet_index, payload);
+        } catch (UnsatisfiedLinkError e) {
+            Environment.log(e);
         }
     }
 

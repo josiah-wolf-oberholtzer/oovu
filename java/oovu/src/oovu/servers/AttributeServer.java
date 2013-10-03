@@ -12,7 +12,8 @@ import oovu.messaging.Response;
 
 import com.cycling74.max.Atom;
 
-abstract public class AttributeServer extends ModuleMemberServer {
+abstract public class AttributeServer extends ModuleMemberServer implements
+    Comparable<AttributeServer> {
 
     private class GetPriorityMessageHandler extends MessageHandler {
 
@@ -101,6 +102,18 @@ abstract public class AttributeServer extends ModuleMemberServer {
     @Override
     protected void cleanup_resources() {
         this.datatype.cleanup_resources();
+    }
+
+    @Override
+    public int compareTo(AttributeServer other) {
+        if (other.priority < this.priority) {
+            return 1;
+        } else if (this.priority == other.priority) {
+            return this.get_osc_address_string().compareTo(
+                other.get_osc_address_string());
+        } else {
+            return -1;
+        }
     }
 
     public Integer get_priority() {

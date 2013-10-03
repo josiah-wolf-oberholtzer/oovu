@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import oovu.Binding;
+import oovu.addressing.Environment;
 import oovu.addressing.OscAddress;
 import oovu.addressing.OscAddressNode;
 import oovu.clients.MessagePasserCallback;
@@ -18,7 +19,6 @@ import oovu.servers.members.PushServer;
 import oovu.servers.members.ReturnServer;
 
 import com.cycling74.max.Atom;
-import com.cycling74.max.MaxSystem;
 
 public abstract class ModuleMemberServer extends Server {
 
@@ -111,8 +111,8 @@ public abstract class ModuleMemberServer extends Server {
         if (server_is_new) {
             Response response = member_server.generate_dumpmeta_response();
             for (Binding binding : osc_address_node.get_bindings()) {
-                MaxSystem
-                    .deferLow(new MessagePasserCallback(binding, response));
+                Environment.defer_low(new MessagePasserCallback(binding,
+                    response));
             }
         }
         return member_server;

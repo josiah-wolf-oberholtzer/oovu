@@ -176,4 +176,74 @@ public class Test__OOVU__lifecycle {
             "<Node '':null (server: RootServer)>"
         }, Environment.root_osc_address_node.get_debug_pieces());
     }
+
+    @Test
+    public void test_05() {
+        Assert.assertArrayEquals(new String[] {
+            "<Node '':null (server: RootServer)>"
+        }, Environment.root_osc_address_node.get_debug_pieces());
+        Module module_one = new Module(Atom.parse("1001 input~"));
+        Module module_two = new Module(Atom.parse("2002 input~"));
+        Module module_three = new Module(Atom.parse("3003 input~"));
+        Property property_one = new Property(Atom.parse("1001 source"));
+        Property property_two = new Property(Atom.parse("2002 source"));
+        Property property_three = new Property(Atom.parse("3003 source"));
+        Binding binding = new Binding(Atom.parse("/input~.1/source"));
+        Assert
+            .assertArrayEquals(
+                new String[] {
+                    "<Node '':null (server: RootServer)>",
+                    "....<Node 'input~':1001 (server: ModuleServer)>",
+                    "........<Node 'source':null (server: PropertyServer)>",
+                    "....<Node 'input~.1':2002 (server: ModuleServer)>",
+                    "........<Node 'source':null (bindings: 1, server: PropertyServer)>",
+                    "....<Node 'input~.2':3003 (server: ModuleServer)>",
+                    "........<Node 'source':null (server: PropertyServer)>"
+                }, Environment.root_osc_address_node.get_debug_pieces());
+        binding.notifyDeleted();
+        property_one.notifyDeleted();
+        property_two.notifyDeleted();
+        property_three.notifyDeleted();
+        module_one.notifyDeleted();
+        module_two.notifyDeleted();
+        module_three.notifyDeleted();
+        Assert.assertArrayEquals(new String[] {
+            "<Node '':null (server: RootServer)>"
+        }, Environment.root_osc_address_node.get_debug_pieces());
+    }
+
+    @Test
+    public void test_06() {
+        Assert.assertArrayEquals(new String[] {
+            "<Node '':null (server: RootServer)>"
+        }, Environment.root_osc_address_node.get_debug_pieces());
+        Binding binding = new Binding(Atom.parse("/input~.1/source"));
+        Module module_one = new Module(Atom.parse("1001 input~"));
+        Module module_two = new Module(Atom.parse("2002 input~"));
+        Module module_three = new Module(Atom.parse("3003 input~"));
+        Property property_one = new Property(Atom.parse("1001 source"));
+        Property property_two = new Property(Atom.parse("2002 source"));
+        Property property_three = new Property(Atom.parse("3003 source"));
+        Assert
+            .assertArrayEquals(
+                new String[] {
+                    "<Node '':null (server: RootServer)>",
+                    "....<Node 'input~':1001 (server: ModuleServer)>",
+                    "........<Node 'source':null (server: PropertyServer)>",
+                    "....<Node 'input~.1':2002 (server: ModuleServer)>",
+                    "........<Node 'source':null (bindings: 1, server: PropertyServer)>",
+                    "....<Node 'input~.2':3003 (server: ModuleServer)>",
+                    "........<Node 'source':null (server: PropertyServer)>"
+                }, Environment.root_osc_address_node.get_debug_pieces());
+        binding.notifyDeleted();
+        property_one.notifyDeleted();
+        property_two.notifyDeleted();
+        property_three.notifyDeleted();
+        module_one.notifyDeleted();
+        module_two.notifyDeleted();
+        module_three.notifyDeleted();
+        Assert.assertArrayEquals(new String[] {
+            "<Node '':null (server: RootServer)>"
+        }, Environment.root_osc_address_node.get_debug_pieces());
+    }
 }

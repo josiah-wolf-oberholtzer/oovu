@@ -72,8 +72,8 @@
 					"id" : "obj-5",
 					"maxclass" : "newobj",
 					"numinlets" : 2,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "" ],
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 55.0, 10.0, 194.0, 20.0 ],
 					"text" : "mxj oovu.Module #0 #1"
 				}
@@ -130,7 +130,7 @@
 					"destination" : [ "obj-10", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"source" : [ "obj-5", 1 ]
+					"source" : [ "obj-5", 2 ]
 				}
 
 			}
@@ -139,7 +139,7 @@
 					"destination" : [ "obj-6", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"source" : [ "obj-5", 0 ]
+					"source" : [ "obj-5", 1 ]
 				}
 
 			}
@@ -151,6 +151,160 @@
 					"source" : [ "obj-7", 0 ]
 				}
 
+			}
+ ],
+		"parameters" : 		{
+			"obj-13::obj-11::obj-18::obj-4" : [ "live.slider", "live.slider", 0 ],
+			"obj-13::obj-58::obj-21" : [ "live.numbox[2]", "live.numbox", 0 ],
+			"obj-13::obj-62::obj-51" : [ "live.numbox[4]", "live.numbox", 0 ],
+			"obj-13::obj-56::obj-42" : [ "live.numbox[28]", "live.numbox", 0 ],
+			"obj-13::obj-62::obj-36" : [ "live.numbox[1]", "live.numbox[1]", 0 ],
+			"obj-13::obj-9" : [ "live.tab", "live.tab", 0 ],
+			"obj-13::obj-56::obj-33" : [ "live.tab[6]", "live.tab[1]", 0 ],
+			"obj-13::obj-6" : [ "live.slider[3]", "live.slider", 0 ],
+			"obj-13::obj-56::obj-41" : [ "live.numbox[29]", "live.numbox", 0 ],
+			"obj-13::obj-11::obj-204" : [ "live.numbox[3]", "live.numbox", 0 ]
+		}
+,
+		"dependency_cache" : [ 			{
+				"name" : "omod.input~.model.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/modules/omod.input~",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.bundle.dsp.sender.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/bundles",
+				"patcherrelativepath" : "../../abstractions/bundles",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.push.source.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/pushpull",
+				"patcherrelativepath" : "../../abstractions/pushpull",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.push.source.poly~.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/pushpull",
+				"patcherrelativepath" : "../../abstractions/pushpull",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.dsp.8chlevels.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/dsp",
+				"patcherrelativepath" : "../../abstractions/dsp",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.input~.voix.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/modules/omod.input~",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.dsp.thispoly~.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/dsp",
+				"patcherrelativepath" : "../../abstractions/dsp",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.input~.view.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/modules/omod.input~",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.guibackground.js",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/gui",
+				"patcherrelativepath" : "../../abstractions/gui",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.gui.meters.8x.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/gui",
+				"patcherrelativepath" : "../../abstractions/gui",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.input~.view.oscillator.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/modules/omod.input~",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "sine.svg",
+				"bootpath" : "/Applications/Max 6.1/patches/picts/m4l-picts",
+				"patcherrelativepath" : "../../../../../../../Applications/Max 6.1/patches/picts/m4l-picts",
+				"type" : "svg ",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "saw.svg",
+				"bootpath" : "/Applications/Max 6.1/patches/picts/m4l-picts",
+				"patcherrelativepath" : "../../../../../../../Applications/Max 6.1/patches/picts/m4l-picts",
+				"type" : "svg ",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "square.svg",
+				"bootpath" : "/Applications/Max 6.1/patches/picts/m4l-picts",
+				"patcherrelativepath" : "../../../../../../../Applications/Max 6.1/patches/picts/m4l-picts",
+				"type" : "svg ",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "random.svg",
+				"bootpath" : "/Applications/Max 6.1/patches/picts/m4l-picts",
+				"patcherrelativepath" : "../../../../../../../Applications/Max 6.1/patches/picts/m4l-picts",
+				"type" : "svg ",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.input~.view.soundfile.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/modules/omod.input~",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.input~.view.adc.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/modules/omod.input~",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.gui.send.dynamic.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/gui",
+				"patcherrelativepath" : "../../abstractions/gui",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.gui.send.1x.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/gui",
+				"patcherrelativepath" : "../../abstractions/gui",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.util.makeumenu.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/utilities",
+				"patcherrelativepath" : "../../abstractions/utilities",
+				"type" : "JSON",
+				"implicit" : 1
 			}
  ]
 	}

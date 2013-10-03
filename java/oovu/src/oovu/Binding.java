@@ -71,13 +71,12 @@ public class Binding extends MaxPeer implements MessagePasser {
                         osc_address = OscAddress.from_cache(message);
                     }
                     if (osc_address.message_handler_name == null) {
-                        osc_address = OscAddress.from_cache(osc_address.toString()
-                            + "/:value");
+                        osc_address = OscAddress.from_cache(osc_address
+                            .toString() + "/:value");
                     }
                 }
             }
             Request request = new Request(this, osc_address, arguments);
-            Environment.log(request.toString());
             this.handle_request(request);
         }
     }

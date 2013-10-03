@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 706.0, 44.0, 648.0, 663.0 ],
+		"rect" : [ 541.0, 44.0, 648.0, 663.0 ],
 		"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
@@ -29,6 +29,31 @@
 		"digest" : "",
 		"tags" : "",
 		"boxes" : [ 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-15",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 115.0, 55.0, 100.0, 20.0 ],
+					"text" : "print OUT"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-14",
+					"maxclass" : "ezdac~",
+					"numinlets" : 2,
+					"numoutlets" : 0,
+					"patching_rect" : [ 185.0, 150.0, 15.0, 15.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 120.0, 5.0, 15.0, 15.0 ]
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
@@ -108,7 +133,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 240.0, 85.0, 40.0, 15.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 75.0, 5.0, 60.0, 15.0 ],
+					"presentation_rect" : [ 75.0, 5.0, 40.0, 15.0 ],
 					"prototypename" : "M4L.toggle-yellow",
 					"rounded" : 0.0,
 					"text" : "Muted",
@@ -666,7 +691,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 20.0, 138.0, 20.0 ],
-					"text" : "mxj oovu.Binding #1 ."
+					"text" : "mxj oovu.Binding #1"
 				}
 
 			}
@@ -736,6 +761,15 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-12", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-3", 2 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-15", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-3", 2 ]

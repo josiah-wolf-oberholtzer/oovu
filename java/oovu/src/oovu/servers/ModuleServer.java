@@ -1,6 +1,7 @@
 package oovu.servers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import oovu.Binding;
@@ -89,9 +90,23 @@ public class ModuleServer extends Server {
         }
         this.name = this.osc_address_node.acquire_name(desired_name);
     }
-    
-    public PropertyServer[] get_property_servers() {
+
+    public PropertyServer[] get_properties_sorted_by_priority() {
+        int property_count = 0;
+        Map<Integer, ArrayList<PropertyServer>> sorted_properties = new HashMap<Integer, ArrayList<PropertyServer>>();
+        for (Server child_server : this.child_servers) {
+            if (!(child_server instanceof PropertyServer)) {
+                continue;
+            }
+            property_count += 1;
+            PropertyServer property = (PropertyServer) child_server;
+            Integer priority = property.get_priority();
+            if (!sorted_properties.containsKey(priority)) {
+                sorted_properties
+                    .put(priority, new ArrayList<PropertyServer>());
+            }
+            sorted_properties.get(priority).add(property);
+        }
         return null;
     }
-    
 }
