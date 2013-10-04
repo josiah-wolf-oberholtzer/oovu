@@ -6,6 +6,7 @@ import oovu.messaging.Response;
 import oovu.servers.AttributeServer;
 import oovu.servers.ModuleMemberServer;
 import oovu.servers.ModuleServer;
+import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
 
@@ -19,9 +20,14 @@ public class PropertyServer extends AttributeServer {
             "PropertyNode", module_id, desired_name, argument_list);
     }
 
-    public PropertyServer(ModuleServer module_node,
+    public PropertyServer(ModuleServer module_server, Atom[] arguments) {
+        this(module_server, Server.process_atom_arguments(Atom
+            .removeFirst(arguments)));
+    }
+
+    public PropertyServer(ModuleServer module_server,
         Map<String, Atom[]> argument_map) {
-        super(module_node, argument_map);
+        super(module_server, argument_map);
     }
 
     @Override

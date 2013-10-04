@@ -6,6 +6,7 @@ import oovu.messaging.Response;
 import oovu.servers.AttributeServer;
 import oovu.servers.ModuleMemberServer;
 import oovu.servers.ModuleServer;
+import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
 
@@ -17,6 +18,11 @@ public class ReturnServer extends AttributeServer {
         Atom[] argument_list) {
         return (ReturnServer) ModuleMemberServer.allocate_from_label(
             "ReturnNode", module_id, desired_name, argument_list);
+    }
+
+    public ReturnServer(ModuleServer module_server, Atom[] arguments) {
+        this(module_server, Server.process_atom_arguments(Atom
+            .removeFirst(arguments)));
     }
 
     public ReturnServer(ModuleServer module_node,

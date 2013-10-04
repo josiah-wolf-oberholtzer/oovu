@@ -85,7 +85,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         }
     }
 
-    protected Integer priority = 0;
+    protected Integer priority;
     public final Datatype datatype;
 
     public AttributeServer(ModuleServer module_server,
@@ -97,6 +97,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         this.add_message_handler(new SetPriorityMessageHandler());
         this.add_message_handler(new SetValueMessageHandler());
         this.initialize_value();
+        this.initialize_priority();
     }
 
     @Override
@@ -106,13 +107,12 @@ abstract public class AttributeServer extends ModuleMemberServer implements
 
     @Override
     public int compareTo(AttributeServer other) {
-        if (other.priority < this.priority) {
-            return 1;
-        } else if (this.priority == other.priority) {
+        int priority_comparison = this.priority.compareTo(other.priority);
+        if (priority_comparison == 0) {
             return this.get_osc_address_string().compareTo(
                 other.get_osc_address_string());
         } else {
-            return -1;
+            return priority_comparison;
         }
     }
 
@@ -131,6 +131,14 @@ abstract public class AttributeServer extends ModuleMemberServer implements
             OscAddress.from_cache("./:getvalue"), new Atom[0]);
         Response response = new Response(this, payload, request);
         this.handle_response(response);
+    }
+
+    private void initialize_priority() {
+        if (this.argument_map.containsKey("priority")) {
+            this.set_priority(this.argument_map.get("priority")[0].getInt());
+        } else {
+            this.set_priority(0);
+        }
     }
 
     private void initialize_value() {

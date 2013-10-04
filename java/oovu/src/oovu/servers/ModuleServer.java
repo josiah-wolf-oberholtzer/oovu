@@ -1,7 +1,8 @@
 package oovu.servers;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import oovu.Binding;
@@ -10,7 +11,9 @@ import oovu.addressing.OscAddressNode;
 import oovu.clients.MessagePasserCallback;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.Response;
+import oovu.servers.members.MethodServer;
 import oovu.servers.members.PropertyServer;
+import oovu.servers.members.ReturnServer;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxSystem;
@@ -77,6 +80,11 @@ public class ModuleServer extends Server {
 
     public final Integer module_id;
 
+    public ModuleServer(Atom[] arguments) {
+        this(arguments[0].getInt(), Server.process_atom_arguments(Atom
+            .removeFirst(arguments)));
+    }
+
     public ModuleServer(Integer module_id, Map<String, Atom[]> argument_map) {
         super(argument_map);
         this.module_id = module_id;
@@ -91,22 +99,36 @@ public class ModuleServer extends Server {
         this.name = this.osc_address_node.acquire_name(desired_name);
     }
 
-    public PropertyServer[] get_properties_sorted_by_priority() {
-        int property_count = 0;
-        Map<Integer, ArrayList<PropertyServer>> sorted_properties = new HashMap<Integer, ArrayList<PropertyServer>>();
-        for (Server child_server : this.child_servers) {
-            if (!(child_server instanceof PropertyServer)) {
-                continue;
+    public List<MethodServer> get_child_method_servers() {
+        ArrayList<MethodServer> method_servers = new ArrayList<MethodServer>();
+        for (Server child : this.child_servers) {
+            if (child instanceof MethodServer) {
+                method_servers.add((MethodServer) child);
             }
-            property_count += 1;
-            PropertyServer property = (PropertyServer) child_server;
-            Integer priority = property.get_priority();
-            if (!sorted_properties.containsKey(priority)) {
-                sorted_properties
-                    .put(priority, new ArrayList<PropertyServer>());
-            }
-            sorted_properties.get(priority).add(property);
         }
-        return null;
+        Collections.sort(method_servers);
+        return method_servers;
+    }
+
+    public List<PropertyServer> get_child_property_servers() {
+        ArrayList<PropertyServer> property_servers = new ArrayList<PropertyServer>();
+        for (Server child : this.child_servers) {
+            if (child instanceof PropertyServer) {
+                property_servers.add((PropertyServer) child);
+            }
+        }
+        Collections.sort(property_servers);
+        return property_servers;
+    }
+
+    public List<ReturnServer> get_child_return_servers() {
+        ArrayList<ReturnServer> return_servers = new ArrayList<ReturnServer>();
+        for (Server child : this.child_servers) {
+            if (child instanceof ReturnServer) {
+                return_servers.add((ReturnServer) child);
+            }
+        }
+        Collections.sort(return_servers);
+        return return_servers;
     }
 }

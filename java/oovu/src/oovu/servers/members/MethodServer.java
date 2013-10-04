@@ -5,6 +5,7 @@ import java.util.Map;
 import oovu.servers.AttributeServer;
 import oovu.servers.ModuleMemberServer;
 import oovu.servers.ModuleServer;
+import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
 
@@ -16,6 +17,11 @@ public class MethodServer extends AttributeServer {
         Atom[] argument_list) {
         return (MethodServer) ModuleMemberServer.allocate_from_label(
             "MethodNode", module_id, desired_name, argument_list);
+    }
+
+    public MethodServer(ModuleServer module_server, Atom[] arguments) {
+        this(module_server, Server.process_atom_arguments(Atom
+            .removeFirst(arguments)));
     }
 
     public MethodServer(ModuleServer module_node,
