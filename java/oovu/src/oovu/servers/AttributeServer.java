@@ -112,7 +112,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
             return this.get_osc_address_string().compareTo(
                 other.get_osc_address_string());
         } else {
-            return priority_comparison;
+            return -1 * priority_comparison;
         }
     }
 

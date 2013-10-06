@@ -14,7 +14,6 @@ public class Module extends ServerClient {
         this.max_adapter = new GenericMaxAdapter(this);
         Integer module_id = arguments[0].toInt();
         String desired_name = arguments[1].toString();
-        System.out.print("OK!");
         ModuleServer module_server = ModuleServer.allocate(module_id);
         module_server.acquire_name(desired_name);
         this.attach_to_server(module_server);
