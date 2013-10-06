@@ -25,6 +25,16 @@ public class PullDatatype extends OscAddressDatatype {
         }
 
         @Override
+        public boolean is_meta_relevant() {
+            return true;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
+        }
+
+        @Override
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             String[] pull_addresses = Environment.pull_addresses.keySet()
@@ -44,6 +54,16 @@ public class PullDatatype extends OscAddressDatatype {
         @Override
         public String get_name() {
             return "getpullid";
+        }
+
+        @Override
+        public boolean is_meta_relevant() {
+            return false;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
         }
 
         @Override

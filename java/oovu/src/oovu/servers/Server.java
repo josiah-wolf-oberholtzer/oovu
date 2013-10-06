@@ -32,6 +32,16 @@ abstract public class Server implements MessagePasser {
         }
 
         @Override
+        public boolean is_meta_relevant() {
+            return false;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
+        }
+
+        @Override
         public Atom[][] run(Atom[] arguments) {
             ArrayList<Atom[]> result = new ArrayList<Atom[]>();
             MessageHandler getMetaMessageHandler = Server.this.message_handlers
@@ -63,6 +73,16 @@ abstract public class Server implements MessagePasser {
         }
 
         @Override
+        public boolean is_meta_relevant() {
+            return true;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
+        }
+
+        @Override
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             String[] message_handler_names = Server.this.message_handlers
@@ -82,15 +102,23 @@ abstract public class Server implements MessagePasser {
         }
 
         @Override
+        public boolean is_meta_relevant() {
+            return false;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
+        }
+
+        @Override
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             ArrayList<Atom> getters = new ArrayList<Atom>();
-            String[] message_handler_names = Server.this.message_handlers
-                .keySet().toArray(new String[0]);
-            Arrays.sort(message_handler_names);
-            for (String message_handler_name : message_handler_names) {
-                if (message_handler_name.startsWith("get")) {
-                    getters.add(Atom.newAtom(message_handler_name));
+            for (MessageHandler message_handler : Server.this.message_handlers
+                .values()) {
+                if (message_handler.is_meta_relevant()) {
+                    getters.add(Atom.newAtom(message_handler.get_name()));
                 }
             }
             result[0] = Atom.newAtom("meta", getters.toArray(new Atom[0]));
@@ -103,6 +131,16 @@ abstract public class Server implements MessagePasser {
         @Override
         public String get_name() {
             return "getoscaddress";
+        }
+
+        @Override
+        public boolean is_meta_relevant() {
+            return true;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
         }
 
         @Override
@@ -124,6 +162,16 @@ abstract public class Server implements MessagePasser {
         }
 
         @Override
+        public boolean is_meta_relevant() {
+            return true;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
+        }
+
+        @Override
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][2];
             result[0][0] = Atom.newAtom("uniqueid");
@@ -137,6 +185,16 @@ abstract public class Server implements MessagePasser {
         @Override
         public String get_name() {
             return "report";
+        }
+
+        @Override
+        public boolean is_meta_relevant() {
+            return false;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
         }
 
         @Override
@@ -154,6 +212,16 @@ abstract public class Server implements MessagePasser {
         @Override
         public String get_name() {
             return "show";
+        }
+
+        @Override
+        public boolean is_meta_relevant() {
+            return false;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
         }
 
         @Override

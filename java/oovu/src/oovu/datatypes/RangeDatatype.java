@@ -29,6 +29,16 @@ public class RangeDatatype extends BoundedDatatype {
         }
 
         @Override
+        public boolean is_meta_relevant() {
+            return false;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
+        }
+
+        @Override
         public Atom[][] run(Atom[] arguments) {
             if (0 == arguments.length) {
                 return null;
@@ -53,6 +63,16 @@ public class RangeDatatype extends BoundedDatatype {
         @Override
         public String get_name() {
             return "width";
+        }
+
+        @Override
+        public boolean is_meta_relevant() {
+            return false;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
         }
 
         @Override

@@ -25,6 +25,16 @@ abstract public class BoundedDatatype extends Datatype implements
         }
 
         @Override
+        public boolean is_meta_relevant() {
+            return true;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return true;
+        }
+
+        @Override
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             Double maximum = BoundedDatatype.this.get_maximum();
@@ -51,6 +61,16 @@ abstract public class BoundedDatatype extends Datatype implements
         @Override
         public String get_name() {
             return "getminimum";
+        }
+
+        @Override
+        public boolean is_meta_relevant() {
+            return true;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return true;
         }
 
         @Override
@@ -88,6 +108,16 @@ abstract public class BoundedDatatype extends Datatype implements
         }
 
         @Override
+        public boolean is_meta_relevant() {
+            return false;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
+        }
+
+        @Override
         public Atom[][] run(Atom[] arguments) {
             Double maximum = null;
             if (0 < arguments.length) {
@@ -112,6 +142,16 @@ abstract public class BoundedDatatype extends Datatype implements
         @Override
         public String get_name() {
             return "minimum";
+        }
+
+        @Override
+        public boolean is_meta_relevant() {
+            return false;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
         }
 
         @Override

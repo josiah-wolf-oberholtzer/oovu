@@ -27,6 +27,16 @@ public class BooleanDatatype extends GenericDatatype {
         }
 
         @Override
+        public boolean is_meta_relevant() {
+            return false;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
+        }
+
+        @Override
         public Atom[][] run(Atom[] arguments) {
             BooleanDatatype.this.toggle();
             return null;

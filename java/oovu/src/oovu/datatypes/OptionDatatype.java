@@ -24,6 +24,16 @@ public class OptionDatatype extends StringDatatype {
         }
 
         @Override
+        public boolean is_meta_relevant() {
+            return true;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return true;
+        }
+
+        @Override
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             result[0] = Atom.newAtom(OptionDatatype.this.get_options().toArray(
@@ -50,6 +60,16 @@ public class OptionDatatype extends StringDatatype {
         }
 
         @Override
+        public boolean is_meta_relevant() {
+            return false;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
+        }
+
+        @Override
         public Atom[][] run(Atom[] arguments) {
             OptionDatatype.this.next_option();
             return null;
@@ -73,6 +93,16 @@ public class OptionDatatype extends StringDatatype {
         }
 
         @Override
+        public boolean is_meta_relevant() {
+            return false;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
+        }
+
+        @Override
         public Atom[][] run(Atom[] arguments) {
             OptionDatatype.this.previous_option();
             return null;
@@ -93,6 +123,16 @@ public class OptionDatatype extends StringDatatype {
         @Override
         public String get_name() {
             return "options";
+        }
+
+        @Override
+        public boolean is_meta_relevant() {
+            return false;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
         }
 
         @Override

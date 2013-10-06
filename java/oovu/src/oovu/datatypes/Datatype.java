@@ -24,6 +24,16 @@ public abstract class Datatype {
         }
 
         @Override
+        public boolean is_meta_relevant() {
+            return true;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
+        }
+
+        @Override
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             String datatype_name = this.attribute_server.datatype.getClass()

@@ -25,6 +25,16 @@ public class PushDatatype extends OscAddressDatatype {
         }
 
         @Override
+        public boolean is_meta_relevant() {
+            return true;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
+        }
+
+        @Override
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             String[] push_addresses = Environment.push_addresses.keySet()
@@ -44,6 +54,16 @@ public class PushDatatype extends OscAddressDatatype {
         @Override
         public String get_name() {
             return "getpushid";
+        }
+
+        @Override
+        public boolean is_meta_relevant() {
+            return false;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
         }
 
         @Override

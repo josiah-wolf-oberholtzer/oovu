@@ -23,6 +23,16 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         }
 
         @Override
+        public boolean is_meta_relevant() {
+            return false;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
+        }
+
+        @Override
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             Integer priority = AttributeServer.this.get_priority();
@@ -42,6 +52,16 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         }
 
         @Override
+        public boolean is_meta_relevant() {
+            return true;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
+        }
+
+        @Override
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             result[0] = AttributeServer.this.get_value();
@@ -55,6 +75,16 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         @Override
         public String get_name() {
             return "priority";
+        }
+
+        @Override
+        public boolean is_meta_relevant() {
+            return false;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
         }
 
         @Override
@@ -73,6 +103,16 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         @Override
         public String get_name() {
             return "value";
+        }
+
+        @Override
+        public boolean is_meta_relevant() {
+            return false;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
         }
 
         @Override

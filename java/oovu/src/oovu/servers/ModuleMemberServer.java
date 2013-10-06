@@ -30,6 +30,16 @@ public abstract class ModuleMemberServer extends Server {
         }
 
         @Override
+        public boolean is_meta_relevant() {
+            return true;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
+        }
+
+        @Override
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             if (ModuleMemberServer.this.parent_server.get_name() != null) {

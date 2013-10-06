@@ -28,6 +28,16 @@ public class ModuleServer extends Server {
         }
 
         @Override
+        public boolean is_meta_relevant() {
+            return true;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
+        }
+
+        @Override
         public Atom[][] run(Atom[] arguments) {
             String name = ModuleServer.this.get_name();
             if (name != null) {
@@ -38,6 +48,33 @@ public class ModuleServer extends Server {
                 return result;
             }
             return null;
+        }
+    }
+
+    private class GetStateMessageHandler extends MessageHandler {
+
+        @Override
+        public String get_name() {
+            return "getstate";
+        }
+
+        @Override
+        public boolean is_meta_relevant() {
+            return false;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
+        }
+
+        @Override
+        public Atom[][] run(Atom[] arguments) {
+            Atom[][] state = ModuleServer.this.get_state();
+            for (int i = 0, j = state.length; i < j; i++) {
+                state[i] = Atom.newAtom("state", state[i]);
+            }
+            return state;
         }
     }
 
@@ -90,6 +127,7 @@ public class ModuleServer extends Server {
         this.module_id = module_id;
         this.attach_to_parent_server(Environment.root_server);
         this.add_message_handler(new GetNameMessageHandler());
+        this.add_message_handler(new GetStateMessageHandler());
     }
 
     public void acquire_name(String desired_name) {
@@ -130,5 +168,14 @@ public class ModuleServer extends Server {
         }
         Collections.sort(return_servers);
         return return_servers;
+    }
+
+    public Atom[][] get_state() {
+        ArrayList<Atom[]> state = new ArrayList<Atom[]>();
+        for (PropertyServer property : this.get_child_property_servers()) {
+            state.add(Atom.newAtom(property.get_osc_address_string(),
+                property.get_value()));
+        }
+        return state.toArray(new Atom[0][]);
     }
 }

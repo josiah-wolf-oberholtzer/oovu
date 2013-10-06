@@ -21,6 +21,16 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
         }
 
         @Override
+        public boolean is_meta_relevant() {
+            return true;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return true;
+        }
+
+        @Override
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             result[0] = Atom.newAtom("length", Atom.newAtom(new int[] {
@@ -44,6 +54,16 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
         @Override
         public String get_name() {
             return "length";
+        }
+
+        @Override
+        public boolean is_meta_relevant() {
+            return false;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
         }
 
         @Override
