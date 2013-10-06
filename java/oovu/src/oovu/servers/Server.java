@@ -393,6 +393,8 @@ abstract public class Server implements MessagePasser {
         return new String[0];
     }
 
+    abstract public Atom[][] get_state();
+
     @Override
     public void handle_request(Request request) {
         if (request == null) {

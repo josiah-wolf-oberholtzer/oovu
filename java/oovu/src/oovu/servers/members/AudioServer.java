@@ -13,4 +13,9 @@ abstract public class AudioServer extends ModuleMemberServer {
         Map<String, Atom[]> argument_map) {
         super(module_node, argument_map);
     }
+
+    @Override
+    public Atom[][] get_state() {
+        return new Atom[0][];
+    }
 }

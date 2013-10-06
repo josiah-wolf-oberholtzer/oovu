@@ -51,33 +51,6 @@ public class ModuleServer extends Server {
         }
     }
 
-    private class GetStateMessageHandler extends MessageHandler {
-
-        @Override
-        public String get_name() {
-            return "getstate";
-        }
-
-        @Override
-        public boolean is_meta_relevant() {
-            return false;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return false;
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            Atom[][] state = ModuleServer.this.get_state();
-            for (int i = 0, j = state.length; i < j; i++) {
-                state[i] = Atom.newAtom("state", state[i]);
-            }
-            return state;
-        }
-    }
-
     public static ModuleServer allocate(Integer module_id) {
         boolean server_is_new = false;
         ModuleServer module_server = null;
@@ -127,7 +100,6 @@ public class ModuleServer extends Server {
         this.module_id = module_id;
         this.attach_to_parent_server(Environment.root_server);
         this.add_message_handler(new GetNameMessageHandler());
-        this.add_message_handler(new GetStateMessageHandler());
     }
 
     public void acquire_name(String desired_name) {
@@ -170,11 +142,16 @@ public class ModuleServer extends Server {
         return return_servers;
     }
 
+    @Override
     public Atom[][] get_state() {
         ArrayList<Atom[]> state = new ArrayList<Atom[]>();
         for (PropertyServer property : this.get_child_property_servers()) {
-            state.add(Atom.newAtom(property.get_osc_address_string(),
-                property.get_value()));
+            for (Atom[] property_state : property.get_state()) {
+                state.add(property_state);
+            }
+            Atom[] property_values = Atom.newAtom(
+                property.get_osc_address_string(), property.get_value());
+            state.add(property_values);
         }
         return state.toArray(new Atom[0][]);
     }

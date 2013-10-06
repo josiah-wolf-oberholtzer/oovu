@@ -1,6 +1,7 @@
 package oovu.servers;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Map;
 
 import oovu.addressing.OscAddress;
@@ -9,6 +10,7 @@ import oovu.datatypes.GenericDatatype;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.Request;
 import oovu.messaging.Response;
+import oovu.servers.members.PropertyServer;
 
 import com.cycling74.max.Atom;
 
@@ -158,6 +160,26 @@ abstract public class AttributeServer extends ModuleMemberServer implements
 
     public Integer get_priority() {
         return this.priority;
+    }
+
+    @Override
+    public Atom[][] get_state() {
+        ArrayList<Atom[]> state = new ArrayList<Atom[]>();
+        String address = this.get_osc_address_string();
+        for (MessageHandler message_handler : this.message_handlers.values()) {
+            if (message_handler.is_state_relevant()) {
+                for (Atom[] substate : message_handler.run(null)) {
+                    String substate_address = address + "/:"
+                        + substate[0].getString();
+                    state.add(Atom.newAtom(substate_address,
+                        Atom.removeFirst(substate)));
+                }
+            }
+            if (this instanceof PropertyServer) {
+                state.add(Atom.newAtom(address, this.get_value()));
+            }
+        }
+        return state.toArray(new Atom[0][]);
     }
 
     public Atom[] get_value() {
