@@ -1,12 +1,12 @@
 package oovu;
 
 import oovu.adapters.GenericMaxAdapter;
-import oovu.clients.AttributeServerClient;
+import oovu.clients.ModuleMemberServerClient;
 import oovu.servers.members.PropertyServer;
 
 import com.cycling74.max.Atom;
 
-public class Property extends AttributeServerClient {
+public class Property extends ModuleMemberServerClient {
 
     public Property(Atom[] arguments) {
         this.declareIO(2, 2);

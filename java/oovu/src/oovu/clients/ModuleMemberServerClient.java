@@ -5,7 +5,7 @@ import oovu.messaging.Request;
 
 import com.cycling74.max.Atom;
 
-public abstract class AttributeServerClient extends ServerClient {
+public abstract class ModuleMemberServerClient extends ServerClient {
 
     @Override
     public void anything(String message, Atom[] arguments) {
