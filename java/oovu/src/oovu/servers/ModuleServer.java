@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import oovu.Binding;
+import oovu.Proxy;
 import oovu.addressing.Environment;
 import oovu.addressing.OscAddressNode;
 import oovu.clients.MessagePasserCallback;
@@ -82,9 +82,9 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
         }
         if (server_is_new) {
             Response response = module_server.generate_dumpmeta_response();
-            for (Binding binding : osc_address_node.get_bindings()) {
+            for (Proxy proxy : osc_address_node.get_proxies()) {
                 MaxSystem
-                    .deferLow(new MessagePasserCallback(binding, response));
+                    .deferLow(new MessagePasserCallback(proxy, response));
             }
         }
         return module_server;

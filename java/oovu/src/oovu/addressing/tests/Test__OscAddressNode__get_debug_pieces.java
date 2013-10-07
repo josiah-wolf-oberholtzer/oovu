@@ -2,7 +2,7 @@ package oovu.addressing.tests;
 
 import java.util.HashMap;
 
-import oovu.Binding;
+import oovu.Proxy;
 import oovu.addressing.Environment;
 import oovu.addressing.OscAddressNode;
 import oovu.servers.ModuleServer;
@@ -38,7 +38,7 @@ public class Test__OscAddressNode__get_debug_pieces {
         root.add_child(n1001);
         foo.add_child(foo_bar);
         n1001.add_child(n1001_bar);
-        foo_bar.add_binding(new Binding(Atom.parse("")));
+        foo_bar.add_proxy(new Proxy(Atom.parse("")));
         ModuleServer n1001_module_server = new ModuleServer(1001,
             new HashMap<String, Atom[]>());
         n1001_module_server.attach_to_osc_address_node(n1001);
@@ -51,7 +51,7 @@ public class Test__OscAddressNode__get_debug_pieces {
             "....<Node null:1001 (server: ModuleServer)>",
             "........<Node 'bar':null (server: PropertyServer)>",
             "....<Node 'foo':null>",
-            "........<Node 'bar':null (bindings: 1)>"
+            "........<Node 'bar':null (proxies: 1)>"
         }, debug_pieces);
     }
 }

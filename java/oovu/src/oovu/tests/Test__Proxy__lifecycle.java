@@ -1,6 +1,6 @@
 package oovu.tests;
 
-import oovu.Binding;
+import oovu.Proxy;
 import oovu.addressing.Environment;
 import oovu.addressing.OscAddress;
 import oovu.addressing.OscAddressNode;
@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import com.cycling74.max.Atom;
 
-public class Test__Binding__lifecycle {
+public class Test__Proxy__lifecycle {
 
     @Before
     public void setUp() throws Exception {
@@ -31,11 +31,11 @@ public class Test__Binding__lifecycle {
         Atom[] arguments = Atom.newAtom(new String[] {
             osc_address_string
         });
-        Binding binding = new Binding(arguments);
+        Proxy proxy = new Proxy(arguments);
         OscAddressNode osc_address_node = Environment.root_osc_address_node
             .search_for_one(osc_address);
-        Assert.assertEquals(binding.get_osc_address_node(), osc_address_node);
-        Assert.assertTrue(osc_address_node.get_bindings().contains(binding));
+        Assert.assertEquals(proxy.get_osc_address_node(), osc_address_node);
+        Assert.assertTrue(osc_address_node.get_proxies().contains(proxy));
         Assert.assertArrayEquals(
             Environment.root_osc_address_node.get_summary_pieces(),
             new String[] {

@@ -51,7 +51,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 185.0, 219.818359, 201.0, 20.0 ],
-					"text" : "mxj oovu.Binding #1 oscillator/pulserate"
+					"text" : "mxj oovu.proxy #1 oscillator/pulserate"
 				}
 
 			}
@@ -66,7 +66,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 185.0, 189.818359, 201.0, 20.0 ],
-					"text" : "mxj oovu.Binding #1 oscillator/frequency"
+					"text" : "mxj oovu.proxy #1 oscillator/frequency"
 				}
 
 			}
@@ -81,7 +81,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 185.0, 159.818359, 201.0, 20.0 ],
-					"text" : "mxj oovu.Binding #1 oscillator/pulsing"
+					"text" : "mxj oovu.proxy #1 oscillator/pulsing"
 				}
 
 			}
@@ -110,7 +110,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 185.0, 104.818359, 201.0, 20.0 ],
-					"text" : "mxj oovu.Binding #1 oscillator/waveform"
+					"text" : "mxj oovu.proxy #1 oscillator/waveform"
 				}
 
 			}

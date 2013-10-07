@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import oovu.Binding;
+import oovu.Proxy;
 import oovu.servers.Server;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -35,7 +35,7 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
 
     private String name;
     private Integer number;
-    private final Set<Binding> bindings = new HashSet<Binding>();
+    private final Set<Proxy> proxies = new HashSet<Proxy>();
     private final Map<String, OscAddressNode> named_children = new HashMap<String, OscAddressNode>();
     private final Map<Integer, OscAddressNode> numbered_children = new HashMap<Integer, OscAddressNode>();
     private OscAddressNode parent = null;
@@ -90,8 +90,8 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
         }
     }
 
-    public void add_binding(Binding binding) {
-        this.bindings.add(binding);
+    public void add_proxy(Proxy proxy) {
+        this.proxies.add(proxy);
     }
 
     public void add_child(OscAddressNode child) {
@@ -184,8 +184,8 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
         return all_children;
     }
 
-    public Set<Binding> get_bindings() {
-        return Collections.unmodifiableSet(this.bindings);
+    public Set<Proxy> get_proxies() {
+        return Collections.unmodifiableSet(this.proxies);
     }
 
     public String get_debug_piece() {
@@ -202,11 +202,11 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
         } else {
             string_builder.append("null");
         }
-        if ((0 < this.bindings.size()) || (this.server != null)) {
+        if ((0 < this.proxies.size()) || (this.server != null)) {
             string_builder.append(" (");
-            if (0 < this.bindings.size()) {
-                string_builder.append("bindings: ");
-                string_builder.append(this.bindings.size());
+            if (0 < this.proxies.size()) {
+                string_builder.append("proxies: ");
+                string_builder.append(this.proxies.size());
                 if (this.server != null) {
                     string_builder.append(", ");
                 }
@@ -284,7 +284,7 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
 
     public int get_reference_count() {
         int count = this.get_all_children().size();
-        count += this.bindings.size();
+        count += this.proxies.size();
         if (this.server != null) {
             count += 1;
         }
@@ -394,8 +394,8 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
         if (other.server != null) {
             other.server.attach_to_osc_address_node(this);
         }
-        for (Binding binding : other.bindings) {
-            binding.attach(this);
+        for (Proxy proxy : other.proxies) {
+            proxy.attach(this);
         }
         Set<String> other_named_children = other.named_children.keySet();
         for (String child_name : other_named_children) {
@@ -441,8 +441,8 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
         this.number = null;
     }
 
-    public void remove_binding(Binding binding) {
-        this.bindings.remove(binding);
+    public void remove_proxy(Proxy proxy) {
+        this.proxies.remove(proxy);
     }
 
     public void remove_child(OscAddressNode child) {

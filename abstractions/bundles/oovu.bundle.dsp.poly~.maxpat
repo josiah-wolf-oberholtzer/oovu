@@ -93,7 +93,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 125.0, 40.0, 285.0, 20.0 ],
-					"text" : "mxj oovu.Binding #1 ."
+					"text" : "mxj oovu.proxy #1 ."
 				}
 
 			}
@@ -107,7 +107,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 10.0, 285.0, 20.0 ],
-					"text" : "mxj oovu.Binding #1 dsp/channelcount"
+					"text" : "mxj oovu.proxy #1 dsp/channelcount"
 				}
 
 			}

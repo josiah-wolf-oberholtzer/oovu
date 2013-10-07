@@ -272,7 +272,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 95.0, 550.0, 191.0, 20.0 ],
-					"text" : "mxj oovu.Binding /input~.1/source"
+					"text" : "mxj oovu.proxy /input~.1/source"
 				}
 
 			}

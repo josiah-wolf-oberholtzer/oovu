@@ -16,14 +16,14 @@ import com.cycling74.max.Executable;
 import com.cycling74.max.MaxObject;
 import com.cycling74.max.MaxSystem;
 
-public class Binding extends MaxPeer implements MessagePasser {
+public class Proxy extends MaxPeer implements MessagePasser {
 
     private class RebindCallback implements Executable {
 
-        public final Binding client;
+        public final Proxy client;
         public final Atom[] arguments;
 
-        public RebindCallback(Binding client, Atom[] arguments) {
+        public RebindCallback(Proxy client, Atom[] arguments) {
             this.client = client;
             this.arguments = arguments;
         }
@@ -36,7 +36,7 @@ public class Binding extends MaxPeer implements MessagePasser {
 
     protected OscAddressNode osc_address_node;
 
-    public Binding(Atom[] arguments) {
+    public Proxy(Atom[] arguments) {
         this.declareIO(3, 2);
         this.max_adapter = new GenericMaxAdapter(this);
         this.osc_address_node = null;
@@ -85,7 +85,7 @@ public class Binding extends MaxPeer implements MessagePasser {
         this.detach();
         if (osc_address_node != null) {
             this.osc_address_node = osc_address_node;
-            this.osc_address_node.add_binding(this);
+            this.osc_address_node.add_proxy(this);
         }
     }
 
@@ -141,7 +141,7 @@ public class Binding extends MaxPeer implements MessagePasser {
 
     public void detach() {
         if (this.osc_address_node != null) {
-            this.osc_address_node.remove_binding(this);
+            this.osc_address_node.remove_proxy(this);
             this.osc_address_node.prune_if_necessary();
         }
         this.osc_address_node = null;

@@ -277,7 +277,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "mxj oovu.Binding.maxpat",
+				"name" : "mxj oovu.proxy.maxpat",
 				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
 				"patcherrelativepath" : "../../abstractions/core",
 				"type" : "JSON",

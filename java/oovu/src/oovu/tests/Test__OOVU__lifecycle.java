@@ -1,6 +1,6 @@
 package oovu.tests;
 
-import oovu.Binding;
+import oovu.Proxy;
 import oovu.Module;
 import oovu.Property;
 import oovu.addressing.Environment;
@@ -57,11 +57,11 @@ public class Test__OOVU__lifecycle {
 
     @Test
     public void test_02() {
-        Binding binding = new Binding(Atom.parse("/foo/bar"));
+        Proxy proxy = new Proxy(Atom.parse("/foo/bar"));
         Assert.assertArrayEquals(new String[] {
             "<Node '':null (server: RootServer)>",
             "....<Node 'foo':null>",
-            "........<Node 'bar':null (bindings: 1)>"
+            "........<Node 'bar':null (proxies: 1)>"
         }, Environment.root_osc_address_node.get_debug_pieces());
         Property property = new Property(Atom.parse("1001 bar"));
         Assert.assertArrayEquals(new String[] {
@@ -69,27 +69,27 @@ public class Test__OOVU__lifecycle {
             "....<Node null:1001 (server: ModuleServer)>",
             "........<Node 'bar':null (server: PropertyServer)>",
             "....<Node 'foo':null>",
-            "........<Node 'bar':null (bindings: 1)>"
+            "........<Node 'bar':null (proxies: 1)>"
         }, Environment.root_osc_address_node.get_debug_pieces());
         Module module = new Module(Atom.parse("1001 foo"));
         Assert.assertArrayEquals(new String[] {
             "<Node '':null (server: RootServer)>",
             "....<Node 'foo':1001 (server: ModuleServer)>",
-            "........<Node 'bar':null (bindings: 1, server: PropertyServer)>"
+            "........<Node 'bar':null (proxies: 1, server: PropertyServer)>"
         }, Environment.root_osc_address_node.get_debug_pieces());
         module.detach_from_server();
         Assert.assertArrayEquals(new String[] {
             "<Node '':null (server: RootServer)>",
             "....<Node 'foo':1001 (server: ModuleServer)>",
-            "........<Node 'bar':null (bindings: 1, server: PropertyServer)>"
+            "........<Node 'bar':null (proxies: 1, server: PropertyServer)>"
         }, Environment.root_osc_address_node.get_debug_pieces());
         property.detach_from_server();
         Assert.assertArrayEquals(new String[] {
             "<Node '':null (server: RootServer)>",
             "....<Node 'foo':null>",
-            "........<Node 'bar':null (bindings: 1)>"
+            "........<Node 'bar':null (proxies: 1)>"
         }, Environment.root_osc_address_node.get_debug_pieces());
-        binding.detach();
+        proxy.detach();
         Assert.assertArrayEquals(new String[] {
             "<Node '':null (server: RootServer)>"
         }, Environment.root_osc_address_node.get_debug_pieces());
@@ -99,14 +99,14 @@ public class Test__OOVU__lifecycle {
     public void test_03() {
         Module module_1001 = new Module(Atom.parse("1001 foo"));
         Property property_1001 = new Property(Atom.parse("1001 bar"));
-        Binding binding = new Binding(Atom.parse("/foo/baz"));
+        Proxy proxy = new Proxy(Atom.parse("/foo/baz"));
         Assert.assertArrayEquals(new String[] {
             "<Node '':null (server: RootServer)>",
             "....<Node 'foo':1001 (server: ModuleServer)>",
             "........<Node 'bar':null (server: PropertyServer)>",
-            "........<Node 'baz':null (bindings: 1)>"
+            "........<Node 'baz':null (proxies: 1)>"
         }, Environment.root_osc_address_node.get_debug_pieces());
-        binding.detach();
+        proxy.detach();
         Assert.assertArrayEquals(new String[] {
             "<Node '':null (server: RootServer)>",
             "....<Node 'foo':1001 (server: ModuleServer)>",
@@ -136,11 +136,11 @@ public class Test__OOVU__lifecycle {
             "....<Node 'foo.1':2002 (server: ModuleServer)>",
             "........<Node 'quux':null (server: PropertyServer)>"
         }, Environment.root_osc_address_node.get_debug_pieces());
-        Binding binding = new Binding(Atom.parse("/foo/bar"));
+        Proxy proxy = new Proxy(Atom.parse("/foo/bar"));
         Assert.assertArrayEquals(new String[] {
             "<Node '':null (server: RootServer)>",
             "....<Node 'foo':1001 (server: ModuleServer)>",
-            "........<Node 'bar':null (bindings: 1)>",
+            "........<Node 'bar':null (proxies: 1)>",
             "........<Node 'baz':null (server: PropertyServer)>",
             "....<Node 'foo.1':2002 (server: ModuleServer)>",
             "........<Node 'quux':null (server: PropertyServer)>"
@@ -150,7 +150,7 @@ public class Test__OOVU__lifecycle {
         Assert.assertArrayEquals(new String[] {
             "<Node '':null (server: RootServer)>",
             "....<Node 'foo':null>",
-            "........<Node 'bar':null (bindings: 1)>",
+            "........<Node 'bar':null (proxies: 1)>",
             "....<Node 'foo.1':2002 (server: ModuleServer)>",
             "........<Node 'quux':null (server: PropertyServer)>"
         }, Environment.root_osc_address_node.get_debug_pieces());
@@ -161,10 +161,10 @@ public class Test__OOVU__lifecycle {
         Assert.assertArrayEquals(new String[] {
             "<Node '':null (server: RootServer)>",
             "....<Node 'foo':3003 (server: ModuleServer)>",
-            "........<Node 'bar':null (bindings: 1)>",
+            "........<Node 'bar':null (proxies: 1)>",
             "........<Node 'baz':null (server: PropertyServer)>"
         }, Environment.root_osc_address_node.get_debug_pieces());
-        binding.detach();
+        proxy.detach();
         Assert.assertArrayEquals(new String[] {
             "<Node '':null (server: RootServer)>",
             "....<Node 'foo':3003 (server: ModuleServer)>",
@@ -188,7 +188,7 @@ public class Test__OOVU__lifecycle {
         Property property_one = new Property(Atom.parse("1001 source"));
         Property property_two = new Property(Atom.parse("2002 source"));
         Property property_three = new Property(Atom.parse("3003 source"));
-        Binding binding = new Binding(Atom.parse("/input~.1/source"));
+        Proxy proxy = new Proxy(Atom.parse("/input~.1/source"));
         Assert
             .assertArrayEquals(
                 new String[] {
@@ -196,11 +196,11 @@ public class Test__OOVU__lifecycle {
                     "....<Node 'input~':1001 (server: ModuleServer)>",
                     "........<Node 'source':null (server: PropertyServer)>",
                     "....<Node 'input~.1':2002 (server: ModuleServer)>",
-                    "........<Node 'source':null (bindings: 1, server: PropertyServer)>",
+                    "........<Node 'source':null (proxies: 1, server: PropertyServer)>",
                     "....<Node 'input~.2':3003 (server: ModuleServer)>",
                     "........<Node 'source':null (server: PropertyServer)>"
                 }, Environment.root_osc_address_node.get_debug_pieces());
-        binding.notifyDeleted();
+        proxy.notifyDeleted();
         property_one.notifyDeleted();
         property_two.notifyDeleted();
         property_three.notifyDeleted();
@@ -217,7 +217,7 @@ public class Test__OOVU__lifecycle {
         Assert.assertArrayEquals(new String[] {
             "<Node '':null (server: RootServer)>"
         }, Environment.root_osc_address_node.get_debug_pieces());
-        Binding binding = new Binding(Atom.parse("/input~.1/source"));
+        Proxy proxy = new Proxy(Atom.parse("/input~.1/source"));
         Module module_one = new Module(Atom.parse("1001 input~"));
         Module module_two = new Module(Atom.parse("2002 input~"));
         Module module_three = new Module(Atom.parse("3003 input~"));
@@ -231,11 +231,11 @@ public class Test__OOVU__lifecycle {
                     "....<Node 'input~':1001 (server: ModuleServer)>",
                     "........<Node 'source':null (server: PropertyServer)>",
                     "....<Node 'input~.1':2002 (server: ModuleServer)>",
-                    "........<Node 'source':null (bindings: 1, server: PropertyServer)>",
+                    "........<Node 'source':null (proxies: 1, server: PropertyServer)>",
                     "....<Node 'input~.2':3003 (server: ModuleServer)>",
                     "........<Node 'source':null (server: PropertyServer)>"
                 }, Environment.root_osc_address_node.get_debug_pieces());
-        binding.notifyDeleted();
+        proxy.notifyDeleted();
         property_one.notifyDeleted();
         property_two.notifyDeleted();
         property_three.notifyDeleted();

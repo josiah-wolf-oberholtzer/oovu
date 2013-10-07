@@ -444,7 +444,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 360.0, 485.0, 239.0, 20.0 ],
-					"text" : "mxj oovu.Binding #1 stutter/transposition"
+					"text" : "mxj oovu.proxy #1 stutter/transposition"
 				}
 
 			}
@@ -490,7 +490,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 360.0, 390.0, 207.0, 20.0 ],
-					"text" : "mxj oovu.Binding #1 stutter/repeat"
+					"text" : "mxj oovu.proxy #1 stutter/repeat"
 				}
 
 			}
@@ -538,7 +538,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 360.0, 360.0, 207.0, 20.0 ],
-					"text" : "mxj oovu.Binding #1 stutter/length"
+					"text" : "mxj oovu.proxy #1 stutter/length"
 				}
 
 			}
@@ -629,7 +629,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 360.0, 300.0, 243.0, 20.0 ],
-					"text" : "mxj oovu.Binding #1 feedback/gain/range"
+					"text" : "mxj oovu.proxy #1 feedback/gain/range"
 				}
 
 			}
@@ -643,7 +643,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 360.0, 270.0, 265.0, 20.0 ],
-					"text" : "mxj oovu.Binding #1 feedback/gain/frequency"
+					"text" : "mxj oovu.proxy #1 feedback/gain/frequency"
 				}
 
 			}
@@ -657,7 +657,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 360.0, 240.0, 249.0, 20.0 ],
-					"text" : "mxj oovu.Binding #1 feedback/delay/range"
+					"text" : "mxj oovu.proxy #1 feedback/delay/range"
 				}
 
 			}
@@ -671,7 +671,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 360.0, 210.0, 271.0, 20.0 ],
-					"text" : "mxj oovu.Binding #1 feedback/delay/frequency"
+					"text" : "mxj oovu.proxy #1 feedback/delay/frequency"
 				}
 
 			}
@@ -795,7 +795,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 360.0, 150.0, 232.0, 20.0 ],
-					"text" : "mxj oovu.Binding #1 allpass/gain/range"
+					"text" : "mxj oovu.proxy #1 allpass/gain/range"
 				}
 
 			}
@@ -809,7 +809,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 360.0, 120.0, 253.0, 20.0 ],
-					"text" : "mxj oovu.Binding #1 allpass/gain/frequency"
+					"text" : "mxj oovu.proxy #1 allpass/gain/frequency"
 				}
 
 			}
@@ -823,7 +823,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 360.0, 90.0, 238.0, 20.0 ],
-					"text" : "mxj oovu.Binding #1 allpass/delay/range"
+					"text" : "mxj oovu.proxy #1 allpass/delay/range"
 				}
 
 			}
@@ -837,7 +837,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 360.0, 60.0, 259.0, 20.0 ],
-					"text" : "mxj oovu.Binding #1 allpass/delay/frequency"
+					"text" : "mxj oovu.proxy #1 allpass/delay/frequency"
 				}
 
 			}
@@ -957,7 +957,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 20.0, 440.0, 228.0, 20.0 ],
-					"text" : "mxj oovu.Binding #1 dsp/channelcount"
+					"text" : "mxj oovu.proxy #1 dsp/channelcount"
 				}
 
 			}
@@ -1021,7 +1021,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 110.0, 500.0, 193.0, 20.0 ],
-					"text" : "mxj oovu.Binding #1 output/gain"
+					"text" : "mxj oovu.proxy #1 output/gain"
 				}
 
 			}
@@ -1118,7 +1118,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 110.0, 345.0, 186.0, 20.0 ],
-					"text" : "mxj oovu.Binding #1 input/gain"
+					"text" : "mxj oovu.proxy #1 input/gain"
 				}
 
 			}
@@ -1132,7 +1132,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 60.0, 315.0, 188.0, 20.0 ],
-					"text" : "mxj oovu.Binding #1 dsp/active"
+					"text" : "mxj oovu.proxy #1 dsp/active"
 				}
 
 			}
@@ -1146,7 +1146,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 30.0, 137.0, 20.0 ],
-					"text" : "mxj oovu.Binding #1 ."
+					"text" : "mxj oovu.proxy #1 ."
 				}
 
 			}

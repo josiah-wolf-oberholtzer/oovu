@@ -147,7 +147,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 285.0, 10.0, 223.0, 20.0 ],
-					"text" : "mxj oovu.Binding #1 output/sendcount"
+					"text" : "mxj oovu.proxy #1 output/sendcount"
 				}
 
 			}

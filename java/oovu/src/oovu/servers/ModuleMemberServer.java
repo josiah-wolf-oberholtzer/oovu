@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import oovu.Binding;
+import oovu.Proxy;
 import oovu.addressing.Environment;
 import oovu.addressing.OscAddress;
 import oovu.addressing.OscAddressNode;
@@ -120,8 +120,8 @@ public abstract class ModuleMemberServer extends Server {
         }
         if (server_is_new) {
             Response response = member_server.generate_dumpmeta_response();
-            for (Binding binding : osc_address_node.get_bindings()) {
-                Environment.defer_low(new MessagePasserCallback(binding,
+            for (Proxy proxy : osc_address_node.get_proxies()) {
+                Environment.defer_low(new MessagePasserCallback(proxy,
                     response));
             }
         }

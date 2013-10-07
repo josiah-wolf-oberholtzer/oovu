@@ -220,7 +220,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 200.0, 300.0, 195.0, 20.0 ],
-					"text" : "mxj oovu.Binding #1 soundfile/seek"
+					"text" : "mxj oovu.proxy #1 soundfile/seek"
 				}
 
 			}
@@ -234,7 +234,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 200.0, 270.0, 207.0, 20.0 ],
-					"text" : "mxj oovu.Binding #1 soundfile/looping"
+					"text" : "mxj oovu.proxy #1 soundfile/looping"
 				}
 
 			}
@@ -248,7 +248,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 200.0, 240.0, 207.0, 20.0 ],
-					"text" : "mxj oovu.Binding #1 soundfile/playing"
+					"text" : "mxj oovu.proxy #1 soundfile/playing"
 				}
 
 			}
@@ -262,7 +262,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 200.0, 125.0, 207.0, 20.0 ],
-					"text" : "mxj oovu.Binding #1 soundfile/filepath"
+					"text" : "mxj oovu.proxy #1 soundfile/filepath"
 				}
 
 			}
