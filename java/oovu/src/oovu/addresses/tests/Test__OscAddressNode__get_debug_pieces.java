@@ -1,10 +1,10 @@
-package oovu.addressing.tests;
+package oovu.addresses.tests;
 
 import java.util.HashMap;
 
 import oovu.Proxy;
-import oovu.addressing.Environment;
-import oovu.addressing.OscAddressNode;
+import oovu.addresses.Environment;
+import oovu.addresses.OscAddressNode;
 import oovu.servers.ModuleServer;
 import oovu.servers.members.PropertyServer;
 

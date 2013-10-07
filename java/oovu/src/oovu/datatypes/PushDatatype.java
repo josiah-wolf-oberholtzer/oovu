@@ -3,7 +3,7 @@ package oovu.datatypes;
 import java.util.Arrays;
 import java.util.Map;
 
-import oovu.addressing.Environment;
+import oovu.addresses.Environment;
 import oovu.messaging.DatatypeMessageHandler;
 import oovu.servers.AttributeServer;
 import oovu.servers.Server;

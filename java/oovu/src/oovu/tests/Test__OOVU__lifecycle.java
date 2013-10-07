@@ -3,8 +3,8 @@ package oovu.tests;
 import oovu.Module;
 import oovu.Property;
 import oovu.Proxy;
-import oovu.addressing.Environment;
-import oovu.addressing.OscAddressNode;
+import oovu.addresses.Environment;
+import oovu.addresses.OscAddressNode;
 import oovu.servers.Server;
 
 import org.junit.After;

@@ -1,6 +1,6 @@
 package oovu.servers.tests;
 
-import oovu.addressing.Environment;
+import oovu.addresses.Environment;
 import oovu.servers.ModuleServer;
 import oovu.servers.members.PropertyServer;
 

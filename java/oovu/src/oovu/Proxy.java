@@ -1,9 +1,9 @@
 package oovu;
 
 import oovu.adapters.GenericMaxAdapter;
-import oovu.addressing.Environment;
-import oovu.addressing.OscAddress;
-import oovu.addressing.OscAddressNode;
+import oovu.addresses.Environment;
+import oovu.addresses.OscAddress;
+import oovu.addresses.OscAddressNode;
 import oovu.clients.MaxPeer;
 import oovu.clients.MessagePasserCallback;
 import oovu.messaging.MessagePasser;

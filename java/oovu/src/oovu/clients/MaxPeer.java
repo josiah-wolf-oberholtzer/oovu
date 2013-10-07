@@ -3,9 +3,9 @@ package oovu.clients;
 import java.util.Set;
 
 import oovu.adapters.MaxAdapter;
-import oovu.addressing.Environment;
-import oovu.addressing.OscAddress;
-import oovu.addressing.OscAddressNode;
+import oovu.addresses.Environment;
+import oovu.addresses.OscAddress;
+import oovu.addresses.OscAddressNode;
 import oovu.messaging.MessagePasser;
 import oovu.messaging.Request;
 import oovu.messaging.Response;

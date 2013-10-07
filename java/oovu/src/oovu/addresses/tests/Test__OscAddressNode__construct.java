@@ -1,7 +1,7 @@
-package oovu.addressing.tests;
+package oovu.addresses.tests;
 
-import oovu.addressing.Environment;
-import oovu.addressing.OscAddressNode;
+import oovu.addresses.Environment;
+import oovu.addresses.OscAddressNode;
 import oovu.servers.ModuleServer;
 
 import org.junit.After;

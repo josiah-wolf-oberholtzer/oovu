@@ -2,7 +2,7 @@ package oovu.datatypes.tests;
 
 import oovu.Module;
 import oovu.Property;
-import oovu.addressing.Environment;
+import oovu.addresses.Environment;
 import oovu.datatypes.BooleanDatatype;
 import oovu.datatypes.Datatype;
 import oovu.datatypes.DecimalArrayDatatype;

@@ -1,9 +1,9 @@
 package oovu.tests;
 
 import oovu.Proxy;
-import oovu.addressing.Environment;
-import oovu.addressing.OscAddress;
-import oovu.addressing.OscAddressNode;
+import oovu.addresses.Environment;
+import oovu.addresses.OscAddress;
+import oovu.addresses.OscAddressNode;
 
 import org.junit.After;
 import org.junit.Assert;

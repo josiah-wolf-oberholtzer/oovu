@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import oovu.Proxy;
-import oovu.addressing.Environment;
-import oovu.addressing.OscAddressNode;
+import oovu.addresses.Environment;
+import oovu.addresses.OscAddressNode;
 import oovu.clients.MessagePasserCallback;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.Response;

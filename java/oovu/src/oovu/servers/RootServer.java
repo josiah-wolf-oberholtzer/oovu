@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import oovu.addressing.Environment;
-import oovu.addressing.OscAddress;
+import oovu.addresses.Environment;
+import oovu.addresses.OscAddress;
 import oovu.clients.ServerClient;
 import oovu.states.State;
 import oovu.states.StateComponentAggregate;

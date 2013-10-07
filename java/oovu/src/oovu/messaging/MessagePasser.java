@@ -1,7 +1,7 @@
 package oovu.messaging;
 
-import oovu.addressing.OscAddress;
-import oovu.addressing.OscAddressNode;
+import oovu.addresses.OscAddress;
+import oovu.addresses.OscAddressNode;
 
 public interface MessagePasser {
 

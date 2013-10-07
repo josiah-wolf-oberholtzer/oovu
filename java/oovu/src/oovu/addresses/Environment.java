@@ -1,4 +1,4 @@
-package oovu.addressing;
+package oovu.addresses;
 
 import java.util.HashMap;
 import java.util.HashSet;

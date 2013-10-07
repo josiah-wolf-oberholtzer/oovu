@@ -1,6 +1,6 @@
 package oovu.clients;
 
-import oovu.addressing.OscAddress;
+import oovu.addresses.OscAddress;
 import oovu.messaging.Request;
 
 import com.cycling74.max.Atom;

@@ -1,7 +1,7 @@
 package oovu.clients;
 
-import oovu.addressing.OscAddress;
-import oovu.addressing.OscAddressNode;
+import oovu.addresses.OscAddress;
+import oovu.addresses.OscAddressNode;
 import oovu.servers.Server;
 
 import com.cycling74.max.Atom;

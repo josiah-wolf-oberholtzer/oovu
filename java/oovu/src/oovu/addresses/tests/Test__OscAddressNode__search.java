@@ -1,11 +1,11 @@
-package oovu.addressing.tests;
+package oovu.addresses.tests;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import oovu.addressing.OscAddress;
-import oovu.addressing.OscAddressNode;
+import oovu.addresses.OscAddress;
+import oovu.addresses.OscAddressNode;
 
 import org.junit.Assert;
 import org.junit.Test;

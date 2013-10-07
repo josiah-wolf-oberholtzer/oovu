@@ -1,7 +1,7 @@
 package oovu;
 
 import oovu.adapters.GenericMaxAdapter;
-import oovu.addressing.Environment;
+import oovu.addresses.Environment;
 import oovu.clients.ServerClient;
 
 public class Root extends ServerClient {

@@ -1,4 +1,4 @@
-package oovu.addressing;
+package oovu.addresses;
 
 import java.util.ArrayList;
 import java.util.Arrays;

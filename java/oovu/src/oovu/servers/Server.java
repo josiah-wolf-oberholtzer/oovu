@@ -9,8 +9,8 @@ import java.util.Map;
 import java.util.Set;
 
 import oovu.Proxy;
-import oovu.addressing.OscAddress;
-import oovu.addressing.OscAddressNode;
+import oovu.addresses.OscAddress;
+import oovu.addresses.OscAddressNode;
 import oovu.clients.ServerClient;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessagePasser;
