@@ -12,10 +12,10 @@ import oovu.addresses.OscAddressNode;
 import oovu.clients.MessagePasserCallback;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.Response;
+import oovu.servers.members.AudioReceiveServer;
+import oovu.servers.members.AudioSendServer;
 import oovu.servers.members.MethodServer;
 import oovu.servers.members.PropertyServer;
-import oovu.servers.members.AudioSendServer;
-import oovu.servers.members.AudioReceiveServer;
 import oovu.servers.members.ReturnServer;
 
 import com.cycling74.max.Atom;
@@ -61,8 +61,8 @@ public abstract class ModuleMemberServer extends Server {
         Map<String, Class<?>> map = new HashMap<String, Class<?>>();
         map.put("MethodNode", MethodServer.class);
         map.put("PropertyNode", PropertyServer.class);
-        map.put("PullNode", AudioSendServer.class);
-        map.put("PushNode", AudioReceiveServer.class);
+        map.put("AudioSend", AudioSendServer.class);
+        map.put("AudioReceive", AudioReceiveServer.class);
         map.put("ReturnNode", ReturnServer.class);
         member_nodes_by_label = Collections.unmodifiableMap(map);
     }

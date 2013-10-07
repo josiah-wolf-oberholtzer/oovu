@@ -13,11 +13,12 @@ public class AudioReceiveServer extends AudioServer {
         Integer module_id,
         String desired_name,
         Atom[] argument_list) {
-        return (AudioReceiveServer) ModuleMemberServer.allocate_from_label("PushNode",
-            module_id, desired_name, argument_list);
+        return (AudioReceiveServer) ModuleMemberServer.allocate_from_label(
+            "AudioReceive", module_id, desired_name, argument_list);
     }
 
-    public AudioReceiveServer(ModuleServer module_node, Map<String, Atom[]> argument_map) {
+    public AudioReceiveServer(ModuleServer module_node,
+        Map<String, Atom[]> argument_map) {
         super(module_node, argument_map);
     }
 
