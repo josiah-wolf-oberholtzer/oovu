@@ -4,9 +4,9 @@ import oovu.addressing.Environment;
 import oovu.servers.ModuleServer;
 import oovu.servers.members.MethodServer;
 import oovu.servers.members.PropertyServer;
-import oovu.states.State;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -49,7 +49,7 @@ public class Test__RootServer__get_state {
         PropertyServer delay_feedback = PropertyServer.allocate(2002,
             "feedback",
             Atom.parse(":datatype decimal :range 0. 0.999 :default 0.001"));
-        State actuals = Environment.root_server.get_state();
+        Atom[][] actuals = Environment.root_server.get_state().toAtoms();
         Atom[][] expecteds = new Atom[][] {
             Atom.parse("/delay~/feedback/:maximum 0.999"),
             Atom.parse("/delay~/feedback/:minimum 0.0"),
@@ -66,10 +66,10 @@ public class Test__RootServer__get_state {
             Atom.parse("/filter~/type/:options hp lp bp br"),
             Atom.parse("/filter~/type hp")
         };
-        // Assert.assertArrayEquals(expecteds, actuals);
+        Assert.assertArrayEquals(expecteds, actuals);
         delay_length.set_priority(100);
         filter_type.set_priority(100);
-        actuals = Environment.root_server.get_state();
+        actuals = Environment.root_server.get_state().toAtoms();
         expecteds = new Atom[][] {
             Atom.parse("/delay~/length/:maximum 1000.0"),
             Atom.parse("/delay~/length/:minimum 0.0"),
@@ -86,6 +86,6 @@ public class Test__RootServer__get_state {
             Atom.parse("/filter~/frequency/:minimum 20.0"),
             Atom.parse("/filter~/frequency 1000.0")
         };
-        // Assert.assertArrayEquals(expecteds, actuals);
+        Assert.assertArrayEquals(expecteds, actuals);
     }
 }
