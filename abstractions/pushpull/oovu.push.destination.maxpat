@@ -180,7 +180,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 30.0, 35.0, 228.0, 20.0 ],
-					"text" : "mxj oovu.proxy #1 dsp/channelcount"
+					"text" : "mxj oovu.Proxy #1 dsp/channelcount"
 				}
 
 			}

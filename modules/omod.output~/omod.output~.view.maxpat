@@ -362,7 +362,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 95.0, 625.0, 177.0, 20.0 ],
-					"text" : "mxj oovu.proxy #1 record/time"
+					"text" : "mxj oovu.Proxy #1 record/time"
 				}
 
 			}
@@ -376,7 +376,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 95.0, 595.0, 204.0, 20.0 ],
-					"text" : "mxj oovu.proxy #1 record/recording"
+					"text" : "mxj oovu.Proxy #1 record/recording"
 				}
 
 			}
@@ -390,7 +390,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 95.0, 565.0, 181.0, 20.0 ],
-					"text" : "mxj oovu.proxy #1 record/open"
+					"text" : "mxj oovu.Proxy #1 record/open"
 				}
 
 			}
@@ -418,7 +418,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 415.0, 580.0, 177.0, 20.0 ],
-					"text" : "mxj oovu.proxy #1 dac/routing"
+					"text" : "mxj oovu.Proxy #1 dac/routing"
 				}
 
 			}
@@ -465,7 +465,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 420.0, 400.0, 171.0, 20.0 ],
-					"text" : "mxj oovu.proxy #1 dac/active"
+					"text" : "mxj oovu.Proxy #1 dac/active"
 				}
 
 			}
@@ -533,7 +533,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 335.0, 270.0, 187.0, 33.0 ],
-					"text" : "mxj oovu.proxy #1 dsp/channelcount"
+					"text" : "mxj oovu.Proxy #1 dsp/channelcount"
 				}
 
 			}
@@ -547,7 +547,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 10.0, 60.0, 120.0, 20.0 ],
-					"text" : "mxj oovu.proxy #1 ."
+					"text" : "mxj oovu.Proxy #1 ."
 				}
 
 			}
@@ -751,7 +751,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 455.0, 85.0, 176.0, 20.0 ],
-					"text" : "mxj oovu.proxy #1 input/gain"
+					"text" : "mxj oovu.Proxy #1 input/gain"
 				}
 
 			}
@@ -765,7 +765,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 305.0, 55.0, 171.0, 20.0 ],
-					"text" : "mxj oovu.proxy #1 dsp/active"
+					"text" : "mxj oovu.Proxy #1 dsp/active"
 				}
 
 			}

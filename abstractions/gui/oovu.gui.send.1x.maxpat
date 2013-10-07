@@ -203,7 +203,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 335.0, 80.0, 100.0, 20.0 ],
-					"text" : "mxj oovu.proxy"
+					"text" : "mxj oovu.Proxy"
 				}
 
 			}
@@ -217,7 +217,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 155.0, 139.0, 20.0 ],
-					"text" : "mxj oovu.proxy"
+					"text" : "mxj oovu.Proxy"
 				}
 
 			}

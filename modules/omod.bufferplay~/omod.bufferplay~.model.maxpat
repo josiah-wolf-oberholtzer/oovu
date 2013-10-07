@@ -78,7 +78,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 620.0, 220.0, 173.0, 20.0 ],
-					"text" : "mxj oovu.proxy #1 dsp/active"
+					"text" : "mxj oovu.Proxy #1 dsp/active"
 				}
 
 			}

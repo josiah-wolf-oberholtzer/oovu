@@ -238,7 +238,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 360.0, 170.0, 232.0, 20.0 ],
-					"text" : "mxj oovu.proxy #1 open"
+					"text" : "mxj oovu.Proxy #1 open"
 				}
 
 			}
@@ -284,7 +284,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 360.0, 235.0, 232.0, 20.0 ],
-					"text" : "mxj oovu.proxy #1 trigger"
+					"text" : "mxj oovu.Proxy #1 trigger"
 				}
 
 			}
@@ -482,7 +482,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 360.0, 320.0, 225.0, 20.0 ],
-					"text" : "mxj oovu.proxy #1 transposition/range"
+					"text" : "mxj oovu.Proxy #1 transposition/range"
 				}
 
 			}
@@ -496,7 +496,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 360.0, 455.0, 247.0, 20.0 ],
-					"text" : "mxj oovu.proxy #1 panning/frequency"
+					"text" : "mxj oovu.Proxy #1 panning/frequency"
 				}
 
 			}
@@ -510,7 +510,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 360.0, 290.0, 232.0, 20.0 ],
-					"text" : "mxj oovu.proxy #1 amplitude/range"
+					"text" : "mxj oovu.Proxy #1 amplitude/range"
 				}
 
 			}
@@ -679,7 +679,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 110.0, 505.0, 176.0, 20.0 ],
-					"text" : "mxj oovu.proxy #1 output/gain"
+					"text" : "mxj oovu.Proxy #1 output/gain"
 				}
 
 			}
@@ -726,7 +726,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 60.0, 320.0, 171.0, 20.0 ],
-					"text" : "mxj oovu.proxy #1 dsp/active"
+					"text" : "mxj oovu.Proxy #1 dsp/active"
 				}
 
 			}
@@ -769,7 +769,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 10.0, 65.0, 120.0, 20.0 ],
-					"text" : "mxj oovu.proxy #1 ."
+					"text" : "mxj oovu.Proxy #1 ."
 				}
 
 			}

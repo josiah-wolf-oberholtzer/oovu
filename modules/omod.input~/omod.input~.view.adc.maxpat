@@ -38,7 +38,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 185.0, 80.0, 195.0, 20.0 ],
-					"text" : "mxj oovu.proxy #1 dsp/active"
+					"text" : "mxj oovu.Proxy #1 dsp/active"
 				}
 
 			}
@@ -241,7 +241,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "bang" ],
 					"patching_rect" : [ 80.0, 275.0, 195.0, 20.0 ],
-					"text" : "mxj oovu.proxy #1 adc/channel"
+					"text" : "mxj oovu.Proxy #1 adc/channel"
 				}
 
 			}
@@ -316,7 +316,7 @@
 		}
 ,
 		"dependency_cache" : [ 			{
-				"name" : "mxj oovu.proxy.maxpat",
+				"name" : "mxj oovu.Proxy.maxpat",
 				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
 				"patcherrelativepath" : "../../abstractions/core",
 				"type" : "JSON",
