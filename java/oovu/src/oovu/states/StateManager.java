@@ -1,4 +1,4 @@
-package oovu;
+package oovu.states;
 
 public class StateManager {
 }
