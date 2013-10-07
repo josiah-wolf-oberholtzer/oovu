@@ -18,7 +18,7 @@ import oovu.servers.members.ReturnServer;
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxSystem;
 
-public class ModuleServer extends Server {
+public class ModuleServer extends Server implements Comparable<ModuleServer> {
 
     private class GetNameMessageHandler extends MessageHandler {
 
@@ -107,6 +107,12 @@ public class ModuleServer extends Server {
             return;
         }
         this.name = this.osc_address_node.acquire_name(desired_name);
+    }
+
+    @Override
+    public int compareTo(ModuleServer other) {
+        return this.get_osc_address_string().compareTo(
+            other.get_osc_address_string());
     }
 
     public List<MethodServer> get_child_method_servers() {

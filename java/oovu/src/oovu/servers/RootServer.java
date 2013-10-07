@@ -1,6 +1,8 @@
 package oovu.servers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import oovu.addressing.Environment;
 import oovu.addressing.OscAddress;
@@ -55,6 +57,17 @@ public class RootServer extends Server {
         }
     }
 
+    public List<ModuleServer> get_child_module_servers() {
+        ArrayList<ModuleServer> module_servers = new ArrayList<ModuleServer>();
+        for (Server child : this.child_servers) {
+            if (child instanceof ModuleServer) {
+                module_servers.add((ModuleServer) child);
+            }
+        }
+        Collections.sort(module_servers);
+        return module_servers;
+    }
+
     @Override
     public OscAddress get_osc_address() {
         return OscAddress.from_cache(this.get_osc_address_string());
@@ -68,7 +81,7 @@ public class RootServer extends Server {
     @Override
     public Atom[][] get_state() {
         ArrayList<Atom[]> state = new ArrayList<Atom[]>();
-        for (Server module_server : this.child_servers) {
+        for (Server module_server : this.get_child_module_servers()) {
             for (Atom[] module_state : module_server.get_state()) {
                 state.add(module_state);
             }
