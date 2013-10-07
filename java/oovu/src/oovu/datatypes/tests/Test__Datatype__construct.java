@@ -13,8 +13,6 @@ import oovu.datatypes.IntegerArrayDatatype;
 import oovu.datatypes.IntegerDatatype;
 import oovu.datatypes.OptionDatatype;
 import oovu.datatypes.OscAddressDatatype;
-import oovu.datatypes.PullDatatype;
-import oovu.datatypes.PushDatatype;
 import oovu.datatypes.RangeDatatype;
 import oovu.datatypes.StringDatatype;
 import oovu.servers.AttributeServer;
@@ -149,28 +147,6 @@ public class Test__Datatype__construct {
     @Test
     public void test_10() {
         Module module = new Module(Atom.parse("1001 foo"));
-        Property property = new Property(Atom.parse("1001 bar :datatype pull"));
-        AttributeServer server = (AttributeServer) property.get_server();
-        Datatype datatype = server.datatype;
-        Assert.assertEquals(PullDatatype.class, datatype.getClass());
-        property.notifyDeleted();
-        module.notifyDeleted();
-    }
-
-    @Test
-    public void test_11() {
-        Module module = new Module(Atom.parse("1001 foo"));
-        Property property = new Property(Atom.parse("1001 bar :datatype push"));
-        AttributeServer server = (AttributeServer) property.get_server();
-        Datatype datatype = server.datatype;
-        Assert.assertEquals(PushDatatype.class, datatype.getClass());
-        property.notifyDeleted();
-        module.notifyDeleted();
-    }
-
-    @Test
-    public void test_12() {
-        Module module = new Module(Atom.parse("1001 foo"));
         Property property = new Property(Atom.parse("1001 bar :datatype range"));
         AttributeServer server = (AttributeServer) property.get_server();
         Datatype datatype = server.datatype;
@@ -180,7 +156,7 @@ public class Test__Datatype__construct {
     }
 
     @Test
-    public void test_13() {
+    public void test_11() {
         Module module = new Module(Atom.parse("1001 foo"));
         Property property = new Property(
             Atom.parse("1001 bar :datatype string"));

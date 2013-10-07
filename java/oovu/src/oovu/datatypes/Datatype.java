@@ -67,8 +67,6 @@ public abstract class Datatype {
         map.put("integer", IntegerDatatype.class);
         map.put("option", OptionDatatype.class);
         map.put("oscaddress", OscAddressDatatype.class);
-        map.put("pull", PullDatatype.class);
-        map.put("push", PushDatatype.class);
         map.put("range", RangeDatatype.class);
         map.put("string", StringDatatype.class);
         map.put(null, GenericDatatype.class);
