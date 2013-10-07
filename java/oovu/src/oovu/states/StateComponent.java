@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import com.cycling74.max.Atom;
 
-public class StateComponent {
+public class StateComponent extends State {
 
     public final String address;
     public final Atom[] arguments;
@@ -50,6 +50,21 @@ public class StateComponent {
         result = (prime * result)
             + ((this.address == null) ? 0 : this.address.hashCode());
         result = (prime * result) + Arrays.hashCode(this.arguments);
+        return result;
+    }
+
+    @Override
+    public Atom[][] toAtoms() {
+        Atom[][] result = new Atom[1][];
+        result[0] = Atom.newAtom(this.address, this.arguments);
+        return result;
+    }
+
+    @Override
+    public String[] toStrings() {
+        String[] result = new String[] {
+            Atom.toOneString(Atom.newAtom(this.address, this.arguments))
+        };
         return result;
     }
 }

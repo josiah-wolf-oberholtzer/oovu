@@ -7,8 +7,8 @@ import java.util.List;
 import oovu.addressing.Environment;
 import oovu.addressing.OscAddress;
 import oovu.clients.ServerClient;
-import oovu.states.GlobalState;
 import oovu.states.State;
+import oovu.states.StateComponentAggregate;
 
 public class RootServer extends Server {
 
@@ -55,6 +55,7 @@ public class RootServer extends Server {
         for (Server module_server : this.get_child_module_servers()) {
             global_state.add(module_server.get_state());
         }
-        return new GlobalState(global_state.toArray(new State[0]));
+        return new StateComponentAggregate(null,
+            global_state.toArray(new State[0]));
     }
 }

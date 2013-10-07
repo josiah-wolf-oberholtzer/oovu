@@ -7,7 +7,6 @@ import java.util.Map;
 
 import oovu.Binding;
 import oovu.addressing.Environment;
-import oovu.addressing.OscAddress;
 import oovu.addressing.OscAddressNode;
 import oovu.clients.MessagePasserCallback;
 import oovu.messaging.MessageHandler;
@@ -15,8 +14,8 @@ import oovu.messaging.Response;
 import oovu.servers.members.MethodServer;
 import oovu.servers.members.PropertyServer;
 import oovu.servers.members.ReturnServer;
-import oovu.states.ModuleState;
 import oovu.states.State;
+import oovu.states.StateComponentAggregate;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxSystem;
@@ -153,12 +152,12 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
 
     @Override
     public State get_state() {
-        OscAddress osc_address = this.get_osc_address();
+        String osc_address_string = this.get_osc_address_string();
         ArrayList<State> attribute_states = new ArrayList<State>();
         for (PropertyServer property : this.get_child_property_servers()) {
             attribute_states.add(property.get_state());
         }
-        return new ModuleState(osc_address,
+        return new StateComponentAggregate(osc_address_string,
             attribute_states.toArray(new State[0]));
     }
 }

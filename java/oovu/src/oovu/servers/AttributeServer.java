@@ -11,9 +11,9 @@ import oovu.messaging.MessageHandler;
 import oovu.messaging.Request;
 import oovu.messaging.Response;
 import oovu.servers.members.PropertyServer;
-import oovu.states.AttributeState;
 import oovu.states.State;
 import oovu.states.StateComponent;
+import oovu.states.StateComponentAggregate;
 
 import com.cycling74.max.Atom;
 
@@ -168,8 +168,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
     @Override
     public State get_state() {
         ArrayList<StateComponent> state_entries = new ArrayList<StateComponent>();
-        OscAddress osc_address = this.get_osc_address();
-        String osc_address_string = osc_address.toString();
+        String osc_address_string = this.get_osc_address_string();
         for (MessageHandler message_handler : this.message_handlers.values()) {
             if (message_handler.is_state_relevant()) {
                 for (Atom[] substate : message_handler.run(null)) {
@@ -185,7 +184,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
             state_entries.add(new StateComponent(osc_address_string, this
                 .get_value()));
         }
-        return new AttributeState(osc_address,
+        return new StateComponentAggregate(osc_address_string,
             state_entries.toArray(new StateComponent[0]));
     }
 
