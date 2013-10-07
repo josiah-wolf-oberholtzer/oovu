@@ -121,8 +121,8 @@ public abstract class ModuleMemberServer extends Server {
         if (server_is_new) {
             Response response = member_server.generate_dumpmeta_response();
             for (Proxy proxy : osc_address_node.get_proxies()) {
-                Environment.defer_low(new MessagePasserCallback(proxy,
-                    response));
+                Environment
+                    .defer_low(new MessagePasserCallback(proxy, response));
             }
         }
         return member_server;

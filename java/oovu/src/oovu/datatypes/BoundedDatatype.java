@@ -257,10 +257,16 @@ abstract public class BoundedDatatype extends Datatype implements
         if (argument_map.containsKey("range")) {
             Atom[] range = argument_map.get("range");
             if (range.length == 2) {
-                double[] numeric_range = Atom.toDouble(range);
-                Arrays.sort(numeric_range);
-                this.minimum = numeric_range[0];
-                this.maximum = numeric_range[1];
+                if (range[0].isString() && range[0].getString().equals("NULL")) {
+                    this.minimum = null;
+                } else {
+                    this.minimum = range[0].toDouble();
+                }
+                if (range[1].isString() && range[1].getString().equals("NULL")) {
+                    this.maximum = null;
+                } else {
+                    this.maximum = range[1].toDouble();
+                }
             }
         }
     }

@@ -1,8 +1,8 @@
 package oovu.tests;
 
-import oovu.Proxy;
 import oovu.Module;
 import oovu.Property;
+import oovu.Proxy;
 import oovu.addressing.Environment;
 import oovu.addressing.OscAddressNode;
 import oovu.servers.Server;

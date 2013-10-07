@@ -90,10 +90,6 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
         }
     }
 
-    public void add_proxy(Proxy proxy) {
-        this.proxies.add(proxy);
-    }
-
     public void add_child(OscAddressNode child) {
         OscAddressNode[] parentage = this.get_parentage();
         if (Arrays.asList(parentage).contains(child)) {
@@ -117,6 +113,10 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
             this.numbered_children.put(child.number, child);
         }
         child.parent = this;
+    }
+
+    public void add_proxy(Proxy proxy) {
+        this.proxies.add(proxy);
     }
 
     public void clear() {
@@ -182,10 +182,6 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
         all_children.addAll(this.named_children.values());
         all_children.addAll(this.numbered_children.values());
         return all_children;
-    }
-
-    public Set<Proxy> get_proxies() {
-        return Collections.unmodifiableSet(this.proxies);
     }
 
     public String get_debug_piece() {
@@ -280,6 +276,10 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
             parent = child.parent;
         }
         return parentage.toArray(new OscAddressNode[0]);
+    }
+
+    public Set<Proxy> get_proxies() {
+        return Collections.unmodifiableSet(this.proxies);
     }
 
     public int get_reference_count() {
@@ -441,10 +441,6 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
         this.number = null;
     }
 
-    public void remove_proxy(Proxy proxy) {
-        this.proxies.remove(proxy);
-    }
-
     public void remove_child(OscAddressNode child) {
         if (child == null) {
             return;
@@ -461,6 +457,10 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
         }
         child.parent = null;
         this.prune_if_necessary();
+    }
+
+    public void remove_proxy(Proxy proxy) {
+        this.proxies.remove(proxy);
     }
 
     public Set<OscAddressNode> search(OscAddress osc_address) {

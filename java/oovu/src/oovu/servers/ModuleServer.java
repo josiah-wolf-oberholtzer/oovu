@@ -83,8 +83,7 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
         if (server_is_new) {
             Response response = module_server.generate_dumpmeta_response();
             for (Proxy proxy : osc_address_node.get_proxies()) {
-                MaxSystem
-                    .deferLow(new MessagePasserCallback(proxy, response));
+                MaxSystem.deferLow(new MessagePasserCallback(proxy, response));
             }
         }
         return module_server;
