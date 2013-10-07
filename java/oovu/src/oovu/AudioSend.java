@@ -6,9 +6,9 @@ import oovu.servers.members.PullServer;
 
 import com.cycling74.max.Atom;
 
-public class PullSource extends AudioServerClient {
+public class AudioSend extends AudioServerClient {
 
-    public PullSource(Atom[] arguments) {
+    public AudioSend(Atom[] arguments) {
         this.declareIO(2, 2);
         this.check_arguments(arguments);
         this.max_adapter = new GenericMaxAdapter(this);
