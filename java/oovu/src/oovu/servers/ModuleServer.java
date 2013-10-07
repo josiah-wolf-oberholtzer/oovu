@@ -149,9 +149,6 @@ public class ModuleServer extends Server {
             for (Atom[] property_state : property.get_state()) {
                 state.add(property_state);
             }
-            Atom[] property_values = Atom.newAtom(
-                property.get_osc_address_string(), property.get_value());
-            state.add(property_values);
         }
         return state.toArray(new Atom[0][]);
     }

@@ -6,7 +6,6 @@ import oovu.addressing.Environment;
 import oovu.addressing.OscAddress;
 import oovu.clients.ServerClient;
 import oovu.messaging.MessageHandler;
-import oovu.messaging.Request;
 
 import com.cycling74.max.Atom;
 
@@ -75,9 +74,5 @@ public class RootServer extends Server {
             }
         }
         return state.toArray(new Atom[0][]);
-    }
-
-    @Override
-    public void handle_request(Request request) {
     }
 }

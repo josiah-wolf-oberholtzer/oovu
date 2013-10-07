@@ -175,9 +175,9 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                         Atom.removeFirst(substate)));
                 }
             }
-            if (this instanceof PropertyServer) {
-                state.add(Atom.newAtom(address, this.get_value()));
-            }
+        }
+        if (this instanceof PropertyServer) {
+            state.add(Atom.newAtom(address, this.get_value()));
         }
         return state.toArray(new Atom[0][]);
     }
