@@ -4,6 +4,7 @@ import java.util.Map;
 
 import oovu.servers.ModuleMemberServer;
 import oovu.servers.ModuleServer;
+import oovu.states.State;
 
 import com.cycling74.max.Atom;
 
@@ -15,7 +16,7 @@ abstract public class AudioServer extends ModuleMemberServer {
     }
 
     @Override
-    public Atom[][] get_state() {
-        return new Atom[0][];
+    public State get_state() {
+        return null;
     }
 }

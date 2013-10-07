@@ -11,6 +11,9 @@ import oovu.messaging.MessageHandler;
 import oovu.messaging.Request;
 import oovu.messaging.Response;
 import oovu.servers.members.PropertyServer;
+import oovu.states.AttributeState;
+import oovu.states.State;
+import oovu.states.StateComponent;
 
 import com.cycling74.max.Atom;
 
@@ -163,23 +166,27 @@ abstract public class AttributeServer extends ModuleMemberServer implements
     }
 
     @Override
-    public Atom[][] get_state() {
-        ArrayList<Atom[]> state = new ArrayList<Atom[]>();
-        String address = this.get_osc_address_string();
+    public State get_state() {
+        ArrayList<StateComponent> state_entries = new ArrayList<StateComponent>();
+        OscAddress osc_address = this.get_osc_address();
+        String osc_address_string = osc_address.toString();
         for (MessageHandler message_handler : this.message_handlers.values()) {
             if (message_handler.is_state_relevant()) {
                 for (Atom[] substate : message_handler.run(null)) {
-                    String substate_address = address + "/:"
+                    String substate_address = osc_address_string + "/:"
                         + substate[0].getString();
-                    state.add(Atom.newAtom(substate_address,
-                        Atom.removeFirst(substate)));
+                    Atom[] payload = Atom.removeFirst(substate);
+                    state_entries.add(new StateComponent(substate_address,
+                        payload));
                 }
             }
         }
         if (this instanceof PropertyServer) {
-            state.add(Atom.newAtom(address, this.get_value()));
+            state_entries.add(new StateComponent(osc_address_string, this
+                .get_value()));
         }
-        return state.toArray(new Atom[0][]);
+        return new AttributeState(osc_address,
+            state_entries.toArray(new StateComponent[0]));
     }
 
     public Atom[] get_value() {
