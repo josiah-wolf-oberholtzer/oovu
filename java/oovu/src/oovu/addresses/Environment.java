@@ -6,8 +6,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.locks.ReentrantLock;
 
+import oovu.servers.AudioServer;
 import oovu.servers.RootServer;
-import oovu.servers.members.AudioServer;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;

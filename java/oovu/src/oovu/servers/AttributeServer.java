@@ -10,7 +10,6 @@ import oovu.datatypes.GenericDatatype;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.Request;
 import oovu.messaging.Response;
-import oovu.servers.members.PropertyServer;
 import oovu.states.State;
 import oovu.states.StateComponent;
 import oovu.states.StateComponentAggregate;

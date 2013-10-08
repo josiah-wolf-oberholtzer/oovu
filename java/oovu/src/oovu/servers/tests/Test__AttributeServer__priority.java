@@ -2,7 +2,7 @@ package oovu.servers.tests;
 
 import oovu.addresses.Environment;
 import oovu.servers.ModuleServer;
-import oovu.servers.members.PropertyServer;
+import oovu.servers.PropertyServer;
 
 import org.junit.After;
 import org.junit.Assert;

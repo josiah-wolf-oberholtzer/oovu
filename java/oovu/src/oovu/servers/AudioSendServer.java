@@ -1,9 +1,6 @@
-package oovu.servers.members;
+package oovu.servers;
 
 import java.util.Map;
-
-import oovu.servers.ModuleMemberServer;
-import oovu.servers.ModuleServer;
 
 import com.cycling74.max.Atom;
 

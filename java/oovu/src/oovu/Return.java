@@ -1,7 +1,7 @@
 package oovu;
 
 import oovu.clients.ModuleMemberServerClient;
-import oovu.servers.members.ReturnServer;
+import oovu.servers.ReturnServer;
 
 import com.cycling74.max.Atom;
 

@@ -1,7 +1,7 @@
 package oovu;
 
 import oovu.clients.ModuleMemberServerClient;
-import oovu.servers.members.AudioSendServer;
+import oovu.servers.AudioSendServer;
 
 import com.cycling74.max.Atom;
 
