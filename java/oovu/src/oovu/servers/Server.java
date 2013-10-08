@@ -12,6 +12,8 @@ import oovu.Proxy;
 import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
 import oovu.clients.ServerClient;
+import oovu.events.Event;
+import oovu.events.EventTypes;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessagePasser;
 import oovu.messaging.Request;
@@ -326,6 +328,7 @@ abstract public class Server implements MessagePasser {
         if (parent_server != null) {
             parent_server.deallocate_if_necessary();
         }
+        Event.remove_observer(this);
         this.cleanup_resources();
     }
 
@@ -435,6 +438,18 @@ abstract public class Server implements MessagePasser {
         if (this.parent_server != null) {
             this.parent_server.handle_response(response);
         }
+    }
+
+    public void notify_children() {
+        for (Server child : this.child_servers) {
+            child.on_parent_notification();
+        }
+    }
+
+    public void on_event_notification(EventTypes event_type) {
+    }
+
+    public void on_parent_notification() {
     }
 
     @Override

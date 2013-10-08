@@ -105,6 +105,7 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
             return;
         }
         this.name = this.osc_address_node.acquire_name(desired_name);
+        this.notify_children();
     }
 
     @Override
