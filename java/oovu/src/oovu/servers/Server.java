@@ -3,6 +3,7 @@ package oovu.servers;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -13,6 +14,7 @@ import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
 import oovu.clients.ServerClient;
 import oovu.events.Event;
+import oovu.events.EventHandler;
 import oovu.events.EventTypes;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessagePasser;
@@ -267,6 +269,8 @@ abstract public class Server implements MessagePasser {
     public final Map<String, Atom[]> argument_map;
     protected final Set<Server> child_servers = new HashSet<Server>();
     protected final Map<String, MessageHandler> message_handlers = new HashMap<String, MessageHandler>();
+    protected final Map<EventTypes, EventHandler> event_handlers = new EnumMap<EventTypes, EventHandler>(
+        EventTypes.class);
     protected String name = null;
     protected Server parent_server = null;
     protected OscAddressNode osc_address_node = null;
@@ -286,6 +290,11 @@ abstract public class Server implements MessagePasser {
         this.add_message_handler(new GetUniqueIdMessageHandler());
         this.add_message_handler(new ReportMessageHandler());
         this.add_message_handler(new ShowMessageHandler());
+    }
+
+    public void add_event_handler(EventHandler event_handler) {
+        this.event_handlers.put(event_handler.get_event(), event_handler);
+        Event.add_observer(event_handler.get_event(), this);
     }
 
     public void add_message_handler(MessageHandler message_handler) {
@@ -399,6 +408,13 @@ abstract public class Server implements MessagePasser {
 
     abstract public State get_state();
 
+    public void handle_event(EventTypes event_type) {
+        EventHandler event_handler = this.event_handlers.get(event_type);
+        if (event_handler != null) {
+            event_handler.run();
+        }
+    }
+
     @Override
     public void handle_request(Request request) {
         if (request == null) {
@@ -444,9 +460,6 @@ abstract public class Server implements MessagePasser {
         for (Server child : this.child_servers) {
             child.on_parent_notification();
         }
-    }
-
-    public void on_event_notification(EventTypes event_type) {
     }
 
     public void on_parent_notification() {

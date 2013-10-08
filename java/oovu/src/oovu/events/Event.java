@@ -29,7 +29,7 @@ public class Event {
         Set<Server> event_observers = Event.observers.get(event_type);
         if (event_observers != null) {
             for (Server observer : event_observers) {
-                observer.on_event_notification(event_type);
+                observer.handle_event(event_type);
             }
         }
     }
