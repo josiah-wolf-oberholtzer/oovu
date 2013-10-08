@@ -51,8 +51,8 @@ public class Test__IntegerArrayDatatype {
 
     @Test
     public void test_05() {
-        Atom[] arguments = Atom
-            .parse(":default 0 10 20 30 :length 3 :minimum 2 :maximum 19.5");
+        Atom[] arguments =
+            Atom.parse(":default 0 10 20 30 :length 3 :minimum 2 :maximum 19.5");
         IntegerArrayDatatype datatype = new IntegerArrayDatatype(arguments);
         Assert.assertTrue(datatype.get_value()[0].isInt());
         Assert.assertArrayEquals(new double[] {
@@ -62,8 +62,8 @@ public class Test__IntegerArrayDatatype {
 
     @Test
     public void test_06() {
-        Atom[] arguments = Atom
-            .parse(":default 0 10 20 30 :length 3 :minimum 2 :maximum 19.5");
+        Atom[] arguments =
+            Atom.parse(":default 0 10 20 30 :length 3 :minimum 2 :maximum 19.5");
         IntegerArrayDatatype datatype = new IntegerArrayDatatype(arguments);
         Assert.assertTrue(datatype.get_value()[0].isInt());
         Assert.assertArrayEquals(new double[] {

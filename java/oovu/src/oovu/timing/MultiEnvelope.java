@@ -46,12 +46,12 @@ public class MultiEnvelope extends ClockWatcher {
                 envelope.add(new TimePoint(current_time, control_values[i]));
             }
         } else if (this.envelopes.size() < control_values.length) {
-            TimePoint[][] unlaced = this.unlace(control_values, current_time,
-                this.envelopes.size());
+            TimePoint[][] unlaced =
+                this.unlace(control_values, current_time, this.envelopes.size());
             for (int i = 0, j = this.envelopes.size(); i < j; i++) {
                 ArrayList<TimePoint> envelope = this.envelopes.get(i);
-                double current_value = this.find_value_at_time(envelope,
-                    current_time);
+                double current_value =
+                    this.find_value_at_time(envelope, current_time);
                 envelope.clear();
                 envelope.add(new TimePoint(current_time, current_value));
                 for (TimePoint time_point : unlaced[i]) {
@@ -77,10 +77,10 @@ public class MultiEnvelope extends ClockWatcher {
             envelope.clear();
             envelope.add(new TimePoint(time, control_values[0]));
         } else if (1 < control_values.length) {
-            TimePoint[][] unlaced = this
-                .unlace(control_values, current_time, 1);
-            double current_value = this.find_value_at_time(envelope,
-                current_time);
+            TimePoint[][] unlaced =
+                this.unlace(control_values, current_time, 1);
+            double current_value =
+                this.find_value_at_time(envelope, current_time);
             envelope.clear();
             envelope.add(new TimePoint(current_time, current_value));
             for (TimePoint time_point : unlaced[0]) {
@@ -164,14 +164,16 @@ public class MultiEnvelope extends ClockWatcher {
         double current_time,
         int envelope_count) {
         double time = current_time;
-        int groups = (int) Math.floor((double) control_values.length
-            / (double) (envelope_count + 1));
+        int groups =
+            (int) Math.floor((double) control_values.length
+                / (double) (envelope_count + 1));
         TimePoint[][] result = new TimePoint[envelope_count][groups];
-        for (int i = 0, j = control_values.length, group_index = 0; (i + envelope_count) < j; i += envelope_count + 1, group_index++) {
+        for (int i = 0, j = control_values.length, group_index = 0; (i + envelope_count) < j; i +=
+            envelope_count + 1, group_index++) {
             time += control_values[i + envelope_count];
             for (int envelope_index = 0; envelope_index < envelope_count; envelope_index++) {
-                result[envelope_index][group_index] = new TimePoint(time,
-                    control_values[i + envelope_index]);
+                result[envelope_index][group_index] =
+                    new TimePoint(time, control_values[i + envelope_index]);
             }
         }
         return result;

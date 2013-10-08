@@ -49,13 +49,13 @@ abstract public class Server implements MessagePasser {
         @Override
         public Atom[][] run(Atom[] arguments) {
             ArrayList<Atom[]> result = new ArrayList<Atom[]>();
-            MessageHandler getMetaMessageHandler = Server.this.message_handlers
-                .get("getmeta");
-            Atom[] meta = Atom
-                .removeFirst(getMetaMessageHandler.run(arguments)[0]);
+            MessageHandler getMetaMessageHandler =
+                Server.this.message_handlers.get("getmeta");
+            Atom[] meta =
+                Atom.removeFirst(getMetaMessageHandler.run(arguments)[0]);
             for (Atom name : meta) {
-                MessageHandler message_handler = Server.this.message_handlers
-                    .get(name.toString());
+                MessageHandler message_handler =
+                    Server.this.message_handlers.get(name.toString());
                 if (message_handler == null) {
                     continue;
                 }
@@ -90,11 +90,11 @@ abstract public class Server implements MessagePasser {
         @Override
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
-            String[] message_handler_names = Server.this.message_handlers
-                .keySet().toArray(new String[0]);
+            String[] message_handler_names =
+                Server.this.message_handlers.keySet().toArray(new String[0]);
             Arrays.sort(message_handler_names);
-            result[0] = Atom.newAtom("interface",
-                Atom.newAtom(message_handler_names));
+            result[0] =
+                Atom.newAtom("interface", Atom.newAtom(message_handler_names));
             return result;
         }
     }
@@ -151,10 +151,11 @@ abstract public class Server implements MessagePasser {
         @Override
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
-            result[0] = Atom.newAtom(new String[] {
-                "oscaddress",
-                Server.this.get_osc_address_node().get_osc_address_string()
-            });
+            result[0] =
+                Atom.newAtom(new String[] {
+                    "oscaddress",
+                    Server.this.get_osc_address_node().get_osc_address_string()
+                });
             return result;
         }
     }
@@ -268,9 +269,10 @@ abstract public class Server implements MessagePasser {
 
     public final Map<String, Atom[]> argument_map;
     protected final Set<Server> child_servers = new HashSet<Server>();
-    protected final Map<String, MessageHandler> message_handlers = new HashMap<String, MessageHandler>();
-    protected final Map<EventTypes, EventHandler> event_handlers = new EnumMap<EventTypes, EventHandler>(
-        EventTypes.class);
+    protected final Map<String, MessageHandler> message_handlers =
+        new HashMap<String, MessageHandler>();
+    protected final Map<EventTypes, EventHandler> event_handlers =
+        new EnumMap<EventTypes, EventHandler>(EventTypes.class);
     protected String name = null;
     protected Server parent_server = null;
     protected OscAddressNode osc_address_node = null;
@@ -332,12 +334,12 @@ abstract public class Server implements MessagePasser {
     }
 
     protected void deallocate() {
+        Event.remove_observer(this);
         Server parent_server = this.get_parent_server();
         this.clear();
         if (parent_server != null) {
             parent_server.deallocate_if_necessary();
         }
-        Event.remove_observer(this);
         this.cleanup_resources();
     }
 
@@ -366,8 +368,8 @@ abstract public class Server implements MessagePasser {
     public Response generate_dumpmeta_response() {
         MessageHandler message_handler = this.message_handlers.get("dumpmeta");
         Atom[][] payload = message_handler.run(null);
-        Request request = new Request(this, OscAddress.from_cache("."),
-            new Atom[0]);
+        Request request =
+            new Request(this, OscAddress.from_cache("."), new Atom[0]);
         Response response = new Response(this, payload, request);
         return response;
     }
@@ -424,8 +426,8 @@ abstract public class Server implements MessagePasser {
         if (message_handler_name == null) {
             message_handler_name = "value";
         }
-        MessageHandler message_handler = this.message_handlers
-            .get(message_handler_name);
+        MessageHandler message_handler =
+            this.message_handlers.get(message_handler_name);
         if (message_handler == null) {
             return;
         }

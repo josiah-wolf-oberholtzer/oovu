@@ -105,19 +105,21 @@ public class RangeDatatype extends BoundedDatatype {
     }
 
     public void apply_new_center(double[] control_values) {
-        double[] response = this.multi_envelope.control_one_envelope(0,
-            control_values);
-        double[] range = this.bound_doubles(this.center_width_to_range(
-            response[0], response[1]));
+        double[] response =
+            this.multi_envelope.control_one_envelope(0, control_values);
+        double[] range =
+            this.bound_doubles(this.center_width_to_range(response[0],
+                response[1]));
         this.value = Atom.newAtom(range);
         this.fix_multi_envelope_values();
     }
 
     public void apply_new_width(double[] control_values) {
-        double[] response = this.multi_envelope.control_one_envelope(1,
-            control_values);
-        double[] range = this.bound_doubles(this.center_width_to_range(
-            response[0], response[1]));
+        double[] response =
+            this.multi_envelope.control_one_envelope(1, control_values);
+        double[] range =
+            this.bound_doubles(this.center_width_to_range(response[0],
+                response[1]));
         this.value = Atom.newAtom(range);
         this.fix_multi_envelope_values();
     }
@@ -131,8 +133,8 @@ public class RangeDatatype extends BoundedDatatype {
     protected void fix_multi_envelope_values() {
         double[] range = Atom.toDouble(this.value);
         if (!this.multi_envelope.has_active_envelopes()) {
-            double[] center_width = this.range_to_center_width(range[0],
-                range[1]);
+            double[] center_width =
+                this.range_to_center_width(range[0], range[1]);
             this.multi_envelope.control_all_envelopes(center_width);
         }
     }
@@ -146,8 +148,9 @@ public class RangeDatatype extends BoundedDatatype {
 
     @Override
     public void handle_envelope_response(double[] response) {
-        double[] range = this.bound_doubles(this.center_width_to_range(
-            response[0], response[1]));
+        double[] range =
+            this.bound_doubles(this.center_width_to_range(response[0],
+                response[1]));
         Atom[] value = Atom.newAtom(range);
         this.value = value;
         this.fix_multi_envelope_values();
@@ -174,8 +177,8 @@ public class RangeDatatype extends BoundedDatatype {
             return this.range_to_center_width(doubles[0], doubles[1]);
         }
         for (int i = 0, j = doubles.length; (i + 2) < j; i += 3) {
-            double[] center_width = this.range_to_center_width(doubles[i],
-                doubles[i + 1]);
+            double[] center_width =
+                this.range_to_center_width(doubles[i], doubles[i + 1]);
             doubles[i] = center_width[0];
             doubles[i + 1] = center_width[1];
         }

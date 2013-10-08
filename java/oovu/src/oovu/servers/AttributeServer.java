@@ -172,13 +172,14 @@ abstract public class AttributeServer extends ModuleMemberServer implements
 
     @Override
     public State get_state() {
-        ArrayList<StateComponent> state_entries = new ArrayList<StateComponent>();
+        ArrayList<StateComponent> state_entries =
+            new ArrayList<StateComponent>();
         String osc_address_string = this.get_osc_address_string();
         for (MessageHandler message_handler : this.message_handlers.values()) {
             if (message_handler.is_state_relevant()) {
                 for (Atom[] substate : message_handler.run(null)) {
-                    String substate_address = osc_address_string + "/:"
-                        + substate[0].getString();
+                    String substate_address =
+                        osc_address_string + "/:" + substate[0].getString();
                     Atom[] payload = Atom.removeFirst(substate);
                     state_entries.add(new StateComponent(substate_address,
                         payload));
@@ -200,8 +201,8 @@ abstract public class AttributeServer extends ModuleMemberServer implements
     public void handle_asynchronous_datatype_value_output(Atom[] output) {
         Atom[][] payload = new Atom[1][];
         payload[0] = Atom.newAtom("value", output);
-        Request request = new Request(this,
-            OscAddress.from_cache("./:getvalue"), new Atom[0]);
+        Request request =
+            new Request(this, OscAddress.from_cache("./:getvalue"), new Atom[0]);
         Response response = new Response(this, payload, request);
         this.handle_response(response);
     }
@@ -244,9 +245,10 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         Class<?> datatype_class = Datatype.from_label(datatype_label);
         Datatype datatype = null;
         try {
-            datatype = (Datatype) datatype_class.getDeclaredConstructor(
-                AttributeServer.class, Map.class).newInstance(this,
-                this.argument_map);
+            datatype =
+                (Datatype) datatype_class.getDeclaredConstructor(
+                    AttributeServer.class, Map.class).newInstance(this,
+                    this.argument_map);
         } catch (IllegalArgumentException e) {
             // e.printStackTrace();
         } catch (SecurityException e) {

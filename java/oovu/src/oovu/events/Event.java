@@ -9,8 +9,8 @@ import oovu.servers.Server;
 
 public class Event {
 
-    protected static Map<EventTypes, Set<Server>> observers = new EnumMap<EventTypes, Set<Server>>(
-        EventTypes.class);
+    protected static Map<EventTypes, Set<Server>> observers =
+        new EnumMap<EventTypes, Set<Server>>(EventTypes.class);
 
     public static void add_observer(EventTypes event_type, Server observer) {
         Set<Server> event_observers = Event.observers.get(event_type);

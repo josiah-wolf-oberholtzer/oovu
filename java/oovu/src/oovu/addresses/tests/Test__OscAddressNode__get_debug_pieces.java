@@ -39,11 +39,12 @@ public class Test__OscAddressNode__get_debug_pieces {
         foo.add_child(foo_bar);
         n1001.add_child(n1001_bar);
         foo_bar.add_proxy(new Proxy(Atom.parse("")));
-        ModuleServer n1001_module_server = new ModuleServer(1001,
-            new HashMap<String, Atom[]>());
+        ModuleServer n1001_module_server =
+            new ModuleServer(1001, new HashMap<String, Atom[]>());
         n1001_module_server.attach_to_osc_address_node(n1001);
-        PropertyServer n1001_bar_property_server = new PropertyServer(
-            n1001_module_server, new HashMap<String, Atom[]>());
+        PropertyServer n1001_bar_property_server =
+            new PropertyServer(n1001_module_server,
+                new HashMap<String, Atom[]>());
         n1001_bar_property_server.attach_to_osc_address_node(n1001_bar);
         String[] debug_pieces = root.get_debug_pieces();
         Assert.assertArrayEquals(new String[] {

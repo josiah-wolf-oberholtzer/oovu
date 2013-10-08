@@ -88,22 +88,23 @@ public class Test__MultiEnvelope__unlace {
         MultiEnvelope envelope = new MultiEnvelope(null, new double[] {
             0., 1., -0.5
         });
-        double[] control_values = new double[] {
-            1.,
-            -1.,
-            0.5,
-            1000.,
-            2.,
-            -2.,
-            1.,
-            2000.,
-            3.,
-            -3.,
-            1.5,
-            3000.,
-            666.,
-            666.
-        };
+        double[] control_values =
+            new double[] {
+                1.,
+                -1.,
+                0.5,
+                1000.,
+                2.,
+                -2.,
+                1.,
+                2000.,
+                3.,
+                -3.,
+                1.5,
+                3000.,
+                666.,
+                666.
+            };
         double current_time = 250.;
         TimePoint[][] result = envelope.unlace(control_values, current_time, 3);
         Assert.assertEquals(3, result.length);
@@ -132,23 +133,24 @@ public class Test__MultiEnvelope__unlace {
         MultiEnvelope envelope = new MultiEnvelope(null, new double[] {
             0., 1., -0.5
         });
-        double[] control_values = new double[] {
-            1.,
-            -1.,
-            0.5,
-            1000.,
-            2.,
-            -2.,
-            1.,
-            2000.,
-            3.,
-            -3.,
-            1.5,
-            3000.,
-            666.,
-            666.,
-            666.
-        };
+        double[] control_values =
+            new double[] {
+                1.,
+                -1.,
+                0.5,
+                1000.,
+                2.,
+                -2.,
+                1.,
+                2000.,
+                3.,
+                -3.,
+                1.5,
+                3000.,
+                666.,
+                666.,
+                666.
+            };
         double current_time = 250.;
         TimePoint[][] result = envelope.unlace(control_values, current_time, 3);
         Assert.assertEquals(3, result.length);

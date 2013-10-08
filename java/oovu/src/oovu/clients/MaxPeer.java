@@ -32,8 +32,8 @@ abstract public class MaxPeer extends MaxObject implements MessagePasser {
                 osc_address = OscAddress.from_cache(message);
             }
             if (osc_address.message_handler_name == null) {
-                osc_address = OscAddress.from_cache(osc_address.toString()
-                    + "/:value");
+                osc_address =
+                    OscAddress.from_cache(osc_address.toString() + "/:value");
             }
         }
         Request request = new Request(this, osc_address, arguments);
@@ -55,8 +55,8 @@ abstract public class MaxPeer extends MaxObject implements MessagePasser {
         } else if (this.get_osc_address_node() == null) {
             return;
         }
-        Set<OscAddressNode> osc_address_nodes = this.get_osc_address_node()
-            .search(request.destination);
+        Set<OscAddressNode> osc_address_nodes =
+            this.get_osc_address_node().search(request.destination);
         for (OscAddressNode osc_address_node : osc_address_nodes) {
             Server server = osc_address_node.get_server();
             if (server != null) {
@@ -74,8 +74,8 @@ abstract public class MaxPeer extends MaxObject implements MessagePasser {
     public void list(Atom[] input) {
         Request request = null;
         if (this.getInlet() == 0) {
-            request = new Request(this, OscAddress.from_cache("./:value"),
-                input);
+            request =
+                new Request(this, OscAddress.from_cache("./:value"), input);
         }
         this.handle_request(request);
     }

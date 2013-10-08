@@ -18,8 +18,8 @@ abstract public class ClockWatcher {
             double current_time = System.currentTimeMillis();
             ClockWatcher[] current_clock_watchers = null;
             synchronized (ClockWatcher.lock) {
-                current_clock_watchers = ClockWatcher.clock_watchers
-                    .toArray(new ClockWatcher[0]);
+                current_clock_watchers =
+                    ClockWatcher.clock_watchers.toArray(new ClockWatcher[0]);
             }
             for (ClockWatcher clock_watcher : current_clock_watchers) {
                 clock_watcher.execute(current_time);
@@ -32,7 +32,8 @@ abstract public class ClockWatcher {
 
     protected static final Lock lock = new ReentrantLock();
     protected static MaxClock clock = null;
-    protected static final Set<ClockWatcher> clock_watchers = new HashSet<ClockWatcher>();
+    protected static final Set<ClockWatcher> clock_watchers =
+        new HashSet<ClockWatcher>();
     protected static final int output_granularity = 20;
     protected static ClockCallback clock_callback = null;
 
@@ -44,16 +45,16 @@ abstract public class ClockWatcher {
 
     protected void start_watching_clock(ClockWatcher clock_watcher) {
         synchronized (ClockWatcher.class) {
-            int original_clock_watchers_count = ClockWatcher.clock_watchers
-                .size();
+            int original_clock_watchers_count =
+                ClockWatcher.clock_watchers.size();
             ClockWatcher.clock_watchers.add(clock_watcher);
             if (ClockWatcher.clock_callback == null) {
                 ClockWatcher.clock_callback = new ClockCallback();
             }
             if (ClockWatcher.clock == null) {
                 try {
-                    ClockWatcher.clock = new MaxClock(
-                        ClockWatcher.clock_callback);
+                    ClockWatcher.clock =
+                        new MaxClock(ClockWatcher.clock_callback);
                 } catch (UnsatisfiedLinkError e) {
                     // Environment.log(e);
                 }

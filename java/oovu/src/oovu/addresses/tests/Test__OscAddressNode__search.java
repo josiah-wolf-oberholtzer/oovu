@@ -64,9 +64,9 @@ public class Test__OscAddressNode__search {
         Map<String, OscAddressNode> map = this.create_node_tree();
         OscAddress address = OscAddress.from_cache("*");
         OscAddressNode root = map.get("/");
-        Set<OscAddressNode> expected = Sets.newHashSet(map.get("/synth.1"),
-            map.get("/synth.2"), map.get("/synth.3"), map.get("/effect.1"),
-            map.get("/effect.2"));
+        Set<OscAddressNode> expected =
+            Sets.newHashSet(map.get("/synth.1"), map.get("/synth.2"),
+                map.get("/synth.3"), map.get("/effect.1"), map.get("/effect.2"));
         Set<OscAddressNode> actual = root.search(address);
         Assert.assertEquals(expected, actual);
     }
@@ -76,9 +76,9 @@ public class Test__OscAddressNode__search {
         Map<String, OscAddressNode> map = this.create_node_tree();
         OscAddress address = OscAddress.from_cache("*/*");
         OscAddressNode root = map.get("/");
-        Set<OscAddressNode> expected = Sets.newHashSet(
-            map.get("/synth.1/child"), map.get("/synth.2/child"),
-            map.get("/effect.1/child"));
+        Set<OscAddressNode> expected =
+            Sets.newHashSet(map.get("/synth.1/child"),
+                map.get("/synth.2/child"), map.get("/effect.1/child"));
         Set<OscAddressNode> actual = root.search(address);
         Assert.assertEquals(expected, actual);
     }
@@ -88,8 +88,9 @@ public class Test__OscAddressNode__search {
         Map<String, OscAddressNode> map = this.create_node_tree();
         OscAddress address = OscAddress.from_cache("*.1/child");
         OscAddressNode root = map.get("/");
-        Set<OscAddressNode> expected = Sets.newHashSet(
-            map.get("/synth.1/child"), map.get("/effect.1/child"));
+        Set<OscAddressNode> expected =
+            Sets.newHashSet(map.get("/synth.1/child"),
+                map.get("/effect.1/child"));
         Set<OscAddressNode> actual = root.search(address);
         Assert.assertEquals(expected, actual);
     }
@@ -99,8 +100,9 @@ public class Test__OscAddressNode__search {
         Map<String, OscAddressNode> map = this.create_node_tree();
         OscAddress address = OscAddress.from_cache("synth.*/child");
         OscAddressNode root = map.get("/");
-        Set<OscAddressNode> expected = Sets.newHashSet(
-            map.get("/synth.1/child"), map.get("/synth.2/child"));
+        Set<OscAddressNode> expected =
+            Sets.newHashSet(map.get("/synth.1/child"),
+                map.get("/synth.2/child"));
         Set<OscAddressNode> actual = root.search(address);
         Assert.assertEquals(expected, actual);
     }
@@ -110,8 +112,8 @@ public class Test__OscAddressNode__search {
         Map<String, OscAddressNode> map = this.create_node_tree();
         OscAddress address = OscAddress.from_cache("../child");
         OscAddressNode root = map.get("/synth.1/child");
-        Set<OscAddressNode> expected = Sets.newHashSet(map
-            .get("/synth.1/child"));
+        Set<OscAddressNode> expected =
+            Sets.newHashSet(map.get("/synth.1/child"));
         Set<OscAddressNode> actual = root.search(address);
         Assert.assertEquals(expected, actual);
     }
@@ -121,8 +123,8 @@ public class Test__OscAddressNode__search {
         Map<String, OscAddressNode> map = this.create_node_tree();
         OscAddress address = OscAddress.from_cache(".");
         OscAddressNode root = map.get("/synth.1/child");
-        Set<OscAddressNode> expected = Sets.newHashSet(map
-            .get("/synth.1/child"));
+        Set<OscAddressNode> expected =
+            Sets.newHashSet(map.get("/synth.1/child"));
         Set<OscAddressNode> actual = root.search(address);
         Assert.assertEquals(expected, actual);
     }
@@ -142,9 +144,9 @@ public class Test__OscAddressNode__search {
         Map<String, OscAddressNode> map = this.create_node_tree();
         OscAddress address = OscAddress.from_cache("../../*/child");
         OscAddressNode root = map.get("/synth.1/child");
-        Set<OscAddressNode> expected = Sets.newHashSet(
-            map.get("/synth.1/child"), map.get("/synth.2/child"),
-            map.get("/effect.1/child"));
+        Set<OscAddressNode> expected =
+            Sets.newHashSet(map.get("/synth.1/child"),
+                map.get("/synth.2/child"), map.get("/effect.1/child"));
         Set<OscAddressNode> actual = root.search(address);
         Assert.assertEquals(expected, actual);
     }
@@ -154,8 +156,8 @@ public class Test__OscAddressNode__search {
         Map<String, OscAddressNode> map = this.create_node_tree();
         OscAddress address = OscAddress.from_cache("../../*/*/*");
         OscAddressNode root = map.get("/synth.1/child");
-        Set<OscAddressNode> expected = Sets.newHashSet(map
-            .get("/synth.1/child/grandchild"));
+        Set<OscAddressNode> expected =
+            Sets.newHashSet(map.get("/synth.1/child/grandchild"));
         Set<OscAddressNode> actual = root.search(address);
         Assert.assertEquals(expected, actual);
     }

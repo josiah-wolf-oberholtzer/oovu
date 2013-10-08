@@ -36,8 +36,9 @@ public class OptionDatatype extends StringDatatype {
         @Override
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
-            result[0] = Atom.newAtom(OptionDatatype.this.get_options().toArray(
-                new String[0]));
+            result[0] =
+                Atom.newAtom(OptionDatatype.this.get_options().toArray(
+                    new String[0]));
             result[0] = Atom.newAtom("options", result[0]);
             return result;
         }
@@ -137,8 +138,8 @@ public class OptionDatatype extends StringDatatype {
 
         @Override
         public Atom[][] run(Atom[] arguments) {
-            String[] options = OptionDatatype.this
-                .extract_strings_from_atoms(arguments);
+            String[] options =
+                OptionDatatype.this.extract_strings_from_atoms(arguments);
             OptionDatatype.this.set_options(options);
             return null;
         }
@@ -177,8 +178,8 @@ public class OptionDatatype extends StringDatatype {
     protected void initialize_options(Map<String, Atom[]> argument_map) {
         String[] options = new String[0];
         if (argument_map.containsKey("options")) {
-            options = this.extract_strings_from_atoms(argument_map
-                .get("options"));
+            options =
+                this.extract_strings_from_atoms(argument_map.get("options"));
         }
         this.set_options(options);
     }

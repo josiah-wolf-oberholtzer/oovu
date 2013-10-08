@@ -36,8 +36,10 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
     private String name;
     private Integer number;
     private final Set<Proxy> proxies = new HashSet<Proxy>();
-    private final Map<String, OscAddressNode> named_children = new HashMap<String, OscAddressNode>();
-    private final Map<Integer, OscAddressNode> numbered_children = new HashMap<Integer, OscAddressNode>();
+    private final Map<String, OscAddressNode> named_children =
+        new HashMap<String, OscAddressNode>();
+    private final Map<Integer, OscAddressNode> numbered_children =
+        new HashMap<Integer, OscAddressNode>();
     private OscAddressNode parent = null;
     private Server server = null;
 
@@ -78,8 +80,8 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
                     names.add(name);
                 }
             }
-            String acquired_name = OscAddressNode.find_unique_name(
-                desired_name, names);
+            String acquired_name =
+                OscAddressNode.find_unique_name(desired_name, names);
             if (this.parent.named_children.containsKey(acquired_name)) {
                 this.parent.named_children.get(acquired_name).merge_with(this);
             } else {
@@ -220,8 +222,8 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
     public String[] get_debug_pieces() {
         ArrayList<String> pieces = new ArrayList<String>();
         pieces.add(this.get_debug_piece());
-        ArrayList<OscAddressNode> all_children = new ArrayList<OscAddressNode>(
-            this.get_all_children());
+        ArrayList<OscAddressNode> all_children =
+            new ArrayList<OscAddressNode>(this.get_all_children());
         Collections.sort(all_children);
         for (OscAddressNode child : all_children) {
             for (String child_piece : child.get_debug_pieces()) {
@@ -294,8 +296,8 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
     public String get_relative_osc_address_string(
         OscAddressNode relative_osc_address_node) {
         OscAddressNode[] source_parentage = this.get_parentage();
-        OscAddressNode[] relative_parentage = relative_osc_address_node
-            .get_parentage();
+        OscAddressNode[] relative_parentage =
+            relative_osc_address_node.get_parentage();
         ArrayUtils.reverse(source_parentage);
         ArrayUtils.reverse(relative_parentage);
         int counter = 0;
@@ -488,8 +490,8 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
                         }
                     }
                 } else {
-                    OscAddressNode child = current_cursor
-                        .get_named_child(current_address_item);
+                    OscAddressNode child =
+                        current_cursor.get_named_child(current_address_item);
                     if (child != null) {
                         new_cursors.add(child);
                     }

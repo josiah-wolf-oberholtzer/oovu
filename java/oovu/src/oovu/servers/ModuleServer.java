@@ -53,8 +53,8 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
     public static ModuleServer allocate(Integer module_id) {
         boolean server_is_new = false;
         ModuleServer module_server = null;
-        OscAddressNode osc_address_node = Environment.root_osc_address_node
-            .get_numbered_child(module_id);
+        OscAddressNode osc_address_node =
+            Environment.root_osc_address_node.get_numbered_child(module_id);
         if (osc_address_node != null) {
             Server server = osc_address_node.get_server();
             if (server != null) {
@@ -126,7 +126,8 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
     }
 
     public List<PropertyServer> get_child_property_servers() {
-        ArrayList<PropertyServer> property_servers = new ArrayList<PropertyServer>();
+        ArrayList<PropertyServer> property_servers =
+            new ArrayList<PropertyServer>();
         for (Server child : this.child_servers) {
             if (child instanceof PropertyServer) {
                 property_servers.add((PropertyServer) child);

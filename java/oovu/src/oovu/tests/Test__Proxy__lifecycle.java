@@ -32,8 +32,8 @@ public class Test__Proxy__lifecycle {
             osc_address_string
         });
         Proxy proxy = new Proxy(arguments);
-        OscAddressNode osc_address_node = Environment.root_osc_address_node
-            .search_for_one(osc_address);
+        OscAddressNode osc_address_node =
+            Environment.root_osc_address_node.search_for_one(osc_address);
         Assert.assertEquals(proxy.get_osc_address_node(), osc_address_node);
         Assert.assertTrue(osc_address_node.get_proxies().contains(proxy));
         Assert.assertArrayEquals(

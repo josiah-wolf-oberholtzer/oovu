@@ -36,8 +36,9 @@ public abstract class Datatype {
         @Override
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
-            String datatype_name = this.attribute_server.datatype.getClass()
-                .getSimpleName().toLowerCase().replace("datatype", "");
+            String datatype_name =
+                this.attribute_server.datatype.getClass().getSimpleName()
+                    .toLowerCase().replace("datatype", "");
             result[0] = Atom.newAtom(new String[] {
                 "datatype", datatype_name
             });

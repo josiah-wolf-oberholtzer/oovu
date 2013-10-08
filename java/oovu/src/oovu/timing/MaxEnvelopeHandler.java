@@ -20,8 +20,8 @@ public class MaxEnvelopeHandler extends MaxObject implements EnvelopeHandler {
     @Override
     public void bang() {
         double current_time = System.currentTimeMillis();
-        double[] current_values = this.multi_envelope
-            .get_current_values(current_time);
+        double[] current_values =
+            this.multi_envelope.get_current_values(current_time);
         this.outlet(0, current_values);
     }
 

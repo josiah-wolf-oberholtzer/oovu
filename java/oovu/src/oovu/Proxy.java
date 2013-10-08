@@ -71,8 +71,9 @@ public class Proxy extends MaxPeer implements MessagePasser {
                         osc_address = OscAddress.from_cache(message);
                     }
                     if (osc_address.message_handler_name == null) {
-                        osc_address = OscAddress.from_cache(osc_address
-                            .toString() + "/:value");
+                        osc_address =
+                            OscAddress.from_cache(osc_address.toString()
+                                + "/:value");
                     }
                 }
             }
@@ -101,8 +102,8 @@ public class Proxy extends MaxPeer implements MessagePasser {
             return;
         } else if (arguments[0].isInt()) {
             int module_id = arguments[0].getInt();
-            OscAddressNode numbered_child = osc_address_node
-                .get_numbered_child(module_id);
+            OscAddressNode numbered_child =
+                osc_address_node.get_numbered_child(module_id);
             if (numbered_child == null) {
                 numbered_child = new OscAddressNode(module_id);
                 osc_address_node.add_child(numbered_child);
@@ -119,8 +120,8 @@ public class Proxy extends MaxPeer implements MessagePasser {
         if (osc_address.has_wildcard_tokens) {
             return;
         }
-        OscAddressNode found_osc_address_node = osc_address_node
-            .create_address(osc_address, false);
+        OscAddressNode found_osc_address_node =
+            osc_address_node.create_address(osc_address, false);
         if (found_osc_address_node == null) {
             MaxObject.error("Couldn't create address node: "
                 + osc_address.toString());
@@ -130,8 +131,9 @@ public class Proxy extends MaxPeer implements MessagePasser {
         if (this.osc_address_node.get_server() != null) {
             try {
                 Server server = this.osc_address_node.get_server();
-                MessagePasserCallback callback = new MessagePasserCallback(
-                    this, server.generate_dumpmeta_response());
+                MessagePasserCallback callback =
+                    new MessagePasserCallback(this,
+                        server.generate_dumpmeta_response());
                 MaxSystem.deferLow(callback);
             } catch (UnsatisfiedLinkError e) {
                 // Environment.log(e);

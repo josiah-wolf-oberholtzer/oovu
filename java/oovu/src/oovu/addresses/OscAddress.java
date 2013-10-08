@@ -11,14 +11,16 @@ import org.apache.commons.lang3.StringUtils;
 
 public class OscAddress {
 
-    static final String osc_name_regex = "(\\*|(([a-z][a-z0-9~]*|\\*)(\\.([a-z0-9]+|\\*))?))";
+    static final String osc_name_regex =
+        "(\\*|(([a-z][a-z0-9~]*|\\*)(\\.([a-z0-9]+|\\*))?))";
     static final String node_attribute_regex = ".*(:"
         + OscAddress.osc_name_regex + "(/" + OscAddress.osc_name_regex + ")*)$";
     static final Pattern node_attribute_pattern = Pattern
         .compile(OscAddress.node_attribute_regex);
     static final Pattern osc_name_pattern = Pattern.compile("^"
         + OscAddress.osc_name_regex + "$");
-    private static final Map<String, OscAddress> cached_addresses = new HashMap<String, OscAddress>();
+    private static final Map<String, OscAddress> cached_addresses =
+        new HashMap<String, OscAddress>();
 
     public static boolean all_are_node_name_tokens(String[] tokens) {
         for (String token : tokens) {
@@ -30,8 +32,8 @@ public class OscAddress {
     }
 
     public static OscAddress from_cache(String osc_address_string) {
-        OscAddress osc_address = OscAddress.cached_addresses
-            .get(osc_address_string);
+        OscAddress osc_address =
+            OscAddress.cached_addresses.get(osc_address_string);
         if (osc_address == null) {
             osc_address = new OscAddress(osc_address_string);
             OscAddress.cached_addresses.put(osc_address_string, osc_address);
@@ -94,8 +96,8 @@ public class OscAddress {
         } else {
             this.is_relative = true;
         }
-        ArrayList<String> old_address_items = new ArrayList<String>(
-            Arrays.asList(input.split("/")));
+        ArrayList<String> old_address_items =
+            new ArrayList<String>(Arrays.asList(input.split("/")));
         ArrayList<String> new_address_items = new ArrayList<String>();
         for (String address_item : old_address_items) {
             if (!OscAddress.is_valid_token(address_item)) {
