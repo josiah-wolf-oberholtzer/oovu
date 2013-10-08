@@ -2,6 +2,9 @@ package oovu.servers;
 
 import java.util.Map;
 
+import oovu.events.Event;
+import oovu.events.EventTypes;
+
 import com.cycling74.max.Atom;
 
 public class AudioReceiveServer extends AudioServer {
@@ -17,6 +20,7 @@ public class AudioReceiveServer extends AudioServer {
     public AudioReceiveServer(ModuleServer module_node,
         Map<String, Atom[]> argument_map) {
         super(module_node, argument_map);
+        Event.notify_observers(EventTypes.AUDIO_RECEIVERS_CHANGED);
     }
 
     @Override
