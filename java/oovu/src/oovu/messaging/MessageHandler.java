@@ -7,9 +7,6 @@ abstract public class MessageHandler {
     public void call_after() {
     }
 
-    public void call_before() {
-    }
-
     abstract public String get_name();
 
     abstract public boolean is_meta_relevant();

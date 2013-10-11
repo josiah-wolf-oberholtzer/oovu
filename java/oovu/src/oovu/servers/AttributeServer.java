@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import oovu.addresses.OscAddress;
-import oovu.datatypes.AudioReceiveDatatype;
+import oovu.datatypes.AudioSendDatatype;
 import oovu.datatypes.Datatype;
 import oovu.datatypes.GenericDatatype;
 import oovu.events.Event;
@@ -145,7 +145,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         this.add_message_handler(new SetValueMessageHandler());
         this.initialize_value();
         this.initialize_priority();
-        if (this.datatype instanceof AudioReceiveDatatype) {
+        if (this.datatype instanceof AudioSendDatatype) {
             Event.add_observer(EventTypes.AUDIO_RECEIVERS_CHANGED, this);
         }
     }

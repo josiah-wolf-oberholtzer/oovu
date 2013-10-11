@@ -59,6 +59,7 @@ public abstract class Datatype {
     private static final Map<String, Class<?>> datatype_classes_by_label;
     static {
         Map<String, Class<?>> map = new HashMap<String, Class<?>>();
+        map.put("audiosend", AudioSendDatatype.class);
         map.put("boolean", BooleanDatatype.class);
         map.put("decimalarray", DecimalArrayDatatype.class);
         map.put("decimal", DecimalDatatype.class);
