@@ -39,7 +39,7 @@ public class AudioReceiveServer extends AudioServer {
     }
 
     @Override
-    public void deallocate() {
+    protected void deallocate() {
         AudioReceiveServer.audio_receive_servers.remove(this.get_osc_address());
         super.deallocate();
         Event.notify_observers(EventTypes.AUDIO_RECEIVERS_CHANGED);

@@ -43,5 +43,13 @@ public class Test__AudioReceiveServer {
             .containsKey(audio_receive_server_two.get_osc_address()));
         Assert.assertTrue(AudioReceiveServer.audio_receive_servers
             .containsValue(audio_receive_server_two));
+        audio_receive_server_one.deallocate_if_necessary();
+        Assert.assertEquals(1, AudioReceiveServer.audio_receive_servers.size());
+        Assert.assertTrue(AudioReceiveServer.audio_receive_servers
+            .containsKey(audio_receive_server_two.get_osc_address()));
+        Assert.assertTrue(AudioReceiveServer.audio_receive_servers
+            .containsValue(audio_receive_server_two));
+        audio_receive_server_two.deallocate_if_necessary();
+        Assert.assertEquals(0, AudioReceiveServer.audio_receive_servers.size());
     }
 }
