@@ -32,7 +32,7 @@ public class AudioSendServer extends AudioServer {
 
         @Override
         public String get_name() {
-            return "getdestination";
+            return "getdestinationid";
         }
 
         @Override
@@ -59,7 +59,7 @@ public class AudioSendServer extends AudioServer {
 
         @Override
         public String get_name() {
-            return "getdestinationid";
+            return "getdestination";
         }
 
         @Override
