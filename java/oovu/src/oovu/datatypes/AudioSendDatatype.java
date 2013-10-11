@@ -130,6 +130,9 @@ public class AudioSendDatatype extends OscAddressDatatype {
     public AudioReceiveServer get_destination_server() {
         Atom[] value = this.get_value();
         String destination_name = value[0].getString();
+        if (destination_name.equals("---")) {
+            return null;
+        }
         OscAddress osc_address = OscAddress.from_cache(destination_name);
         return AudioReceiveServer.audio_receive_servers.get(osc_address);
     }

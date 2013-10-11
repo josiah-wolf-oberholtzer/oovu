@@ -32,6 +32,33 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
+					"id" : "obj-9",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "dumpmeta" ],
+					"patching_rect" : [ 150.0, 410.0, 100.0, 20.0 ],
+					"text" : "t dumpmeta"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-8",
+					"maxclass" : "button",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "bang" ],
+					"patching_rect" : [ 150.0, 385.0, 20.0, 20.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 170.0, 5.0, 15.0, 15.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
 					"id" : "obj-5",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -80,8 +107,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 90.0, 180.0, 126.0, 33.0 ],
-					"text" : "oovu.util.makeumenu addresses"
+					"patching_rect" : [ 90.0, 205.0, 126.0, 33.0 ],
+					"text" : "oovu.util.makeumenu destinations"
 				}
 
 			}
@@ -188,7 +215,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 90.0, 265.0, 56.0, 18.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 10.0, 30.0, 170.0, 18.0 ],
+					"presentation_rect" : [ 5.0, 30.0, 180.0, 18.0 ],
 					"varname" : "live.menu"
 				}
 
@@ -376,6 +403,24 @@
 					"hidden" : 0,
 					"midpoints" : [ 99.5, 315.0, 222.0, 315.0, 222.0, 149.0, 19.5, 149.0 ],
 					"source" : [ "obj-5", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-9", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-8", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-1", 2 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-9", 0 ]
 				}
 
 			}
