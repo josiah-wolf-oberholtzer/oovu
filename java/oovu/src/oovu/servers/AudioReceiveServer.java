@@ -7,10 +7,11 @@ import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
 import oovu.events.Event;
 import oovu.events.EventTypes;
+import oovu.states.State;
 
 import com.cycling74.max.Atom;
 
-public class AudioReceiveServer extends AudioServer {
+public class AudioReceiveServer extends ModuleMemberServer {
 
     public final static Map<OscAddress, AudioReceiveServer> audio_receive_servers =
         new HashMap<OscAddress, AudioReceiveServer>();
@@ -43,6 +44,11 @@ public class AudioReceiveServer extends AudioServer {
         AudioReceiveServer.audio_receive_servers.remove(this.get_osc_address());
         super.deallocate();
         Event.notify_observers(EventTypes.AUDIO_RECEIVERS_CHANGED);
+    }
+
+    @Override
+    public State get_state() {
+        return null;
     }
 
     @Override

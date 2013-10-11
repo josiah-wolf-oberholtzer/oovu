@@ -57,7 +57,6 @@ public abstract class ModuleMemberServer extends Server {
         Map<String, Class<?>> map = new HashMap<String, Class<?>>();
         map.put("MethodNode", MethodServer.class);
         map.put("PropertyNode", PropertyServer.class);
-        map.put("AudioSend", AudioSendServer.class);
         map.put("AudioReceive", AudioReceiveServer.class);
         map.put("ReturnNode", ReturnServer.class);
         member_nodes_by_label = Collections.unmodifiableMap(map);

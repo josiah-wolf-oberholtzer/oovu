@@ -1,14 +1,9 @@
 package oovu.addresses;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.locks.ReentrantLock;
 
 import oovu.events.Event;
 import oovu.servers.AudioReceiveServer;
-import oovu.servers.AudioServer;
 import oovu.servers.RootServer;
 
 import org.apache.log4j.BasicConfigurator;
@@ -24,12 +19,6 @@ public class Environment {
 
     public static final ReentrantLock lock = new ReentrantLock();
     private static final Logger logger;
-    public static final Set<AudioServer> audio_servers =
-        new HashSet<AudioServer>();
-    public static final Map<OscAddress, AudioServer> pull_addresses =
-        new HashMap<OscAddress, AudioServer>();
-    public static final Map<OscAddress, AudioServer> push_addresses =
-        new HashMap<OscAddress, AudioServer>();
     public static final RootServer root_server;
     public static final OscAddressNode root_osc_address_node;
     static {
@@ -78,8 +67,6 @@ public class Environment {
         synchronized (Environment.lock) {
             Environment.root_server.clear();
             Environment.root_osc_address_node.clear();
-            Environment.pull_addresses.clear();
-            Environment.push_addresses.clear();
             Environment.root_server
                 .attach_to_osc_address_node(Environment.root_osc_address_node);
             Event.clear_observers();
