@@ -150,13 +150,15 @@ abstract public class Server implements MessagePasser {
 
         @Override
         public Atom[][] run(Atom[] arguments) {
-            Atom[][] result = new Atom[1][];
-            result[0] =
-                Atom.newAtom(new String[] {
+            String osc_address_string = Server.this.get_osc_address_string();
+            if (osc_address_string != null) {
+                Atom[][] result = new Atom[1][];
+                result[0] = Atom.newAtom(new String[] {
                     "oscaddress",
-                    Server.this.get_osc_address_node().get_osc_address_string()
                 });
-            return result;
+                return result;
+            }
+            return null;
         }
     }
 
@@ -393,7 +395,11 @@ abstract public class Server implements MessagePasser {
 
     @Override
     public String get_osc_address_string() {
-        return this.get_osc_address().toString();
+        OscAddress osc_address = this.get_osc_address();
+        if (osc_address != null) {
+            return this.get_osc_address().toString();
+        }
+        return null;
     }
 
     public Server get_parent_server() {

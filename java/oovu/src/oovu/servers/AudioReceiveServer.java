@@ -3,6 +3,7 @@ package oovu.servers;
 import java.util.HashMap;
 import java.util.Map;
 
+import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
 import oovu.events.Event;
 import oovu.events.EventTypes;
@@ -18,18 +19,23 @@ public class AudioReceiveServer extends AudioServer {
         Integer module_id,
         String desired_name,
         Atom[] argument_list) {
-        return (AudioReceiveServer) ModuleMemberServer.allocate_from_label(
-            "AudioReceive", module_id, desired_name, argument_list);
+        AudioReceiveServer server =
+            (AudioReceiveServer) ModuleMemberServer.allocate_from_label(
+                "AudioReceive", module_id, desired_name, argument_list);
+        OscAddress osc_address = server.get_osc_address();
+        if ((osc_address != null)
+            && (!AudioReceiveServer.audio_receive_servers
+                .containsKey(osc_address))) {
+            Environment.log(osc_address);
+            AudioReceiveServer.audio_receive_servers.put(osc_address, server);
+            Event.notify_observers(EventTypes.AUDIO_RECEIVERS_CHANGED);
+        }
+        return server;
     }
 
     public AudioReceiveServer(ModuleServer module_node,
         Map<String, Atom[]> argument_map) {
         super(module_node, argument_map);
-        OscAddress osc_address = this.get_osc_address();
-        if (osc_address != null) {
-            AudioReceiveServer.audio_receive_servers.put(osc_address, this);
-            Event.notify_observers(EventTypes.AUDIO_RECEIVERS_CHANGED);
-        }
     }
 
     @Override

@@ -250,12 +250,19 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
     }
 
     public OscAddress get_osc_address() {
+        String osc_address_string = this.get_osc_address_string();
+        if (osc_address_string == null) {
+            return null;
+        }
         return OscAddress.from_cache(this.get_osc_address_string());
     }
 
     public String get_osc_address_string() {
         ArrayList<String> names = new ArrayList<String>();
         for (OscAddressNode osc_address_node : this.get_parentage()) {
+            if (osc_address_node.name == null) {
+                return null;
+            }
             names.add(osc_address_node.name);
         }
         List<String> reversed_names = List.from(names.toArray(new String[0]));

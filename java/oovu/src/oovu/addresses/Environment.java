@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.concurrent.locks.ReentrantLock;
 
 import oovu.events.Event;
+import oovu.servers.AudioReceiveServer;
 import oovu.servers.AudioServer;
 import oovu.servers.RootServer;
 
@@ -82,6 +83,7 @@ public class Environment {
             Environment.root_server
                 .attach_to_osc_address_node(Environment.root_osc_address_node);
             Event.clear_observers();
+            AudioReceiveServer.audio_receive_servers.clear();
         }
     }
 }
