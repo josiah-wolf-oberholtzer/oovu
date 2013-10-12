@@ -19,6 +19,64 @@ import com.cycling74.max.MaxSystem;
 
 public class ModuleServer extends Server implements Comparable<ModuleServer> {
 
+    private class GetMembersMessageHandler extends MessageHandler {
+
+        @Override
+        public String get_name() {
+            return "getmembers";
+        }
+
+        @Override
+        public boolean is_meta_relevant() {
+            return true;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
+        }
+
+        @Override
+        public Atom[][] run(Atom[] arguments) {
+            Atom[][] result = new Atom[1][];
+            List<Server> servers =
+                new ArrayList<Server>(ModuleServer.this.child_servers);
+            String[] names =
+                ModuleServer.this.get_relative_server_names(servers);
+            result[0] = Atom.newAtom("members", Atom.newAtom(names));
+            return result;
+        }
+    }
+
+    private class GetMethodsMessageHandler extends MessageHandler {
+
+        @Override
+        public String get_name() {
+            return "getmethods";
+        }
+
+        @Override
+        public boolean is_meta_relevant() {
+            return true;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
+        }
+
+        @Override
+        public Atom[][] run(Atom[] arguments) {
+            Atom[][] result = new Atom[1][];
+            List<? extends Server> servers =
+                ModuleServer.this.get_child_method_servers();
+            String[] names =
+                ModuleServer.this.get_relative_server_names(servers);
+            result[0] = Atom.newAtom("methods", Atom.newAtom(names));
+            return result;
+        }
+    }
+
     private class GetNameMessageHandler extends MessageHandler {
 
         @Override
@@ -47,6 +105,64 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
                 return result;
             }
             return null;
+        }
+    }
+
+    private class GetPropertiesMessageHandler extends MessageHandler {
+
+        @Override
+        public String get_name() {
+            return "getproperties";
+        }
+
+        @Override
+        public boolean is_meta_relevant() {
+            return true;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
+        }
+
+        @Override
+        public Atom[][] run(Atom[] arguments) {
+            Atom[][] result = new Atom[1][];
+            List<? extends Server> servers =
+                ModuleServer.this.get_child_property_servers();
+            String[] names =
+                ModuleServer.this.get_relative_server_names(servers);
+            result[0] = Atom.newAtom("properties", Atom.newAtom(names));
+            return result;
+        }
+    }
+
+    private class GetReturnsMessageHandler extends MessageHandler {
+
+        @Override
+        public String get_name() {
+            return "getreturns";
+        }
+
+        @Override
+        public boolean is_meta_relevant() {
+            return true;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
+        }
+
+        @Override
+        public Atom[][] run(Atom[] arguments) {
+            Atom[][] result = new Atom[1][];
+            List<? extends Server> servers =
+                ModuleServer.this.get_child_return_servers();
+            String[] names =
+                ModuleServer.this.get_relative_server_names(servers);
+            result[0] = Atom.newAtom("returns", Atom.newAtom(names));
+            return result;
         }
     }
 
@@ -97,7 +213,11 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
         super(argument_map);
         this.module_id = module_id;
         this.attach_to_parent_server(Environment.root_server);
+        this.add_message_handler(new GetMembersMessageHandler());
+        this.add_message_handler(new GetMethodsMessageHandler());
         this.add_message_handler(new GetNameMessageHandler());
+        this.add_message_handler(new GetPropertiesMessageHandler());
+        this.add_message_handler(new GetReturnsMessageHandler());
     }
 
     public void acquire_name(String desired_name) {
@@ -146,6 +266,22 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
         }
         Collections.sort(return_servers);
         return return_servers;
+    }
+
+    public String[] get_relative_server_names(List<? extends Server> servers) {
+        ArrayList<String> names = new ArrayList<String>();
+        OscAddressNode this_address_node = this.get_osc_address_node();
+        for (Server server : servers) {
+            OscAddressNode that_address_node = server.get_osc_address_node();
+            String address_string =
+                that_address_node
+                    .get_relative_osc_address_string(this_address_node);
+            if (address_string != null) {
+                names.add(address_string);
+            }
+        }
+        Collections.sort(names);
+        return names.toArray(new String[0]);
     }
 
     @Override
