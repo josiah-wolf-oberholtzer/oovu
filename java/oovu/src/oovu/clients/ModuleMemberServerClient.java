@@ -42,7 +42,7 @@ public abstract class ModuleMemberServerClient extends ServerClient {
                 arguments = Atom.newAtom(message, arguments);
                 osc_address = OscAddress.from_cache("./:value");
             }
-            Request request = new Request(this, osc_address, arguments);
+            Request request = new Request(this, osc_address, arguments, true);
             this.handle_request(request);
         }
     }

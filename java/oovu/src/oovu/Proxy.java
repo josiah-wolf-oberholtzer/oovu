@@ -77,7 +77,7 @@ public class Proxy extends MaxPeer implements MessagePasser {
                     }
                 }
             }
-            Request request = new Request(this, osc_address, arguments);
+            Request request = new Request(this, osc_address, arguments, true);
             this.handle_request(request);
         }
     }

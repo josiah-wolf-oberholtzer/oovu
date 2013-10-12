@@ -371,7 +371,7 @@ abstract public class Server implements MessagePasser {
         MessageHandler message_handler = this.message_handlers.get("dumpmeta");
         Atom[][] payload = message_handler.run(null);
         Request request =
-            new Request(this, OscAddress.from_cache("."), new Atom[0]);
+            new Request(this, OscAddress.from_cache("."), new Atom[0], false);
         Response response = new Response(this, payload, request);
         return response;
     }
@@ -440,12 +440,16 @@ abstract public class Server implements MessagePasser {
         Atom[][] payload = message_handler.run(request.payload);
         if (payload == null) {
             return;
+        } else {
+            Response response = new Response(this, payload, request);
+            if (payload[0][0].equals(Atom.newAtom("value"))) {
+                this.handle_response(response);
+            }
+            request.source.handle_response(response);
         }
-        Response response = new Response(this, payload, request);
-        if (payload[0][0].equals(Atom.newAtom("value"))) {
-            this.handle_response(response);
+        if (request.call_after) {
+            message_handler.call_after();
         }
-        request.source.handle_response(response);
     }
 
     @Override

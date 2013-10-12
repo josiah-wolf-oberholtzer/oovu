@@ -60,7 +60,10 @@ abstract public class AttributeServer extends ModuleMemberServer implements
 
         @Override
         public boolean is_meta_relevant() {
-            return true;
+            if (AttributeServer.this instanceof PropertyServer) {
+                return true;
+            }
+            return false;
         }
 
         @Override
@@ -105,7 +108,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         }
     }
 
-    private class SetValueMessageHandler extends MessageHandler {
+    protected class SetValueMessageHandler extends MessageHandler {
 
         @Override
         public String get_name() {
@@ -202,7 +205,8 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         Atom[][] payload = new Atom[1][];
         payload[0] = Atom.newAtom("value", output);
         Request request =
-            new Request(this, OscAddress.from_cache("./:getvalue"), new Atom[0]);
+            new Request(this, OscAddress.from_cache("./:getvalue"),
+                new Atom[0], true);
         Response response = new Response(this, payload, request);
         this.handle_response(response);
     }

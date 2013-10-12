@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 370.0, 48.0, 340.0, 344.0 ],
+		"rect" : [ 238.0, 337.0, 569.0, 289.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -31,12 +31,52 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
+					"id" : "obj-7",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 415.0, 15.0, 50.0, 18.0 ],
+					"text" : ":show"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"args" : [ "output~" ],
+					"id" : "obj-5",
+					"maxclass" : "bpatcher",
+					"name" : "omod.output~.maxpat",
+					"numinlets" : 2,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "" ],
+					"patching_rect" : [ 415.0, 40.0, 140.0, 210.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"args" : [ "input~" ],
+					"id" : "obj-35",
+					"maxclass" : "bpatcher",
+					"name" : "omod.input~.maxpat",
+					"numinlets" : 2,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "" ],
+					"patching_rect" : [ 265.0, 40.0, 140.0, 210.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
 					"id" : "obj-4",
 					"maxclass" : "newobj",
 					"numinlets" : 2,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 15.0, 295.0, 100.0, 20.0 ],
+					"patching_rect" : [ 100.0, 10.0, 100.0, 20.0 ],
 					"text" : "mxj oovu.Root"
 				}
 
@@ -64,8 +104,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 15.0, 255.0, 305.0, 18.0 ],
-					"text" : "/stutter/transposition -6."
+					"patching_rect" : [ 15.0, 255.0, 240.0, 18.0 ],
+					"text" : "/send.2/amplitude 0."
 				}
 
 			}
@@ -101,20 +141,43 @@
 				}
 
 			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-5", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-7", 0 ]
+				}
+
+			}
  ],
 		"parameters" : 		{
-			"obj-1::obj-5::obj-18::obj-18::obj-4" : [ "live.slider", "live.slider", 0 ],
+			"obj-1::obj-5::obj-31" : [ "live.numbox[42]", "live.numbox[4]", 0 ],
+			"obj-1::obj-5::obj-18::obj-204" : [ "live.numbox[3]", "live.numbox", 0 ],
+			"obj-1::obj-5::obj-49" : [ "live.numbox[39]", "live.numbox[4]", 0 ],
+			"obj-1::obj-5::obj-40" : [ "live.numbox[40]", "live.numbox[4]", 0 ],
+			"obj-35::obj-13::obj-56::obj-42" : [ "live.numbox[28]", "live.numbox", 0 ],
+			"obj-35::obj-13::obj-56::obj-41" : [ "live.numbox[29]", "live.numbox", 0 ],
+			"obj-1::obj-5::obj-18::obj-17::obj-4" : [ "live.slider[6]", "live.slider", 0 ],
+			"obj-35::obj-13::obj-62::obj-36" : [ "live.numbox[1]", "live.numbox[1]", 0 ],
+			"obj-35::obj-13::obj-11::obj-18::obj-4" : [ "live.slider[1]", "live.slider", 0 ],
+			"obj-1::obj-5::obj-38" : [ "live.numbox[41]", "live.numbox[4]", 0 ],
+			"obj-35::obj-13::obj-58::obj-21" : [ "live.numbox[2]", "live.numbox", 0 ],
+			"obj-1::obj-5::obj-21" : [ "live.numbox[12]", "live.numbox[4]", 0 ],
+			"obj-1::obj-5::obj-18::obj-15::obj-4" : [ "live.slider", "live.slider", 0 ],
+			"obj-35::obj-13::obj-11::obj-204" : [ "live.numbox[13]", "live.numbox", 0 ],
+			"obj-5::obj-13::obj-6" : [ "live.slider[5]", "live.slider", 0 ],
+			"obj-35::obj-13::obj-62::obj-51" : [ "live.numbox[4]", "live.numbox", 0 ],
 			"obj-1::obj-5::obj-36" : [ "live.numbox[43]", "live.numbox[4]", 0 ],
 			"obj-1::obj-5::obj-12" : [ "live.slider[14]", "live.slider", 0 ],
-			"obj-1::obj-5::obj-21" : [ "live.numbox[12]", "live.numbox[4]", 0 ],
-			"obj-1::obj-5::obj-204" : [ "live.numbox[46]", "live.numbox", 0 ],
+			"obj-5::obj-13::obj-36" : [ "live.numbox[5]", "live.numbox[1]", 0 ],
 			"obj-1::obj-5::obj-26" : [ "live.numbox[44]", "live.numbox[4]", 0 ],
+			"obj-35::obj-13::obj-6" : [ "live.slider[3]", "live.slider", 0 ],
+			"obj-35::obj-13::obj-9" : [ "live.tab", "live.tab", 0 ],
+			"obj-5::obj-13::obj-204" : [ "live.numbox[15]", "live.numbox", 0 ],
 			"obj-1::obj-5::obj-6" : [ "live.slider[15]", "live.slider", 0 ],
-			"obj-1::obj-5::obj-31" : [ "live.numbox[42]", "live.numbox[4]", 0 ],
-			"obj-1::obj-5::obj-49" : [ "live.numbox[39]", "live.numbox[4]", 0 ],
-			"obj-1::obj-5::obj-18::obj-204" : [ "live.numbox[3]", "live.numbox", 0 ],
-			"obj-1::obj-5::obj-40" : [ "live.numbox[40]", "live.numbox[4]", 0 ],
-			"obj-1::obj-5::obj-38" : [ "live.numbox[41]", "live.numbox[4]", 0 ]
+			"obj-1::obj-5::obj-204" : [ "live.numbox[46]", "live.numbox", 0 ],
+			"obj-35::obj-13::obj-56::obj-33" : [ "live.tab[6]", "live.tab[1]", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{
@@ -261,6 +324,118 @@
 				"name" : "oovu.util.makeumenu.maxpat",
 				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/utilities",
 				"patcherrelativepath" : "../../abstractions/utilities",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.input~.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/modules/omod.input~",
+				"patcherrelativepath" : "../omod.input~",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.input~.model.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/modules/omod.input~",
+				"patcherrelativepath" : "../omod.input~",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.input~.voix.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/modules/omod.input~",
+				"patcherrelativepath" : "../omod.input~",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.dsp.thispoly~.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/dsp",
+				"patcherrelativepath" : "../../abstractions/dsp",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.input~.view.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/modules/omod.input~",
+				"patcherrelativepath" : "../omod.input~",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.input~.view.oscillator.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/modules/omod.input~",
+				"patcherrelativepath" : "../omod.input~",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "sine.svg",
+				"bootpath" : "/Applications/Max 6.1/patches/picts/m4l-picts",
+				"patcherrelativepath" : "../../../../../../../Applications/Max 6.1/patches/picts/m4l-picts",
+				"type" : "svg ",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "saw.svg",
+				"bootpath" : "/Applications/Max 6.1/patches/picts/m4l-picts",
+				"patcherrelativepath" : "../../../../../../../Applications/Max 6.1/patches/picts/m4l-picts",
+				"type" : "svg ",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "square.svg",
+				"bootpath" : "/Applications/Max 6.1/patches/picts/m4l-picts",
+				"patcherrelativepath" : "../../../../../../../Applications/Max 6.1/patches/picts/m4l-picts",
+				"type" : "svg ",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "random.svg",
+				"bootpath" : "/Applications/Max 6.1/patches/picts/m4l-picts",
+				"patcherrelativepath" : "../../../../../../../Applications/Max 6.1/patches/picts/m4l-picts",
+				"type" : "svg ",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.input~.view.soundfile.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/modules/omod.input~",
+				"patcherrelativepath" : "../omod.input~",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.input~.view.adc.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/modules/omod.input~",
+				"patcherrelativepath" : "../omod.input~",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.output~.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/modules/omod.output~",
+				"patcherrelativepath" : "../omod.output~",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.output~.model.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/modules/omod.output~",
+				"patcherrelativepath" : "../omod.output~",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.output~.voix.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/modules/omod.output~",
+				"patcherrelativepath" : "../omod.output~",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.output~.view.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/modules/omod.output~",
+				"patcherrelativepath" : "../omod.output~",
 				"type" : "JSON",
 				"implicit" : 1
 			}
