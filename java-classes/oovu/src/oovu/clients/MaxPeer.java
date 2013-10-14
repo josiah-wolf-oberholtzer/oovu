@@ -41,6 +41,11 @@ abstract public class MaxPeer extends MaxObject implements MessagePasser {
     }
 
     @Override
+    public void bang() {
+        this.anything("bang", new Atom[0]);
+    }
+
+    @Override
     public void dblclick() {
         for (String piece : Environment.root_osc_address_node
             .get_debug_pieces()) {
