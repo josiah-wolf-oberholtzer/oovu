@@ -10,6 +10,6 @@
 	<classpathentry kind="lib" path="java-classes/oovu/lib/commons-lang3-3.1.jar"/>
 	<classpathentry kind="lib" path="java-classes/oovu/lib/guava-15.0.jar"/>
 	<classpathentry kind="lib" path="java-classes/oovu/lib/log4j-1.2.16.jar"/>
-	<classpathentry kind="lib" path="java-classes/oovu/lib/max.jar"/>
+	<classpathentry kind="lib" path="/Applications/Max 6.1/Cycling &apos;74/java/lib/max.jar"/>
 	<classpathentry kind="output" path="java-classes/oovu/bin"/>
 </classpath>

@@ -35,7 +35,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 675.0, 325.0, 110.0, 20.0 ],
+					"patching_rect" : [ 675.0, 325.0, 122.0, 20.0 ],
 					"text" : "send~ #0-nowhere"
 				}
 
@@ -51,20 +51,6 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 700.0, 295.0, 189.0, 20.0 ],
 					"text" : "sprintf set %s-%s-summed-signal"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"id" : "obj-27",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 70.0, 325.0, 185.0, 18.0 ],
-					"text" : "send #0-input-levels"
 				}
 
 			}
@@ -144,7 +130,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 535.0, 10.0, 20.0, 20.0 ]
 				}
 
@@ -170,7 +156,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 460.0, 10.0, 20.0, 20.0 ]
 				}
 
@@ -196,7 +182,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 385.0, 10.0, 20.0, 20.0 ]
 				}
 
@@ -222,7 +208,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 310.0, 10.0, 20.0, 20.0 ]
 				}
 
@@ -248,7 +234,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 235.0, 10.0, 20.0, 20.0 ]
 				}
 
@@ -274,7 +260,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 160.0, 10.0, 20.0, 20.0 ]
 				}
 
@@ -300,7 +286,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 85.0, 10.0, 20.0, 20.0 ]
 				}
 
@@ -339,10 +325,10 @@
 					"fontsize" : 12.0,
 					"id" : "obj-4",
 					"maxclass" : "newobj",
-					"numinlets" : 2,
+					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 565.0, 10.0, 177.0, 20.0 ],
+					"patching_rect" : [ 565.0, 10.0, 179.0, 20.0 ],
 					"text" : "mxj oovu.Proxy #1 dsp/active"
 				}
 
@@ -368,7 +354,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 10.0, 10.0, 20.0, 20.0 ]
 				}
 
@@ -582,15 +568,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-27", 1 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-23", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-23", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -752,8 +729,7 @@
 				}
 
 			}
- ],
-		"dependency_cache" : [  ]
+ ]
 	}
 
 }
