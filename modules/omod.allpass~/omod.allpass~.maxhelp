@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 372.0, 44.0, 571.0, 710.0 ],
+		"rect" : [ 4.0, 44.0, 1276.0, 710.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -28,6 +28,33 @@
 		"digest" : "",
 		"tags" : "",
 		"boxes" : [ 			{
+				"box" : 				{
+					"args" : [ "output~" ],
+					"id" : "obj-19",
+					"maxclass" : "bpatcher",
+					"name" : "omod.output~.maxpat",
+					"numinlets" : 2,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "" ],
+					"patching_rect" : [ 415.0, 40.0, 140.0, 210.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-9",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 15.0, 260.0, 220.0, 18.0 ],
+					"text" : "/stutter/repeat 63.779556"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
@@ -49,7 +76,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 270.0, 475.0, 20.0, 20.0 ]
+					"patching_rect" : [ 265.0, 270.0, 20.0, 20.0 ]
 				}
 
 			}
@@ -62,7 +89,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 270.0, 510.0, 93.0, 18.0 ],
+					"patching_rect" : [ 265.0, 300.0, 93.0, 18.0 ],
 					"text" : "/*/dsp/active $1"
 				}
 
@@ -78,19 +105,6 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 415.0, 15.0, 50.0, 18.0 ],
 					"text" : ":show"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"args" : [ "output~" ],
-					"id" : "obj-5",
-					"maxclass" : "bpatcher",
-					"name" : "omod.output~.maxpat",
-					"numinlets" : 2,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 415.0, 40.0, 140.0, 210.0 ]
 				}
 
 			}
@@ -116,7 +130,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 270.0, 580.0, 100.0, 20.0 ],
+					"patching_rect" : [ 265.0, 325.0, 100.0, 20.0 ],
 					"text" : "mxj oovu.Root"
 				}
 
@@ -131,7 +145,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 15.0, 465.0, 240.0, 58.0 ],
+					"patching_rect" : [ 15.0, 285.0, 241.0, 58.0 ],
 					"text" : "interface dumpmeta getinterface getmembers getmeta getmethods getname getoscaddress getproperties getreturns getuniqueid report show"
 				}
 
@@ -161,6 +175,15 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-9", 1 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-1", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-8", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -179,15 +202,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-5", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-7", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-4", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -197,31 +211,31 @@
 			}
  ],
 		"parameters" : 		{
-			"obj-1::obj-5::obj-12" : [ "live.slider[14]", "live.slider", 0 ],
-			"obj-1::obj-5::obj-18::obj-204" : [ "live.numbox[3]", "live.numbox", 0 ],
-			"obj-35::obj-13::obj-9" : [ "live.tab", "live.tab", 0 ],
-			"obj-5::obj-13::obj-36" : [ "live.numbox[5]", "live.numbox[1]", 0 ],
-			"obj-35::obj-13::obj-11::obj-18::obj-4" : [ "live.slider[1]", "live.slider", 0 ],
-			"obj-35::obj-13::obj-58::obj-21" : [ "live.numbox[2]", "live.numbox", 0 ],
-			"obj-1::obj-5::obj-6" : [ "live.slider[15]", "live.slider", 0 ],
-			"obj-1::obj-5::obj-204" : [ "live.numbox[46]", "live.numbox", 0 ],
-			"obj-1::obj-5::obj-49" : [ "live.numbox[39]", "live.numbox[4]", 0 ],
+			"obj-1::obj-5::obj-26" : [ "live.numbox[44]", "live.numbox[4]", 0 ],
 			"obj-35::obj-13::obj-62::obj-51" : [ "live.numbox[4]", "live.numbox", 0 ],
+			"obj-35::obj-13::obj-58::obj-21" : [ "live.numbox[2]", "live.numbox", 0 ],
+			"obj-35::obj-13::obj-6" : [ "live.slider[3]", "live.slider", 0 ],
+			"obj-1::obj-5::obj-31" : [ "live.numbox[42]", "live.numbox[4]", 0 ],
+			"obj-1::obj-5::obj-18::obj-204" : [ "live.numbox[3]", "live.numbox", 0 ],
+			"obj-19::obj-13::obj-6" : [ "live.slider[31]", "live.slider", 0 ],
+			"obj-35::obj-13::obj-11::obj-18::obj-4" : [ "live.slider[1]", "live.slider", 0 ],
+			"obj-1::obj-5::obj-18::obj-18::obj-4" : [ "live.slider", "live.slider", 0 ],
+			"obj-1::obj-5::obj-12" : [ "live.slider[14]", "live.slider", 0 ],
+			"obj-1::obj-5::obj-49" : [ "live.numbox[39]", "live.numbox[4]", 0 ],
 			"obj-1::obj-5::obj-40" : [ "live.numbox[40]", "live.numbox[4]", 0 ],
 			"obj-1::obj-5::obj-38" : [ "live.numbox[41]", "live.numbox[4]", 0 ],
-			"obj-35::obj-13::obj-56::obj-42" : [ "live.numbox[28]", "live.numbox", 0 ],
-			"obj-35::obj-13::obj-11::obj-204" : [ "live.numbox[13]", "live.numbox", 0 ],
-			"obj-35::obj-13::obj-56::obj-41" : [ "live.numbox[29]", "live.numbox", 0 ],
 			"obj-1::obj-5::obj-21" : [ "live.numbox[12]", "live.numbox[4]", 0 ],
-			"obj-1::obj-5::obj-36" : [ "live.numbox[43]", "live.numbox[4]", 0 ],
-			"obj-5::obj-13::obj-6" : [ "live.slider[5]", "live.slider", 0 ],
-			"obj-5::obj-13::obj-204" : [ "live.numbox[15]", "live.numbox", 0 ],
-			"obj-1::obj-5::obj-18::obj-18::obj-4" : [ "live.slider", "live.slider", 0 ],
-			"obj-35::obj-13::obj-6" : [ "live.slider[3]", "live.slider", 0 ],
-			"obj-1::obj-5::obj-26" : [ "live.numbox[44]", "live.numbox[4]", 0 ],
+			"obj-19::obj-13::obj-204" : [ "live.numbox[73]", "live.numbox", 0 ],
+			"obj-19::obj-13::obj-36" : [ "live.numbox[72]", "live.numbox[1]", 0 ],
 			"obj-35::obj-13::obj-56::obj-33" : [ "live.tab[6]", "live.tab[1]", 0 ],
-			"obj-35::obj-13::obj-62::obj-36" : [ "live.numbox[1]", "live.numbox[1]", 0 ],
-			"obj-1::obj-5::obj-31" : [ "live.numbox[42]", "live.numbox[4]", 0 ]
+			"obj-35::obj-13::obj-11::obj-204" : [ "live.numbox[13]", "live.numbox", 0 ],
+			"obj-35::obj-13::obj-56::obj-42" : [ "live.numbox[28]", "live.numbox", 0 ],
+			"obj-1::obj-5::obj-36" : [ "live.numbox[43]", "live.numbox[4]", 0 ],
+			"obj-35::obj-13::obj-56::obj-41" : [ "live.numbox[29]", "live.numbox", 0 ],
+			"obj-1::obj-5::obj-6" : [ "live.slider[15]", "live.slider", 0 ],
+			"obj-1::obj-5::obj-204" : [ "live.numbox[46]", "live.numbox", 0 ],
+			"obj-35::obj-13::obj-9" : [ "live.tab", "live.tab", 0 ],
+			"obj-35::obj-13::obj-62::obj-36" : [ "live.numbox[1]", "live.numbox[1]", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{

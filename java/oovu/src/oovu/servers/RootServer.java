@@ -4,17 +4,47 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.cycling74.max.Atom;
+
 import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
 import oovu.clients.ServerClient;
+import oovu.messaging.MessageHandler;
 import oovu.states.State;
 import oovu.states.StateComponentAggregate;
 
 public class RootServer extends Server {
 
+    private class GetStateMessageHandler extends MessageHandler {
+
+        @Override
+        public String get_name() {
+            return "getstate";
+        }
+
+        @Override
+        public boolean is_meta_relevant() {
+            // TODO Auto-generated method stub
+            return false;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            // TODO Auto-generated method stub
+            return false;
+        }
+
+        @Override
+        public Atom[][] run(Atom[] arguments) {
+            return null;
+        }
+        
+    }
+    
     public RootServer() {
         super(null);
         this.attach_to_osc_address_node(Environment.root_osc_address_node);
+        this.add_message_handler(new GetStateMessageHandler());
     }
 
     @Override
