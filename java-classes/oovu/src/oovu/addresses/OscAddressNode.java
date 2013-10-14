@@ -5,16 +5,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import oovu.Proxy;
 import oovu.servers.Server;
-
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
-
-import com.sun.tools.javac.util.List;
 
 public class OscAddressNode implements Comparable<OscAddressNode> {
 
@@ -265,9 +261,16 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
             }
             names.add(osc_address_node.name);
         }
-        List<String> reversed_names = List.from(names.toArray(new String[0]));
-        reversed_names = reversed_names.reverse();
-        return StringUtils.join(reversed_names, "/");
+        Collections.reverse(names);
+        StringBuilder string_builder = new StringBuilder();
+        for (String name : names) {
+            if (name.equals("")) {
+                continue;
+            }
+            string_builder.append("/");
+            string_builder.append(name);
+        }
+        return string_builder.toString();
     }
 
     public OscAddressNode get_parent() {
@@ -302,21 +305,23 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
 
     public String get_relative_osc_address_string(
         OscAddressNode relative_osc_address_node) {
-        OscAddressNode[] source_parentage = this.get_parentage();
-        OscAddressNode[] relative_parentage =
-            relative_osc_address_node.get_parentage();
-        ArrayUtils.reverse(source_parentage);
-        ArrayUtils.reverse(relative_parentage);
+        List<OscAddressNode> source_parentage =
+            Arrays.asList(this.get_parentage());
+        List<OscAddressNode> relative_parentage =
+            Arrays.asList(relative_osc_address_node.get_parentage());
+        Collections.reverse(source_parentage);
+        Collections.reverse(relative_parentage);
         int counter = 0;
-        while ((counter < source_parentage.length)
-            && (counter < relative_parentage.length)
-            && (source_parentage[counter] == relative_parentage[counter])) {
+        while ((counter < source_parentage.size())
+            && (counter < relative_parentage.size())
+            && (source_parentage.get(counter) == relative_parentage
+                .get(counter))) {
             counter += 1;
         }
         StringBuilder string_builder = new StringBuilder();
-        while (counter < source_parentage.length) {
+        while (counter < source_parentage.size()) {
             string_builder.append("/");
-            string_builder.append(source_parentage[counter].get_name());
+            string_builder.append(source_parentage.get(counter).get_name());
             counter += 1;
         }
         String result = string_builder.toString();

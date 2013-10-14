@@ -30,6 +30,52 @@
 		"tags" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"bgcolor" : [ 0.568627, 0.619608, 0.662745, 1.0 ],
+					"bgoncolor" : [ 0.921569, 0.94902, 0.05098, 1.0 ],
+					"bgovercolor" : [ 0.568627, 0.619608, 0.662745, 1.0 ],
+					"bgoveroncolor" : [ 0.921569, 0.94902, 0.05098, 1.0 ],
+					"border" : 1,
+					"bordercolor" : [ 0.301961, 0.337255, 0.403922, 1.0 ],
+					"borderoncolor" : [ 0.301961, 0.337255, 0.403922, 1.0 ],
+					"fontface" : 1,
+					"fontname" : "Arial",
+					"fontsize" : 10.0,
+					"id" : "obj-2",
+					"maxclass" : "textbutton",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "int" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 10.0, 580.0, 40.0, 15.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 130.0, 5.0, 40.0, 15.0 ],
+					"prototypename" : "M4L.toggle-yellow",
+					"rounded" : 0.0,
+					"text" : "Clear",
+					"textcolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
+					"texton" : "Active",
+					"textoncolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
+					"textovercolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
+					"textoveroncolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-14",
+					"maxclass" : "newobj",
+					"numinlets" : 3,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 60.0, 580.0, 188.0, 20.0 ],
+					"text" : "mxj oovu.Proxy #1 clear"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-1",
@@ -1220,6 +1266,15 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-2", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-14", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-204", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -1234,6 +1289,15 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-19", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-14", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-2", 0 ]
 				}
 
 			}
@@ -1479,6 +1543,57 @@
 					"source" : [ "obj-9", 2 ]
 				}
 
+			}
+ ],
+		"parameters" : 		{
+			"obj-18::obj-18::obj-4" : [ "live.slider", "live.slider", 0 ],
+			"obj-49" : [ "live.numbox[39]", "live.numbox[4]", 0 ],
+			"obj-31" : [ "live.numbox[42]", "live.numbox[4]", 0 ],
+			"obj-204" : [ "live.numbox[46]", "live.numbox", 0 ],
+			"obj-21" : [ "live.numbox[12]", "live.numbox[4]", 0 ],
+			"obj-40" : [ "live.numbox[40]", "live.numbox[4]", 0 ],
+			"obj-26" : [ "live.numbox[44]", "live.numbox[4]", 0 ],
+			"obj-12" : [ "live.slider[14]", "live.slider", 0 ],
+			"obj-18::obj-204" : [ "live.numbox[3]", "live.numbox", 0 ],
+			"obj-6" : [ "live.slider[15]", "live.slider", 0 ],
+			"obj-38" : [ "live.numbox[41]", "live.numbox[4]", 0 ],
+			"obj-36" : [ "live.numbox[43]", "live.numbox[4]", 0 ]
+		}
+,
+		"dependency_cache" : [ 			{
+				"name" : "oovu.guibackground.js",
+				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/gui",
+				"patcherrelativepath" : "../../abstractions/gui",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.gui.meters.8x.maxpat",
+				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/gui",
+				"patcherrelativepath" : "../../abstractions/gui",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.gui.send.dynamic.maxpat",
+				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/gui",
+				"patcherrelativepath" : "../../abstractions/gui",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.gui.send.1x.maxpat",
+				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/gui",
+				"patcherrelativepath" : "../../abstractions/gui",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.util.makeumenu.maxpat",
+				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/utilities",
+				"patcherrelativepath" : "../../abstractions/utilities",
+				"type" : "JSON",
+				"implicit" : 1
 			}
  ]
 	}

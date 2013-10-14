@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.cycling74.max.Atom;
-
 import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
 import oovu.clients.ServerClient;
 import oovu.messaging.MessageHandler;
 import oovu.states.State;
 import oovu.states.StateComponentAggregate;
+
+import com.cycling74.max.Atom;
 
 public class RootServer extends Server {
 
@@ -38,9 +38,8 @@ public class RootServer extends Server {
         public Atom[][] run(Atom[] arguments) {
             return null;
         }
-        
     }
-    
+
     public RootServer() {
         super(null);
         this.attach_to_osc_address_node(Environment.root_osc_address_node);

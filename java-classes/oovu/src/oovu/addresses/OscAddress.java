@@ -7,8 +7,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.StringUtils;
-
 public class OscAddress {
 
     static final String osc_name_regex =
@@ -125,12 +123,13 @@ public class OscAddress {
     @Override
     public String toString() {
         StringBuilder string_builder = new StringBuilder();
-        if (!this.is_relative) {
-            string_builder.append("/");
-        } else {
-            string_builder.append("./");
+        if (this.is_relative) {
+            string_builder.append(".");
         }
-        string_builder.append(StringUtils.join(this.address_items, "/"));
+        for (String address_item : this.address_items) {
+            string_builder.append("/");
+            string_builder.append(address_item);
+        }
         if (this.message_handler_name != null) {
             if (string_builder.charAt(string_builder.length() - 1) != '/') {
                 string_builder.append("/");

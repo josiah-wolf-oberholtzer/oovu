@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 464.0, 253.0, 617.0, 392.0 ],
+		"rect" : [ 415.0, 44.0, 617.0, 421.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -31,12 +31,26 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
+					"id" : "obj-1",
+					"maxclass" : "newobj",
+					"numinlets" : 3,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 10.0, 10.0, 600.0, 20.0 ],
+					"text" : "mxj oovu.Method #1 clear :datatype generic"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
 					"id" : "obj-13",
 					"maxclass" : "newobj",
 					"numinlets" : 0,
 					"numoutlets" : 8,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 10.0, 285.0, 252.0, 20.0 ],
+					"patching_rect" : [ 10.0, 310.0, 252.0, 20.0 ],
 					"text" : "oovu.bundle.dsp.receiver #1"
 				}
 
@@ -50,7 +64,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 270.0, 285.0, 340.0, 20.0 ],
+					"patching_rect" : [ 270.0, 310.0, 340.0, 20.0 ],
 					"text" : "oovu.bundle.dsp.poly~ #1"
 				}
 
@@ -64,7 +78,7 @@
 					"numinlets" : 9,
 					"numoutlets" : 9,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "" ],
-					"patching_rect" : [ 10.0, 315.0, 285.0, 20.0 ],
+					"patching_rect" : [ 10.0, 340.0, 285.0, 20.0 ],
 					"text" : "poly~ omod.allpass~.voix 1 @args #1"
 				}
 
@@ -77,7 +91,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 0,
 					"numoutlets" : 0,
-					"patching_rect" : [ 10.0, 365.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 390.0, 600.0, 20.0 ],
 					"text" : "oovu.bundle.dsp.base #1"
 				}
 
@@ -90,7 +104,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 8,
 					"numoutlets" : 0,
-					"patching_rect" : [ 10.0, 340.0, 252.0, 20.0 ],
+					"patching_rect" : [ 10.0, 365.0, 252.0, 20.0 ],
 					"text" : "oovu.bundle.dsp.sender #1"
 				}
 
@@ -104,7 +118,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 35.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 60.0, 600.0, 20.0 ],
 					"text" : "mxj oovu.Property #1 allpass/delay/range :datatype range :default 0. 0.1 :range 0. 1."
 				}
 
@@ -118,8 +132,8 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 85.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 allpass/gain/range :datatype range :default 0.5 0.75 :range 0. 1."
+					"patching_rect" : [ 10.0, 110.0, 600.0, 20.0 ],
+					"text" : "mxj oovu.Property #1 allpass/gain/range :datatype range :default 0.5 0.75 :range 0. 0.999"
 				}
 
 			}
@@ -132,7 +146,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 135.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 160.0, 600.0, 20.0 ],
 					"text" : "mxj oovu.Property #1 feedback/delay/range :datatype range :default 0. 0.1  :range 0. 1."
 				}
 
@@ -146,8 +160,8 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 185.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 feedback/gain/range :datatype range :default 0.5 0.75 :range 0. 1."
+					"patching_rect" : [ 10.0, 210.0, 600.0, 20.0 ],
+					"text" : "mxj oovu.Property #1 feedback/gain/range :datatype range :default 0.5 0.75 :range 0. 0.99"
 				}
 
 			}
@@ -160,7 +174,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 235.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 260.0, 600.0, 20.0 ],
 					"text" : "mxj oovu.Property #1 stutter/transposition :datatype decimal :range -24 24 :default -6 :unit semitones"
 				}
 
@@ -174,7 +188,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 210.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 235.0, 600.0, 20.0 ],
 					"text" : "mxj oovu.Property #1 stutter/length :datatype decimal :range 0. 1000. :default 20 :unit milliseconds"
 				}
 
@@ -188,7 +202,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 260.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 285.0, 600.0, 20.0 ],
 					"text" : "mxj oovu.Property #1 stutter/repeat :datatype decimal :range 0. 100. :default 30 :unit percentage"
 				}
 
@@ -202,7 +216,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 160.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 185.0, 600.0, 20.0 ],
 					"text" : "mxj oovu.Property #1 feedback/gain/frequency :datatype decimal :default 1 :range 0 20 :unit hertz"
 				}
 
@@ -216,7 +230,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 110.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 135.0, 600.0, 20.0 ],
 					"text" : "mxj oovu.Property #1 feedback/delay/frequency :datatype decimal :default 1 :range 0 20 :unit hertz"
 				}
 
@@ -230,7 +244,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 60.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 85.0, 600.0, 20.0 ],
 					"text" : "mxj oovu.Property #1 allpass/gain/frequency :datatype decimal :default 1 :range 0 20 :unit hertz"
 				}
 
@@ -244,7 +258,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 10.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 35.0, 600.0, 20.0 ],
 					"text" : "mxj oovu.Property #1 allpass/delay/frequency :datatype decimal :default 1 :range 0 20 :unit hertz"
 				}
 
@@ -399,7 +413,7 @@
 					"destination" : [ "obj-55", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 279.5, 309.0, 19.5, 309.0 ],
+					"midpoints" : [ 279.5, 334.0, 19.5, 334.0 ],
 					"source" : [ "obj-66", 0 ]
 				}
 
