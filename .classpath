@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="java/oovu/src"/>
-	<classpathentry kind="lib" path="java/oovu/lib/max.jar"/>
-	<classpathentry kind="lib" path="java/oovu/lib/log4j-1.2.16.jar"/>
+	<classpathentry kind="src" path="java-classes/oovu/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="java/oovu/lib/commons-lang3-3.1-javadoc.jar"/>
-	<classpathentry kind="lib" path="java/oovu/lib/commons-lang3-3.1-sources.jar"/>
-	<classpathentry kind="lib" path="java/oovu/lib/commons-lang3-3.1-tests.jar"/>
-	<classpathentry kind="lib" path="java/oovu/lib/commons-lang3-3.1.jar"/>
-	<classpathentry kind="lib" path="java/oovu/lib/guava-15.0.jar"/>
-	<classpathentry kind="lib" path="java/oovu/lib/antlr-4.1-complete.jar"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="lib" path="java-classes/oovu/lib/antlr-4.1-complete.jar"/>
+	<classpathentry kind="lib" path="java-classes/oovu/lib/commons-lang3-3.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="java-classes/oovu/lib/commons-lang3-3.1-sources.jar"/>
+	<classpathentry kind="lib" path="java-classes/oovu/lib/commons-lang3-3.1-tests.jar"/>
+	<classpathentry kind="lib" path="java-classes/oovu/lib/commons-lang3-3.1.jar"/>
+	<classpathentry kind="lib" path="java-classes/oovu/lib/guava-15.0.jar"/>
+	<classpathentry kind="lib" path="java-classes/oovu/lib/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="java-classes/oovu/lib/max.jar"/>
+	<classpathentry kind="output" path="java-classes/oovu/bin"/>
 </classpath>
