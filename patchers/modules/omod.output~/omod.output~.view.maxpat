@@ -32,6 +32,20 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
+					"id" : "obj-12",
+					"maxclass" : "newobj",
+					"numinlets" : 3,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 250.0, 360.0, 187.0, 20.0 ],
+					"text" : "mxj oovu.Proxy #1 input/limiter"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
 					"id" : "obj-13",
 					"maxclass" : "newobj",
 					"numinlets" : 2,
@@ -61,7 +75,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_linknames" : 1,
-							"parameter_longname" : "live.numbox[5]",
+							"parameter_longname" : "live.numbox[6]",
 							"parameter_shortname" : "live.numbox[1]",
 							"parameter_type" : 0,
 							"parameter_mmin" : -70.0,
@@ -75,7 +89,7 @@
 					}
 ,
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
-					"varname" : "live.numbox[1]"
+					"varname" : "live.numbox[6]"
 				}
 
 			}
@@ -159,7 +173,7 @@
 					"presentation_rect" : [ 5.0, 120.0, 65.0, 20.0 ],
 					"prototypename" : "M4L.display",
 					"rounded" : 8.0,
-					"text" : "CPU 0%",
+					"text" : "CPU 9%",
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"texton" : "Text",
 					"textovercolor" : [ 1.0, 1.0, 1.0, 1.0 ],
@@ -582,49 +596,22 @@
 					"fontsize" : 10.0,
 					"id" : "obj-17",
 					"maxclass" : "textbutton",
+					"mode" : 1,
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 255.0, 335.0, 15.0, 15.0 ],
+					"patching_rect" : [ 220.0, 360.0, 15.0, 15.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 120.0, 5.0, 15.0, 15.0 ],
 					"prototypename" : "M4L.toggle",
 					"rounded" : 0.0,
-					"text" : "?",
+					"text" : "L",
 					"textcolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
-					"texton" : "Trig",
+					"texton" : "L",
 					"textoncolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
 					"textovercolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
 					"textoveroncolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"id" : "obj-15",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 250.0, 360.0, 155.0, 18.0 ],
-					"text" : "loadunique oovu.gui.debug"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"id" : "obj-12",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 250.0, 385.0, 53.0, 20.0 ],
-					"text" : "pcontrol"
 				}
 
 			}
@@ -707,7 +694,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_linknames" : 1,
-							"parameter_longname" : "live.slider[5]",
+							"parameter_longname" : "live.slider[7]",
 							"parameter_shortname" : "live.slider",
 							"parameter_type" : 0,
 							"parameter_mmax" : 1.0,
@@ -793,6 +780,15 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-17", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-12", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-1", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -806,15 +802,6 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-14", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-12", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-15", 0 ]
 				}
 
 			}
@@ -838,7 +825,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-15", 0 ],
+					"destination" : [ "obj-12", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-17", 0 ]

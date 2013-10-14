@@ -72,8 +72,8 @@
 					"id" : "obj-5",
 					"maxclass" : "newobj",
 					"numinlets" : 2,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "" ],
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 55.0, 10.0, 194.0, 20.0 ],
 					"text" : "mxj oovu.Module #0 #1"
 				}

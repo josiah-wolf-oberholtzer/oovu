@@ -66,7 +66,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 160.0, 255.0, 246.0, 18.0 ],
-					"text" : "/send.1/amplitude 1."
+					"text" : "/input/limiter 1"
 				}
 
 			}

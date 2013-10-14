@@ -36,7 +36,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 75.0, 80.0, 50.0, 18.0 ]
+					"patching_rect" : [ 75.0, 80.0, 56.0, 18.0 ],
+					"text" : "3534544"
 				}
 
 			}
@@ -206,7 +207,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 30.0, 115.0, 228.0, 20.0 ],
+					"patching_rect" : [ 30.0, 110.0, 228.0, 20.0 ],
 					"text" : "mxj oovu.Proxy #1 dsp/channelcount"
 				}
 
