@@ -52,7 +52,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 310.0, 255.0, 246.0, 18.0 ],
-					"text" : "/send.1/destination/:modulename allpasser~"
+					"text" : "/dsp/active 0"
 				}
 
 			}
