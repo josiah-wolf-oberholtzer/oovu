@@ -33,11 +33,11 @@
 					"fontsize" : 12.0,
 					"id" : "obj-2",
 					"maxclass" : "newobj",
-					"numinlets" : 2,
+					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 40.0, 506.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 dsp/channelcount :datatype integer :default 2 :range 1 8 :priority 100"
+					"text" : "mxj oovu.Property #1 dsp/voicecount :datatype integer :default 2 :range 1 8 :priority 100"
 				}
 
 			}
@@ -47,7 +47,7 @@
 					"fontsize" : 12.0,
 					"id" : "obj-1",
 					"maxclass" : "newobj",
-					"numinlets" : 2,
+					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 10.0, 350.0, 20.0 ],
@@ -56,8 +56,7 @@
 
 			}
  ],
-		"lines" : [  ],
-		"dependency_cache" : [  ]
+		"lines" : [  ]
 	}
 
 }

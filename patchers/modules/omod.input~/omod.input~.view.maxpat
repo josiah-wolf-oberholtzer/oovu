@@ -645,12 +645,13 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-2",
+					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 340.0, 115.0, 194.0, 20.0 ],
-					"text" : "mxj oovu.Proxy #1 output/gain"
+					"patching_rect" : [ 340.0, 115.0, 194.0, 33.0 ],
+					"text" : "mxj oovu.Proxy #1 dsp/output/gain"
 				}
 
 			}

@@ -37,8 +37,8 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 40.0, 610.0, 186.0, 20.0 ],
-					"text" : "mxj oovu.Proxy #1 input/limiter"
+					"patching_rect" : [ 40.0, 610.0, 209.0, 20.0 ],
+					"text" : "mxj oovu.Proxy #1 dsp/input/limiter"
 				}
 
 			}
@@ -1050,7 +1050,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 20.0, 440.0, 228.0, 20.0 ],
-					"text" : "mxj oovu.Proxy #1 dsp/channelcount"
+					"text" : "mxj oovu.Proxy #1 dsp/voicecount"
 				}
 
 			}
@@ -1113,8 +1113,8 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 110.0, 500.0, 193.0, 20.0 ],
-					"text" : "mxj oovu.Proxy #1 output/gain"
+					"patching_rect" : [ 110.0, 500.0, 207.0, 20.0 ],
+					"text" : "mxj oovu.Proxy #1 dsp/output/gain"
 				}
 
 			}
@@ -1210,8 +1210,8 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 110.0, 345.0, 186.0, 20.0 ],
-					"text" : "mxj oovu.Proxy #1 input/gain"
+					"patching_rect" : [ 110.0, 345.0, 200.0, 20.0 ],
+					"text" : "mxj oovu.Proxy #1 dsp/input/gain"
 				}
 
 			}

@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 408.0, 367.0, 625.0, 307.0 ],
+		"rect" : [ 275.0, 349.0, 625.0, 307.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -190,7 +190,7 @@
 					"numinlets" : 8,
 					"numoutlets" : 0,
 					"patching_rect" : [ 290.0, 225.0, 275.0, 20.0 ],
-					"text" : "oovu.dsp.8chlevels #1 output"
+					"text" : "oovu.dsp.8chlevels #1 dsp/output"
 				}
 
 			}
@@ -200,11 +200,11 @@
 					"fontsize" : 12.0,
 					"id" : "obj-15",
 					"maxclass" : "newobj",
-					"numinlets" : 2,
+					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 10.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 output/gain :datatype decimal :range 0. 1. :default 1."
+					"text" : "mxj oovu.Property #1 dsp/output/gain :datatype decimal :range 0. 1. :default 1."
 				}
 
 			}
@@ -215,7 +215,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 255.0, 90.0, 20.0, 20.0 ]
 				}
 
@@ -227,7 +227,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 220.0, 90.0, 20.0, 20.0 ]
 				}
 
@@ -239,7 +239,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 185.0, 90.0, 20.0, 20.0 ]
 				}
 
@@ -251,7 +251,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 150.0, 90.0, 20.0, 20.0 ]
 				}
 
@@ -263,7 +263,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 115.0, 90.0, 20.0, 20.0 ]
 				}
 
@@ -275,7 +275,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 80.0, 90.0, 20.0, 20.0 ]
 				}
 
@@ -287,7 +287,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 45.0, 90.0, 20.0, 20.0 ]
 				}
 
@@ -299,7 +299,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 10.0, 90.0, 20.0, 20.0 ]
 				}
 
@@ -323,11 +323,11 @@
 					"fontsize" : 12.0,
 					"id" : "obj-1",
 					"maxclass" : "newobj",
-					"numinlets" : 2,
+					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 250.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 output/sendcount :datatype integer :default 1 :range 1 8 :priority 99"
+					"text" : "mxj oovu.Property #1 dsp/sendcount :datatype integer :default 1 :range 1 8 :priority 99"
 				}
 
 			}
@@ -663,28 +663,6 @@
 					"source" : [ "obj-9", 0 ]
 				}
 
-			}
- ],
-		"dependency_cache" : [ 			{
-				"name" : "oovu.push.source.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/pushpull",
-				"patcherrelativepath" : "../pushpull",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.push.source.poly~.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/pushpull",
-				"patcherrelativepath" : "../pushpull",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.dsp.8chlevels.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/dsp",
-				"patcherrelativepath" : "../dsp",
-				"type" : "JSON",
-				"implicit" : 1
 			}
  ]
 	}

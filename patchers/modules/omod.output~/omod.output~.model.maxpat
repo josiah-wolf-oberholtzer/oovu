@@ -31,6 +31,20 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
+					"id" : "obj-1",
+					"maxclass" : "newobj",
+					"numinlets" : 3,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 10.0, 75.0, 600.0, 20.0 ],
+					"text" : "mxj oovu.Return #1 record/time :datatype decimal"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
 					"id" : "obj-6",
 					"maxclass" : "newobj",
 					"numinlets" : 2,
@@ -105,7 +119,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 80.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 50.0, 600.0, 20.0 ],
 					"text" : "mxj oovu.Method #1 record/recording :datatype boolean"
 				}
 
@@ -119,7 +133,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 55.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 25.0, 600.0, 20.0 ],
 					"text" : "mxj oovu.Method #1 record/open :datatype filesystempath"
 				}
 

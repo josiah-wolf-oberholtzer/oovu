@@ -104,8 +104,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 340.0, 85.0, 189.0, 20.0 ],
-					"text" : "sprintf set %s-%s-summed-signal"
+					"patching_rect" : [ 340.0, 85.0, 211.0, 20.0 ],
+					"text" : "sprintf set %s-dsp/%s-summed-signal"
 				}
 
 			}
@@ -129,7 +129,7 @@
 					"fontsize" : 12.0,
 					"id" : "obj-1",
 					"maxclass" : "newobj",
-					"numinlets" : 2,
+					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 270.0, 165.0, 191.0, 20.0 ],
@@ -147,7 +147,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 65.0, 110.0, 260.0, 18.0 ],
-					"text" : "set 39044-output-levels"
+					"text" : "set 1880-dsp/output-levels"
 				}
 
 			}
@@ -352,8 +352,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 10.0, 85.0, 138.0, 20.0 ],
-					"text" : "sprintf set %s-%s-levels"
+					"patching_rect" : [ 10.0, 85.0, 161.0, 20.0 ],
+					"text" : "sprintf set %s-dsp/%s-levels"
 				}
 
 			}
@@ -677,8 +677,7 @@
 				}
 
 			}
- ],
-		"dependency_cache" : [  ]
+ ]
 	}
 
 }

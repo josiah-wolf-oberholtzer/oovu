@@ -143,11 +143,11 @@
 					"fontsize" : 12.0,
 					"id" : "obj-2",
 					"maxclass" : "newobj",
-					"numinlets" : 2,
+					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 285.0, 10.0, 223.0, 20.0 ],
-					"text" : "mxj oovu.Proxy #1 output/sendcount"
+					"patching_rect" : [ 285.0, 10.0, 227.0, 20.0 ],
+					"text" : "mxj oovu.Proxy #1 dsp/sendcount"
 				}
 
 			}

@@ -36,8 +36,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 75.0, 80.0, 56.0, 18.0 ],
-					"text" : "3534544"
+					"patching_rect" : [ 75.0, 80.0, 62.0, 18.0 ],
+					"text" : "28838298"
 				}
 
 			}
@@ -208,7 +208,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 30.0, 110.0, 228.0, 20.0 ],
-					"text" : "mxj oovu.Proxy #1 dsp/channelcount"
+					"text" : "mxj oovu.Proxy #1 dsp/voicecount"
 				}
 
 			}

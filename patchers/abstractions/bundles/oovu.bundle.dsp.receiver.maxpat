@@ -37,7 +37,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 15.0, 602.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 input/limiter :datatype boolean :default 1"
+					"text" : "mxj oovu.Property #1 dsp/input/limiter :datatype boolean :default 1"
 				}
 
 			}
@@ -205,7 +205,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 45.0, 602.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 input/gain :datatype decimal :range 0. 1. :default 1."
+					"text" : "mxj oovu.Property #1 dsp/input/gain :datatype decimal :range 0. 1. :default 1."
 				}
 
 			}
@@ -219,7 +219,7 @@
 					"numoutlets" : 8,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 					"patching_rect" : [ 10.0, 75.0, 264.0, 20.0 ],
-					"text" : "oovu.push.destination #1 input"
+					"text" : "oovu.push.destination #1 dsp/input"
 				}
 
 			}
