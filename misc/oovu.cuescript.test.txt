@@ -1,0 +1,50 @@
+MACRO: playonce module soundfile {
+    ${module}/playing 0
+    ${module}/open ${soundfile}
+    ${module}/playing 1
+}
+
+GROUP: sfplays {
+	/sfplay~.1
+	/sfplay~.2
+	/sfplay~.3
+}
+
+GROUP: inputs {
+    /input~.1
+    /input~.2
+}
+
+EVENT: NewCue {
+
+	### /allpasser~ ###
+
+	CALL playonce /sfplay~.1 "okaycomputer.wav"
+
+	/allpasser~/dsp/voicecount/:maximum 8.000
+	/allpasser~/dsp/voicecount/:minimum 1.000
+	/allpasser~/dsp/voicecount 2
+	/allpasser~/dsp/sendcount/:maximum 8.000
+	/allpasser~/dsp/sendcount/:minimum 1.000
+	/allpasser~/dsp/sendcount 1
+
+	### /in~ ###
+
+	/in~/source/:options adc oscillator soundfile
+	/in~/source adc
+	/in~/dsp/sendcount/:maximum 8.000
+	/in~/dsp/sendcount/:minimum 1.000
+	/in~/dsp/sendcount 1
+	/in~/soundfile/filepath 
+	/in~/soundfile/playing 0
+
+	### /out~ ###
+
+	/out~/dsp/voicecount/:maximum 8.000
+	/out~/dsp/voicecount/:minimum 1.000
+	/out~/dsp/voicecount 2
+	/out~/dac/active 0
+	/out~/dac/routing/:maximum
+	/out~/dac/routing/:minimum 1.000
+
+}
