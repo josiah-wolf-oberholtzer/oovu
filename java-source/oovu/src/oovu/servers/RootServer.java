@@ -24,19 +24,21 @@ public class RootServer extends Server {
 
         @Override
         public boolean is_meta_relevant() {
-            // TODO Auto-generated method stub
             return false;
         }
 
         @Override
         public boolean is_state_relevant() {
-            // TODO Auto-generated method stub
             return false;
         }
 
         @Override
         public Atom[][] run(Atom[] arguments) {
-            return null;
+            Atom[][] result = RootServer.this.get_formatted_state();
+            for (int i = 0, j = result.length; i < j; i++) {
+                result[i] = Atom.newAtom("state", result[i]);
+            }
+            return result;
         }
     }
 
@@ -66,6 +68,37 @@ public class RootServer extends Server {
         }
         Collections.sort(module_servers);
         return module_servers;
+    }
+
+    public Atom[][] get_formatted_state() {
+        ArrayList<Atom[]> commands = new ArrayList<Atom[]>();
+        StateComponentAggregate global_state =
+            (StateComponentAggregate) this.get_state();
+        commands.add(Atom.parse("wclose"));
+        commands.add(Atom.parse("clear"));
+        commands.add(Atom.parse("CUE NewCue"));
+        commands.add(Atom.parse("cr"));
+        for (State state : global_state.state_components) {
+            if (!(state instanceof StateComponentAggregate)) {
+                continue;
+            }
+            StateComponentAggregate module_state =
+                (StateComponentAggregate) state;
+            commands.add(Atom.parse("cr"));
+            commands.add(Atom.parse("tab"));
+            commands.add(Atom.newAtom(new String[] {
+                "###", module_state.name, "###"
+            }));
+            commands.add(Atom.parse("cr"));
+            commands.add(Atom.parse("cr"));
+            for (Atom[] atoms : module_state.toAtoms()) {
+                commands.add(Atom.parse("tab"));
+                commands.add(atoms);
+                commands.add(Atom.parse("cr"));
+            }
+        }
+        commands.add(Atom.parse("open"));
+        return commands.toArray(new Atom[0][]);
     }
 
     @Override
