@@ -1,5 +1,5 @@
 ###################
-CUE "My Event Name"
+CUE My Event Name
 ###################
 
 	### /delays~ ###
@@ -18,16 +18,16 @@ CUE "My Event Name"
 	/delays~/input/gain 1
 	/delays~/output/gain 0.969
 	/delays~/send.1/amplitude 1
-	/delays~/send.1/destination "/out~/push/input"
+	/delays~/send.1/destination /out~/push/input
 	/delays~/send.2/amplitude 0.757
-	/delays~/send.2/destination "/reverb~/push/input"
+	/delays~/send.2/destination /reverb~/push/input
 	/delays~/stutter/length 30.734
 	/delays~/stutter/repeat 0.824
 	/delays~/stutter/transposition -5.669
 
 	### /in~.1 ###
 
-	/in~.1/source "adc"
+	/in~.1/source adc
 	/in~.1/output/sendcount 1
 	/in~.1/soundfile/playing 0
 	/in~.1/adc/channel 1
@@ -35,15 +35,15 @@ CUE "My Event Name"
 	/in~.1/oscillator/frequency 440
 	/in~.1/oscillator/pulserate 500
 	/in~.1/oscillator/pulsing 0
-	/in~.1/oscillator/waveform "sine"
+	/in~.1/oscillator/waveform sine
 	/in~.1/output/gain 1
 	/in~.1/send.1/amplitude 1
-	/in~.1/send.1/destination "/delays~/push/input"
+	/in~.1/send.1/destination /delays~/push/input
 	/in~.1/soundfile/looping 0
 
 	### /in~.2 ###
 
-	/in~.2/source "adc"
+	/in~.2/source adc
 	/in~.2/output/sendcount 1
 	/in~.2/soundfile/playing 0
 	/in~.2/adc/channel 1
@@ -51,14 +51,14 @@ CUE "My Event Name"
 	/in~.2/oscillator/frequency 440
 	/in~.2/oscillator/pulserate 500
 	/in~.2/oscillator/pulsing 0
-	/in~.2/oscillator/waveform "sine"
+	/in~.2/oscillator/waveform sine
 	/in~.2/output/gain 1
 	/in~.2/send.1/amplitude 0
 	/in~.2/soundfile/looping 0
 
 	### /in~.3 ###
 
-	/in~.3/source "adc"
+	/in~.3/source adc
 	/in~.3/output/sendcount 1
 	/in~.3/soundfile/playing 0
 	/in~.3/adc/channel 1
@@ -66,14 +66,14 @@ CUE "My Event Name"
 	/in~.3/oscillator/frequency 440
 	/in~.3/oscillator/pulserate 500
 	/in~.3/oscillator/pulsing 0
-	/in~.3/oscillator/waveform "sine"
+	/in~.3/oscillator/waveform sine
 	/in~.3/output/gain 1
 	/in~.3/send.1/amplitude 0
 	/in~.3/soundfile/looping 0
 
 	### /in~.4 ###
 
-	/in~.4/source "adc"
+	/in~.4/source adc
 	/in~.4/output/sendcount 1
 	/in~.4/soundfile/playing 0
 	/in~.4/adc/channel 1
@@ -81,7 +81,7 @@ CUE "My Event Name"
 	/in~.4/oscillator/frequency 440
 	/in~.4/oscillator/pulserate 500
 	/in~.4/oscillator/pulsing 0
-	/in~.4/oscillator/waveform "sine"
+	/in~.4/oscillator/waveform sine
 	/in~.4/output/gain 1
 	/in~.4/send.1/amplitude 0
 	/in~.4/soundfile/looping 0
@@ -104,5 +104,5 @@ CUE "My Event Name"
 	/reverb~/input/gain 1
 	/reverb~/output/gain 1
 	/reverb~/send.1/amplitude 1
-	/reverb~/send.1/destination "/out~/push/input"
+	/reverb~/send.1/destination /out~/push/input
 	/reverb~/spread 400

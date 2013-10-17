@@ -3,7 +3,6 @@ package oovu.servers;
 import java.util.HashMap;
 import java.util.Map;
 
-import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
 import oovu.events.Event;
 import oovu.events.EventTypes;
@@ -27,7 +26,6 @@ public class AudioReceiveServer extends ModuleMemberServer {
         if ((osc_address != null)
             && (!AudioReceiveServer.audio_receive_servers
                 .containsKey(osc_address))) {
-            Environment.log(osc_address);
             AudioReceiveServer.audio_receive_servers.put(osc_address, server);
             Event.notify_observers(EventTypes.AUDIO_RECEIVERS_CHANGED);
         }

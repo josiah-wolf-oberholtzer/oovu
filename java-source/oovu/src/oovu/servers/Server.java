@@ -438,9 +438,7 @@ abstract public class Server implements MessagePasser {
             return;
         }
         Atom[][] payload = message_handler.run(request.payload);
-        if (payload == null) {
-            return;
-        } else {
+        if (payload != null) {
             Response response = new Response(this, payload, request);
             if (payload[0][0].equals(Atom.newAtom("value"))) {
                 this.handle_response(response);

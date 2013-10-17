@@ -3,7 +3,7 @@
 	<classpathentry kind="src" path="java-source/oovu/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="/Applications/Max 6.1/packages/oovu/java-source/oovu/lib/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="/Users/josiah/Documents/Development/oovu/java-source/oovu/lib/log4j-1.2.16.jar"/>
 	<classpathentry kind="lib" path="/Applications/Max 6.1/Cycling &apos;74/java/lib/max.jar"/>
 	<classpathentry kind="output" path="java-classes/oovu/bin"/>
 </classpath>

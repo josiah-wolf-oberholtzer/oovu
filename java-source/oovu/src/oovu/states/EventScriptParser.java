@@ -21,14 +21,16 @@ public class EventScriptParser {
             new ArrayList<StateComponent>();
         for (String line : this.read_file(filename)) {
             line = line.trim();
-            if (line.charAt(0) == '#') {
+            if (0 == line.length()) {
+                continue;
+            } else if (line.charAt(0) == '#') {
                 continue;
             }
             Atom[] atoms = Atom.parse(line);
             if (atoms.length == 0) {
                 continue;
             }
-            if ((1 < atoms.length) && (atoms[0].getString().equals("EVENT"))) {
+            if ((1 < atoms.length) && (atoms[0].getString().equals("CUE"))) {
                 if (event_name != null) {
                     events.put(event_name, new StateComponentAggregate(
                         event_name, event_components.toArray(new State[0])));
