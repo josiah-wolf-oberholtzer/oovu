@@ -9,6 +9,7 @@ import java.util.Set;
 
 import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
+import oovu.addresses.OscAddressNode;
 import oovu.clients.ServerClient;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.Request;
@@ -150,20 +151,29 @@ public class RootServer extends Server {
             } else if (0 == arguments.length) {
                 return null;
             }
+            String cue_name = Atom.toOneString(arguments);
             StateComponentAggregate cue =
-                (StateComponentAggregate) RootServer.this.cues.get(Atom
-                    .toOneString(arguments));
+                (StateComponentAggregate) RootServer.this.cues.get(cue_name);
             if (cue == null) {
                 return null;
             }
             for (Atom[] atoms : cue.toAtoms()) {
+                String cue_address_string = atoms[0].getString();
                 OscAddress cue_address =
-                    OscAddress.from_cache(atoms[0].getString());
+                    OscAddress.from_cache(cue_address_string);
                 Atom[] cue_arguments = Atom.removeFirst(atoms);
                 Request request =
                     new Request(RootServer.this, cue_address, cue_arguments,
                         false);
-                RootServer.this.handle_request(request);
+                Set<OscAddressNode> osc_address_nodes =
+                    RootServer.this.get_osc_address_node().search(
+                        request.destination);
+                for (OscAddressNode osc_address_node : osc_address_nodes) {
+                    Server server = osc_address_node.get_server();
+                    if (server != null) {
+                        server.handle_request(request);
+                    }
+                }
             }
             return null;
         }
