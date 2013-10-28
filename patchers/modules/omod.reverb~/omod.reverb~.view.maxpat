@@ -9,7 +9,8 @@
 		}
 ,
 		"rect" : [ 27.0, 44.0, 1011.0, 710.0 ],
-		"bglocked" : 1,
+		"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
+		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
 		"default_fontface" : 0,
@@ -28,6 +29,68 @@
 		"digest" : "",
 		"tags" : "",
 		"boxes" : [ 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-2",
+					"linecount" : 2,
+					"maxclass" : "newobj",
+					"numinlets" : 3,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 50.0, 575.0, 193.0, 33.0 ],
+					"text" : "mxj oovu.Proxy #1 dsp/input/limiter"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 0.568627, 0.619608, 0.662745, 1.0 ],
+					"bgoncolor" : [ 1.0, 0.8, 0.4, 1.0 ],
+					"bgovercolor" : [ 0.568627, 0.619608, 0.662745, 1.0 ],
+					"bgoveroncolor" : [ 0.921569, 0.94902, 0.05098, 1.0 ],
+					"border" : 1,
+					"bordercolor" : [ 0.301961, 0.337255, 0.403922, 1.0 ],
+					"borderoncolor" : [ 0.301961, 0.337255, 0.403922, 1.0 ],
+					"fontface" : 1,
+					"fontname" : "Arial",
+					"fontsize" : 10.0,
+					"id" : "obj-17",
+					"maxclass" : "textbutton",
+					"mode" : 1,
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "int" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 20.0, 575.0, 15.0, 15.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 120.0, 5.0, 15.0, 15.0 ],
+					"prototypename" : "M4L.toggle",
+					"rounded" : 0.0,
+					"text" : "L",
+					"textcolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
+					"texton" : "L",
+					"textoncolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
+					"textovercolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
+					"textoveroncolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-1",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "" ],
+					"patching_rect" : [ 10.0, 55.0, 100.0, 20.0 ],
+					"text" : "routepass name"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"align" : 0,
 					"bgcolor" : [ 0.666667, 0.698039, 0.717647, 0.0 ],
@@ -330,8 +393,8 @@
 					"id" : "obj-40",
 					"maxclass" : "newobj",
 					"numinlets" : 3,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "bang" ],
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 425.0, 350.0, 250.0, 20.0 ],
 					"text" : "mxj oovu.Proxy #1 feedback/secondary"
 				}
@@ -395,7 +458,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_linknames" : 1,
-							"parameter_longname" : "live.numbox[5]",
+							"parameter_longname" : "live.numbox[16]",
 							"parameter_shortname" : "live.numbox[4]",
 							"parameter_type" : 0,
 							"parameter_mmax" : 100.0,
@@ -407,7 +470,7 @@
 
 					}
 ,
-					"varname" : "live.numbox[5]"
+					"varname" : "live.numbox[16]"
 				}
 
 			}
@@ -418,8 +481,8 @@
 					"id" : "obj-34",
 					"maxclass" : "newobj",
 					"numinlets" : 3,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "bang" ],
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 425.0, 215.0, 250.0, 20.0 ],
 					"text" : "mxj oovu.Proxy #1 feedback/primary"
 				}
@@ -483,7 +546,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_linknames" : 1,
-							"parameter_longname" : "live.numbox[8]",
+							"parameter_longname" : "live.numbox[17]",
 							"parameter_shortname" : "live.numbox[4]",
 							"parameter_type" : 0,
 							"parameter_mmax" : 100.0,
@@ -495,7 +558,7 @@
 
 					}
 ,
-					"varname" : "live.numbox[8]"
+					"varname" : "live.numbox[17]"
 				}
 
 			}
@@ -506,8 +569,8 @@
 					"id" : "obj-22",
 					"maxclass" : "newobj",
 					"numinlets" : 3,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "bang" ],
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 425.0, 510.0, 250.0, 20.0 ],
 					"text" : "mxj oovu.Proxy #1 spread"
 				}
@@ -520,8 +583,8 @@
 					"id" : "obj-3",
 					"maxclass" : "newobj",
 					"numinlets" : 3,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "bang" ],
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 425.0, 80.0, 250.0, 20.0 ],
 					"text" : "mxj oovu.Proxy #1 damping"
 				}
@@ -607,70 +670,10 @@
 					"id" : "obj-16",
 					"maxclass" : "newobj",
 					"numinlets" : 3,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "bang" ],
-					"patching_rect" : [ 25.0, 440.0, 211.0, 20.0 ],
-					"text" : "mxj oovu.Proxy #1 dsp/channelcount"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"bgcolor" : [ 0.568627, 0.619608, 0.662745, 1.0 ],
-					"bgoncolor" : [ 1.0, 0.8, 0.4, 1.0 ],
-					"bgovercolor" : [ 0.568627, 0.619608, 0.662745, 1.0 ],
-					"bgoveroncolor" : [ 0.921569, 0.94902, 0.05098, 1.0 ],
-					"border" : 1,
-					"bordercolor" : [ 0.301961, 0.337255, 0.403922, 1.0 ],
-					"borderoncolor" : [ 0.301961, 0.337255, 0.403922, 1.0 ],
-					"fontface" : 1,
-					"fontname" : "Arial",
-					"fontsize" : 10.0,
-					"id" : "obj-17",
-					"maxclass" : "textbutton",
-					"numinlets" : 1,
 					"numoutlets" : 3,
-					"outlettype" : [ "", "", "int" ],
-					"parameter_enable" : 0,
-					"patching_rect" : [ 20.0, 570.0, 15.0, 15.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 120.0, 5.0, 15.0, 15.0 ],
-					"prototypename" : "M4L.toggle",
-					"rounded" : 0.0,
-					"text" : "?",
-					"textcolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
-					"texton" : "Trig",
-					"textoncolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
-					"textovercolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
-					"textoveroncolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"id" : "obj-15",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 15.0, 595.0, 155.0, 18.0 ],
-					"text" : "loadunique oovu.gui.debug"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"id" : "obj-14",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 15.0, 620.0, 53.0, 20.0 ],
-					"text" : "pcontrol"
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 25.0, 440.0, 219.0, 20.0 ],
+					"text" : "mxj oovu.Proxy #1 dsp/voicecount"
 				}
 
 			}
@@ -729,12 +732,13 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-13",
+					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 3,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "bang" ],
-					"patching_rect" : [ 115.0, 500.0, 176.0, 20.0 ],
-					"text" : "mxj oovu.Proxy #1 output/gain"
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 115.0, 500.0, 195.0, 33.0 ],
+					"text" : "mxj oovu.Proxy #1 dsp/output/gain"
 				}
 
 			}
@@ -826,12 +830,13 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-5",
+					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 3,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "bang" ],
-					"patching_rect" : [ 115.0, 345.0, 176.0, 20.0 ],
-					"text" : "mxj oovu.Proxy #1 input/gain"
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 115.0, 345.0, 187.0, 33.0 ],
+					"text" : "mxj oovu.Proxy #1 dsp/input/gain"
 				}
 
 			}
@@ -842,39 +847,10 @@
 					"id" : "obj-10",
 					"maxclass" : "newobj",
 					"numinlets" : 3,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "bang" ],
-					"patching_rect" : [ 65.0, 315.0, 171.0, 20.0 ],
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 65.0, 315.0, 179.0, 20.0 ],
 					"text" : "mxj oovu.Proxy #1 dsp/active"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"id" : "obj-2",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 10.0, 35.0, 69.0, 20.0 ],
-					"save" : [ "#N", "thispatcher", ";", "#Q", "end", ";" ],
-					"text" : "thispatcher"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"id" : "obj-1",
-					"maxclass" : "newobj",
-					"numinlets" : 0,
-					"numoutlets" : 1,
-					"outlettype" : [ "front" ],
-					"patching_rect" : [ 10.0, 10.0, 149.0, 20.0 ],
-					"text" : "oovu.obj.show #1 view"
 				}
 
 			}
@@ -885,9 +861,9 @@
 					"id" : "obj-9",
 					"maxclass" : "newobj",
 					"numinlets" : 3,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "bang" ],
-					"patching_rect" : [ 10.0, 60.0, 120.0, 20.0 ],
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 10.0, 25.0, 128.0, 20.0 ],
 					"text" : "mxj oovu.Proxy #1 ."
 				}
 
@@ -912,7 +888,7 @@
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
-					"destination" : [ "obj-2", 0 ],
+					"destination" : [ "obj-8", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-1", 0 ]
@@ -948,15 +924,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-14", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-15", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-204", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -967,7 +934,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-15", 0 ],
+					"destination" : [ "obj-2", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-17", 0 ]
@@ -980,6 +947,15 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-19", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-17", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-2", 0 ]
 				}
 
 			}
@@ -1210,102 +1186,12 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-8", 0 ],
+					"destination" : [ "obj-1", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-9", 2 ]
 				}
 
-			}
- ],
-		"parameters" : 		{
-			"obj-41" : [ "live.numbox[10]", "live.numbox[4]", 0 ],
-			"obj-18::obj-204" : [ "live.numbox[3]", "live.numbox", 0 ],
-			"obj-38" : [ "live.numbox[8]", "live.numbox[4]", 0 ],
-			"obj-204" : [ "live.numbox[14]", "live.numbox", 0 ],
-			"obj-18::obj-18::obj-4" : [ "live.slider", "live.slider", 0 ],
-			"obj-39" : [ "live.numbox[9]", "live.numbox[4]", 0 ],
-			"obj-12" : [ "live.slider[1]", "live.slider", 0 ],
-			"obj-6" : [ "live.slider[6]", "live.slider", 0 ],
-			"obj-33" : [ "live.numbox[5]", "live.numbox[4]", 0 ]
-		}
-,
-		"dependency_cache" : [ 			{
-				"name" : "oovu.guibackground.js",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/gui",
-				"patcherrelativepath" : "../../abstractions/gui",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "mxj oovu.Proxy.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
-				"patcherrelativepath" : "../../abstractions/core",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.environment.js",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
-				"patcherrelativepath" : "../../abstractions/core",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.messaging.call.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/messaging",
-				"patcherrelativepath" : "../../abstractions/messaging",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.util.queue.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/utilities",
-				"patcherrelativepath" : "../../abstractions/utilities",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.updated.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
-				"patcherrelativepath" : "../../abstractions/core",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.obj.show.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/internals",
-				"patcherrelativepath" : "../../abstractions/internals",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.gui.meters.8x.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/gui",
-				"patcherrelativepath" : "../../abstractions/gui",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.gui.send.dynamic.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/gui",
-				"patcherrelativepath" : "../../abstractions/gui",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.gui.send.1x.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/gui",
-				"patcherrelativepath" : "../../abstractions/gui",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.util.makeumenu.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/utilities",
-				"patcherrelativepath" : "../../abstractions/utilities",
-				"type" : "JSON",
-				"implicit" : 1
 			}
  ]
 	}

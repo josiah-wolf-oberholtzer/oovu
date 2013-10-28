@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 658.0, 167.0, 588.0, 478.0 ],
+		"rect" : [ 502.0, 44.0, 967.0, 504.0 ],
 		"bgcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -32,12 +32,55 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
+					"id" : "obj-24",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 560.0, 255.0, 135.0, 18.0 ],
+					"presentation_rect" : [ 561.0, 254.0, 0.0, 0.0 ],
+					"text" : "/damping 0.472441"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-23",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 560.0, 10.0, 50.0, 18.0 ],
+					"presentation_rect" : [ 561.0, 10.0, 0.0, 0.0 ],
+					"text" : ":show"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"args" : [ "reverb~" ],
+					"id" : "obj-22",
+					"maxclass" : "bpatcher",
+					"name" : "omod.reverb~.maxpat",
+					"numinlets" : 2,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "" ],
+					"patching_rect" : [ 560.0, 35.0, 140.0, 210.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
 					"id" : "obj-20",
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 310.0, 385.0, 55.0, 18.0 ],
+					"patching_rect" : [ 315.0, 335.0, 55.0, 18.0 ],
 					"text" : "cue One"
 				}
 
@@ -51,7 +94,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 285.0, 350.0, 179.0, 18.0 ],
+					"patching_rect" : [ 235.0, 310.0, 179.0, 18.0 ],
 					"text" : "readcues oovu.cuescript.test.txt"
 				}
 
@@ -65,7 +108,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 250.0, 385.0, 55.0, 18.0 ],
+					"patching_rect" : [ 250.0, 335.0, 55.0, 18.0 ],
 					"text" : "cue Two"
 				}
 
@@ -79,7 +122,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 210.0, 350.0, 60.0, 18.0 ],
+					"patching_rect" : [ 165.0, 310.0, 60.0, 18.0 ],
 					"text" : "readcues"
 				}
 
@@ -93,7 +136,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 150.0, 350.0, 53.0, 18.0 ],
+					"patching_rect" : [ 105.0, 310.0, 53.0, 18.0 ],
 					"text" : "getcues"
 				}
 
@@ -107,7 +150,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 70.0, 350.0, 73.0, 18.0 ],
+					"patching_rect" : [ 25.0, 310.0, 73.0, 18.0 ],
 					"text" : "getinterface"
 				}
 
@@ -122,7 +165,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 135.0, 435.0, 426.0, 18.0 ],
-					"text" : "cues One Two"
+					"text" : "state open"
 				}
 
 			}
@@ -135,7 +178,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 10.0, 350.0, 53.0, 18.0 ],
+					"patching_rect" : [ 10.0, 285.0, 53.0, 18.0 ],
 					"text" : "getstate"
 				}
 
@@ -205,8 +248,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 10.0, 315.0, 419.0, 18.0 ],
-					"text" : "set /dac/active 1"
+					"patching_rect" : [ 415.0, 255.0, 135.0, 18.0 ],
+					"text" : "/dsp/voicecount 8"
 				}
 
 			}
@@ -215,12 +258,13 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-4",
+					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 10.0, 285.0, 390.0, 18.0 ],
-					"text" : "/soundfile/playing 0"
+					"patching_rect" : [ 10.0, 255.0, 140.0, 31.0 ],
+					"text" : "/oscillator/pulserate 1000."
 				}
 
 			}
@@ -262,7 +306,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 160.0, 255.0, 240.0, 18.0 ],
-					"text" : "/dsp/output/gain 1."
+					"text" : "/stutter/repeat 0."
 				}
 
 			}
@@ -311,7 +355,7 @@
 					"destination" : [ "obj-4", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 19.5, 280.0, 390.5, 280.0 ],
+					"midpoints" : [ 19.5, 250.0, 140.5, 250.0 ],
 					"source" : [ "obj-1", 0 ]
 				}
 
@@ -340,7 +384,7 @@
 					"destination" : [ "obj-7", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 169.5, 249.5, 390.5, 249.5 ],
+					"midpoints" : [ 169.5, 250.5, 390.5, 250.5 ],
 					"source" : [ "obj-14", 0 ]
 				}
 
@@ -395,7 +439,7 @@
 					"destination" : [ "obj-5", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 419.5, 307.0, 419.5, 307.0 ],
+					"midpoints" : [ 419.5, 250.0, 540.5, 250.0 ],
 					"source" : [ "obj-2", 0 ]
 				}
 
@@ -406,6 +450,25 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-20", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-24", 1 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"midpoints" : [ 569.5, 250.0, 685.5, 250.0 ],
+					"source" : [ "obj-22", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-22", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-23", 0 ]
 				}
 
 			}
@@ -461,23 +524,33 @@
 			"obj-14::obj-5::obj-6" : [ "live.slider[15]", "live.slider", 0 ],
 			"obj-1::obj-13::obj-56::obj-33" : [ "live.tab[3]", "live.tab[1]", 0 ],
 			"obj-1::obj-13::obj-11::obj-18::obj-4" : [ "live.slider", "live.slider", 0 ],
+			"obj-22::obj-13::obj-39" : [ "live.numbox[9]", "live.numbox[4]", 0 ],
 			"obj-14::obj-5::obj-21" : [ "live.numbox[12]", "live.numbox[4]", 0 ],
+			"obj-22::obj-13::obj-204" : [ "live.numbox[14]", "live.numbox", 0 ],
 			"obj-2::obj-13::obj-36" : [ "live.numbox[6]", "live.numbox[1]", 0 ],
-			"obj-14::obj-5::obj-18::obj-18::obj-4" : [ "live.slider[4]", "live.slider", 0 ],
+			"obj-22::obj-13::obj-41" : [ "live.numbox[10]", "live.numbox[4]", 0 ],
 			"obj-14::obj-5::obj-31" : [ "live.numbox[42]", "live.numbox[4]", 0 ],
 			"obj-14::obj-5::obj-40" : [ "live.numbox[40]", "live.numbox[4]", 0 ],
 			"obj-14::obj-5::obj-12" : [ "live.slider[14]", "live.slider", 0 ],
+			"obj-22::obj-13::obj-12" : [ "live.slider[1]", "live.slider", 0 ],
 			"obj-2::obj-13::obj-204" : [ "live.numbox[15]", "live.numbox", 0 ],
+			"obj-22::obj-13::obj-18::obj-204" : [ "live.numbox[18]", "live.numbox", 0 ],
+			"obj-22::obj-13::obj-18::obj-18::obj-4" : [ "live.slider[5]", "live.slider", 0 ],
 			"obj-14::obj-5::obj-18::obj-204" : [ "live.numbox[8]", "live.numbox", 0 ],
 			"obj-1::obj-13::obj-58::obj-21" : [ "live.numbox[2]", "live.numbox", 0 ],
 			"obj-1::obj-13::obj-62::obj-36" : [ "live.numbox[3]", "live.numbox[1]", 0 ],
 			"obj-1::obj-13::obj-56::obj-41" : [ "live.numbox", "live.numbox", 0 ],
 			"obj-1::obj-13::obj-9" : [ "live.tab", "live.tab", 0 ],
 			"obj-1::obj-13::obj-6" : [ "live.slider[3]", "live.slider", 0 ],
+			"obj-22::obj-13::obj-38" : [ "live.numbox[17]", "live.numbox[4]", 0 ],
+			"obj-14::obj-5::obj-18::obj-17::obj-4" : [ "live.slider[9]", "live.slider", 0 ],
 			"obj-14::obj-5::obj-204" : [ "live.numbox[46]", "live.numbox", 0 ],
 			"obj-14::obj-5::obj-38" : [ "live.numbox[41]", "live.numbox[4]", 0 ],
+			"obj-22::obj-13::obj-33" : [ "live.numbox[16]", "live.numbox[4]", 0 ],
 			"obj-14::obj-5::obj-49" : [ "live.numbox[39]", "live.numbox[4]", 0 ],
 			"obj-14::obj-5::obj-26" : [ "live.numbox[44]", "live.numbox[4]", 0 ],
+			"obj-22::obj-13::obj-6" : [ "live.slider[6]", "live.slider", 0 ],
+			"obj-14::obj-5::obj-18::obj-15::obj-4" : [ "live.slider[8]", "live.slider", 0 ],
 			"obj-2::obj-13::obj-6" : [ "live.slider[7]", "live.slider", 0 ],
 			"obj-1::obj-13::obj-11::obj-204" : [ "live.numbox[5]", "live.numbox", 0 ],
 			"obj-1::obj-13::obj-56::obj-42" : [ "live.numbox[1]", "live.numbox", 0 ]
@@ -739,6 +812,48 @@
 				"name" : "omod.allpass~.view.maxpat",
 				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/modules/omod.allpass~",
 				"patcherrelativepath" : "../omod.allpass~",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.reverb~.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/modules/omod.reverb~",
+				"patcherrelativepath" : "../omod.reverb~",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.reverb~.model.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/modules/omod.reverb~",
+				"patcherrelativepath" : "../omod.reverb~",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.reverb~.voix.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/modules/omod.reverb~",
+				"patcherrelativepath" : "../omod.reverb~",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.reverb~.voix.kernel.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/modules/omod.reverb~",
+				"patcherrelativepath" : "../omod.reverb~",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "freeverb.gendsp",
+				"bootpath" : "/Applications/Max 6.1/examples/gen",
+				"patcherrelativepath" : "../../../../../../../../Applications/Max 6.1/examples/gen",
+				"type" : "gDSP",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.reverb~.view.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/modules/omod.reverb~",
+				"patcherrelativepath" : "../omod.reverb~",
 				"type" : "JSON",
 				"implicit" : 1
 			}

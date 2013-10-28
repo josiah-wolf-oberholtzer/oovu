@@ -34,9 +34,9 @@
 					"id" : "obj-13",
 					"maxclass" : "newobj",
 					"numinlets" : 3,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "bang" ],
-					"patching_rect" : [ 80.0, 90.0, 191.0, 20.0 ],
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 80.0, 90.0, 217.0, 20.0 ],
 					"text" : "mxj oovu.Proxy #1 feedback/primary"
 				}
 
@@ -48,9 +48,9 @@
 					"id" : "obj-14",
 					"maxclass" : "newobj",
 					"numinlets" : 3,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "bang" ],
-					"patching_rect" : [ 80.0, 150.0, 206.0, 20.0 ],
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 80.0, 150.0, 232.0, 20.0 ],
 					"text" : "mxj oovu.Proxy #1 feedback/secondary"
 				}
 
@@ -90,10 +90,9 @@
 					"id" : "obj-12",
 					"maxclass" : "newobj",
 					"numinlets" : 3,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "bang" ],
-					"patching_rect" : [ 80.0, 210.0, 145.0, 20.0 ],
-					"presentation_rect" : [ 50.0, 205.0, 0.0, 0.0 ],
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 80.0, 210.0, 171.0, 20.0 ],
 					"text" : "mxj oovu.Proxy #1 damping"
 				}
 
@@ -105,9 +104,9 @@
 					"id" : "obj-11",
 					"maxclass" : "newobj",
 					"numinlets" : 3,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "bang" ],
-					"patching_rect" : [ 80.0, 270.0, 145.0, 20.0 ],
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 80.0, 270.0, 171.0, 20.0 ],
 					"text" : "mxj oovu.Proxy #1 damping"
 				}
 
@@ -164,7 +163,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 60.0, 330.0, 120.0, 20.0 ],
-					"text" : "gen~ :gen freeverb"
+					"text" : "gen~ @gen freeverb"
 				}
 
 			}
