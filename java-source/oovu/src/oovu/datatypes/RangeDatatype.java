@@ -3,7 +3,7 @@ package oovu.datatypes;
 import java.util.Arrays;
 import java.util.Map;
 
-import oovu.messaging.DatatypeMessageHandler;
+import oovu.messaging.ActionMessageHandler;
 import oovu.servers.AttributeServer;
 import oovu.servers.Server;
 import oovu.timing.MultiEnvelope;
@@ -12,15 +12,16 @@ import com.cycling74.max.Atom;
 
 public class RangeDatatype extends BoundedDatatype {
 
-    private class CenterMessageHandler extends DatatypeMessageHandler {
-
-        public CenterMessageHandler(AttributeServer attribute_server) {
-            super(attribute_server);
-        }
+    private class CenterMessageHandler extends ActionMessageHandler {
 
         @Override
         public void call_after() {
-            this.attribute_server.reoutput_value();
+            RangeDatatype.this.client.reoutput_value();
+        }
+
+        @Override
+        public int get_arity() {
+            return 1;
         }
 
         @Override
@@ -29,13 +30,8 @@ public class RangeDatatype extends BoundedDatatype {
         }
 
         @Override
-        public boolean is_meta_relevant() {
-            return false;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return false;
+        public boolean is_rampable() {
+            return true;
         }
 
         @Override
@@ -49,15 +45,16 @@ public class RangeDatatype extends BoundedDatatype {
         }
     }
 
-    private class WidthMessageHandler extends DatatypeMessageHandler {
-
-        public WidthMessageHandler(AttributeServer attribute_server) {
-            super(attribute_server);
-        }
+    private class WidthMessageHandler extends ActionMessageHandler {
 
         @Override
         public void call_after() {
-            this.attribute_server.reoutput_value();
+            RangeDatatype.this.client.reoutput_value();
+        }
+
+        @Override
+        public int get_arity() {
+            return 1;
         }
 
         @Override
@@ -66,13 +63,8 @@ public class RangeDatatype extends BoundedDatatype {
         }
 
         @Override
-        public boolean is_meta_relevant() {
-            return false;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return false;
+        public boolean is_rampable() {
+            return true;
         }
 
         @Override
@@ -94,10 +86,8 @@ public class RangeDatatype extends BoundedDatatype {
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {
-            this.client.add_message_handler(new CenterMessageHandler(
-                this.client));
-            this.client
-                .add_message_handler(new WidthMessageHandler(this.client));
+            this.client.add_message_handler(new CenterMessageHandler());
+            this.client.add_message_handler(new WidthMessageHandler());
         }
         double[] range = Atom.toDouble(this.value);
         double[] center_width = this.range_to_center_width(range[0], range[1]);
