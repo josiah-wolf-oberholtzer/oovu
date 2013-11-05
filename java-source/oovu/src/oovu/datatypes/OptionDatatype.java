@@ -4,7 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import oovu.messaging.DatatypeMessageHandler;
+import oovu.messaging.ActionMessageHandler;
+import oovu.messaging.InfoGetterMessageHandler;
+import oovu.messaging.SetterMessageHandler;
 import oovu.servers.AttributeServer;
 import oovu.servers.Server;
 
@@ -12,25 +14,11 @@ import com.cycling74.max.Atom;
 
 public class OptionDatatype extends StringDatatype {
 
-    private class GetOptionsMessageHandler extends DatatypeMessageHandler {
-
-        public GetOptionsMessageHandler(AttributeServer attribute_server) {
-            super(attribute_server);
-        }
+    private class GetOptionsMessageHandler extends InfoGetterMessageHandler {
 
         @Override
         public String get_name() {
             return "getoptions";
-        }
-
-        @Override
-        public boolean is_meta_relevant() {
-            return true;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return true;
         }
 
         @Override
@@ -44,15 +32,16 @@ public class OptionDatatype extends StringDatatype {
         }
     }
 
-    private class NextOptionMessageHandler extends DatatypeMessageHandler {
-
-        public NextOptionMessageHandler(AttributeServer attribute_server) {
-            super(attribute_server);
-        }
+    private class NextOptionMessageHandler extends ActionMessageHandler {
 
         @Override
         public void call_after() {
-            this.attribute_server.reoutput_value();
+            OptionDatatype.this.client.reoutput_value();
+        }
+
+        @Override
+        public Integer get_arity() {
+            return 0;
         }
 
         @Override
@@ -61,12 +50,7 @@ public class OptionDatatype extends StringDatatype {
         }
 
         @Override
-        public boolean is_meta_relevant() {
-            return false;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
+        public boolean is_rampable() {
             return false;
         }
 
@@ -77,15 +61,16 @@ public class OptionDatatype extends StringDatatype {
         }
     }
 
-    private class PreviousOptionMessageHandler extends DatatypeMessageHandler {
-
-        public PreviousOptionMessageHandler(AttributeServer attribute_server) {
-            super(attribute_server);
-        }
+    private class PreviousOptionMessageHandler extends ActionMessageHandler {
 
         @Override
         public void call_after() {
-            this.attribute_server.reoutput_value();
+            OptionDatatype.this.client.reoutput_value();
+        }
+
+        @Override
+        public Integer get_arity() {
+            return 0;
         }
 
         @Override
@@ -94,12 +79,7 @@ public class OptionDatatype extends StringDatatype {
         }
 
         @Override
-        public boolean is_meta_relevant() {
-            return false;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
+        public boolean is_rampable() {
             return false;
         }
 
@@ -110,30 +90,21 @@ public class OptionDatatype extends StringDatatype {
         }
     }
 
-    private class SetOptionsMessageHandler extends DatatypeMessageHandler {
-
-        public SetOptionsMessageHandler(AttributeServer attribute_server) {
-            super(attribute_server);
-        }
+    private class SetOptionsMessageHandler extends SetterMessageHandler {
 
         @Override
         public void call_after() {
-            this.attribute_server.reoutput_value();
+            OptionDatatype.this.client.reoutput_value();
+        }
+
+        @Override
+        public Integer get_arity() {
+            return null;
         }
 
         @Override
         public String get_name() {
             return "options";
-        }
-
-        @Override
-        public boolean is_meta_relevant() {
-            return false;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return false;
         }
 
         @Override
@@ -156,14 +127,10 @@ public class OptionDatatype extends StringDatatype {
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {
-            this.client.add_message_handler(new GetOptionsMessageHandler(
-                this.client));
-            this.client.add_message_handler(new NextOptionMessageHandler(
-                this.client));
-            this.client.add_message_handler(new PreviousOptionMessageHandler(
-                this.client));
-            this.client.add_message_handler(new SetOptionsMessageHandler(
-                this.client));
+            this.client.add_message_handler(new GetOptionsMessageHandler());
+            this.client.add_message_handler(new NextOptionMessageHandler());
+            this.client.add_message_handler(new PreviousOptionMessageHandler());
+            this.client.add_message_handler(new SetOptionsMessageHandler());
         }
     }
 

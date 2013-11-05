@@ -18,7 +18,7 @@ public class BooleanDatatype extends GenericDatatype {
         }
 
         @Override
-        public int get_arity() {
+        public Integer get_arity() {
             return 0;
         }
 

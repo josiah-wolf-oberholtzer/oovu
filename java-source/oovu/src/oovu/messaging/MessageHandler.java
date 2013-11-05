@@ -7,7 +7,7 @@ abstract public class MessageHandler {
     public void call_after() {
     }
 
-    abstract public int get_arity();
+    abstract public Integer get_arity();
 
     abstract public String get_name();
 

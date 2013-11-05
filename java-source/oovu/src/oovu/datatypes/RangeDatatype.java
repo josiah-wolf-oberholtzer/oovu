@@ -20,7 +20,7 @@ public class RangeDatatype extends BoundedDatatype {
         }
 
         @Override
-        public int get_arity() {
+        public Integer get_arity() {
             return 1;
         }
 
@@ -53,7 +53,7 @@ public class RangeDatatype extends BoundedDatatype {
         }
 
         @Override
-        public int get_arity() {
+        public Integer get_arity() {
             return 1;
         }
 
