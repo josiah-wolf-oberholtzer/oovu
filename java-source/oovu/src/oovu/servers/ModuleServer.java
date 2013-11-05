@@ -9,7 +9,7 @@ import oovu.Proxy;
 import oovu.addresses.Environment;
 import oovu.addresses.OscAddressNode;
 import oovu.clients.MessagePasserCallback;
-import oovu.messaging.MessageHandler;
+import oovu.messaging.InfoGetterMessageHandler;
 import oovu.messaging.Response;
 import oovu.states.State;
 import oovu.states.StateComponentAggregate;
@@ -19,21 +19,11 @@ import com.cycling74.max.MaxSystem;
 
 public class ModuleServer extends Server implements Comparable<ModuleServer> {
 
-    private class GetMembersMessageHandler extends MessageHandler {
+    private class GetMembersMessageHandler extends InfoGetterMessageHandler {
 
         @Override
         public String get_name() {
             return "getmembers";
-        }
-
-        @Override
-        public boolean is_meta_relevant() {
-            return true;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return false;
         }
 
         @Override
@@ -48,21 +38,11 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
         }
     }
 
-    private class GetMethodsMessageHandler extends MessageHandler {
+    private class GetMethodsMessageHandler extends InfoGetterMessageHandler {
 
         @Override
         public String get_name() {
             return "getmethods";
-        }
-
-        @Override
-        public boolean is_meta_relevant() {
-            return true;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return false;
         }
 
         @Override
@@ -77,21 +57,11 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
         }
     }
 
-    private class GetNameMessageHandler extends MessageHandler {
+    private class GetNameMessageHandler extends InfoGetterMessageHandler {
 
         @Override
         public String get_name() {
             return "getname";
-        }
-
-        @Override
-        public boolean is_meta_relevant() {
-            return true;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return false;
         }
 
         @Override
@@ -108,21 +78,11 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
         }
     }
 
-    private class GetPropertiesMessageHandler extends MessageHandler {
+    private class GetPropertiesMessageHandler extends InfoGetterMessageHandler {
 
         @Override
         public String get_name() {
             return "getproperties";
-        }
-
-        @Override
-        public boolean is_meta_relevant() {
-            return true;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return false;
         }
 
         @Override
@@ -137,21 +97,11 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
         }
     }
 
-    private class GetReturnsMessageHandler extends MessageHandler {
+    private class GetReturnsMessageHandler extends InfoGetterMessageHandler {
 
         @Override
         public String get_name() {
             return "getreturns";
-        }
-
-        @Override
-        public boolean is_meta_relevant() {
-            return true;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return false;
         }
 
         @Override
