@@ -1,6 +1,7 @@
 package oovu.servers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
 import oovu.clients.ServerClient;
 import oovu.eventscripts.EventScriptParser;
+import oovu.messaging.ActionMessageHandler;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.Request;
 import oovu.messaging.SetterMessageHandler;
@@ -22,6 +24,48 @@ import com.cycling74.max.Atom;
 import com.cycling74.max.MaxSystem;
 
 public class RootServer extends Server {
+
+    private class GetStateMessageHandler extends MessageHandler {
+
+        @Override
+        public Integer get_arity() {
+            return 0;
+        }
+
+        @Override
+        public String get_name() {
+            return "getstate";
+        }
+
+        @Override
+        public boolean is_binding_relevant() {
+            return false;
+        }
+
+        @Override
+        public boolean is_meta_relevant() {
+            return false;
+        }
+
+        @Override
+        public boolean is_rampable() {
+            return false;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return false;
+        }
+
+        @Override
+        public Atom[][] run(Atom[] arguments) {
+            Atom[][] result = RootServer.this.get_formatted_state();
+            for (int i = 0, j = result.length; i < j; i++) {
+                result[i] = Atom.newAtom("state", result[i]);
+            }
+            return result;
+        }
+    }
 
     private class ListEventsMessageHandler extends MessageHandler {
 
@@ -75,7 +119,7 @@ public class RootServer extends Server {
         }
     }
 
-    private class GetStateMessageHandler extends MessageHandler {
+    private class NextEventMessageHandler extends ActionMessageHandler {
 
         @Override
         public Integer get_arity() {
@@ -84,17 +128,7 @@ public class RootServer extends Server {
 
         @Override
         public String get_name() {
-            return "getstate";
-        }
-
-        @Override
-        public boolean is_binding_relevant() {
-            return false;
-        }
-
-        @Override
-        public boolean is_meta_relevant() {
-            return false;
+            return "events/next";
         }
 
         @Override
@@ -103,17 +137,75 @@ public class RootServer extends Server {
         }
 
         @Override
-        public boolean is_state_relevant() {
+        public Atom[][] run(Atom[] arguments) {
+            if (RootServer.this.events == null) {
+                return null;
+            } else if (RootServer.this.events.size() == 0) {
+                return null;
+            }
+            String[] event_names =
+                RootServer.this.events.keySet().toArray(new String[0]);
+            int event_index =
+                Arrays.asList(event_names).indexOf(
+                    RootServer.this.current_event_name);
+            if (event_index == -1) {
+                event_index = 0;
+            } else {
+                event_index += 1;
+            }
+            if (event_index == event_names.length) {
+                event_index -= 1;
+            }
+            MessageHandler message_handler =
+                RootServer.this.message_handlers.get("events/goto");
+            Atom[] message_arguments = Atom.newAtom(new int[] {
+                event_index
+            });
+            message_handler.run(message_arguments);
+            return null;
+        }
+    }
+
+    private class PreviousEventMessageHandler extends ActionMessageHandler {
+
+        @Override
+        public Integer get_arity() {
+            return 0;
+        }
+
+        @Override
+        public String get_name() {
+            return "events/previous";
+        }
+
+        @Override
+        public boolean is_rampable() {
             return false;
         }
 
         @Override
         public Atom[][] run(Atom[] arguments) {
-            Atom[][] result = RootServer.this.get_formatted_state();
-            for (int i = 0, j = result.length; i < j; i++) {
-                result[i] = Atom.newAtom("state", result[i]);
+            if (RootServer.this.events == null) {
+                return null;
+            } else if (RootServer.this.events.size() == 0) {
+                return null;
             }
-            return result;
+            String[] event_names =
+                RootServer.this.events.keySet().toArray(new String[0]);
+            int event_index =
+                Arrays.asList(event_names).indexOf(
+                    RootServer.this.current_event_name);
+            event_index -= 1;
+            if (event_index < 0) {
+                event_index = 0;
+            }
+            MessageHandler message_handler =
+                RootServer.this.message_handlers.get("events/goto");
+            Atom[] message_arguments = Atom.newAtom(new int[] {
+                event_index
+            });
+            message_handler.run(message_arguments);
+            return null;
         }
     }
 
@@ -193,8 +285,9 @@ public class RootServer extends Server {
                 return null;
             }
             String cue_name = null;
-            if (arguments.length == 1 && arguments[0].isInt()) {
-                String[] cue_names = RootServer.this.events.keySet().toArray(new String[0]);
+            if ((arguments.length == 1) && arguments[0].isInt()) {
+                String[] cue_names =
+                    RootServer.this.events.keySet().toArray(new String[0]);
                 cue_name = cue_names[arguments[0].toInt()];
             } else {
                 cue_name = Atom.toOneString(arguments);
@@ -227,6 +320,7 @@ public class RootServer extends Server {
     }
 
     private Map<String, State> events = null;
+    private String current_event_name = null;
 
     public RootServer() {
         super(null);
@@ -235,6 +329,8 @@ public class RootServer extends Server {
         this.add_message_handler(new GetStateMessageHandler());
         this.add_message_handler(new ReadEventScriptMessageHandler());
         this.add_message_handler(new SetEventMessageHandler());
+        this.add_message_handler(new NextEventMessageHandler());
+        this.add_message_handler(new PreviousEventMessageHandler());
     }
 
     @Override
