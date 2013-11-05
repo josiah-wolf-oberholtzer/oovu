@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import oovu.messaging.ActionMessageHandler;
-import oovu.messaging.InfoGetterMessageHandler;
+import oovu.messaging.GetterMessageHandler;
 import oovu.messaging.SetterMessageHandler;
 import oovu.servers.AttributeServer;
 import oovu.servers.Server;
@@ -14,11 +14,21 @@ import com.cycling74.max.Atom;
 
 public class OptionDatatype extends StringDatatype {
 
-    private class GetOptionsMessageHandler extends InfoGetterMessageHandler {
+    private class GetOptionsMessageHandler extends GetterMessageHandler {
 
         @Override
         public String get_name() {
             return "getoptions";
+        }
+
+        @Override
+        public boolean is_meta_relevant() {
+            return true;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return true;
         }
 
         @Override
