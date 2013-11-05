@@ -10,9 +10,11 @@ import oovu.datatypes.Datatype;
 import oovu.datatypes.GenericDatatype;
 import oovu.events.Event;
 import oovu.events.EventTypes;
+import oovu.messaging.GetterMessageHandler;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.Request;
 import oovu.messaging.Response;
+import oovu.messaging.SetterMessageHandler;
 import oovu.states.State;
 import oovu.states.StateComponent;
 import oovu.states.StateComponentAggregate;
@@ -22,7 +24,7 @@ import com.cycling74.max.Atom;
 abstract public class AttributeServer extends ModuleMemberServer implements
     Comparable<AttributeServer> {
 
-    private class GetPriorityMessageHandler extends MessageHandler {
+    private class GetPriorityMessageHandler extends GetterMessageHandler {
 
         @Override
         public String get_name() {
@@ -51,7 +53,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         }
     }
 
-    private class GetValueMessageHandler extends MessageHandler {
+    private class GetValueMessageHandler extends GetterMessageHandler {
 
         @Override
         public String get_name() {
@@ -80,21 +82,16 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         }
     }
 
-    private class SetPriorityMessageHandler extends MessageHandler {
+    private class SetPriorityMessageHandler extends SetterMessageHandler {
+
+        @Override
+        public Integer get_arity() {
+            return 1;
+        }
 
         @Override
         public String get_name() {
             return "priority";
-        }
-
-        @Override
-        public boolean is_meta_relevant() {
-            return false;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return false;
         }
 
         @Override
@@ -111,13 +108,28 @@ abstract public class AttributeServer extends ModuleMemberServer implements
     protected class SetValueMessageHandler extends MessageHandler {
 
         @Override
+        public Integer get_arity() {
+            return AttributeServer.this.datatype.get_arity();
+        }
+
+        @Override
         public String get_name() {
             return "value";
         }
 
         @Override
+        public boolean is_binding_relevant() {
+            return AttributeServer.this.datatype.is_binding_relevant();
+        }
+
+        @Override
         public boolean is_meta_relevant() {
             return false;
+        }
+
+        @Override
+        public boolean is_rampable() {
+            return AttributeServer.this.datatype.is_rampable();
         }
 
         @Override
