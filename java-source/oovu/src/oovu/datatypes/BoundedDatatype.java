@@ -3,7 +3,8 @@ package oovu.datatypes;
 import java.util.Arrays;
 import java.util.Map;
 
-import oovu.messaging.DatatypeMessageHandler;
+import oovu.messaging.GetterMessageHandler;
+import oovu.messaging.SetterMessageHandler;
 import oovu.servers.AttributeServer;
 import oovu.timing.EnvelopeHandler;
 import oovu.timing.MultiEnvelope;
@@ -13,11 +14,7 @@ import com.cycling74.max.Atom;
 abstract public class BoundedDatatype extends Datatype implements
     EnvelopeHandler {
 
-    private class GetMaximumMessageHandler extends DatatypeMessageHandler {
-
-        public GetMaximumMessageHandler(AttributeServer attribute_server) {
-            super(attribute_server);
-        }
+    private class GetMaximumMessageHandler extends GetterMessageHandler {
 
         @Override
         public String get_name() {
@@ -52,11 +49,7 @@ abstract public class BoundedDatatype extends Datatype implements
         }
     }
 
-    private class GetMinimumMessageHandler extends DatatypeMessageHandler {
-
-        public GetMinimumMessageHandler(AttributeServer attribute_server) {
-            super(attribute_server);
-        }
+    private class GetMinimumMessageHandler extends GetterMessageHandler {
 
         @Override
         public String get_name() {
@@ -91,30 +84,21 @@ abstract public class BoundedDatatype extends Datatype implements
         }
     }
 
-    private class SetMaximumMessageHandler extends DatatypeMessageHandler {
-
-        public SetMaximumMessageHandler(AttributeServer attribute_server) {
-            super(attribute_server);
-        }
+    private class SetMaximumMessageHandler extends SetterMessageHandler {
 
         @Override
         public void call_after() {
-            this.attribute_server.reoutput_value();
+            BoundedDatatype.this.client.reoutput_value();
+        }
+
+        @Override
+        public Integer get_arity() {
+            return 1;
         }
 
         @Override
         public String get_name() {
             return "maximum";
-        }
-
-        @Override
-        public boolean is_meta_relevant() {
-            return false;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return false;
         }
 
         @Override
@@ -128,30 +112,21 @@ abstract public class BoundedDatatype extends Datatype implements
         }
     }
 
-    private class SetMinimumMessageHandler extends DatatypeMessageHandler {
-
-        public SetMinimumMessageHandler(AttributeServer attribute_server) {
-            super(attribute_server);
-        }
+    private class SetMinimumMessageHandler extends SetterMessageHandler {
 
         @Override
         public void call_after() {
-            this.attribute_server.reoutput_value();
+            BoundedDatatype.this.client.reoutput_value();
+        }
+
+        @Override
+        public Integer get_arity() {
+            return 1;
         }
 
         @Override
         public String get_name() {
             return "minimum";
-        }
-
-        @Override
-        public boolean is_meta_relevant() {
-            return false;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return false;
         }
 
         @Override
@@ -173,14 +148,10 @@ abstract public class BoundedDatatype extends Datatype implements
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {
-            this.client.add_message_handler(new GetMaximumMessageHandler(
-                this.client));
-            this.client.add_message_handler(new GetMinimumMessageHandler(
-                this.client));
-            this.client.add_message_handler(new SetMaximumMessageHandler(
-                this.client));
-            this.client.add_message_handler(new SetMinimumMessageHandler(
-                this.client));
+            this.client.add_message_handler(new GetMaximumMessageHandler());
+            this.client.add_message_handler(new GetMinimumMessageHandler());
+            this.client.add_message_handler(new SetMaximumMessageHandler());
+            this.client.add_message_handler(new SetMinimumMessageHandler());
         }
     }
 

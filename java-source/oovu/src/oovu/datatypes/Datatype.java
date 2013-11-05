@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import oovu.messaging.DatatypeMessageHandler;
+import oovu.messaging.InfoGetterMessageHandler;
 import oovu.servers.AttributeServer;
 
 import com.cycling74.max.Atom;
@@ -12,11 +12,7 @@ import com.cycling74.max.MaxObject;
 
 public abstract class Datatype {
 
-    private class GetDatatypeMessageHandler extends DatatypeMessageHandler {
-
-        public GetDatatypeMessageHandler(AttributeServer attribute_server) {
-            super(attribute_server);
-        }
+    private class GetDatatypeMessageHandler extends InfoGetterMessageHandler {
 
         @Override
         public String get_name() {
@@ -24,20 +20,10 @@ public abstract class Datatype {
         }
 
         @Override
-        public boolean is_meta_relevant() {
-            return true;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return false;
-        }
-
-        @Override
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
             String datatype_name =
-                this.attribute_server.datatype.getClass().getSimpleName()
+                Datatype.this.client.datatype.getClass().getSimpleName()
                     .toLowerCase().replace("datatype", "");
             result[0] = Atom.newAtom(new String[] {
                 "datatype", datatype_name
@@ -78,8 +64,7 @@ public abstract class Datatype {
     public Datatype(AttributeServer client, Map<String, Atom[]> argument_map) {
         this.client = client;
         if (this.client != null) {
-            this.client.add_message_handler(new GetDatatypeMessageHandler(
-                this.client));
+            this.client.add_message_handler(new GetDatatypeMessageHandler());
         }
         this.initialize_prerequisites(argument_map);
         this.initialize_default_value(argument_map);
