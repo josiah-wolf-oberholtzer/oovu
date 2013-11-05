@@ -13,6 +13,7 @@ import oovu.addresses.OscAddressNode;
 import oovu.clients.ServerClient;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.Request;
+import oovu.messaging.SetterMessageHandler;
 import oovu.states.EventScriptParser;
 import oovu.states.State;
 import oovu.states.StateComponentAggregate;
@@ -25,12 +26,27 @@ public class RootServer extends Server {
     private class GetCuesMessageHandler extends MessageHandler {
 
         @Override
+        public Integer get_arity() {
+            return 0;
+        }
+
+        @Override
         public String get_name() {
             return "getcues";
         }
 
         @Override
+        public boolean is_binding_relevant() {
+            return false;
+        }
+
+        @Override
         public boolean is_meta_relevant() {
+            return false;
+        }
+
+        @Override
+        public boolean is_rampable() {
             return false;
         }
 
@@ -62,12 +78,27 @@ public class RootServer extends Server {
     private class GetStateMessageHandler extends MessageHandler {
 
         @Override
+        public Integer get_arity() {
+            return 0;
+        }
+
+        @Override
         public String get_name() {
             return "getstate";
         }
 
         @Override
+        public boolean is_binding_relevant() {
+            return false;
+        }
+
+        @Override
         public boolean is_meta_relevant() {
+            return false;
+        }
+
+        @Override
+        public boolean is_rampable() {
             return false;
         }
 
@@ -97,12 +128,27 @@ public class RootServer extends Server {
         }
 
         @Override
+        public Integer get_arity() {
+            return 0;
+        }
+
+        @Override
         public String get_name() {
             return "readcues";
         }
 
         @Override
+        public boolean is_binding_relevant() {
+            return false;
+        }
+
+        @Override
         public boolean is_meta_relevant() {
+            return false;
+        }
+
+        @Override
+        public boolean is_rampable() {
             return false;
         }
 
@@ -127,21 +173,16 @@ public class RootServer extends Server {
         }
     }
 
-    private class SetCueMessageHandler extends MessageHandler {
+    private class SetCueMessageHandler extends SetterMessageHandler {
+
+        @Override
+        public Integer get_arity() {
+            return null;
+        }
 
         @Override
         public String get_name() {
             return "cue";
-        }
-
-        @Override
-        public boolean is_meta_relevant() {
-            return false;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return false;
         }
 
         @Override
