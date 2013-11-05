@@ -10,28 +10,18 @@ import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
 import oovu.clients.MessagePasserCallback;
-import oovu.messaging.MessageHandler;
+import oovu.messaging.InfoGetterMessageHandler;
 import oovu.messaging.Response;
 
 import com.cycling74.max.Atom;
 
 public abstract class ModuleMemberServer extends Server {
 
-    private class GetModuleNameMessageHandler extends MessageHandler {
+    private class GetModuleNameMessageHandler extends InfoGetterMessageHandler {
 
         @Override
         public String get_name() {
             return "getmodulename";
-        }
-
-        @Override
-        public boolean is_meta_relevant() {
-            return true;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return false;
         }
 
         @Override
