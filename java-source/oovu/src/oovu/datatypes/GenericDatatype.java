@@ -19,6 +19,11 @@ public class GenericDatatype extends Datatype {
     }
 
     @Override
+    public Integer get_arity() {
+        return null;
+    }
+
+    @Override
     public Atom[] get_default() {
         return Atom.newAtom(new double[] {
             0.
@@ -27,6 +32,16 @@ public class GenericDatatype extends Datatype {
 
     @Override
     protected void initialize_prerequisites(Map<String, Atom[]> argument_map) {
+    }
+
+    @Override
+    public boolean is_binding_relevant() {
+        return false;
+    }
+
+    @Override
+    public boolean is_rampable() {
+        return false;
     }
 
     @Override

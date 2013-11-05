@@ -97,6 +97,11 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
         return output;
     }
 
+    @Override
+    public Integer get_arity() {
+        return this.length;
+    }
+
     public Integer get_length() {
         return this.length;
     }

@@ -22,6 +22,11 @@ public class DecimalDatatype extends BoundedDatatype {
     }
 
     @Override
+    public Integer get_arity() {
+        return 1;
+    }
+
+    @Override
     public Atom[] get_default() {
         return Atom.newAtom(new double[] {
             0.

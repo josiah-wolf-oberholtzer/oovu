@@ -247,6 +247,16 @@ abstract public class BoundedDatatype extends Datatype implements
         this.initialize_extrema(argument_map);
     }
 
+    @Override
+    public boolean is_binding_relevant() {
+        return true;
+    }
+
+    @Override
+    public boolean is_rampable() {
+        return true;
+    }
+
     public void set_maximum(Double maximum) {
         this.maximum = maximum;
         this.sort_extrema();

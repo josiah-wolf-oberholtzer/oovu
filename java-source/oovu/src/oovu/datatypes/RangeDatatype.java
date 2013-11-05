@@ -130,6 +130,11 @@ public class RangeDatatype extends BoundedDatatype {
     }
 
     @Override
+    public Integer get_arity() {
+        return 2;
+    }
+
+    @Override
     public Atom[] get_default() {
         return Atom.newAtom(new double[] {
             0., 1.

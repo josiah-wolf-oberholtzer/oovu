@@ -73,6 +73,8 @@ public abstract class Datatype {
     public void cleanup_resources() {
     }
 
+    abstract public Integer get_arity();
+
     public String get_datatype() {
         return this.getClass().getSimpleName().toLowerCase()
             .replace("datatype", "");
@@ -94,6 +96,10 @@ public abstract class Datatype {
 
     abstract protected void initialize_prerequisites(
         Map<String, Atom[]> argument_map);
+
+    abstract public boolean is_binding_relevant();
+
+    abstract public boolean is_rampable();
 
     public abstract Atom[] process_input(Atom[] input);
 
