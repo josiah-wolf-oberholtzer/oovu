@@ -11,10 +11,10 @@ import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
 import oovu.clients.ServerClient;
+import oovu.eventscripts.EventScriptParser;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.Request;
 import oovu.messaging.SetterMessageHandler;
-import oovu.states.EventScriptParser;
 import oovu.states.State;
 import oovu.states.StateComponentAggregate;
 
@@ -23,7 +23,7 @@ import com.cycling74.max.MaxSystem;
 
 public class RootServer extends Server {
 
-    private class GetCuesMessageHandler extends MessageHandler {
+    private class ListEventsMessageHandler extends MessageHandler {
 
         @Override
         public Integer get_arity() {
@@ -32,7 +32,7 @@ public class RootServer extends Server {
 
         @Override
         public String get_name() {
-            return "getcues";
+            return "events/list";
         }
 
         @Override
@@ -58,9 +58,9 @@ public class RootServer extends Server {
         @Override
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
-            if (RootServer.this.cues != null) {
+            if (RootServer.this.events != null) {
                 Set<Entry<String, State>> entry_set =
-                    RootServer.this.cues.entrySet();
+                    RootServer.this.events.entrySet();
                 int counter = 0;
                 result[0] = new Atom[entry_set.size()];
                 for (Entry<String, State> entry : entry_set) {
@@ -70,7 +70,7 @@ public class RootServer extends Server {
             } else {
                 result[0] = new Atom[0];
             }
-            result[0] = Atom.newAtom("cues", result[0]);
+            result[0] = Atom.newAtom("events", result[0]);
             return result;
         }
     }
@@ -117,13 +117,13 @@ public class RootServer extends Server {
         }
     }
 
-    private class ReadCueScriptMessageHandler extends MessageHandler {
+    private class ReadEventScriptMessageHandler extends MessageHandler {
 
         @Override
         public void call_after() {
             Request request =
                 new Request(RootServer.this,
-                    OscAddress.from_cache("./:getcues"), new Atom[0], false);
+                    OscAddress.from_cache("./:events/list"), new Atom[0], false);
             RootServer.this.handle_request(request);
         }
 
@@ -134,7 +134,7 @@ public class RootServer extends Server {
 
         @Override
         public String get_name() {
-            return "readcues";
+            return "events/read";
         }
 
         @Override
@@ -166,14 +166,14 @@ public class RootServer extends Server {
                 filename = Atom.toOneString(arguments);
             }
             if (filename != null) {
-                RootServer.this.cues =
+                RootServer.this.events =
                     new EventScriptParser().parse_file(filename);
             }
             return null;
         }
     }
 
-    private class SetCueMessageHandler extends SetterMessageHandler {
+    private class SetEventMessageHandler extends SetterMessageHandler {
 
         @Override
         public Integer get_arity() {
@@ -182,19 +182,25 @@ public class RootServer extends Server {
 
         @Override
         public String get_name() {
-            return "cue";
+            return "events/goto";
         }
 
         @Override
         public Atom[][] run(Atom[] arguments) {
-            if (RootServer.this.cues == null) {
+            if (RootServer.this.events == null) {
                 return null;
             } else if (0 == arguments.length) {
                 return null;
             }
-            String cue_name = Atom.toOneString(arguments);
+            String cue_name = null;
+            if (arguments.length == 1 && arguments[0].isInt()) {
+                String[] cue_names = RootServer.this.events.keySet().toArray(new String[0]);
+                cue_name = cue_names[arguments[0].toInt()];
+            } else {
+                cue_name = Atom.toOneString(arguments);
+            }
             StateComponentAggregate cue =
-                (StateComponentAggregate) RootServer.this.cues.get(cue_name);
+                (StateComponentAggregate) RootServer.this.events.get(cue_name);
             if (cue == null) {
                 return null;
             }
@@ -220,15 +226,15 @@ public class RootServer extends Server {
         }
     }
 
-    private Map<String, State> cues = null;
+    private Map<String, State> events = null;
 
     public RootServer() {
         super(null);
         this.attach_to_osc_address_node(Environment.root_osc_address_node);
-        this.add_message_handler(new GetCuesMessageHandler());
+        this.add_message_handler(new ListEventsMessageHandler());
         this.add_message_handler(new GetStateMessageHandler());
-        this.add_message_handler(new ReadCueScriptMessageHandler());
-        this.add_message_handler(new SetCueMessageHandler());
+        this.add_message_handler(new ReadEventScriptMessageHandler());
+        this.add_message_handler(new SetEventMessageHandler());
     }
 
     @Override

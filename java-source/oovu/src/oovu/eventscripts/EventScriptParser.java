@@ -1,4 +1,4 @@
-package oovu.states;
+package oovu.eventscripts;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -9,6 +9,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import oovu.addresses.Environment;
+import oovu.states.State;
+import oovu.states.StateComponent;
+import oovu.states.StateComponentAggregate;
 
 import com.cycling74.max.Atom;
 
