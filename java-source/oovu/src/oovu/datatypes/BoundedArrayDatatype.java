@@ -2,18 +2,15 @@ package oovu.datatypes;
 
 import java.util.Map;
 
-import oovu.messaging.DatatypeMessageHandler;
+import oovu.messaging.GetterMessageHandler;
+import oovu.messaging.SetterMessageHandler;
 import oovu.servers.AttributeServer;
 
 import com.cycling74.max.Atom;
 
 abstract public class BoundedArrayDatatype extends BoundedDatatype {
 
-    private class GetLengthMessageHandler extends DatatypeMessageHandler {
-
-        public GetLengthMessageHandler(AttributeServer attribute_server) {
-            super(attribute_server);
-        }
+    private class GetLengthMessageHandler extends GetterMessageHandler {
 
         @Override
         public String get_name() {
@@ -40,30 +37,21 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
         }
     }
 
-    private class SetLengthMessageHandler extends DatatypeMessageHandler {
-
-        public SetLengthMessageHandler(AttributeServer attribute_server) {
-            super(attribute_server);
-        }
+    private class SetLengthMessageHandler extends SetterMessageHandler {
 
         @Override
         public void call_after() {
-            this.attribute_server.reoutput_value();
+            BoundedArrayDatatype.this.client.reoutput_value();
+        }
+
+        @Override
+        public Integer get_arity() {
+            return 1;
         }
 
         @Override
         public String get_name() {
             return "length";
-        }
-
-        @Override
-        public boolean is_meta_relevant() {
-            return false;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return false;
         }
 
         @Override
@@ -83,10 +71,8 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {
-            client
-                .add_message_handler(new GetLengthMessageHandler(this.client));
-            client
-                .add_message_handler(new SetLengthMessageHandler(this.client));
+            client.add_message_handler(new GetLengthMessageHandler());
+            client.add_message_handler(new SetLengthMessageHandler());
         }
     }
 
