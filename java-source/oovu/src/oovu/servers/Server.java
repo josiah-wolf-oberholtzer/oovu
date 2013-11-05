@@ -16,6 +16,7 @@ import oovu.clients.ServerClient;
 import oovu.events.Event;
 import oovu.events.EventHandler;
 import oovu.events.EventTypes;
+import oovu.messaging.InfoGetterMessageHandler;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessagePasser;
 import oovu.messaging.Request;
@@ -32,12 +33,27 @@ abstract public class Server implements MessagePasser {
     private class DumpMetaMessageHandler extends MessageHandler {
 
         @Override
+        public Integer get_arity() {
+            return 0;
+        }
+
+        @Override
         public String get_name() {
             return "dumpmeta";
         }
 
         @Override
+        public boolean is_binding_relevant() {
+            return false;
+        }
+
+        @Override
         public boolean is_meta_relevant() {
+            return false;
+        }
+
+        @Override
+        public boolean is_rampable() {
             return false;
         }
 
@@ -70,7 +86,7 @@ abstract public class Server implements MessagePasser {
         }
     }
 
-    private class GetInterfaceMessageHandler extends MessageHandler {
+    private class GetInterfaceMessageHandler extends InfoGetterMessageHandler {
 
         @Override
         public String get_name() {
@@ -99,21 +115,11 @@ abstract public class Server implements MessagePasser {
         }
     }
 
-    private class GetMetaMessageHandler extends MessageHandler {
+    private class GetMetaMessageHandler extends InfoGetterMessageHandler {
 
         @Override
         public String get_name() {
             return "getmeta";
-        }
-
-        @Override
-        public boolean is_meta_relevant() {
-            return false;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return false;
         }
 
         @Override
@@ -131,21 +137,11 @@ abstract public class Server implements MessagePasser {
         }
     }
 
-    private class GetOscAddressMessageHandler extends MessageHandler {
+    private class GetOscAddressMessageHandler extends InfoGetterMessageHandler {
 
         @Override
         public String get_name() {
             return "getoscaddress";
-        }
-
-        @Override
-        public boolean is_meta_relevant() {
-            return true;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return false;
         }
 
         @Override
@@ -162,21 +158,11 @@ abstract public class Server implements MessagePasser {
         }
     }
 
-    private class GetUniqueIdMessageHandler extends MessageHandler {
+    private class GetUniqueIdMessageHandler extends InfoGetterMessageHandler {
 
         @Override
         public String get_name() {
             return "getuniqueid";
-        }
-
-        @Override
-        public boolean is_meta_relevant() {
-            return true;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return false;
         }
 
         @Override
@@ -191,12 +177,27 @@ abstract public class Server implements MessagePasser {
     private class ReportMessageHandler extends MessageHandler {
 
         @Override
+        public Integer get_arity() {
+            return null;
+        }
+
+        @Override
         public String get_name() {
             return "report";
         }
 
         @Override
+        public boolean is_binding_relevant() {
+            return false;
+        }
+
+        @Override
         public boolean is_meta_relevant() {
+            return false;
+        }
+
+        @Override
+        public boolean is_rampable() {
             return false;
         }
 
@@ -218,12 +219,27 @@ abstract public class Server implements MessagePasser {
     private class ShowMessageHandler extends MessageHandler {
 
         @Override
+        public Integer get_arity() {
+            return null;
+        }
+
+        @Override
         public String get_name() {
             return "show";
         }
 
         @Override
+        public boolean is_binding_relevant() {
+            return false;
+        }
+
+        @Override
         public boolean is_meta_relevant() {
+            return false;
+        }
+
+        @Override
+        public boolean is_rampable() {
             return false;
         }
 
