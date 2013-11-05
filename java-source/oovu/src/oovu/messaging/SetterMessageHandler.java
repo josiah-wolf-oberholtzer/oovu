@@ -1,17 +1,15 @@
 package oovu.messaging;
 
-
-
 public abstract class SetterMessageHandler extends MessageHandler {
 
     @Override
-    public boolean is_meta_relevant() {
+    public boolean is_binding_relevant() {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean is_binding_relevant() {
+    public boolean is_meta_relevant() {
         // TODO Auto-generated method stub
         return false;
     }
@@ -27,5 +25,4 @@ public abstract class SetterMessageHandler extends MessageHandler {
         // TODO Auto-generated method stub
         return false;
     }
-
 }

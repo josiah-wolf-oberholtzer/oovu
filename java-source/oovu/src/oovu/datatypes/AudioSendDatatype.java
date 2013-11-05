@@ -6,7 +6,7 @@ import java.util.Map;
 import oovu.addresses.OscAddress;
 import oovu.events.EventHandler;
 import oovu.events.EventTypes;
-import oovu.messaging.DatatypeMessageHandler;
+import oovu.messaging.InfoGetterMessageHandler;
 import oovu.servers.AttributeServer;
 import oovu.servers.AudioReceiveServer;
 import oovu.servers.Server;
@@ -33,25 +33,12 @@ public class AudioSendDatatype extends OscAddressDatatype {
         }
     }
 
-    private class GetDestinationIdMessageHandler extends DatatypeMessageHandler {
-
-        public GetDestinationIdMessageHandler(AttributeServer attribute_server) {
-            super(attribute_server);
-        }
+    private class GetDestinationIdMessageHandler extends
+        InfoGetterMessageHandler {
 
         @Override
         public String get_name() {
             return "getdestinationid";
-        }
-
-        @Override
-        public boolean is_meta_relevant() {
-            return true;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return false;
         }
 
         @Override
@@ -64,25 +51,12 @@ public class AudioSendDatatype extends OscAddressDatatype {
         }
     }
 
-    private class GetDestinationsMessageHandler extends DatatypeMessageHandler {
-
-        public GetDestinationsMessageHandler(AttributeServer attribute_server) {
-            super(attribute_server);
-        }
+    private class GetDestinationsMessageHandler extends
+        InfoGetterMessageHandler {
 
         @Override
         public String get_name() {
             return "getdestinations";
-        }
-
-        @Override
-        public boolean is_meta_relevant() {
-            return true;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return false;
         }
 
         @Override
@@ -105,10 +79,10 @@ public class AudioSendDatatype extends OscAddressDatatype {
         if (this.client != null) {
             this.client
                 .add_event_handler(new AudioReceiversChangedEventHandler());
-            this.client.add_message_handler(new GetDestinationIdMessageHandler(
-                client));
-            this.client.add_message_handler(new GetDestinationsMessageHandler(
-                client));
+            this.client
+                .add_message_handler(new GetDestinationIdMessageHandler());
+            this.client
+                .add_message_handler(new GetDestinationsMessageHandler());
         }
     }
 

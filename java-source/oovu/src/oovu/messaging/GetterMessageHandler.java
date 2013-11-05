@@ -1,6 +1,5 @@
 package oovu.messaging;
 
-
 public abstract class GetterMessageHandler extends MessageHandler {
 
     @Override
@@ -20,5 +19,4 @@ public abstract class GetterMessageHandler extends MessageHandler {
         // TODO Auto-generated method stub
         return false;
     }
-
 }
