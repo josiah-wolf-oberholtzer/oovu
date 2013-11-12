@@ -57,6 +57,7 @@ public abstract class Datatype {
         map.put("oscaddress", OscAddressDatatype.class);
         map.put("range", RangeDatatype.class);
         map.put("string", StringDatatype.class);
+        map.put("trigger", TriggerDatatype.class);
         map.put(null, GenericDatatype.class);
         datatype_classes_by_label = Collections.unmodifiableMap(map);
     }
