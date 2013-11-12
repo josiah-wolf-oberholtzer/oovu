@@ -33,4 +33,22 @@ public class Test__ValueRange {
             Assert.assertTrue(result <= value_range.high);
         }
     }
+    
+    @Test
+    public void test_03() {
+        ValueRange value_range_a = new ValueRange(0, 1);
+        ValueRange value_range_b = new ValueRange(0, 1);
+        ValueRange value_range_c = new ValueRange(0);
+        ValueRange value_range_d = new ValueRange(0.5, 1.5);
+        Assert.assertTrue(value_range_a.equals(value_range_a));
+        Assert.assertTrue(value_range_a.equals(value_range_b));
+        Assert.assertFalse(value_range_a.equals(value_range_c));
+        Assert.assertFalse(value_range_a.equals(value_range_d));
+        Assert.assertTrue(value_range_b.equals(value_range_b));
+        Assert.assertFalse(value_range_b.equals(value_range_c));
+        Assert.assertFalse(value_range_b.equals(value_range_d));
+        Assert.assertTrue(value_range_c.equals(value_range_c));
+        Assert.assertFalse(value_range_c.equals(value_range_d));
+        Assert.assertTrue(value_range_d.equals(value_range_d));
+    }
 }
