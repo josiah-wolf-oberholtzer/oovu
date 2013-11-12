@@ -392,6 +392,10 @@ abstract public class Server implements MessagePasser {
         return response;
     }
 
+    public MessageHandler get_message_handler(String message_name) {
+        return this.message_handlers.get(message_name);
+    }
+
     public String get_name() {
         return this.name;
     }

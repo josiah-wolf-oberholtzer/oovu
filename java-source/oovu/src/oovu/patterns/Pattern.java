@@ -1,9 +1,5 @@
 package oovu.patterns;
 
-import java.util.Map;
-
-import com.cycling74.max.Atom;
-
 import oovu.servers.Server;
 import oovu.timing.ClockWatcher;
 
@@ -27,20 +23,20 @@ public class Pattern extends ClockWatcher {
         this.arity = arity;
         this.start_watching_clock(this);
     }
-    
-//    public static Pattern from_mapping(Server client, Map<String, Atom[]> arguments) {
-//        String message = null;
-//        ValueRange[] timings = null;
-//        ValueRange[] values = null;
-//        int arity = 0;
-//        if (arguments.containsKey("message")) {
-//             
-//        } else {
-//            
-//        }
-//
-//    }
 
+    // public static Pattern from_mapping(Server client, Map<String, Atom[]>
+    // arguments) {
+    // String message = null;
+    // ValueRange[] timings = null;
+    // ValueRange[] values = null;
+    // int arity = 0;
+    // if (arguments.containsKey("message")) {
+    //
+    // } else {
+    //
+    // }
+    //
+    // }
     @Override
     public void execute(double current_time) {
         synchronized (ClockWatcher.class) {
