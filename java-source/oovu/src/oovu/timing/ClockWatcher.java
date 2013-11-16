@@ -43,7 +43,7 @@ abstract public class ClockWatcher {
 
     abstract public void execute(double current_time);
 
-    protected void start_watching_clock(ClockWatcher clock_watcher) {
+    public void start_watching_clock(ClockWatcher clock_watcher) {
         synchronized (ClockWatcher.class) {
             int original_clock_watchers_count =
                 ClockWatcher.clock_watchers.size();
@@ -66,7 +66,7 @@ abstract public class ClockWatcher {
         }
     }
 
-    protected void stop_watching_clock(ClockWatcher clock_watcher) {
+    public void stop_watching_clock(ClockWatcher clock_watcher) {
         synchronized (ClockWatcher.class) {
             ClockWatcher.clock_watchers.remove(clock_watcher);
             if ((ClockWatcher.clock_watchers.size() == 0)

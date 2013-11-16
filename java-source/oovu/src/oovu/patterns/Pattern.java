@@ -1,5 +1,6 @@
 package oovu.patterns;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import oovu.datatypes.BooleanDatatype;
@@ -111,5 +112,20 @@ public class Pattern extends ClockWatcher {
 
     public void set_next_event_time(double next_event_time) {
         this.next_event_time = next_event_time;
+    }
+
+    public Atom[] to_atoms() {
+        ArrayList<Atom> result = new ArrayList<Atom>();
+        result.add(Atom.newAtom(":message"));
+        result.add(Atom.newAtom(this.message));
+        result.add(Atom.newAtom(":timings"));
+        for (ValueRange value_range : this.timings) {
+            result.add(value_range.to_atom());
+        }
+        result.add(Atom.newAtom(":values"));
+        for (ValueRange value_range : this.values) {
+            result.add(value_range.to_atom());
+        }
+        return result.toArray(new Atom[0]);
     }
 }

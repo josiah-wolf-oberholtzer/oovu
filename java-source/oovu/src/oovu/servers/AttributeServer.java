@@ -15,6 +15,7 @@ import oovu.messaging.MessageHandler;
 import oovu.messaging.Request;
 import oovu.messaging.Response;
 import oovu.messaging.SetterMessageHandler;
+import oovu.patterns.Pattern;
 import oovu.states.State;
 import oovu.states.StateComponent;
 import oovu.states.StateComponentAggregate;
@@ -149,6 +150,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
 
     protected Integer priority;
     public final Datatype datatype;
+    protected Pattern pattern;
 
     public AttributeServer(ModuleServer module_server,
         Map<String, Atom[]> argument_map) {
@@ -162,6 +164,10 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         this.initialize_priority();
         if (this.datatype instanceof AudioSendDatatype) {
             Event.add_observer(EventTypes.DSP_RECEIVERS_CHANGED, this);
+        }
+        if (!(this instanceof ReturnServer)) {
+            // this.add_message_handler(new GetPatternMessageHandler());
+            // this.add_message_handler(new SetPatternMessageHandler())
         }
     }
 
@@ -179,6 +185,10 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         } else {
             return -1 * priority_comparison;
         }
+    }
+
+    public Pattern get_pattern() {
+        return this.pattern;
     }
 
     public Integer get_priority() {
@@ -240,6 +250,16 @@ abstract public class AttributeServer extends ModuleMemberServer implements
     }
 
     abstract public void reoutput_value();
+
+    public void set_pattern(Pattern pattern) {
+        if (this.pattern != null) {
+            this.pattern.stop_watching_clock(this.pattern);
+        }
+        this.pattern = pattern;
+        if (this.pattern != null) {
+            this.pattern.start_watching_clock(this.pattern);
+        }
+    }
 
     public void set_priority(Integer priority) {
         if (priority == null) {

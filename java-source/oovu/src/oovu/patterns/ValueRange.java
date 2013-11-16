@@ -79,4 +79,11 @@ public class ValueRange {
         result = (prime * result) + (int) (temp ^ (temp >>> 32));
         return result;
     }
+
+    public Atom to_atom() {
+        if (this.low == this.high) {
+            return Atom.newAtom(this.low);
+        }
+        return Atom.newAtom(this.low + ":" + this.high);
+    }
 }
