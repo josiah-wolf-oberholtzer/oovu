@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry exported="true" kind="lib" path="/Applications/Max 6.1/Cycling &apos;74/java/lib/max.jar"/>
-	<classpathentry exported="true" kind="lib" path="/Applications/Max 6.1/Cycling &apos;74/java/lib/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="/Users/josiah/Documents/Development/oovu/java-source/oovu/lib/max.jar"/>
+	<classpathentry kind="lib" path="/Users/josiah/Documents/Development/oovu/java-source/oovu/lib/log4j-1.2.16.jar"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="src" path="java-source/oovu/src"/>
