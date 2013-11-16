@@ -45,10 +45,12 @@ public abstract class ModuleMemberServer extends Server {
     public static final Map<String, Class<?>> member_nodes_by_label;
     static {
         Map<String, Class<?>> map = new HashMap<String, Class<?>>();
-        map.put("MethodNode", MethodServer.class);
-        map.put("PropertyNode", PropertyServer.class);
-        map.put("AudioReceive", AudioReceiveServer.class);
-        map.put("ReturnNode", ReturnServer.class);
+        map.put("MethodServer", MethodServer.class);
+        map.put("PropertyServer", PropertyServer.class);
+        map.put("AudioReceiveServer", AudioReceiveServer.class);
+        map.put("ReturnServer", ReturnServer.class);
+        map.put("AudioSendServer", AudioSendServer.class);
+        map.put("DspSetupServer", DspSetupServer.class);
         member_nodes_by_label = Collections.unmodifiableMap(map);
     }
 

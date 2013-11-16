@@ -21,7 +21,7 @@ public class AudioReceiveServer extends ModuleMemberServer {
         Atom[] argument_list) {
         AudioReceiveServer server =
             (AudioReceiveServer) ModuleMemberServer.allocate_from_label(
-                "AudioReceive", module_id, desired_name, argument_list);
+                "AudioReceiveServer", module_id, desired_name, argument_list);
         OscAddress osc_address = server.get_osc_address();
         if ((osc_address != null)
             && (!AudioReceiveServer.audio_receive_servers

@@ -1,25 +1,26 @@
 package oovu.patterns;
 
-import java.util.ArrayList;
 import java.util.Map;
-
-import com.cycling74.max.Atom;
 
 import oovu.datatypes.BooleanDatatype;
 import oovu.datatypes.BoundedDatatype;
-import oovu.datatypes.TriggerDatatype;
 import oovu.messaging.MessageHandler;
 import oovu.servers.AttributeServer;
 import oovu.servers.Server;
 import oovu.timing.ClockWatcher;
 
+import com.cycling74.max.Atom;
+
 public class Pattern extends ClockWatcher {
 
     public static Pattern from_atoms(Server client, Atom[] atoms) {
-        return Pattern.from_mapping(client, Server.process_atom_arguments(atoms));
+        return Pattern.from_mapping(client,
+            Server.process_atom_arguments(atoms));
     }
-    
-    public static Pattern from_mapping(Server client, Map<String, Atom[]> arguments) {
+
+    public static Pattern from_mapping(
+        Server client,
+        Map<String, Atom[]> arguments) {
         String message = null;
         ValueRange[] timings = null;
         ValueRange[] values = null;
@@ -39,33 +40,42 @@ public class Pattern extends ClockWatcher {
         if (arguments.containsKey("timings")) {
             Atom[] atoms = arguments.get("timings");
             timings = new ValueRange[atoms.length];
-            for (int i = 0, j = atoms.length; i < j; i++ ) {
+            for (int i = 0, j = atoms.length; i < j; i++) {
                 timings[i] = new ValueRange(atoms[i]);
-            }            
+            }
         }
-        if (timings == null || 0 == timings.length) {
-            timings = new ValueRange[]{ new ValueRange(250) };
+        if ((timings == null) || (0 == timings.length)) {
+            timings = new ValueRange[] {
+                new ValueRange(250)
+            };
         }
         if (arguments.containsKey("values")) {
             Atom[] atoms = arguments.get("values");
             values = new ValueRange[atoms.length];
-            for (int i = 0, j = atoms.length; i < j; i++ ) {
+            for (int i = 0, j = atoms.length; i < j; i++) {
                 values[i] = new ValueRange(atoms[i]);
             }
         }
-        if ((values == null || 0 == values.length) && (0 < arity)) {
+        if (((values == null) || (0 == values.length)) && (0 < arity)) {
             if (client instanceof AttributeServer) {
                 AttributeServer attribute = (AttributeServer) client;
                 if (attribute.datatype instanceof BoundedDatatype) {
-                    BoundedDatatype bounded_datatype = (BoundedDatatype) attribute.datatype; 
+                    BoundedDatatype bounded_datatype =
+                        (BoundedDatatype) attribute.datatype;
                     double low = bounded_datatype.get_minimum();
                     double high = bounded_datatype.get_maximum();
-                    values = new ValueRange[]{ new ValueRange(low, high) };
+                    values = new ValueRange[] {
+                        new ValueRange(low, high)
+                    };
                 } else if (attribute.datatype instanceof BooleanDatatype) {
-                    values = new ValueRange[]{ new ValueRange(0), new ValueRange(1) };
+                    values = new ValueRange[] {
+                        new ValueRange(0), new ValueRange(1)
+                    };
                 }
             } else {
-                values = new ValueRange[]{ new ValueRange(0) };
+                values = new ValueRange[] {
+                    new ValueRange(0)
+                };
             }
         }
         return new Pattern(client, message, timings, values, arity);
@@ -98,7 +108,7 @@ public class Pattern extends ClockWatcher {
 
     public void notify_client() {
     }
-    
+
     public void set_next_event_time(double next_event_time) {
         this.next_event_time = next_event_time;
     }
