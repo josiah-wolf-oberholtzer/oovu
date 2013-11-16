@@ -161,7 +161,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         this.initialize_value();
         this.initialize_priority();
         if (this.datatype instanceof AudioSendDatatype) {
-            Event.add_observer(EventTypes.AUDIO_RECEIVERS_CHANGED, this);
+            Event.add_observer(EventTypes.DSP_RECEIVERS_CHANGED, this);
         }
     }
 

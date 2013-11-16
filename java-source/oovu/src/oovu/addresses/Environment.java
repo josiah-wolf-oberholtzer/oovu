@@ -3,7 +3,7 @@ package oovu.addresses;
 import java.util.concurrent.locks.ReentrantLock;
 
 import oovu.events.Event;
-import oovu.servers.AudioReceiveServer;
+import oovu.servers.DspReceiveServer;
 import oovu.servers.RootServer;
 
 import org.apache.log4j.BasicConfigurator;
@@ -70,7 +70,7 @@ public class Environment {
             Environment.root_server
                 .attach_to_osc_address_node(Environment.root_osc_address_node);
             Event.clear_observers();
-            AudioReceiveServer.audio_receive_servers.clear();
+            DspReceiveServer.dsp_receive_servers.clear();
         }
     }
 }

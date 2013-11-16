@@ -153,6 +153,7 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
     }
 
     public final Integer module_id;
+    private DspSettingsServer dsp_settings_server;
 
     public ModuleServer(Atom[] arguments) {
         this(arguments[0].getInt(), Server.process_atom_arguments(Atom
@@ -162,6 +163,7 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
     public ModuleServer(Integer module_id, Map<String, Atom[]> argument_map) {
         super(argument_map);
         this.module_id = module_id;
+        this.dsp_settings_server = null;
         this.attach_to_parent_server(Environment.root_server);
         this.add_message_handler(new GetMembersMessageHandler());
         this.add_message_handler(new GetMethodsMessageHandler());
@@ -218,6 +220,10 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
         return return_servers;
     }
 
+    public DspSettingsServer get_dsp_settings_server() {
+        return this.dsp_settings_server;
+    }
+
     public String[] get_relative_server_names(List<? extends Server> servers) {
         ArrayList<String> names = new ArrayList<String>();
         OscAddressNode this_address_node = this.get_osc_address_node();
@@ -243,5 +249,13 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
         }
         return new StateComponentAggregate(osc_address_string,
             attribute_states.toArray(new State[0]));
+    }
+
+    public void set_dsp_settings_server(DspSettingsServer dsp_settings_server) {
+        if (this.dsp_settings_server == null) {
+            this.dsp_settings_server = dsp_settings_server;
+        } else if (this.dsp_settings_server != dsp_settings_server) {
+            throw new RuntimeException();
+        }
     }
 }

@@ -8,7 +8,7 @@ import oovu.events.EventHandler;
 import oovu.events.EventTypes;
 import oovu.messaging.InfoGetterMessageHandler;
 import oovu.servers.AttributeServer;
-import oovu.servers.AudioReceiveServer;
+import oovu.servers.DspReceiveServer;
 import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
@@ -19,7 +19,7 @@ public class AudioSendDatatype extends OscAddressDatatype {
 
         @Override
         public EventTypes get_event() {
-            return EventTypes.AUDIO_RECEIVERS_CHANGED;
+            return EventTypes.DSP_RECEIVERS_CHANGED;
         }
 
         @Override
@@ -94,28 +94,28 @@ public class AudioSendDatatype extends OscAddressDatatype {
     }
 
     public Integer get_destination_id() {
-        AudioReceiveServer destination_server = this.get_destination_server();
+        DspReceiveServer destination_server = this.get_destination_server();
         if (destination_server == null) {
             return System.identityHashCode(this.client);
         }
         return System.identityHashCode(destination_server);
     }
 
-    public AudioReceiveServer get_destination_server() {
+    public DspReceiveServer get_destination_server() {
         Atom[] value = this.get_value();
         String destination_name = value[0].getString();
         if (destination_name.equals("---")) {
             return null;
         }
         OscAddress osc_address = OscAddress.from_cache(destination_name);
-        return AudioReceiveServer.audio_receive_servers.get(osc_address);
+        return DspReceiveServer.dsp_receive_servers.get(osc_address);
     }
 
     public String[] get_destinations() {
         String[] destination_names =
-            new String[AudioReceiveServer.audio_receive_servers.size()];
+            new String[DspReceiveServer.dsp_receive_servers.size()];
         OscAddress[] osc_addresses =
-            AudioReceiveServer.audio_receive_servers.keySet().toArray(
+            DspReceiveServer.dsp_receive_servers.keySet().toArray(
                 new OscAddress[0]);
         for (int i = 0, j = osc_addresses.length; i < j; i++) {
             destination_names[i] = osc_addresses[i].toString();
@@ -136,8 +136,7 @@ public class AudioSendDatatype extends OscAddressDatatype {
         } catch (RuntimeException e) {
         }
         if ((osc_address != null)
-            && (AudioReceiveServer.audio_receive_servers
-                .containsKey(osc_address))) {
+            && (DspReceiveServer.dsp_receive_servers.containsKey(osc_address))) {
             destination_name = osc_address.toString();
         } else {
             destination_name = "---";
