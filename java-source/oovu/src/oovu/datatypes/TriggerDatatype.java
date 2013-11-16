@@ -7,7 +7,6 @@ import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
 
-
 public class TriggerDatatype extends Datatype {
 
     public TriggerDatatype(Atom[] arguments) {
@@ -26,7 +25,9 @@ public class TriggerDatatype extends Datatype {
 
     @Override
     public Atom[] get_default() {
-        return new Atom[]{ Atom.newAtom("bang") };
+        return new Atom[] {
+            Atom.newAtom("bang")
+        };
     }
 
     @Override
@@ -45,6 +46,8 @@ public class TriggerDatatype extends Datatype {
 
     @Override
     public Atom[] process_input(Atom[] input) {
-        return new Atom[]{ Atom.newAtom("bang") };
+        return new Atom[] {
+            Atom.newAtom("bang")
+        };
     }
 }

@@ -1,10 +1,9 @@
 package oovu;
 
-import com.cycling74.max.Atom;
-
 import oovu.clients.ModuleMemberServerClient;
 import oovu.servers.DspSetupServer;
 
+import com.cycling74.max.Atom;
 
 public class DspSetup extends ModuleMemberServerClient {
 

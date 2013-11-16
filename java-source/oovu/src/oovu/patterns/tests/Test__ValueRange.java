@@ -33,7 +33,7 @@ public class Test__ValueRange {
             Assert.assertTrue(result <= value_range.high);
         }
     }
-    
+
     @Test
     public void test_03() {
         ValueRange value_range_a = new ValueRange(0, 1);
