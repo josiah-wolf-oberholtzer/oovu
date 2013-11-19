@@ -253,11 +253,11 @@ abstract public class AttributeServer extends ModuleMemberServer implements
 
     public void set_pattern(Pattern pattern) {
         if (this.pattern != null) {
-            this.pattern.stop_watching_clock(this.pattern);
+            this.pattern.stop();
         }
         this.pattern = pattern;
         if (this.pattern != null) {
-            this.pattern.start_watching_clock(this.pattern);
+            this.pattern.start();
         }
     }
 

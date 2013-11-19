@@ -98,7 +98,6 @@ public class Pattern extends ClockWatcher {
         this.timings = timings;
         this.values = values;
         this.arity = arity;
-        this.start_watching_clock(this);
     }
 
     @Override
