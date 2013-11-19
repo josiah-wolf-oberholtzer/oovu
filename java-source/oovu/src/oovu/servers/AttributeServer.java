@@ -25,6 +25,35 @@ import com.cycling74.max.Atom;
 abstract public class AttributeServer extends ModuleMemberServer implements
     Comparable<AttributeServer> {
 
+    private class GetPatternMessageHandler extends GetterMessageHandler {
+
+        @Override
+        public String get_name() {
+            return "getpattern";
+        }
+
+        @Override
+        public boolean is_meta_relevant() {
+            return false;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return true;
+        }
+
+        @Override
+        public Atom[][] run(Atom[] arguments) {
+            Atom[][] result = new Atom[1][0];
+            Pattern pattern = AttributeServer.this.get_pattern();
+            if (pattern != null) {
+                result[0] = pattern.to_atoms();
+            }
+            result[0] = Atom.newAtom("pattern", result[0]);
+            return null;
+        }
+    }
+
     private class GetPriorityMessageHandler extends GetterMessageHandler {
 
         @Override
@@ -80,6 +109,29 @@ abstract public class AttributeServer extends ModuleMemberServer implements
             result[0] = AttributeServer.this.get_value();
             result[0] = Atom.newAtom("value", result[0]);
             return result;
+        }
+    }
+
+    private class SetPatternMessageHandler extends SetterMessageHandler {
+
+        @Override
+        public Integer get_arity() {
+            return null;
+        }
+
+        @Override
+        public String get_name() {
+            return "pattern";
+        }
+
+        @Override
+        public Atom[][] run(Atom[] arguments) {
+            Pattern pattern = null;
+            if (0 < arguments.length) {
+                pattern = Pattern.from_atoms(AttributeServer.this, arguments);
+            }
+            AttributeServer.this.set_pattern(pattern);
+            return null;
         }
     }
 
@@ -166,8 +218,8 @@ abstract public class AttributeServer extends ModuleMemberServer implements
             Event.add_observer(EventTypes.DSP_RECEIVERS_CHANGED, this);
         }
         if (!(this instanceof ReturnServer)) {
-            // this.add_message_handler(new GetPatternMessageHandler());
-            // this.add_message_handler(new SetPatternMessageHandler())
+            this.add_message_handler(new GetPatternMessageHandler());
+            this.add_message_handler(new SetPatternMessageHandler());
         }
     }
 
@@ -252,12 +304,14 @@ abstract public class AttributeServer extends ModuleMemberServer implements
     abstract public void reoutput_value();
 
     public void set_pattern(Pattern pattern) {
-        if (this.pattern != null) {
-            this.pattern.stop();
-        }
-        this.pattern = pattern;
-        if (this.pattern != null) {
-            this.pattern.start();
+        if (pattern != this.pattern) {
+            if (this.pattern != null) {
+                this.pattern.stop();
+            }
+            this.pattern = pattern;
+            if (this.pattern != null) {
+                this.pattern.start();
+            }
         }
     }
 
