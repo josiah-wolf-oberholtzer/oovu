@@ -7,7 +7,6 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import com.cycling74.max.Executable;
 import com.cycling74.max.MaxClock;
-import com.cycling74.max.MaxObject;
 
 abstract public class ClockWatcher {
 
@@ -85,7 +84,7 @@ abstract public class ClockWatcher {
                 && (ClockWatcher.clock != null)) {
                 ClockWatcher.clock.unset();
                 // ClockWatcher.clock.release();
-                MaxObject.post("Freeing Clock");
+                // MaxObject.post("Freeing Clock");
             }
         }
     }

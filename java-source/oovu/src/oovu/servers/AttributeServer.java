@@ -50,7 +50,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                 result[0] = pattern.to_atoms();
             }
             result[0] = Atom.newAtom("pattern", result[0]);
-            return null;
+            return result;
         }
     }
 
