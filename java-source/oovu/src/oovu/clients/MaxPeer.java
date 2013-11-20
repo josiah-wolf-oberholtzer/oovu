@@ -77,12 +77,6 @@ abstract public class MaxPeer extends MaxObject implements MessagePasser {
 
     @Override
     public void list(Atom[] input) {
-        Request request = null;
-        if (this.getInlet() == 0) {
-            request =
-                new Request(this, OscAddress.from_cache("./:value"), input,
-                    true);
-        }
-        this.handle_request(request);
+        this.anything(":value", input);
     }
 }

@@ -35,11 +35,13 @@ public class Proxy extends MaxPeer implements MessagePasser {
     }
 
     protected OscAddressNode osc_address_node;
+    protected String message_handler_name;
 
     public Proxy(Atom[] arguments) {
         this.declareIO(3, 2);
         this.max_adapter = new GenericMaxAdapter(this);
         this.osc_address_node = null;
+        this.message_handler_name = null;
         try {
             MaxSystem.deferLow(new RebindCallback(this, arguments));
         } catch (UnsatisfiedLinkError e) {
@@ -55,27 +57,33 @@ public class Proxy extends MaxPeer implements MessagePasser {
             }
         } else {
             OscAddress osc_address = null;
-            if (this.getInlet() == 1) {
-                osc_address = OscAddress.from_cache("./:" + message);
-            } else if ((1 < message.length()) && (message.charAt(0) == ':')) {
-                osc_address = OscAddress.from_cache("./" + message);
-            } else {
-                Server server = this.get_osc_address_node().get_server();
-                if (server instanceof ModuleMemberServer) {
-                    osc_address = OscAddress.from_cache("./:value");
-                    arguments = Atom.newAtom(message, arguments);
+            if (this.message_handler_name == null) {
+                if (this.getInlet() == 1) {
+                    osc_address = OscAddress.from_cache("./:" + message);
+                } else if ((1 < message.length()) && (message.charAt(0) == ':')) {
+                    osc_address = OscAddress.from_cache("./" + message);
                 } else {
-                    if (message.charAt(0) == '/') {
-                        osc_address = OscAddress.from_cache("." + message);
+                    Server server = this.get_osc_address_node().get_server();
+                    if (server instanceof ModuleMemberServer) {
+                        osc_address = OscAddress.from_cache("./:value");
+                        arguments = Atom.newAtom(message, arguments);
                     } else {
-                        osc_address = OscAddress.from_cache(message);
-                    }
-                    if (osc_address.message_handler_name == null) {
-                        osc_address =
-                            OscAddress.from_cache(osc_address.toString()
-                                + "/:value");
+                        if (message.charAt(0) == '/') {
+                            osc_address = OscAddress.from_cache("." + message);
+                        } else {
+                            osc_address = OscAddress.from_cache(message);
+                        }
+                        if (osc_address.message_handler_name == null) {
+                            osc_address =
+                                OscAddress.from_cache(osc_address.toString()
+                                    + "/:value");
+                        }
                     }
                 }
+            } else {
+                arguments = Atom.newAtom(message, arguments);
+                osc_address =
+                    OscAddress.from_cache("./:" + this.message_handler_name);
             }
             Request request = new Request(this, osc_address, arguments, true);
             this.handle_request(request);
@@ -128,6 +136,11 @@ public class Proxy extends MaxPeer implements MessagePasser {
             return;
         }
         this.attach(found_osc_address_node);
+        if (osc_address.message_handler_name != null) {
+            this.message_handler_name = osc_address.message_handler_name;
+        } else {
+            this.message_handler_name = null;
+        }
         if (this.osc_address_node.get_server() != null) {
             try {
                 Server server = this.osc_address_node.get_server();
@@ -147,6 +160,11 @@ public class Proxy extends MaxPeer implements MessagePasser {
             this.osc_address_node.prune_if_necessary();
         }
         this.osc_address_node = null;
+        this.message_handler_name = null;
+    }
+
+    public String get_message_handler_name() {
+        return this.message_handler_name;
     }
 
     @Override

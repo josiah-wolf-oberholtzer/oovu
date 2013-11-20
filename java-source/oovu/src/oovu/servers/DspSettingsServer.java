@@ -50,7 +50,8 @@ public class DspSettingsServer extends ModuleMemberServer {
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][2];
             result[0][0] = Atom.newAtom("inputcount");
-            result[0][1] = Atom.newAtom(DspSettingsServer.this.input_count);
+            result[0][1] =
+                Atom.newAtom(DspSettingsServer.this.get_input_count());
             return result;
         }
     }
