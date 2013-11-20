@@ -13,6 +13,32 @@ import com.cycling74.max.Atom;
 
 public class DspSettingsServer extends ModuleMemberServer {
 
+    private class GetActiveMessageHandler extends GetterMessageHandler {
+
+        @Override
+        public String get_name() {
+            return "getactive";
+        }
+
+        @Override
+        public boolean is_meta_relevant() {
+            return true;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            return true;
+        }
+
+        @Override
+        public Atom[][] run(Atom[] arguments) {
+            Atom[][] result = new Atom[1][2];
+            result[0][0] = Atom.newAtom("active");
+            result[0][1] = Atom.newAtom(DspSettingsServer.this.get_is_active());
+            return result;
+        }
+    }
+
     private class GetInputCountMessageHandler extends InfoGetterMessageHandler {
 
         @Override
@@ -50,7 +76,7 @@ public class DspSettingsServer extends ModuleMemberServer {
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][2];
             result[0][0] = Atom.newAtom("limiting");
-            result[0][1] = Atom.newAtom(DspSettingsServer.this.limiting);
+            result[0][1] = Atom.newAtom(DspSettingsServer.this.get_limiting());
             return result;
         }
     }
@@ -66,7 +92,8 @@ public class DspSettingsServer extends ModuleMemberServer {
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][2];
             result[0][0] = Atom.newAtom("outputcount");
-            result[0][1] = Atom.newAtom(DspSettingsServer.this.output_count);
+            result[0][1] =
+                Atom.newAtom(DspSettingsServer.this.get_output_count());
             return result;
         }
     }
@@ -92,7 +119,8 @@ public class DspSettingsServer extends ModuleMemberServer {
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][2];
             result[0][0] = Atom.newAtom("sendcount");
-            result[0][1] = Atom.newAtom(DspSettingsServer.this.send_count);
+            result[0][1] =
+                Atom.newAtom(DspSettingsServer.this.get_send_count());
             return result;
         }
     }
@@ -118,12 +146,51 @@ public class DspSettingsServer extends ModuleMemberServer {
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][2];
             result[0][0] = Atom.newAtom("voicecount");
-            result[0][1] = Atom.newAtom(DspSettingsServer.this.voice_count);
+            result[0][1] =
+                Atom.newAtom(DspSettingsServer.this.get_voice_count());
             return result;
         }
     }
 
+    private class SetActiveMessageHandler extends SetterMessageHandler {
+
+        @Override
+        public void call_after() {
+            Request request =
+                new Request(DspSettingsServer.this,
+                    OscAddress.from_cache("./:getactive"), new Atom[0], false);
+            DspSettingsServer.this.handle_request(request);
+        }
+
+        @Override
+        public Integer get_arity() {
+            return 1;
+        }
+
+        @Override
+        public String get_name() {
+            return "active";
+        }
+
+        @Override
+        public Atom[][] run(Atom[] arguments) {
+            if (0 < arguments.length) {
+                boolean argument = arguments[0].toBoolean();
+                DspSettingsServer.this.set_is_active(argument);
+            }
+            return null;
+        }
+    }
+
     private class SetLimitingMessageHandler extends SetterMessageHandler {
+
+        @Override
+        public void call_after() {
+            Request request =
+                new Request(DspSettingsServer.this,
+                    OscAddress.from_cache("./:getlimiting"), new Atom[0], false);
+            DspSettingsServer.this.handle_request(request);
+        }
 
         @Override
         public Integer get_arity() {
@@ -141,14 +208,20 @@ public class DspSettingsServer extends ModuleMemberServer {
                 boolean argument = arguments[0].toBoolean();
                 DspSettingsServer.this.set_limiting(argument);
             }
-            Atom[][] result = new Atom[1][2];
-            result[0][0] = Atom.newAtom("limiting");
-            result[0][1] = Atom.newAtom(DspSettingsServer.this.get_limiting());
-            return result;
+            return null;
         }
     }
 
     private class SetSendCountMessageHandler extends SetterMessageHandler {
+
+        @Override
+        public void call_after() {
+            Request request =
+                new Request(DspSettingsServer.this,
+                    OscAddress.from_cache("./:getsendcount"), new Atom[0],
+                    false);
+            DspSettingsServer.this.handle_request(request);
+        }
 
         @Override
         public Integer get_arity() {
@@ -166,11 +239,7 @@ public class DspSettingsServer extends ModuleMemberServer {
                 int argument = arguments[0].toInt();
                 DspSettingsServer.this.set_send_count(argument);
             }
-            Atom[][] result = new Atom[1][2];
-            result[0][0] = Atom.newAtom("sendcount");
-            result[0][1] =
-                Atom.newAtom(DspSettingsServer.this.get_send_count());
-            return result;
+            return null;
         }
     }
 
@@ -178,12 +247,19 @@ public class DspSettingsServer extends ModuleMemberServer {
 
         @Override
         public void call_after() {
+            Request voice_request =
+                new Request(DspSettingsServer.this,
+                    OscAddress.from_cache("./:getvoicecount"), new Atom[0],
+                    false);
             Request input_request =
                 new Request(DspSettingsServer.this,
-                    OscAddress.from_cache("./:getinputcount"), new Atom[0], false);
+                    OscAddress.from_cache("./:getinputcount"), new Atom[0],
+                    false);
             Request output_request =
                 new Request(DspSettingsServer.this,
-                    OscAddress.from_cache("./:getoutputcount"), new Atom[0], false);
+                    OscAddress.from_cache("./:getoutputcount"), new Atom[0],
+                    false);
+            DspSettingsServer.this.handle_request(voice_request);
             DspSettingsServer.this.handle_request(input_request);
             DspSettingsServer.this.handle_request(output_request);
         }
@@ -204,11 +280,7 @@ public class DspSettingsServer extends ModuleMemberServer {
                 int argument = arguments[0].toInt();
                 DspSettingsServer.this.set_voice_count(argument);
             }
-            Atom[][] result = new Atom[1][2];
-            result[0][0] = Atom.newAtom("voicecount");
-            result[0][1] =
-                Atom.newAtom(DspSettingsServer.this.get_voice_count());
-            return result;
+            return null;
         }
     }
 
@@ -224,6 +296,7 @@ public class DspSettingsServer extends ModuleMemberServer {
         return server;
     }
 
+    private boolean is_active = false;
     private Integer input_count = null;
     private Integer output_count = null;
     private Integer send_count = 1;
@@ -240,11 +313,13 @@ public class DspSettingsServer extends ModuleMemberServer {
         super(module_server, argument_map);
         this.initialize_input_count();
         this.initialize_output_count();
+        this.add_message_handler(new GetActiveMessageHandler());
         this.add_message_handler(new GetInputCountMessageHandler());
         this.add_message_handler(new GetLimitingMessageHandler());
         this.add_message_handler(new GetOutputCountMessageHandler());
         this.add_message_handler(new GetSendCountMessageHandler());
         this.add_message_handler(new GetVoiceCountMessageHandler());
+        this.add_message_handler(new SetActiveMessageHandler());
         this.add_message_handler(new SetLimitingMessageHandler());
         this.add_message_handler(new SetSendCountMessageHandler());
         this.add_message_handler(new SetVoiceCountMessageHandler());
@@ -255,6 +330,10 @@ public class DspSettingsServer extends ModuleMemberServer {
             return this.input_count;
         }
         return this.voice_count;
+    }
+
+    public boolean get_is_active() {
+        return this.is_active;
     }
 
     public boolean get_limiting() {
@@ -342,6 +421,10 @@ public class DspSettingsServer extends ModuleMemberServer {
             return true;
         }
         return false;
+    }
+
+    public void set_is_active(boolean is_active) {
+        this.is_active = is_active;
     }
 
     public void set_limiting(boolean limiting) {
