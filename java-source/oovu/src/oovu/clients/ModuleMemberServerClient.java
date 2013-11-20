@@ -39,7 +39,9 @@ public abstract class ModuleMemberServerClient extends ServerClient {
             if (this.getInlet() == 1) {
                 osc_address = OscAddress.from_cache("./:" + message);
             } else {
-                arguments = Atom.newAtom(message, arguments);
+                if (message != null) {
+                    arguments = Atom.newAtom(message, arguments);
+                }
                 osc_address = OscAddress.from_cache("./:value");
             }
             Request request = new Request(this, osc_address, arguments, true);
@@ -57,5 +59,14 @@ public abstract class ModuleMemberServerClient extends ServerClient {
             arguments = Atom.removeFirst(arguments);
         }
         return lazy_name;
+    }
+
+    @Override
+    public void list(Atom[] input) {
+        if (this.getInlet() == 1) {
+            this.anything("value", input);
+        } else if (this.getInlet() == 0) {
+            this.anything(null, input);
+        }
     }
 }

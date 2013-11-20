@@ -74,9 +74,4 @@ abstract public class MaxPeer extends MaxObject implements MessagePasser {
     public void handle_response(Response response) {
         this.max_adapter.handle_response(response);
     }
-
-    @Override
-    public void list(Atom[] input) {
-        this.anything(":value", input);
-    }
 }

@@ -190,11 +190,6 @@ public class Proxy extends MaxPeer implements MessagePasser {
     }
 
     @Override
-    public void notifyDeleted() {
-        this.detach();
-    }
-
-    @Override
     public void handle_response(Response response) {
         if (this.message_handler_name != null) {
             for (Atom[] atoms : response.payload) {
@@ -203,8 +198,9 @@ public class Proxy extends MaxPeer implements MessagePasser {
                 }
                 Atom[][] payload = new Atom[1][];
                 payload[0] = Atom.newAtom("value", Atom.removeFirst(atoms));
-                Response new_response = new Response(
-                    response.source, payload, response.original_request);
+                Response new_response =
+                    new Response(response.source, payload,
+                        response.original_request);
                 this.max_adapter.handle_response(new_response);
             }
         } else {
@@ -222,5 +218,10 @@ public class Proxy extends MaxPeer implements MessagePasser {
             Request request = new Request(this, osc_address, input, true);
             this.handle_request(request);
         }
+    }
+
+    @Override
+    public void notifyDeleted() {
+        this.detach();
     }
 }

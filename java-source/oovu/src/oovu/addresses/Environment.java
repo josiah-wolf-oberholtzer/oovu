@@ -6,27 +6,26 @@ import oovu.events.Event;
 import oovu.servers.DspReceiveServer;
 import oovu.servers.RootServer;
 
-//import org.apache.log4j.BasicConfigurator;
-//import org.apache.log4j.Level;
-//import org.apache.log4j.Logger;
-
-import com.cycling74.max.Atom;
 import com.cycling74.max.Executable;
 import com.cycling74.max.MaxObject;
 import com.cycling74.max.MaxSystem;
+// import org.apache.log4j.BasicConfigurator;
+// import org.apache.log4j.Level;
+// import org.apache.log4j.Logger;
+import com.cycling74.max.Atom;
 
 public class Environment {
 
     public static final ReentrantLock lock = new ReentrantLock();
-//    private static final Logger logger;
+    // private static final Logger logger;
     public static final RootServer root_server;
     public static final OscAddressNode root_osc_address_node;
     static {
         root_osc_address_node = new OscAddressNode("");
         root_server = new RootServer();
-//        BasicConfigurator.configure();
-//        logger = Logger.getLogger("OOVU");
-//        Environment.logger.setLevel(Level.ALL);
+        // BasicConfigurator.configure();
+        // logger = Logger.getLogger("OOVU");
+        // Environment.logger.setLevel(Level.ALL);
     }
 
     public static void defer_low(Executable executable) {
@@ -41,7 +40,7 @@ public class Environment {
         try {
             MaxObject.post(message.toString());
         } catch (UnsatisfiedLinkError e) {
-//            Environment.logger.log(Environment.logger.getLevel(), message);
+            // Environment.logger.log(Environment.logger.getLevel(), message);
         }
     }
 
