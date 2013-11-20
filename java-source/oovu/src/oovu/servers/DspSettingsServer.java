@@ -15,8 +15,7 @@ public class DspSettingsServer extends ModuleMemberServer {
 
         @Override
         public String get_name() {
-            // TODO Auto-generated method stub
-            return null;
+            return "getinputcount";
         }
 
         @Override
@@ -30,20 +29,17 @@ public class DspSettingsServer extends ModuleMemberServer {
 
         @Override
         public String get_name() {
-            // TODO Auto-generated method stub
-            return null;
+            return "getlimiting";
         }
 
         @Override
         public boolean is_meta_relevant() {
-            // TODO Auto-generated method stub
-            return false;
+            return true;
         }
 
         @Override
         public boolean is_state_relevant() {
-            // TODO Auto-generated method stub
-            return false;
+            return true;
         }
 
         @Override
@@ -57,8 +53,7 @@ public class DspSettingsServer extends ModuleMemberServer {
 
         @Override
         public String get_name() {
-            // TODO Auto-generated method stub
-            return null;
+            return "getoutputcount";
         }
 
         @Override
@@ -72,20 +67,17 @@ public class DspSettingsServer extends ModuleMemberServer {
 
         @Override
         public String get_name() {
-            // TODO Auto-generated method stub
-            return null;
+            return "getsendcount";
         }
 
         @Override
         public boolean is_meta_relevant() {
-            // TODO Auto-generated method stub
-            return false;
+            return true;
         }
 
         @Override
         public boolean is_state_relevant() {
-            // TODO Auto-generated method stub
-            return false;
+            return true;
         }
 
         @Override
@@ -99,20 +91,17 @@ public class DspSettingsServer extends ModuleMemberServer {
 
         @Override
         public String get_name() {
-            // TODO Auto-generated method stub
-            return null;
+            return "getvoicecount";
         }
 
         @Override
         public boolean is_meta_relevant() {
-            // TODO Auto-generated method stub
-            return false;
+            return true;
         }
 
         @Override
         public boolean is_state_relevant() {
-            // TODO Auto-generated method stub
-            return false;
+            return true;
         }
 
         @Override
@@ -126,14 +115,12 @@ public class DspSettingsServer extends ModuleMemberServer {
 
         @Override
         public Integer get_arity() {
-            // TODO Auto-generated method stub
-            return null;
+            return 1;
         }
 
         @Override
         public String get_name() {
-            // TODO Auto-generated method stub
-            return null;
+            return "limiting";
         }
 
         @Override
@@ -147,14 +134,12 @@ public class DspSettingsServer extends ModuleMemberServer {
 
         @Override
         public Integer get_arity() {
-            // TODO Auto-generated method stub
-            return null;
+            return 1;
         }
 
         @Override
         public String get_name() {
-            // TODO Auto-generated method stub
-            return null;
+            return "sendcount";
         }
 
         @Override
@@ -168,14 +153,12 @@ public class DspSettingsServer extends ModuleMemberServer {
 
         @Override
         public Integer get_arity() {
-            // TODO Auto-generated method stub
-            return null;
+            return 1;
         }
 
         @Override
         public String get_name() {
-            // TODO Auto-generated method stub
-            return null;
+            return "voicecount";
         }
 
         @Override
@@ -200,6 +183,7 @@ public class DspSettingsServer extends ModuleMemberServer {
     private Integer input_count = null;
     private Integer output_count = null;
     private Integer voice_count = 1;
+    private boolean limiting = true;
 
     public DspSettingsServer(ModuleServer module_server, Atom[] arguments) {
         this(module_server, Server.process_atom_arguments(Atom
@@ -211,6 +195,14 @@ public class DspSettingsServer extends ModuleMemberServer {
         super(module_server, argument_map);
         this.initialize_input_count();
         this.initialize_output_count();
+        this.add_message_handler(new GetInputCountMessageHandler());
+        this.add_message_handler(new GetLimitingMessageHandler());
+        this.add_message_handler(new GetOutputCountMessageHandler());
+        this.add_message_handler(new GetSendCountMessageHandler());
+        this.add_message_handler(new GetVoiceCountMessageHandler());
+        this.add_message_handler(new SetLimitingMessageHandler());
+        this.add_message_handler(new SetSendCountMessageHandler());
+        this.add_message_handler(new SetVoiceCountMessageHandler());
     }
 
     public int get_input_count() {
@@ -218,6 +210,10 @@ public class DspSettingsServer extends ModuleMemberServer {
             return this.input_count;
         }
         return this.voice_count;
+    }
+
+    public boolean get_limiting() {
+        return this.limiting;
     }
 
     public int get_output_count() {
@@ -294,6 +290,10 @@ public class DspSettingsServer extends ModuleMemberServer {
             return true;
         }
         return false;
+    }
+
+    public void set_limiting(boolean limiting) {
+        this.limiting = limiting;
     }
 
     public void set_voice_count(int voice_count) {
