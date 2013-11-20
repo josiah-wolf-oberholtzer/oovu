@@ -310,6 +310,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
             }
             this.pattern = pattern;
             if (this.pattern != null) {
+                this.pattern.set_next_event_time(System.currentTimeMillis());
                 this.pattern.start();
             }
         }
