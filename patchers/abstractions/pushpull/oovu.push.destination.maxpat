@@ -250,7 +250,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 10.0, 233.0, 20.0 ],
-					"text" : "mxj oovu.AudioReceive #1 #2"
+					"text" : "mxj oovu.DspReceive #1 #2"
 				}
 
 			}
