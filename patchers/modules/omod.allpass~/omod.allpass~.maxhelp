@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 431.0, 44.0, 849.0, 710.0 ],
+		"rect" : [ 452.0, 44.0, 849.0, 710.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -28,6 +28,20 @@
 		"digest" : "",
 		"tags" : "",
 		"boxes" : [ 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-20",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 30.0, 325.0, 408.0, 18.0 ],
+					"text" : "/allpass/delay/range/:pattern :message value :timings 1000. :values 0.0:1.0"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
@@ -52,7 +66,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 250.0, 15.0, 331.0, 18.0 ],
-					"text" : "/allpass/delay/range/:pattern"
+					"text" : "/allpass/delay/range/:getpattern"
 				}
 
 			}
@@ -94,7 +108,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 245.0, 80.0, 431.0, 18.0 ],
-					"text" : "/allpass/delay/range/:pattern :timings 1000:10000 0:250 :values 0.2:0.9 0.:0.05"
+					"text" : "/allpass/delay/range/:pattern :timings 1000"
 				}
 
 			}
@@ -307,6 +321,15 @@
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
+					"destination" : [ "obj-20", 1 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-1", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-3", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -460,8 +483,8 @@
 			"obj-19::obj-13::obj-6" : [ "live.slider[31]", "live.slider", 0 ],
 			"obj-35::obj-13::obj-6" : [ "live.slider[3]", "live.slider", 0 ],
 			"obj-35::obj-13::obj-58::obj-21" : [ "live.numbox[2]", "live.numbox", 0 ],
-			"obj-1::obj-5::obj-12" : [ "live.slider[14]", "live.slider", 0 ],
 			"obj-1::obj-5::obj-26" : [ "live.numbox[44]", "live.numbox[4]", 0 ],
+			"obj-1::obj-5::obj-12" : [ "live.slider[14]", "live.slider", 0 ],
 			"obj-35::obj-13::obj-9" : [ "live.tab", "live.tab", 0 ],
 			"obj-1::obj-5::obj-31" : [ "live.numbox[42]", "live.numbox[4]", 0 ],
 			"obj-35::obj-13::obj-11::obj-18::obj-4" : [ "live.slider[1]", "live.slider", 0 ],

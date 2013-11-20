@@ -478,8 +478,11 @@ abstract public class Server implements MessagePasser {
         for (ServerClient server_client : this.server_clients) {
             server_client.handle_response(response);
         }
-        for (Proxy proxy : this.osc_address_node.get_proxies()) {
-            proxy.handle_response(response);
+        OscAddressNode osc_address_node = this.get_osc_address_node();
+        if (osc_address_node != null) {
+            for (Proxy proxy : osc_address_node.get_proxies()) {
+                proxy.handle_response(response);
+            }
         }
         if (this.parent_server != null) {
             this.parent_server.handle_response(response);
