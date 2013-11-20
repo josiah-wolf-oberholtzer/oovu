@@ -359,6 +359,9 @@ public class DspSettingsServer extends ModuleMemberServer {
 
     public int get_voice_count() {
         if (this.input_count_is_static()) {
+            if (0 == this.get_input_count()) {
+                return 1;
+            }
             return this.input_count;
         }
         return this.voice_count;
@@ -367,18 +370,24 @@ public class DspSettingsServer extends ModuleMemberServer {
     public void initialize_input_count() {
         if (this.argument_map.containsKey("inputs")) {
             int input_count = this.argument_map.get("inputs")[0].getInt();
-            if ((0 < input_count) && (input_count <= 8)) {
-                this.input_count = input_count;
+            if (input_count < 0) {
+                input_count = 0;
+            } else if (8 < input_count) {
+                input_count = 8;
             }
+            this.input_count = input_count;
         }
     }
 
     public void initialize_output_count() {
         if (this.argument_map.containsKey("outputs")) {
             int output_count = this.argument_map.get("outputs")[0].getInt();
-            if ((0 < output_count) && (output_count <= 8)) {
-                this.output_count = output_count;
+            if (output_count < 0) {
+                output_count = 0;
+            } else if (8 < output_count) {
+                output_count = 8;
             }
+            this.output_count = output_count;
         }
     }
 
