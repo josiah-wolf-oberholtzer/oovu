@@ -2,11 +2,188 @@ package oovu.servers;
 
 import java.util.Map;
 
+import oovu.messaging.GetterMessageHandler;
+import oovu.messaging.InfoGetterMessageHandler;
+import oovu.messaging.SetterMessageHandler;
 import oovu.states.State;
 
 import com.cycling74.max.Atom;
 
 public class DspSettingsServer extends ModuleMemberServer {
+
+    private class GetInputCountMessageHandler extends InfoGetterMessageHandler {
+
+        @Override
+        public String get_name() {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
+        @Override
+        public Atom[][] run(Atom[] arguments) {
+            // TODO Auto-generated method stub
+            return null;
+        }
+    }
+
+    private class GetLimitingMessageHandler extends GetterMessageHandler {
+
+        @Override
+        public String get_name() {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
+        @Override
+        public boolean is_meta_relevant() {
+            // TODO Auto-generated method stub
+            return false;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            // TODO Auto-generated method stub
+            return false;
+        }
+
+        @Override
+        public Atom[][] run(Atom[] arguments) {
+            // TODO Auto-generated method stub
+            return null;
+        }
+    }
+
+    private class GetOutputCountMessageHandler extends InfoGetterMessageHandler {
+
+        @Override
+        public String get_name() {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
+        @Override
+        public Atom[][] run(Atom[] arguments) {
+            // TODO Auto-generated method stub
+            return null;
+        }
+    }
+
+    private class GetSendCountMessageHandler extends GetterMessageHandler {
+
+        @Override
+        public String get_name() {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
+        @Override
+        public boolean is_meta_relevant() {
+            // TODO Auto-generated method stub
+            return false;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            // TODO Auto-generated method stub
+            return false;
+        }
+
+        @Override
+        public Atom[][] run(Atom[] arguments) {
+            // TODO Auto-generated method stub
+            return null;
+        }
+    }
+
+    private class GetVoiceCountMessageHandler extends GetterMessageHandler {
+
+        @Override
+        public String get_name() {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
+        @Override
+        public boolean is_meta_relevant() {
+            // TODO Auto-generated method stub
+            return false;
+        }
+
+        @Override
+        public boolean is_state_relevant() {
+            // TODO Auto-generated method stub
+            return false;
+        }
+
+        @Override
+        public Atom[][] run(Atom[] arguments) {
+            // TODO Auto-generated method stub
+            return null;
+        }
+    }
+
+    private class SetLimitingMessageHandler extends SetterMessageHandler {
+
+        @Override
+        public Integer get_arity() {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
+        @Override
+        public String get_name() {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
+        @Override
+        public Atom[][] run(Atom[] arguments) {
+            // TODO Auto-generated method stub
+            return null;
+        }
+    }
+
+    private class SetSendCountMessageHandler extends SetterMessageHandler {
+
+        @Override
+        public Integer get_arity() {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
+        @Override
+        public String get_name() {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
+        @Override
+        public Atom[][] run(Atom[] arguments) {
+            // TODO Auto-generated method stub
+            return null;
+        }
+    }
+
+    private class SetVoiceCountMessageHandler extends SetterMessageHandler {
+
+        @Override
+        public Integer get_arity() {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
+        @Override
+        public String get_name() {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
+        @Override
+        public Atom[][] run(Atom[] arguments) {
+            // TODO Auto-generated method stub
+            return null;
+        }
+    }
 
     public static DspSettingsServer allocate(
         Integer module_id,
