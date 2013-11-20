@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x86"
 		}
 ,
@@ -150,7 +150,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 10.0, 10.0, 141.0, 20.0 ],
-					"text" : "patcherargs #1 send.x"
+					"text" : "patcherargs #1 output.x"
 				}
 
 			}
@@ -431,14 +431,14 @@
 ,
 		"dependency_cache" : [ 			{
 				"name" : "oovu.guibackground.js",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/gui",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/gui",
 				"patcherrelativepath" : ".",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "oovu.util.makeumenu.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/abstractions/utilities",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/utilities",
 				"patcherrelativepath" : "../utilities",
 				"type" : "JSON",
 				"implicit" : 1

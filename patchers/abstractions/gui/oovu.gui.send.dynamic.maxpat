@@ -4,11 +4,11 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 4.0, 44.0, 208.0, 684.0 ],
+		"rect" : [ 4.0, 44.0, 209.0, 685.0 ],
 		"bgcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 		"bglocked" : 1,
 		"openinpresentation" : 1,
@@ -28,7 +28,7 @@
 		"description" : "",
 		"digest" : "",
 		"tags" : "",
-		"title" : "/allpasser~ Sends",
+		"title" : "/input~ Sends",
 		"boxes" : [ 			{
 				"box" : 				{
 					"fontname" : "Arial",
@@ -137,7 +137,7 @@
 					"presentation_rect" : [ 10.0, 5.0, 90.0, 25.0 ],
 					"prototypename" : "M4L.display",
 					"rounded" : 0.0,
-					"text" : "/allpasser~",
+					"text" : "/input~",
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"texton" : "Text",
 					"textovercolor" : [ 1.0, 1.0, 1.0, 1.0 ],
@@ -178,12 +178,11 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-214",
-					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 235.0, 490.0, 113.0, 33.0 ],
+					"patching_rect" : [ 235.0, 490.0, 129.0, 20.0 ],
 					"text" : "mxj oovu.Proxy #1 ."
 				}
 
@@ -215,7 +214,7 @@
 					"presentation_rect" : [ 110.0, 10.0, 90.0, 15.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_longname" : "live.numbox[8]",
+							"parameter_longname" : "live.numbox[13]",
 							"parameter_shortname" : "live.numbox",
 							"parameter_type" : 1,
 							"parameter_mmin" : 1.0,
@@ -282,7 +281,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 445.0, 335.0, 100.0, 20.0 ],
-					"text" : "sprintf send.%d"
+					"text" : "sprintf output.%d"
 				}
 
 			}
@@ -367,7 +366,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 235.0, 230.0, 100.0, 33.0 ],
-					"text" : "sprintf dsp/send.%d"
+					"text" : "sprintf dsp/output.%d"
 				}
 
 			}
@@ -431,7 +430,7 @@
 			}
 , 			{
 				"box" : 				{
-					"args" : [ "#1", "dsp/send.1" ],
+					"args" : [ "#1", "dsp/output.1" ],
 					"id" : "obj-18",
 					"maxclass" : "bpatcher",
 					"name" : "oovu.gui.send.1x.maxpat",
@@ -440,7 +439,7 @@
 					"patching_rect" : [ 10.0, 35.0, 190.0, 70.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 10.0, 35.0, 190.0, 70.0 ],
-					"varname" : "send.1"
+					"varname" : "output.1"
 				}
 
 			}
@@ -699,33 +698,6 @@
 					"source" : [ "obj-7", 0 ]
 				}
 
-			}
- ],
-		"parameters" : 		{
-			"obj-18::obj-4" : [ "live.slider", "live.slider", 0 ],
-			"obj-204" : [ "live.numbox[8]", "live.numbox", 0 ]
-		}
-,
-		"dependency_cache" : [ 			{
-				"name" : "oovu.gui.send.1x.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/gui",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.guibackground.js",
-				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/gui",
-				"patcherrelativepath" : ".",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.util.makeumenu.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/utilities",
-				"patcherrelativepath" : "../utilities",
-				"type" : "JSON",
-				"implicit" : 1
 			}
  ]
 	}
