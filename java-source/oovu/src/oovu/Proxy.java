@@ -8,6 +8,7 @@ import oovu.clients.MaxPeer;
 import oovu.clients.MessagePasserCallback;
 import oovu.messaging.MessagePasser;
 import oovu.messaging.Request;
+import oovu.messaging.Response;
 import oovu.servers.ModuleMemberServer;
 import oovu.servers.Server;
 
@@ -191,5 +192,35 @@ public class Proxy extends MaxPeer implements MessagePasser {
     @Override
     public void notifyDeleted() {
         this.detach();
+    }
+
+    @Override
+    public void handle_response(Response response) {
+        if (this.message_handler_name != null) {
+            for (Atom[] atoms : response.payload) {
+                if (!atoms[0].getString().equals(this.message_handler_name)) {
+                    continue;
+                }
+                Atom[][] payload = new Atom[1][];
+                payload[0] = Atom.newAtom("value", Atom.removeFirst(atoms));
+                Response new_response = new Response(
+                    response.source, payload, response.original_request);
+                this.max_adapter.handle_response(new_response);
+            }
+        } else {
+            this.max_adapter.handle_response(response);
+        }
+    }
+
+    @Override
+    public void list(Atom[] input) {
+        if (this.message_handler_name == null) {
+            this.anything(":value", input);
+        } else {
+            OscAddress osc_address =
+                OscAddress.from_cache("./:" + this.message_handler_name);
+            Request request = new Request(this, osc_address, input, true);
+            this.handle_request(request);
+        }
     }
 }
