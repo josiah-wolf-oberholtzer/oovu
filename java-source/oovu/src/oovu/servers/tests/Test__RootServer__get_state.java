@@ -56,18 +56,23 @@ public class Test__RootServer__get_state {
         Atom[][] actuals = Environment.root_server.get_state().toAtoms();
         Atom[][] expecteds =
             new Atom[][] {
+                Atom.parse("/delay~/feedback/:pattern"),
                 Atom.parse("/delay~/feedback/:maximum 0.999"),
                 Atom.parse("/delay~/feedback/:minimum 0.0"),
                 Atom.parse("/delay~/feedback 0.0010"),
+                Atom.parse("/delay~/length/:pattern"),
                 Atom.parse("/delay~/length/:maximum 1000.0"),
                 Atom.parse("/delay~/length/:minimum 0.0"),
                 Atom.parse("/delay~/length 100.0 "),
+                Atom.parse("/filter~/amplitude/:pattern"),
                 Atom.parse("/filter~/amplitude/:maximum 1.0"),
                 Atom.parse("/filter~/amplitude/:minimum 0.0"),
                 Atom.parse("/filter~/amplitude 1.0"),
+                Atom.parse("/filter~/frequency/:pattern"),
                 Atom.parse("/filter~/frequency/:maximum 22050.0"),
                 Atom.parse("/filter~/frequency/:minimum 20.0"),
                 Atom.parse("/filter~/frequency 1000.0"),
+                Atom.parse("/filter~/type/:pattern"),
                 Atom.parse("/filter~/type/:options hp lp bp br"),
                 Atom.parse("/filter~/type hp")
             };
@@ -77,17 +82,22 @@ public class Test__RootServer__get_state {
         actuals = Environment.root_server.get_state().toAtoms();
         expecteds =
             new Atom[][] {
+                Atom.parse("/delay~/length/:pattern"),
                 Atom.parse("/delay~/length/:maximum 1000.0"),
                 Atom.parse("/delay~/length/:minimum 0.0"),
                 Atom.parse("/delay~/length 100.0 "),
+                Atom.parse("/delay~/feedback/:pattern"),
                 Atom.parse("/delay~/feedback/:maximum 0.999"),
                 Atom.parse("/delay~/feedback/:minimum 0.0"),
                 Atom.parse("/delay~/feedback 0.0010"),
+                Atom.parse("/filter~/type/:pattern"),
                 Atom.parse("/filter~/type/:options hp lp bp br"),
                 Atom.parse("/filter~/type hp"),
+                Atom.parse("/filter~/amplitude/:pattern"),
                 Atom.parse("/filter~/amplitude/:maximum 1.0"),
                 Atom.parse("/filter~/amplitude/:minimum 0.0"),
                 Atom.parse("/filter~/amplitude 1.0"),
+                Atom.parse("/filter~/frequency/:pattern"),
                 Atom.parse("/filter~/frequency/:maximum 22050.0"),
                 Atom.parse("/filter~/frequency/:minimum 20.0"),
                 Atom.parse("/filter~/frequency 1000.0")
