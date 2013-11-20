@@ -2,8 +2,10 @@ package oovu.servers;
 
 import java.util.Map;
 
+import oovu.addresses.OscAddress;
 import oovu.messaging.GetterMessageHandler;
 import oovu.messaging.InfoGetterMessageHandler;
+import oovu.messaging.Request;
 import oovu.messaging.SetterMessageHandler;
 import oovu.states.State;
 
@@ -166,12 +168,25 @@ public class DspSettingsServer extends ModuleMemberServer {
             }
             Atom[][] result = new Atom[1][2];
             result[0][0] = Atom.newAtom("sendcount");
-            result[0][1] = Atom.newAtom(DspSettingsServer.this.get_send_count());
+            result[0][1] =
+                Atom.newAtom(DspSettingsServer.this.get_send_count());
             return result;
         }
     }
 
     private class SetVoiceCountMessageHandler extends SetterMessageHandler {
+
+        @Override
+        public void call_after() {
+            Request input_request =
+                new Request(DspSettingsServer.this,
+                    OscAddress.from_cache("./:getinputcount"), new Atom[0], false);
+            Request output_request =
+                new Request(DspSettingsServer.this,
+                    OscAddress.from_cache("./:getoutputcount"), new Atom[0], false);
+            DspSettingsServer.this.handle_request(input_request);
+            DspSettingsServer.this.handle_request(output_request);
+        }
 
         @Override
         public Integer get_arity() {
@@ -191,7 +206,8 @@ public class DspSettingsServer extends ModuleMemberServer {
             }
             Atom[][] result = new Atom[1][2];
             result[0][0] = Atom.newAtom("voicecount");
-            result[0][1] = Atom.newAtom(DspSettingsServer.this.get_voice_count());
+            result[0][1] =
+                Atom.newAtom(DspSettingsServer.this.get_voice_count());
             return result;
         }
     }
@@ -252,16 +268,19 @@ public class DspSettingsServer extends ModuleMemberServer {
         return this.voice_count;
     }
 
+    public int get_send_count() {
+        return this.send_count;
+    }
+
     @Override
     public State get_state() {
         return null;
     }
 
-    public int get_send_count() {
-        return this.send_count;
-    }
-    
     public int get_voice_count() {
+        if (this.input_count_is_static()) {
+            return this.input_count;
+        }
         return this.voice_count;
     }
 
@@ -329,15 +348,17 @@ public class DspSettingsServer extends ModuleMemberServer {
         this.limiting = limiting;
     }
 
-    public void set_voice_count(int voice_count) {
-        if ((0 < voice_count) && (voice_count <= 8)) {
-            this.voice_count = voice_count;
-        }
-    }
-
     public void set_send_count(int send_count) {
         if ((0 < send_count) && (send_count <= 8)) {
             this.send_count = send_count;
+        }
+    }
+
+    public void set_voice_count(int voice_count) {
+        if ((0 < voice_count) && (voice_count <= 8)) {
+            if (!this.input_count_is_static()) {
+                this.voice_count = voice_count;
+            }
         }
     }
 }
