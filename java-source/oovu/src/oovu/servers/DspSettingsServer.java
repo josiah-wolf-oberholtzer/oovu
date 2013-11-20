@@ -20,8 +20,10 @@ public class DspSettingsServer extends ModuleMemberServer {
 
         @Override
         public Atom[][] run(Atom[] arguments) {
-            // TODO Auto-generated method stub
-            return null;
+            Atom[][] result = new Atom[1][2];
+            result[0][0] = Atom.newAtom("inputcount");
+            result[0][1] = Atom.newAtom(DspSettingsServer.this.input_count);
+            return result;
         }
     }
 
@@ -44,8 +46,10 @@ public class DspSettingsServer extends ModuleMemberServer {
 
         @Override
         public Atom[][] run(Atom[] arguments) {
-            // TODO Auto-generated method stub
-            return null;
+            Atom[][] result = new Atom[1][2];
+            result[0][0] = Atom.newAtom("limiting");
+            result[0][1] = Atom.newAtom(DspSettingsServer.this.limiting);
+            return result;
         }
     }
 
@@ -58,8 +62,10 @@ public class DspSettingsServer extends ModuleMemberServer {
 
         @Override
         public Atom[][] run(Atom[] arguments) {
-            // TODO Auto-generated method stub
-            return null;
+            Atom[][] result = new Atom[1][2];
+            result[0][0] = Atom.newAtom("outputcount");
+            result[0][1] = Atom.newAtom(DspSettingsServer.this.output_count);
+            return result;
         }
     }
 
@@ -82,8 +88,10 @@ public class DspSettingsServer extends ModuleMemberServer {
 
         @Override
         public Atom[][] run(Atom[] arguments) {
-            // TODO Auto-generated method stub
-            return null;
+            Atom[][] result = new Atom[1][2];
+            result[0][0] = Atom.newAtom("sendcount");
+            result[0][1] = Atom.newAtom(DspSettingsServer.this.send_count);
+            return result;
         }
     }
 
@@ -106,8 +114,10 @@ public class DspSettingsServer extends ModuleMemberServer {
 
         @Override
         public Atom[][] run(Atom[] arguments) {
-            // TODO Auto-generated method stub
-            return null;
+            Atom[][] result = new Atom[1][2];
+            result[0][0] = Atom.newAtom("voicecount");
+            result[0][1] = Atom.newAtom(DspSettingsServer.this.voice_count);
+            return result;
         }
     }
 
@@ -125,8 +135,14 @@ public class DspSettingsServer extends ModuleMemberServer {
 
         @Override
         public Atom[][] run(Atom[] arguments) {
-            // TODO Auto-generated method stub
-            return null;
+            if (0 < arguments.length) {
+                boolean argument = arguments[0].toBoolean();
+                DspSettingsServer.this.set_limiting(argument);
+            }
+            Atom[][] result = new Atom[1][2];
+            result[0][0] = Atom.newAtom("limiting");
+            result[0][1] = Atom.newAtom(DspSettingsServer.this.get_limiting());
+            return result;
         }
     }
 
@@ -144,8 +160,14 @@ public class DspSettingsServer extends ModuleMemberServer {
 
         @Override
         public Atom[][] run(Atom[] arguments) {
-            // TODO Auto-generated method stub
-            return null;
+            if (0 < arguments.length) {
+                int argument = arguments[0].toInt();
+                DspSettingsServer.this.set_send_count(argument);
+            }
+            Atom[][] result = new Atom[1][2];
+            result[0][0] = Atom.newAtom("sendcount");
+            result[0][1] = Atom.newAtom(DspSettingsServer.this.get_send_count());
+            return result;
         }
     }
 
@@ -163,8 +185,14 @@ public class DspSettingsServer extends ModuleMemberServer {
 
         @Override
         public Atom[][] run(Atom[] arguments) {
-            // TODO Auto-generated method stub
-            return null;
+            if (0 < arguments.length) {
+                int argument = arguments[0].toInt();
+                DspSettingsServer.this.set_voice_count(argument);
+            }
+            Atom[][] result = new Atom[1][2];
+            result[0][0] = Atom.newAtom("voicecount");
+            result[0][1] = Atom.newAtom(DspSettingsServer.this.get_voice_count());
+            return result;
         }
     }
 
