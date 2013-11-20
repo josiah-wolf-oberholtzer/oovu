@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x86"
 		}
 ,
@@ -37,7 +37,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 75.0, 80.0, 62.0, 18.0 ],
-					"text" : "28838298"
+					"text" : "2592387"
 				}
 
 			}
@@ -208,7 +208,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 30.0, 110.0, 228.0, 20.0 ],
-					"text" : "mxj oovu.Proxy #1 dsp/voicecount"
+					"text" : "mxj oovu.Proxy #1 dsp/:voicecount"
 				}
 
 			}

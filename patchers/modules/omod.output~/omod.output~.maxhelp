@@ -249,7 +249,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 415.0, 255.0, 135.0, 18.0 ],
-					"text" : "/dsp/voicecount 8"
+					"text" : "/dsp/:voicecount 8"
 				}
 
 			}

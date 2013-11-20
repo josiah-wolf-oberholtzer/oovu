@@ -49,7 +49,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 295.0, 170.0, 292.0, 20.0 ],
-					"text" : "mxj oovu.Property 1001 dsp/active :datatype boolean"
+					"text" : "mxj oovu.Property 1001 dsp/:active :datatype boolean"
 				}
 
 			}
@@ -64,7 +64,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 175.0, 115.0, 50.0, 31.0 ],
-					"text" : "/dsp/active 0"
+					"text" : "/dsp/:active 0"
 				}
 
 			}

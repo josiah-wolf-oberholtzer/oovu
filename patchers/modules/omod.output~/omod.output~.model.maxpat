@@ -4,11 +4,11 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 371.0, 150.0, 644.0, 410.0 ],
+		"rect" : [ 357.0, 141.0, 644.0, 410.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -31,6 +31,48 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
+					"id" : "obj-7",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "int", "int" ],
+					"patching_rect" : [ 10.0, 205.0, 64.0, 20.0 ],
+					"text" : "change -1"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-8",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "int" ],
+					"patching_rect" : [ 10.0, 275.0, 100.0, 20.0 ],
+					"text" : "adstatus switch"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-3",
+					"maxclass" : "newobj",
+					"numinlets" : 3,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 10.0, 340.0, 600.0, 20.0 ],
+					"text" : "mxj oovu.DspSettings #1 dsp"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
 					"id" : "obj-1",
 					"maxclass" : "newobj",
 					"numinlets" : 3,
@@ -50,35 +92,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "int" ],
-					"patching_rect" : [ 10.0, 230.0, 100.0, 20.0 ],
+					"patching_rect" : [ 10.0, 175.0, 100.0, 20.0 ],
 					"text" : "adstatus switch"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"id" : "obj-5",
-					"maxclass" : "newobj",
-					"numinlets" : 2,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "int" ],
-					"patching_rect" : [ 10.0, 290.0, 93.0, 20.0 ],
-					"text" : "adstatus switch"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"id" : "obj-3",
-					"maxclass" : "newobj",
-					"numinlets" : 0,
-					"numoutlets" : 0,
-					"patching_rect" : [ 10.0, 105.0, 600.0, 20.0 ],
-					"text" : "oovu.bundle.dsp.base #1"
 				}
 
 			}
@@ -91,7 +106,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 260.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 235.0, 600.0, 20.0 ],
 					"text" : "mxj oovu.Property #1 dac/active :datatype boolean :default 0"
 				}
 
@@ -146,7 +161,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 8,
 					"numoutlets" : 0,
-					"patching_rect" : [ 10.0, 205.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 125.0, 600.0, 20.0 ],
 					"text" : "poly~ omod.output~.voix 1 @args #1"
 				}
 
@@ -160,7 +175,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 8,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 10.0, 130.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 100.0, 600.0, 20.0 ],
 					"text" : "oovu.bundle.dsp.receiver #1"
 				}
 
@@ -168,10 +183,9 @@
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
-					"destination" : [ "obj-5", 0 ],
+					"destination" : [ "obj-8", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 310.0, 285.5, 19.5, 285.5 ],
 					"source" : [ "obj-2", 1 ]
 				}
 
@@ -250,11 +264,20 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-7", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"midpoints" : [ 100.5, 199.5, 19.5, 199.5 ],
+					"source" : [ "obj-6", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-2", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 100.5, 254.5, 19.5, 254.5 ],
-					"source" : [ "obj-6", 1 ]
+					"source" : [ "obj-7", 0 ]
 				}
 
 			}

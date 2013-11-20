@@ -4,11 +4,11 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 457.0, 44.0, 734.0, 710.0 ],
+		"rect" : [ 771.0, 53.0, 734.0, 710.0 ],
 		"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
@@ -95,7 +95,7 @@
 					"presentation_rect" : [ 5.0, 120.0, 65.0, 20.0 ],
 					"prototypename" : "M4L.display",
 					"rounded" : 0.0,
-					"text" : "10%",
+					"text" : "2%",
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"texton" : "Text",
 					"textovercolor" : [ 1.0, 1.0, 1.0, 1.0 ],
@@ -180,7 +180,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x86"
 						}
 ,
@@ -533,13 +533,12 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-12",
-					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 250.0, 360.0, 193.0, 33.0 ],
-					"text" : "mxj oovu.Proxy #1 dsp/input/limiter"
+					"patching_rect" : [ 250.0, 360.0, 193.0, 20.0 ],
+					"text" : "mxj oovu.Proxy #1 dsp/:limiting"
 				}
 
 			}
@@ -576,7 +575,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_linknames" : 1,
-							"parameter_longname" : "live.numbox[6]",
+							"parameter_longname" : "live.numbox[72]",
 							"parameter_shortname" : "live.numbox[1]",
 							"parameter_type" : 0,
 							"parameter_mmin" : -70.0,
@@ -590,7 +589,7 @@
 					}
 ,
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
-					"varname" : "live.numbox[6]"
+					"varname" : "live.numbox[72]"
 				}
 
 			}
@@ -747,7 +746,7 @@
 					"presentation_rect" : [ 5.0, 70.0, 65.0, 20.0 ],
 					"prototypename" : "M4L.display",
 					"rounded" : 8.0,
-					"text" : "0:03:10.982",
+					"text" : "0:00:00.000",
 					"textcolor" : [ 0.8, 0.8, 0.8, 1.0 ],
 					"texton" : "Text",
 					"textovercolor" : [ 1.0, 1.0, 1.0, 1.0 ],
@@ -975,7 +974,7 @@
 					"presentation_rect" : [ 75.0, 30.0, 60.0, 15.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_longname" : "live.numbox[15]",
+							"parameter_longname" : "live.numbox[73]",
 							"parameter_shortname" : "live.numbox",
 							"parameter_type" : 1,
 							"parameter_mmin" : 1.0,
@@ -1000,7 +999,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 335.0, 270.0, 207.0, 20.0 ],
-					"text" : "mxj oovu.Proxy #1 dsp/voicecount"
+					"text" : "mxj oovu.Proxy #1 dsp/:voicecount"
 				}
 
 			}
@@ -1162,7 +1161,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_linknames" : 1,
-							"parameter_longname" : "live.slider[7]",
+							"parameter_longname" : "live.slider[31]",
 							"parameter_shortname" : "live.slider",
 							"parameter_type" : 0,
 							"parameter_mmax" : 1.0,
@@ -1177,7 +1176,7 @@
 					"showname" : 0,
 					"shownumber" : 0,
 					"trioncolor" : [ 1.0, 0.0, 0.0, 1.0 ],
-					"varname" : "live.slider[7]"
+					"varname" : "live.slider[31]"
 				}
 
 			}
@@ -1205,8 +1204,8 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 305.0, 55.0, 179.0, 20.0 ],
-					"text" : "mxj oovu.Proxy #1 dsp/active"
+					"patching_rect" : [ 305.0, 55.0, 181.0, 20.0 ],
+					"text" : "mxj oovu.Proxy #1 dsp/:active"
 				}
 
 			}

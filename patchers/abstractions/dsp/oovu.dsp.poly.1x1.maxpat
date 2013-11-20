@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x86"
 		}
 ,
@@ -33,11 +33,11 @@
 					"fontsize" : 12.0,
 					"id" : "obj-3",
 					"maxclass" : "newobj",
-					"numinlets" : 2,
+					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 505.0, 30.0, 188.0, 20.0 ],
-					"text" : "mxj oovu.Proxy #1 dsp/active"
+					"text" : "mxj oovu.Proxy #1 dsp/:active"
 				}
 
 			}

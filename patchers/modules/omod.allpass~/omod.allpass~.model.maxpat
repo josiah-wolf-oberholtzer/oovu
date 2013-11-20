@@ -36,7 +36,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 415.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 390.0, 600.0, 20.0 ],
 					"text" : "mxj oovu.DspSettings #1 dsp"
 				}
 
@@ -94,19 +94,6 @@
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "" ],
 					"patching_rect" : [ 10.0, 340.0, 285.0, 20.0 ],
 					"text" : "poly~ omod.allpass~.voix 1 @args #1"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"id" : "obj-38",
-					"maxclass" : "newobj",
-					"numinlets" : 0,
-					"numoutlets" : 0,
-					"patching_rect" : [ 10.0, 390.0, 600.0, 20.0 ],
-					"text" : "oovu.bundle.dsp.base #1"
 				}
 
 			}
@@ -431,6 +418,91 @@
 					"source" : [ "obj-66", 0 ]
 				}
 
+			}
+ ],
+		"dependency_cache" : [ 			{
+				"name" : "oovu.bundle.dsp.sender.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/bundles",
+				"patcherrelativepath" : "../../abstractions/bundles",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.push.source.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/pushpull",
+				"patcherrelativepath" : "../../abstractions/pushpull",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.push.source.poly~.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/pushpull",
+				"patcherrelativepath" : "../../abstractions/pushpull",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.dsp.8chlevels.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/dsp",
+				"patcherrelativepath" : "../../abstractions/dsp",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.allpass~.voix.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/modules/omod.allpass~",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.allpass~.voix.kernelwrapper.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/modules/omod.allpass~",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.allpass~.voix.kernel.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/modules/omod.allpass~",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.dsp.poly.1x1.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/dsp",
+				"patcherrelativepath" : "../../abstractions/dsp",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.bundle.dsp.poly~.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/bundles",
+				"patcherrelativepath" : "../../abstractions/bundles",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.bundle.dsp.receiver.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/bundles",
+				"patcherrelativepath" : "../../abstractions/bundles",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.push.destination.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/pushpull",
+				"patcherrelativepath" : "../../abstractions/pushpull",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.push.destination.poly~.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/pushpull",
+				"patcherrelativepath" : "../../abstractions/pushpull",
+				"type" : "JSON",
+				"implicit" : 1
 			}
  ]
 	}

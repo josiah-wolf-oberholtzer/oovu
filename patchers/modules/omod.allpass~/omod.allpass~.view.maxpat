@@ -4,11 +4,11 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 551.0, 44.0, 698.0, 710.0 ],
+		"rect" : [ 825.0, 44.0, 698.0, 710.0 ],
 		"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
@@ -32,13 +32,26 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
+					"id" : "obj-51",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 210.0, 400.0, 50.0, 18.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
 					"id" : "obj-15",
 					"maxclass" : "newobj",
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 40.0, 610.0, 209.0, 20.0 ],
-					"text" : "mxj oovu.Proxy #1 dsp/input/limiter"
+					"text" : "mxj oovu.Proxy #1 dsp/:limiting"
 				}
 
 			}
@@ -1050,7 +1063,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 20.0, 440.0, 228.0, 20.0 ],
-					"text" : "mxj oovu.Proxy #1 dsp/voicecount"
+					"text" : "mxj oovu.Proxy #1 dsp/:voicecount"
 				}
 
 			}
@@ -1225,7 +1238,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 60.0, 315.0, 188.0, 20.0 ],
-					"text" : "mxj oovu.Proxy #1 dsp/active"
+					"text" : "mxj oovu.Proxy #1 dsp/:active"
 				}
 
 			}
@@ -1290,6 +1303,15 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-10", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-51", 1 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-10", 2 ]
 				}
 
 			}

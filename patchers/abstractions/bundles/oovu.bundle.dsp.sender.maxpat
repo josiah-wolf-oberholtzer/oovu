@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x86"
 		}
 ,
@@ -314,20 +314,6 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 10.0, 225.0, 264.0, 20.0 ],
 					"text" : "oovu.push.source #1"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"id" : "obj-1",
-					"maxclass" : "newobj",
-					"numinlets" : 3,
-					"numoutlets" : 3,
-					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 250.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 dsp/sendcount :datatype integer :default 1 :range 1 8 :priority 99"
 				}
 
 			}

@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x86"
 		}
 ,
@@ -31,12 +31,26 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
-					"id" : "obj-13",
+					"id" : "obj-1",
 					"maxclass" : "newobj",
-					"numinlets" : 2,
+					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 290.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 340.0, 600.0, 20.0 ],
+					"text" : "mxj oovu.DspSettings #1 dsp"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-13",
+					"maxclass" : "newobj",
+					"numinlets" : 3,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 10.0, 240.0, 600.0, 20.0 ],
 					"text" : "mxj oovu.Property #1 soundfile/looping :datatype boolean :default 0"
 				}
 
@@ -50,22 +64,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
-					"patching_rect" : [ 10.0, 240.0, 24.0, 20.0 ],
+					"patching_rect" : [ 10.0, 190.0, 24.0, 20.0 ],
 					"text" : "t 0"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"id" : "obj-1",
-					"maxclass" : "newobj",
-					"numinlets" : 2,
-					"numoutlets" : 3,
-					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 340.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 dsp/active :datatype boolean :default 0"
 				}
 
 			}
@@ -75,10 +75,10 @@
 					"fontsize" : 12.0,
 					"id" : "obj-11",
 					"maxclass" : "newobj",
-					"numinlets" : 2,
+					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 185.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 135.0, 600.0, 20.0 ],
 					"text" : "mxj oovu.Property #1 oscillator/pulserate :datatype decimal :default 500 :range 0. NULL"
 				}
 
@@ -89,10 +89,10 @@
 					"fontsize" : 12.0,
 					"id" : "obj-10",
 					"maxclass" : "newobj",
-					"numinlets" : 2,
+					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 160.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 110.0, 600.0, 20.0 ],
 					"text" : "mxj oovu.Property #1 oscillator/pulsing :datatype boolean :default 0"
 				}
 
@@ -103,10 +103,10 @@
 					"fontsize" : 12.0,
 					"id" : "obj-9",
 					"maxclass" : "newobj",
-					"numinlets" : 2,
+					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 135.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 85.0, 600.0, 20.0 ],
 					"text" : "mxj oovu.Property #1 oscillator/frequency :datatype decimal :range 0. NULL :default 440"
 				}
 
@@ -117,10 +117,10 @@
 					"fontsize" : 12.0,
 					"id" : "obj-8",
 					"maxclass" : "newobj",
-					"numinlets" : 2,
+					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 110.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 60.0, 600.0, 20.0 ],
 					"text" : "mxj oovu.Property #1 oscillator/waveform :datatype option :options sine triangle rectangle noise :default sine"
 				}
 
@@ -131,10 +131,10 @@
 					"fontsize" : 12.0,
 					"id" : "obj-7",
 					"maxclass" : "newobj",
-					"numinlets" : 2,
+					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 85.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 35.0, 600.0, 20.0 ],
 					"text" : "mxj oovu.Property #1 adc/channel :datatype integer :range 1 NULL :default 1"
 				}
 
@@ -145,9 +145,10 @@
 					"fontsize" : 12.0,
 					"id" : "obj-6",
 					"maxclass" : "newobj",
-					"numinlets" : 0,
-					"numoutlets" : 0,
-					"patching_rect" : [ 10.0, 315.0, 600.0, 20.0 ],
+					"numinlets" : 3,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 10.0, 265.0, 600.0, 20.0 ],
 					"text" : "mxj oovu.Method #1 soundfile/seek :datatype decimal :range 0 NULL"
 				}
 
@@ -158,10 +159,10 @@
 					"fontsize" : 12.0,
 					"id" : "obj-5",
 					"maxclass" : "newobj",
-					"numinlets" : 2,
+					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 265.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 215.0, 600.0, 20.0 ],
 					"text" : "mxj oovu.Property #1 soundfile/playing :datatype boolean :priority 98 :default 0"
 				}
 
@@ -172,10 +173,10 @@
 					"fontsize" : 12.0,
 					"id" : "obj-19",
 					"maxclass" : "newobj",
-					"numinlets" : 2,
+					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 210.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 160.0, 600.0, 20.0 ],
 					"text" : "mxj oovu.Property #1 soundfile/filepath :datatype filesystempath :priority 99"
 				}
 
@@ -186,10 +187,10 @@
 					"fontsize" : 12.0,
 					"id" : "obj-4",
 					"maxclass" : "newobj",
-					"numinlets" : 2,
+					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 60.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 10.0, 600.0, 20.0 ],
 					"text" : "mxj oovu.Property #1 source :datatype option :options adc oscillator soundfile :priority 100 :default adc"
 				}
 
@@ -203,7 +204,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 8,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 10.0, 415.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 290.0, 600.0, 20.0 ],
 					"text" : "poly~ omod.input~.voix 1 @args #1"
 				}
 
@@ -216,7 +217,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 8,
 					"numoutlets" : 0,
-					"patching_rect" : [ 10.0, 440.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 315.0, 600.0, 20.0 ],
 					"text" : "oovu.bundle.dsp.sender #1"
 				}
 
@@ -236,7 +237,7 @@
 					"destination" : [ "obj-12", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 310.0, 234.0, 19.5, 234.0 ],
+					"midpoints" : [ 310.0, 184.0, 19.5, 184.0 ],
 					"source" : [ "obj-19", 1 ]
 				}
 

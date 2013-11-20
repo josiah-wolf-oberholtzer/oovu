@@ -425,7 +425,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 235.0, 65.0, 227.0, 20.0 ],
-					"text" : "mxj oovu.Proxy #1 dsp/sendcount"
+					"text" : "mxj oovu.Proxy #1 dsp/:sendcount"
 				}
 
 			}
