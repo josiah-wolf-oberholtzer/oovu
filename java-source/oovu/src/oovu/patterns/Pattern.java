@@ -3,7 +3,6 @@ package oovu.patterns;
 import java.util.ArrayList;
 import java.util.Map;
 
-import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
 import oovu.datatypes.BooleanDatatype;
 import oovu.datatypes.BoundedDatatype;
@@ -112,17 +111,14 @@ public class Pattern extends ClockWatcher {
             double previous_event_time = this.next_event_time;
             double timing = this.timings[this.current_timing_step].execute();
             Atom[] payload = null;
-            Environment.log("ARITY: " + this.arity);
             if (0 < this.arity) {
                 double[] values = new double[this.arity + 1];
                 ValueRange value = this.values[this.current_value_step];
                 for (int i = 0, j = this.arity; i < j; i++) {
                     values[i] = value.execute();
-                    Environment.log(i + ": " + values[i]);
                 }
                 values[this.arity] = timing;
                 payload = Atom.newAtom(values);
-                Environment.log(Atom.toOneString(payload));
             }
             this.next_event_time = previous_event_time + timing;
             this.current_timing_step =
@@ -132,7 +128,6 @@ public class Pattern extends ClockWatcher {
             OscAddress osc_address = OscAddress.from_cache(":" + this.message);
             Request request =
                 new Request(this.client, osc_address, payload, false);
-            Environment.log("Y: " + request.toString());
             this.client.handle_request(request);
         }
     }

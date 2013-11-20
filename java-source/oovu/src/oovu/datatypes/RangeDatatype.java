@@ -169,11 +169,13 @@ public class RangeDatatype extends BoundedDatatype {
         if (doubles.length < 2) {
             return doubles;
         } else if (doubles.length == 2) {
+            Arrays.sort(doubles);
             return this.range_to_center_width(doubles[0], doubles[1]);
         }
         for (int i = 0, j = doubles.length; (i + 2) < j; i += 3) {
-            double[] center_width =
-                this.range_to_center_width(doubles[i], doubles[i + 1]);
+            double low = Math.min(doubles[i], doubles[i + 1]);
+            double high = Math.max(doubles[i], doubles[i + 1]);
+            double[] center_width = this.range_to_center_width(low, high);
             doubles[i] = center_width[0];
             doubles[i + 1] = center_width[1];
         }

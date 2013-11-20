@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 426.0, 44.0, 849.0, 710.0 ],
+		"rect" : [ 431.0, 44.0, 849.0, 710.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -28,6 +28,62 @@
 		"digest" : "",
 		"tags" : "",
 		"boxes" : [ 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-18",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 250.0, 15.0, 331.0, 18.0 ],
+					"text" : "/allpass/delay/range/:pattern"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-12",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 270.0, 45.0, 286.0, 18.0 ],
+					"text" : "/allpass/delay/frequency/:pattern"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-11",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 50.0, 60.0, 203.0, 18.0 ],
+					"text" : "/allpass/delay/frequency/:getpattern"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-7",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 245.0, 80.0, 331.0, 18.0 ],
+					"text" : "/allpass/delay/range/:pattern :timings 2000 :values 0.25:0.75"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
@@ -134,7 +190,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 415.0, 40.0, 140.0, 210.0 ]
+					"patching_rect" : [ 430.0, 105.0, 140.0, 210.0 ]
 				}
 
 			}
@@ -147,8 +203,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 15.0, 260.0, 220.0, 18.0 ],
-					"text" : "/dsp/active 1"
+					"patching_rect" : [ 305.0, 635.0, 457.0, 18.0 ],
+					"text" : "/allpass/delay/range 0.451242 0.545222"
 				}
 
 			}
@@ -161,8 +217,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 15.0, 15.0, 169.0, 18.0 ],
-					"text" : "/dsp/send.1/destination/:show"
+					"patching_rect" : [ 30.0, 35.0, 203.0, 18.0 ],
+					"text" : "/dsp/send.1/destination/:getinterface"
 				}
 
 			}
@@ -174,7 +230,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 265.0, 270.0, 20.0, 20.0 ]
+					"patching_rect" : [ 280.0, 335.0, 20.0, 20.0 ]
 				}
 
 			}
@@ -187,7 +243,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 265.0, 300.0, 93.0, 18.0 ],
+					"patching_rect" : [ 280.0, 365.0, 93.0, 18.0 ],
 					"text" : "/*/dsp/active $1"
 				}
 
@@ -201,7 +257,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 265.0, 40.0, 140.0, 210.0 ]
+					"patching_rect" : [ 280.0, 105.0, 140.0, 210.0 ]
 				}
 
 			}
@@ -214,7 +270,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 265.0, 325.0, 100.0, 20.0 ],
+					"patching_rect" : [ 280.0, 390.0, 100.0, 20.0 ],
 					"text" : "mxj oovu.Root"
 				}
 
@@ -229,7 +285,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 15.0, 285.0, 241.0, 58.0 ],
+					"patching_rect" : [ 30.0, 350.0, 241.0, 58.0 ],
 					"text" : "interface dumpmeta getinterface getmembers getmeta getmethods getname getoscaddress getproperties getreturns getuniqueid report show"
 				}
 
@@ -243,7 +299,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 15.0, 40.0, 240.0, 210.0 ]
+					"patching_rect" : [ 30.0, 105.0, 240.0, 210.0 ]
 				}
 
 			}
@@ -272,6 +328,24 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-10", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-1", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-11", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-1", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-12", 0 ]
 				}
 
 			}
@@ -313,6 +387,15 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-1", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-18", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-17", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -340,6 +423,15 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-1", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-7", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-4", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -349,31 +441,31 @@
 			}
  ],
 		"parameters" : 		{
-			"obj-35::obj-13::obj-56::obj-33" : [ "live.tab[6]", "live.tab[1]", 0 ],
-			"obj-35::obj-13::obj-62::obj-51" : [ "live.numbox[4]", "live.numbox", 0 ],
-			"obj-1::obj-5::obj-36" : [ "live.numbox[43]", "live.numbox[4]", 0 ],
-			"obj-35::obj-13::obj-56::obj-42" : [ "live.numbox[28]", "live.numbox", 0 ],
-			"obj-35::obj-13::obj-56::obj-41" : [ "live.numbox[29]", "live.numbox", 0 ],
-			"obj-35::obj-13::obj-11::obj-18::obj-4" : [ "live.slider[1]", "live.slider", 0 ],
-			"obj-19::obj-13::obj-36" : [ "live.numbox[72]", "live.numbox[1]", 0 ],
-			"obj-35::obj-13::obj-9" : [ "live.tab", "live.tab", 0 ],
-			"obj-1::obj-5::obj-26" : [ "live.numbox[44]", "live.numbox[4]", 0 ],
-			"obj-1::obj-5::obj-18::obj-204" : [ "live.numbox[3]", "live.numbox", 0 ],
-			"obj-35::obj-13::obj-11::obj-204" : [ "live.numbox[13]", "live.numbox", 0 ],
-			"obj-35::obj-13::obj-58::obj-21" : [ "live.numbox[2]", "live.numbox", 0 ],
 			"obj-1::obj-5::obj-31" : [ "live.numbox[42]", "live.numbox[4]", 0 ],
-			"obj-35::obj-13::obj-6" : [ "live.slider[3]", "live.slider", 0 ],
+			"obj-35::obj-13::obj-9" : [ "live.tab", "live.tab", 0 ],
+			"obj-35::obj-13::obj-58::obj-21" : [ "live.numbox[2]", "live.numbox", 0 ],
+			"obj-35::obj-13::obj-11::obj-18::obj-4" : [ "live.slider[1]", "live.slider", 0 ],
 			"obj-19::obj-13::obj-204" : [ "live.numbox[73]", "live.numbox", 0 ],
+			"obj-35::obj-13::obj-6" : [ "live.slider[3]", "live.slider", 0 ],
 			"obj-1::obj-5::obj-12" : [ "live.slider[14]", "live.slider", 0 ],
-			"obj-19::obj-13::obj-6" : [ "live.slider[31]", "live.slider", 0 ],
-			"obj-35::obj-13::obj-62::obj-36" : [ "live.numbox[1]", "live.numbox[1]", 0 ],
-			"obj-1::obj-5::obj-18::obj-18::obj-4" : [ "live.slider", "live.slider", 0 ],
+			"obj-35::obj-13::obj-56::obj-33" : [ "live.tab[6]", "live.tab[1]", 0 ],
+			"obj-35::obj-13::obj-11::obj-204" : [ "live.numbox[13]", "live.numbox", 0 ],
+			"obj-35::obj-13::obj-62::obj-51" : [ "live.numbox[4]", "live.numbox", 0 ],
 			"obj-1::obj-5::obj-49" : [ "live.numbox[39]", "live.numbox[4]", 0 ],
 			"obj-1::obj-5::obj-40" : [ "live.numbox[40]", "live.numbox[4]", 0 ],
 			"obj-1::obj-5::obj-38" : [ "live.numbox[41]", "live.numbox[4]", 0 ],
+			"obj-19::obj-13::obj-6" : [ "live.slider[31]", "live.slider", 0 ],
 			"obj-1::obj-5::obj-6" : [ "live.slider[15]", "live.slider", 0 ],
-			"obj-1::obj-5::obj-21" : [ "live.numbox[12]", "live.numbox[4]", 0 ],
-			"obj-1::obj-5::obj-204" : [ "live.numbox[46]", "live.numbox", 0 ]
+			"obj-1::obj-5::obj-18::obj-18::obj-4" : [ "live.slider", "live.slider", 0 ],
+			"obj-1::obj-5::obj-36" : [ "live.numbox[43]", "live.numbox[4]", 0 ],
+			"obj-1::obj-5::obj-204" : [ "live.numbox[46]", "live.numbox", 0 ],
+			"obj-35::obj-13::obj-62::obj-36" : [ "live.numbox[1]", "live.numbox[1]", 0 ],
+			"obj-19::obj-13::obj-36" : [ "live.numbox[72]", "live.numbox[1]", 0 ],
+			"obj-35::obj-13::obj-56::obj-42" : [ "live.numbox[28]", "live.numbox", 0 ],
+			"obj-1::obj-5::obj-18::obj-204" : [ "live.numbox[3]", "live.numbox", 0 ],
+			"obj-35::obj-13::obj-56::obj-41" : [ "live.numbox[29]", "live.numbox", 0 ],
+			"obj-1::obj-5::obj-26" : [ "live.numbox[44]", "live.numbox[4]", 0 ],
+			"obj-1::obj-5::obj-21" : [ "live.numbox[12]", "live.numbox[4]", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{
