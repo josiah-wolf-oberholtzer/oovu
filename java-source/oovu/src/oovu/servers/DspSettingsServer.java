@@ -182,6 +182,7 @@ public class DspSettingsServer extends ModuleMemberServer {
 
     private Integer input_count = null;
     private Integer output_count = null;
+    private Integer send_count = 1;
     private Integer voice_count = 1;
     private boolean limiting = true;
 
@@ -228,6 +229,10 @@ public class DspSettingsServer extends ModuleMemberServer {
         return null;
     }
 
+    public int get_send_count() {
+        return this.send_count;
+    }
+    
     public int get_voice_count() {
         return this.voice_count;
     }
@@ -299,6 +304,12 @@ public class DspSettingsServer extends ModuleMemberServer {
     public void set_voice_count(int voice_count) {
         if ((0 < voice_count) && (voice_count <= 8)) {
             this.voice_count = voice_count;
+        }
+    }
+
+    public void set_send_count(int send_count) {
+        if ((0 < send_count) && (send_count <= 8)) {
+            this.send_count = send_count;
         }
     }
 }
