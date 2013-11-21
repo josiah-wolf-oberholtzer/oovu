@@ -2,6 +2,7 @@ package oovu.servers;
 
 import java.util.Map;
 
+import oovu.addresses.OscAddress;
 import oovu.messaging.GetterMessageHandler;
 import oovu.messaging.InfoGetterMessageHandler;
 import oovu.messaging.SetterMessageHandler;
@@ -21,8 +22,11 @@ public class DspSendServer extends ModuleMemberServer {
 
         @Override
         public Atom[][] run(Atom[] arguments) {
-            // TODO Auto-generated method stub
-            return null;
+            Atom[][] result = new Atom[1][2];
+            result[0][0] = Atom.newAtom("destinationid");
+            result[0][1] =
+                Atom.newAtom(DspSendServer.this.get_destination_id());
+            return result;
         }
     }
 
@@ -45,8 +49,19 @@ public class DspSendServer extends ModuleMemberServer {
 
         @Override
         public Atom[][] run(Atom[] arguments) {
-            // TODO Auto-generated method stub
-            return null;
+            Atom[][] result = new Atom[1][];
+            String destination =
+                DspSendServer.this.get_destination_address_string();
+            if (destination != null) {
+                result[0] = Atom.newAtom(new String[] {
+                    "destination", destination
+                });
+            } else {
+                result[0] = Atom.newAtom(new String[] {
+                    "destination"
+                });
+            }
+            return result;
         }
     }
 
@@ -59,12 +74,20 @@ public class DspSendServer extends ModuleMemberServer {
 
         @Override
         public Atom[][] run(Atom[] arguments) {
-            // TODO Auto-generated method stub
-            return null;
+            Atom[][] result = new Atom[1][];
+            int[] io = DspSendServer.this.get_io();
+            result[0] = Atom.newAtom("io", Atom.newAtom(io));
+            return result;
         }
     }
 
     private class SetDestinationMessageHandler extends SetterMessageHandler {
+
+        @Override
+        public void call_after() {
+            DspSendServer.this.make_request(DspSendServer.this, "dumpmeta",
+                null);
+        }
 
         @Override
         public Integer get_arity() {
@@ -78,7 +101,17 @@ public class DspSendServer extends ModuleMemberServer {
 
         @Override
         public Atom[][] run(Atom[] arguments) {
-            // TODO Auto-generated method stub
+            if (0 < arguments.length) {
+                String address_string = arguments[0].getString();
+                OscAddress destination_address =
+                    OscAddress.from_cache(address_string);
+                DspReceiveServer destination_server =
+                    DspReceiveServer.dsp_receive_servers
+                        .get(destination_address);
+                DspSendServer.this.set_destination_server(destination_server);
+            } else {
+                DspSendServer.this.set_destination_server(null);
+            }
             return null;
         }
     }
