@@ -2,9 +2,10 @@ package oovu.addresses;
 
 import java.util.concurrent.locks.ReentrantLock;
 
-import oovu.events.EventThing;
+import oovu.events.EventService;
 import oovu.servers.DspReceiveServer;
 import oovu.servers.RootServer;
+
 
 // import org.apache.log4j.BasicConfigurator;
 // import org.apache.log4j.Level;
@@ -20,9 +21,11 @@ public class Environment {
     // private static final Logger logger;
     public static final RootServer root_server;
     public static final OscAddressNode root_osc_address_node;
+    public static final EventService event_service;
     static {
         root_osc_address_node = new OscAddressNode("");
         root_server = new RootServer();
+        event_service = new EventService();
         // BasicConfigurator.configure();
         // logger = Logger.getLogger("OOVU");
         // Environment.logger.setLevel(Level.ALL);
@@ -68,7 +71,7 @@ public class Environment {
             Environment.root_osc_address_node.clear();
             Environment.root_server
                 .attach_to_osc_address_node(Environment.root_osc_address_node);
-            EventThing.clear_observers();
+            Environment.event_service.reset();
             DspReceiveServer.dsp_receive_servers.clear();
         }
     }

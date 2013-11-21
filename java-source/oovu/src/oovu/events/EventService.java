@@ -11,6 +11,14 @@ public class EventService {
     private final Map<Class<? extends Event>, HashSet<Subscription>> subscriptions =
         new HashMap<Class<? extends Event>, HashSet<Subscription>>();
 
+    public void reset() {
+        for (Class<? extends Event> event_type : this.subscriptions.keySet()) {
+            HashSet<Subscription> subscription_set = this.subscriptions.get(event_type);
+            subscription_set.clear();
+        }
+        this.subscriptions.clear();
+    }
+    
     public void publish(Event event) {
         for (Class<? extends Event> event_type : this.subscriptions.keySet()) {
             if (!event_type.isInstance(event)) {
