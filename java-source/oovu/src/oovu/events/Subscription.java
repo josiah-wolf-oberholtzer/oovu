@@ -1,15 +1,18 @@
 package oovu.events;
 
-public class Subscription {
+import oovu.addresses.Environment;
+import oovu.servers.Server;
 
-    public final Subscriber subscriber;
-    public final Class<? extends Event> event_type;
+abstract public class Subscription {
+
+    public final Server subscriber;
+    public final Class<? extends Event> event_class;
     public final Filter filter;
 
-    public Subscription(Subscriber subscriber,
-        Class<? extends Event> event_type, Filter filter) {
+    public Subscription(Server subscriber, Class<? extends Event> event_class,
+        Filter filter) {
         this.subscriber = subscriber;
-        this.event_type = event_type;
+        this.event_class = event_class;
         this.filter = filter;
     }
 
@@ -25,11 +28,11 @@ public class Subscription {
             return false;
         }
         Subscription other = (Subscription) obj;
-        if (this.event_type == null) {
-            if (other.event_type != null) {
+        if (this.event_class == null) {
+            if (other.event_class != null) {
                 return false;
             }
-        } else if (!this.event_type.equals(other.event_type)) {
+        } else if (!this.event_class.equals(other.event_class)) {
             return false;
         }
         if (this.filter == null) {
@@ -49,13 +52,15 @@ public class Subscription {
         return true;
     }
 
+    abstract public void handle_event(Event event);
+
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result =
             (prime * result)
-                + ((this.event_type == null) ? 0 : this.event_type.hashCode());
+                + ((this.event_class == null) ? 0 : this.event_class.hashCode());
         result =
             (prime * result)
                 + ((this.filter == null) ? 0 : this.filter.hashCode());
@@ -63,5 +68,17 @@ public class Subscription {
             (prime * result)
                 + ((this.subscriber == null) ? 0 : this.subscriber.hashCode());
         return result;
+    }
+
+    public Subscription subscribe() {
+        Environment.event_service.subscribe(this);
+        this.subscriber.add_subscription(this);
+        return this;
+    }
+
+    public Subscription unsubscribe() {
+        Environment.event_service.unsubscribe(this);
+        this.subscriber.remove_subscription(this);
+        return this;
     }
 }

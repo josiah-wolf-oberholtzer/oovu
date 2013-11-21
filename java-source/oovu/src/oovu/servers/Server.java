@@ -14,8 +14,8 @@ import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
 import oovu.clients.ServerClient;
 import oovu.events.Event;
-import oovu.events.EventHandler;
 import oovu.events.Subscriber;
+import oovu.events.Subscription;
 import oovu.messaging.DeferredRequestCallback;
 import oovu.messaging.InfoGetterMessageHandler;
 import oovu.messaging.MessageHandler;
@@ -289,8 +289,8 @@ abstract public class Server implements MessagePasser, Subscriber {
 
     public final Map<String, Atom[]> argument_map;
     protected final Set<Server> child_servers = new HashSet<Server>();
-    protected final Map<Class<? extends Event>, EventHandler> event_handlers =
-        new HashMap<Class<? extends Event>, EventHandler>();
+    protected final Map<Class<? extends Event>, Subscription> subscriptions =
+        new HashMap<Class<? extends Event>, Subscription>();
     protected final Map<String, MessageHandler> message_handlers =
         new HashMap<String, MessageHandler>();
     protected String name = null;
@@ -313,12 +313,12 @@ abstract public class Server implements MessagePasser, Subscriber {
         this.add_message_handler(new ShowMessageHandler());
     }
 
-    public void add_event_handler(EventHandler event_handler) {
-        this.event_handlers.put(event_handler.event_class, event_handler);
-    }
-
     public void add_message_handler(MessageHandler message_handler) {
         this.message_handlers.put(message_handler.get_name(), message_handler);
+    }
+
+    public void add_subscription(Subscription subscription) {
+        this.subscriptions.put(subscription.event_class, subscription);
     }
 
     public void attach_to_osc_address_node(OscAddressNode osc_address_node) {
@@ -429,9 +429,9 @@ abstract public class Server implements MessagePasser, Subscriber {
 
     @Override
     public void handle_event(Event event) {
-        EventHandler event_handler = this.event_handlers.get(event.getClass());
-        if (event_handler != null) {
-            event_handler.run(event);
+        Subscription subscription = this.subscriptions.get(event.getClass());
+        if (subscription != null) {
+            subscription.handle_event(event);
         }
     }
 
@@ -511,6 +511,10 @@ abstract public class Server implements MessagePasser, Subscriber {
             new Request(source, OscAddress.from_cache("./:"
                 + message_handler_name), arguments, true);
         this.handle_request(request);
+    }
+
+    public void remove_subscription(Subscription subscription) {
+        this.subscriptions.remove(subscription.event_class);
     }
 
     @Override

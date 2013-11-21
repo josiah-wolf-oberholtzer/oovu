@@ -4,12 +4,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Map;
 
-import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
-import oovu.datatypes.AudioSendDatatype;
 import oovu.datatypes.Datatype;
 import oovu.datatypes.GenericDatatype;
-import oovu.events.types.DspReceiversChangedEvent;
 import oovu.messaging.GetterMessageHandler;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.Request;
@@ -214,10 +211,6 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         this.add_message_handler(new SetValueMessageHandler());
         this.initialize_value();
         this.initialize_priority();
-        if (this.datatype instanceof AudioSendDatatype) {
-            Environment.event_service.subscribe(this,
-                DspReceiversChangedEvent.class, null);
-        }
         if (!(this instanceof ReturnServer)) {
             this.add_message_handler(new GetPatternMessageHandler());
             this.add_message_handler(new SetPatternMessageHandler());

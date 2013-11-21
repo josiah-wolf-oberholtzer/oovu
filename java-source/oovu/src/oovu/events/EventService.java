@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import oovu.servers.Server;
+
 public class EventService {
 
     private final Map<Class<? extends Event>, HashSet<Subscription>> subscriptions =
@@ -36,21 +38,17 @@ public class EventService {
         this.subscriptions.clear();
     }
 
-    public void subscribe(
-        Subscriber subscriber,
-        Class<? extends Event> event_type,
-        Filter filter) {
-        Subscription subscription =
-            new Subscription(subscriber, event_type, filter);
-        if (!this.subscriptions.containsKey(event_type)) {
-            this.subscriptions.put(event_type, new HashSet<Subscription>());
+    public void subscribe(Subscription subscription) {
+        if (!this.subscriptions.containsKey(subscription.event_class)) {
+            this.subscriptions.put(subscription.event_class,
+                new HashSet<Subscription>());
         }
         HashSet<Subscription> subscription_set =
-            this.subscriptions.get(event_type);
+            this.subscriptions.get(subscription.event_class);
         subscription_set.add(subscription);
     }
 
-    public void unsubscribe(Subscriber subscriber) {
+    public void unsubscribe(Server subscriber) {
         Set<Class<? extends Event>> keys =
             new HashSet<Class<? extends Event>>(this.subscriptions.keySet());
         for (Class<? extends Event> event_type : keys) {
@@ -69,20 +67,15 @@ public class EventService {
         }
     }
 
-    public void unsubscribe(
-        Subscriber subscriber,
-        Class<? extends Event> event_type,
-        Filter filter) {
-        Subscription subscription =
-            new Subscription(subscriber, event_type, filter);
-        if (this.subscriptions.containsKey(event_type)) {
+    public void unsubscribe(Subscription subscription) {
+        if (this.subscriptions.containsKey(subscription.event_class)) {
             HashSet<Subscription> subscription_set =
-                this.subscriptions.get(event_type);
+                this.subscriptions.get(subscription.event_class);
             if (subscription_set.contains(subscription)) {
                 subscription_set.remove(subscription);
             }
             if (0 == subscription_set.size()) {
-                this.subscriptions.remove(event_type);
+                this.subscriptions.remove(subscription.event_class);
             }
         }
     }

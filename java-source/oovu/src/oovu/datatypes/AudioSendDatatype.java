@@ -3,10 +3,9 @@ package oovu.datatypes;
 import java.util.Arrays;
 import java.util.Map;
 
-import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
 import oovu.events.Event;
-import oovu.events.EventHandler;
+import oovu.events.Subscription;
 import oovu.events.types.DspReceiversChangedEvent;
 import oovu.messaging.InfoGetterMessageHandler;
 import oovu.servers.AttributeServer;
@@ -17,15 +16,15 @@ import com.cycling74.max.Atom;
 
 public class AudioSendDatatype extends OscAddressDatatype {
 
-    private class DspReceiversChangedEventHandler extends EventHandler {
+    private class DspReceiversChangedSubscription extends Subscription {
 
-        public DspReceiversChangedEventHandler(Server client) {
-            super(client, DspReceiversChangedEvent.class);
+        public DspReceiversChangedSubscription(Server client) {
+            super(client, DspReceiversChangedEvent.class, null);
         }
 
         @Override
-        public void run(Event event) {
-            AttributeServer client = (AttributeServer) this.client;
+        public void handle_event(Event event) {
+            AttributeServer client = (AttributeServer) this.subscriber;
             Atom[] value = client.datatype.get_value();
             client.datatype.set_value(value);
             client.make_deferred_request(client, "dumpmeta", null);
@@ -76,10 +75,9 @@ public class AudioSendDatatype extends OscAddressDatatype {
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {
-            client
-                .add_event_handler(new DspReceiversChangedEventHandler(client));
-            Environment.event_service.subscribe(client,
-                DspReceiversChangedEvent.class, null);
+            Subscription subscription =
+                new DspReceiversChangedSubscription(client);
+            subscription.subscribe();
             this.client
                 .add_message_handler(new GetDestinationIdMessageHandler());
             this.client

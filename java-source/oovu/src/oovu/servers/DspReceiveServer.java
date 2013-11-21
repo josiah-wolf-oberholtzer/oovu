@@ -6,8 +6,8 @@ import java.util.Map;
 import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
 import oovu.events.Event;
-import oovu.events.EventHandler;
 import oovu.events.PublisherFilter;
+import oovu.events.Subscription;
 import oovu.events.types.DspReceiversChangedEvent;
 import oovu.events.types.ModuleNameAcquiredEvent;
 import oovu.states.State;
@@ -16,21 +16,21 @@ import com.cycling74.max.Atom;
 
 public class DspReceiveServer extends ModuleMemberServer {
 
-    private class ModuleNameAcquiredEventHandler extends EventHandler {
+    private class ModuleNameAcquiredSubscription extends Subscription {
 
-        public ModuleNameAcquiredEventHandler(Server client) {
-            super(client, ModuleNameAcquiredEvent.class);
+        public ModuleNameAcquiredSubscription(Server subscriber) {
+            super(subscriber, ModuleNameAcquiredEvent.class,
+                new PublisherFilter(subscriber.parent_server));
         }
 
         @Override
-        public void run(Event event) {
-            Environment.event_service.unsubscribe(this.client,
-                this.event_class,
-                new PublisherFilter(this.client.get_parent_server()));
+        public void handle_event(Event event) {
+            this.unsubscribe();
             DspReceiveServer.dsp_receive_servers.put(
-                this.client.get_osc_address(), (DspReceiveServer) this.client);
+                this.subscriber.get_osc_address(),
+                (DspReceiveServer) this.subscriber);
             Environment.event_service.publish(new DspReceiversChangedEvent(
-                this.client));
+                this.subscriber));
         }
     }
 
@@ -58,10 +58,9 @@ public class DspReceiveServer extends ModuleMemberServer {
         Map<String, Atom[]> argument_map) {
         super(module_server, argument_map);
         if (module_server.get_name() == null) {
-            this.add_event_handler(new ModuleNameAcquiredEventHandler(this));
-            Environment.event_service.subscribe(this,
-                ModuleNameAcquiredEvent.class, new PublisherFilter(
-                    module_server));
+            Subscription subscription =
+                new ModuleNameAcquiredSubscription(this);
+            subscription.subscribe();
         }
     }
 
