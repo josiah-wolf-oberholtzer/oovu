@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+import oovu.servers.Server;
+
 public class EventService {
 
     private final Map<Class<? extends Event>, HashSet<Subscription>> subscriptions =
@@ -27,7 +29,7 @@ public class EventService {
     }
 
     public void subscribe(
-        Subscriber subscriber,
+        Server subscriber,
         Class<? extends Event> event_type,
         Filter filter) {
         Subscription subscription =
@@ -40,7 +42,7 @@ public class EventService {
         subscription_set.add(subscription);
     }
 
-    public void unsubscribe(Subscriber subscriber) {
+    public void unsubscribe(Server subscriber) {
         for (Class<? extends Event> event_type : this.subscriptions.keySet()) {
             HashSet<Subscription> old_subscription_set =
                 this.subscriptions.get(event_type);
@@ -58,7 +60,7 @@ public class EventService {
     }
 
     public void unsubscribe(
-        Subscriber subscriber,
+        Server subscriber,
         Class<? extends Event> event_type,
         Filter filter) {
         Subscription subscription =

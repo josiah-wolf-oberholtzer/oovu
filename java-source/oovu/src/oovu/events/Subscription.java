@@ -1,12 +1,14 @@
 package oovu.events;
 
+import oovu.servers.Server;
+
 public class Subscription {
 
-    public final Subscriber subscriber;
+    public final Server subscriber;
     public final Class<? extends Event> event_type;
     public final Filter filter;
 
-    public Subscription(Subscriber subscriber,
+    public Subscription(Server subscriber,
         Class<? extends Event> event_type, Filter filter) {
         this.subscriber = subscriber;
         this.event_type = event_type;

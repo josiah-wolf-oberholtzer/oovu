@@ -13,6 +13,7 @@ import oovu.Proxy;
 import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
 import oovu.clients.ServerClient;
+import oovu.events.Event;
 import oovu.events.EventHandler;
 import oovu.events.EventThing;
 import oovu.events.EventTypes;
@@ -502,5 +503,9 @@ abstract public class Server implements MessagePasser {
     public String toString() {
         return "<" + this.getClass().getSimpleName() + ": "
             + this.get_osc_address() + ">";
+    }
+    
+    public void inform(Event event) {
+        
     }
 }
