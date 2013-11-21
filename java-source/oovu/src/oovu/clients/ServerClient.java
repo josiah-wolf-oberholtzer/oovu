@@ -2,12 +2,10 @@ package oovu.clients;
 
 import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
-import oovu.messaging.DeferredResponseCallback;
 import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
-import com.cycling74.max.MaxSystem;
 
 abstract public class ServerClient extends MaxPeer {
 
@@ -36,17 +34,6 @@ abstract public class ServerClient extends MaxPeer {
             this.server.deallocate_if_necessary();
         }
         this.server = null;
-    }
-
-    protected void generate_message_passer_callback() {
-        try {
-            DeferredResponseCallback callback =
-                new DeferredResponseCallback(this, this.get_server()
-                    .generate_dumpmeta_response());
-            MaxSystem.deferLow(callback);
-        } catch (UnsatisfiedLinkError e) {
-            // Environment.log(e);
-        }
     }
 
     @Override

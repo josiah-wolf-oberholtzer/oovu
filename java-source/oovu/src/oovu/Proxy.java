@@ -5,7 +5,6 @@ import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
 import oovu.clients.MaxPeer;
-import oovu.messaging.DeferredResponseCallback;
 import oovu.messaging.MessagePasser;
 import oovu.messaging.Request;
 import oovu.messaging.Response;
@@ -143,15 +142,17 @@ public class Proxy extends MaxPeer implements MessagePasser {
             this.message_handler_name = null;
         }
         if (this.osc_address_node.get_server() != null) {
-            try {
-                Server server = this.osc_address_node.get_server();
-                DeferredResponseCallback callback =
-                    new DeferredResponseCallback(this,
-                        server.generate_dumpmeta_response());
-                MaxSystem.deferLow(callback);
-            } catch (UnsatisfiedLinkError e) {
-                // Environment.log(e);
-            }
+            this.osc_address_node.get_server().make_deferred_request(this,
+                "dumpmeta", null);
+            // try {
+            // Server server = this.osc_address_node.get_server();
+            // DeferredResponseCallback callback =
+            // new DeferredResponseCallback(this,
+            // server.generate_dumpmeta_response());
+            // MaxSystem.deferLow(callback);
+            // } catch (UnsatisfiedLinkError e) {
+            // // Environment.log(e);
+            // }
         }
     }
 

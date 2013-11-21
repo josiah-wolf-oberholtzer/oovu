@@ -481,13 +481,14 @@ abstract public class Server implements MessagePasser, Subscriber {
     }
 
     public void make_deferred_request(
+        MessagePasser source,
         String message_handler_name,
         Atom[] arguments) {
         if (message_handler_name == null) {
             return;
         }
         Request request =
-            new Request(this, OscAddress.from_cache("./:"
+            new Request(source, OscAddress.from_cache("./:"
                 + message_handler_name), arguments, true);
         DeferredRequestCallback callback =
             new DeferredRequestCallback(this, request);
@@ -498,12 +499,15 @@ abstract public class Server implements MessagePasser, Subscriber {
         }
     }
 
-    public void make_request(String message_handler_name, Atom[] arguments) {
+    public void make_request(
+        MessagePasser source,
+        String message_handler_name,
+        Atom[] arguments) {
         if (message_handler_name == null) {
             return;
         }
         Request request =
-            new Request(this, OscAddress.from_cache("./:"
+            new Request(source, OscAddress.from_cache("./:"
                 + message_handler_name), arguments, true);
         this.handle_request(request);
     }

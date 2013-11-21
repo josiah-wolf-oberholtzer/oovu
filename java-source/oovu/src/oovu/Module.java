@@ -17,6 +17,6 @@ public class Module extends ServerClient {
         ModuleServer module_server = ModuleServer.allocate(module_id);
         module_server.acquire_name(desired_name);
         this.attach_to_server(module_server);
-        this.generate_message_passer_callback();
+        this.server.make_deferred_request(this, "dumpmeta", null);
     }
 }

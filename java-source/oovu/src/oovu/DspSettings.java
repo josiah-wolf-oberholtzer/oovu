@@ -18,6 +18,6 @@ public class DspSettings extends ModuleMemberServerClient {
             DspSettingsServer.allocate(this.lazy_module_id, desired_name,
                 this.lazy_arguments);
         this.server.server_clients.add(this);
-        this.generate_message_passer_callback();
+        this.server.make_deferred_request(this, "dumpmeta", null);
     }
 }

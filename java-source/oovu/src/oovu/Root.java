@@ -11,5 +11,6 @@ public class Root extends ServerClient {
         this.max_adapter = new GenericMaxAdapter(this);
         this.server = Environment.root_server;
         this.server.server_clients.add(this);
+        this.server.make_deferred_request(this, "dumpmeta", null);
     }
 }
