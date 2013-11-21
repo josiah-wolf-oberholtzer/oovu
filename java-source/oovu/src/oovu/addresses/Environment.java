@@ -6,13 +6,13 @@ import oovu.events.EventThing;
 import oovu.servers.DspReceiveServer;
 import oovu.servers.RootServer;
 
-import com.cycling74.max.Executable;
-import com.cycling74.max.MaxObject;
-import com.cycling74.max.MaxSystem;
 // import org.apache.log4j.BasicConfigurator;
 // import org.apache.log4j.Level;
 // import org.apache.log4j.Logger;
 import com.cycling74.max.Atom;
+import com.cycling74.max.Executable;
+import com.cycling74.max.MaxObject;
+import com.cycling74.max.MaxSystem;
 
 public class Environment {
 
