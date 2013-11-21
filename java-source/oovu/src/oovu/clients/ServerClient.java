@@ -2,6 +2,7 @@ package oovu.clients;
 
 import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
+import oovu.messaging.DeferredResponseCallback;
 import oovu.servers.Server;
 
 import com.cycling74.max.Atom;

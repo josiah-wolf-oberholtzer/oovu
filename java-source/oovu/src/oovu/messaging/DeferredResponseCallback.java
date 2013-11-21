@@ -1,7 +1,4 @@
-package oovu.clients;
-
-import oovu.messaging.MessagePasser;
-import oovu.messaging.Response;
+package oovu.messaging;
 
 import com.cycling74.max.Executable;
 

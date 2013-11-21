@@ -9,7 +9,7 @@ import oovu.Proxy;
 import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
-import oovu.clients.DeferredResponseCallback;
+import oovu.messaging.DeferredResponseCallback;
 import oovu.messaging.InfoGetterMessageHandler;
 import oovu.messaging.Response;
 
