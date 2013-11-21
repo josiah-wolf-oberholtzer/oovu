@@ -71,6 +71,19 @@ public class DspReceiveServer extends ModuleMemberServer {
         Environment.event_service.publish(new DspReceiversChangedEvent(this));
     }
 
+    public int get_input_count() {
+        ModuleServer module_server = (ModuleServer) this.parent_server;
+        if (module_server == null) {
+            return 0;
+        }
+        DspSettingsServer dsp_settings_server =
+            module_server.get_dsp_settings_server();
+        if (dsp_settings_server == null) {
+            return 1;
+        }
+        return dsp_settings_server.get_input_count();
+    }
+
     @Override
     public State get_state() {
         return null;
