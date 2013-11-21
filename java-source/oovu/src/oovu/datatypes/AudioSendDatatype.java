@@ -6,9 +6,8 @@ import java.util.Map;
 import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
 import oovu.events.Event;
-import oovu.events.Subscriber;
-import oovu.events.types.DspReceiveCreatedEvent;
-import oovu.events.types.DspReceiveFreedEvent;
+import oovu.events.EventHandler;
+import oovu.events.types.DspReceiversChangedEvent;
 import oovu.messaging.InfoGetterMessageHandler;
 import oovu.servers.AttributeServer;
 import oovu.servers.DspReceiveServer;
@@ -18,16 +17,18 @@ import com.cycling74.max.Atom;
 
 public class AudioSendDatatype extends OscAddressDatatype {
 
-    private class AudioReceiversChangedEventHandler implements Subscriber {
+    private class DspReceiversChangedEventHandler extends EventHandler {
+
+        public DspReceiversChangedEventHandler(Server client) {
+            super(client, DspReceiversChangedEvent.class);
+        }
 
         @Override
-        public void handle_event(Event event) {
-            Atom[] value = AudioSendDatatype.this.get_value();
-            AudioSendDatatype.this.set_value(value);
-            Server server = AudioSendDatatype.this.client;
-            if (server != null) {
-                server.make_deferred_request(server, "dumpmeta", null);
-            }
+        public void run(Event event) {
+            AttributeServer client = (AttributeServer) this.client;
+            Atom[] value = client.datatype.get_value();
+            client.datatype.set_value(value);
+            client.make_deferred_request(client, "dumpmeta", null);
         }
     }
 
@@ -75,11 +76,10 @@ public class AudioSendDatatype extends OscAddressDatatype {
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {
-            Subscriber subscriber = new AudioReceiversChangedEventHandler();
-            Environment.event_service.subscribe(subscriber,
-                DspReceiveCreatedEvent.class, null);
-            Environment.event_service.subscribe(subscriber,
-                DspReceiveFreedEvent.class, null);
+            client
+                .add_event_handler(new DspReceiversChangedEventHandler(client));
+            Environment.event_service.subscribe(client,
+                DspReceiversChangedEvent.class, null);
             this.client
                 .add_message_handler(new GetDestinationIdMessageHandler());
             this.client

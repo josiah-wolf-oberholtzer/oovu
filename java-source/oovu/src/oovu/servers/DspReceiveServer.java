@@ -8,8 +8,7 @@ import oovu.addresses.OscAddress;
 import oovu.events.Event;
 import oovu.events.EventHandler;
 import oovu.events.PublisherFilter;
-import oovu.events.types.DspReceiveCreatedEvent;
-import oovu.events.types.DspReceiveFreedEvent;
+import oovu.events.types.DspReceiversChangedEvent;
 import oovu.events.types.ModuleNameAcquiredEvent;
 import oovu.states.State;
 
@@ -30,7 +29,7 @@ public class DspReceiveServer extends ModuleMemberServer {
                 new PublisherFilter(this.client.get_parent_server()));
             DspReceiveServer.dsp_receive_servers.put(
                 this.client.get_osc_address(), (DspReceiveServer) this.client);
-            Environment.event_service.publish(new DspReceiveCreatedEvent(
+            Environment.event_service.publish(new DspReceiversChangedEvent(
                 this.client));
         }
     }
@@ -49,8 +48,8 @@ public class DspReceiveServer extends ModuleMemberServer {
         if ((osc_address != null)
             && (!DspReceiveServer.dsp_receive_servers.containsKey(osc_address))) {
             DspReceiveServer.dsp_receive_servers.put(osc_address, server);
-            Environment.event_service
-                .publish(new DspReceiveCreatedEvent(server));
+            Environment.event_service.publish(new DspReceiversChangedEvent(
+                server));
         }
         return server;
     }
@@ -70,7 +69,7 @@ public class DspReceiveServer extends ModuleMemberServer {
     protected void deallocate() {
         DspReceiveServer.dsp_receive_servers.remove(this.get_osc_address());
         super.deallocate();
-        Environment.event_service.publish(new DspReceiveFreedEvent(this));
+        Environment.event_service.publish(new DspReceiversChangedEvent(this));
     }
 
     @Override
