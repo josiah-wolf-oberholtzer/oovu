@@ -90,7 +90,7 @@ public abstract class Datatype implements Subscriber {
     }
 
     @Override
-    public void inform(Event event) {
+    public void handle_event(Event event) {
     }
 
     public void initialize_default_value(Map<String, Atom[]> argument_map) {

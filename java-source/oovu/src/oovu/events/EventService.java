@@ -3,6 +3,7 @@ package oovu.events;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class EventService {
 
@@ -18,9 +19,9 @@ public class EventService {
                 this.subscriptions.get(event_type);
             for (Subscription subscription : subscription_set) {
                 if (subscription.filter == null) {
-                    subscription.subscriber.inform(event);
+                    subscription.subscriber.handle_event(event);
                 } else if (subscription.filter.is_valid_event(event)) {
-                    subscription.subscriber.inform(event);
+                    subscription.subscriber.handle_event(event);
                 }
             }
         }
@@ -50,7 +51,9 @@ public class EventService {
     }
 
     public void unsubscribe(Subscriber subscriber) {
-        for (Class<? extends Event> event_type : this.subscriptions.keySet()) {
+        Set<Class<? extends Event>> keys =
+            new HashSet<Class<? extends Event>>(this.subscriptions.keySet());
+        for (Class<? extends Event> event_type : keys) {
             HashSet<Subscription> old_subscription_set =
                 this.subscriptions.get(event_type);
             HashSet<Subscription> new_subscription_set =

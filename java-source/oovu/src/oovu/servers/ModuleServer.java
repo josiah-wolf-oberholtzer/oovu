@@ -8,6 +8,7 @@ import java.util.Map;
 import oovu.Proxy;
 import oovu.addresses.Environment;
 import oovu.addresses.OscAddressNode;
+import oovu.events.types.ModuleNameAcquiredEvent;
 import oovu.messaging.InfoGetterMessageHandler;
 import oovu.states.State;
 import oovu.states.StateComponentAggregate;
@@ -173,7 +174,7 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
             return;
         }
         this.name = this.osc_address_node.acquire_name(desired_name);
-        this.notify_children();
+        Environment.event_service.publish(new ModuleNameAcquiredEvent(this));
     }
 
     @Override

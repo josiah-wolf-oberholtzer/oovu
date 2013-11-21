@@ -422,6 +422,10 @@ abstract public class Server implements MessagePasser, Subscriber {
     abstract public State get_state();
 
     @Override
+    public void handle_event(Event event) {
+    }
+
+    @Override
     public void handle_request(Request request) {
         if (request == null) {
             return;
@@ -467,10 +471,6 @@ abstract public class Server implements MessagePasser, Subscriber {
         }
     }
 
-    @Override
-    public void inform(Event event) {
-    }
-
     public void make_deferred_request(
         MessagePasser source,
         String message_handler_name,
@@ -503,15 +503,13 @@ abstract public class Server implements MessagePasser, Subscriber {
         this.handle_request(request);
     }
 
-    public void notify_children() {
-        for (Server child : this.child_servers) {
-            child.on_parent_notification();
-        }
-    }
-
-    public void on_parent_notification() {
-    }
-
+    // public void notify_children() {
+    // for (Server child : this.child_servers) {
+    // child.on_parent_notification();
+    // }
+    // }
+    // public void on_parent_notification() {
+    // }
     @Override
     public String toString() {
         return "<" + this.getClass().getSimpleName() + ": "

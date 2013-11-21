@@ -21,7 +21,7 @@ public class AudioSendDatatype extends OscAddressDatatype {
     private class AudioReceiversChangedEventHandler implements Subscriber {
 
         @Override
-        public void inform(Event event) {
+        public void handle_event(Event event) {
             Atom[] value = AudioSendDatatype.this.get_value();
             AudioSendDatatype.this.set_value(value);
             Server server = AudioSendDatatype.this.client;

@@ -2,5 +2,5 @@ package oovu.events;
 
 public interface Subscriber {
 
-    public void inform(Event event);
+    public void handle_event(Event event);
 }
