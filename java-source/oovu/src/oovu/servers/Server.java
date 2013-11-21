@@ -12,6 +12,7 @@ import oovu.Proxy;
 import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
+import oovu.clients.DeferredRequestCallback;
 import oovu.clients.ServerClient;
 import oovu.events.Event;
 import oovu.events.Subscriber;
@@ -26,6 +27,7 @@ import com.cycling74.max.Atom;
 import com.cycling74.max.MaxBox;
 import com.cycling74.max.MaxObject;
 import com.cycling74.max.MaxPatcher;
+import com.cycling74.max.MaxSystem;
 
 abstract public class Server implements MessagePasser, Subscriber {
 
@@ -476,6 +478,34 @@ abstract public class Server implements MessagePasser, Subscriber {
 
     @Override
     public void inform(Event event) {
+    }
+
+    public void make_deferred_request(
+        String message_handler_name,
+        Atom[] arguments) {
+        if (message_handler_name == null) {
+            return;
+        }
+        Request request =
+            new Request(this, OscAddress.from_cache("./:"
+                + message_handler_name), arguments, true);
+        DeferredRequestCallback callback =
+            new DeferredRequestCallback(this, request);
+        try {
+            MaxSystem.deferLow(callback);
+        } catch (UnsatisfiedLinkError e) {
+            // Environment.log(e);
+        }
+    }
+
+    public void make_request(String message_handler_name, Atom[] arguments) {
+        if (message_handler_name == null) {
+            return;
+        }
+        Request request =
+            new Request(this, OscAddress.from_cache("./:"
+                + message_handler_name), arguments, true);
+        this.handle_request(request);
     }
 
     public void notify_children() {

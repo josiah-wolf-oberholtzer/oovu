@@ -9,7 +9,7 @@ import oovu.Proxy;
 import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
-import oovu.clients.MessagePasserCallback;
+import oovu.clients.DeferredResponseCallback;
 import oovu.messaging.InfoGetterMessageHandler;
 import oovu.messaging.Response;
 
@@ -116,8 +116,8 @@ public abstract class ModuleMemberServer extends Server {
         if (server_is_new) {
             Response response = member_server.generate_dumpmeta_response();
             for (Proxy proxy : osc_address_node.get_proxies()) {
-                Environment
-                    .defer_low(new MessagePasserCallback(proxy, response));
+                Environment.defer_low(new DeferredResponseCallback(proxy,
+                    response));
             }
         }
         return member_server;

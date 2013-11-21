@@ -39,8 +39,8 @@ abstract public class ServerClient extends MaxPeer {
 
     protected void generate_message_passer_callback() {
         try {
-            MessagePasserCallback callback =
-                new MessagePasserCallback(this, this.get_server()
+            DeferredResponseCallback callback =
+                new DeferredResponseCallback(this, this.get_server()
                     .generate_dumpmeta_response());
             MaxSystem.deferLow(callback);
         } catch (UnsatisfiedLinkError e) {

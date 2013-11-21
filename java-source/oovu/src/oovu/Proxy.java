@@ -4,8 +4,8 @@ import oovu.adapters.GenericMaxAdapter;
 import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
+import oovu.clients.DeferredResponseCallback;
 import oovu.clients.MaxPeer;
-import oovu.clients.MessagePasserCallback;
 import oovu.messaging.MessagePasser;
 import oovu.messaging.Request;
 import oovu.messaging.Response;
@@ -145,8 +145,8 @@ public class Proxy extends MaxPeer implements MessagePasser {
         if (this.osc_address_node.get_server() != null) {
             try {
                 Server server = this.osc_address_node.get_server();
-                MessagePasserCallback callback =
-                    new MessagePasserCallback(this,
+                DeferredResponseCallback callback =
+                    new DeferredResponseCallback(this,
                         server.generate_dumpmeta_response());
                 MaxSystem.deferLow(callback);
             } catch (UnsatisfiedLinkError e) {
