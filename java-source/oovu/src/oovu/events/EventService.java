@@ -13,12 +13,14 @@ public class EventService {
         new HashMap<Class<? extends Event>, HashSet<Subscription>>();
 
     public void publish(Event event) {
-        for (Class<? extends Event> event_type : this.subscriptions.keySet()) {
+        Set<Class<? extends Event>> keys =
+            new HashSet<Class<? extends Event>>(this.subscriptions.keySet());
+        for (Class<? extends Event> event_type : keys) {
             if (!event_type.isInstance(event)) {
                 continue;
             }
             HashSet<Subscription> subscription_set =
-                this.subscriptions.get(event_type);
+                new HashSet<Subscription>(this.subscriptions.get(event_type));
             for (Subscription subscription : subscription_set) {
                 if (subscription.filter == null) {
                     subscription.subscriber.handle_event(event);
