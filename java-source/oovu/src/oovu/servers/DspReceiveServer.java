@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import oovu.addresses.OscAddress;
-import oovu.events.Event;
+import oovu.events.EventThing;
 import oovu.events.EventTypes;
 import oovu.states.State;
 
@@ -26,7 +26,7 @@ public class DspReceiveServer extends ModuleMemberServer {
         if ((osc_address != null)
             && (!DspReceiveServer.dsp_receive_servers.containsKey(osc_address))) {
             DspReceiveServer.dsp_receive_servers.put(osc_address, server);
-            Event.notify_observers(EventTypes.DSP_RECEIVERS_CHANGED);
+            EventThing.notify_observers(EventTypes.DSP_RECEIVERS_CHANGED);
         }
         return server;
     }
@@ -40,7 +40,7 @@ public class DspReceiveServer extends ModuleMemberServer {
     protected void deallocate() {
         DspReceiveServer.dsp_receive_servers.remove(this.get_osc_address());
         super.deallocate();
-        Event.notify_observers(EventTypes.DSP_RECEIVERS_CHANGED);
+        EventThing.notify_observers(EventTypes.DSP_RECEIVERS_CHANGED);
     }
 
     @Override
@@ -59,6 +59,6 @@ public class DspReceiveServer extends ModuleMemberServer {
     @Override
     public void on_parent_notification() {
         DspReceiveServer.dsp_receive_servers.put(this.get_osc_address(), this);
-        Event.notify_observers(EventTypes.DSP_RECEIVERS_CHANGED);
+        EventThing.notify_observers(EventTypes.DSP_RECEIVERS_CHANGED);
     }
 }

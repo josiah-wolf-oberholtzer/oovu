@@ -13,7 +13,7 @@ import oovu.Proxy;
 import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
 import oovu.clients.ServerClient;
-import oovu.events.Event;
+import oovu.events.EventThing;
 import oovu.events.EventHandler;
 import oovu.events.EventTypes;
 import oovu.messaging.InfoGetterMessageHandler;
@@ -314,7 +314,7 @@ abstract public class Server implements MessagePasser {
 
     public void add_event_handler(EventHandler event_handler) {
         this.event_handlers.put(event_handler.get_event(), event_handler);
-        Event.add_observer(event_handler.get_event(), this);
+        EventThing.add_observer(event_handler.get_event(), this);
     }
 
     public void add_message_handler(MessageHandler message_handler) {
@@ -352,7 +352,7 @@ abstract public class Server implements MessagePasser {
     }
 
     protected void deallocate() {
-        Event.remove_observer(this);
+        EventThing.remove_observer(this);
         Server parent_server = this.get_parent_server();
         this.clear();
         if (parent_server != null) {

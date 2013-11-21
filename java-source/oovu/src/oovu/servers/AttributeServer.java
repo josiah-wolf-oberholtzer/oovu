@@ -8,7 +8,7 @@ import oovu.addresses.OscAddress;
 import oovu.datatypes.AudioSendDatatype;
 import oovu.datatypes.Datatype;
 import oovu.datatypes.GenericDatatype;
-import oovu.events.Event;
+import oovu.events.EventThing;
 import oovu.events.EventTypes;
 import oovu.messaging.GetterMessageHandler;
 import oovu.messaging.MessageHandler;
@@ -215,7 +215,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         this.initialize_value();
         this.initialize_priority();
         if (this.datatype instanceof AudioSendDatatype) {
-            Event.add_observer(EventTypes.DSP_RECEIVERS_CHANGED, this);
+            EventThing.add_observer(EventTypes.DSP_RECEIVERS_CHANGED, this);
         }
         if (!(this instanceof ReturnServer)) {
             this.add_message_handler(new GetPatternMessageHandler());
