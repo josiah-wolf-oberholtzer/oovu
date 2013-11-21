@@ -25,14 +25,6 @@ public class MethodServer extends AttributeServer {
     }
 
     @Override
-    public MethodServer new_instance(
-        Integer module_id,
-        Map<String, Atom[]> argument_map) {
-        ModuleServer module_node = ModuleServer.allocate(module_id);
-        return new MethodServer(module_node, argument_map);
-    }
-
-    @Override
     public void reoutput_value() {
     }
 }

@@ -30,12 +30,4 @@ public class DspSendServer extends ModuleMemberServer {
     public State get_state() {
         return null;
     }
-
-    @Override
-    public DspSendServer new_instance(
-        Integer module_id,
-        Map<String, Atom[]> argument_map) {
-        ModuleServer module_node = ModuleServer.allocate(module_id);
-        return new DspSendServer(module_node, argument_map);
-    }
 }

@@ -51,14 +51,6 @@ public class DspReceiveServer extends ModuleMemberServer {
     }
 
     @Override
-    public DspReceiveServer new_instance(
-        Integer module_id,
-        Map<String, Atom[]> argument_map) {
-        ModuleServer module_node = ModuleServer.allocate(module_id);
-        return new DspReceiveServer(module_node, argument_map);
-    }
-
-    @Override
     public void on_parent_notification() {
         DspReceiveServer.dsp_receive_servers.put(this.get_osc_address(), this);
         Environment.event_service.publish(new DspReceiveCreatedEvent(this));

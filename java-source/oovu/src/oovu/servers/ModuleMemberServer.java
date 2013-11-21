@@ -27,6 +27,9 @@ public abstract class ModuleMemberServer extends Server {
         @Override
         public Atom[][] run(Atom[] arguments) {
             Atom[][] result = new Atom[1][];
+            if (ModuleMemberServer.this.parent_server == null) {
+                return null;
+            }
             if (ModuleMemberServer.this.parent_server.get_name() != null) {
                 result[0] =
                     Atom.newAtom(new String[] {
@@ -158,8 +161,4 @@ public abstract class ModuleMemberServer extends Server {
         this.attach_to_parent_server(module_server);
         this.add_message_handler(new GetModuleNameMessageHandler());
     }
-
-    abstract public ModuleMemberServer new_instance(
-        Integer module_id,
-        Map<String, Atom[]> argument_map);
 }

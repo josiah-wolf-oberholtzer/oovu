@@ -27,14 +27,6 @@ public class PropertyServer extends AttributeServer {
     }
 
     @Override
-    public PropertyServer new_instance(
-        Integer module_id,
-        Map<String, Atom[]> argument_map) {
-        ModuleServer module_node = ModuleServer.allocate(module_id);
-        return new PropertyServer(module_node, argument_map);
-    }
-
-    @Override
     public void reoutput_value() {
         Atom[] value = this.get_value();
         this.set_value(value);
