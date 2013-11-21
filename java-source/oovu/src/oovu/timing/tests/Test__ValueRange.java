@@ -1,6 +1,6 @@
-package oovu.patterns.tests;
+package oovu.timing.tests;
 
-import oovu.patterns.ValueRange;
+import oovu.timing.ValueRange;
 
 import org.junit.Assert;
 import org.junit.Test;

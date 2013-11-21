@@ -1,4 +1,4 @@
-package oovu.patterns;
+package oovu.timing;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -10,7 +10,6 @@ import oovu.messaging.MessageHandler;
 import oovu.messaging.Request;
 import oovu.servers.AttributeServer;
 import oovu.servers.Server;
-import oovu.timing.ClockWatcher;
 
 import com.cycling74.max.Atom;
 

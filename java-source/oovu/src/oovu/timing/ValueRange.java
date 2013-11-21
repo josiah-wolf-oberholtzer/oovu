@@ -1,4 +1,4 @@
-package oovu.patterns;
+package oovu.timing;
 
 import java.util.Arrays;
 

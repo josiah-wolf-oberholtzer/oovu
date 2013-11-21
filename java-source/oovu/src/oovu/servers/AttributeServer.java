@@ -15,10 +15,10 @@ import oovu.messaging.MessageHandler;
 import oovu.messaging.Request;
 import oovu.messaging.Response;
 import oovu.messaging.SetterMessageHandler;
-import oovu.patterns.Pattern;
 import oovu.states.State;
 import oovu.states.StateComponent;
 import oovu.states.StateComponentAggregate;
+import oovu.timing.Pattern;
 
 import com.cycling74.max.Atom;
 
