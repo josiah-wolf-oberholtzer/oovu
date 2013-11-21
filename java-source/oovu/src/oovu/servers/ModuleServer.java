@@ -8,14 +8,11 @@ import java.util.Map;
 import oovu.Proxy;
 import oovu.addresses.Environment;
 import oovu.addresses.OscAddressNode;
-import oovu.messaging.DeferredResponseCallback;
 import oovu.messaging.InfoGetterMessageHandler;
-import oovu.messaging.Response;
 import oovu.states.State;
 import oovu.states.StateComponentAggregate;
 
 import com.cycling74.max.Atom;
-import com.cycling74.max.MaxSystem;
 
 public class ModuleServer extends Server implements Comparable<ModuleServer> {
 
@@ -144,10 +141,8 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
             server_is_new = true;
         }
         if (server_is_new) {
-            Response response = module_server.generate_dumpmeta_response();
             for (Proxy proxy : osc_address_node.get_proxies()) {
-                MaxSystem
-                    .deferLow(new DeferredResponseCallback(proxy, response));
+                module_server.make_deferred_request(proxy, "dumpmeta", null);
             }
         }
         return module_server;

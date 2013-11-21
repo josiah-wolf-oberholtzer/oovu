@@ -377,15 +377,6 @@ abstract public class Server implements MessagePasser, Subscriber {
         this.parent_server = null;
     }
 
-    public Response generate_dumpmeta_response() {
-        MessageHandler message_handler = this.message_handlers.get("dumpmeta");
-        Atom[][] payload = message_handler.run(null);
-        Request request =
-            new Request(this, OscAddress.from_cache("."), new Atom[0], false);
-        Response response = new Response(this, payload, request);
-        return response;
-    }
-
     public MessageHandler get_message_handler(String message_name) {
         return this.message_handlers.get(message_name);
     }

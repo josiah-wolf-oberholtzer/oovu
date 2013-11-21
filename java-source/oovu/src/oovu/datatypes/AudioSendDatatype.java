@@ -26,7 +26,7 @@ public class AudioSendDatatype extends OscAddressDatatype {
             AudioSendDatatype.this.set_value(value);
             Server server = AudioSendDatatype.this.client;
             if (server != null) {
-                server.handle_response(server.generate_dumpmeta_response());
+                server.make_deferred_request(server, "dumpmeta", null);
             }
         }
     }

@@ -6,12 +6,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import oovu.Proxy;
-import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
-import oovu.messaging.DeferredResponseCallback;
 import oovu.messaging.InfoGetterMessageHandler;
-import oovu.messaging.Response;
 
 import com.cycling74.max.Atom;
 
@@ -114,10 +111,8 @@ public abstract class ModuleMemberServer extends Server {
             }
         }
         if (server_is_new) {
-            Response response = member_server.generate_dumpmeta_response();
             for (Proxy proxy : osc_address_node.get_proxies()) {
-                Environment.defer_low(new DeferredResponseCallback(proxy,
-                    response));
+                member_server.make_deferred_request(proxy, "dumpmeta", null);
             }
         }
         return member_server;

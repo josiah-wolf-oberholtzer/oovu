@@ -144,15 +144,6 @@ public class Proxy extends MaxPeer implements MessagePasser {
         if (this.osc_address_node.get_server() != null) {
             this.osc_address_node.get_server().make_deferred_request(this,
                 "dumpmeta", null);
-            // try {
-            // Server server = this.osc_address_node.get_server();
-            // DeferredResponseCallback callback =
-            // new DeferredResponseCallback(this,
-            // server.generate_dumpmeta_response());
-            // MaxSystem.deferLow(callback);
-            // } catch (UnsatisfiedLinkError e) {
-            // // Environment.log(e);
-            // }
         }
     }
 
