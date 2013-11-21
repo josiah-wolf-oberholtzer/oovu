@@ -4,21 +4,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-import oovu.servers.Server;
-
 public class EventService {
 
     private final Map<Class<? extends Event>, HashSet<Subscription>> subscriptions =
         new HashMap<Class<? extends Event>, HashSet<Subscription>>();
 
-    public void reset() {
-        for (Class<? extends Event> event_type : this.subscriptions.keySet()) {
-            HashSet<Subscription> subscription_set = this.subscriptions.get(event_type);
-            subscription_set.clear();
-        }
-        this.subscriptions.clear();
-    }
-    
     public void publish(Event event) {
         for (Class<? extends Event> event_type : this.subscriptions.keySet()) {
             if (!event_type.isInstance(event)) {
@@ -36,8 +26,17 @@ public class EventService {
         }
     }
 
+    public void reset() {
+        for (Class<? extends Event> event_type : this.subscriptions.keySet()) {
+            HashSet<Subscription> subscription_set =
+                this.subscriptions.get(event_type);
+            subscription_set.clear();
+        }
+        this.subscriptions.clear();
+    }
+
     public void subscribe(
-        Server subscriber,
+        Subscriber subscriber,
         Class<? extends Event> event_type,
         Filter filter) {
         Subscription subscription =
@@ -50,7 +49,7 @@ public class EventService {
         subscription_set.add(subscription);
     }
 
-    public void unsubscribe(Server subscriber) {
+    public void unsubscribe(Subscriber subscriber) {
         for (Class<? extends Event> event_type : this.subscriptions.keySet()) {
             HashSet<Subscription> old_subscription_set =
                 this.subscriptions.get(event_type);
@@ -68,7 +67,7 @@ public class EventService {
     }
 
     public void unsubscribe(
-        Server subscriber,
+        Subscriber subscriber,
         Class<? extends Event> event_type,
         Filter filter) {
         Subscription subscription =

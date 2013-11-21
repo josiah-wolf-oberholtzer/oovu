@@ -4,13 +4,15 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import oovu.events.Event;
+import oovu.events.Subscriber;
 import oovu.messaging.InfoGetterMessageHandler;
 import oovu.servers.AttributeServer;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
 
-public abstract class Datatype {
+public abstract class Datatype implements Subscriber {
 
     private class GetDatatypeMessageHandler extends InfoGetterMessageHandler {
 
@@ -85,6 +87,10 @@ public abstract class Datatype {
 
     public Atom[] get_value() {
         return this.value;
+    }
+
+    @Override
+    public void inform(Event event) {
     }
 
     public void initialize_default_value(Map<String, Atom[]> argument_map) {

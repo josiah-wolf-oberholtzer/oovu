@@ -4,12 +4,13 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Map;
 
+import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
 import oovu.datatypes.AudioSendDatatype;
 import oovu.datatypes.Datatype;
 import oovu.datatypes.GenericDatatype;
-import oovu.events.EventThing;
-import oovu.events.EventTypes;
+import oovu.events.types.DspReceiveCreatedEvent;
+import oovu.events.types.DspReceiveFreedEvent;
 import oovu.messaging.GetterMessageHandler;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.Request;
@@ -215,7 +216,11 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         this.initialize_value();
         this.initialize_priority();
         if (this.datatype instanceof AudioSendDatatype) {
-            EventThing.add_observer(EventTypes.DSP_RECEIVERS_CHANGED, this);
+            Environment.event_service.subscribe(this,
+                DspReceiveCreatedEvent.class, null);
+            Environment.event_service.subscribe(this,
+                DspReceiveFreedEvent.class, null);
+            // EventThing.add_observer(EventTypes.DSP_RECEIVERS_CHANGED, this);
         }
         if (!(this instanceof ReturnServer)) {
             this.add_message_handler(new GetPatternMessageHandler());

@@ -3,9 +3,10 @@ package oovu.servers;
 import java.util.HashMap;
 import java.util.Map;
 
+import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
-import oovu.events.EventThing;
-import oovu.events.EventTypes;
+import oovu.events.types.DspReceiveCreatedEvent;
+import oovu.events.types.DspReceiveFreedEvent;
 import oovu.states.State;
 
 import com.cycling74.max.Atom;
@@ -26,7 +27,8 @@ public class DspReceiveServer extends ModuleMemberServer {
         if ((osc_address != null)
             && (!DspReceiveServer.dsp_receive_servers.containsKey(osc_address))) {
             DspReceiveServer.dsp_receive_servers.put(osc_address, server);
-            EventThing.notify_observers(EventTypes.DSP_RECEIVERS_CHANGED);
+            Environment.event_service
+                .publish(new DspReceiveCreatedEvent(server));
         }
         return server;
     }
@@ -40,7 +42,7 @@ public class DspReceiveServer extends ModuleMemberServer {
     protected void deallocate() {
         DspReceiveServer.dsp_receive_servers.remove(this.get_osc_address());
         super.deallocate();
-        EventThing.notify_observers(EventTypes.DSP_RECEIVERS_CHANGED);
+        Environment.event_service.publish(new DspReceiveFreedEvent(this));
     }
 
     @Override
@@ -59,6 +61,6 @@ public class DspReceiveServer extends ModuleMemberServer {
     @Override
     public void on_parent_notification() {
         DspReceiveServer.dsp_receive_servers.put(this.get_osc_address(), this);
-        EventThing.notify_observers(EventTypes.DSP_RECEIVERS_CHANGED);
+        Environment.event_service.publish(new DspReceiveCreatedEvent(this));
     }
 }
