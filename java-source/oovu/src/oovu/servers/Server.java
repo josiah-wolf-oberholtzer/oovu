@@ -14,6 +14,7 @@ import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
 import oovu.clients.ServerClient;
 import oovu.events.Event;
+import oovu.events.EventHandler;
 import oovu.events.Subscriber;
 import oovu.messaging.DeferredRequestCallback;
 import oovu.messaging.InfoGetterMessageHandler;
@@ -288,6 +289,8 @@ abstract public class Server implements MessagePasser, Subscriber {
 
     public final Map<String, Atom[]> argument_map;
     protected final Set<Server> child_servers = new HashSet<Server>();
+    protected final Map<Class<? extends Event>, EventHandler> event_handlers =
+        new HashMap<Class<? extends Event>, EventHandler>();
     protected final Map<String, MessageHandler> message_handlers =
         new HashMap<String, MessageHandler>();
     protected String name = null;
@@ -304,11 +307,14 @@ abstract public class Server implements MessagePasser, Subscriber {
         this.add_message_handler(new DumpMetaMessageHandler());
         this.add_message_handler(new GetMetaMessageHandler());
         this.add_message_handler(new GetInterfaceMessageHandler());
-        // this.add_message_handler(new GetNameMessageHandler());
         this.add_message_handler(new GetOscAddressMessageHandler());
         this.add_message_handler(new GetUniqueIdMessageHandler());
         this.add_message_handler(new ReportMessageHandler());
         this.add_message_handler(new ShowMessageHandler());
+    }
+
+    public void add_event_handler(EventHandler event_handler) {
+        this.event_handlers.put(event_handler.event_class, event_handler);
     }
 
     public void add_message_handler(MessageHandler message_handler) {
@@ -423,6 +429,10 @@ abstract public class Server implements MessagePasser, Subscriber {
 
     @Override
     public void handle_event(Event event) {
+        EventHandler event_handler = this.event_handlers.get(event.getClass());
+        if (event_handler != null) {
+            event_handler.run(event);
+        }
     }
 
     @Override
@@ -503,13 +513,6 @@ abstract public class Server implements MessagePasser, Subscriber {
         this.handle_request(request);
     }
 
-    // public void notify_children() {
-    // for (Server child : this.child_servers) {
-    // child.on_parent_notification();
-    // }
-    // }
-    // public void on_parent_notification() {
-    // }
     @Override
     public String toString() {
         return "<" + this.getClass().getSimpleName() + ": "

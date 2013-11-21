@@ -6,6 +6,7 @@ import java.util.Map;
 import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
 import oovu.events.Event;
+import oovu.events.EventHandler;
 import oovu.events.PublisherFilter;
 import oovu.events.types.DspReceiveCreatedEvent;
 import oovu.events.types.DspReceiveFreedEvent;
@@ -15,6 +16,24 @@ import oovu.states.State;
 import com.cycling74.max.Atom;
 
 public class DspReceiveServer extends ModuleMemberServer {
+
+    private class ModuleNameAcquiredEventHandler extends EventHandler {
+
+        public ModuleNameAcquiredEventHandler(Server client) {
+            super(client, ModuleNameAcquiredEvent.class);
+        }
+
+        @Override
+        public void run(Event event) {
+            Environment.event_service.unsubscribe(this.client,
+                this.event_class,
+                new PublisherFilter(this.client.get_parent_server()));
+            DspReceiveServer.dsp_receive_servers.put(
+                this.client.get_osc_address(), (DspReceiveServer) this.client);
+            Environment.event_service.publish(new DspReceiveCreatedEvent(
+                this.client));
+        }
+    }
 
     public final static Map<OscAddress, DspReceiveServer> dsp_receive_servers =
         new HashMap<OscAddress, DspReceiveServer>();
@@ -40,6 +59,7 @@ public class DspReceiveServer extends ModuleMemberServer {
         Map<String, Atom[]> argument_map) {
         super(module_server, argument_map);
         if (module_server.get_name() == null) {
+            this.add_event_handler(new ModuleNameAcquiredEventHandler(this));
             Environment.event_service.subscribe(this,
                 ModuleNameAcquiredEvent.class, new PublisherFilter(
                     module_server));
@@ -56,17 +76,5 @@ public class DspReceiveServer extends ModuleMemberServer {
     @Override
     public State get_state() {
         return null;
-    }
-
-    @Override
-    public void handle_event(Event event) {
-        if (event instanceof ModuleNameAcquiredEvent) {
-            Environment.event_service.unsubscribe(this,
-                ModuleNameAcquiredEvent.class,
-                new PublisherFilter(this.get_parent_server()));
-            DspReceiveServer.dsp_receive_servers.put(this.get_osc_address(),
-                this);
-            Environment.event_service.publish(new DspReceiveCreatedEvent(this));
-        }
     }
 }
