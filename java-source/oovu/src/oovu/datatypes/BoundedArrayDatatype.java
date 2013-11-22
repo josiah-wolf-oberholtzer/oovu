@@ -2,6 +2,7 @@ package oovu.datatypes;
 
 import java.util.Map;
 
+import oovu.messaging.Atoms;
 import oovu.messaging.GetterMessageHandler;
 import oovu.messaging.SetterMessageHandler;
 import oovu.servers.AttributeServer;
@@ -29,11 +30,8 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
 
         @Override
         public Atom[][] run(Atom[] arguments) {
-            Atom[][] result = new Atom[1][];
-            result[0] = Atom.newAtom("length", Atom.newAtom(new int[] {
-                BoundedArrayDatatype.this.get_length()
-            }));
-            return result;
+            return Atoms.to_atoms("length",
+                BoundedArrayDatatype.this.get_length());
         }
     }
 

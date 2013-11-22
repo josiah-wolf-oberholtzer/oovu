@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import oovu.messaging.ActionMessageHandler;
+import oovu.messaging.Atoms;
 import oovu.messaging.GetterMessageHandler;
 import oovu.messaging.SetterMessageHandler;
 import oovu.servers.AttributeServer;
@@ -33,12 +34,8 @@ public class OptionDatatype extends StringDatatype {
 
         @Override
         public Atom[][] run(Atom[] arguments) {
-            Atom[][] result = new Atom[1][];
-            result[0] =
-                Atom.newAtom(OptionDatatype.this.get_options().toArray(
-                    new String[0]));
-            result[0] = Atom.newAtom("options", result[0]);
-            return result;
+            return Atoms.to_atoms("options", OptionDatatype.this.get_options()
+                .toArray(new String[0]));
         }
     }
 

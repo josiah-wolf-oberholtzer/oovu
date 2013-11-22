@@ -30,6 +30,32 @@ public class Atoms {
         result[0] = Atom.newAtom(message, atoms);
         return result;
     }
-    
 
+    public static Atom[][] to_atoms(String message, Double argument) {
+        if (argument == null) {
+            return Atoms.to_atoms(message);
+        }
+        return Atoms.to_atoms(message, Atom.newAtom(argument));
+    }
+
+    public static Atom[][] to_atoms(String message, Integer argument) {
+        if (argument == null) {
+            return Atoms.to_atoms(message);
+        }
+        return Atoms.to_atoms(message, Atom.newAtom(argument));
+    }
+
+    public static Atom[][] to_atoms(String message, String argument) {
+        if (argument == null) {
+            return Atoms.to_atoms(message);
+        }
+        return Atoms.to_atoms(message, Atom.newAtom(argument));
+    }
+
+    public static Atom[][] to_atoms(String message, String[] arguments) {
+        if (arguments == null) {
+            return Atoms.to_atoms(message);
+        }
+        return Atoms.to_atoms(message, Atom.newAtom(arguments));
+    }
 }

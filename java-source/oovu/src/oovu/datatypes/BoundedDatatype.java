@@ -3,6 +3,7 @@ package oovu.datatypes;
 import java.util.Arrays;
 import java.util.Map;
 
+import oovu.messaging.Atoms;
 import oovu.messaging.GetterMessageHandler;
 import oovu.messaging.SetterMessageHandler;
 import oovu.servers.AttributeServer;
@@ -33,19 +34,8 @@ abstract public class BoundedDatatype extends Datatype implements
 
         @Override
         public Atom[][] run(Atom[] arguments) {
-            Atom[][] result = new Atom[1][];
-            Double maximum = BoundedDatatype.this.get_maximum();
-            String label = "maximum";
-            if (maximum != null) {
-                result[0] = Atom.newAtom(label, Atom.newAtom(new double[] {
-                    maximum
-                }));
-            } else {
-                result[0] = Atom.newAtom(new String[] {
-                    label
-                });
-            }
-            return result;
+            return Atoms
+                .to_atoms("maximum", BoundedDatatype.this.get_maximum());
         }
     }
 
@@ -68,19 +58,8 @@ abstract public class BoundedDatatype extends Datatype implements
 
         @Override
         public Atom[][] run(Atom[] arguments) {
-            Atom[][] result = new Atom[1][];
-            Double minimum = BoundedDatatype.this.get_minimum();
-            String label = "minimum";
-            if (minimum != null) {
-                result[0] = Atom.newAtom(label, Atom.newAtom(new double[] {
-                    minimum
-                }));
-            } else {
-                result[0] = Atom.newAtom(new String[] {
-                    label
-                });
-            }
-            return result;
+            return Atoms
+                .to_atoms("minimum", BoundedDatatype.this.get_minimum());
         }
     }
 

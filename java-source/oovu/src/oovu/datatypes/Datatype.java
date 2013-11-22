@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import oovu.messaging.Atoms;
 import oovu.messaging.InfoGetterMessageHandler;
 import oovu.servers.AttributeServer;
 
@@ -21,14 +22,9 @@ public abstract class Datatype {
 
         @Override
         public Atom[][] run(Atom[] arguments) {
-            Atom[][] result = new Atom[1][];
-            String datatype_name =
+            return Atoms.to_atoms("datatype",
                 Datatype.this.client.datatype.getClass().getSimpleName()
-                    .toLowerCase().replace("datatype", "");
-            result[0] = Atom.newAtom(new String[] {
-                "datatype", datatype_name
-            });
-            return result;
+                    .toLowerCase().replace("datatype", ""));
         }
     }
 
