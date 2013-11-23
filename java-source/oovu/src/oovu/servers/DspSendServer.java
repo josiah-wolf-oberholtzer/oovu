@@ -3,6 +3,7 @@ package oovu.servers;
 import java.util.Map;
 
 import oovu.addresses.OscAddress;
+import oovu.messaging.Atoms;
 import oovu.messaging.GetterMessageHandler;
 import oovu.messaging.InfoGetterMessageHandler;
 import oovu.messaging.SetterMessageHandler;
@@ -127,7 +128,7 @@ public class DspSendServer extends ModuleMemberServer {
     private DspReceiveServer destination_server;
 
     public DspSendServer(ModuleServer module_server, Atom[] arguments) {
-        this(module_server, Server.process_atom_arguments(Atom
+        this(module_server, Atoms.to_map(Atom
             .removeFirst(arguments)));
     }
 

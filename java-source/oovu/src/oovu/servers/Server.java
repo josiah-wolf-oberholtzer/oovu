@@ -261,32 +261,6 @@ abstract public class Server implements MessagePasser, Subscriber {
         }
     }
 
-    public static Map<String, Atom[]> process_atom_arguments(Atom[] arguments) {
-        HashMap<String, Atom[]> argument_map = new HashMap<String, Atom[]>();
-        String current_key = null;
-        ArrayList<Atom> current_list = new ArrayList<Atom>();
-        for (Atom argument : arguments) {
-            if ((current_key == null) && (argument.toString().charAt(0) != ':')) {
-                continue;
-            }
-            if (argument.toString().charAt(0) == ':') {
-                if ((current_key != null) && (0 < current_list.size())) {
-                    argument_map.put(current_key,
-                        current_list.toArray(new Atom[current_list.size()]));
-                    current_list.clear();
-                }
-                current_key = argument.toString().substring(1);
-            } else {
-                current_list.add(argument);
-            }
-        }
-        if (0 < current_list.size()) {
-            argument_map.put(current_key,
-                current_list.toArray(new Atom[current_list.size()]));
-        }
-        return Collections.unmodifiableMap(argument_map);
-    }
-
     public final Map<String, Atom[]> argument_map;
     protected final Set<Server> child_servers = new HashSet<Server>();
     protected final Map<Class<? extends Event>, Subscription> subscriptions =

@@ -9,6 +9,7 @@ import oovu.Proxy;
 import oovu.addresses.Environment;
 import oovu.addresses.OscAddressNode;
 import oovu.events.types.ModuleNameAcquiredEvent;
+import oovu.messaging.Atoms;
 import oovu.messaging.InfoGetterMessageHandler;
 import oovu.states.State;
 import oovu.states.StateComponentAggregate;
@@ -153,7 +154,7 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
     private DspSettingsServer dsp_settings_server;
 
     public ModuleServer(Atom[] arguments) {
-        this(arguments[0].getInt(), Server.process_atom_arguments(Atom
+        this(arguments[0].getInt(), Atoms.to_map(Atom
             .removeFirst(arguments)));
     }
 

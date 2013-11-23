@@ -6,6 +6,7 @@ import java.util.Map;
 import oovu.addresses.OscAddress;
 import oovu.datatypes.BooleanDatatype;
 import oovu.datatypes.BoundedDatatype;
+import oovu.messaging.Atoms;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.Request;
 import oovu.servers.AttributeServer;
@@ -17,7 +18,7 @@ public class Pattern extends ClockWatcher {
 
     public static Pattern from_atoms(Server client, Atom[] atoms) {
         return Pattern.from_mapping(client,
-            Server.process_atom_arguments(atoms));
+            Atoms.to_map(atoms));
     }
 
     public static Pattern from_mapping(

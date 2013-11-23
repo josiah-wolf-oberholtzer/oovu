@@ -2,8 +2,8 @@ package oovu.datatypes;
 
 import java.util.Map;
 
+import oovu.messaging.Atoms;
 import oovu.servers.AttributeServer;
-import oovu.servers.Server;
 import oovu.timing.MultiEnvelope;
 
 import com.cycling74.max.Atom;
@@ -11,7 +11,7 @@ import com.cycling74.max.Atom;
 public class IntegerDatatype extends BoundedDatatype {
 
     public IntegerDatatype(Atom[] arguments) {
-        this(null, Server.process_atom_arguments(arguments));
+        this(null, Atoms.to_map(arguments));
     }
 
     public IntegerDatatype(AttributeServer client,

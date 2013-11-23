@@ -2,6 +2,8 @@ package oovu.servers;
 
 import java.util.Map;
 
+import oovu.messaging.Atoms;
+
 import com.cycling74.max.Atom;
 
 public class MethodServer extends AttributeServer {
@@ -15,7 +17,7 @@ public class MethodServer extends AttributeServer {
     }
 
     public MethodServer(ModuleServer module_server, Atom[] arguments) {
-        this(module_server, Server.process_atom_arguments(Atom
+        this(module_server, Atoms.to_map(Atom
             .removeFirst(arguments)));
     }
 

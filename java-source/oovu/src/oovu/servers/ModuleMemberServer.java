@@ -8,6 +8,7 @@ import java.util.Map;
 import oovu.Proxy;
 import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
+import oovu.messaging.Atoms;
 import oovu.messaging.InfoGetterMessageHandler;
 
 import com.cycling74.max.Atom;
@@ -126,7 +127,7 @@ public abstract class ModuleMemberServer extends Server {
         Class<?> member_node_class =
             ModuleMemberServer.member_nodes_by_label.get(label);
         Map<String, Atom[]> argument_map =
-            Server.process_atom_arguments(argument_list);
+            Atoms.to_map(argument_list);
         ModuleMemberServer new_member_node = null;
         try {
             new_member_node =

@@ -9,7 +9,6 @@ import oovu.messaging.Atoms;
 import oovu.messaging.GetterMessageHandler;
 import oovu.messaging.SetterMessageHandler;
 import oovu.servers.AttributeServer;
-import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
 
@@ -127,7 +126,7 @@ public class OptionDatatype extends StringDatatype {
     protected List<String> options;
 
     public OptionDatatype(Atom[] arguments) {
-        this(null, Server.process_atom_arguments(arguments));
+        this(null, Atoms.to_map(arguments));
     }
 
     public OptionDatatype(AttributeServer client,

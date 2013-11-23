@@ -3,6 +3,7 @@ package oovu.servers;
 import java.util.Map;
 
 import oovu.addresses.OscAddress;
+import oovu.messaging.Atoms;
 import oovu.messaging.GetterMessageHandler;
 import oovu.messaging.InfoGetterMessageHandler;
 import oovu.messaging.Request;
@@ -305,7 +306,7 @@ public class DspSettingsServer extends ModuleMemberServer {
     private boolean limiting = true;
 
     public DspSettingsServer(ModuleServer module_server, Atom[] arguments) {
-        this(module_server, Server.process_atom_arguments(Atom
+        this(module_server, Atoms.to_map(Atom
             .removeFirst(arguments)));
     }
 
