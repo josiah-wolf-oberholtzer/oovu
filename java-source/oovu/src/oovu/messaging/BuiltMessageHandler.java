@@ -3,11 +3,10 @@ package oovu.messaging;
 import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
-import com.cycling74.max.Callback;
 
 public class BuiltMessageHandler {
 
-    public final Callback callback;
+    public final Setter callback;
     public final Getter getter;
     public final Integer arity;
     public final Server client;
@@ -18,7 +17,7 @@ public class BuiltMessageHandler {
     public final boolean is_rampable;
     public final boolean is_state_relevant;
 
-    public BuiltMessageHandler(Callback callback, Getter getter, Integer arity,
+    public BuiltMessageHandler(Setter callback, Getter getter, Integer arity,
         Server client, Setter setter, String name, boolean is_binding_relevant,
         boolean is_meta_relevant, boolean is_rampable, boolean is_state_relevant) {
         this.callback = callback;
@@ -47,12 +46,12 @@ public class BuiltMessageHandler {
         boolean callback) {
         Atom[][] result = null;
         if (message.equals(this.get_getter_name())) {
-            result = this.getter.execute(arguments);
+            result = this.getter.execute(this, arguments);
         } else if (message.equals(this.get_setter_name())) {
-            this.setter.execute(arguments);
+            this.setter.execute(this, arguments);
         }
         if (callback && (this.callback != null)) {
-            this.callback.execute();
+            this.callback.execute(this, null);
         }
         return result;
     }

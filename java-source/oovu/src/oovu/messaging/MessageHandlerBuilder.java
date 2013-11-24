@@ -2,11 +2,9 @@ package oovu.messaging;
 
 import oovu.servers.Server;
 
-import com.cycling74.max.Callback;
-
 public class MessageHandlerBuilder {
 
-    private Callback callback;
+    private Setter callback;
     private Getter getter;
     private Integer arity;
     private Setter setter;
@@ -39,6 +37,16 @@ public class MessageHandlerBuilder {
         return this;
     }
 
+    public MessageHandlerBuilder with_callback(Setter callback) {
+        this.callback = callback;
+        return this;
+    }
+
+    public MessageHandlerBuilder with_getter(Getter getter) {
+        this.getter = getter;
+        return this;
+    }
+
     public MessageHandlerBuilder with_is_binding_relevant(
         boolean is_binding_relevant) {
         this.is_binding_relevant = is_binding_relevant;
@@ -49,6 +57,22 @@ public class MessageHandlerBuilder {
         MessageHandlerBuilder
         with_is_meta_relevant(boolean is_meta_relevant) {
         this.is_meta_relevant = is_meta_relevant;
+        return this;
+    }
+
+    public MessageHandlerBuilder with_is_rampable(boolean is_rampable) {
+        this.is_rampable = is_rampable;
+        return this;
+    }
+
+    public MessageHandlerBuilder with_is_state_relevant(
+        boolean is_state_relevant) {
+        this.is_state_relevant = is_state_relevant;
+        return this;
+    }
+
+    public MessageHandlerBuilder with_setter(Setter setter) {
+        this.setter = setter;
         return this;
     }
 }
