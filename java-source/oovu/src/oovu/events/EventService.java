@@ -13,6 +13,7 @@ public class EventService {
         new HashMap<Class<? extends Event>, HashSet<Subscription>>();
 
     public void publish(Event event) {
+        // Environment.log(event.toString());
         Set<Class<? extends Event>> keys =
             new HashSet<Class<? extends Event>>(this.subscriptions.keySet());
         for (Class<? extends Event> event_type : keys) {

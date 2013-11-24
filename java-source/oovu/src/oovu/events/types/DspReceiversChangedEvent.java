@@ -8,4 +8,9 @@ public class DspReceiversChangedEvent extends Event {
     public DspReceiversChangedEvent(Server publisher) {
         super(publisher);
     }
+
+    @Override
+    public String toString() {
+        return "DspReceiversChangedEvent [publisher=" + this.publisher + "]";
+    }
 }

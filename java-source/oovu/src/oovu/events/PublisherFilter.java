@@ -17,4 +17,9 @@ public class PublisherFilter extends Filter {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "PublisherFilter [publisher=" + this.publisher + "]";
+    }
 }

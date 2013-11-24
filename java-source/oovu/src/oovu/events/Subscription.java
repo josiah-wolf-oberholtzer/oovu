@@ -71,12 +71,21 @@ abstract public class Subscription {
     }
 
     public Subscription subscribe() {
+        // Environment.log("SUBSCRIBED: " + this.toString());
         Environment.event_service.subscribe(this);
         this.subscriber.add_subscription(this);
         return this;
     }
 
+    @Override
+    public String toString() {
+        return "Subscription [subscriber=" + this.subscriber + ", event_class="
+            + this.event_class.getSimpleName() + ", filter=" + this.filter
+            + "]";
+    }
+
     public Subscription unsubscribe() {
+        // Environment.log("UNSUBSCRIBED: " + this.toString());
         Environment.event_service.unsubscribe(this);
         this.subscriber.remove_subscription(this);
         return this;

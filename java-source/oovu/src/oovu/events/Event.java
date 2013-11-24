@@ -9,4 +9,9 @@ public class Event {
     public Event(Server publisher) {
         this.publisher = publisher;
     }
+
+    @Override
+    public String toString() {
+        return "Event [publisher=" + this.publisher + "]";
+    }
 }

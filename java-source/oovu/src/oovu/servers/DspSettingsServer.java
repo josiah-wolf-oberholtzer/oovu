@@ -274,6 +274,8 @@ public class DspSettingsServer extends ModuleMemberServer {
                 int argument = arguments[0].toInt();
                 DspSettingsServer.this.set_voice_count(argument);
             }
+            Environment.event_service.publish(new DspSettingsChangedEvent(
+                DspSettingsServer.this));
             return null;
         }
     }

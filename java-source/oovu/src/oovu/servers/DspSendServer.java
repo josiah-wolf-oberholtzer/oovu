@@ -1,6 +1,10 @@
 package oovu.servers;
 
 import oovu.addresses.OscAddress;
+import oovu.events.Event;
+import oovu.events.PublisherFilter;
+import oovu.events.Subscription;
+import oovu.events.types.DspSettingsChangedEvent;
 import oovu.messaging.GetterMessageHandler;
 import oovu.messaging.InfoGetterMessageHandler;
 import oovu.messaging.SetterMessageHandler;
@@ -9,6 +13,20 @@ import oovu.states.State;
 import com.cycling74.max.Atom;
 
 public class DspSendServer extends ModuleMemberServer {
+
+    private class DspSettingsChangedSubscription extends Subscription {
+
+        public DspSettingsChangedSubscription(Server subscriber,
+            Server publisher) {
+            super(subscriber, DspSettingsChangedEvent.class,
+                new PublisherFilter(publisher));
+        }
+
+        @Override
+        public void handle_event(Event event) {
+            this.subscriber.make_request(this.subscriber, "dumpmeta", null);
+        }
+    }
 
     private class GetDestinationIDMessageHandler extends
         InfoGetterMessageHandler {
@@ -129,6 +147,8 @@ public class DspSendServer extends ModuleMemberServer {
     }
 
     private DspReceiveServer destination_server;
+    private Subscription source_subscription;
+    private Subscription target_subscription;
 
     public DspSendServer(ModuleServer module_server) {
         super(module_server);
@@ -137,6 +157,10 @@ public class DspSendServer extends ModuleMemberServer {
         this.add_message_handler(new SetDestinationMessageHandler(this));
         this.add_message_handler(new GetDestinationIDMessageHandler(this));
         this.add_message_handler(new GetIOMessageHandler(this));
+        this.source_subscription =
+            new DspSettingsChangedSubscription(this,
+                module_server.get_dsp_settings_server());
+        this.source_subscription.subscribe();
     }
 
     public String get_destination_address_string() {
@@ -188,6 +212,18 @@ public class DspSendServer extends ModuleMemberServer {
     }
 
     public void set_destination_server(DspReceiveServer destination) {
+        if (this.target_subscription != null) {
+            this.target_subscription.unsubscribe();
+        }
         this.destination_server = destination;
+        if (destination != null) {
+            ModuleServer target_module =
+                (ModuleServer) destination.get_parent_server();
+            Subscription target_subscription =
+                new DspSettingsChangedSubscription(this,
+                    target_module.get_dsp_settings_server());
+            target_subscription.subscribe();
+            this.make_request(this, "dumpmeta", null);
+        }
     }
 }
