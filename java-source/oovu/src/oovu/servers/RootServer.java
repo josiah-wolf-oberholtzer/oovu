@@ -317,7 +317,7 @@ public class RootServer extends Server {
     private String current_event_name = null;
 
     public RootServer() {
-        super(null);
+        super();
         this.attach_to_osc_address_node(Environment.root_osc_address_node);
         this.add_message_handler(new ListEventsMessageHandler(this));
         this.add_message_handler(new GetStateMessageHandler(this));

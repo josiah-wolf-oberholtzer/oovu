@@ -295,15 +295,8 @@ public class DspSettingsServer extends ModuleMemberServer {
     private Integer voice_count = 1;
     private boolean limiting = true;
 
-    public DspSettingsServer(ModuleServer module_server, Atom[] arguments) {
-        this(module_server, Atoms.to_map(Atom.removeFirst(arguments)));
-    }
-
-    public DspSettingsServer(ModuleServer module_server,
-        Map<String, Atom[]> argument_map) {
-        super(module_server, argument_map);
-        this.initialize_input_count();
-        this.initialize_output_count();
+    public DspSettingsServer(ModuleServer module_server) {
+        super(module_server);
         this.add_message_handler(new GetActiveMessageHandler(this));
         this.add_message_handler(new GetInputCountMessageHandler(this));
         this.add_message_handler(new GetLimitingMessageHandler(this));
@@ -314,6 +307,28 @@ public class DspSettingsServer extends ModuleMemberServer {
         this.add_message_handler(new SetLimitingMessageHandler(this));
         this.add_message_handler(new SetSendCountMessageHandler(this));
         this.add_message_handler(new SetVoiceCountMessageHandler(this));
+    }
+
+    public void configure(Atom[] arguments) {
+        Map<String, Atom[]> argument_map = Atoms.to_map(arguments);
+        if (argument_map.containsKey("inputs")) {
+            int input_count = argument_map.get("inputs")[0].getInt();
+            if (input_count < 0) {
+                input_count = 0;
+            } else if (8 < input_count) {
+                input_count = 8;
+            }
+            this.input_count = input_count;
+        }
+        if (argument_map.containsKey("outputs")) {
+            int output_count = argument_map.get("outputs")[0].getInt();
+            if (output_count < 0) {
+                output_count = 0;
+            } else if (8 < output_count) {
+                output_count = 8;
+            }
+            this.output_count = output_count;
+        }
     }
 
     public int get_input_count() {
@@ -355,30 +370,6 @@ public class DspSettingsServer extends ModuleMemberServer {
             return this.input_count;
         }
         return this.voice_count;
-    }
-
-    public void initialize_input_count() {
-        if (this.argument_map.containsKey("inputs")) {
-            int input_count = this.argument_map.get("inputs")[0].getInt();
-            if (input_count < 0) {
-                input_count = 0;
-            } else if (8 < input_count) {
-                input_count = 8;
-            }
-            this.input_count = input_count;
-        }
-    }
-
-    public void initialize_output_count() {
-        if (this.argument_map.containsKey("outputs")) {
-            int output_count = this.argument_map.get("outputs")[0].getInt();
-            if (output_count < 0) {
-                output_count = 0;
-            } else if (8 < output_count) {
-                output_count = 8;
-            }
-            this.output_count = output_count;
-        }
     }
 
     public boolean input_count_is_static() {

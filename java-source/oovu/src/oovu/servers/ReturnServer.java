@@ -1,8 +1,5 @@
 package oovu.servers;
 
-import java.util.Map;
-
-import oovu.messaging.Atoms;
 import oovu.messaging.Response;
 
 import com.cycling74.max.Atom;
@@ -17,13 +14,8 @@ public class ReturnServer extends AttributeServer {
             "ReturnServer", module_id, desired_name, argument_list);
     }
 
-    public ReturnServer(ModuleServer module_server, Atom[] arguments) {
-        this(module_server, Atoms.to_map(Atom.removeFirst(arguments)));
-    }
-
-    public ReturnServer(ModuleServer module_node,
-        Map<String, Atom[]> argument_map) {
-        super(module_node, argument_map);
+    public ReturnServer(ModuleServer module_node) {
+        super(module_node);
     }
 
     @Override

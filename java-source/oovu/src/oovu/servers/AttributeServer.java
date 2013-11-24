@@ -7,6 +7,7 @@ import java.util.Map;
 import oovu.addresses.OscAddress;
 import oovu.datatypes.Datatype;
 import oovu.datatypes.GenericDatatype;
+import oovu.messaging.Atoms;
 import oovu.messaging.GetterMessageHandler;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.Request;
@@ -192,28 +193,19 @@ abstract public class AttributeServer extends ModuleMemberServer implements
     }
 
     protected Integer priority;
-    public final Datatype datatype;
+    public Datatype datatype;
     protected Pattern pattern;
 
-    public AttributeServer(ModuleServer module_server,
-        Map<String, Atom[]> argument_map) {
-        super(module_server, argument_map);
-        this.datatype = this.setup_datatype();
+    public AttributeServer(ModuleServer module_server) {
+        super(module_server);
         this.add_message_handler(new GetPriorityMessageHandler(this));
         this.add_message_handler(new GetValueMessageHandler(this));
         this.add_message_handler(new SetPriorityMessageHandler(this));
         this.add_message_handler(new SetValueMessageHandler(this));
-        this.initialize_value();
-        this.initialize_priority();
         if (!(this instanceof ReturnServer)) {
             this.add_message_handler(new GetPatternMessageHandler(this));
             this.add_message_handler(new SetPatternMessageHandler(this));
         }
-    }
-
-    @Override
-    protected void cleanup_resources() {
-        this.datatype.cleanup_resources();
     }
 
     @Override
@@ -225,6 +217,55 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         } else {
             return -1 * priority_comparison;
         }
+    }
+
+    public void configure(Atom[] arguments) {
+        Map<String, Atom[]> argument_map = Atoms.to_map(arguments);
+        if (argument_map.containsKey("priority")) {
+            this.set_priority(argument_map.get("priority")[0].getInt());
+        } else {
+            this.set_priority(0);
+        }
+        if (argument_map.containsKey("default")) {
+            this.set_value(argument_map.get("default"));
+        } else {
+            this.set_value(this.datatype.get_default());
+        }
+        Atom[] datatype_arguments = argument_map.get("datatype");
+        String datatype_label = null;
+        if ((datatype_arguments != null) && (0 < datatype_arguments.length)) {
+            datatype_label = datatype_arguments[0].toString();
+        }
+        Class<?> datatype_class = Datatype.from_label(datatype_label);
+        Datatype datatype = null;
+        try {
+            datatype =
+                (Datatype) datatype_class.getDeclaredConstructor(
+                    AttributeServer.class, Map.class).newInstance(this,
+                    argument_map);
+        } catch (IllegalArgumentException e) {
+            // e.printStackTrace();
+        } catch (SecurityException e) {
+            // e.printStackTrace();
+        } catch (InstantiationException e) {
+            // e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            // e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            // e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            // e.printStackTrace();
+        }
+        if (datatype == null) {
+            datatype = new GenericDatatype(this, argument_map);
+        }
+        this.datatype = datatype;
+    }
+
+    @Override
+    protected void deallocate() {
+        super.deallocate();
+        this.datatype.cleanup_resources();
     }
 
     public Pattern get_pattern() {
@@ -273,22 +314,6 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         this.handle_response(response);
     }
 
-    private void initialize_priority() {
-        if (this.argument_map.containsKey("priority")) {
-            this.set_priority(this.argument_map.get("priority")[0].getInt());
-        } else {
-            this.set_priority(0);
-        }
-    }
-
-    private void initialize_value() {
-        if (this.argument_map.containsKey("default")) {
-            this.set_value(this.argument_map.get("default"));
-        } else {
-            this.set_value(this.datatype.get_default());
-        }
-    }
-
     abstract public void reoutput_value();
 
     public void set_pattern(Pattern pattern) {
@@ -313,37 +338,5 @@ abstract public class AttributeServer extends ModuleMemberServer implements
 
     public void set_value(Atom[] value) {
         this.datatype.set_value(value);
-    }
-
-    protected Datatype setup_datatype() {
-        Atom[] datatype_arguments = this.argument_map.get("datatype");
-        String datatype_label = null;
-        if ((datatype_arguments != null) && (0 < datatype_arguments.length)) {
-            datatype_label = datatype_arguments[0].toString();
-        }
-        Class<?> datatype_class = Datatype.from_label(datatype_label);
-        Datatype datatype = null;
-        try {
-            datatype =
-                (Datatype) datatype_class.getDeclaredConstructor(
-                    AttributeServer.class, Map.class).newInstance(this,
-                    this.argument_map);
-        } catch (IllegalArgumentException e) {
-            // e.printStackTrace();
-        } catch (SecurityException e) {
-            // e.printStackTrace();
-        } catch (InstantiationException e) {
-            // e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            // e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            // e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            // e.printStackTrace();
-        }
-        if (datatype == null) {
-            datatype = new GenericDatatype(this, this.argument_map);
-        }
-        return datatype;
     }
 }

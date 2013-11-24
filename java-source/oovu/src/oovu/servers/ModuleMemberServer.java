@@ -144,14 +144,15 @@ public abstract class ModuleMemberServer extends Server {
             // e.printStackTrace();
         }
         if (new_member_node == null) {
-            new_member_node = new PropertyServer(module_server, argument_map);
+            new_member_node = new PropertyServer(module_server);
         }
         return new_member_node;
     }
 
-    public ModuleMemberServer(ModuleServer module_server,
-        Map<String, Atom[]> argument_map) {
-        super(argument_map);
+    protected boolean is_configured;
+
+    public ModuleMemberServer(ModuleServer module_server) {
+        super();
         this.attach_to_parent_server(module_server);
         this.add_message_handler(new GetModuleNameMessageHandler(this));
     }

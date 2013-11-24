@@ -2,7 +2,6 @@ package oovu.servers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -269,7 +268,6 @@ abstract public class Server implements MessagePasser, Subscriber {
         }
     }
 
-    public final Map<String, Atom[]> argument_map;
     protected final Set<Server> child_servers = new HashSet<Server>();
     protected final Map<Class<? extends Event>, Subscription> subscriptions =
         new HashMap<Class<? extends Event>, Subscription>();
@@ -280,12 +278,7 @@ abstract public class Server implements MessagePasser, Subscriber {
     protected OscAddressNode osc_address_node = null;
     public final Set<ServerClient> server_clients = new HashSet<ServerClient>();
 
-    public Server(Map<String, Atom[]> argument_map) {
-        if (argument_map != null) {
-            this.argument_map = Collections.unmodifiableMap(argument_map);
-        } else {
-            this.argument_map = null;
-        }
+    public Server() {
         this.add_message_handler(new DumpMetaMessageHandler(this));
         this.add_message_handler(new GetMetaMessageHandler(this));
         this.add_message_handler(new GetInterfaceMessageHandler(this));
@@ -319,9 +312,6 @@ abstract public class Server implements MessagePasser, Subscriber {
         }
     }
 
-    protected void cleanup_resources() {
-    }
-
     public void clear() {
         for (Server child_server : this.child_servers.toArray(new Server[0])) {
             child_server.detach_from_parent_server();
@@ -340,7 +330,6 @@ abstract public class Server implements MessagePasser, Subscriber {
         if (parent_server != null) {
             parent_server.deallocate_if_necessary();
         }
-        this.cleanup_resources();
     }
 
     public void deallocate_if_necessary() {

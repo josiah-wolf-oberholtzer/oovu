@@ -1,8 +1,5 @@
 package oovu.servers;
 
-import java.util.Map;
-
-import oovu.messaging.Atoms;
 import oovu.messaging.Response;
 
 import com.cycling74.max.Atom;
@@ -17,13 +14,8 @@ public class PropertyServer extends AttributeServer {
             "PropertyServer", module_id, desired_name, argument_list);
     }
 
-    public PropertyServer(ModuleServer module_server, Atom[] arguments) {
-        this(module_server, Atoms.to_map(Atom.removeFirst(arguments)));
-    }
-
-    public PropertyServer(ModuleServer module_server,
-        Map<String, Atom[]> argument_map) {
-        super(module_server, argument_map);
+    public PropertyServer(ModuleServer module_server) {
+        super(module_server);
     }
 
     @Override

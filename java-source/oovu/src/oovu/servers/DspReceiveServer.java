@@ -54,9 +54,8 @@ public class DspReceiveServer extends ModuleMemberServer {
         return server;
     }
 
-    public DspReceiveServer(ModuleServer module_server,
-        Map<String, Atom[]> argument_map) {
-        super(module_server, argument_map);
+    public DspReceiveServer(ModuleServer module_server) {
+        super(module_server);
         if (module_server.get_name() == null) {
             Subscription subscription =
                 new ModuleNameAcquiredSubscription(this);

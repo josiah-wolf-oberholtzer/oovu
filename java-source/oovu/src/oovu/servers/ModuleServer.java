@@ -158,7 +158,7 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
     }
 
     public ModuleServer(Integer module_id, Map<String, Atom[]> argument_map) {
-        super(argument_map);
+        super();
         this.module_id = module_id;
         this.dsp_settings_server = null;
         this.attach_to_parent_server(Environment.root_server);
