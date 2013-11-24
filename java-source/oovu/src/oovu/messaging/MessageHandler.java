@@ -1,15 +1,27 @@
 package oovu.messaging;
 
+import oovu.servers.Server;
+
 import com.cycling74.max.Atom;
 
 abstract public class MessageHandler {
+
+    protected final Server client;
+    protected final String name;
+
+    public MessageHandler(Server client, String name) {
+        this.client = client;
+        this.name = name;
+    }
 
     public void call_after() {
     }
 
     abstract public Integer get_arity();
 
-    abstract public String get_name();
+    public String get_name() {
+        return this.name;
+    }
 
     abstract public boolean is_binding_relevant();
 

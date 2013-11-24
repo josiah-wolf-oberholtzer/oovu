@@ -17,8 +17,7 @@ public class MethodServer extends AttributeServer {
     }
 
     public MethodServer(ModuleServer module_server, Atom[] arguments) {
-        this(module_server, Atoms.to_map(Atom
-            .removeFirst(arguments)));
+        this(module_server, Atoms.to_map(Atom.removeFirst(arguments)));
     }
 
     public MethodServer(ModuleServer module_node,

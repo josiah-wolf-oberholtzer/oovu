@@ -7,6 +7,7 @@ import oovu.messaging.Atoms;
 import oovu.messaging.GetterMessageHandler;
 import oovu.messaging.SetterMessageHandler;
 import oovu.servers.AttributeServer;
+import oovu.servers.Server;
 import oovu.timing.EnvelopeHandler;
 import oovu.timing.MultiEnvelope;
 
@@ -17,9 +18,8 @@ abstract public class BoundedDatatype extends Datatype implements
 
     private class GetMaximumMessageHandler extends GetterMessageHandler {
 
-        @Override
-        public String get_name() {
-            return "getmaximum";
+        public GetMaximumMessageHandler(Server client) {
+            super(client, "getmaximum");
         }
 
         @Override
@@ -41,9 +41,8 @@ abstract public class BoundedDatatype extends Datatype implements
 
     private class GetMinimumMessageHandler extends GetterMessageHandler {
 
-        @Override
-        public String get_name() {
-            return "getminimum";
+        public GetMinimumMessageHandler(Server client) {
+            super(client, "getminimum");
         }
 
         @Override
@@ -65,6 +64,10 @@ abstract public class BoundedDatatype extends Datatype implements
 
     private class SetMaximumMessageHandler extends SetterMessageHandler {
 
+        public SetMaximumMessageHandler(Server client) {
+            super(client, "maximum");
+        }
+
         @Override
         public void call_after() {
             BoundedDatatype.this.client.reoutput_value();
@@ -73,11 +76,6 @@ abstract public class BoundedDatatype extends Datatype implements
         @Override
         public Integer get_arity() {
             return 1;
-        }
-
-        @Override
-        public String get_name() {
-            return "maximum";
         }
 
         @Override
@@ -93,6 +91,10 @@ abstract public class BoundedDatatype extends Datatype implements
 
     private class SetMinimumMessageHandler extends SetterMessageHandler {
 
+        public SetMinimumMessageHandler(Server client) {
+            super(client, "minimum");
+        }
+
         @Override
         public void call_after() {
             BoundedDatatype.this.client.reoutput_value();
@@ -101,11 +103,6 @@ abstract public class BoundedDatatype extends Datatype implements
         @Override
         public Integer get_arity() {
             return 1;
-        }
-
-        @Override
-        public String get_name() {
-            return "minimum";
         }
 
         @Override
@@ -127,10 +124,14 @@ abstract public class BoundedDatatype extends Datatype implements
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {
-            this.client.add_message_handler(new GetMaximumMessageHandler());
-            this.client.add_message_handler(new GetMinimumMessageHandler());
-            this.client.add_message_handler(new SetMaximumMessageHandler());
-            this.client.add_message_handler(new SetMinimumMessageHandler());
+            this.client.add_message_handler(new GetMaximumMessageHandler(
+                this.client));
+            this.client.add_message_handler(new GetMinimumMessageHandler(
+                this.client));
+            this.client.add_message_handler(new SetMaximumMessageHandler(
+                this.client));
+            this.client.add_message_handler(new SetMinimumMessageHandler(
+                this.client));
         }
     }
 

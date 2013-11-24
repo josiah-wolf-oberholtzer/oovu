@@ -9,6 +9,7 @@ import oovu.messaging.Atoms;
 import oovu.messaging.GetterMessageHandler;
 import oovu.messaging.SetterMessageHandler;
 import oovu.servers.AttributeServer;
+import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
 
@@ -16,9 +17,8 @@ public class OptionDatatype extends StringDatatype {
 
     private class GetOptionsMessageHandler extends GetterMessageHandler {
 
-        @Override
-        public String get_name() {
-            return "getoptions";
+        public GetOptionsMessageHandler(Server client) {
+            super(client, "getoptions");
         }
 
         @Override
@@ -40,6 +40,10 @@ public class OptionDatatype extends StringDatatype {
 
     private class NextOptionMessageHandler extends ActionMessageHandler {
 
+        public NextOptionMessageHandler(Server client) {
+            super(client, "next");
+        }
+
         @Override
         public void call_after() {
             OptionDatatype.this.client.reoutput_value();
@@ -48,11 +52,6 @@ public class OptionDatatype extends StringDatatype {
         @Override
         public Integer get_arity() {
             return 0;
-        }
-
-        @Override
-        public String get_name() {
-            return "next";
         }
 
         @Override
@@ -69,6 +68,10 @@ public class OptionDatatype extends StringDatatype {
 
     private class PreviousOptionMessageHandler extends ActionMessageHandler {
 
+        public PreviousOptionMessageHandler(Server client) {
+            super(client, "previous");
+        }
+
         @Override
         public void call_after() {
             OptionDatatype.this.client.reoutput_value();
@@ -77,11 +80,6 @@ public class OptionDatatype extends StringDatatype {
         @Override
         public Integer get_arity() {
             return 0;
-        }
-
-        @Override
-        public String get_name() {
-            return "previous";
         }
 
         @Override
@@ -98,6 +96,10 @@ public class OptionDatatype extends StringDatatype {
 
     private class SetOptionsMessageHandler extends SetterMessageHandler {
 
+        public SetOptionsMessageHandler(Server client) {
+            super(client, "options");
+        }
+
         @Override
         public void call_after() {
             OptionDatatype.this.client.reoutput_value();
@@ -106,11 +108,6 @@ public class OptionDatatype extends StringDatatype {
         @Override
         public Integer get_arity() {
             return null;
-        }
-
-        @Override
-        public String get_name() {
-            return "options";
         }
 
         @Override
@@ -133,10 +130,14 @@ public class OptionDatatype extends StringDatatype {
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {
-            this.client.add_message_handler(new GetOptionsMessageHandler());
-            this.client.add_message_handler(new NextOptionMessageHandler());
-            this.client.add_message_handler(new PreviousOptionMessageHandler());
-            this.client.add_message_handler(new SetOptionsMessageHandler());
+            this.client.add_message_handler(new GetOptionsMessageHandler(
+                this.client));
+            this.client.add_message_handler(new NextOptionMessageHandler(
+                this.client));
+            this.client.add_message_handler(new PreviousOptionMessageHandler(
+                this.client));
+            this.client.add_message_handler(new SetOptionsMessageHandler(
+                this.client));
         }
     }
 

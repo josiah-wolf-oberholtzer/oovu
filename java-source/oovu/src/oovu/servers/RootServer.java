@@ -27,14 +27,13 @@ public class RootServer extends Server {
 
     private class GetStateMessageHandler extends MessageHandler {
 
-        @Override
-        public Integer get_arity() {
-            return 0;
+        public GetStateMessageHandler(Server client) {
+            super(client, "getstate");
         }
 
         @Override
-        public String get_name() {
-            return "getstate";
+        public Integer get_arity() {
+            return 0;
         }
 
         @Override
@@ -69,14 +68,13 @@ public class RootServer extends Server {
 
     private class ListEventsMessageHandler extends MessageHandler {
 
-        @Override
-        public Integer get_arity() {
-            return 0;
+        public ListEventsMessageHandler(Server client) {
+            super(client, "events/list");
         }
 
         @Override
-        public String get_name() {
-            return "events/list";
+        public Integer get_arity() {
+            return 0;
         }
 
         @Override
@@ -121,14 +119,13 @@ public class RootServer extends Server {
 
     private class NextEventMessageHandler extends ActionMessageHandler {
 
-        @Override
-        public Integer get_arity() {
-            return 0;
+        public NextEventMessageHandler(Server client) {
+            super(client, "events/next");
         }
 
         @Override
-        public String get_name() {
-            return "events/next";
+        public Integer get_arity() {
+            return 0;
         }
 
         @Override
@@ -168,14 +165,13 @@ public class RootServer extends Server {
 
     private class PreviousEventMessageHandler extends ActionMessageHandler {
 
-        @Override
-        public Integer get_arity() {
-            return 0;
+        public PreviousEventMessageHandler(Server client) {
+            super(client, "events/previous");
         }
 
         @Override
-        public String get_name() {
-            return "events/previous";
+        public Integer get_arity() {
+            return 0;
         }
 
         @Override
@@ -211,6 +207,10 @@ public class RootServer extends Server {
 
     private class ReadEventScriptMessageHandler extends MessageHandler {
 
+        public ReadEventScriptMessageHandler(Server client) {
+            super(client, "events/read");
+        }
+
         @Override
         public void call_after() {
             Request request =
@@ -222,11 +222,6 @@ public class RootServer extends Server {
         @Override
         public Integer get_arity() {
             return 0;
-        }
-
-        @Override
-        public String get_name() {
-            return "events/read";
         }
 
         @Override
@@ -267,14 +262,13 @@ public class RootServer extends Server {
 
     private class SetEventMessageHandler extends SetterMessageHandler {
 
-        @Override
-        public Integer get_arity() {
-            return null;
+        public SetEventMessageHandler(Server client) {
+            super(client, "events/goto");
         }
 
         @Override
-        public String get_name() {
-            return "events/goto";
+        public Integer get_arity() {
+            return null;
         }
 
         @Override
@@ -325,12 +319,12 @@ public class RootServer extends Server {
     public RootServer() {
         super(null);
         this.attach_to_osc_address_node(Environment.root_osc_address_node);
-        this.add_message_handler(new ListEventsMessageHandler());
-        this.add_message_handler(new GetStateMessageHandler());
-        this.add_message_handler(new ReadEventScriptMessageHandler());
-        this.add_message_handler(new SetEventMessageHandler());
-        this.add_message_handler(new NextEventMessageHandler());
-        this.add_message_handler(new PreviousEventMessageHandler());
+        this.add_message_handler(new ListEventsMessageHandler(this));
+        this.add_message_handler(new GetStateMessageHandler(this));
+        this.add_message_handler(new ReadEventScriptMessageHandler(this));
+        this.add_message_handler(new SetEventMessageHandler(this));
+        this.add_message_handler(new NextEventMessageHandler(this));
+        this.add_message_handler(new PreviousEventMessageHandler(this));
     }
 
     @Override

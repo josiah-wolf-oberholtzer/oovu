@@ -6,6 +6,7 @@ import oovu.messaging.Atoms;
 import oovu.messaging.GetterMessageHandler;
 import oovu.messaging.SetterMessageHandler;
 import oovu.servers.AttributeServer;
+import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
 
@@ -13,9 +14,8 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
 
     private class GetLengthMessageHandler extends GetterMessageHandler {
 
-        @Override
-        public String get_name() {
-            return "getlength";
+        public GetLengthMessageHandler(Server client) {
+            super(client, "getlength");
         }
 
         @Override
@@ -37,6 +37,10 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
 
     private class SetLengthMessageHandler extends SetterMessageHandler {
 
+        public SetLengthMessageHandler(Server client) {
+            super(client, "length");
+        }
+
         @Override
         public void call_after() {
             BoundedArrayDatatype.this.client.reoutput_value();
@@ -45,11 +49,6 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
         @Override
         public Integer get_arity() {
             return 1;
-        }
-
-        @Override
-        public String get_name() {
-            return "length";
         }
 
         @Override
@@ -69,8 +68,10 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {
-            client.add_message_handler(new GetLengthMessageHandler());
-            client.add_message_handler(new SetLengthMessageHandler());
+            client
+                .add_message_handler(new GetLengthMessageHandler(this.client));
+            client
+                .add_message_handler(new SetLengthMessageHandler(this.client));
         }
     }
 

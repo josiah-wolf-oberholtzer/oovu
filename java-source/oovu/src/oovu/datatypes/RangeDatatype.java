@@ -6,6 +6,7 @@ import java.util.Map;
 import oovu.messaging.ActionMessageHandler;
 import oovu.messaging.Atoms;
 import oovu.servers.AttributeServer;
+import oovu.servers.Server;
 import oovu.timing.MultiEnvelope;
 
 import com.cycling74.max.Atom;
@@ -13,6 +14,10 @@ import com.cycling74.max.Atom;
 public class RangeDatatype extends BoundedDatatype {
 
     private class CenterMessageHandler extends ActionMessageHandler {
+
+        public CenterMessageHandler(Server client) {
+            super(client, "center");
+        }
 
         @Override
         public void call_after() {
@@ -22,11 +27,6 @@ public class RangeDatatype extends BoundedDatatype {
         @Override
         public Integer get_arity() {
             return 1;
-        }
-
-        @Override
-        public String get_name() {
-            return "center";
         }
 
         @Override
@@ -47,6 +47,10 @@ public class RangeDatatype extends BoundedDatatype {
 
     private class WidthMessageHandler extends ActionMessageHandler {
 
+        public WidthMessageHandler(Server client) {
+            super(client, "width");
+        }
+
         @Override
         public void call_after() {
             RangeDatatype.this.client.reoutput_value();
@@ -55,11 +59,6 @@ public class RangeDatatype extends BoundedDatatype {
         @Override
         public Integer get_arity() {
             return 1;
-        }
-
-        @Override
-        public String get_name() {
-            return "width";
         }
 
         @Override
@@ -86,8 +85,10 @@ public class RangeDatatype extends BoundedDatatype {
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {
-            this.client.add_message_handler(new CenterMessageHandler());
-            this.client.add_message_handler(new WidthMessageHandler());
+            this.client.add_message_handler(new CenterMessageHandler(
+                this.client));
+            this.client
+                .add_message_handler(new WidthMessageHandler(this.client));
         }
         double[] range = Atom.toDouble(this.value);
         double[] center_width = this.range_to_center_width(range[0], range[1]);

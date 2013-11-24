@@ -35,9 +35,8 @@ public class AudioSendDatatype extends OscAddressDatatype {
     private class GetDestinationIdMessageHandler extends
         InfoGetterMessageHandler {
 
-        @Override
-        public String get_name() {
-            return "getdestinationid";
+        public GetDestinationIdMessageHandler(Server client) {
+            super(client, "getdestinationid");
         }
 
         @Override
@@ -50,9 +49,8 @@ public class AudioSendDatatype extends OscAddressDatatype {
     private class GetDestinationsMessageHandler extends
         InfoGetterMessageHandler {
 
-        @Override
-        public String get_name() {
-            return "getdestinations";
+        public GetDestinationsMessageHandler(Server client) {
+            super(client, "getdestinations");
         }
 
         @Override
@@ -73,10 +71,10 @@ public class AudioSendDatatype extends OscAddressDatatype {
             Subscription subscription =
                 new DspReceiversChangedSubscription(client);
             subscription.subscribe();
-            this.client
-                .add_message_handler(new GetDestinationIdMessageHandler());
-            this.client
-                .add_message_handler(new GetDestinationsMessageHandler());
+            this.client.add_message_handler(new GetDestinationIdMessageHandler(
+                this.client));
+            this.client.add_message_handler(new GetDestinationsMessageHandler(
+                this.client));
         }
     }
 

@@ -20,9 +20,8 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
 
     private class GetMembersMessageHandler extends InfoGetterMessageHandler {
 
-        @Override
-        public String get_name() {
-            return "getmembers";
+        public GetMembersMessageHandler(Server client) {
+            super(client, "getmembers");
         }
 
         @Override
@@ -39,9 +38,8 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
 
     private class GetMethodsMessageHandler extends InfoGetterMessageHandler {
 
-        @Override
-        public String get_name() {
-            return "getmethods";
+        public GetMethodsMessageHandler(Server client) {
+            super(client, "getmethods");
         }
 
         @Override
@@ -57,6 +55,10 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
     }
 
     private class GetNameMessageHandler extends InfoGetterMessageHandler {
+
+        public GetNameMessageHandler(Server client) {
+            super(client, "getname");
+        }
 
         @Override
         public String get_name() {
@@ -79,9 +81,8 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
 
     private class GetPropertiesMessageHandler extends InfoGetterMessageHandler {
 
-        @Override
-        public String get_name() {
-            return "getproperties";
+        public GetPropertiesMessageHandler(Server client) {
+            super(client, "getproperties");
         }
 
         @Override
@@ -98,9 +99,8 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
 
     private class GetReturnsMessageHandler extends InfoGetterMessageHandler {
 
-        @Override
-        public String get_name() {
-            return "getreturns";
+        public GetReturnsMessageHandler(Server client) {
+            super(client, "getreturns");
         }
 
         @Override
@@ -154,8 +154,7 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
     private DspSettingsServer dsp_settings_server;
 
     public ModuleServer(Atom[] arguments) {
-        this(arguments[0].getInt(), Atoms.to_map(Atom
-            .removeFirst(arguments)));
+        this(arguments[0].getInt(), Atoms.to_map(Atom.removeFirst(arguments)));
     }
 
     public ModuleServer(Integer module_id, Map<String, Atom[]> argument_map) {
@@ -163,11 +162,11 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
         this.module_id = module_id;
         this.dsp_settings_server = null;
         this.attach_to_parent_server(Environment.root_server);
-        this.add_message_handler(new GetMembersMessageHandler());
-        this.add_message_handler(new GetMethodsMessageHandler());
-        this.add_message_handler(new GetNameMessageHandler());
-        this.add_message_handler(new GetPropertiesMessageHandler());
-        this.add_message_handler(new GetReturnsMessageHandler());
+        this.add_message_handler(new GetMembersMessageHandler(this));
+        this.add_message_handler(new GetMethodsMessageHandler(this));
+        this.add_message_handler(new GetNameMessageHandler(this));
+        this.add_message_handler(new GetPropertiesMessageHandler(this));
+        this.add_message_handler(new GetReturnsMessageHandler(this));
     }
 
     public void acquire_name(String desired_name) {

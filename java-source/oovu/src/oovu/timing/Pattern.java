@@ -17,8 +17,7 @@ import com.cycling74.max.Atom;
 public class Pattern extends ClockWatcher {
 
     public static Pattern from_atoms(Server client, Atom[] atoms) {
-        return Pattern.from_mapping(client,
-            Atoms.to_map(atoms));
+        return Pattern.from_mapping(client, Atoms.to_map(atoms));
     }
 
     public static Pattern from_mapping(

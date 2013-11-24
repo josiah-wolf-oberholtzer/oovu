@@ -16,9 +16,8 @@ public class DspSettingsServer extends ModuleMemberServer {
 
     private class GetActiveMessageHandler extends GetterMessageHandler {
 
-        @Override
-        public String get_name() {
-            return "getactive";
+        public GetActiveMessageHandler(Server client) {
+            super(client, "getactive");
         }
 
         @Override
@@ -42,9 +41,8 @@ public class DspSettingsServer extends ModuleMemberServer {
 
     private class GetInputCountMessageHandler extends InfoGetterMessageHandler {
 
-        @Override
-        public String get_name() {
-            return "getinputcount";
+        public GetInputCountMessageHandler(Server client) {
+            super(client, "getinputcount");
         }
 
         @Override
@@ -59,9 +57,8 @@ public class DspSettingsServer extends ModuleMemberServer {
 
     private class GetLimitingMessageHandler extends GetterMessageHandler {
 
-        @Override
-        public String get_name() {
-            return "getlimiting";
+        public GetLimitingMessageHandler(Server client) {
+            super(client, "getlimiting");
         }
 
         @Override
@@ -85,9 +82,8 @@ public class DspSettingsServer extends ModuleMemberServer {
 
     private class GetOutputCountMessageHandler extends InfoGetterMessageHandler {
 
-        @Override
-        public String get_name() {
-            return "getoutputcount";
+        public GetOutputCountMessageHandler(Server client) {
+            super(client, "getoutputcount");
         }
 
         @Override
@@ -102,9 +98,8 @@ public class DspSettingsServer extends ModuleMemberServer {
 
     private class GetSendCountMessageHandler extends GetterMessageHandler {
 
-        @Override
-        public String get_name() {
-            return "getsendcount";
+        public GetSendCountMessageHandler(Server client) {
+            super(client, "getsendcount");
         }
 
         @Override
@@ -129,9 +124,8 @@ public class DspSettingsServer extends ModuleMemberServer {
 
     private class GetVoiceCountMessageHandler extends GetterMessageHandler {
 
-        @Override
-        public String get_name() {
-            return "getvoicecount";
+        public GetVoiceCountMessageHandler(Server client) {
+            super(client, "getvoicecount");
         }
 
         @Override
@@ -156,6 +150,10 @@ public class DspSettingsServer extends ModuleMemberServer {
 
     private class SetActiveMessageHandler extends SetterMessageHandler {
 
+        public SetActiveMessageHandler(Server client) {
+            super(client, "active");
+        }
+
         @Override
         public void call_after() {
             Request request =
@@ -170,11 +168,6 @@ public class DspSettingsServer extends ModuleMemberServer {
         }
 
         @Override
-        public String get_name() {
-            return "active";
-        }
-
-        @Override
         public Atom[][] run(Atom[] arguments) {
             if (0 < arguments.length) {
                 boolean argument = arguments[0].toBoolean();
@@ -185,6 +178,10 @@ public class DspSettingsServer extends ModuleMemberServer {
     }
 
     private class SetLimitingMessageHandler extends SetterMessageHandler {
+
+        public SetLimitingMessageHandler(Server client) {
+            super(client, "limiting");
+        }
 
         @Override
         public void call_after() {
@@ -200,11 +197,6 @@ public class DspSettingsServer extends ModuleMemberServer {
         }
 
         @Override
-        public String get_name() {
-            return "limiting";
-        }
-
-        @Override
         public Atom[][] run(Atom[] arguments) {
             if (0 < arguments.length) {
                 boolean argument = arguments[0].toBoolean();
@@ -215,6 +207,10 @@ public class DspSettingsServer extends ModuleMemberServer {
     }
 
     private class SetSendCountMessageHandler extends SetterMessageHandler {
+
+        public SetSendCountMessageHandler(Server client) {
+            super(client, "sendcount");
+        }
 
         @Override
         public void call_after() {
@@ -231,11 +227,6 @@ public class DspSettingsServer extends ModuleMemberServer {
         }
 
         @Override
-        public String get_name() {
-            return "sendcount";
-        }
-
-        @Override
         public Atom[][] run(Atom[] arguments) {
             if (0 < arguments.length) {
                 int argument = arguments[0].toInt();
@@ -246,6 +237,10 @@ public class DspSettingsServer extends ModuleMemberServer {
     }
 
     private class SetVoiceCountMessageHandler extends SetterMessageHandler {
+
+        public SetVoiceCountMessageHandler(Server client) {
+            super(client, "voicecount");
+        }
 
         @Override
         public void call_after() {
@@ -269,11 +264,6 @@ public class DspSettingsServer extends ModuleMemberServer {
         @Override
         public Integer get_arity() {
             return 1;
-        }
-
-        @Override
-        public String get_name() {
-            return "voicecount";
         }
 
         @Override
@@ -306,8 +296,7 @@ public class DspSettingsServer extends ModuleMemberServer {
     private boolean limiting = true;
 
     public DspSettingsServer(ModuleServer module_server, Atom[] arguments) {
-        this(module_server, Atoms.to_map(Atom
-            .removeFirst(arguments)));
+        this(module_server, Atoms.to_map(Atom.removeFirst(arguments)));
     }
 
     public DspSettingsServer(ModuleServer module_server,
@@ -315,16 +304,16 @@ public class DspSettingsServer extends ModuleMemberServer {
         super(module_server, argument_map);
         this.initialize_input_count();
         this.initialize_output_count();
-        this.add_message_handler(new GetActiveMessageHandler());
-        this.add_message_handler(new GetInputCountMessageHandler());
-        this.add_message_handler(new GetLimitingMessageHandler());
-        this.add_message_handler(new GetOutputCountMessageHandler());
-        this.add_message_handler(new GetSendCountMessageHandler());
-        this.add_message_handler(new GetVoiceCountMessageHandler());
-        this.add_message_handler(new SetActiveMessageHandler());
-        this.add_message_handler(new SetLimitingMessageHandler());
-        this.add_message_handler(new SetSendCountMessageHandler());
-        this.add_message_handler(new SetVoiceCountMessageHandler());
+        this.add_message_handler(new GetActiveMessageHandler(this));
+        this.add_message_handler(new GetInputCountMessageHandler(this));
+        this.add_message_handler(new GetLimitingMessageHandler(this));
+        this.add_message_handler(new GetOutputCountMessageHandler(this));
+        this.add_message_handler(new GetSendCountMessageHandler(this));
+        this.add_message_handler(new GetVoiceCountMessageHandler(this));
+        this.add_message_handler(new SetActiveMessageHandler(this));
+        this.add_message_handler(new SetLimitingMessageHandler(this));
+        this.add_message_handler(new SetSendCountMessageHandler(this));
+        this.add_message_handler(new SetVoiceCountMessageHandler(this));
     }
 
     public int get_input_count() {

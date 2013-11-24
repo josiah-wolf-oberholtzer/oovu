@@ -5,12 +5,17 @@ import java.util.Map;
 import oovu.messaging.ActionMessageHandler;
 import oovu.messaging.Atoms;
 import oovu.servers.AttributeServer;
+import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
 
 public class BooleanDatatype extends GenericDatatype {
 
     private class ToggleMessageHandler extends ActionMessageHandler {
+
+        public ToggleMessageHandler(Server client) {
+            super(client, "toggle");
+        }
 
         @Override
         public void call_after() {
@@ -23,13 +28,7 @@ public class BooleanDatatype extends GenericDatatype {
         }
 
         @Override
-        public String get_name() {
-            return "toggle";
-        }
-
-        @Override
         public boolean is_rampable() {
-            // TODO Auto-generated method stub
             return false;
         }
 
@@ -48,7 +47,8 @@ public class BooleanDatatype extends GenericDatatype {
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {
-            this.client.add_message_handler(new ToggleMessageHandler());
+            this.client.add_message_handler(new ToggleMessageHandler(
+                this.client));
         }
     }
 

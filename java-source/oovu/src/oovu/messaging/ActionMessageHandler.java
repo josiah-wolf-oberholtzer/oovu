@@ -1,6 +1,12 @@
 package oovu.messaging;
 
+import oovu.servers.Server;
+
 abstract public class ActionMessageHandler extends MessageHandler {
+
+    public ActionMessageHandler(Server client, String name) {
+        super(client, name);
+    }
 
     @Override
     public boolean is_binding_relevant() {

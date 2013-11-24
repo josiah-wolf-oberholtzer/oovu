@@ -17,9 +17,8 @@ public abstract class ModuleMemberServer extends Server {
 
     private class GetModuleNameMessageHandler extends InfoGetterMessageHandler {
 
-        @Override
-        public String get_name() {
-            return "getmodulename";
+        public GetModuleNameMessageHandler(Server client) {
+            super(client, "getmodulename");
         }
 
         @Override
@@ -126,8 +125,7 @@ public abstract class ModuleMemberServer extends Server {
         Atom[] argument_list) {
         Class<?> member_node_class =
             ModuleMemberServer.member_nodes_by_label.get(label);
-        Map<String, Atom[]> argument_map =
-            Atoms.to_map(argument_list);
+        Map<String, Atom[]> argument_map = Atoms.to_map(argument_list);
         ModuleMemberServer new_member_node = null;
         try {
             new_member_node =
@@ -155,6 +153,6 @@ public abstract class ModuleMemberServer extends Server {
         Map<String, Atom[]> argument_map) {
         super(argument_map);
         this.attach_to_parent_server(module_server);
-        this.add_message_handler(new GetModuleNameMessageHandler());
+        this.add_message_handler(new GetModuleNameMessageHandler(this));
     }
 }

@@ -18,8 +18,7 @@ public class ReturnServer extends AttributeServer {
     }
 
     public ReturnServer(ModuleServer module_server, Atom[] arguments) {
-        this(module_server, Atoms.to_map(Atom
-            .removeFirst(arguments)));
+        this(module_server, Atoms.to_map(Atom.removeFirst(arguments)));
     }
 
     public ReturnServer(ModuleServer module_node,

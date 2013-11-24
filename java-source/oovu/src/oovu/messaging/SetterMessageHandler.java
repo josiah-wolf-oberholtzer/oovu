@@ -1,6 +1,12 @@
 package oovu.messaging;
 
+import oovu.servers.Server;
+
 public abstract class SetterMessageHandler extends MessageHandler {
+
+    public SetterMessageHandler(Server client, String name) {
+        super(client, name);
+    }
 
     @Override
     public boolean is_binding_relevant() {

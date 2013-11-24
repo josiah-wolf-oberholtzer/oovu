@@ -18,8 +18,7 @@ public class PropertyServer extends AttributeServer {
     }
 
     public PropertyServer(ModuleServer module_server, Atom[] arguments) {
-        this(module_server, Atoms.to_map(Atom
-            .removeFirst(arguments)));
+        this(module_server, Atoms.to_map(Atom.removeFirst(arguments)));
     }
 
     public PropertyServer(ModuleServer module_server,

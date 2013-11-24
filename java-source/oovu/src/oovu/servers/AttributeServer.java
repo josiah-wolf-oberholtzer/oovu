@@ -24,9 +24,8 @@ abstract public class AttributeServer extends ModuleMemberServer implements
 
     private class GetPatternMessageHandler extends GetterMessageHandler {
 
-        @Override
-        public String get_name() {
-            return "getpattern";
+        public GetPatternMessageHandler(Server client) {
+            super(client, "getpattern");
         }
 
         @Override
@@ -53,9 +52,8 @@ abstract public class AttributeServer extends ModuleMemberServer implements
 
     private class GetPriorityMessageHandler extends GetterMessageHandler {
 
-        @Override
-        public String get_name() {
-            return "getpriority";
+        public GetPriorityMessageHandler(Server client) {
+            super(client, "getpriority");
         }
 
         @Override
@@ -82,9 +80,8 @@ abstract public class AttributeServer extends ModuleMemberServer implements
 
     private class GetValueMessageHandler extends GetterMessageHandler {
 
-        @Override
-        public String get_name() {
-            return "getvalue";
+        public GetValueMessageHandler(Server client) {
+            super(client, "getvalue");
         }
 
         @Override
@@ -111,14 +108,13 @@ abstract public class AttributeServer extends ModuleMemberServer implements
 
     private class SetPatternMessageHandler extends SetterMessageHandler {
 
-        @Override
-        public Integer get_arity() {
-            return null;
+        public SetPatternMessageHandler(Server client) {
+            super(client, "pattern");
         }
 
         @Override
-        public String get_name() {
-            return "pattern";
+        public Integer get_arity() {
+            return null;
         }
 
         @Override
@@ -134,14 +130,13 @@ abstract public class AttributeServer extends ModuleMemberServer implements
 
     private class SetPriorityMessageHandler extends SetterMessageHandler {
 
-        @Override
-        public Integer get_arity() {
-            return 1;
+        public SetPriorityMessageHandler(Server client) {
+            super(client, "priority");
         }
 
         @Override
-        public String get_name() {
-            return "priority";
+        public Integer get_arity() {
+            return 1;
         }
 
         @Override
@@ -157,14 +152,13 @@ abstract public class AttributeServer extends ModuleMemberServer implements
 
     protected class SetValueMessageHandler extends MessageHandler {
 
-        @Override
-        public Integer get_arity() {
-            return AttributeServer.this.datatype.get_arity();
+        public SetValueMessageHandler(Server client) {
+            super(client, "value");
         }
 
         @Override
-        public String get_name() {
-            return "value";
+        public Integer get_arity() {
+            return AttributeServer.this.datatype.get_arity();
         }
 
         @Override
@@ -205,15 +199,15 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         Map<String, Atom[]> argument_map) {
         super(module_server, argument_map);
         this.datatype = this.setup_datatype();
-        this.add_message_handler(new GetPriorityMessageHandler());
-        this.add_message_handler(new GetValueMessageHandler());
-        this.add_message_handler(new SetPriorityMessageHandler());
-        this.add_message_handler(new SetValueMessageHandler());
+        this.add_message_handler(new GetPriorityMessageHandler(this));
+        this.add_message_handler(new GetValueMessageHandler(this));
+        this.add_message_handler(new SetPriorityMessageHandler(this));
+        this.add_message_handler(new SetValueMessageHandler(this));
         this.initialize_value();
         this.initialize_priority();
         if (!(this instanceof ReturnServer)) {
-            this.add_message_handler(new GetPatternMessageHandler());
-            this.add_message_handler(new SetPatternMessageHandler());
+            this.add_message_handler(new GetPatternMessageHandler(this));
+            this.add_message_handler(new SetPatternMessageHandler(this));
         }
     }
 

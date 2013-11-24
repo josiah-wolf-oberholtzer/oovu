@@ -34,14 +34,13 @@ abstract public class Server implements MessagePasser, Subscriber {
 
     private class DumpMetaMessageHandler extends MessageHandler {
 
-        @Override
-        public Integer get_arity() {
-            return 0;
+        public DumpMetaMessageHandler(Server client) {
+            super(client, "dumpmeta");
         }
 
         @Override
-        public String get_name() {
-            return "dumpmeta";
+        public Integer get_arity() {
+            return 0;
         }
 
         @Override
@@ -90,9 +89,8 @@ abstract public class Server implements MessagePasser, Subscriber {
 
     private class GetInterfaceMessageHandler extends InfoGetterMessageHandler {
 
-        @Override
-        public String get_name() {
-            return "getinterface";
+        public GetInterfaceMessageHandler(Server client) {
+            super(client, "getinterface");
         }
 
         @Override
@@ -119,9 +117,8 @@ abstract public class Server implements MessagePasser, Subscriber {
 
     private class GetMetaMessageHandler extends InfoGetterMessageHandler {
 
-        @Override
-        public String get_name() {
-            return "getmeta";
+        public GetMetaMessageHandler(Server client) {
+            super(client, "getmeta");
         }
 
         @Override
@@ -140,6 +137,10 @@ abstract public class Server implements MessagePasser, Subscriber {
     }
 
     private class GetOscAddressMessageHandler extends InfoGetterMessageHandler {
+
+        public GetOscAddressMessageHandler(Server client) {
+            super(client, "getoscaddress");
+        }
 
         @Override
         public String get_name() {
@@ -162,6 +163,10 @@ abstract public class Server implements MessagePasser, Subscriber {
 
     private class GetUniqueIdMessageHandler extends InfoGetterMessageHandler {
 
+        public GetUniqueIdMessageHandler(Server client) {
+            super(client, "getuniqueid");
+        }
+
         @Override
         public String get_name() {
             return "getuniqueid";
@@ -178,14 +183,13 @@ abstract public class Server implements MessagePasser, Subscriber {
 
     private class ReportMessageHandler extends MessageHandler {
 
-        @Override
-        public Integer get_arity() {
-            return null;
+        public ReportMessageHandler(Server client) {
+            super(client, "report");
         }
 
         @Override
-        public String get_name() {
-            return "report";
+        public Integer get_arity() {
+            return null;
         }
 
         @Override
@@ -219,6 +223,10 @@ abstract public class Server implements MessagePasser, Subscriber {
     }
 
     private class ShowMessageHandler extends MessageHandler {
+
+        public ShowMessageHandler(Server client) {
+            super(client, "show");
+        }
 
         @Override
         public Integer get_arity() {
@@ -278,13 +286,13 @@ abstract public class Server implements MessagePasser, Subscriber {
         } else {
             this.argument_map = null;
         }
-        this.add_message_handler(new DumpMetaMessageHandler());
-        this.add_message_handler(new GetMetaMessageHandler());
-        this.add_message_handler(new GetInterfaceMessageHandler());
-        this.add_message_handler(new GetOscAddressMessageHandler());
-        this.add_message_handler(new GetUniqueIdMessageHandler());
-        this.add_message_handler(new ReportMessageHandler());
-        this.add_message_handler(new ShowMessageHandler());
+        this.add_message_handler(new DumpMetaMessageHandler(this));
+        this.add_message_handler(new GetMetaMessageHandler(this));
+        this.add_message_handler(new GetInterfaceMessageHandler(this));
+        this.add_message_handler(new GetOscAddressMessageHandler(this));
+        this.add_message_handler(new GetUniqueIdMessageHandler(this));
+        this.add_message_handler(new ReportMessageHandler(this));
+        this.add_message_handler(new ShowMessageHandler(this));
     }
 
     public void add_message_handler(MessageHandler message_handler) {

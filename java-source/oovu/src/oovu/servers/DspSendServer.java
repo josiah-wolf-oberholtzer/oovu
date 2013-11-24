@@ -16,9 +16,8 @@ public class DspSendServer extends ModuleMemberServer {
     private class GetDestinationIDMessageHandler extends
         InfoGetterMessageHandler {
 
-        @Override
-        public String get_name() {
-            return "getdestinationid";
+        public GetDestinationIDMessageHandler(Server client) {
+            super(client, "getdestinationid");
         }
 
         @Override
@@ -33,9 +32,8 @@ public class DspSendServer extends ModuleMemberServer {
 
     private class GetDestinationMessageHandler extends GetterMessageHandler {
 
-        @Override
-        public String get_name() {
-            return "getdestination";
+        public GetDestinationMessageHandler(Server client) {
+            super(client, "getdestination");
         }
 
         @Override
@@ -68,6 +66,10 @@ public class DspSendServer extends ModuleMemberServer {
 
     private class GetIOMessageHandler extends InfoGetterMessageHandler {
 
+        public GetIOMessageHandler(Server client) {
+            super(client, "getio");
+        }
+
         @Override
         public String get_name() {
             return "getio";
@@ -83,6 +85,10 @@ public class DspSendServer extends ModuleMemberServer {
     }
 
     private class SetDestinationMessageHandler extends SetterMessageHandler {
+
+        public SetDestinationMessageHandler(Server client) {
+            super(client, "destination");
+        }
 
         @Override
         public void call_after() {
@@ -128,18 +134,17 @@ public class DspSendServer extends ModuleMemberServer {
     private DspReceiveServer destination_server;
 
     public DspSendServer(ModuleServer module_server, Atom[] arguments) {
-        this(module_server, Atoms.to_map(Atom
-            .removeFirst(arguments)));
+        this(module_server, Atoms.to_map(Atom.removeFirst(arguments)));
     }
 
     public DspSendServer(ModuleServer module_server,
         Map<String, Atom[]> argument_map) {
         super(module_server, argument_map);
         this.destination_server = null;
-        this.add_message_handler(new GetDestinationMessageHandler());
-        this.add_message_handler(new SetDestinationMessageHandler());
-        this.add_message_handler(new GetDestinationIDMessageHandler());
-        this.add_message_handler(new GetIOMessageHandler());
+        this.add_message_handler(new GetDestinationMessageHandler(this));
+        this.add_message_handler(new SetDestinationMessageHandler(this));
+        this.add_message_handler(new GetDestinationIDMessageHandler(this));
+        this.add_message_handler(new GetIOMessageHandler(this));
     }
 
     public String get_destination_address_string() {
