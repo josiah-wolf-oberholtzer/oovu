@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 353.0, 178.0, 796.0, 580.0 ],
+		"rect" : [ 83.0, 44.0, 796.0, 580.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -28,6 +28,19 @@
 		"digest" : "",
 		"tags" : "",
 		"boxes" : [ 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-53",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 70.0, 380.0, 74.0, 20.0 ],
+					"text" : "print routing"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
@@ -79,7 +92,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 205.0, 380.0, 50.0, 18.0 ],
-					"text" : "2 0"
+					"text" : "1 0"
 				}
 
 			}
@@ -131,13 +144,13 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-62",
-					"linecount" : 10,
+					"linecount" : 11,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 595.0, 355.0, 110.0, 139.0 ],
-					"text" : "destination dumpmeta getdestination getdestinationid getinterface getio getmeta getmodulename getoscaddress getuniqueid report show"
+					"patching_rect" : [ 595.0, 355.0, 110.0, 152.0 ],
+					"text" : "destination dumpmeta getdestination getdestinationid getinterface getio getmeta getmodulename getoscaddress getrouting getuniqueid report show"
 				}
 
 			}
@@ -231,11 +244,11 @@
 					"fontsize" : 12.0,
 					"id" : "obj-46",
 					"maxclass" : "newobj",
-					"numinlets" : 3,
-					"numoutlets" : 3,
-					"outlettype" : [ "", "", "" ],
+					"numinlets" : 4,
+					"numoutlets" : 4,
+					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 15.0, 325.0, 169.0, 20.0 ],
-					"text" : "route destinationid io"
+					"text" : "route destinationid io routing"
 				}
 
 			}
@@ -1160,6 +1173,15 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-46", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-53", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-46", 2 ]
 				}
 
 			}

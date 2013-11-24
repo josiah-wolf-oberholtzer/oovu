@@ -443,7 +443,8 @@ abstract public class Server implements MessagePasser, Subscriber {
         }
         OscAddressNode osc_address_node = this.get_osc_address_node();
         if (osc_address_node != null) {
-            Set<Proxy> proxies = new HashSet<Proxy>(osc_address_node.get_proxies());
+            Set<Proxy> proxies =
+                new HashSet<Proxy>(osc_address_node.get_proxies());
             for (Proxy proxy : proxies) {
                 proxy.handle_response(response);
             }

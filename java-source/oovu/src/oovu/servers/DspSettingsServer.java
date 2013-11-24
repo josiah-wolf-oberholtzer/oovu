@@ -1,5 +1,8 @@
 package oovu.servers;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import oovu.addresses.Environment;
@@ -282,6 +285,8 @@ public class DspSettingsServer extends ModuleMemberServer {
             return;
         }
         Map<String, Atom[]> argument_map = Atoms.to_map(arguments);
+        List<Integer> valid_counts =
+            new ArrayList<Integer>(Arrays.asList(0, 1, 2, 4, 8));
         if (argument_map.containsKey("inputs")) {
             int input_count = argument_map.get("inputs")[0].getInt();
             if (input_count < 0) {
@@ -289,7 +294,9 @@ public class DspSettingsServer extends ModuleMemberServer {
             } else if (8 < input_count) {
                 input_count = 8;
             }
-            this.input_count = input_count;
+            if (valid_counts.contains(input_count)) {
+                this.input_count = input_count;
+            }
         }
         if (argument_map.containsKey("outputs")) {
             int output_count = argument_map.get("outputs")[0].getInt();
@@ -298,7 +305,9 @@ public class DspSettingsServer extends ModuleMemberServer {
             } else if (8 < output_count) {
                 output_count = 8;
             }
-            this.output_count = output_count;
+            if (valid_counts.contains(output_count)) {
+                this.output_count = output_count;
+            }
         }
         this.is_configured = true;
         Environment.event_service.publish(new DspSettingsChangedEvent(this));
@@ -394,9 +403,13 @@ public class DspSettingsServer extends ModuleMemberServer {
     }
 
     public void set_voice_count(int voice_count) {
+        List<Integer> valid_counts =
+            new ArrayList<Integer>(Arrays.asList(1, 2, 4, 8));
         if ((0 < voice_count) && (voice_count <= 8)) {
             if (!this.input_count_is_static()) {
-                this.voice_count = voice_count;
+                if (valid_counts.contains(voice_count)) {
+                    this.voice_count = voice_count;
+                }
             }
         }
     }
