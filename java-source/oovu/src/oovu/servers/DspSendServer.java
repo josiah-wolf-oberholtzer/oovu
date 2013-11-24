@@ -123,7 +123,9 @@ public class DspSendServer extends ModuleMemberServer {
 
         @Override
         public Atom[][] run(Atom[] arguments) {
-            if (0 < arguments.length) {
+            if (0 == arguments.length || arguments[0].getString().equals("---")) {
+                DspSendServer.this.set_destination_server(null);
+            } else {
                 String address_string = arguments[0].getString();
                 OscAddress destination_address =
                     OscAddress.from_cache(address_string);
@@ -131,8 +133,6 @@ public class DspSendServer extends ModuleMemberServer {
                     DspReceiveServer.dsp_receive_servers
                         .get(destination_address);
                 DspSendServer.this.set_destination_server(destination_server);
-            } else {
-                DspSendServer.this.set_destination_server(null);
             }
             return null;
         }

@@ -3,12 +3,10 @@ package oovu.servers;
 import java.util.Map;
 
 import oovu.addresses.Environment;
-import oovu.addresses.OscAddress;
 import oovu.events.types.DspSettingsChangedEvent;
 import oovu.messaging.Atoms;
 import oovu.messaging.GetterMessageHandler;
 import oovu.messaging.InfoGetterMessageHandler;
-import oovu.messaging.Request;
 import oovu.messaging.SetterMessageHandler;
 import oovu.states.State;
 
@@ -158,10 +156,7 @@ public class DspSettingsServer extends ModuleMemberServer {
 
         @Override
         public void call_after() {
-            Request request =
-                new Request(DspSettingsServer.this,
-                    OscAddress.from_cache("./:getactive"), new Atom[0], false);
-            DspSettingsServer.this.handle_request(request);
+            this.client.make_request(this.client, "getactive", null);
         }
 
         @Override
@@ -187,10 +182,7 @@ public class DspSettingsServer extends ModuleMemberServer {
 
         @Override
         public void call_after() {
-            Request request =
-                new Request(DspSettingsServer.this,
-                    OscAddress.from_cache("./:getlimiting"), new Atom[0], false);
-            DspSettingsServer.this.handle_request(request);
+            this.client.make_request(this.client, "getlimiting", null);
         }
 
         @Override
@@ -216,11 +208,7 @@ public class DspSettingsServer extends ModuleMemberServer {
 
         @Override
         public void call_after() {
-            Request request =
-                new Request(DspSettingsServer.this,
-                    OscAddress.from_cache("./:getsendcount"), new Atom[0],
-                    false);
-            DspSettingsServer.this.handle_request(request);
+            this.client.make_request(this.client, "getsendcount", null);
         }
 
         @Override
@@ -246,21 +234,11 @@ public class DspSettingsServer extends ModuleMemberServer {
 
         @Override
         public void call_after() {
-            Request voice_request =
-                new Request(DspSettingsServer.this,
-                    OscAddress.from_cache("./:getvoicecount"), new Atom[0],
-                    false);
-            Request input_request =
-                new Request(DspSettingsServer.this,
-                    OscAddress.from_cache("./:getinputcount"), new Atom[0],
-                    false);
-            Request output_request =
-                new Request(DspSettingsServer.this,
-                    OscAddress.from_cache("./:getoutputcount"), new Atom[0],
-                    false);
-            DspSettingsServer.this.handle_request(voice_request);
-            DspSettingsServer.this.handle_request(input_request);
-            DspSettingsServer.this.handle_request(output_request);
+            this.client.make_request(this.client, "getvoicecount", null);
+            this.client.make_request(this.client, "getinputcount", null);
+            this.client.make_request(this.client, "getoutputcount", null);
+            Environment.event_service.publish(new DspSettingsChangedEvent(
+                DspSettingsServer.this));
         }
 
         @Override
@@ -274,8 +252,6 @@ public class DspSettingsServer extends ModuleMemberServer {
                 int argument = arguments[0].toInt();
                 DspSettingsServer.this.set_voice_count(argument);
             }
-            Environment.event_service.publish(new DspSettingsChangedEvent(
-                DspSettingsServer.this));
             return null;
         }
     }
