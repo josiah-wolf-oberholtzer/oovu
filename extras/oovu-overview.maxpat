@@ -4,11 +4,11 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 193.0, 145.0, 115.0, 226.0 ],
+		"rect" : [ 193.0, 145.0, 127.0, 189.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -62,7 +62,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 0.0, 0.0, 105.0, 35.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 0.0, 115.0, 35.0 ],
+					"presentation_rect" : [ 0.0, 0.0, 120.0, 35.0 ],
 					"prototypename" : "M4L.display",
 					"rounded" : 0.0,
 					"text" : "oovu",
@@ -114,10 +114,10 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 0.0, 35.0, 105.0, 75.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 35.0, 115.0, 75.0 ],
+					"presentation_rect" : [ 0.0, 35.0, 125.0, 140.0 ],
 					"spacing_x" : 16.0,
 					"spacing_y" : 16.0,
-					"tabs" : [ "omod.allpass~", "omod.input~", "omod.output~" ]
+					"tabs" : [ "omod.allpass~", "omod.bufferplay~", "omod.input~", "omod.output~", "omod.reverb~" ]
 				}
 
 			}
