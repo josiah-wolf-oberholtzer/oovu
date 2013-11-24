@@ -64,8 +64,12 @@ public class Pattern extends ClockWatcher {
                 if (attribute.datatype instanceof BoundedDatatype) {
                     BoundedDatatype bounded_datatype =
                         (BoundedDatatype) attribute.datatype;
-                    double low = bounded_datatype.get_minimum();
-                    double high = bounded_datatype.get_maximum();
+                    Double low = bounded_datatype.get_minimum();
+                    Double high = bounded_datatype.get_maximum();
+                    if ((low == null) || (high == null)) {
+                        low = 0.;
+                        high = 1.;
+                    }
                     values = new ValueRange[] {
                         new ValueRange(low, high)
                     };
@@ -79,6 +83,8 @@ public class Pattern extends ClockWatcher {
                     new ValueRange(0)
                 };
             }
+        } else {
+            values = new ValueRange[0];
         }
         return new Pattern(client, message, timings, values, arity);
     }
@@ -109,7 +115,7 @@ public class Pattern extends ClockWatcher {
             }
             double previous_event_time = this.next_event_time;
             double timing = this.timings[this.current_timing_step].execute();
-            Atom[] payload = null;
+            Atom[] payload = new Atom[0];
             if (0 < this.arity) {
                 double[] values = new double[this.arity + 1];
                 ValueRange value = this.values[this.current_value_step];
@@ -122,8 +128,10 @@ public class Pattern extends ClockWatcher {
             this.next_event_time = previous_event_time + timing;
             this.current_timing_step =
                 (this.current_timing_step + 1) % this.timings.length;
-            this.current_value_step =
-                (this.current_value_step + 1) % this.values.length;
+            if (0 < this.values.length) {
+                this.current_value_step =
+                    (this.current_value_step + 1) % this.values.length;
+            }
             OscAddress osc_address = OscAddress.from_cache(":" + this.message);
             Request request =
                 new Request(this.client, osc_address, payload, false);
