@@ -10,8 +10,11 @@ public class ReturnServer extends AttributeServer {
         Integer module_id,
         String desired_name,
         Atom[] argument_list) {
-        return (ReturnServer) ModuleMemberServer.allocate_from_label(
-            "ReturnServer", module_id, desired_name, argument_list);
+        ReturnServer return_server =
+            (ReturnServer) ModuleMemberServer.allocate_from_label(
+                "ReturnServer", module_id, desired_name);
+        return_server.configure(argument_list);
+        return return_server;
     }
 
     public ReturnServer(ModuleServer module_node) {

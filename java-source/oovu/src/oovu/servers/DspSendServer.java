@@ -125,7 +125,7 @@ public class DspSendServer extends ModuleMemberServer {
         String desired_name,
         Atom[] argument_list) {
         return (DspSendServer) ModuleMemberServer.allocate_from_label(
-            "DspSendServer", module_id, desired_name, argument_list);
+            "DspSendServer", module_id, desired_name);
     }
 
     private DspReceiveServer destination_server;

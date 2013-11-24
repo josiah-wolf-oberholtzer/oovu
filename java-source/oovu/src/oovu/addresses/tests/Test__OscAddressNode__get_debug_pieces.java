@@ -43,8 +43,7 @@ public class Test__OscAddressNode__get_debug_pieces {
             new ModuleServer(1001, new HashMap<String, Atom[]>());
         n1001_module_server.attach_to_osc_address_node(n1001);
         PropertyServer n1001_bar_property_server =
-            new PropertyServer(n1001_module_server,
-                new HashMap<String, Atom[]>());
+            new PropertyServer(n1001_module_server);
         n1001_bar_property_server.attach_to_osc_address_node(n1001_bar);
         String[] debug_pieces = root.get_debug_pieces();
         Assert.assertArrayEquals(new String[] {

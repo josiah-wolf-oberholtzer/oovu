@@ -192,9 +192,9 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         }
     }
 
-    protected Integer priority;
-    public Datatype datatype;
-    protected Pattern pattern;
+    protected Integer priority = 0;
+    public Datatype datatype = null;
+    protected Pattern pattern = null;
 
     public AttributeServer(ModuleServer module_server) {
         super(module_server);
@@ -220,17 +220,10 @@ abstract public class AttributeServer extends ModuleMemberServer implements
     }
 
     public void configure(Atom[] arguments) {
+        if (this.is_configured) {
+            return;
+        }
         Map<String, Atom[]> argument_map = Atoms.to_map(arguments);
-        if (argument_map.containsKey("priority")) {
-            this.set_priority(argument_map.get("priority")[0].getInt());
-        } else {
-            this.set_priority(0);
-        }
-        if (argument_map.containsKey("default")) {
-            this.set_value(argument_map.get("default"));
-        } else {
-            this.set_value(this.datatype.get_default());
-        }
         Atom[] datatype_arguments = argument_map.get("datatype");
         String datatype_label = null;
         if ((datatype_arguments != null) && (0 < datatype_arguments.length)) {
@@ -260,6 +253,17 @@ abstract public class AttributeServer extends ModuleMemberServer implements
             datatype = new GenericDatatype(this, argument_map);
         }
         this.datatype = datatype;
+        if (argument_map.containsKey("priority")) {
+            this.set_priority(argument_map.get("priority")[0].getInt());
+        } else {
+            this.set_priority(0);
+        }
+        if (argument_map.containsKey("default")) {
+            this.set_value(argument_map.get("default"));
+        } else {
+            this.set_value(this.datatype.get_default());
+        }
+        this.is_configured = true;
     }
 
     @Override

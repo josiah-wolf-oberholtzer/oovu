@@ -43,7 +43,7 @@ public class DspReceiveServer extends ModuleMemberServer {
         Atom[] argument_list) {
         DspReceiveServer server =
             (DspReceiveServer) ModuleMemberServer.allocate_from_label(
-                "DspReceiveServer", module_id, desired_name, argument_list);
+                "DspReceiveServer", module_id, desired_name);
         OscAddress osc_address = server.get_osc_address();
         if ((osc_address != null)
             && (!DspReceiveServer.dsp_receive_servers.containsKey(osc_address))) {

@@ -8,12 +8,18 @@ import java.util.Map;
 import oovu.Proxy;
 import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
-import oovu.messaging.Atoms;
 import oovu.messaging.InfoGetterMessageHandler;
 
 import com.cycling74.max.Atom;
 
 public abstract class ModuleMemberServer extends Server {
+
+    protected enum AllocationState {
+        NO_ADDRESS,
+        ADDRESS_WITHOUT_SERVER,
+        ADDRESS_WITH_NONMATCHING_SERVER,
+        ADDRESS_WITH_MATCHING_SERVER
+    }
 
     private class GetModuleNameMessageHandler extends InfoGetterMessageHandler {
 
@@ -57,8 +63,7 @@ public abstract class ModuleMemberServer extends Server {
     public static ModuleMemberServer allocate_from_label(
         String label,
         Integer module_id,
-        String desired_name,
-        Atom[] argument_list) {
+        String desired_name) {
         Class<?> member_node_class =
             ModuleMemberServer.member_nodes_by_label.get(label);
         if (member_node_class == null) {
@@ -78,7 +83,7 @@ public abstract class ModuleMemberServer extends Server {
             // address doesn't exist
             member_server =
                 ModuleMemberServer.allocate_new_from_label(module_server,
-                    label, module_id, argument_list);
+                    label, module_id);
             osc_address_node =
                 module_server.get_osc_address_node().create_address(
                     osc_address, true);
@@ -88,7 +93,7 @@ public abstract class ModuleMemberServer extends Server {
             // address does exist but no server is attached
             member_server =
                 ModuleMemberServer.allocate_new_from_label(module_server,
-                    label, module_id, argument_list);
+                    label, module_id);
             member_server.attach_to_osc_address_node(osc_address_node);
             server_is_new = true;
         } else {
@@ -102,7 +107,7 @@ public abstract class ModuleMemberServer extends Server {
                 // server is not of the desired type, so acquire a new address
                 member_server =
                     ModuleMemberServer.allocate_new_from_label(module_server,
-                        label, module_id, argument_list);
+                        label, module_id);
                 osc_address_node =
                     module_server.get_osc_address_node().create_address(
                         osc_address, true);
@@ -121,17 +126,14 @@ public abstract class ModuleMemberServer extends Server {
     private static ModuleMemberServer allocate_new_from_label(
         ModuleServer module_server,
         String label,
-        Integer module_id,
-        Atom[] argument_list) {
+        Integer module_id) {
         Class<?> member_node_class =
             ModuleMemberServer.member_nodes_by_label.get(label);
-        Map<String, Atom[]> argument_map = Atoms.to_map(argument_list);
         ModuleMemberServer new_member_node = null;
         try {
             new_member_node =
                 (ModuleMemberServer) member_node_class.getDeclaredConstructor(
-                    ModuleServer.class, Map.class).newInstance(module_server,
-                    argument_map);
+                    ModuleServer.class).newInstance(module_server);
         } catch (IllegalArgumentException e) {
             // e.printStackTrace();
         } catch (InstantiationException e) {
@@ -149,11 +151,38 @@ public abstract class ModuleMemberServer extends Server {
         return new_member_node;
     }
 
+    protected static AllocationState find_allocation_state(
+        Integer module_id,
+        String desired_name,
+        Class<? extends ModuleMemberServer> server_class) {
+        ModuleServer module_server = ModuleServer.allocate(module_id);
+        OscAddress osc_address = OscAddress.from_cache(desired_name);
+        if (osc_address.has_parent_path_tokens
+            || osc_address.has_wildcard_tokens || !osc_address.is_relative) {
+            throw new RuntimeException("Bad child address: " + desired_name);
+        }
+        OscAddressNode osc_address_node =
+            module_server.get_osc_address_node().search_for_one(osc_address);
+        if (osc_address_node == null) {
+            return AllocationState.NO_ADDRESS;
+        } else if (osc_address_node.get_server() == null) {
+            return AllocationState.ADDRESS_WITHOUT_SERVER;
+        } else {
+            Server current_member_server = osc_address_node.get_server();
+            if (current_member_server.getClass() == server_class) {
+                return AllocationState.ADDRESS_WITH_MATCHING_SERVER;
+            } else {
+                return AllocationState.ADDRESS_WITH_NONMATCHING_SERVER;
+            }
+        }
+    }
+
     protected boolean is_configured;
 
     public ModuleMemberServer(ModuleServer module_server) {
         super();
         this.attach_to_parent_server(module_server);
         this.add_message_handler(new GetModuleNameMessageHandler(this));
+        this.is_configured = false;
     }
 }

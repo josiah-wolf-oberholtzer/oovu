@@ -2,7 +2,9 @@ package oovu.servers;
 
 import java.util.Map;
 
+import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
+import oovu.events.types.DspSettingsChangedEvent;
 import oovu.messaging.Atoms;
 import oovu.messaging.GetterMessageHandler;
 import oovu.messaging.InfoGetterMessageHandler;
@@ -276,18 +278,6 @@ public class DspSettingsServer extends ModuleMemberServer {
         }
     }
 
-    public static DspSettingsServer allocate(
-        Integer module_id,
-        String desired_name,
-        Atom[] argument_list) {
-        DspSettingsServer server =
-            (DspSettingsServer) ModuleMemberServer.allocate_from_label(
-                "DspSettingsServer", module_id, desired_name, argument_list);
-        ModuleServer module = (ModuleServer) server.get_parent_server();
-        module.set_dsp_settings_server(server);
-        return server;
-    }
-
     private boolean is_active = false;
     private Integer input_count = null;
     private Integer output_count = null;
@@ -310,6 +300,9 @@ public class DspSettingsServer extends ModuleMemberServer {
     }
 
     public void configure(Atom[] arguments) {
+        if (this.is_configured) {
+            return;
+        }
         Map<String, Atom[]> argument_map = Atoms.to_map(arguments);
         if (argument_map.containsKey("inputs")) {
             int input_count = argument_map.get("inputs")[0].getInt();
@@ -329,6 +322,8 @@ public class DspSettingsServer extends ModuleMemberServer {
             }
             this.output_count = output_count;
         }
+        this.is_configured = true;
+        Environment.event_service.publish(new DspSettingsChangedEvent(this));
     }
 
     public int get_input_count() {

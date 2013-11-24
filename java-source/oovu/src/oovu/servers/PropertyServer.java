@@ -10,8 +10,11 @@ public class PropertyServer extends AttributeServer {
         Integer module_id,
         String desired_name,
         Atom[] argument_list) {
-        return (PropertyServer) ModuleMemberServer.allocate_from_label(
-            "PropertyServer", module_id, desired_name, argument_list);
+        PropertyServer property_server =
+            (PropertyServer) ModuleMemberServer.allocate_from_label(
+                "PropertyServer", module_id, desired_name);
+        property_server.configure(argument_list);
+        return property_server;
     }
 
     public PropertyServer(ModuleServer module_server) {

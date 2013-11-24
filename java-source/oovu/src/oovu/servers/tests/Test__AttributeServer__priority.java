@@ -26,23 +26,25 @@ public class Test__AttributeServer__priority {
     @Test
     public void test_01() {
         PropertyServer property_server =
-            new PropertyServer(ModuleServer.allocate(1001), Atom.parse("foo"));
+            new PropertyServer(ModuleServer.allocate(1001));
         Assert.assertTrue(property_server.get_priority() == 0);
     }
 
     @Test
     public void test_02() {
+        Atom[] arguments = Atom.parse(":priority 100");
         PropertyServer property_server =
-            new PropertyServer(ModuleServer.allocate(1001),
-                Atom.parse("foo :priority 100"));
+            new PropertyServer(ModuleServer.allocate(1001));
+        property_server.configure(arguments);
         Assert.assertTrue(property_server.get_priority() == 100);
     }
 
     @Test
     public void test_03() {
+        Atom[] arguments = Atom.parse(":priority -6");
         PropertyServer property_server =
-            new PropertyServer(ModuleServer.allocate(1001),
-                Atom.parse("foo :priority -6"));
+            new PropertyServer(ModuleServer.allocate(1001));
+        property_server.configure(arguments);
         Assert.assertTrue(property_server.get_priority() == -6);
     }
 }

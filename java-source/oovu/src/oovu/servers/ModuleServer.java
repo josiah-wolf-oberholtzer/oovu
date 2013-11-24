@@ -218,6 +218,9 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
     }
 
     public DspSettingsServer get_dsp_settings_server() {
+        if (this.dsp_settings_server == null) {
+            this.dsp_settings_server = new DspSettingsServer(this);
+        }
         return this.dsp_settings_server;
     }
 
@@ -246,13 +249,5 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
         }
         return new StateComponentAggregate(osc_address_string,
             attribute_states.toArray(new State[0]));
-    }
-
-    public void set_dsp_settings_server(DspSettingsServer dsp_settings_server) {
-        if (this.dsp_settings_server == null) {
-            this.dsp_settings_server = dsp_settings_server;
-        } else if (this.dsp_settings_server != dsp_settings_server) {
-            throw new RuntimeException();
-        }
     }
 }
