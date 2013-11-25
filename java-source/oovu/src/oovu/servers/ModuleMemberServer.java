@@ -11,7 +11,6 @@ import oovu.addresses.OscAddressNode;
 import oovu.messaging.Atoms;
 import oovu.messaging.BuiltMessageHandler;
 import oovu.messaging.Getter;
-import oovu.messaging.InfoGetterMessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 
 import com.cycling74.max.Atom;
@@ -22,32 +21,6 @@ public abstract class ModuleMemberServer extends Server {
         ADDRESS_WITHOUT_SERVER,
         ADDRESS_WITH_NONMATCHING_SERVER,
         ADDRESS_WITH_MATCHING_SERVER
-    }
-
-    private class GetModuleNameMessageHandler extends InfoGetterMessageHandler {
-        public GetModuleNameMessageHandler(Server client) {
-            super(client, "getmodulename");
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            Atom[][] result = new Atom[1][];
-            if (ModuleMemberServer.this.parent_server == null) {
-                return null;
-            }
-            if (ModuleMemberServer.this.parent_server.get_name() != null) {
-                result[0] =
-                    Atom.newAtom(new String[] {
-                        "modulename",
-                        ModuleMemberServer.this.parent_server.get_name()
-                    });
-            } else {
-                result[0] = Atom.newAtom(new String[] {
-                    "modulename"
-                });
-            }
-            return result;
-        }
     }
 
     public static final Map<String, Class<?>> member_nodes_by_label;

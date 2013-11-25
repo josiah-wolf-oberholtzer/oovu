@@ -10,105 +10,15 @@ import oovu.addresses.Environment;
 import oovu.addresses.OscAddressNode;
 import oovu.events.types.ModuleNameAcquiredEvent;
 import oovu.messaging.Atoms;
-import oovu.messaging.InfoGetterMessageHandler;
+import oovu.messaging.BuiltMessageHandler;
+import oovu.messaging.Getter;
+import oovu.messaging.MessageHandlerBuilder;
 import oovu.states.State;
 import oovu.states.StateComponentAggregate;
 
 import com.cycling74.max.Atom;
 
 public class ModuleServer extends Server implements Comparable<ModuleServer> {
-    private class GetMembersMessageHandler extends InfoGetterMessageHandler {
-        public GetMembersMessageHandler(Server client) {
-            super(client, "getmembers");
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            Atom[][] result = new Atom[1][];
-            List<Server> servers =
-                new ArrayList<Server>(ModuleServer.this.child_servers);
-            String[] names =
-                ModuleServer.this.get_relative_server_names(servers);
-            result[0] = Atom.newAtom("members", Atom.newAtom(names));
-            return result;
-        }
-    }
-
-    private class GetMethodsMessageHandler extends InfoGetterMessageHandler {
-        public GetMethodsMessageHandler(Server client) {
-            super(client, "getmethods");
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            Atom[][] result = new Atom[1][];
-            List<? extends Server> servers =
-                ModuleServer.this.get_child_method_servers();
-            String[] names =
-                ModuleServer.this.get_relative_server_names(servers);
-            result[0] = Atom.newAtom("methods", Atom.newAtom(names));
-            return result;
-        }
-    }
-
-    private class GetNameMessageHandler extends InfoGetterMessageHandler {
-        public GetNameMessageHandler(Server client) {
-            super(client, "getname");
-        }
-
-        @Override
-        public String get_name() {
-            return "getname";
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            String name = ModuleServer.this.get_name();
-            if (name != null) {
-                Atom[][] result = new Atom[1][];
-                result[0] = Atom.newAtom(new String[] {
-                    "name", name
-                });
-                return result;
-            }
-            return null;
-        }
-    }
-
-    private class GetPropertiesMessageHandler extends InfoGetterMessageHandler {
-        public GetPropertiesMessageHandler(Server client) {
-            super(client, "getproperties");
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            Atom[][] result = new Atom[1][];
-            List<? extends Server> servers =
-                ModuleServer.this.get_child_property_servers();
-            String[] names =
-                ModuleServer.this.get_relative_server_names(servers);
-            result[0] = Atom.newAtom("properties", Atom.newAtom(names));
-            return result;
-        }
-    }
-
-    private class GetReturnsMessageHandler extends InfoGetterMessageHandler {
-        public GetReturnsMessageHandler(Server client) {
-            super(client, "getreturns");
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            Atom[][] result = new Atom[1][];
-            List<? extends Server> servers =
-                ModuleServer.this.get_child_return_servers();
-            String[] names =
-                ModuleServer.this.get_relative_server_names(servers);
-            result[0] = Atom.newAtom("returns", Atom.newAtom(names));
-            return result;
-        }
-    }
-
     public static ModuleServer allocate(Integer module_id) {
         boolean server_is_new = false;
         ModuleServer module_server = null;
@@ -156,11 +66,90 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
         this.module_id = module_id;
         this.dsp_settings_server = null;
         this.attach_to_parent_server(Environment.root_server);
-        this.add_message_handler(new GetMembersMessageHandler(this));
-        this.add_message_handler(new GetMethodsMessageHandler(this));
-        this.add_message_handler(new GetNameMessageHandler(this));
-        this.add_message_handler(new GetPropertiesMessageHandler(this));
-        this.add_message_handler(new GetReturnsMessageHandler(this));
+        // this.add_message_handler(new GetMembersMessageHandler(this));
+        // this.add_message_handler(new GetMethodsMessageHandler(this));
+        // this.add_message_handler(new GetNameMessageHandler(this));
+        // this.add_message_handler(new GetPropertiesMessageHandler(this));
+        // this.add_message_handler(new GetReturnsMessageHandler(this));
+        this.add_built_message_handler(new MessageHandlerBuilder("members")
+            .with_getter(new Getter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    ModuleServer module_server =
+                        (ModuleServer) built_message_handler.client;
+                    List<Server> servers =
+                        new ArrayList<Server>(module_server.child_servers);
+                    String[] names =
+                        module_server.get_relative_server_names(servers);
+                    return Atoms.to_atoms(built_message_handler.name, names);
+                }
+            }).build(this));
+        this.add_built_message_handler(new MessageHandlerBuilder("methods")
+            .with_getter(new Getter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    ModuleServer module_server =
+                        (ModuleServer) built_message_handler.client;
+                    List<? extends Server> servers =
+                        module_server.get_child_method_servers();
+                    String[] names =
+                        module_server.get_relative_server_names(servers);
+                    return Atoms.to_atoms(built_message_handler.name, names);
+                }
+            }).build(this));
+        this.add_built_message_handler(new MessageHandlerBuilder("name")
+            .with_getter(new Getter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    ModuleServer module_server =
+                        (ModuleServer) built_message_handler.client;
+                    String name = module_server.get_name();
+                    if (name != null) {
+                        Atom[][] result = new Atom[1][];
+                        result[0] = Atom.newAtom(new String[] {
+                            built_message_handler.name, name
+                        });
+                        return result;
+                    }
+                    return null;
+                }
+            }).build(this));
+        this.add_built_message_handler(new MessageHandlerBuilder("properties")
+            .with_getter(new Getter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    ModuleServer module_server =
+                        (ModuleServer) built_message_handler.client;
+                    List<? extends Server> servers =
+                        module_server.get_child_property_servers();
+                    String[] names =
+                        module_server.get_relative_server_names(servers);
+                    return Atoms.to_atoms(built_message_handler.name, names);
+                }
+            }).build(this));
+        this.add_built_message_handler(new MessageHandlerBuilder("returns")
+            .with_getter(new Getter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    ModuleServer module_server =
+                        (ModuleServer) built_message_handler.client;
+                    List<? extends Server> servers =
+                        module_server.get_child_return_servers();
+                    String[] names =
+                        module_server.get_relative_server_names(servers);
+                    return Atoms.to_atoms(built_message_handler.name, names);
+                }
+            }).build(this));
     }
 
     public void acquire_name(String desired_name) {

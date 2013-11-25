@@ -8,7 +8,6 @@ import oovu.events.Event;
 import oovu.events.Subscription;
 import oovu.events.types.DspReceiversChangedEvent;
 import oovu.messaging.Atoms;
-import oovu.messaging.InfoGetterMessageHandler;
 import oovu.servers.AttributeServer;
 import oovu.servers.DspReceiveServer;
 import oovu.servers.Server;

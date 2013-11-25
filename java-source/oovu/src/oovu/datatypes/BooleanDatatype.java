@@ -2,7 +2,6 @@ package oovu.datatypes;
 
 import java.util.Map;
 
-import oovu.messaging.ActionMessageHandler;
 import oovu.messaging.Atoms;
 import oovu.servers.AttributeServer;
 import oovu.servers.Server;

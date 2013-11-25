@@ -11,14 +11,12 @@ import oovu.messaging.Atoms;
 import oovu.messaging.BooleanMessageHandlerCallback;
 import oovu.messaging.BuiltMessageHandler;
 import oovu.messaging.Getter;
-import oovu.messaging.GetterMessageHandler;
 import oovu.messaging.IntegerMessageHandlerCallback;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.Request;
 import oovu.messaging.Response;
 import oovu.messaging.Setter;
-import oovu.messaging.SetterMessageHandler;
 import oovu.states.State;
 import oovu.states.StateComponent;
 import oovu.states.StateComponentAggregate;
@@ -28,169 +26,6 @@ import com.cycling74.max.Atom;
 
 abstract public class AttributeServer extends ModuleMemberServer implements
     Comparable<AttributeServer> {
-    private class GetPatternMessageHandler extends GetterMessageHandler {
-        public GetPatternMessageHandler(Server client) {
-            super(client, "getpattern");
-        }
-
-        @Override
-        public boolean is_meta_relevant() {
-            return false;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return true;
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            Atom[][] result = new Atom[1][0];
-            Pattern pattern = AttributeServer.this.get_pattern();
-            if (pattern != null) {
-                result[0] = pattern.to_atoms();
-            }
-            result[0] = Atom.newAtom("pattern", result[0]);
-            return result;
-        }
-    }
-
-    private class GetPriorityMessageHandler extends GetterMessageHandler {
-        public GetPriorityMessageHandler(Server client) {
-            super(client, "getpriority");
-        }
-
-        @Override
-        public boolean is_meta_relevant() {
-            return false;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return false;
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            Atom[][] result = new Atom[1][];
-            Integer priority = AttributeServer.this.get_priority();
-            result[0] = Atom.newAtom(new int[] {
-                priority
-            });
-            result[0] = Atom.newAtom("priority", result[0]);
-            return result;
-        }
-    }
-
-    private class GetValueMessageHandler extends GetterMessageHandler {
-        public GetValueMessageHandler(Server client) {
-            super(client, "getvalue");
-        }
-
-        @Override
-        public boolean is_meta_relevant() {
-            if (AttributeServer.this instanceof PropertyServer) {
-                return true;
-            }
-            return false;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return false;
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            Atom[][] result = new Atom[1][];
-            result[0] = AttributeServer.this.get_value();
-            result[0] = Atom.newAtom("value", result[0]);
-            return result;
-        }
-    }
-
-    private class SetPatternMessageHandler extends SetterMessageHandler {
-        public SetPatternMessageHandler(Server client) {
-            super(client, "pattern");
-        }
-
-        @Override
-        public Integer get_arity() {
-            return null;
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            Pattern pattern = null;
-            if (0 < arguments.length) {
-                pattern = Pattern.from_atoms(AttributeServer.this, arguments);
-            }
-            AttributeServer.this.set_pattern(pattern);
-            return null;
-        }
-    }
-
-    private class SetPriorityMessageHandler extends SetterMessageHandler {
-        public SetPriorityMessageHandler(Server client) {
-            super(client, "priority");
-        }
-
-        @Override
-        public Integer get_arity() {
-            return 1;
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            Integer priority = null;
-            if (0 < arguments.length) {
-                priority = arguments[0].toInt();
-            }
-            AttributeServer.this.set_priority(priority);
-            return null;
-        }
-    }
-
-    protected class SetValueMessageHandler extends MessageHandler {
-        public SetValueMessageHandler(Server client) {
-            super(client, "value");
-        }
-
-        @Override
-        public Integer get_arity() {
-            return AttributeServer.this.datatype.get_arity();
-        }
-
-        @Override
-        public boolean is_binding_relevant() {
-            return AttributeServer.this.datatype.is_binding_relevant();
-        }
-
-        @Override
-        public boolean is_meta_relevant() {
-            return false;
-        }
-
-        @Override
-        public boolean is_rampable() {
-            return AttributeServer.this.datatype.is_rampable();
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return false;
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            Atom[][] result = new Atom[1][];
-            AttributeServer.this.set_value(arguments);
-            result[0] = AttributeServer.this.get_value();
-            result[0] = Atom.newAtom("value", result[0]);
-            return result;
-        }
-    }
-
     protected Integer priority = 0;
     public Datatype datatype = null;
     protected Pattern pattern = null;
