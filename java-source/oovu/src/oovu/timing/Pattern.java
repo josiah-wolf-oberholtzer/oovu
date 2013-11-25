@@ -7,6 +7,7 @@ import oovu.addresses.OscAddress;
 import oovu.datatypes.BooleanDatatype;
 import oovu.datatypes.BoundedDatatype;
 import oovu.messaging.Atoms;
+import oovu.messaging.BuiltMessageHandler;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.Request;
 import oovu.servers.AttributeServer;
@@ -31,13 +32,13 @@ public class Pattern extends ClockWatcher {
         } else {
             message = "value";
         }
-        MessageHandler message_handler = client.get_message_handler(message);
+        BuiltMessageHandler message_handler = client.get_message_handler(message);
         if (message_handler == null) {
             return null;
-        } else if (!message_handler.is_binding_relevant()) {
+        } else if (!message_handler.is_binding_relevant) {
             return null;
         }
-        arity = message_handler.get_arity();
+        arity = message_handler.arity;
         if (arguments.containsKey("timings")) {
             Atom[] atoms = arguments.get("timings");
             timings = new ValueRange[atoms.length];

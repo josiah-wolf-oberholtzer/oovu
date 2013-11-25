@@ -277,13 +277,13 @@ abstract public class Server implements MessagePasser, Subscriber {
     public final Set<ServerClient> server_clients = new HashSet<ServerClient>();
 
     public Server() {
-        this.add_message_handler(new DumpMetaMessageHandler(this));
-        this.add_message_handler(new GetMetaMessageHandler(this));
-        this.add_message_handler(new GetInterfaceMessageHandler(this));
-        this.add_message_handler(new GetOscAddressMessageHandler(this));
-        this.add_message_handler(new GetUniqueIdMessageHandler(this));
-        this.add_message_handler(new ReportMessageHandler(this));
-        this.add_message_handler(new ShowMessageHandler(this));
+//        this.add_message_handler(new DumpMetaMessageHandler(this));
+//        this.add_message_handler(new GetMetaMessageHandler(this));
+//        this.add_message_handler(new GetInterfaceMessageHandler(this));
+//        this.add_message_handler(new GetOscAddressMessageHandler(this));
+//        this.add_message_handler(new GetUniqueIdMessageHandler(this));
+//        this.add_message_handler(new ReportMessageHandler(this));
+//        this.add_message_handler(new ShowMessageHandler(this));
         this.add_built_message_handler(new MessageHandlerBuilder("dumpmeta")
             .with_setter(new Setter() {
                 @Override
@@ -493,8 +493,8 @@ abstract public class Server implements MessagePasser, Subscriber {
         this.parent_server = null;
     }
 
-    public MessageHandler get_message_handler(String message_name) {
-        return this.message_handlers.get(message_name);
+    public BuiltMessageHandler get_message_handler(String message_name) {
+        return this.built_message_handlers.get(message_name);
     }
 
     public String get_name() {
@@ -554,12 +554,13 @@ abstract public class Server implements MessagePasser, Subscriber {
         if (message_handler_name == null) {
             message_handler_name = "value";
         }
-        MessageHandler message_handler =
-            this.message_handlers.get(message_handler_name);
+        BuiltMessageHandler message_handler =
+            this.built_message_handlers.get(message_handler_name);
         if (message_handler == null) {
             return;
         }
-        Atom[][] payload = message_handler.run(request.payload);
+        Atom[][] payload = message_handler.handle_message(
+            message_handler_name, request.payload, false);
         if (payload != null) {
             Response response = new Response(this, payload, request);
             if (payload[0][0].equals(Atom.newAtom("value"))) {
@@ -568,7 +569,7 @@ abstract public class Server implements MessagePasser, Subscriber {
             request.source.handle_response(response);
         }
         if (request.call_after) {
-            message_handler.call_after();
+            message_handler.callback.execute(message_handler, null);
         }
     }
 

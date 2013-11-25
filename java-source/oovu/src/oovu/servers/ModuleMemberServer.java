@@ -8,7 +8,11 @@ import java.util.Map;
 import oovu.Proxy;
 import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
+import oovu.messaging.Atoms;
+import oovu.messaging.BuiltMessageHandler;
+import oovu.messaging.Getter;
 import oovu.messaging.InfoGetterMessageHandler;
+import oovu.messaging.MessageHandlerBuilder;
 
 import com.cycling74.max.Atom;
 
@@ -180,7 +184,22 @@ public abstract class ModuleMemberServer extends Server {
     public ModuleMemberServer(ModuleServer module_server) {
         super();
         this.attach_to_parent_server(module_server);
-        this.add_message_handler(new GetModuleNameMessageHandler(this));
+//        this.add_message_handler(new GetModuleNameMessageHandler(this));
+        this.add_built_message_handler(new MessageHandlerBuilder("modulename")
+            .with_getter(new Getter(){
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    ModuleMemberServer module_member_server = (ModuleMemberServer) built_message_handler.client;
+                    if (module_member_server.parent_server == null) {
+                        return null;
+                    }
+                    return Atoms.to_atoms(built_message_handler.name, 
+                        module_member_server.parent_server.get_name());
+                    }
+                })
+            .build(this));
         this.is_configured = false;
     }
 }
