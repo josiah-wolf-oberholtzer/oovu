@@ -12,7 +12,6 @@ import org.junit.Test;
 import com.cycling74.max.Atom;
 
 public class Test__AudioReceiveServer {
-
     @Before
     public void setUp() throws Exception {
         Environment.reset();

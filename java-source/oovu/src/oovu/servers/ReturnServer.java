@@ -5,7 +5,6 @@ import oovu.messaging.Response;
 import com.cycling74.max.Atom;
 
 public class ReturnServer extends AttributeServer {
-
     public static ReturnServer allocate(
         Integer module_id,
         String desired_name,

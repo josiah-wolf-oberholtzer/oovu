@@ -6,7 +6,6 @@ import java.util.Arrays;
 import com.cycling74.max.Atom;
 
 public class StateComponentAggregate extends State {
-
     public final String name;
     public final State[] state_components;
 

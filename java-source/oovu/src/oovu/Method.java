@@ -6,7 +6,6 @@ import oovu.servers.MethodServer;
 import com.cycling74.max.Atom;
 
 public class Method extends ModuleMemberServerClient {
-
     public Method(Atom[] arguments) {
         super(arguments);
     }

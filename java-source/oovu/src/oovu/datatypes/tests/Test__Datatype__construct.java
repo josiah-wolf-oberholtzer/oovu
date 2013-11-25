@@ -25,7 +25,6 @@ import org.junit.Test;
 import com.cycling74.max.Atom;
 
 public class Test__Datatype__construct {
-
     @Before
     public void setUp() throws Exception {
         Environment.reset();

@@ -17,9 +17,7 @@ import oovu.states.StateComponentAggregate;
 import com.cycling74.max.Atom;
 
 public class ModuleServer extends Server implements Comparable<ModuleServer> {
-
     private class GetMembersMessageHandler extends InfoGetterMessageHandler {
-
         public GetMembersMessageHandler(Server client) {
             super(client, "getmembers");
         }
@@ -37,7 +35,6 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
     }
 
     private class GetMethodsMessageHandler extends InfoGetterMessageHandler {
-
         public GetMethodsMessageHandler(Server client) {
             super(client, "getmethods");
         }
@@ -55,7 +52,6 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
     }
 
     private class GetNameMessageHandler extends InfoGetterMessageHandler {
-
         public GetNameMessageHandler(Server client) {
             super(client, "getname");
         }
@@ -80,7 +76,6 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
     }
 
     private class GetPropertiesMessageHandler extends InfoGetterMessageHandler {
-
         public GetPropertiesMessageHandler(Server client) {
             super(client, "getproperties");
         }
@@ -98,7 +93,6 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
     }
 
     private class GetReturnsMessageHandler extends InfoGetterMessageHandler {
-
         public GetReturnsMessageHandler(Server client) {
             super(client, "getreturns");
         }

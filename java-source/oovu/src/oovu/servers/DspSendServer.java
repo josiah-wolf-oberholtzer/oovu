@@ -16,9 +16,7 @@ import oovu.states.State;
 import com.cycling74.max.Atom;
 
 public class DspSendServer extends ModuleMemberServer {
-
     private class DspSettingsChangedSubscription extends Subscription {
-
         public DspSettingsChangedSubscription(Server subscriber,
             Server publisher) {
             super(subscriber, DspSettingsChangedEvent.class,
@@ -33,7 +31,6 @@ public class DspSendServer extends ModuleMemberServer {
 
     private class GetDestinationIDMessageHandler extends
         InfoGetterMessageHandler {
-
         public GetDestinationIDMessageHandler(Server client) {
             super(client, "getdestinationid");
         }
@@ -49,7 +46,6 @@ public class DspSendServer extends ModuleMemberServer {
     }
 
     private class GetDestinationMessageHandler extends GetterMessageHandler {
-
         public GetDestinationMessageHandler(Server client) {
             super(client, "getdestination");
         }
@@ -83,7 +79,6 @@ public class DspSendServer extends ModuleMemberServer {
     }
 
     private class GetIOMessageHandler extends InfoGetterMessageHandler {
-
         public GetIOMessageHandler(Server client) {
             super(client, "getio");
         }
@@ -103,7 +98,6 @@ public class DspSendServer extends ModuleMemberServer {
     }
 
     private class GetRoutingMessageHandler extends InfoGetterMessageHandler {
-
         public GetRoutingMessageHandler(Server client) {
             super(client, "getrouting");
         }
@@ -127,7 +121,6 @@ public class DspSendServer extends ModuleMemberServer {
     }
 
     private class Routing {
-
         public final int input;
         public final int output;
         public final double gain;
@@ -150,7 +143,6 @@ public class DspSendServer extends ModuleMemberServer {
     }
 
     private class SetDestinationMessageHandler extends SetterMessageHandler {
-
         public SetDestinationMessageHandler(Server client) {
             super(client, "destination");
         }

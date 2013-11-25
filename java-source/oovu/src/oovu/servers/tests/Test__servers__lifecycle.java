@@ -14,7 +14,6 @@ import org.junit.Test;
 import com.cycling74.max.Atom;
 
 public class Test__servers__lifecycle {
-
     @Before
     public void setUp() throws Exception {
         Environment.reset();

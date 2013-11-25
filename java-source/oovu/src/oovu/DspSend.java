@@ -6,7 +6,6 @@ import oovu.servers.DspSendServer;
 import com.cycling74.max.Atom;
 
 public class DspSend extends ModuleMemberServerClient {
-
     public DspSend(Atom[] arguments) {
         super(arguments);
     }

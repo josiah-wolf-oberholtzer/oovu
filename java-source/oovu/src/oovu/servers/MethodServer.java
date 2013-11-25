@@ -3,7 +3,6 @@ package oovu.servers;
 import com.cycling74.max.Atom;
 
 public class MethodServer extends AttributeServer {
-
     public static MethodServer allocate(
         Integer module_id,
         String desired_name,

@@ -9,7 +9,6 @@ import org.junit.Test;
 import com.cycling74.max.Atom;
 
 public class Test__BooleanDatatype {
-
     @Test
     public void test_01() {
         Datatype datatype = new BooleanDatatype(new Atom[0]);

@@ -8,7 +8,6 @@ import org.junit.Test;
 import com.cycling74.max.Atom;
 
 public class Test__DecimalDatatype {
-
     @Test
     public void test_01() {
         DecimalDatatype datatype = new DecimalDatatype(new Atom[0]);

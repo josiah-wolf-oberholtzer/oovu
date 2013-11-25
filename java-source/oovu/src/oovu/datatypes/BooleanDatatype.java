@@ -10,9 +10,7 @@ import oovu.servers.Server;
 import com.cycling74.max.Atom;
 
 public class BooleanDatatype extends GenericDatatype {
-
     private class ToggleMessageHandler extends ActionMessageHandler {
-
         public ToggleMessageHandler(Server client) {
             super(client, "toggle");
         }

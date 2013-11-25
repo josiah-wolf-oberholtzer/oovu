@@ -6,7 +6,6 @@ import oovu.messaging.Response;
 import com.cycling74.max.Atom;
 
 public abstract class MaxAdapter {
-
     protected static final Atom value_atom = Atom.newAtom("value");
     protected final MaxPeer max_peer;
 

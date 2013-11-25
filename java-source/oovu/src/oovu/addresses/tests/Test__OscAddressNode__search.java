@@ -12,7 +12,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class Test__OscAddressNode__search {
-
     public Map<String, OscAddressNode> create_node_tree() {
         OscAddressNode root = new OscAddressNode("");
         OscAddressNode synth_one = new OscAddressNode("synth.1");

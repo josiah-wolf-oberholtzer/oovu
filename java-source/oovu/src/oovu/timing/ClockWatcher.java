@@ -9,9 +9,7 @@ import com.cycling74.max.Executable;
 import com.cycling74.max.MaxClock;
 
 abstract public class ClockWatcher {
-
     public static class ClockCallback implements Executable {
-
         @Override
         public void execute() {
             double current_time = System.currentTimeMillis();

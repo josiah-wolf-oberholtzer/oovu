@@ -10,7 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class Test__OscAddressNode__construct {
-
     @Before
     public void setUp() throws Exception {
         Environment.reset();

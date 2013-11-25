@@ -8,7 +8,6 @@ import java.util.Map;
 import com.cycling74.max.Atom;
 
 public class Atoms {
-
     public static Atom[][] to_atoms(String message) {
         if (message == null) {
             return null;

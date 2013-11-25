@@ -9,7 +9,6 @@ import oovu.servers.ModuleServer;
 import com.cycling74.max.Atom;
 
 public class DspSettings extends ModuleMemberServerClient {
-
     public DspSettings(Atom[] arguments) {
         super(arguments);
     }

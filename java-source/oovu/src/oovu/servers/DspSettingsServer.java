@@ -16,9 +16,7 @@ import oovu.states.State;
 import com.cycling74.max.Atom;
 
 public class DspSettingsServer extends ModuleMemberServer {
-
     private class GetActiveMessageHandler extends GetterMessageHandler {
-
         public GetActiveMessageHandler(Server client) {
             super(client, "getactive");
         }
@@ -43,7 +41,6 @@ public class DspSettingsServer extends ModuleMemberServer {
     }
 
     private class GetInputCountMessageHandler extends InfoGetterMessageHandler {
-
         public GetInputCountMessageHandler(Server client) {
             super(client, "getinputcount");
         }
@@ -59,7 +56,6 @@ public class DspSettingsServer extends ModuleMemberServer {
     }
 
     private class GetLimitingMessageHandler extends GetterMessageHandler {
-
         public GetLimitingMessageHandler(Server client) {
             super(client, "getlimiting");
         }
@@ -84,7 +80,6 @@ public class DspSettingsServer extends ModuleMemberServer {
     }
 
     private class GetOutputCountMessageHandler extends InfoGetterMessageHandler {
-
         public GetOutputCountMessageHandler(Server client) {
             super(client, "getoutputcount");
         }
@@ -100,7 +95,6 @@ public class DspSettingsServer extends ModuleMemberServer {
     }
 
     private class GetSendCountMessageHandler extends GetterMessageHandler {
-
         public GetSendCountMessageHandler(Server client) {
             super(client, "getsendcount");
         }
@@ -126,7 +120,6 @@ public class DspSettingsServer extends ModuleMemberServer {
     }
 
     private class GetVoiceCountMessageHandler extends GetterMessageHandler {
-
         public GetVoiceCountMessageHandler(Server client) {
             super(client, "getvoicecount");
         }
@@ -152,7 +145,6 @@ public class DspSettingsServer extends ModuleMemberServer {
     }
 
     private class SetActiveMessageHandler extends SetterMessageHandler {
-
         public SetActiveMessageHandler(Server client) {
             super(client, "active");
         }
@@ -178,7 +170,6 @@ public class DspSettingsServer extends ModuleMemberServer {
     }
 
     private class SetLimitingMessageHandler extends SetterMessageHandler {
-
         public SetLimitingMessageHandler(Server client) {
             super(client, "limiting");
         }
@@ -204,7 +195,6 @@ public class DspSettingsServer extends ModuleMemberServer {
     }
 
     private class SetSendCountMessageHandler extends SetterMessageHandler {
-
         public SetSendCountMessageHandler(Server client) {
             super(client, "sendcount");
         }
@@ -230,7 +220,6 @@ public class DspSettingsServer extends ModuleMemberServer {
     }
 
     private class SetVoiceCountMessageHandler extends SetterMessageHandler {
-
         public SetVoiceCountMessageHandler(Server client) {
             super(client, "voicecount");
         }

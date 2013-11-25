@@ -9,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class Test__OscAddressNode__get_relative_osc_address {
-
     @Before
     public void setUp() throws Exception {
     }

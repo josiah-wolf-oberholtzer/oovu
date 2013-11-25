@@ -5,7 +5,6 @@ import java.util.Arrays;
 import com.cycling74.max.Atom;
 
 public class ValueRange {
-
     public final double low;
     public final double high;
 

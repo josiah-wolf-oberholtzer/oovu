@@ -15,9 +15,7 @@ import oovu.states.State;
 import com.cycling74.max.Atom;
 
 public class DspReceiveServer extends ModuleMemberServer {
-
     private class ModuleNameAcquiredSubscription extends Subscription {
-
         public ModuleNameAcquiredSubscription(Server subscriber) {
             super(subscriber, ModuleNameAcquiredEvent.class,
                 new PublisherFilter(subscriber.parent_server));

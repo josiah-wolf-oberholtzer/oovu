@@ -7,7 +7,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class Test__MultiEnvelope__unlace {
-
     @Test
     public void test_01() {
         MultiEnvelope envelope = new MultiEnvelope(null, new double[] {

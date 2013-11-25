@@ -13,7 +13,6 @@ import oovu.Proxy;
 import oovu.servers.Server;
 
 public class OscAddressNode implements Comparable<OscAddressNode> {
-
     public static
         String
         find_unique_name(String desired_name, Set<String> names) {

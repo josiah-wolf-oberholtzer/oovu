@@ -14,9 +14,7 @@ import oovu.servers.Server;
 import com.cycling74.max.Atom;
 
 public class OptionDatatype extends StringDatatype {
-
     private class GetOptionsMessageHandler extends GetterMessageHandler {
-
         public GetOptionsMessageHandler(Server client) {
             super(client, "getoptions");
         }
@@ -39,7 +37,6 @@ public class OptionDatatype extends StringDatatype {
     }
 
     private class NextOptionMessageHandler extends ActionMessageHandler {
-
         public NextOptionMessageHandler(Server client) {
             super(client, "next");
         }
@@ -67,7 +64,6 @@ public class OptionDatatype extends StringDatatype {
     }
 
     private class PreviousOptionMessageHandler extends ActionMessageHandler {
-
         public PreviousOptionMessageHandler(Server client) {
             super(client, "previous");
         }
@@ -95,7 +91,6 @@ public class OptionDatatype extends StringDatatype {
     }
 
     private class SetOptionsMessageHandler extends SetterMessageHandler {
-
         public SetOptionsMessageHandler(Server client) {
             super(client, "options");
         }

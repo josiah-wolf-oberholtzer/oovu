@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class Test__Environment__reset {
-
     @Before
     public void setUp() throws Exception {
         Environment.reset();

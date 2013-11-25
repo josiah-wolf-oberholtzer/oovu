@@ -4,7 +4,6 @@ import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
 
 public class MaxEnvelopeHandler extends MaxObject implements EnvelopeHandler {
-
     public MultiEnvelope multi_envelope;
 
     public MaxEnvelopeHandler(Atom[] arguments) {

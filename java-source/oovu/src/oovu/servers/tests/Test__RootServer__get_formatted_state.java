@@ -13,7 +13,6 @@ import org.junit.Test;
 import com.cycling74.max.Atom;
 
 public class Test__RootServer__get_formatted_state {
-
     @Before
     public void setUp() throws Exception {
         Environment.reset();

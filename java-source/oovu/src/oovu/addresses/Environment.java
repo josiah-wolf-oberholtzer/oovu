@@ -15,7 +15,6 @@ import com.cycling74.max.MaxObject;
 import com.cycling74.max.MaxSystem;
 
 public class Environment {
-
     public static final ReentrantLock lock = new ReentrantLock();
     // private static final Logger logger;
     public static final RootServer root_server;

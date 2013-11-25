@@ -5,7 +5,6 @@ import oovu.addresses.OscAddress;
 import com.cycling74.max.Atom;
 
 public class Request {
-
     public final MessagePasser source;
     public final OscAddress destination;
     public final Atom[] payload;

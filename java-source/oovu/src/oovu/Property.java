@@ -6,7 +6,6 @@ import oovu.servers.PropertyServer;
 import com.cycling74.max.Atom;
 
 public class Property extends ModuleMemberServerClient {
-
     public Property(Atom[] arguments) {
         super(arguments);
     }

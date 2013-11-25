@@ -3,7 +3,6 @@ package oovu.messaging;
 import com.cycling74.max.Executable;
 
 public class DeferredResponseCallback implements Executable {
-
     public final MessagePasser message_passer;
     public final Response response;
 

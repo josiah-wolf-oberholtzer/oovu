@@ -6,7 +6,6 @@ import oovu.servers.ReturnServer;
 import com.cycling74.max.Atom;
 
 public class Return extends ModuleMemberServerClient {
-
     public Return(Atom[] arguments) {
         super(arguments);
     }

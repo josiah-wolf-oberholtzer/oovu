@@ -15,7 +15,6 @@ import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
 
 abstract public class MaxPeer extends MaxObject implements MessagePasser {
-
     protected MaxAdapter max_adapter;
 
     @Override

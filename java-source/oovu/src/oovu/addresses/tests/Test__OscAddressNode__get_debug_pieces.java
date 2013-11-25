@@ -16,7 +16,6 @@ import org.junit.Test;
 import com.cycling74.max.Atom;
 
 public class Test__OscAddressNode__get_debug_pieces {
-
     @Before
     public void setUp() throws Exception {
         Environment.reset();

@@ -9,7 +9,6 @@ import oovu.timing.MultiEnvelope;
 import com.cycling74.max.Atom;
 
 public class DecimalArrayDatatype extends BoundedArrayDatatype {
-
     public DecimalArrayDatatype(Atom[] arguments) {
         this(null, Atoms.to_map(arguments));
     }

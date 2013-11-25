@@ -8,7 +8,6 @@ import org.junit.Test;
 import com.cycling74.max.Atom;
 
 public class Test__ValueRange {
-
     @Test
     public void test_01() {
         for (int i = 0, j = 1000; i < j; i++) {

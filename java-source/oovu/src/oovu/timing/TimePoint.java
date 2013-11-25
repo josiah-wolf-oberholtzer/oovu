@@ -1,7 +1,6 @@
 package oovu.timing;
 
 public class TimePoint {
-
     public final double time;
     public final double value;
 

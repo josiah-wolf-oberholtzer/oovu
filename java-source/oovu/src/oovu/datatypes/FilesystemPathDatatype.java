@@ -8,7 +8,6 @@ import oovu.servers.AttributeServer;
 import com.cycling74.max.Atom;
 
 public class FilesystemPathDatatype extends StringDatatype {
-
     public FilesystemPathDatatype(Atom[] arguments) {
         this(null, Atoms.to_map(arguments));
     }

@@ -12,9 +12,7 @@ import oovu.timing.MultiEnvelope;
 import com.cycling74.max.Atom;
 
 public class RangeDatatype extends BoundedDatatype {
-
     private class CenterMessageHandler extends ActionMessageHandler {
-
         public CenterMessageHandler(Server client) {
             super(client, "center");
         }
@@ -46,7 +44,6 @@ public class RangeDatatype extends BoundedDatatype {
     }
 
     private class WidthMessageHandler extends ActionMessageHandler {
-
         public WidthMessageHandler(Server client) {
             super(client, "width");
         }

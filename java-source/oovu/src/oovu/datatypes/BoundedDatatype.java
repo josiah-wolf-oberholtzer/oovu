@@ -15,9 +15,7 @@ import com.cycling74.max.Atom;
 
 abstract public class BoundedDatatype extends Datatype implements
     EnvelopeHandler {
-
     private class GetMaximumMessageHandler extends GetterMessageHandler {
-
         public GetMaximumMessageHandler(Server client) {
             super(client, "getmaximum");
         }
@@ -40,7 +38,6 @@ abstract public class BoundedDatatype extends Datatype implements
     }
 
     private class GetMinimumMessageHandler extends GetterMessageHandler {
-
         public GetMinimumMessageHandler(Server client) {
             super(client, "getminimum");
         }
@@ -63,7 +60,6 @@ abstract public class BoundedDatatype extends Datatype implements
     }
 
     private class SetMaximumMessageHandler extends SetterMessageHandler {
-
         public SetMaximumMessageHandler(Server client) {
             super(client, "maximum");
         }
@@ -90,7 +86,6 @@ abstract public class BoundedDatatype extends Datatype implements
     }
 
     private class SetMinimumMessageHandler extends SetterMessageHandler {
-
         public SetMinimumMessageHandler(Server client) {
             super(client, "minimum");
         }

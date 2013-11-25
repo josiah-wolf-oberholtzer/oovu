@@ -9,7 +9,6 @@ import oovu.timing.MultiEnvelope;
 import com.cycling74.max.Atom;
 
 public class IntegerDatatype extends BoundedDatatype {
-
     public IntegerDatatype(Atom[] arguments) {
         this(null, Atoms.to_map(arguments));
     }

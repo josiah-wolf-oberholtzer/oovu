@@ -5,7 +5,6 @@ import oovu.servers.Server;
 import com.cycling74.max.Atom;
 
 abstract public class MessageHandler {
-
     protected final Server client;
     protected final String name;
 

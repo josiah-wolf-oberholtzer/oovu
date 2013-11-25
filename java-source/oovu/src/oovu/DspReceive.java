@@ -6,7 +6,6 @@ import oovu.servers.DspReceiveServer;
 import com.cycling74.max.Atom;
 
 public class DspReceive extends ModuleMemberServerClient {
-
     public DspReceive(Atom[] arguments) {
         super(arguments);
     }

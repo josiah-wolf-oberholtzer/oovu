@@ -5,7 +5,6 @@ import java.util.Arrays;
 import com.cycling74.max.Atom;
 
 public class StateComponent extends State {
-
     public final String address;
     public final Atom[] arguments;
 

@@ -12,7 +12,6 @@ import org.junit.Test;
 import com.cycling74.max.Atom;
 
 public class Test__ModuleServer__get_child_property_servers {
-
     @Before
     public void setUp() throws Exception {
         Environment.reset();

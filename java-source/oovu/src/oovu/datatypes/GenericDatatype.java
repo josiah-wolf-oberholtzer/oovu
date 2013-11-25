@@ -8,7 +8,6 @@ import oovu.servers.AttributeServer;
 import com.cycling74.max.Atom;
 
 public class GenericDatatype extends Datatype {
-
     public GenericDatatype(Atom[] arguments) {
         this(null, Atoms.to_map(arguments));
     }

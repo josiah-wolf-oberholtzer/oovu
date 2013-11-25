@@ -11,7 +11,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class Test__OscAddressNode__create_address {
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
     public static final OscAddressNode root = new OscAddressNode("");

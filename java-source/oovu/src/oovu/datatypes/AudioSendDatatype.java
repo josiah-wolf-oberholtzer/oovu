@@ -16,9 +16,7 @@ import oovu.servers.Server;
 import com.cycling74.max.Atom;
 
 public class AudioSendDatatype extends OscAddressDatatype {
-
     private class DspReceiversChangedSubscription extends Subscription {
-
         public DspReceiversChangedSubscription(Server client) {
             super(client, DspReceiversChangedEvent.class, null);
         }
@@ -34,7 +32,6 @@ public class AudioSendDatatype extends OscAddressDatatype {
 
     private class GetDestinationIdMessageHandler extends
         InfoGetterMessageHandler {
-
         public GetDestinationIdMessageHandler(Server client) {
             super(client, "getdestinationid");
         }
@@ -48,7 +45,6 @@ public class AudioSendDatatype extends OscAddressDatatype {
 
     private class GetDestinationsMessageHandler extends
         InfoGetterMessageHandler {
-
         public GetDestinationsMessageHandler(Server client) {
             super(client, "getdestinations");
         }

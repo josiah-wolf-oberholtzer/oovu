@@ -12,7 +12,6 @@ import org.junit.Test;
 import com.cycling74.max.Atom;
 
 public class Test__AttributeServer__priority {
-
     @Before
     public void setUp() throws Exception {
         Environment.reset();

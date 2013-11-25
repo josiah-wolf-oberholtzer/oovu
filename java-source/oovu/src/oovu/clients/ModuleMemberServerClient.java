@@ -8,7 +8,6 @@ import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
 
 public abstract class ModuleMemberServerClient extends ServerClient {
-
     protected int lazy_module_id;
     protected String lazy_name;
     protected Atom[] lazy_arguments;

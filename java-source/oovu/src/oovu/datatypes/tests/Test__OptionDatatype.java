@@ -10,7 +10,6 @@ import org.junit.Test;
 import com.cycling74.max.Atom;
 
 public class Test__OptionDatatype {
-
     @Test
     public void test_01() {
         Atom[] arguments = Atom.parse("");

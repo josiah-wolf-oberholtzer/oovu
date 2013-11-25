@@ -9,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class Test__OscAddressNode__matches {
-
     @Before
     public void setUp() throws Exception {
         Environment.reset();

@@ -4,7 +4,6 @@ import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
 
 public interface MessagePasser {
-
     public OscAddress get_osc_address();
 
     public OscAddressNode get_osc_address_node();

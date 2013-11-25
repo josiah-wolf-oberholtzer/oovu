@@ -22,9 +22,7 @@ import com.cycling74.max.Atom;
 
 abstract public class AttributeServer extends ModuleMemberServer implements
     Comparable<AttributeServer> {
-
     private class GetPatternMessageHandler extends GetterMessageHandler {
-
         public GetPatternMessageHandler(Server client) {
             super(client, "getpattern");
         }
@@ -52,7 +50,6 @@ abstract public class AttributeServer extends ModuleMemberServer implements
     }
 
     private class GetPriorityMessageHandler extends GetterMessageHandler {
-
         public GetPriorityMessageHandler(Server client) {
             super(client, "getpriority");
         }
@@ -80,7 +77,6 @@ abstract public class AttributeServer extends ModuleMemberServer implements
     }
 
     private class GetValueMessageHandler extends GetterMessageHandler {
-
         public GetValueMessageHandler(Server client) {
             super(client, "getvalue");
         }
@@ -108,7 +104,6 @@ abstract public class AttributeServer extends ModuleMemberServer implements
     }
 
     private class SetPatternMessageHandler extends SetterMessageHandler {
-
         public SetPatternMessageHandler(Server client) {
             super(client, "pattern");
         }
@@ -130,7 +125,6 @@ abstract public class AttributeServer extends ModuleMemberServer implements
     }
 
     private class SetPriorityMessageHandler extends SetterMessageHandler {
-
         public SetPriorityMessageHandler(Server client) {
             super(client, "priority");
         }
@@ -152,7 +146,6 @@ abstract public class AttributeServer extends ModuleMemberServer implements
     }
 
     protected class SetValueMessageHandler extends MessageHandler {
-
         public SetValueMessageHandler(Server client) {
             super(client, "value");
         }

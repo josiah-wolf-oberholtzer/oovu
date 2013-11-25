@@ -17,9 +17,7 @@ import com.cycling74.max.MaxObject;
 import com.cycling74.max.MaxSystem;
 
 public class Proxy extends MaxPeer implements MessagePasser {
-
     private class RebindCallback implements Executable {
-
         public final Proxy client;
         public final Atom[] arguments;
 

@@ -5,7 +5,6 @@ import oovu.addresses.Environment;
 import oovu.clients.ServerClient;
 
 public class Root extends ServerClient {
-
     public Root() {
         this.declareIO(2, 2);
         this.max_adapter = new GenericMaxAdapter(this);

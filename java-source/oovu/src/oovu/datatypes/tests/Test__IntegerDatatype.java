@@ -8,7 +8,6 @@ import org.junit.Test;
 import com.cycling74.max.Atom;
 
 public class Test__IntegerDatatype {
-
     @Test
     public void test_01() {
         IntegerDatatype datatype = new IntegerDatatype(new Atom[0]);

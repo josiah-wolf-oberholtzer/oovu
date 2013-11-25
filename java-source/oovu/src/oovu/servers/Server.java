@@ -15,12 +15,16 @@ import oovu.clients.ServerClient;
 import oovu.events.Event;
 import oovu.events.Subscriber;
 import oovu.events.Subscription;
+import oovu.messaging.BuiltMessageHandler;
 import oovu.messaging.DeferredRequestCallback;
+import oovu.messaging.Getter;
 import oovu.messaging.InfoGetterMessageHandler;
 import oovu.messaging.MessageHandler;
+import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.MessagePasser;
 import oovu.messaging.Request;
 import oovu.messaging.Response;
+import oovu.messaging.Setter;
 import oovu.states.State;
 
 import com.cycling74.max.Atom;
@@ -30,9 +34,7 @@ import com.cycling74.max.MaxPatcher;
 import com.cycling74.max.MaxSystem;
 
 abstract public class Server implements MessagePasser, Subscriber {
-
     private class DumpMetaMessageHandler extends MessageHandler {
-
         public DumpMetaMessageHandler(Server client) {
             super(client, "dumpmeta");
         }
@@ -87,7 +89,6 @@ abstract public class Server implements MessagePasser, Subscriber {
     }
 
     private class GetInterfaceMessageHandler extends InfoGetterMessageHandler {
-
         public GetInterfaceMessageHandler(Server client) {
             super(client, "getinterface");
         }
@@ -115,7 +116,6 @@ abstract public class Server implements MessagePasser, Subscriber {
     }
 
     private class GetMetaMessageHandler extends InfoGetterMessageHandler {
-
         public GetMetaMessageHandler(Server client) {
             super(client, "getmeta");
         }
@@ -136,7 +136,6 @@ abstract public class Server implements MessagePasser, Subscriber {
     }
 
     private class GetOscAddressMessageHandler extends InfoGetterMessageHandler {
-
         public GetOscAddressMessageHandler(Server client) {
             super(client, "getoscaddress");
         }
@@ -161,7 +160,6 @@ abstract public class Server implements MessagePasser, Subscriber {
     }
 
     private class GetUniqueIdMessageHandler extends InfoGetterMessageHandler {
-
         public GetUniqueIdMessageHandler(Server client) {
             super(client, "getuniqueid");
         }
@@ -181,7 +179,6 @@ abstract public class Server implements MessagePasser, Subscriber {
     }
 
     private class ReportMessageHandler extends MessageHandler {
-
         public ReportMessageHandler(Server client) {
             super(client, "report");
         }
@@ -222,7 +219,6 @@ abstract public class Server implements MessagePasser, Subscriber {
     }
 
     private class ShowMessageHandler extends MessageHandler {
-
         public ShowMessageHandler(Server client) {
             super(client, "show");
         }
@@ -273,6 +269,8 @@ abstract public class Server implements MessagePasser, Subscriber {
         new HashMap<Class<? extends Event>, Subscription>();
     protected final Map<String, MessageHandler> message_handlers =
         new HashMap<String, MessageHandler>();
+    protected final Map<String, BuiltMessageHandler> built_message_handlers =
+        new HashMap<String, BuiltMessageHandler>();
     protected String name = null;
     protected Server parent_server = null;
     protected OscAddressNode osc_address_node = null;
@@ -286,6 +284,83 @@ abstract public class Server implements MessagePasser, Subscriber {
         this.add_message_handler(new GetUniqueIdMessageHandler(this));
         this.add_message_handler(new ReportMessageHandler(this));
         this.add_message_handler(new ShowMessageHandler(this));
+        this.add_built_message_handler(new MessageHandlerBuilder("dumpmeta")
+            .with_setter(new Setter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    ArrayList<Atom[]> result = new ArrayList<Atom[]>();
+                    MessageHandler getMetaMessageHandler =
+                        Server.this.message_handlers.get("getmeta");
+                    Atom[] meta =
+                        Atom.removeFirst(getMetaMessageHandler.run(arguments)[0]);
+                    for (Atom name : meta) {
+                        MessageHandler message_handler =
+                            Server.this.message_handlers.get(name.toString());
+                        if (message_handler == null) {
+                            continue;
+                        }
+                        Atom[][] message_handler_run_result =
+                            message_handler.run(null);
+                        if (message_handler_run_result != null) {
+                            for (Atom[] subresult : message_handler_run_result) {
+                                result.add(subresult);
+                            }
+                        }
+                    }
+                    return result.toArray(new Atom[0][]);
+                }
+            }).build(this));
+        this.add_built_message_handler(new MessageHandlerBuilder("interface")
+            .with_getter(new Getter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    Atom[][] result = new Atom[1][];
+                    String[] message_handler_names =
+                        Server.this.message_handlers.keySet().toArray(
+                            new String[0]);
+                    Arrays.sort(message_handler_names);
+                    result[0] =
+                        Atom.newAtom(built_message_handler.name,
+                            Atom.newAtom(message_handler_names));
+                    return result;
+                }
+            }).build(this));
+        this.add_built_message_handler(new MessageHandlerBuilder("meta")
+            .with_getter(new Getter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    Atom[][] result = new Atom[1][];
+                    ArrayList<Atom> getters = new ArrayList<Atom>();
+                    for (MessageHandler message_handler : Server.this.message_handlers
+                        .values()) {
+                        if (message_handler.is_meta_relevant()) {
+                            getters.add(Atom.newAtom(message_handler.get_name()));
+                        }
+                    }
+                    result[0] =
+                        Atom.newAtom(built_message_handler.name,
+                            getters.toArray(new Atom[0]));
+                    return result;
+                }
+            }).build(this));
+    }
+
+    public void add_built_message_handler(
+        BuiltMessageHandler built_message_handler) {
+        if (built_message_handler.getter != null) {
+            this.built_message_handlers.put(
+                built_message_handler.get_getter_name(), built_message_handler);
+        }
+        if (built_message_handler.setter != null) {
+            this.built_message_handlers.put(
+                built_message_handler.get_setter_name(), built_message_handler);
+        }
     }
 
     public void add_message_handler(MessageHandler message_handler) {

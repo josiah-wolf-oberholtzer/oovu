@@ -9,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class Test__OscAddressNode__prune_if_necessary {
-
     public static final OscAddressNode root = new OscAddressNode("");
 
     @Before

@@ -7,7 +7,6 @@ import oovu.servers.ModuleServer;
 import com.cycling74.max.Atom;
 
 public class Module extends ServerClient {
-
     public Module(Atom[] arguments) {
         this.declareIO(2, 2);
         this.check_arguments(arguments);

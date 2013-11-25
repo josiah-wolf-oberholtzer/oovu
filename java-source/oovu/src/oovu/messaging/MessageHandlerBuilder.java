@@ -3,7 +3,6 @@ package oovu.messaging;
 import oovu.servers.Server;
 
 public class MessageHandlerBuilder {
-
     private Setter callback;
     private Getter getter;
     private Integer arity;

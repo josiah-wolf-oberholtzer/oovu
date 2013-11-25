@@ -13,7 +13,6 @@ import oovu.messaging.InfoGetterMessageHandler;
 import com.cycling74.max.Atom;
 
 public abstract class ModuleMemberServer extends Server {
-
     protected enum AllocationState {
         NO_ADDRESS,
         ADDRESS_WITHOUT_SERVER,
@@ -22,7 +21,6 @@ public abstract class ModuleMemberServer extends Server {
     }
 
     private class GetModuleNameMessageHandler extends InfoGetterMessageHandler {
-
         public GetModuleNameMessageHandler(Server client) {
             super(client, "getmodulename");
         }

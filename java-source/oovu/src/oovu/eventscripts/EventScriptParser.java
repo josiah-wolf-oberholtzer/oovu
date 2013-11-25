@@ -16,7 +16,6 @@ import oovu.states.StateComponentAggregate;
 import com.cycling74.max.Atom;
 
 public class EventScriptParser {
-
     public Map<String, State> parse_file(String filename) {
         Map<String, State> events = new LinkedHashMap<String, State>();
         String event_name = null;

@@ -3,7 +3,6 @@ package oovu.timing;
 import java.util.ArrayList;
 
 public class MultiEnvelope extends ClockWatcher {
-
     private final EnvelopeHandler client;
     private final ArrayList<ArrayList<TimePoint>> envelopes;
 

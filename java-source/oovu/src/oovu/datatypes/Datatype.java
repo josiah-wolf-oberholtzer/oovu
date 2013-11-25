@@ -13,9 +13,7 @@ import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
 
 public abstract class Datatype {
-
     private class GetDatatypeMessageHandler extends InfoGetterMessageHandler {
-
         public GetDatatypeMessageHandler(Server client) {
             super(client, "getdatatype");
         }

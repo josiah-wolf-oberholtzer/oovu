@@ -6,7 +6,6 @@ import oovu.servers.Server;
 import com.cycling74.max.Atom;
 
 public class Response {
-
     public final Server source;
     public final Atom[][] payload;
     public final Request original_request;

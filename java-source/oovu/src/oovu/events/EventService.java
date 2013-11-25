@@ -8,7 +8,6 @@ import java.util.Set;
 import oovu.servers.Server;
 
 public class EventService {
-
     private final Map<Class<? extends Event>, HashSet<Subscription>> subscriptions =
         new HashMap<Class<? extends Event>, HashSet<Subscription>>();
 

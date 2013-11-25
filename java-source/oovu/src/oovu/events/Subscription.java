@@ -4,7 +4,6 @@ import oovu.addresses.Environment;
 import oovu.servers.Server;
 
 abstract public class Subscription {
-
     public final Server subscriber;
     public final Class<? extends Event> event_class;
     public final Filter filter;

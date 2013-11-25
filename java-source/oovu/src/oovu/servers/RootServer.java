@@ -24,9 +24,7 @@ import com.cycling74.max.Atom;
 import com.cycling74.max.MaxSystem;
 
 public class RootServer extends Server {
-
     private class GetStateMessageHandler extends MessageHandler {
-
         public GetStateMessageHandler(Server client) {
             super(client, "getstate");
         }
@@ -67,7 +65,6 @@ public class RootServer extends Server {
     }
 
     private class ListEventsMessageHandler extends MessageHandler {
-
         public ListEventsMessageHandler(Server client) {
             super(client, "events/list");
         }
@@ -118,7 +115,6 @@ public class RootServer extends Server {
     }
 
     private class NextEventMessageHandler extends ActionMessageHandler {
-
         public NextEventMessageHandler(Server client) {
             super(client, "events/next");
         }
@@ -164,7 +160,6 @@ public class RootServer extends Server {
     }
 
     private class PreviousEventMessageHandler extends ActionMessageHandler {
-
         public PreviousEventMessageHandler(Server client) {
             super(client, "events/previous");
         }
@@ -206,7 +201,6 @@ public class RootServer extends Server {
     }
 
     private class ReadEventScriptMessageHandler extends MessageHandler {
-
         public ReadEventScriptMessageHandler(Server client) {
             super(client, "events/read");
         }
@@ -261,7 +255,6 @@ public class RootServer extends Server {
     }
 
     private class SetEventMessageHandler extends SetterMessageHandler {
-
         public SetEventMessageHandler(Server client) {
             super(client, "events/goto");
         }

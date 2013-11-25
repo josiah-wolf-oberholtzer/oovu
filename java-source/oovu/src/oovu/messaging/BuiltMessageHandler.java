@@ -5,7 +5,6 @@ import oovu.servers.Server;
 import com.cycling74.max.Atom;
 
 public class BuiltMessageHandler {
-
     public final Setter callback;
     public final Getter getter;
     public final Integer arity;

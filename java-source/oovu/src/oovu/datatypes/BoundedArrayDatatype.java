@@ -11,9 +11,7 @@ import oovu.servers.Server;
 import com.cycling74.max.Atom;
 
 abstract public class BoundedArrayDatatype extends BoundedDatatype {
-
     private class GetLengthMessageHandler extends GetterMessageHandler {
-
         public GetLengthMessageHandler(Server client) {
             super(client, "getlength");
         }
@@ -36,7 +34,6 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
     }
 
     private class SetLengthMessageHandler extends SetterMessageHandler {
-
         public SetLengthMessageHandler(Server client) {
             super(client, "length");
         }

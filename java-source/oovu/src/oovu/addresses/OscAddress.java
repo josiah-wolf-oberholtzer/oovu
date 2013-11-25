@@ -8,7 +8,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class OscAddress {
-
     static final String osc_name_regex =
         "(\\*|(([a-z][a-z0-9~]*|\\*)(\\.([a-z0-9]+|\\*))?))";
     static final String node_attribute_regex = ".*(:"

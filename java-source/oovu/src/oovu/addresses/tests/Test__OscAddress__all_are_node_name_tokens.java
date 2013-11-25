@@ -11,7 +11,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class Test__OscAddress__all_are_node_name_tokens {
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
