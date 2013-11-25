@@ -13,6 +13,7 @@ public class MessageHandlerBuilder {
     private boolean is_rampable;
     private boolean is_state_relevant;
     private BooleanMessageHandlerCallback is_meta_relevant_callback;
+    private BooleanMessageHandlerCallback is_rampable_callback;
     private IntegerMessageHandlerCallback arity_callback;
 
     public MessageHandlerBuilder(String name) {
@@ -32,7 +33,8 @@ public class MessageHandlerBuilder {
         return new BuiltMessageHandler(this.callback, this.getter, this.arity,
             client, this.setter, this.name, this.is_binding_relevant,
             this.is_meta_relevant, this.is_rampable, this.is_state_relevant,
-            this.is_meta_relevant_callback, this.arity_callback);
+            this.is_meta_relevant_callback, this.arity_callback,
+            this.is_rampable_callback);
     }
 
     public MessageHandlerBuilder with_arity(Integer arity) {
@@ -77,6 +79,12 @@ public class MessageHandlerBuilder {
 
     public MessageHandlerBuilder with_is_rampable(boolean is_rampable) {
         this.is_rampable = is_rampable;
+        return this;
+    }
+
+    public MessageHandlerBuilder with_is_rampable_callback(
+        BooleanMessageHandlerCallback is_rampable_callback) {
+        this.is_rampable_callback = is_rampable_callback;
         return this;
     }
 

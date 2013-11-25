@@ -238,6 +238,16 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                     return attribute_server.datatype.get_arity();
                 }
             })
+            .with_callback(new Setter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    built_message_handler.client.make_request(
+                        built_message_handler.client, "getvalue", null);
+                    return null;
+                }
+            })
             .with_is_binding_relevant(true)
             .with_is_meta_relevant_callback(
                 new BooleanMessageHandlerCallback() {
@@ -254,13 +264,28 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                 public Atom[][] execute(
                     BuiltMessageHandler built_message_handler,
                     Atom[] arguments) {
-                    return null;
+                    Atom[][] result = new Atom[1][];
+                    result[0] = AttributeServer.this.get_value();
+                    result[0] = Atom.newAtom("value", result[0]);
+                    return result;
+                }
+            }).with_is_rampable_callback(new BooleanMessageHandlerCallback() {
+                @Override
+                public
+                    boolean
+                    execute(BuiltMessageHandler built_message_handler) {
+                    AttributeServer attribute_server =
+                        (AttributeServer) built_message_handler.client;
+                    return attribute_server.datatype.is_rampable();
                 }
             }).with_setter(new Setter() {
                 @Override
                 public Atom[][] execute(
                     BuiltMessageHandler built_message_handler,
                     Atom[] arguments) {
+                    AttributeServer attribute_server =
+                        (AttributeServer) built_message_handler.client;
+                    attribute_server.set_value(arguments);
                     return null;
                 }
             }).build(this));
@@ -289,6 +314,14 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                     public Atom[][] execute(
                         BuiltMessageHandler built_message_handler,
                         Atom[] arguments) {
+                        AttributeServer attribute_server =
+                            (AttributeServer) built_message_handler.client;
+                        Pattern pattern = null;
+                        if (0 < arguments.length) {
+                            pattern =
+                                Pattern.from_atoms(attribute_server, arguments);
+                        }
+                        attribute_server.set_pattern(pattern);
                         return null;
                     }
                 }).build(this));

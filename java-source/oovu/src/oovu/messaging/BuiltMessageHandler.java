@@ -6,6 +6,7 @@ import com.cycling74.max.Atom;
 
 public class BuiltMessageHandler {
     public final BooleanMessageHandlerCallback is_meta_relevant_callback;
+    public final BooleanMessageHandlerCallback is_rampable_callback;
     public final Getter getter;
     public final Integer arity;
     public final IntegerMessageHandlerCallback arity_callback;
@@ -30,7 +31,8 @@ public class BuiltMessageHandler {
         boolean is_rampable,
         boolean is_state_relevant,
         BooleanMessageHandlerCallback is_meta_relevant_callback,
-        IntegerMessageHandlerCallback arity_callback) {
+        IntegerMessageHandlerCallback arity_callback,
+        BooleanMessageHandlerCallback is_rampable_callback) {
         this.arity = arity;
         this.arity_callback = arity_callback;
         this.callback = callback;
@@ -40,6 +42,7 @@ public class BuiltMessageHandler {
         this.is_meta_relevant = is_meta_relevant;
         this.is_meta_relevant_callback = is_meta_relevant_callback;
         this.is_rampable = is_rampable;
+        this.is_rampable_callback = is_rampable_callback;
         this.is_state_relevant = is_state_relevant;
         this.name = name;
         this.setter = setter;
