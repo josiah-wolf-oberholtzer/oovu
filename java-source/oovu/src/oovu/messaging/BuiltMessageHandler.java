@@ -5,10 +5,12 @@ import oovu.servers.Server;
 import com.cycling74.max.Atom;
 
 public class BuiltMessageHandler {
-    public final Setter callback;
+    public final BooleanMessageHandlerCallback is_meta_relevant_callback;
     public final Getter getter;
     public final Integer arity;
+    public final IntegerMessageHandlerCallback arity_callback;
     public final Server client;
+    public final Setter callback;
     public final Setter setter;
     public final String name;
     public final boolean is_binding_relevant;
@@ -16,19 +18,31 @@ public class BuiltMessageHandler {
     public final boolean is_rampable;
     public final boolean is_state_relevant;
 
-    public BuiltMessageHandler(Setter callback, Getter getter, Integer arity,
-        Server client, Setter setter, String name, boolean is_binding_relevant,
-        boolean is_meta_relevant, boolean is_rampable, boolean is_state_relevant) {
-        this.callback = callback;
-        this.getter = getter;
+    public BuiltMessageHandler(
+        Setter callback,
+        Getter getter,
+        Integer arity,
+        Server client,
+        Setter setter,
+        String name,
+        boolean is_binding_relevant,
+        boolean is_meta_relevant,
+        boolean is_rampable,
+        boolean is_state_relevant,
+        BooleanMessageHandlerCallback is_meta_relevant_callback,
+        IntegerMessageHandlerCallback arity_callback) {
         this.arity = arity;
+        this.arity_callback = arity_callback;
+        this.callback = callback;
         this.client = client;
-        this.setter = setter;
-        this.name = name;
+        this.getter = getter;
         this.is_binding_relevant = is_binding_relevant;
         this.is_meta_relevant = is_meta_relevant;
+        this.is_meta_relevant_callback = is_meta_relevant_callback;
         this.is_rampable = is_rampable;
         this.is_state_relevant = is_state_relevant;
+        this.name = name;
+        this.setter = setter;
     }
 
     public String get_getter_name() {

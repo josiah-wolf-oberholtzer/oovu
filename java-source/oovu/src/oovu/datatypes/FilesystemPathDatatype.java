@@ -12,7 +12,8 @@ public class FilesystemPathDatatype extends StringDatatype {
         this(null, Atoms.to_map(arguments));
     }
 
-    public FilesystemPathDatatype(AttributeServer client,
+    public FilesystemPathDatatype(
+        AttributeServer client,
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
     }

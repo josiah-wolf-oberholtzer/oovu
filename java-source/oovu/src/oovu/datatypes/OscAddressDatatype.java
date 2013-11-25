@@ -12,7 +12,8 @@ public class OscAddressDatatype extends StringDatatype {
         this(null, Atoms.to_map(arguments));
     }
 
-    public OscAddressDatatype(AttributeServer client,
+    public OscAddressDatatype(
+        AttributeServer client,
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
     }

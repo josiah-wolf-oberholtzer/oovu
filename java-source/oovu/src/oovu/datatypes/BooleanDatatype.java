@@ -41,7 +41,8 @@ public class BooleanDatatype extends GenericDatatype {
         this(null, Atoms.to_map(arguments));
     }
 
-    public BooleanDatatype(AttributeServer client,
+    public BooleanDatatype(
+        AttributeServer client,
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {

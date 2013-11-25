@@ -60,7 +60,8 @@ public class AudioSendDatatype extends OscAddressDatatype {
         this(null, Atoms.to_map(arguments));
     }
 
-    public AudioSendDatatype(AttributeServer client,
+    public AudioSendDatatype(
+        AttributeServer client,
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {

@@ -12,7 +12,8 @@ public class TriggerDatatype extends Datatype {
         this(null, Atoms.to_map(arguments));
     }
 
-    public TriggerDatatype(AttributeServer client,
+    public TriggerDatatype(
+        AttributeServer client,
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
     }

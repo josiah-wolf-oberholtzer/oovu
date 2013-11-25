@@ -121,7 +121,8 @@ public class OptionDatatype extends StringDatatype {
         this(null, Atoms.to_map(arguments));
     }
 
-    public OptionDatatype(AttributeServer client,
+    public OptionDatatype(
+        AttributeServer client,
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {

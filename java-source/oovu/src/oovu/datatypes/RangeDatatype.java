@@ -78,7 +78,8 @@ public class RangeDatatype extends BoundedDatatype {
         this(null, Atoms.to_map(arguments));
     }
 
-    public RangeDatatype(AttributeServer client,
+    public RangeDatatype(
+        AttributeServer client,
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {

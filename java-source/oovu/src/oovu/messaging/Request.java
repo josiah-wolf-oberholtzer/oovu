@@ -10,8 +10,11 @@ public class Request {
     public final Atom[] payload;
     public final boolean call_after;
 
-    public Request(MessagePasser source, OscAddress destination,
-        Atom[] payload, boolean call_after) {
+    public Request(
+        MessagePasser source,
+        OscAddress destination,
+        Atom[] payload,
+        boolean call_after) {
         this.source = source;
         this.destination = destination;
         this.payload = payload;

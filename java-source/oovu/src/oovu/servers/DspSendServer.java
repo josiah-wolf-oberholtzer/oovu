@@ -17,7 +17,8 @@ import com.cycling74.max.Atom;
 
 public class DspSendServer extends ModuleMemberServer {
     private class DspSettingsChangedSubscription extends Subscription {
-        public DspSettingsChangedSubscription(Server subscriber,
+        public DspSettingsChangedSubscription(
+            Server subscriber,
             Server publisher) {
             super(subscriber, DspSettingsChangedEvent.class,
                 new PublisherFilter(publisher));

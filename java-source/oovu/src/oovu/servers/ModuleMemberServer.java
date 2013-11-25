@@ -184,22 +184,22 @@ public abstract class ModuleMemberServer extends Server {
     public ModuleMemberServer(ModuleServer module_server) {
         super();
         this.attach_to_parent_server(module_server);
-//        this.add_message_handler(new GetModuleNameMessageHandler(this));
+        // this.add_message_handler(new GetModuleNameMessageHandler(this));
         this.add_built_message_handler(new MessageHandlerBuilder("modulename")
-            .with_getter(new Getter(){
+            .with_getter(new Getter() {
                 @Override
                 public Atom[][] execute(
                     BuiltMessageHandler built_message_handler,
                     Atom[] arguments) {
-                    ModuleMemberServer module_member_server = (ModuleMemberServer) built_message_handler.client;
+                    ModuleMemberServer module_member_server =
+                        (ModuleMemberServer) built_message_handler.client;
                     if (module_member_server.parent_server == null) {
                         return null;
                     }
-                    return Atoms.to_atoms(built_message_handler.name, 
+                    return Atoms.to_atoms(built_message_handler.name,
                         module_member_server.parent_server.get_name());
-                    }
-                })
-            .build(this));
+                }
+            }).build(this));
         this.is_configured = false;
     }
 }

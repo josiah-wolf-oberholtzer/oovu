@@ -115,7 +115,8 @@ abstract public class BoundedDatatype extends Datatype implements
     protected Double maximum;
     protected MultiEnvelope multi_envelope;
 
-    public BoundedDatatype(AttributeServer client,
+    public BoundedDatatype(
+        AttributeServer client,
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {

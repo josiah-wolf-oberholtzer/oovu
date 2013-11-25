@@ -13,7 +13,8 @@ public class IntegerArrayDatatype extends BoundedArrayDatatype {
         this(null, Atoms.to_map(arguments));
     }
 
-    public IntegerArrayDatatype(AttributeServer client,
+    public IntegerArrayDatatype(
+        AttributeServer client,
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         this.multi_envelope =

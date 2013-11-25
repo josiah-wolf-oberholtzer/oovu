@@ -61,7 +61,8 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
 
     protected int length;
 
-    public BoundedArrayDatatype(AttributeServer client,
+    public BoundedArrayDatatype(
+        AttributeServer client,
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {

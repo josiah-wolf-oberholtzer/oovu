@@ -12,6 +12,8 @@ public class MessageHandlerBuilder {
     private boolean is_meta_relevant;
     private boolean is_rampable;
     private boolean is_state_relevant;
+    private BooleanMessageHandlerCallback is_meta_relevant_callback;
+    private IntegerMessageHandlerCallback arity_callback;
 
     public MessageHandlerBuilder(String name) {
         this.arity = null;
@@ -19,6 +21,7 @@ public class MessageHandlerBuilder {
         this.getter = null;
         this.is_binding_relevant = false;
         this.is_meta_relevant = false;
+        this.is_meta_relevant_callback = null;
         this.is_rampable = false;
         this.is_state_relevant = false;
         this.name = name;
@@ -28,11 +31,18 @@ public class MessageHandlerBuilder {
     public BuiltMessageHandler build(Server client) {
         return new BuiltMessageHandler(this.callback, this.getter, this.arity,
             client, this.setter, this.name, this.is_binding_relevant,
-            this.is_meta_relevant, this.is_rampable, this.is_state_relevant);
+            this.is_meta_relevant, this.is_rampable, this.is_state_relevant,
+            this.is_meta_relevant_callback, this.arity_callback);
     }
 
     public MessageHandlerBuilder with_arity(Integer arity) {
         this.arity = arity;
+        return this;
+    }
+
+    public MessageHandlerBuilder with_arity_callback(
+        IntegerMessageHandlerCallback arity_callback) {
+        this.arity_callback = arity_callback;
         return this;
     }
 
@@ -56,6 +66,12 @@ public class MessageHandlerBuilder {
         MessageHandlerBuilder
         with_is_meta_relevant(boolean is_meta_relevant) {
         this.is_meta_relevant = is_meta_relevant;
+        return this;
+    }
+
+    public MessageHandlerBuilder with_is_meta_relevant_callback(
+        BooleanMessageHandlerCallback is_meta_relevant_callback) {
+        this.is_meta_relevant_callback = is_meta_relevant_callback;
         return this;
     }
 

@@ -8,7 +8,9 @@ abstract public class Subscription {
     public final Class<? extends Event> event_class;
     public final Filter filter;
 
-    public Subscription(Server subscriber, Class<? extends Event> event_class,
+    public Subscription(
+        Server subscriber,
+        Class<? extends Event> event_class,
         Filter filter) {
         this.subscriber = subscriber;
         this.event_class = event_class;

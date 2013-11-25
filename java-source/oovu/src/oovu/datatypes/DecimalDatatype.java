@@ -13,7 +13,8 @@ public class DecimalDatatype extends BoundedDatatype {
         this(null, Atoms.to_map(arguments));
     }
 
-    public DecimalDatatype(AttributeServer client,
+    public DecimalDatatype(
+        AttributeServer client,
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         this.multi_envelope =

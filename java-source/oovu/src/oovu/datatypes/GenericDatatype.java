@@ -12,7 +12,8 @@ public class GenericDatatype extends Datatype {
         this(null, Atoms.to_map(arguments));
     }
 
-    public GenericDatatype(AttributeServer client,
+    public GenericDatatype(
+        AttributeServer client,
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
     }

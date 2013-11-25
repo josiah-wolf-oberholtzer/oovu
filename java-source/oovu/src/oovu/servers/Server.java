@@ -277,13 +277,13 @@ abstract public class Server implements MessagePasser, Subscriber {
     public final Set<ServerClient> server_clients = new HashSet<ServerClient>();
 
     public Server() {
-//        this.add_message_handler(new DumpMetaMessageHandler(this));
-//        this.add_message_handler(new GetMetaMessageHandler(this));
-//        this.add_message_handler(new GetInterfaceMessageHandler(this));
-//        this.add_message_handler(new GetOscAddressMessageHandler(this));
-//        this.add_message_handler(new GetUniqueIdMessageHandler(this));
-//        this.add_message_handler(new ReportMessageHandler(this));
-//        this.add_message_handler(new ShowMessageHandler(this));
+        // this.add_message_handler(new DumpMetaMessageHandler(this));
+        // this.add_message_handler(new GetMetaMessageHandler(this));
+        // this.add_message_handler(new GetInterfaceMessageHandler(this));
+        // this.add_message_handler(new GetOscAddressMessageHandler(this));
+        // this.add_message_handler(new GetUniqueIdMessageHandler(this));
+        // this.add_message_handler(new ReportMessageHandler(this));
+        // this.add_message_handler(new ShowMessageHandler(this));
         this.add_built_message_handler(new MessageHandlerBuilder("dumpmeta")
             .with_setter(new Setter() {
                 @Override
@@ -559,8 +559,9 @@ abstract public class Server implements MessagePasser, Subscriber {
         if (message_handler == null) {
             return;
         }
-        Atom[][] payload = message_handler.handle_message(
-            message_handler_name, request.payload, false);
+        Atom[][] payload =
+            message_handler.handle_message(message_handler_name,
+                request.payload, false);
         if (payload != null) {
             Response response = new Response(this, payload, request);
             if (payload[0][0].equals(Atom.newAtom("value"))) {
