@@ -371,20 +371,6 @@ abstract public class Server implements MessagePasser, Subscriber {
                     return null;
                 }
             }).build(this));
-        this.add_built_message_handler(new MessageHandlerBuilder("uniqueid")
-            .with_getter(new Getter() {
-                @Override
-                public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    Atom[][] result = new Atom[1][2];
-                    result[0][0] = Atom.newAtom(built_message_handler.name);
-                    result[0][1] =
-                        Atom.newAtom(System
-                            .identityHashCode(built_message_handler.client));
-                    return result;
-                }
-            }).build(this));
         this.add_built_message_handler(new MessageHandlerBuilder("report")
             .with_setter(new Setter() {
                 @Override
@@ -411,6 +397,20 @@ abstract public class Server implements MessagePasser, Subscriber {
                         patcher.send("front", new Atom[0]);
                     }
                     return null;
+                }
+            }).build(this));
+        this.add_built_message_handler(new MessageHandlerBuilder("uniqueid")
+            .with_getter(new Getter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    Atom[][] result = new Atom[1][2];
+                    result[0][0] = Atom.newAtom(built_message_handler.name);
+                    result[0][1] =
+                        Atom.newAtom(System
+                            .identityHashCode(built_message_handler.client));
+                    return result;
                 }
             }).build(this));
     }
