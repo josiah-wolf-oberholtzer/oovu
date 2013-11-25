@@ -39,6 +39,10 @@ public class BuiltMessageHandler {
         return this.name;
     }
 
+    public Atom[][] handle_message(String message) {
+        return this.handle_message(message, null, true);
+    }
+
     public Atom[][] handle_message(
         String message,
         Atom[] arguments,

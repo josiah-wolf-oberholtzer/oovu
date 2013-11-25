@@ -291,18 +291,21 @@ abstract public class Server implements MessagePasser, Subscriber {
                     BuiltMessageHandler built_message_handler,
                     Atom[] arguments) {
                     ArrayList<Atom[]> result = new ArrayList<Atom[]>();
-                    MessageHandler getMetaMessageHandler =
-                        Server.this.message_handlers.get("getmeta");
+                    String message_name = "getmeta";
+                    BuiltMessageHandler getmeta_message_handler =
+                        Server.this.built_message_handlers.get(message_name);
                     Atom[] meta =
-                        Atom.removeFirst(getMetaMessageHandler.run(arguments)[0]);
-                    for (Atom name : meta) {
-                        MessageHandler message_handler =
-                            Server.this.message_handlers.get(name.toString());
+                        Atom.removeFirst(getmeta_message_handler
+                            .handle_message(message_name)[0]);
+                    for (Atom atom : meta) {
+                        String name = atom.getString();
+                        BuiltMessageHandler message_handler =
+                            Server.this.built_message_handlers.get(name);
                         if (message_handler == null) {
                             continue;
                         }
                         Atom[][] message_handler_run_result =
-                            message_handler.run(null);
+                            message_handler.handle_message(name);
                         if (message_handler_run_result != null) {
                             for (Atom[] subresult : message_handler_run_result) {
                                 result.add(subresult);
@@ -320,7 +323,7 @@ abstract public class Server implements MessagePasser, Subscriber {
                     Atom[] arguments) {
                     Atom[][] result = new Atom[1][];
                     String[] message_handler_names =
-                        Server.this.message_handlers.keySet().toArray(
+                        Server.this.built_message_handlers.keySet().toArray(
                             new String[0]);
                     Arrays.sort(message_handler_names);
                     result[0] =
@@ -337,16 +340,77 @@ abstract public class Server implements MessagePasser, Subscriber {
                     Atom[] arguments) {
                     Atom[][] result = new Atom[1][];
                     ArrayList<Atom> getters = new ArrayList<Atom>();
-                    for (MessageHandler message_handler : Server.this.message_handlers
+                    for (BuiltMessageHandler message_handler : built_message_handler.client.built_message_handlers
                         .values()) {
-                        if (message_handler.is_meta_relevant()) {
-                            getters.add(Atom.newAtom(message_handler.get_name()));
+                        if (message_handler.is_meta_relevant) {
+                            getters.add(Atom.newAtom(message_handler
+                                .get_getter_name()));
                         }
                     }
                     result[0] =
                         Atom.newAtom(built_message_handler.name,
                             getters.toArray(new Atom[0]));
                     return result;
+                }
+            }).build(this));
+        this.add_built_message_handler(new MessageHandlerBuilder("oscaddress")
+            .with_getter(new Getter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    String osc_address_string =
+                        built_message_handler.client.get_osc_address_string();
+                    if (osc_address_string != null) {
+                        Atom[][] result = new Atom[1][];
+                        result[0] = Atom.newAtom(new String[] {
+                            built_message_handler.name, osc_address_string
+                        });
+                        return result;
+                    }
+                    return null;
+                }
+            }).build(this));
+        this.add_built_message_handler(new MessageHandlerBuilder("uniqueid")
+            .with_getter(new Getter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    Atom[][] result = new Atom[1][2];
+                    result[0][0] = Atom.newAtom(built_message_handler.name);
+                    result[0][1] =
+                        Atom.newAtom(System
+                            .identityHashCode(built_message_handler.client));
+                    return result;
+                }
+            }).build(this));
+        this.add_built_message_handler(new MessageHandlerBuilder("report")
+            .with_setter(new Setter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    String[] report_pieces =
+                        built_message_handler.client.get_report_pieces();
+                    for (String report_piece : report_pieces) {
+                        Environment.log(report_piece);
+                    }
+                    return null;
+                }
+            }).build(this));
+        this.add_built_message_handler(new MessageHandlerBuilder("show")
+            .with_setter(new Setter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    for (ServerClient server_client : built_message_handler.client.server_clients) {
+                        MaxBox box = server_client.getMaxBox();
+                        MaxPatcher patcher = box.getPatcher();
+                        patcher.send("front", new Atom[0]);
+                    }
+                    return null;
                 }
             }).build(this));
     }
