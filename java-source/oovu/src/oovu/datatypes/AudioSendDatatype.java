@@ -51,8 +51,21 @@ public class AudioSendDatatype extends OscAddressDatatype {
         @Override
         public Atom[][] run(Atom[] arguments) {
             return Atoms.to_atoms("destinations",
-                AudioSendDatatype.this.get_destinations());
+                AudioSendDatatype.get_destinations());
         }
+    }
+
+    public static String[] get_destinations() {
+        String[] destination_names =
+            new String[DspReceiveServer.dsp_receive_servers.size()];
+        OscAddress[] osc_addresses =
+            DspReceiveServer.dsp_receive_servers.keySet().toArray(
+                new OscAddress[0]);
+        for (int i = 0, j = osc_addresses.length; i < j; i++) {
+            destination_names[i] = osc_addresses[i].toString();
+        }
+        Arrays.sort(destination_names);
+        return destination_names;
     }
 
     public AudioSendDatatype(Atom[] arguments) {
@@ -97,19 +110,6 @@ public class AudioSendDatatype extends OscAddressDatatype {
         }
         OscAddress osc_address = OscAddress.from_cache(destination_name);
         return DspReceiveServer.dsp_receive_servers.get(osc_address);
-    }
-
-    public String[] get_destinations() {
-        String[] destination_names =
-            new String[DspReceiveServer.dsp_receive_servers.size()];
-        OscAddress[] osc_addresses =
-            DspReceiveServer.dsp_receive_servers.keySet().toArray(
-                new OscAddress[0]);
-        for (int i = 0, j = osc_addresses.length; i < j; i++) {
-            destination_names[i] = osc_addresses[i].toString();
-        }
-        Arrays.sort(destination_names);
-        return destination_names;
     }
 
     @Override
