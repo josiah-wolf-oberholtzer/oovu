@@ -8,6 +8,9 @@ import oovu.events.Event;
 import oovu.events.Subscription;
 import oovu.events.types.DspReceiversChangedEvent;
 import oovu.messaging.Atoms;
+import oovu.messaging.BuiltMessageHandler;
+import oovu.messaging.Getter;
+import oovu.messaging.MessageHandlerBuilder;
 import oovu.servers.AttributeServer;
 import oovu.servers.DspReceiveServer;
 import oovu.servers.Server;
@@ -26,32 +29,6 @@ public class AudioSendDatatype extends OscAddressDatatype {
             Atom[] value = client.datatype.get_value();
             client.datatype.set_value(value);
             client.make_deferred_request(client, "dumpmeta", null);
-        }
-    }
-
-    private class GetDestinationIdMessageHandler extends
-        InfoGetterMessageHandler {
-        public GetDestinationIdMessageHandler(Server client) {
-            super(client, "getdestinationid");
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            return Atoms.to_atoms("destinationid",
-                AudioSendDatatype.this.get_destination_id());
-        }
-    }
-
-    private class GetDestinationsMessageHandler extends
-        InfoGetterMessageHandler {
-        public GetDestinationsMessageHandler(Server client) {
-            super(client, "getdestinations");
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            return Atoms.to_atoms("destinations",
-                AudioSendDatatype.get_destinations());
         }
     }
 
@@ -80,10 +57,17 @@ public class AudioSendDatatype extends OscAddressDatatype {
             Subscription subscription =
                 new DspReceiversChangedSubscription(client);
             subscription.subscribe();
-            this.client.add_message_handler(new GetDestinationIdMessageHandler(
-                this.client));
-            this.client.add_message_handler(new GetDestinationsMessageHandler(
-                this.client));
+            this.client.add_built_message_handler(new MessageHandlerBuilder(
+                "destinations").with_getter(new Getter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    return Atoms.to_atoms(
+                        built_message_handler.get_setter_name(),
+                        AudioSendDatatype.get_destinations());
+                }
+            }).with_is_meta_relevant(true).build(this.client));
         }
     }
 
