@@ -35,6 +35,10 @@ public class Atoms {
         return result;
     }
 
+    public static Atom[][] to_atoms(String message, boolean argument) {
+        return Atoms.to_atoms(message, Atom.newAtom(argument));
+    }
+
     public static Atom[][] to_atoms(String message, Double argument) {
         if (argument == null) {
             return Atoms.to_atoms(message);

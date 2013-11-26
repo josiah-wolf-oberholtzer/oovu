@@ -8,243 +8,15 @@ import java.util.Map;
 import oovu.addresses.Environment;
 import oovu.events.types.DspSettingsChangedEvent;
 import oovu.messaging.Atoms;
+import oovu.messaging.BuiltMessageHandler;
+import oovu.messaging.Getter;
+import oovu.messaging.MessageHandlerBuilder;
+import oovu.messaging.Setter;
 import oovu.states.State;
 
 import com.cycling74.max.Atom;
 
 public class DspSettingsServer extends ModuleMemberServer {
-    private class GetActiveMessageHandler extends GetterMessageHandler {
-        public GetActiveMessageHandler(Server client) {
-            super(client, "getactive");
-        }
-
-        @Override
-        public boolean is_meta_relevant() {
-            return true;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return true;
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            Atom[][] result = new Atom[1][2];
-            result[0][0] = Atom.newAtom("active");
-            result[0][1] = Atom.newAtom(DspSettingsServer.this.get_is_active());
-            return result;
-        }
-    }
-
-    private class GetInputCountMessageHandler extends InfoGetterMessageHandler {
-        public GetInputCountMessageHandler(Server client) {
-            super(client, "getinputcount");
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            Atom[][] result = new Atom[1][2];
-            result[0][0] = Atom.newAtom("inputcount");
-            result[0][1] =
-                Atom.newAtom(DspSettingsServer.this.get_input_count());
-            return result;
-        }
-    }
-
-    private class GetLimitingMessageHandler extends GetterMessageHandler {
-        public GetLimitingMessageHandler(Server client) {
-            super(client, "getlimiting");
-        }
-
-        @Override
-        public boolean is_meta_relevant() {
-            return true;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return true;
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            Atom[][] result = new Atom[1][2];
-            result[0][0] = Atom.newAtom("limiting");
-            result[0][1] = Atom.newAtom(DspSettingsServer.this.get_limiting());
-            return result;
-        }
-    }
-
-    private class GetOutputCountMessageHandler extends InfoGetterMessageHandler {
-        public GetOutputCountMessageHandler(Server client) {
-            super(client, "getoutputcount");
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            Atom[][] result = new Atom[1][2];
-            result[0][0] = Atom.newAtom("outputcount");
-            result[0][1] =
-                Atom.newAtom(DspSettingsServer.this.get_output_count());
-            return result;
-        }
-    }
-
-    private class GetSendCountMessageHandler extends GetterMessageHandler {
-        public GetSendCountMessageHandler(Server client) {
-            super(client, "getsendcount");
-        }
-
-        @Override
-        public boolean is_meta_relevant() {
-            return true;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return true;
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            Atom[][] result = new Atom[1][2];
-            result[0][0] = Atom.newAtom("sendcount");
-            result[0][1] =
-                Atom.newAtom(DspSettingsServer.this.get_send_count());
-            return result;
-        }
-    }
-
-    private class GetVoiceCountMessageHandler extends GetterMessageHandler {
-        public GetVoiceCountMessageHandler(Server client) {
-            super(client, "getvoicecount");
-        }
-
-        @Override
-        public boolean is_meta_relevant() {
-            return true;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return true;
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            Atom[][] result = new Atom[1][2];
-            result[0][0] = Atom.newAtom("voicecount");
-            result[0][1] =
-                Atom.newAtom(DspSettingsServer.this.get_voice_count());
-            return result;
-        }
-    }
-
-    private class SetActiveMessageHandler extends SetterMessageHandler {
-        public SetActiveMessageHandler(Server client) {
-            super(client, "active");
-        }
-
-        @Override
-        public void call_after() {
-            this.client.make_request(this.client, "getactive", null);
-        }
-
-        @Override
-        public Integer get_arity() {
-            return 1;
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            if (0 < arguments.length) {
-                boolean argument = arguments[0].toBoolean();
-                DspSettingsServer.this.set_is_active(argument);
-            }
-            return null;
-        }
-    }
-
-    private class SetLimitingMessageHandler extends SetterMessageHandler {
-        public SetLimitingMessageHandler(Server client) {
-            super(client, "limiting");
-        }
-
-        @Override
-        public void call_after() {
-            this.client.make_request(this.client, "getlimiting", null);
-        }
-
-        @Override
-        public Integer get_arity() {
-            return 1;
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            if (0 < arguments.length) {
-                boolean argument = arguments[0].toBoolean();
-                DspSettingsServer.this.set_limiting(argument);
-            }
-            return null;
-        }
-    }
-
-    private class SetSendCountMessageHandler extends SetterMessageHandler {
-        public SetSendCountMessageHandler(Server client) {
-            super(client, "sendcount");
-        }
-
-        @Override
-        public void call_after() {
-            this.client.make_request(this.client, "getsendcount", null);
-        }
-
-        @Override
-        public Integer get_arity() {
-            return 1;
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            if (0 < arguments.length) {
-                int argument = arguments[0].toInt();
-                DspSettingsServer.this.set_send_count(argument);
-            }
-            return null;
-        }
-    }
-
-    private class SetVoiceCountMessageHandler extends SetterMessageHandler {
-        public SetVoiceCountMessageHandler(Server client) {
-            super(client, "voicecount");
-        }
-
-        @Override
-        public void call_after() {
-            this.client.make_request(this.client, "getvoicecount", null);
-            this.client.make_request(this.client, "getinputcount", null);
-            this.client.make_request(this.client, "getoutputcount", null);
-            Environment.event_service.publish(new DspSettingsChangedEvent(
-                DspSettingsServer.this));
-        }
-
-        @Override
-        public Integer get_arity() {
-            return 1;
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            if (0 < arguments.length) {
-                int argument = arguments[0].toInt();
-                DspSettingsServer.this.set_voice_count(argument);
-            }
-            return null;
-        }
-    }
-
     private boolean is_active = false;
     private Integer input_count = null;
     private Integer output_count = null;
@@ -254,16 +26,186 @@ public class DspSettingsServer extends ModuleMemberServer {
 
     public DspSettingsServer(ModuleServer module_server) {
         super(module_server);
-        this.add_message_handler(new GetActiveMessageHandler(this));
-        this.add_message_handler(new GetInputCountMessageHandler(this));
-        this.add_message_handler(new GetLimitingMessageHandler(this));
-        this.add_message_handler(new GetOutputCountMessageHandler(this));
-        this.add_message_handler(new GetSendCountMessageHandler(this));
-        this.add_message_handler(new GetVoiceCountMessageHandler(this));
-        this.add_message_handler(new SetActiveMessageHandler(this));
-        this.add_message_handler(new SetLimitingMessageHandler(this));
-        this.add_message_handler(new SetSendCountMessageHandler(this));
-        this.add_message_handler(new SetVoiceCountMessageHandler(this));
+        this.add_built_message_handler(new MessageHandlerBuilder("active")
+            .with_callback(new Setter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    built_message_handler.client.make_request(
+                        built_message_handler.client,
+                        built_message_handler.get_getter_name(), null);
+                    return null;
+                }
+            }).with_is_meta_relevant(true).with_is_state_relevant(true)
+            .with_getter(new Getter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    DspSettingsServer server =
+                        (DspSettingsServer) built_message_handler.client;
+                    return Atoms.to_atoms(
+                        built_message_handler.get_setter_name(),
+                        server.get_is_active());
+                }
+            }).with_setter(new Setter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    DspSettingsServer server =
+                        (DspSettingsServer) built_message_handler.client;
+                    if (0 < arguments.length) {
+                        boolean argument = arguments[0].toBoolean();
+                        server.set_is_active(argument);
+                    }
+                    return null;
+                }
+            }).build(this));
+        this.add_built_message_handler(new MessageHandlerBuilder("inputcount")
+            .with_is_meta_relevant(true).with_getter(new Getter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    DspSettingsServer server =
+                        (DspSettingsServer) built_message_handler.client;
+                    return Atoms.to_atoms(
+                        built_message_handler.get_setter_name(),
+                        server.get_input_count());
+                }
+            }).build(this));
+        this.add_built_message_handler(new MessageHandlerBuilder("limiting")
+            .with_callback(new Setter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    built_message_handler.client.make_request(
+                        built_message_handler.client,
+                        built_message_handler.get_getter_name(), null);
+                    return null;
+                }
+            }).with_is_meta_relevant(true).with_is_state_relevant(true)
+            .with_getter(new Getter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    DspSettingsServer server =
+                        (DspSettingsServer) built_message_handler.client;
+                    return Atoms.to_atoms(
+                        built_message_handler.get_setter_name(),
+                        server.get_limiting());
+                }
+            }).with_setter(new Setter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    DspSettingsServer server =
+                        (DspSettingsServer) built_message_handler.client;
+                    if (0 < arguments.length) {
+                        boolean argument = arguments[0].toBoolean();
+                        server.set_limiting(argument);
+                    }
+                    return null;
+                }
+            }).build(this));
+        this.add_built_message_handler(new MessageHandlerBuilder("outputcount")
+            .with_is_meta_relevant(true).with_getter(new Getter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    DspSettingsServer server =
+                        (DspSettingsServer) built_message_handler.client;
+                    return Atoms.to_atoms(
+                        built_message_handler.get_setter_name(),
+                        server.get_output_count());
+                }
+            }).build(this));
+        this.add_built_message_handler(new MessageHandlerBuilder("sendcount")
+            .with_callback(new Setter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    built_message_handler.client.make_request(
+                        built_message_handler.client,
+                        built_message_handler.get_getter_name(), null);
+                    return null;
+                }
+            }).with_is_meta_relevant(true).with_is_state_relevant(true)
+            .with_getter(new Getter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    DspSettingsServer server =
+                        (DspSettingsServer) built_message_handler.client;
+                    return Atoms.to_atoms(
+                        built_message_handler.get_setter_name(),
+                        server.get_send_count());
+                }
+            }).with_setter(new Setter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    DspSettingsServer server =
+                        (DspSettingsServer) built_message_handler.client;
+                    if (0 < arguments.length) {
+                        int argument = arguments[0].toInt();
+                        server.set_send_count(argument);
+                    }
+                    return null;
+                }
+            }).build(this));
+        this.add_built_message_handler(new MessageHandlerBuilder("voicecount")
+            .with_callback(new Setter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    built_message_handler.client.make_request(
+                        built_message_handler.client, "getvoicecount", null);
+                    built_message_handler.client.make_request(
+                        built_message_handler.client, "getinputcount", null);
+                    built_message_handler.client.make_request(
+                        built_message_handler.client, "getoutputcount", null);
+                    Environment.event_service
+                        .publish(new DspSettingsChangedEvent(
+                            DspSettingsServer.this));
+                    return null;
+                }
+            }).with_is_meta_relevant(true).with_is_state_relevant(true)
+            .with_getter(new Getter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    DspSettingsServer server =
+                        (DspSettingsServer) built_message_handler.client;
+                    return Atoms.to_atoms(
+                        built_message_handler.get_setter_name(),
+                        server.get_voice_count());
+                }
+            }).with_setter(new Setter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    DspSettingsServer server =
+                        (DspSettingsServer) built_message_handler.client;
+                    if (0 < arguments.length) {
+                        int argument = arguments[0].toInt();
+                        server.set_voice_count(argument);
+                    }
+                    return null;
+                }
+            }).build(this));
     }
 
     public void configure(Atom[] arguments) {
