@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import oovu.messaging.Atoms;
-import oovu.messaging.BuiltMessageHandler;
+import oovu.messaging.MessageHandler;
 import oovu.messaging.Getter;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.Setter;
@@ -26,11 +26,11 @@ public class OptionDatatype extends StringDatatype {
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {
-            this.client.add_built_message_handler(new MessageHandlerBuilder(
+            this.client.add_message_handler(new MessageHandlerBuilder(
                 "next").with_arity(0).with_callback(new Setter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     OptionDatatype.this.client.reoutput_value();
                     return null;
@@ -38,18 +38,18 @@ public class OptionDatatype extends StringDatatype {
             }).with_is_binding_relevant(true).with_setter(new Setter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     OptionDatatype.this.next_option();
                     return null;
                 }
             }).build(this.client));
-            this.client.add_built_message_handler(new MessageHandlerBuilder(
+            this.client.add_message_handler(new MessageHandlerBuilder(
                 "options")
                 .with_callback(new Setter() {
                     @Override
                     public Atom[][] execute(
-                        BuiltMessageHandler built_message_handler,
+                        MessageHandler built_message_handler,
                         Atom[] arguments) {
                         OptionDatatype.this.client.reoutput_value();
                         return null;
@@ -58,7 +58,7 @@ public class OptionDatatype extends StringDatatype {
                 .with_getter(new Getter() {
                     @Override
                     public Atom[][] execute(
-                        BuiltMessageHandler built_message_handler,
+                        MessageHandler built_message_handler,
                         Atom[] arguments) {
                         return Atoms.to_atoms(
                             built_message_handler.get_setter_name(),
@@ -69,7 +69,7 @@ public class OptionDatatype extends StringDatatype {
                 .with_setter(new Setter() {
                     @Override
                     public Atom[][] execute(
-                        BuiltMessageHandler built_message_handler,
+                        MessageHandler built_message_handler,
                         Atom[] arguments) {
                         String[] options =
                             OptionDatatype.this
@@ -78,11 +78,11 @@ public class OptionDatatype extends StringDatatype {
                         return null;
                     }
                 }).build(this.client));
-            this.client.add_built_message_handler(new MessageHandlerBuilder(
+            this.client.add_message_handler(new MessageHandlerBuilder(
                 "previous").with_arity(0).with_callback(new Setter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     OptionDatatype.this.client.reoutput_value();
                     return null;
@@ -90,7 +90,7 @@ public class OptionDatatype extends StringDatatype {
             }).with_is_binding_relevant(true).with_setter(new Setter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     OptionDatatype.this.previous_option();
                     return null;

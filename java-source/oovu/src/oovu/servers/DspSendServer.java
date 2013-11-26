@@ -9,7 +9,7 @@ import oovu.events.PublisherFilter;
 import oovu.events.Subscription;
 import oovu.events.types.DspSettingsChangedEvent;
 import oovu.messaging.Atoms;
-import oovu.messaging.BuiltMessageHandler;
+import oovu.messaging.MessageHandler;
 import oovu.messaging.Getter;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.Setter;
@@ -73,11 +73,11 @@ public class DspSendServer extends ModuleMemberServer {
             new DspSettingsChangedSubscription(this,
                 module_server.get_dsp_settings_server());
         this.source_subscription.subscribe();
-        this.add_built_message_handler(new MessageHandlerBuilder("destination")
+        this.add_message_handler(new MessageHandlerBuilder("destination")
             .with_callback(new Setter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     built_message_handler.client.make_request(
                         built_message_handler.client, "dumpmeta", null);
@@ -87,7 +87,7 @@ public class DspSendServer extends ModuleMemberServer {
             .with_getter(new Getter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     DspSendServer server =
                         (DspSendServer) built_message_handler.client;
@@ -97,7 +97,7 @@ public class DspSendServer extends ModuleMemberServer {
             }).with_setter(new Setter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     DspSendServer server =
                         (DspSendServer) built_message_handler.client;
@@ -116,12 +116,12 @@ public class DspSendServer extends ModuleMemberServer {
                     return null;
                 }
             }).build(this));
-        this.add_built_message_handler(new MessageHandlerBuilder(
+        this.add_message_handler(new MessageHandlerBuilder(
             "destinationid").with_is_meta_relevant(true)
             .with_getter(new Getter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     DspSendServer server =
                         (DspSendServer) built_message_handler.client;
@@ -129,21 +129,21 @@ public class DspSendServer extends ModuleMemberServer {
                         server.get_destination_id());
                 }
             }).build(this));
-        this.add_built_message_handler(new MessageHandlerBuilder("destinations")
+        this.add_message_handler(new MessageHandlerBuilder("destinations")
             .with_is_meta_relevant(true).with_getter(new Getter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     return Atoms.to_atoms("destinations",
                         AudioSendDatatype.get_destinations());
                 }
             }).build(this));
-        this.add_built_message_handler(new MessageHandlerBuilder("io")
+        this.add_message_handler(new MessageHandlerBuilder("io")
             .with_is_meta_relevant(true).with_getter(new Getter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     DspSendServer server =
                         (DspSendServer) built_message_handler.client;
@@ -153,11 +153,11 @@ public class DspSendServer extends ModuleMemberServer {
                     return result;
                 }
             }).build(this));
-        this.add_built_message_handler(new MessageHandlerBuilder("routing")
+        this.add_message_handler(new MessageHandlerBuilder("routing")
             .with_is_meta_relevant(true).with_getter(new Getter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     DspSendServer server =
                         (DspSendServer) built_message_handler.client;

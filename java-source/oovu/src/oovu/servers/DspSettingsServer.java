@@ -8,7 +8,7 @@ import java.util.Map;
 import oovu.addresses.Environment;
 import oovu.events.types.DspSettingsChangedEvent;
 import oovu.messaging.Atoms;
-import oovu.messaging.BuiltMessageHandler;
+import oovu.messaging.MessageHandler;
 import oovu.messaging.Getter;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.Setter;
@@ -26,11 +26,11 @@ public class DspSettingsServer extends ModuleMemberServer {
 
     public DspSettingsServer(ModuleServer module_server) {
         super(module_server);
-        this.add_built_message_handler(new MessageHandlerBuilder("active")
+        this.add_message_handler(new MessageHandlerBuilder("active")
             .with_callback(new Setter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     built_message_handler.client.make_request(
                         built_message_handler.client,
@@ -41,7 +41,7 @@ public class DspSettingsServer extends ModuleMemberServer {
             .with_getter(new Getter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     DspSettingsServer server =
                         (DspSettingsServer) built_message_handler.client;
@@ -52,7 +52,7 @@ public class DspSettingsServer extends ModuleMemberServer {
             }).with_setter(new Setter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     DspSettingsServer server =
                         (DspSettingsServer) built_message_handler.client;
@@ -63,11 +63,11 @@ public class DspSettingsServer extends ModuleMemberServer {
                     return null;
                 }
             }).build(this));
-        this.add_built_message_handler(new MessageHandlerBuilder("inputcount")
+        this.add_message_handler(new MessageHandlerBuilder("inputcount")
             .with_is_meta_relevant(true).with_getter(new Getter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     DspSettingsServer server =
                         (DspSettingsServer) built_message_handler.client;
@@ -76,11 +76,11 @@ public class DspSettingsServer extends ModuleMemberServer {
                         server.get_input_count());
                 }
             }).build(this));
-        this.add_built_message_handler(new MessageHandlerBuilder("limiting")
+        this.add_message_handler(new MessageHandlerBuilder("limiting")
             .with_callback(new Setter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     built_message_handler.client.make_request(
                         built_message_handler.client,
@@ -91,7 +91,7 @@ public class DspSettingsServer extends ModuleMemberServer {
             .with_getter(new Getter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     DspSettingsServer server =
                         (DspSettingsServer) built_message_handler.client;
@@ -102,7 +102,7 @@ public class DspSettingsServer extends ModuleMemberServer {
             }).with_setter(new Setter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     DspSettingsServer server =
                         (DspSettingsServer) built_message_handler.client;
@@ -113,11 +113,11 @@ public class DspSettingsServer extends ModuleMemberServer {
                     return null;
                 }
             }).build(this));
-        this.add_built_message_handler(new MessageHandlerBuilder("outputcount")
+        this.add_message_handler(new MessageHandlerBuilder("outputcount")
             .with_is_meta_relevant(true).with_getter(new Getter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     DspSettingsServer server =
                         (DspSettingsServer) built_message_handler.client;
@@ -126,11 +126,11 @@ public class DspSettingsServer extends ModuleMemberServer {
                         server.get_output_count());
                 }
             }).build(this));
-        this.add_built_message_handler(new MessageHandlerBuilder("sendcount")
+        this.add_message_handler(new MessageHandlerBuilder("sendcount")
             .with_callback(new Setter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     built_message_handler.client.make_request(
                         built_message_handler.client,
@@ -141,7 +141,7 @@ public class DspSettingsServer extends ModuleMemberServer {
             .with_getter(new Getter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     DspSettingsServer server =
                         (DspSettingsServer) built_message_handler.client;
@@ -152,7 +152,7 @@ public class DspSettingsServer extends ModuleMemberServer {
             }).with_setter(new Setter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     DspSettingsServer server =
                         (DspSettingsServer) built_message_handler.client;
@@ -163,11 +163,11 @@ public class DspSettingsServer extends ModuleMemberServer {
                     return null;
                 }
             }).build(this));
-        this.add_built_message_handler(new MessageHandlerBuilder("voicecount")
+        this.add_message_handler(new MessageHandlerBuilder("voicecount")
             .with_callback(new Setter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     built_message_handler.client.make_request(
                         built_message_handler.client, "getvoicecount", null);
@@ -184,7 +184,7 @@ public class DspSettingsServer extends ModuleMemberServer {
             .with_getter(new Getter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     DspSettingsServer server =
                         (DspSettingsServer) built_message_handler.client;
@@ -195,7 +195,7 @@ public class DspSettingsServer extends ModuleMemberServer {
             }).with_setter(new Setter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     DspSettingsServer server =
                         (DspSettingsServer) built_message_handler.client;

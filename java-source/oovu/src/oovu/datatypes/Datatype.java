@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import oovu.messaging.Atoms;
-import oovu.messaging.BuiltMessageHandler;
+import oovu.messaging.MessageHandler;
 import oovu.messaging.Getter;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.servers.AttributeServer;
@@ -49,11 +49,11 @@ public abstract class Datatype {
         this.initialize_prerequisites(argument_map);
         this.initialize_default_value(argument_map);
         if (this.client != null) {
-            this.client.add_built_message_handler(new MessageHandlerBuilder(
+            this.client.add_message_handler(new MessageHandlerBuilder(
                 "datatype").with_getter(new Getter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     AttributeServer server =
                         (AttributeServer) built_message_handler.client;

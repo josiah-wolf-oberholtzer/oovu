@@ -29,8 +29,8 @@ public class MessageHandlerBuilder {
         this.setter = null;
     }
 
-    public BuiltMessageHandler build(Server client) {
-        return new BuiltMessageHandler(this.callback, this.getter, this.arity,
+    public MessageHandler build(Server client) {
+        return new MessageHandler(this.callback, this.getter, this.arity,
             client, this.setter, this.name, this.is_binding_relevant,
             this.is_meta_relevant, this.is_rampable, this.is_state_relevant,
             this.is_meta_relevant_callback, this.arity_callback,

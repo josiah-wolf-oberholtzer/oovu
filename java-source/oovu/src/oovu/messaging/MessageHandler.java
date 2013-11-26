@@ -4,7 +4,7 @@ import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
 
-public class BuiltMessageHandler {
+public class MessageHandler {
     public final BooleanMessageHandlerCallback is_meta_relevant_callback;
     public final BooleanMessageHandlerCallback is_rampable_callback;
     public final Getter getter;
@@ -19,7 +19,7 @@ public class BuiltMessageHandler {
     public final boolean is_rampable;
     public final boolean is_state_relevant;
 
-    public BuiltMessageHandler(
+    public MessageHandler(
         Setter callback,
         Getter getter,
         Integer arity,

@@ -10,7 +10,7 @@ import oovu.addresses.Environment;
 import oovu.addresses.OscAddressNode;
 import oovu.events.types.ModuleNameAcquiredEvent;
 import oovu.messaging.Atoms;
-import oovu.messaging.BuiltMessageHandler;
+import oovu.messaging.MessageHandler;
 import oovu.messaging.Getter;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.states.State;
@@ -71,11 +71,11 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
         // this.add_message_handler(new GetNameMessageHandler(this));
         // this.add_message_handler(new GetPropertiesMessageHandler(this));
         // this.add_message_handler(new GetReturnsMessageHandler(this));
-        this.add_built_message_handler(new MessageHandlerBuilder("members")
+        this.add_message_handler(new MessageHandlerBuilder("members")
             .with_getter(new Getter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     ModuleServer module_server =
                         (ModuleServer) built_message_handler.client;
@@ -86,11 +86,11 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
                     return Atoms.to_atoms(built_message_handler.name, names);
                 }
             }).build(this));
-        this.add_built_message_handler(new MessageHandlerBuilder("methods")
+        this.add_message_handler(new MessageHandlerBuilder("methods")
             .with_getter(new Getter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     ModuleServer module_server =
                         (ModuleServer) built_message_handler.client;
@@ -101,11 +101,11 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
                     return Atoms.to_atoms(built_message_handler.name, names);
                 }
             }).build(this));
-        this.add_built_message_handler(new MessageHandlerBuilder("name")
+        this.add_message_handler(new MessageHandlerBuilder("name")
             .with_getter(new Getter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     ModuleServer module_server =
                         (ModuleServer) built_message_handler.client;
@@ -120,11 +120,11 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
                     return null;
                 }
             }).build(this));
-        this.add_built_message_handler(new MessageHandlerBuilder("properties")
+        this.add_message_handler(new MessageHandlerBuilder("properties")
             .with_getter(new Getter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     ModuleServer module_server =
                         (ModuleServer) built_message_handler.client;
@@ -135,11 +135,11 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
                     return Atoms.to_atoms(built_message_handler.name, names);
                 }
             }).build(this));
-        this.add_built_message_handler(new MessageHandlerBuilder("returns")
+        this.add_message_handler(new MessageHandlerBuilder("returns")
             .with_getter(new Getter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     ModuleServer module_server =
                         (ModuleServer) built_message_handler.client;

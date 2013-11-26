@@ -13,7 +13,7 @@ import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
 import oovu.clients.ServerClient;
 import oovu.eventscripts.EventScriptParser;
-import oovu.messaging.BuiltMessageHandler;
+import oovu.messaging.MessageHandler;
 import oovu.messaging.Getter;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.Request;
@@ -37,11 +37,11 @@ public class RootServer extends Server {
         // this.add_message_handler(new PreviousEventMessageHandler(this));
         // this.add_message_handler(new ReadEventScriptMessageHandler(this));
         // this.add_message_handler(new SetEventMessageHandler(this));
-        this.add_built_message_handler(new MessageHandlerBuilder("state")
+        this.add_message_handler(new MessageHandlerBuilder("state")
             .with_getter(new Getter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     Atom[][] result = RootServer.this.get_formatted_state();
                     for (int i = 0, j = result.length; i < j; i++) {
@@ -51,11 +51,11 @@ public class RootServer extends Server {
                     return result;
                 }
             }).build(this));
-        this.add_built_message_handler(new MessageHandlerBuilder("events/list")
+        this.add_message_handler(new MessageHandlerBuilder("events/list")
             .with_setter(new Setter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     RootServer root_server =
                         (RootServer) built_message_handler.client;
@@ -76,11 +76,11 @@ public class RootServer extends Server {
                     return result;
                 }
             }).build(this));
-        this.add_built_message_handler(new MessageHandlerBuilder("events/next")
+        this.add_message_handler(new MessageHandlerBuilder("events/next")
             .with_is_binding_relevant(true).with_setter(new Setter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     RootServer root_server =
                         (RootServer) built_message_handler.client;
@@ -110,12 +110,12 @@ public class RootServer extends Server {
                     return null;
                 }
             }).build(this));
-        this.add_built_message_handler(new MessageHandlerBuilder(
+        this.add_message_handler(new MessageHandlerBuilder(
             "events/previous").with_is_binding_relevant(true)
             .with_setter(new Setter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     RootServer root_server =
                         (RootServer) built_message_handler.client;
@@ -141,11 +141,11 @@ public class RootServer extends Server {
                     return null;
                 }
             }).build(this));
-        this.add_built_message_handler(new MessageHandlerBuilder("events/read")
+        this.add_message_handler(new MessageHandlerBuilder("events/read")
             .with_callback(new Setter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     built_message_handler.client.make_request(
                         built_message_handler.client, "events/list", null);
@@ -154,7 +154,7 @@ public class RootServer extends Server {
             }).with_setter(new Setter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     RootServer root_server =
                         (RootServer) built_message_handler.client;
@@ -171,11 +171,11 @@ public class RootServer extends Server {
                     return null;
                 }
             }).build(this));
-        this.add_built_message_handler(new MessageHandlerBuilder("events/goto")
+        this.add_message_handler(new MessageHandlerBuilder("events/goto")
             .with_setter(new Setter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     RootServer root_server =
                         (RootServer) built_message_handler.client;

@@ -9,7 +9,7 @@ import oovu.Proxy;
 import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
 import oovu.messaging.Atoms;
-import oovu.messaging.BuiltMessageHandler;
+import oovu.messaging.MessageHandler;
 import oovu.messaging.Getter;
 import oovu.messaging.MessageHandlerBuilder;
 
@@ -158,11 +158,11 @@ public abstract class ModuleMemberServer extends Server {
         super();
         this.attach_to_parent_server(module_server);
         // this.add_message_handler(new GetModuleNameMessageHandler(this));
-        this.add_built_message_handler(new MessageHandlerBuilder("modulename")
+        this.add_message_handler(new MessageHandlerBuilder("modulename")
             .with_getter(new Getter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     ModuleMemberServer module_member_server =
                         (ModuleMemberServer) built_message_handler.client;

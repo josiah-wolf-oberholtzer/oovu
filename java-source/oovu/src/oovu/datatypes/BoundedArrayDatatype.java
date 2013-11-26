@@ -3,7 +3,7 @@ package oovu.datatypes;
 import java.util.Map;
 
 import oovu.messaging.Atoms;
-import oovu.messaging.BuiltMessageHandler;
+import oovu.messaging.MessageHandler;
 import oovu.messaging.Getter;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.Setter;
@@ -19,12 +19,12 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {
-            this.client.add_built_message_handler(new MessageHandlerBuilder(
+            this.client.add_message_handler(new MessageHandlerBuilder(
                 "length")
                 .with_callback(new Setter() {
                     @Override
                     public Atom[][] execute(
-                        BuiltMessageHandler built_message_handler,
+                        MessageHandler built_message_handler,
                         Atom[] arguments) {
                         AttributeServer server =
                             (AttributeServer) built_message_handler.client;
@@ -35,7 +35,7 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
                 .with_getter(new Getter() {
                     @Override
                     public Atom[][] execute(
-                        BuiltMessageHandler built_message_handler,
+                        MessageHandler built_message_handler,
                         Atom[] arguments) {
                         return Atoms.to_atoms(
                             built_message_handler.get_setter_name(),
@@ -45,7 +45,7 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
                 .with_setter(new Setter() {
                     @Override
                     public Atom[][] execute(
-                        BuiltMessageHandler built_message_handler,
+                        MessageHandler built_message_handler,
                         Atom[] arguments) {
                         int new_length = BoundedArrayDatatype.this.length;
                         if (0 < arguments.length) {

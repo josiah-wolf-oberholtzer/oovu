@@ -2,14 +2,16 @@ package oovu.servers;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import oovu.addresses.OscAddress;
 import oovu.datatypes.Datatype;
 import oovu.datatypes.GenericDatatype;
 import oovu.messaging.Atoms;
 import oovu.messaging.BooleanMessageHandlerCallback;
-import oovu.messaging.BuiltMessageHandler;
+import oovu.messaging.MessageHandler;
 import oovu.messaging.Getter;
 import oovu.messaging.IntegerMessageHandlerCallback;
 import oovu.messaging.MessageHandlerBuilder;
@@ -35,11 +37,11 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         // this.add_message_handler(new GetValueMessageHandler(this));
         // this.add_message_handler(new SetPriorityMessageHandler(this));
         // this.add_message_handler(new SetValueMessageHandler(this));
-        this.add_built_message_handler(new MessageHandlerBuilder("priority")
+        this.add_message_handler(new MessageHandlerBuilder("priority")
             .with_getter(new Getter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     AttributeServer attribute_server =
                         (AttributeServer) built_message_handler.client;
@@ -49,7 +51,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
             }).with_setter(new Setter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     AttributeServer attribute_server =
                         (AttributeServer) built_message_handler.client;
@@ -61,12 +63,12 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                     return null;
                 }
             }).build(this));
-        this.add_built_message_handler(new MessageHandlerBuilder("value")
+        this.add_message_handler(new MessageHandlerBuilder("value")
             .with_arity_callback(new IntegerMessageHandlerCallback() {
                 @Override
                 public
                     Integer
-                    execute(BuiltMessageHandler built_message_handler) {
+                    execute(MessageHandler built_message_handler) {
                     AttributeServer attribute_server =
                         (AttributeServer) built_message_handler.client;
                     return attribute_server.datatype.get_arity();
@@ -75,7 +77,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
             .with_callback(new Setter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     built_message_handler.client.make_request(
                         built_message_handler.client, "getvalue", null);
@@ -87,7 +89,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                 new BooleanMessageHandlerCallback() {
                     @Override
                     public boolean execute(
-                        BuiltMessageHandler built_message_handler) {
+                        MessageHandler built_message_handler) {
                         if (built_message_handler.client instanceof PropertyServer) {
                             return true;
                         }
@@ -96,7 +98,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                 }).with_getter(new Getter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     Atom[][] result = new Atom[1][];
                     result[0] = AttributeServer.this.get_value();
@@ -107,7 +109,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                 @Override
                 public
                     boolean
-                    execute(BuiltMessageHandler built_message_handler) {
+                    execute(MessageHandler built_message_handler) {
                     AttributeServer attribute_server =
                         (AttributeServer) built_message_handler.client;
                     return attribute_server.datatype.is_rampable();
@@ -115,7 +117,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
             }).with_setter(new Setter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     AttributeServer attribute_server =
                         (AttributeServer) built_message_handler.client;
@@ -126,11 +128,11 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         if (!(this instanceof ReturnServer)) {
             // this.add_message_handler(new GetPatternMessageHandler(this));
             // this.add_message_handler(new SetPatternMessageHandler(this));
-            this.add_built_message_handler(new MessageHandlerBuilder("pattern")
+            this.add_message_handler(new MessageHandlerBuilder("pattern")
                 .with_is_state_relevant(true).with_getter(new Getter() {
                     @Override
                     public Atom[][] execute(
-                        BuiltMessageHandler built_message_handler,
+                        MessageHandler built_message_handler,
                         Atom[] arguments) {
                         AttributeServer server =
                             (AttributeServer) built_message_handler.client;
@@ -146,7 +148,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                 }).with_setter(new Setter() {
                     @Override
                     public Atom[][] execute(
-                        BuiltMessageHandler built_message_handler,
+                        MessageHandler built_message_handler,
                         Atom[] arguments) {
                         AttributeServer attribute_server =
                             (AttributeServer) built_message_handler.client;
@@ -239,9 +241,13 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         ArrayList<StateComponent> state_entries =
             new ArrayList<StateComponent>();
         String osc_address_string = this.get_osc_address_string();
-        for (MessageHandler message_handler : this.message_handlers.values()) {
-            if (message_handler.is_state_relevant()) {
-                for (Atom[] substate : message_handler.run(null)) {
+        Set<MessageHandler> message_handlers = 
+            new HashSet<MessageHandler>(this.message_handlers.values());
+        for (MessageHandler message_handler : message_handlers) {
+            if (message_handler.is_state_relevant && message_handler.getter != null) {
+                Atom[][] getter_payload = message_handler.handle_message(
+                    message_handler.get_getter_name(), null, false);
+                for (Atom[] substate : getter_payload) {
                     String substate_address =
                         osc_address_string + "/:" + substate[0].getString();
                     Atom[] payload = Atom.removeFirst(substate);

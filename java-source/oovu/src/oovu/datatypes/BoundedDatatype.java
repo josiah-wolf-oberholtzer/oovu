@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 import oovu.messaging.Atoms;
-import oovu.messaging.BuiltMessageHandler;
+import oovu.messaging.MessageHandler;
 import oovu.messaging.Getter;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.Setter;
@@ -25,12 +25,12 @@ abstract public class BoundedDatatype extends Datatype implements
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {
-            this.client.add_built_message_handler(new MessageHandlerBuilder(
+            this.client.add_message_handler(new MessageHandlerBuilder(
                 "maximum")
                 .with_callback(new Setter() {
                     @Override
                     public Atom[][] execute(
-                        BuiltMessageHandler built_message_handler,
+                        MessageHandler built_message_handler,
                         Atom[] arguments) {
                         BoundedDatatype.this.client.reoutput_value();
                         return null;
@@ -39,7 +39,7 @@ abstract public class BoundedDatatype extends Datatype implements
                 .with_getter(new Getter() {
                     @Override
                     public Atom[][] execute(
-                        BuiltMessageHandler built_message_handler,
+                        MessageHandler built_message_handler,
                         Atom[] arguments) {
                         return Atoms.to_atoms(
                             built_message_handler.get_setter_name(),
@@ -49,7 +49,7 @@ abstract public class BoundedDatatype extends Datatype implements
                 .with_setter(new Setter() {
                     @Override
                     public Atom[][] execute(
-                        BuiltMessageHandler built_message_handler,
+                        MessageHandler built_message_handler,
                         Atom[] arguments) {
                         Double maximum = null;
                         if (0 < arguments.length) {
@@ -59,12 +59,12 @@ abstract public class BoundedDatatype extends Datatype implements
                         return null;
                     }
                 }).build(this.client));
-            this.client.add_built_message_handler(new MessageHandlerBuilder(
+            this.client.add_message_handler(new MessageHandlerBuilder(
                 "minimum")
                 .with_callback(new Setter() {
                     @Override
                     public Atom[][] execute(
-                        BuiltMessageHandler built_message_handler,
+                        MessageHandler built_message_handler,
                         Atom[] arguments) {
                         BoundedDatatype.this.client.reoutput_value();
                         return null;
@@ -73,7 +73,7 @@ abstract public class BoundedDatatype extends Datatype implements
                 .with_getter(new Getter() {
                     @Override
                     public Atom[][] execute(
-                        BuiltMessageHandler built_message_handler,
+                        MessageHandler built_message_handler,
                         Atom[] arguments) {
                         return Atoms.to_atoms(
                             built_message_handler.get_setter_name(),
@@ -83,7 +83,7 @@ abstract public class BoundedDatatype extends Datatype implements
                 .with_setter(new Setter() {
                     @Override
                     public Atom[][] execute(
-                        BuiltMessageHandler built_message_handler,
+                        MessageHandler built_message_handler,
                         Atom[] arguments) {
                         Double minimum = null;
                         if (0 < arguments.length) {

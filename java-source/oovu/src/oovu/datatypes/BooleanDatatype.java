@@ -3,7 +3,7 @@ package oovu.datatypes;
 import java.util.Map;
 
 import oovu.messaging.Atoms;
-import oovu.messaging.BuiltMessageHandler;
+import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.Setter;
 import oovu.servers.AttributeServer;
@@ -20,11 +20,11 @@ public class BooleanDatatype extends GenericDatatype {
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {
-            this.client.add_built_message_handler(new MessageHandlerBuilder(
+            this.client.add_message_handler(new MessageHandlerBuilder(
                 "toggle").with_arity(0).with_callback(new Setter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     AttributeServer server =
                         (AttributeServer) built_message_handler.client;
@@ -34,7 +34,7 @@ public class BooleanDatatype extends GenericDatatype {
             }).with_is_binding_relevant(true).with_setter(new Setter() {
                 @Override
                 public Atom[][] execute(
-                    BuiltMessageHandler built_message_handler,
+                    MessageHandler built_message_handler,
                     Atom[] arguments) {
                     BooleanDatatype.this.toggle();
                     return null;

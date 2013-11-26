@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 import oovu.messaging.Atoms;
-import oovu.messaging.BuiltMessageHandler;
+import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.Setter;
 import oovu.servers.AttributeServer;
@@ -25,13 +25,13 @@ public class RangeDatatype extends BoundedDatatype {
         double[] center_width = this.range_to_center_width(range[0], range[1]);
         this.multi_envelope = new MultiEnvelope(this, center_width);
         if (this.client != null) {
-            this.client.add_built_message_handler(new MessageHandlerBuilder(
+            this.client.add_message_handler(new MessageHandlerBuilder(
                 "center")
                 .with_arity(1)
                 .with_callback(new Setter() {
                     @Override
                     public Atom[][] execute(
-                        BuiltMessageHandler built_message_handler,
+                        MessageHandler built_message_handler,
                         Atom[] arguments) {
                         RangeDatatype.this.client.reoutput_value();
                         return null;
@@ -40,7 +40,7 @@ public class RangeDatatype extends BoundedDatatype {
                 .with_setter(new Setter() {
                     @Override
                     public Atom[][] execute(
-                        BuiltMessageHandler built_message_handler,
+                        MessageHandler built_message_handler,
                         Atom[] arguments) {
                         if (0 == arguments.length) {
                             return null;
@@ -50,13 +50,13 @@ public class RangeDatatype extends BoundedDatatype {
                         return null;
                     }
                 }).build(this.client));
-            this.client.add_built_message_handler(new MessageHandlerBuilder(
+            this.client.add_message_handler(new MessageHandlerBuilder(
                 "width")
                 .with_arity(1)
                 .with_callback(new Setter() {
                     @Override
                     public Atom[][] execute(
-                        BuiltMessageHandler built_message_handler,
+                        MessageHandler built_message_handler,
                         Atom[] arguments) {
                         RangeDatatype.this.client.reoutput_value();
                         return null;
@@ -65,7 +65,7 @@ public class RangeDatatype extends BoundedDatatype {
                 .with_setter(new Setter() {
                     @Override
                     public Atom[][] execute(
-                        BuiltMessageHandler built_message_handler,
+                        MessageHandler built_message_handler,
                         Atom[] arguments) {
                         if (0 == arguments.length) {
                             return null;
