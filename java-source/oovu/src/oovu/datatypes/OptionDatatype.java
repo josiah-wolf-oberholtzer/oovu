@@ -5,112 +5,15 @@ import java.util.List;
 import java.util.Map;
 
 import oovu.messaging.Atoms;
+import oovu.messaging.BuiltMessageHandler;
+import oovu.messaging.Getter;
+import oovu.messaging.MessageHandlerBuilder;
+import oovu.messaging.Setter;
 import oovu.servers.AttributeServer;
-import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
 
 public class OptionDatatype extends StringDatatype {
-    private class GetOptionsMessageHandler extends GetterMessageHandler {
-        public GetOptionsMessageHandler(Server client) {
-            super(client, "getoptions");
-        }
-
-        @Override
-        public boolean is_meta_relevant() {
-            return true;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return true;
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            return Atoms.to_atoms("options", OptionDatatype.this.get_options()
-                .toArray(new String[0]));
-        }
-    }
-
-    private class NextOptionMessageHandler extends ActionMessageHandler {
-        public NextOptionMessageHandler(Server client) {
-            super(client, "next");
-        }
-
-        @Override
-        public void call_after() {
-            OptionDatatype.this.client.reoutput_value();
-        }
-
-        @Override
-        public Integer get_arity() {
-            return 0;
-        }
-
-        @Override
-        public boolean is_rampable() {
-            return false;
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            OptionDatatype.this.next_option();
-            return null;
-        }
-    }
-
-    private class PreviousOptionMessageHandler extends ActionMessageHandler {
-        public PreviousOptionMessageHandler(Server client) {
-            super(client, "previous");
-        }
-
-        @Override
-        public void call_after() {
-            OptionDatatype.this.client.reoutput_value();
-        }
-
-        @Override
-        public Integer get_arity() {
-            return 0;
-        }
-
-        @Override
-        public boolean is_rampable() {
-            return false;
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            OptionDatatype.this.previous_option();
-            return null;
-        }
-    }
-
-    private class SetOptionsMessageHandler extends SetterMessageHandler {
-        public SetOptionsMessageHandler(Server client) {
-            super(client, "options");
-        }
-
-        @Override
-        public void call_after() {
-            OptionDatatype.this.client.reoutput_value();
-        }
-
-        @Override
-        public Integer get_arity() {
-            return null;
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            String[] options =
-                OptionDatatype.this.extract_strings_from_atoms(arguments);
-            OptionDatatype.this.set_options(options);
-            return null;
-        }
-    }
-
     protected int option_index;
     protected List<String> options;
 
@@ -123,14 +26,76 @@ public class OptionDatatype extends StringDatatype {
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {
-            this.client.add_message_handler(new GetOptionsMessageHandler(
-                this.client));
-            this.client.add_message_handler(new NextOptionMessageHandler(
-                this.client));
-            this.client.add_message_handler(new PreviousOptionMessageHandler(
-                this.client));
-            this.client.add_message_handler(new SetOptionsMessageHandler(
-                this.client));
+            this.client.add_built_message_handler(new MessageHandlerBuilder(
+                "next").with_arity(0).with_callback(new Setter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    OptionDatatype.this.client.reoutput_value();
+                    return null;
+                }
+            }).with_is_binding_relevant(true).with_setter(new Setter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    OptionDatatype.this.next_option();
+                    return null;
+                }
+            }).build(this.client));
+            this.client.add_built_message_handler(new MessageHandlerBuilder(
+                "options")
+                .with_callback(new Setter() {
+                    @Override
+                    public Atom[][] execute(
+                        BuiltMessageHandler built_message_handler,
+                        Atom[] arguments) {
+                        OptionDatatype.this.client.reoutput_value();
+                        return null;
+                    }
+                })
+                .with_getter(new Getter() {
+                    @Override
+                    public Atom[][] execute(
+                        BuiltMessageHandler built_message_handler,
+                        Atom[] arguments) {
+                        return Atoms.to_atoms(
+                            built_message_handler.get_setter_name(),
+                            OptionDatatype.this.get_options().toArray(
+                                new String[0]));
+                    }
+                }).with_is_meta_relevant(true).with_is_state_relevant(true)
+                .with_setter(new Setter() {
+                    @Override
+                    public Atom[][] execute(
+                        BuiltMessageHandler built_message_handler,
+                        Atom[] arguments) {
+                        String[] options =
+                            OptionDatatype.this
+                                .extract_strings_from_atoms(arguments);
+                        OptionDatatype.this.set_options(options);
+                        return null;
+                    }
+                }).build(this.client));
+            this.client.add_built_message_handler(new MessageHandlerBuilder(
+                "previous").with_arity(0).with_callback(new Setter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    OptionDatatype.this.client.reoutput_value();
+                    return null;
+                }
+            }).with_is_binding_relevant(true).with_setter(new Setter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    OptionDatatype.this.previous_option();
+                    return null;
+                }
+            }).build(this.client));
         }
     }
 
