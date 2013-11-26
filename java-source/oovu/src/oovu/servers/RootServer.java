@@ -15,7 +15,6 @@ import oovu.clients.ServerClient;
 import oovu.eventscripts.EventScriptParser;
 import oovu.messaging.BuiltMessageHandler;
 import oovu.messaging.Getter;
-import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.Request;
 import oovu.messaging.Setter;
@@ -134,12 +133,11 @@ public class RootServer extends Server {
                     if (event_index < 0) {
                         event_index = 0;
                     }
-                    MessageHandler message_handler =
-                        root_server.message_handlers.get("events/goto");
                     Atom[] message_arguments = Atom.newAtom(new int[] {
                         event_index
                     });
-                    message_handler.run(message_arguments);
+                    root_server.make_request(root_server, "events/goto",
+                        message_arguments);
                     return null;
                 }
             }).build(this));

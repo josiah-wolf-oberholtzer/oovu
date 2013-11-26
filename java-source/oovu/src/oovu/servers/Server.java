@@ -18,7 +18,6 @@ import oovu.events.Subscription;
 import oovu.messaging.BuiltMessageHandler;
 import oovu.messaging.DeferredRequestCallback;
 import oovu.messaging.Getter;
-import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.MessagePasser;
 import oovu.messaging.Request;
@@ -35,8 +34,6 @@ abstract public class Server implements MessagePasser, Subscriber {
     protected final Set<Server> child_servers = new HashSet<Server>();
     protected final Map<Class<? extends Event>, Subscription> subscriptions =
         new HashMap<Class<? extends Event>, Subscription>();
-    protected final Map<String, MessageHandler> message_handlers =
-        new HashMap<String, MessageHandler>();
     protected final Map<String, BuiltMessageHandler> built_message_handlers =
         new HashMap<String, BuiltMessageHandler>();
     protected String name = null;
@@ -193,10 +190,6 @@ abstract public class Server implements MessagePasser, Subscriber {
             this.built_message_handlers.put(
                 built_message_handler.get_setter_name(), built_message_handler);
         }
-    }
-
-    public void add_message_handler(MessageHandler message_handler) {
-        this.message_handlers.put(message_handler.get_name(), message_handler);
     }
 
     public void add_subscription(Subscription subscription) {

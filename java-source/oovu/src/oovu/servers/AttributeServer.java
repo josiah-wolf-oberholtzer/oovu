@@ -12,7 +12,6 @@ import oovu.messaging.BooleanMessageHandlerCallback;
 import oovu.messaging.BuiltMessageHandler;
 import oovu.messaging.Getter;
 import oovu.messaging.IntegerMessageHandlerCallback;
-import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.Request;
 import oovu.messaging.Response;
