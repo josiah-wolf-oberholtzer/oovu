@@ -3,60 +3,15 @@ package oovu.datatypes;
 import java.util.Map;
 
 import oovu.messaging.Atoms;
+import oovu.messaging.BuiltMessageHandler;
+import oovu.messaging.Getter;
+import oovu.messaging.MessageHandlerBuilder;
+import oovu.messaging.Setter;
 import oovu.servers.AttributeServer;
-import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
 
 abstract public class BoundedArrayDatatype extends BoundedDatatype {
-    private class GetLengthMessageHandler extends GetterMessageHandler {
-        public GetLengthMessageHandler(Server client) {
-            super(client, "getlength");
-        }
-
-        @Override
-        public boolean is_meta_relevant() {
-            return true;
-        }
-
-        @Override
-        public boolean is_state_relevant() {
-            return true;
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            return Atoms.to_atoms("length",
-                BoundedArrayDatatype.this.get_length());
-        }
-    }
-
-    private class SetLengthMessageHandler extends SetterMessageHandler {
-        public SetLengthMessageHandler(Server client) {
-            super(client, "length");
-        }
-
-        @Override
-        public void call_after() {
-            BoundedArrayDatatype.this.client.reoutput_value();
-        }
-
-        @Override
-        public Integer get_arity() {
-            return 1;
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            int new_length = BoundedArrayDatatype.this.length;
-            if (0 < arguments.length) {
-                new_length = arguments[0].toInt();
-            }
-            BoundedArrayDatatype.this.set_length(new_length);
-            return null;
-        }
-    }
-
     protected int length;
 
     public BoundedArrayDatatype(
@@ -64,10 +19,42 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {
-            client
-                .add_message_handler(new GetLengthMessageHandler(this.client));
-            client
-                .add_message_handler(new SetLengthMessageHandler(this.client));
+            this.client.add_built_message_handler(new MessageHandlerBuilder(
+                "length")
+                .with_callback(new Setter() {
+                    @Override
+                    public Atom[][] execute(
+                        BuiltMessageHandler built_message_handler,
+                        Atom[] arguments) {
+                        AttributeServer server =
+                            (AttributeServer) built_message_handler.client;
+                        server.reoutput_value();
+                        return null;
+                    }
+                })
+                .with_getter(new Getter() {
+                    @Override
+                    public Atom[][] execute(
+                        BuiltMessageHandler built_message_handler,
+                        Atom[] arguments) {
+                        return Atoms.to_atoms(
+                            built_message_handler.get_setter_name(),
+                            BoundedArrayDatatype.this.get_length());
+                    }
+                }).with_is_meta_relevant(true).with_is_state_relevant(true)
+                .with_setter(new Setter() {
+                    @Override
+                    public Atom[][] execute(
+                        BuiltMessageHandler built_message_handler,
+                        Atom[] arguments) {
+                        int new_length = BoundedArrayDatatype.this.length;
+                        if (0 < arguments.length) {
+                            new_length = arguments[0].toInt();
+                        }
+                        BoundedArrayDatatype.this.set_length(new_length);
+                        return null;
+                    }
+                }).build(this.client));
         }
     }
 
