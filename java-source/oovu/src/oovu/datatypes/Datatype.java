@@ -5,31 +5,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import oovu.messaging.Atoms;
+import oovu.messaging.BuiltMessageHandler;
+import oovu.messaging.Getter;
+import oovu.messaging.MessageHandlerBuilder;
 import oovu.servers.AttributeServer;
-import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
 
 public abstract class Datatype {
-    private class GetDatatypeMessageHandler extends InfoGetterMessageHandler {
-        public GetDatatypeMessageHandler(Server client) {
-            super(client, "getdatatype");
-        }
-
-        @Override
-        public String get_name() {
-            return "getdatatype";
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            return Atoms.to_atoms("datatype",
-                Datatype.this.client.datatype.getClass().getSimpleName()
-                    .toLowerCase().replace("datatype", ""));
-        }
-    }
-
     public static Class<?> from_label(String label) {
         if (Datatype.datatype_classes_by_label.containsKey(label)) {
             return Datatype.datatype_classes_by_label.get(label);
@@ -62,12 +46,24 @@ public abstract class Datatype {
 
     public Datatype(AttributeServer client, Map<String, Atom[]> argument_map) {
         this.client = client;
-        if (this.client != null) {
-            this.client.add_message_handler(new GetDatatypeMessageHandler(
-                this.client));
-        }
         this.initialize_prerequisites(argument_map);
         this.initialize_default_value(argument_map);
+        if (this.client != null) {
+            this.client.add_built_message_handler(new MessageHandlerBuilder(
+                "datatype").with_getter(new Getter() {
+                @Override
+                public Atom[][] execute(
+                    BuiltMessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    AttributeServer server =
+                        (AttributeServer) built_message_handler.client;
+                    return Atoms.to_atoms(
+                        built_message_handler.get_setter_name(),
+                        server.datatype.getClass().getSimpleName()
+                            .toLowerCase().replace("datatype", ""));
+                }
+            }).build(this.client));
+        }
     }
 
     public void cleanup_resources() {
