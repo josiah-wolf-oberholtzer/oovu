@@ -9,8 +9,8 @@ import oovu.Proxy;
 import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
 import oovu.messaging.Atoms;
-import oovu.messaging.MessageHandler;
 import oovu.messaging.Getter;
+import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 
 import com.cycling74.max.Atom;

@@ -20,26 +20,26 @@ public class BooleanDatatype extends GenericDatatype {
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {
-            this.client.add_message_handler(new MessageHandlerBuilder(
-                "toggle").with_arity(0).with_callback(new Setter() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    AttributeServer server =
-                        (AttributeServer) built_message_handler.client;
-                    server.reoutput_value();
-                    return null;
-                }
-            }).with_is_binding_relevant(true).with_setter(new Setter() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    BooleanDatatype.this.toggle();
-                    return null;
-                }
-            }).build(this.client));
+            this.client.add_message_handler(new MessageHandlerBuilder("toggle")
+                .with_arity(0).with_callback(new Setter() {
+                    @Override
+                    public Atom[][] execute(
+                        MessageHandler built_message_handler,
+                        Atom[] arguments) {
+                        AttributeServer server =
+                            (AttributeServer) built_message_handler.client;
+                        server.reoutput_value();
+                        return null;
+                    }
+                }).with_is_binding_relevant(true).with_setter(new Setter() {
+                    @Override
+                    public Atom[][] execute(
+                        MessageHandler built_message_handler,
+                        Atom[] arguments) {
+                        BooleanDatatype.this.toggle();
+                        return null;
+                    }
+                }).build(this.client));
         }
     }
 

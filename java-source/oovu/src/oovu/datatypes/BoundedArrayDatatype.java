@@ -3,8 +3,8 @@ package oovu.datatypes;
 import java.util.Map;
 
 import oovu.messaging.Atoms;
-import oovu.messaging.MessageHandler;
 import oovu.messaging.Getter;
+import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.Setter;
 import oovu.servers.AttributeServer;
@@ -19,8 +19,7 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {
-            this.client.add_message_handler(new MessageHandlerBuilder(
-                "length")
+            this.client.add_message_handler(new MessageHandlerBuilder("length")
                 .with_callback(new Setter() {
                     @Override
                     public Atom[][] execute(

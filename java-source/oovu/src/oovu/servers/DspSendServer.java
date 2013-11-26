@@ -9,8 +9,8 @@ import oovu.events.PublisherFilter;
 import oovu.events.Subscription;
 import oovu.events.types.DspSettingsChangedEvent;
 import oovu.messaging.Atoms;
-import oovu.messaging.MessageHandler;
 import oovu.messaging.Getter;
+import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.Setter;
 import oovu.states.State;
@@ -116,9 +116,8 @@ public class DspSendServer extends ModuleMemberServer {
                     return null;
                 }
             }).build(this));
-        this.add_message_handler(new MessageHandlerBuilder(
-            "destinationid").with_is_meta_relevant(true)
-            .with_getter(new Getter() {
+        this.add_message_handler(new MessageHandlerBuilder("destinationid")
+            .with_is_meta_relevant(true).with_getter(new Getter() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,

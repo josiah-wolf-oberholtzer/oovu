@@ -10,8 +10,8 @@ import oovu.addresses.Environment;
 import oovu.addresses.OscAddressNode;
 import oovu.events.types.ModuleNameAcquiredEvent;
 import oovu.messaging.Atoms;
-import oovu.messaging.MessageHandler;
 import oovu.messaging.Getter;
+import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.states.State;
 import oovu.states.StateComponentAggregate;
@@ -101,8 +101,8 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
                     return Atoms.to_atoms(built_message_handler.name, names);
                 }
             }).build(this));
-        this.add_message_handler(new MessageHandlerBuilder("name")
-            .with_getter(new Getter() {
+        this.add_message_handler(new MessageHandlerBuilder("name").with_getter(
+            new Getter() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,

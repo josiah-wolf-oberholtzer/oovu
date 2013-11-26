@@ -20,19 +20,19 @@ public class MessageHandler {
     public final boolean is_state_relevant;
 
     public MessageHandler(
+        Server client,
+        Integer arity,
+        IntegerMessageHandlerCallback arity_callback,
         Setter callback,
         Getter getter,
-        Integer arity,
-        Server client,
-        Setter setter,
-        String name,
         boolean is_binding_relevant,
         boolean is_meta_relevant,
-        boolean is_rampable,
-        boolean is_state_relevant,
         BooleanMessageHandlerCallback is_meta_relevant_callback,
-        IntegerMessageHandlerCallback arity_callback,
-        BooleanMessageHandlerCallback is_rampable_callback) {
+        boolean is_rampable,
+        BooleanMessageHandlerCallback is_rampable_callback,
+        boolean is_state_relevant,
+        String name,
+        Setter setter) {
         this.arity = arity;
         this.arity_callback = arity_callback;
         this.callback = callback;
@@ -57,21 +57,15 @@ public class MessageHandler {
     }
 
     public Atom[][] handle_message(String message) {
-        return this.handle_message(message, null, true);
+        return this.handle_message(message, null);
     }
 
-    public Atom[][] handle_message(
-        String message,
-        Atom[] arguments,
-        boolean callback) {
+    public Atom[][] handle_message(String message, Atom[] arguments) {
         Atom[][] result = null;
         if (message.equals(this.get_getter_name())) {
             result = this.getter.execute(this, arguments);
         } else if (message.equals(this.get_setter_name())) {
-            this.setter.execute(this, arguments);
-        }
-        if (callback && (this.callback != null)) {
-            this.callback.execute(this, null);
+            result = this.setter.execute(this, arguments);
         }
         return result;
     }

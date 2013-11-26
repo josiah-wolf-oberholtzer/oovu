@@ -31,8 +31,7 @@ public class Pattern extends ClockWatcher {
         } else {
             message = "value";
         }
-        MessageHandler message_handler =
-            client.get_message_handler(message);
+        MessageHandler message_handler = client.get_message_handler(message);
         if (message_handler == null) {
             return null;
         } else if (!message_handler.is_binding_relevant) {

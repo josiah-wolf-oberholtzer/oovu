@@ -30,11 +30,11 @@ public class MessageHandlerBuilder {
     }
 
     public MessageHandler build(Server client) {
-        return new MessageHandler(this.callback, this.getter, this.arity,
-            client, this.setter, this.name, this.is_binding_relevant,
-            this.is_meta_relevant, this.is_rampable, this.is_state_relevant,
-            this.is_meta_relevant_callback, this.arity_callback,
-            this.is_rampable_callback);
+        return new MessageHandler(client, this.arity, this.arity_callback,
+            this.callback, this.getter, this.is_binding_relevant,
+            this.is_meta_relevant, this.is_meta_relevant_callback,
+            this.is_rampable, this.is_rampable_callback,
+            this.is_state_relevant, this.name, this.setter);
     }
 
     public MessageHandlerBuilder with_arity(Integer arity) {

@@ -15,9 +15,10 @@ import oovu.clients.ServerClient;
 import oovu.events.Event;
 import oovu.events.Subscriber;
 import oovu.events.Subscription;
-import oovu.messaging.MessageHandler;
+import oovu.messaging.Atoms;
 import oovu.messaging.DeferredRequestCallback;
 import oovu.messaging.Getter;
+import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.MessagePasser;
 import oovu.messaging.Request;
@@ -51,14 +52,16 @@ abstract public class Server implements MessagePasser, Subscriber {
                     ArrayList<Atom[]> result = new ArrayList<Atom[]>();
                     String message_name = "getmeta";
                     MessageHandler getmeta_message_handler =
-                        Server.this.message_handlers.get(message_name);
+                        built_message_handler.client.message_handlers
+                            .get(message_name);
                     Atom[] meta =
                         Atom.removeFirst(getmeta_message_handler
                             .handle_message(message_name)[0]);
                     for (Atom atom : meta) {
                         String name = atom.getString();
                         MessageHandler message_handler =
-                            Server.this.message_handlers.get(name);
+                            built_message_handler.client.message_handlers
+                                .get(name);
                         if (message_handler == null) {
                             continue;
                         }
@@ -90,25 +93,27 @@ abstract public class Server implements MessagePasser, Subscriber {
                     return result;
                 }
             }).build(this));
-        this.add_message_handler(new MessageHandlerBuilder("meta")
-            .with_getter(new Getter() {
+        this.add_message_handler(new MessageHandlerBuilder("meta").with_getter(
+            new Getter() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
                     Atom[] arguments) {
-                    Atom[][] result = new Atom[1][];
-                    ArrayList<Atom> getters = new ArrayList<Atom>();
-                    for (MessageHandler message_handler : built_message_handler.client.message_handlers
-                        .values()) {
-                        if (message_handler.is_meta_relevant) {
-                            getters.add(Atom.newAtom(message_handler
-                                .get_getter_name()));
+                    ArrayList<String> getter_names = new ArrayList<String>();
+                    Set<MessageHandler> message_handlers =
+                        new HashSet<MessageHandler>(
+                            built_message_handler.client.message_handlers
+                                .values());
+                    for (MessageHandler message_handler : message_handlers) {
+                        if (!message_handler.is_meta_relevant) {
+                            continue;
                         }
+                        String getter_name = message_handler.get_getter_name();
+                        getter_names.add(getter_name);
                     }
-                    result[0] =
-                        Atom.newAtom(built_message_handler.name,
-                            getters.toArray(new Atom[0]));
-                    return result;
+                    return Atoms.to_atoms(
+                        built_message_handler.get_getter_name(),
+                        getter_names.toArray(new String[0]));
                 }
             }).build(this));
         this.add_message_handler(new MessageHandlerBuilder("oscaddress")
@@ -143,8 +148,8 @@ abstract public class Server implements MessagePasser, Subscriber {
                     return null;
                 }
             }).build(this));
-        this.add_message_handler(new MessageHandlerBuilder("show")
-            .with_setter(new Setter() {
+        this.add_message_handler(new MessageHandlerBuilder("show").with_setter(
+            new Setter() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
@@ -173,15 +178,14 @@ abstract public class Server implements MessagePasser, Subscriber {
             }).build(this));
     }
 
-    public void add_message_handler(
-        MessageHandler built_message_handler) {
-        if (built_message_handler.getter != null) {
-            this.message_handlers.put(
-                built_message_handler.get_getter_name(), built_message_handler);
+    public void add_message_handler(MessageHandler message_handler) {
+        if (message_handler.getter != null) {
+            this.message_handlers.put(message_handler.get_getter_name(),
+                message_handler);
         }
-        if (built_message_handler.setter != null) {
-            this.message_handlers.put(
-                built_message_handler.get_setter_name(), built_message_handler);
+        if (message_handler.setter != null) {
+            this.message_handlers.put(message_handler.get_setter_name(),
+                message_handler);
         }
     }
 
@@ -315,16 +319,22 @@ abstract public class Server implements MessagePasser, Subscriber {
         }
         Atom[][] payload =
             message_handler.handle_message(message_handler_name,
-                request.payload, false);
-        if (payload != null) {
+                request.payload);
+        if ((payload != null) && (0 < payload.length)) {
             Response response = new Response(this, payload, request);
             if (payload[0][0].equals(Atom.newAtom("value"))) {
                 this.handle_response(response);
+            } else if (request.source != this) {
+                request.source.handle_response(response);
             }
-            request.source.handle_response(response);
         }
         if (request.call_after) {
-            message_handler.callback.execute(message_handler, null);
+            if (message_handler.callback != null) {
+                if (!message_handler_name.equals(message_handler
+                    .get_getter_name())) {
+                    message_handler.callback.execute(message_handler, null);
+                }
+            }
         }
     }
 

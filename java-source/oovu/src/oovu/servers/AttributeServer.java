@@ -11,9 +11,9 @@ import oovu.datatypes.Datatype;
 import oovu.datatypes.GenericDatatype;
 import oovu.messaging.Atoms;
 import oovu.messaging.BooleanMessageHandlerCallback;
-import oovu.messaging.MessageHandler;
 import oovu.messaging.Getter;
 import oovu.messaging.IntegerMessageHandlerCallback;
+import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.Request;
 import oovu.messaging.Response;
@@ -66,9 +66,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         this.add_message_handler(new MessageHandlerBuilder("value")
             .with_arity_callback(new IntegerMessageHandlerCallback() {
                 @Override
-                public
-                    Integer
-                    execute(MessageHandler built_message_handler) {
+                public Integer execute(MessageHandler built_message_handler) {
                     AttributeServer attribute_server =
                         (AttributeServer) built_message_handler.client;
                     return attribute_server.datatype.get_arity();
@@ -88,8 +86,9 @@ abstract public class AttributeServer extends ModuleMemberServer implements
             .with_is_meta_relevant_callback(
                 new BooleanMessageHandlerCallback() {
                     @Override
-                    public boolean execute(
-                        MessageHandler built_message_handler) {
+                    public
+                        boolean
+                        execute(MessageHandler built_message_handler) {
                         if (built_message_handler.client instanceof PropertyServer) {
                             return true;
                         }
@@ -102,14 +101,14 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                     Atom[] arguments) {
                     Atom[][] result = new Atom[1][];
                     result[0] = AttributeServer.this.get_value();
-                    result[0] = Atom.newAtom("value", result[0]);
+                    result[0] =
+                        Atom.newAtom(built_message_handler.get_setter_name(),
+                            result[0]);
                     return result;
                 }
             }).with_is_rampable_callback(new BooleanMessageHandlerCallback() {
                 @Override
-                public
-                    boolean
-                    execute(MessageHandler built_message_handler) {
+                public boolean execute(MessageHandler built_message_handler) {
                     AttributeServer attribute_server =
                         (AttributeServer) built_message_handler.client;
                     return attribute_server.datatype.is_rampable();
@@ -126,8 +125,6 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                 }
             }).build(this));
         if (!(this instanceof ReturnServer)) {
-            // this.add_message_handler(new GetPatternMessageHandler(this));
-            // this.add_message_handler(new SetPatternMessageHandler(this));
             this.add_message_handler(new MessageHandlerBuilder("pattern")
                 .with_is_state_relevant(true).with_getter(new Getter() {
                     @Override
@@ -241,12 +238,14 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         ArrayList<StateComponent> state_entries =
             new ArrayList<StateComponent>();
         String osc_address_string = this.get_osc_address_string();
-        Set<MessageHandler> message_handlers = 
+        Set<MessageHandler> message_handlers =
             new HashSet<MessageHandler>(this.message_handlers.values());
         for (MessageHandler message_handler : message_handlers) {
-            if (message_handler.is_state_relevant && message_handler.getter != null) {
-                Atom[][] getter_payload = message_handler.handle_message(
-                    message_handler.get_getter_name(), null, false);
+            if (message_handler.is_state_relevant
+                && (message_handler.getter != null)) {
+                Atom[][] getter_payload =
+                    message_handler.handle_message(
+                        message_handler.get_getter_name(), null);
                 for (Atom[] substate : getter_payload) {
                     String substate_address =
                         osc_address_string + "/:" + substate[0].getString();

@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import oovu.messaging.Atoms;
-import oovu.messaging.MessageHandler;
 import oovu.messaging.Getter;
+import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.servers.AttributeServer;
 

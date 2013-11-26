@@ -25,8 +25,7 @@ public class RangeDatatype extends BoundedDatatype {
         double[] center_width = this.range_to_center_width(range[0], range[1]);
         this.multi_envelope = new MultiEnvelope(this, center_width);
         if (this.client != null) {
-            this.client.add_message_handler(new MessageHandlerBuilder(
-                "center")
+            this.client.add_message_handler(new MessageHandlerBuilder("center")
                 .with_arity(1)
                 .with_callback(new Setter() {
                     @Override
@@ -50,8 +49,7 @@ public class RangeDatatype extends BoundedDatatype {
                         return null;
                     }
                 }).build(this.client));
-            this.client.add_message_handler(new MessageHandlerBuilder(
-                "width")
+            this.client.add_message_handler(new MessageHandlerBuilder("width")
                 .with_arity(1)
                 .with_callback(new Setter() {
                     @Override
