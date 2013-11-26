@@ -32,12 +32,13 @@ public class Pattern extends ClockWatcher {
             message = "value";
         }
         MessageHandler message_handler = client.get_message_handler(message);
-        if (message_handler == null) {
+        if ((message_handler == null)
+            || message.equals(message_handler.get_getter_name())) {
             return null;
-        } else if (!message_handler.is_binding_relevant) {
+        } else if (!message_handler.get_is_binding_relevant()) {
             return null;
         }
-        arity = message_handler.arity;
+        arity = message_handler.get_arity();
         if (arguments.containsKey("timings")) {
             Atom[] atoms = arguments.get("timings");
             timings = new ValueRange[atoms.length];

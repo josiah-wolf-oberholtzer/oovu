@@ -46,7 +46,8 @@ public class RootServer extends Server {
                     Atom[][] result = RootServer.this.get_formatted_state();
                     for (int i = 0, j = result.length; i < j; i++) {
                         result[i] =
-                            Atom.newAtom(built_message_handler.name, result[i]);
+                            Atom.newAtom(built_message_handler.get_name(),
+                                result[i]);
                     }
                     return result;
                 }

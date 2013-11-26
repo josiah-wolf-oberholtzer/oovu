@@ -42,7 +42,7 @@ abstract public class BoundedDatatype extends Datatype implements
                             MessageHandler built_message_handler,
                             Atom[] arguments) {
                             return Atoms.to_atoms(
-                                built_message_handler.get_setter_name(),
+                                built_message_handler.get_name(),
                                 BoundedDatatype.this.get_maximum());
                         }
                     }).with_is_meta_relevant(true).with_is_state_relevant(true)
@@ -76,7 +76,7 @@ abstract public class BoundedDatatype extends Datatype implements
                             MessageHandler built_message_handler,
                             Atom[] arguments) {
                             return Atoms.to_atoms(
-                                built_message_handler.get_setter_name(),
+                                built_message_handler.get_name(),
                                 BoundedDatatype.this.get_minimum());
                         }
                     }).with_is_meta_relevant(true).with_is_state_relevant(true)

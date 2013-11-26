@@ -36,8 +36,7 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
                     public Atom[][] execute(
                         MessageHandler built_message_handler,
                         Atom[] arguments) {
-                        return Atoms.to_atoms(
-                            built_message_handler.get_setter_name(),
+                        return Atoms.to_atoms(built_message_handler.get_name(),
                             BoundedArrayDatatype.this.get_length());
                     }
                 }).with_is_meta_relevant(true).with_is_state_relevant(true)

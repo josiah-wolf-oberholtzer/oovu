@@ -63,8 +63,7 @@ public class AudioSendDatatype extends OscAddressDatatype {
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
                     Atom[] arguments) {
-                    return Atoms.to_atoms(
-                        built_message_handler.get_setter_name(),
+                    return Atoms.to_atoms(built_message_handler.get_name(),
                         AudioSendDatatype.get_destinations());
                 }
             }).with_is_meta_relevant(true).build(this.client));

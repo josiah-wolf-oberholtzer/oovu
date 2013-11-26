@@ -1,5 +1,7 @@
 package oovu.messaging;
 
+import java.util.Arrays;
+
 import oovu.addresses.OscAddress;
 
 import com.cycling74.max.Atom;
@@ -23,10 +25,12 @@ public class Request {
 
     @Override
     public String toString() {
-        StringBuilder string_builder = new StringBuilder();
-        string_builder.append(this.destination.toString());
-        string_builder.append(" ");
-        string_builder.append(Atom.toOneString(this.payload));
-        return string_builder.toString();
+        return "Request ["
+            + (this.source != null ? "source=" + this.source + ", " : "")
+            + (this.destination != null ? "destination=" + this.destination
+                + ", " : "")
+            + (this.payload != null ? "payload="
+                + Arrays.toString(this.payload) + ", " : "") + "call_after="
+            + this.call_after + "]";
     }
 }

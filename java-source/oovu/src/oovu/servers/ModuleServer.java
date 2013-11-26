@@ -66,11 +66,6 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
         this.module_id = module_id;
         this.dsp_settings_server = null;
         this.attach_to_parent_server(Environment.root_server);
-        // this.add_message_handler(new GetMembersMessageHandler(this));
-        // this.add_message_handler(new GetMethodsMessageHandler(this));
-        // this.add_message_handler(new GetNameMessageHandler(this));
-        // this.add_message_handler(new GetPropertiesMessageHandler(this));
-        // this.add_message_handler(new GetReturnsMessageHandler(this));
         this.add_message_handler(new MessageHandlerBuilder("members")
             .with_getter(new Getter() {
                 @Override
@@ -83,7 +78,8 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
                         new ArrayList<Server>(module_server.child_servers);
                     String[] names =
                         module_server.get_relative_server_names(servers);
-                    return Atoms.to_atoms(built_message_handler.name, names);
+                    return Atoms.to_atoms(built_message_handler.get_name(),
+                        names);
                 }
             }).build(this));
         this.add_message_handler(new MessageHandlerBuilder("methods")
@@ -98,11 +94,12 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
                         module_server.get_child_method_servers();
                     String[] names =
                         module_server.get_relative_server_names(servers);
-                    return Atoms.to_atoms(built_message_handler.name, names);
+                    return Atoms.to_atoms(built_message_handler.get_name(),
+                        names);
                 }
             }).build(this));
-        this.add_message_handler(new MessageHandlerBuilder("name").with_getter(
-            new Getter() {
+        this.add_message_handler(new MessageHandlerBuilder("name")
+            .with_getter(new Getter() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
@@ -113,13 +110,13 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
                     if (name != null) {
                         Atom[][] result = new Atom[1][];
                         result[0] = Atom.newAtom(new String[] {
-                            built_message_handler.name, name
+                            built_message_handler.get_name(), name
                         });
                         return result;
                     }
                     return null;
                 }
-            }).build(this));
+            }).with_is_meta_relevant(true).build(this));
         this.add_message_handler(new MessageHandlerBuilder("properties")
             .with_getter(new Getter() {
                 @Override
@@ -132,7 +129,8 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
                         module_server.get_child_property_servers();
                     String[] names =
                         module_server.get_relative_server_names(servers);
-                    return Atoms.to_atoms(built_message_handler.name, names);
+                    return Atoms.to_atoms(built_message_handler.get_name(),
+                        names);
                 }
             }).build(this));
         this.add_message_handler(new MessageHandlerBuilder("returns")
@@ -147,7 +145,8 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
                         module_server.get_child_return_servers();
                     String[] names =
                         module_server.get_relative_server_names(servers);
-                    return Atoms.to_atoms(built_message_handler.name, names);
+                    return Atoms.to_atoms(built_message_handler.get_name(),
+                        names);
                 }
             }).build(this));
     }

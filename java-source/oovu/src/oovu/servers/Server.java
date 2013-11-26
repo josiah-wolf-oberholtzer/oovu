@@ -88,7 +88,7 @@ abstract public class Server implements MessagePasser, Subscriber {
                             new String[0]);
                     Arrays.sort(message_handler_names);
                     result[0] =
-                        Atom.newAtom(built_message_handler.name,
+                        Atom.newAtom(built_message_handler.get_name(),
                             Atom.newAtom(message_handler_names));
                     return result;
                 }
@@ -105,7 +105,7 @@ abstract public class Server implements MessagePasser, Subscriber {
                             built_message_handler.client.message_handlers
                                 .values());
                     for (MessageHandler message_handler : message_handlers) {
-                        if (!message_handler.is_meta_relevant) {
+                        if (!message_handler.get_is_meta_relevant()) {
                             continue;
                         }
                         String getter_name = message_handler.get_getter_name();
@@ -126,9 +126,11 @@ abstract public class Server implements MessagePasser, Subscriber {
                         built_message_handler.client.get_osc_address_string();
                     if (osc_address_string != null) {
                         Atom[][] result = new Atom[1][];
-                        result[0] = Atom.newAtom(new String[] {
-                            built_message_handler.name, osc_address_string
-                        });
+                        result[0] =
+                            Atom.newAtom(new String[] {
+                                built_message_handler.get_name(),
+                                osc_address_string
+                            });
                         return result;
                     }
                     return null;
@@ -169,7 +171,8 @@ abstract public class Server implements MessagePasser, Subscriber {
                     MessageHandler built_message_handler,
                     Atom[] arguments) {
                     Atom[][] result = new Atom[1][2];
-                    result[0][0] = Atom.newAtom(built_message_handler.name);
+                    result[0][0] =
+                        Atom.newAtom(built_message_handler.get_name());
                     result[0][1] =
                         Atom.newAtom(System
                             .identityHashCode(built_message_handler.client));
@@ -184,7 +187,7 @@ abstract public class Server implements MessagePasser, Subscriber {
                 message_handler);
         }
         if (message_handler.setter != null) {
-            this.message_handlers.put(message_handler.get_setter_name(),
+            this.message_handlers.put(message_handler.get_name(),
                 message_handler);
         }
     }
@@ -320,11 +323,11 @@ abstract public class Server implements MessagePasser, Subscriber {
         Atom[][] payload =
             message_handler.handle_message(message_handler_name,
                 request.payload);
+        Response response = new Response(this, payload, request);
         if ((payload != null) && (0 < payload.length)) {
-            Response response = new Response(this, payload, request);
             if (payload[0][0].equals(Atom.newAtom("value"))) {
                 this.handle_response(response);
-            } else if (request.source != this) {
+            } else {
                 request.source.handle_response(response);
             }
         }

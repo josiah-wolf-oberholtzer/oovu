@@ -91,7 +91,7 @@ public class DspSendServer extends ModuleMemberServer {
                     Atom[] arguments) {
                     DspSendServer server =
                         (DspSendServer) built_message_handler.client;
-                    return Atoms.to_atoms(built_message_handler.name,
+                    return Atoms.to_atoms(built_message_handler.get_name(),
                         server.get_destination_address_string());
                 }
             }).with_setter(new Setter() {
@@ -124,7 +124,7 @@ public class DspSendServer extends ModuleMemberServer {
                     Atom[] arguments) {
                     DspSendServer server =
                         (DspSendServer) built_message_handler.client;
-                    return Atoms.to_atoms(built_message_handler.name,
+                    return Atoms.to_atoms(built_message_handler.get_name(),
                         server.get_destination_id());
                 }
             }).build(this));

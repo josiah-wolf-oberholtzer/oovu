@@ -57,8 +57,7 @@ public abstract class Datatype {
                     Atom[] arguments) {
                     AttributeServer server =
                         (AttributeServer) built_message_handler.client;
-                    return Atoms.to_atoms(
-                        built_message_handler.get_setter_name(),
+                    return Atoms.to_atoms(built_message_handler.get_name(),
                         server.datatype.getClass().getSimpleName()
                             .toLowerCase().replace("datatype", ""));
                 }

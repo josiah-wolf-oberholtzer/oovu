@@ -21,4 +21,20 @@ public class Response {
         return this.source.get_osc_address_node()
             .get_relative_osc_address_string(relative_osc_address_node);
     }
+
+    @Override
+    public String toString() {
+        String payload_info = null;
+        if (this.payload != null) {
+            payload_info = "";
+            for (Atom[] element : this.payload) {
+                payload_info += "[" + Atom.toOneString(element) + "]";
+            }
+        }
+        return "Response ["
+            + (this.source != null ? "source=" + this.source + ", " : "")
+            + (this.payload != null ? "payload=" + payload_info + ", " : "[]")
+            + (this.original_request != null ? "original_request="
+                + this.original_request : "") + "]";
+    }
 }

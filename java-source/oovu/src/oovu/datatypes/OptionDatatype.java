@@ -61,7 +61,7 @@ public class OptionDatatype extends StringDatatype {
                             MessageHandler built_message_handler,
                             Atom[] arguments) {
                             return Atoms.to_atoms(
-                                built_message_handler.get_setter_name(),
+                                built_message_handler.get_name(),
                                 OptionDatatype.this.get_options().toArray(
                                     new String[0]));
                         }

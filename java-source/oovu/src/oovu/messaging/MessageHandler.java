@@ -5,19 +5,19 @@ import oovu.servers.Server;
 import com.cycling74.max.Atom;
 
 public class MessageHandler {
-    public final BooleanMessageHandlerCallback is_meta_relevant_callback;
-    public final BooleanMessageHandlerCallback is_rampable_callback;
+    private final BooleanMessageHandlerCallback is_meta_relevant_callback;
+    private final BooleanMessageHandlerCallback is_rampable_callback;
     public final Getter getter;
-    public final Integer arity;
-    public final IntegerMessageHandlerCallback arity_callback;
+    private final Integer arity;
+    private final IntegerMessageHandlerCallback arity_callback;
     public final Server client;
     public final Setter callback;
     public final Setter setter;
-    public final String name;
-    public final boolean is_binding_relevant;
-    public final boolean is_meta_relevant;
-    public final boolean is_rampable;
-    public final boolean is_state_relevant;
+    private final String name;
+    private final boolean is_binding_relevant;
+    private final boolean is_meta_relevant;
+    private final boolean is_rampable;
+    private final boolean is_state_relevant;
 
     public MessageHandler(
         Server client,
@@ -48,11 +48,40 @@ public class MessageHandler {
         this.setter = setter;
     }
 
+    public Integer get_arity() {
+        if (this.arity_callback != null) {
+            return this.arity_callback.execute(this);
+        }
+        return this.arity;
+    }
+
     public String get_getter_name() {
         return "get" + this.name;
     }
 
-    public String get_setter_name() {
+    public boolean get_is_binding_relevant() {
+        return this.is_binding_relevant;
+    }
+
+    public boolean get_is_meta_relevant() {
+        if (this.is_meta_relevant_callback != null) {
+            return this.is_meta_relevant_callback.execute(this);
+        }
+        return this.is_meta_relevant;
+    }
+
+    public boolean get_is_rampable() {
+        if (this.is_rampable_callback != null) {
+            return this.is_rampable_callback.execute(this);
+        }
+        return this.is_rampable;
+    }
+
+    public boolean get_is_state_relevant() {
+        return this.is_state_relevant;
+    }
+
+    public String get_name() {
         return this.name;
     }
 
@@ -64,7 +93,7 @@ public class MessageHandler {
         Atom[][] result = null;
         if (message.equals(this.get_getter_name())) {
             result = this.getter.execute(this, arguments);
-        } else if (message.equals(this.get_setter_name())) {
+        } else if (message.equals(this.get_name())) {
             result = this.setter.execute(this, arguments);
         }
         return result;

@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import oovu.Proxy;
 import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
 import oovu.messaging.Atoms;
@@ -91,9 +90,10 @@ public abstract class ModuleMemberServer extends Server {
             }
         }
         if (server_is_new) {
-            for (Proxy proxy : osc_address_node.get_proxies()) {
-                member_server.make_deferred_request(proxy, "dumpmeta", null);
-            }
+            String acquired_name =
+                osc_address_node.get_relative_osc_address_string(module_server
+                    .get_osc_address_node());
+            member_server.name = acquired_name;
         }
         return member_server;
     }
@@ -169,7 +169,7 @@ public abstract class ModuleMemberServer extends Server {
                     if (module_member_server.parent_server == null) {
                         return null;
                     }
-                    return Atoms.to_atoms(built_message_handler.name,
+                    return Atoms.to_atoms(built_message_handler.get_name(),
                         module_member_server.parent_server.get_name());
                 }
             }).build(this));

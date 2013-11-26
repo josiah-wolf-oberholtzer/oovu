@@ -181,7 +181,9 @@ public class Proxy extends MaxPeer implements MessagePasser {
 
     @Override
     public void handle_response(Response response) {
-        if (this.message_handler_name != null) {
+        if (this.message_handler_name == null) {
+            this.max_adapter.handle_response(response);
+        } else {
             for (Atom[] atoms : response.payload) {
                 if (!atoms[0].getString().equals(this.message_handler_name)) {
                     continue;
@@ -193,8 +195,6 @@ public class Proxy extends MaxPeer implements MessagePasser {
                         response.original_request);
                 this.max_adapter.handle_response(new_response);
             }
-        } else {
-            this.max_adapter.handle_response(response);
         }
     }
 

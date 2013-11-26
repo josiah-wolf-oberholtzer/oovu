@@ -33,10 +33,6 @@ abstract public class AttributeServer extends ModuleMemberServer implements
 
     public AttributeServer(ModuleServer module_server) {
         super(module_server);
-        // this.add_message_handler(new GetPriorityMessageHandler(this));
-        // this.add_message_handler(new GetValueMessageHandler(this));
-        // this.add_message_handler(new SetPriorityMessageHandler(this));
-        // this.add_message_handler(new SetValueMessageHandler(this));
         this.add_message_handler(new MessageHandlerBuilder("priority")
             .with_getter(new Getter() {
                 @Override
@@ -45,7 +41,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                     Atom[] arguments) {
                     AttributeServer attribute_server =
                         (AttributeServer) built_message_handler.client;
-                    return Atoms.to_atoms(built_message_handler.name,
+                    return Atoms.to_atoms(built_message_handler.get_name(),
                         attribute_server.get_priority());
                 }
             }).with_setter(new Setter() {
@@ -102,7 +98,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                     Atom[][] result = new Atom[1][];
                     result[0] = AttributeServer.this.get_value();
                     result[0] =
-                        Atom.newAtom(built_message_handler.get_setter_name(),
+                        Atom.newAtom(built_message_handler.get_name(),
                             result[0]);
                     return result;
                 }
@@ -139,7 +135,8 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                             result[0] = pattern.to_atoms();
                         }
                         result[0] =
-                            Atom.newAtom(built_message_handler.name, result[0]);
+                            Atom.newAtom(built_message_handler.get_name(),
+                                result[0]);
                         return result;
                     }
                 }).with_setter(new Setter() {
@@ -241,7 +238,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         Set<MessageHandler> message_handlers =
             new HashSet<MessageHandler>(this.message_handlers.values());
         for (MessageHandler message_handler : message_handlers) {
-            if (message_handler.is_state_relevant
+            if (message_handler.get_is_state_relevant()
                 && (message_handler.getter != null)) {
                 Atom[][] getter_payload =
                     message_handler.handle_message(

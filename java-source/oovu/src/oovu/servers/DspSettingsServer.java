@@ -45,8 +45,7 @@ public class DspSettingsServer extends ModuleMemberServer {
                     Atom[] arguments) {
                     DspSettingsServer server =
                         (DspSettingsServer) built_message_handler.client;
-                    return Atoms.to_atoms(
-                        built_message_handler.get_setter_name(),
+                    return Atoms.to_atoms(built_message_handler.get_name(),
                         server.get_is_active());
                 }
             }).with_setter(new Setter() {
@@ -71,8 +70,7 @@ public class DspSettingsServer extends ModuleMemberServer {
                     Atom[] arguments) {
                     DspSettingsServer server =
                         (DspSettingsServer) built_message_handler.client;
-                    return Atoms.to_atoms(
-                        built_message_handler.get_setter_name(),
+                    return Atoms.to_atoms(built_message_handler.get_name(),
                         server.get_input_count());
                 }
             }).build(this));
@@ -95,8 +93,7 @@ public class DspSettingsServer extends ModuleMemberServer {
                     Atom[] arguments) {
                     DspSettingsServer server =
                         (DspSettingsServer) built_message_handler.client;
-                    return Atoms.to_atoms(
-                        built_message_handler.get_setter_name(),
+                    return Atoms.to_atoms(built_message_handler.get_name(),
                         server.get_limiting());
                 }
             }).with_setter(new Setter() {
@@ -121,8 +118,7 @@ public class DspSettingsServer extends ModuleMemberServer {
                     Atom[] arguments) {
                     DspSettingsServer server =
                         (DspSettingsServer) built_message_handler.client;
-                    return Atoms.to_atoms(
-                        built_message_handler.get_setter_name(),
+                    return Atoms.to_atoms(built_message_handler.get_name(),
                         server.get_output_count());
                 }
             }).build(this));
@@ -145,8 +141,7 @@ public class DspSettingsServer extends ModuleMemberServer {
                     Atom[] arguments) {
                     DspSettingsServer server =
                         (DspSettingsServer) built_message_handler.client;
-                    return Atoms.to_atoms(
-                        built_message_handler.get_setter_name(),
+                    return Atoms.to_atoms(built_message_handler.get_name(),
                         server.get_send_count());
                 }
             }).with_setter(new Setter() {
@@ -188,8 +183,7 @@ public class DspSettingsServer extends ModuleMemberServer {
                     Atom[] arguments) {
                     DspSettingsServer server =
                         (DspSettingsServer) built_message_handler.client;
-                    return Atoms.to_atoms(
-                        built_message_handler.get_setter_name(),
+                    return Atoms.to_atoms(built_message_handler.get_name(),
                         server.get_voice_count());
                 }
             }).with_setter(new Setter() {
