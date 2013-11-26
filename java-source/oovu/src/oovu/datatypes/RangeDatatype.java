@@ -4,75 +4,15 @@ import java.util.Arrays;
 import java.util.Map;
 
 import oovu.messaging.Atoms;
+import oovu.messaging.BuiltMessageHandler;
+import oovu.messaging.MessageHandlerBuilder;
+import oovu.messaging.Setter;
 import oovu.servers.AttributeServer;
-import oovu.servers.Server;
 import oovu.timing.MultiEnvelope;
 
 import com.cycling74.max.Atom;
 
 public class RangeDatatype extends BoundedDatatype {
-    private class CenterMessageHandler extends ActionMessageHandler {
-        public CenterMessageHandler(Server client) {
-            super(client, "center");
-        }
-
-        @Override
-        public void call_after() {
-            RangeDatatype.this.client.reoutput_value();
-        }
-
-        @Override
-        public Integer get_arity() {
-            return 1;
-        }
-
-        @Override
-        public boolean is_rampable() {
-            return true;
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            if (0 == arguments.length) {
-                return null;
-            }
-            double[] control_values = Atom.toDouble(arguments);
-            RangeDatatype.this.apply_new_center(control_values);
-            return null;
-        }
-    }
-
-    private class WidthMessageHandler extends ActionMessageHandler {
-        public WidthMessageHandler(Server client) {
-            super(client, "width");
-        }
-
-        @Override
-        public void call_after() {
-            RangeDatatype.this.client.reoutput_value();
-        }
-
-        @Override
-        public Integer get_arity() {
-            return 1;
-        }
-
-        @Override
-        public boolean is_rampable() {
-            return true;
-        }
-
-        @Override
-        public Atom[][] run(Atom[] arguments) {
-            if (0 == arguments.length) {
-                return null;
-            }
-            double[] control_values = Atom.toDouble(arguments);
-            RangeDatatype.this.apply_new_width(control_values);
-            return null;
-        }
-    }
-
     public RangeDatatype(Atom[] arguments) {
         this(null, Atoms.to_map(arguments));
     }
@@ -81,15 +21,61 @@ public class RangeDatatype extends BoundedDatatype {
         AttributeServer client,
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
-        if (this.client != null) {
-            this.client.add_message_handler(new CenterMessageHandler(
-                this.client));
-            this.client
-                .add_message_handler(new WidthMessageHandler(this.client));
-        }
         double[] range = Atom.toDouble(this.value);
         double[] center_width = this.range_to_center_width(range[0], range[1]);
         this.multi_envelope = new MultiEnvelope(this, center_width);
+        if (this.client != null) {
+            this.client.add_built_message_handler(new MessageHandlerBuilder(
+                "center")
+                .with_arity(1)
+                .with_callback(new Setter() {
+                    @Override
+                    public Atom[][] execute(
+                        BuiltMessageHandler built_message_handler,
+                        Atom[] arguments) {
+                        RangeDatatype.this.client.reoutput_value();
+                        return null;
+                    }
+                }).with_is_binding_relevant(true).with_is_rampable(true)
+                .with_setter(new Setter() {
+                    @Override
+                    public Atom[][] execute(
+                        BuiltMessageHandler built_message_handler,
+                        Atom[] arguments) {
+                        if (0 == arguments.length) {
+                            return null;
+                        }
+                        double[] control_values = Atom.toDouble(arguments);
+                        RangeDatatype.this.apply_new_center(control_values);
+                        return null;
+                    }
+                }).build(this.client));
+            this.client.add_built_message_handler(new MessageHandlerBuilder(
+                "width")
+                .with_arity(1)
+                .with_callback(new Setter() {
+                    @Override
+                    public Atom[][] execute(
+                        BuiltMessageHandler built_message_handler,
+                        Atom[] arguments) {
+                        RangeDatatype.this.client.reoutput_value();
+                        return null;
+                    }
+                }).with_is_binding_relevant(true).with_is_rampable(true)
+                .with_setter(new Setter() {
+                    @Override
+                    public Atom[][] execute(
+                        BuiltMessageHandler built_message_handler,
+                        Atom[] arguments) {
+                        if (0 == arguments.length) {
+                            return null;
+                        }
+                        double[] control_values = Atom.toDouble(arguments);
+                        RangeDatatype.this.apply_new_width(control_values);
+                        return null;
+                    }
+                }).build(this.client));
+        }
     }
 
     public void apply_new_center(double[] control_values) {
