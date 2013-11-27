@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 import oovu.messaging.Atoms;
-import oovu.messaging.Getter;
+import oovu.messaging.MessageHandlerCallback;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.Setter;
@@ -36,7 +36,7 @@ abstract public class BoundedDatatype extends Datatype implements
                             return null;
                         }
                     })
-                    .with_getter(new Getter() {
+                    .with_getter(new MessageHandlerCallback() {
                         @Override
                         public Atom[][] execute(
                             MessageHandler built_message_handler,
@@ -70,7 +70,7 @@ abstract public class BoundedDatatype extends Datatype implements
                             return null;
                         }
                     })
-                    .with_getter(new Getter() {
+                    .with_getter(new MessageHandlerCallback() {
                         @Override
                         public Atom[][] execute(
                             MessageHandler built_message_handler,

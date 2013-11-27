@@ -8,7 +8,7 @@ import oovu.events.Event;
 import oovu.events.Subscription;
 import oovu.events.types.DspReceiversChangedEvent;
 import oovu.messaging.Atoms;
-import oovu.messaging.Getter;
+import oovu.messaging.MessageHandlerCallback;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.servers.AttributeServer;
@@ -58,7 +58,7 @@ public class AudioSendDatatype extends OscAddressDatatype {
                 new DspReceiversChangedSubscription(client);
             subscription.subscribe();
             this.client.add_message_handler(new MessageHandlerBuilder(
-                "destinations").with_getter(new Getter() {
+                "destinations").with_getter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,

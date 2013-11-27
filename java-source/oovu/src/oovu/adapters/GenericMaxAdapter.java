@@ -22,6 +22,7 @@ public class GenericMaxAdapter extends MaxAdapter {
             response.get_relative_osc_address(this.max_peer
                 .get_osc_address_node());
         for (Atom[] output : response.payload) {
+
             if (output[0].equals(MaxAdapter.value_atom)) {
                 output = Atom.removeFirst(output);
                 if (relative_osc_address != null) {
@@ -29,7 +30,6 @@ public class GenericMaxAdapter extends MaxAdapter {
                 }
                 this.outlet(1, output);
                 this.outlet(0, Atom.newAtom("set", output));
-                // this.output_value_response_payload(output);
             } else {
                 if (relative_osc_address != null) {
                     String message = output[0].getString();
@@ -42,7 +42,6 @@ public class GenericMaxAdapter extends MaxAdapter {
                     // this.output_value_response_payload(output);
                 } else {
                     this.outlet(2, output);
-                    // this.output_interface_response_payload(output);
                 }
             }
         }

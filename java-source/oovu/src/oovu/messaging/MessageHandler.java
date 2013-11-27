@@ -7,7 +7,7 @@ import com.cycling74.max.Atom;
 public class MessageHandler {
     private final BooleanMessageHandlerCallback is_meta_relevant_callback;
     private final BooleanMessageHandlerCallback is_rampable_callback;
-    public final Getter getter;
+    public final MessageHandlerCallback getter;
     private final Integer arity;
     private final IntegerMessageHandlerCallback arity_callback;
     public final Server client;
@@ -24,7 +24,7 @@ public class MessageHandler {
         Integer arity,
         IntegerMessageHandlerCallback arity_callback,
         Setter callback,
-        Getter getter,
+        MessageHandlerCallback getter,
         boolean is_binding_relevant,
         boolean is_meta_relevant,
         BooleanMessageHandlerCallback is_meta_relevant_callback,

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import oovu.messaging.Atoms;
-import oovu.messaging.Getter;
+import oovu.messaging.MessageHandlerCallback;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.servers.AttributeServer;
@@ -50,7 +50,7 @@ public abstract class Datatype {
         this.initialize_default_value(argument_map);
         if (this.client != null) {
             this.client.add_message_handler(new MessageHandlerBuilder(
-                "datatype").with_getter(new Getter() {
+                "datatype").with_getter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,

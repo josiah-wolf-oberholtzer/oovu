@@ -8,7 +8,7 @@ import java.util.Map;
 import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
 import oovu.messaging.Atoms;
-import oovu.messaging.Getter;
+import oovu.messaging.MessageHandlerCallback;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 
@@ -159,7 +159,7 @@ public abstract class ModuleMemberServer extends Server {
         this.attach_to_parent_server(module_server);
         // this.add_message_handler(new GetModuleNameMessageHandler(this));
         this.add_message_handler(new MessageHandlerBuilder("modulename")
-            .with_getter(new Getter() {
+            .with_getter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,

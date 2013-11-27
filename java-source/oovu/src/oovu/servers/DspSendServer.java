@@ -9,7 +9,7 @@ import oovu.events.PublisherFilter;
 import oovu.events.Subscription;
 import oovu.events.types.DspSettingsChangedEvent;
 import oovu.messaging.Atoms;
-import oovu.messaging.Getter;
+import oovu.messaging.MessageHandlerCallback;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.Setter;
@@ -84,7 +84,7 @@ public class DspSendServer extends ModuleMemberServer {
                     return null;
                 }
             }).with_is_meta_relevant(true).with_is_state_relevant(true)
-            .with_getter(new Getter() {
+            .with_getter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
@@ -117,7 +117,7 @@ public class DspSendServer extends ModuleMemberServer {
                 }
             }).build(this));
         this.add_message_handler(new MessageHandlerBuilder("destinationid")
-            .with_is_meta_relevant(true).with_getter(new Getter() {
+            .with_is_meta_relevant(true).with_getter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
@@ -129,7 +129,7 @@ public class DspSendServer extends ModuleMemberServer {
                 }
             }).build(this));
         this.add_message_handler(new MessageHandlerBuilder("destinations")
-            .with_is_meta_relevant(true).with_getter(new Getter() {
+            .with_is_meta_relevant(true).with_getter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
@@ -139,7 +139,7 @@ public class DspSendServer extends ModuleMemberServer {
                 }
             }).build(this));
         this.add_message_handler(new MessageHandlerBuilder("io")
-            .with_is_meta_relevant(true).with_getter(new Getter() {
+            .with_is_meta_relevant(true).with_getter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
@@ -153,7 +153,7 @@ public class DspSendServer extends ModuleMemberServer {
                 }
             }).build(this));
         this.add_message_handler(new MessageHandlerBuilder("routing")
-            .with_is_meta_relevant(true).with_getter(new Getter() {
+            .with_is_meta_relevant(true).with_getter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,

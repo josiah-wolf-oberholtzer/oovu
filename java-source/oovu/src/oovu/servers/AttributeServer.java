@@ -11,7 +11,7 @@ import oovu.datatypes.Datatype;
 import oovu.datatypes.GenericDatatype;
 import oovu.messaging.Atoms;
 import oovu.messaging.BooleanMessageHandlerCallback;
-import oovu.messaging.Getter;
+import oovu.messaging.MessageHandlerCallback;
 import oovu.messaging.IntegerMessageHandlerCallback;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
@@ -33,96 +33,104 @@ abstract public class AttributeServer extends ModuleMemberServer implements
 
     public AttributeServer(ModuleServer module_server) {
         super(module_server);
-        this.add_message_handler(new MessageHandlerBuilder("priority")
-            .with_getter(new Getter() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    AttributeServer attribute_server =
-                        (AttributeServer) built_message_handler.client;
-                    return Atoms.to_atoms(built_message_handler.get_name(),
-                        attribute_server.get_priority());
+        MessageHandlerBuilder priority_builder =
+            new MessageHandlerBuilder("priority");
+        priority_builder.with_getter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                AttributeServer attribute_server =
+                    (AttributeServer) built_message_handler.client;
+                return Atoms.to_atoms(built_message_handler.get_name(),
+                    attribute_server.get_priority());
+            }
+        });
+        priority_builder.with_setter(new Setter() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                AttributeServer attribute_server =
+                    (AttributeServer) built_message_handler.client;
+                Integer priority = null;
+                if (0 < arguments.length) {
+                    priority = arguments[0].toInt();
                 }
-            }).with_setter(new Setter() {
+                attribute_server.set_priority(priority);
+                return null;
+            }
+        });
+        this.add_message_handler(priority_builder.build(this));
+        MessageHandlerBuilder value_builder =
+            new MessageHandlerBuilder("value");
+        value_builder.with_arity_callback(new IntegerMessageHandlerCallback() {
+            @Override
+            public Integer execute(MessageHandler built_message_handler) {
+                AttributeServer attribute_server =
+                    (AttributeServer) built_message_handler.client;
+                return attribute_server.datatype.get_arity();
+            }
+        });
+        value_builder.with_callback(new Setter() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                built_message_handler.client.make_request(
+                    built_message_handler.client, "getvalue", null);
+                return null;
+            }
+        });
+        value_builder.with_is_binding_relevant(true);
+        value_builder
+            .with_is_meta_relevant_callback(new BooleanMessageHandlerCallback() {
                 @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    AttributeServer attribute_server =
-                        (AttributeServer) built_message_handler.client;
-                    Integer priority = null;
-                    if (0 < arguments.length) {
-                        priority = arguments[0].toInt();
+                public boolean execute(MessageHandler built_message_handler) {
+                    if (built_message_handler.client instanceof PropertyServer) {
+                        return true;
                     }
-                    attribute_server.set_priority(priority);
-                    return null;
+                    return false;
                 }
-            }).build(this));
-        this.add_message_handler(new MessageHandlerBuilder("value")
-            .with_arity_callback(new IntegerMessageHandlerCallback() {
-                @Override
-                public Integer execute(MessageHandler built_message_handler) {
-                    AttributeServer attribute_server =
-                        (AttributeServer) built_message_handler.client;
-                    return attribute_server.datatype.get_arity();
-                }
-            })
-            .with_callback(new Setter() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    built_message_handler.client.make_request(
-                        built_message_handler.client, "getvalue", null);
-                    return null;
-                }
-            })
-            .with_is_binding_relevant(true)
-            .with_is_meta_relevant_callback(
-                new BooleanMessageHandlerCallback() {
-                    @Override
-                    public
-                        boolean
-                        execute(MessageHandler built_message_handler) {
-                        if (built_message_handler.client instanceof PropertyServer) {
-                            return true;
-                        }
-                        return false;
-                    }
-                }).with_getter(new Getter() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    Atom[][] result = new Atom[1][];
-                    result[0] = AttributeServer.this.get_value();
-                    result[0] =
-                        Atom.newAtom(built_message_handler.get_name(),
-                            result[0]);
-                    return result;
-                }
-            }).with_is_rampable_callback(new BooleanMessageHandlerCallback() {
+            });
+        value_builder.with_getter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                Atom[][] result = new Atom[1][];
+                result[0] = AttributeServer.this.get_value();
+                result[0] =
+                    Atom.newAtom(built_message_handler.get_name(), result[0]);
+                return result;
+            }
+        });
+        value_builder
+            .with_is_rampable_callback(new BooleanMessageHandlerCallback() {
                 @Override
                 public boolean execute(MessageHandler built_message_handler) {
                     AttributeServer attribute_server =
                         (AttributeServer) built_message_handler.client;
                     return attribute_server.datatype.is_rampable();
                 }
-            }).with_setter(new Setter() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    AttributeServer attribute_server =
-                        (AttributeServer) built_message_handler.client;
-                    attribute_server.set_value(arguments);
-                    return null;
-                }
-            }).build(this));
+            });
+        value_builder.with_setter(new Setter() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                AttributeServer attribute_server =
+                    (AttributeServer) built_message_handler.client;
+                attribute_server.set_value(arguments);
+                return null;
+            }
+        });
+        this.add_message_handler(value_builder.build(this));
         if (!(this instanceof ReturnServer)) {
-            this.add_message_handler(new MessageHandlerBuilder("pattern")
-                .with_is_state_relevant(true).with_getter(new Getter() {
+            MessageHandlerBuilder pattern_builder =
+                new MessageHandlerBuilder("pattern");
+            pattern_builder.with_is_state_relevant(true).with_getter(
+                new MessageHandlerCallback() {
                     @Override
                     public Atom[][] execute(
                         MessageHandler built_message_handler,
@@ -139,22 +147,24 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                                 result[0]);
                         return result;
                     }
-                }).with_setter(new Setter() {
-                    @Override
-                    public Atom[][] execute(
-                        MessageHandler built_message_handler,
-                        Atom[] arguments) {
-                        AttributeServer attribute_server =
-                            (AttributeServer) built_message_handler.client;
-                        Pattern pattern = null;
-                        if (0 < arguments.length) {
-                            pattern =
-                                Pattern.from_atoms(attribute_server, arguments);
-                        }
-                        attribute_server.set_pattern(pattern);
-                        return null;
+                });
+            pattern_builder.with_setter(new Setter() {
+                @Override
+                public Atom[][] execute(
+                    MessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    AttributeServer attribute_server =
+                        (AttributeServer) built_message_handler.client;
+                    Pattern pattern = null;
+                    if (0 < arguments.length) {
+                        pattern =
+                            Pattern.from_atoms(attribute_server, arguments);
                     }
-                }).build(this));
+                    attribute_server.set_pattern(pattern);
+                    return null;
+                }
+            });
+            this.add_message_handler(pattern_builder.build(this));
         }
     }
 

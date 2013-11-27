@@ -8,7 +8,7 @@ import java.util.Map;
 import oovu.addresses.Environment;
 import oovu.events.types.DspSettingsChangedEvent;
 import oovu.messaging.Atoms;
-import oovu.messaging.Getter;
+import oovu.messaging.MessageHandlerCallback;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.Setter;
@@ -38,7 +38,7 @@ public class DspSettingsServer extends ModuleMemberServer {
                     return null;
                 }
             }).with_is_meta_relevant(true).with_is_state_relevant(true)
-            .with_getter(new Getter() {
+            .with_getter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
@@ -63,7 +63,7 @@ public class DspSettingsServer extends ModuleMemberServer {
                 }
             }).build(this));
         this.add_message_handler(new MessageHandlerBuilder("inputcount")
-            .with_is_meta_relevant(true).with_getter(new Getter() {
+            .with_is_meta_relevant(true).with_getter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
@@ -86,7 +86,7 @@ public class DspSettingsServer extends ModuleMemberServer {
                     return null;
                 }
             }).with_is_meta_relevant(true).with_is_state_relevant(true)
-            .with_getter(new Getter() {
+            .with_getter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
@@ -111,7 +111,7 @@ public class DspSettingsServer extends ModuleMemberServer {
                 }
             }).build(this));
         this.add_message_handler(new MessageHandlerBuilder("outputcount")
-            .with_is_meta_relevant(true).with_getter(new Getter() {
+            .with_is_meta_relevant(true).with_getter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
@@ -134,7 +134,7 @@ public class DspSettingsServer extends ModuleMemberServer {
                     return null;
                 }
             }).with_is_meta_relevant(true).with_is_state_relevant(true)
-            .with_getter(new Getter() {
+            .with_getter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
@@ -176,7 +176,7 @@ public class DspSettingsServer extends ModuleMemberServer {
                     return null;
                 }
             }).with_is_meta_relevant(true).with_is_state_relevant(true)
-            .with_getter(new Getter() {
+            .with_getter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,

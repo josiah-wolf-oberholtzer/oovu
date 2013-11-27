@@ -17,7 +17,7 @@ import oovu.events.Subscriber;
 import oovu.events.Subscription;
 import oovu.messaging.Atoms;
 import oovu.messaging.DeferredRequestCallback;
-import oovu.messaging.Getter;
+import oovu.messaging.MessageHandlerCallback;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.MessagePasser;
@@ -77,7 +77,7 @@ abstract public class Server implements MessagePasser, Subscriber {
                 }
             }).build(this));
         this.add_message_handler(new MessageHandlerBuilder("interface")
-            .with_getter(new Getter() {
+            .with_getter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
@@ -94,7 +94,7 @@ abstract public class Server implements MessagePasser, Subscriber {
                 }
             }).build(this));
         this.add_message_handler(new MessageHandlerBuilder("meta").with_getter(
-            new Getter() {
+            new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
@@ -117,7 +117,7 @@ abstract public class Server implements MessagePasser, Subscriber {
                 }
             }).build(this));
         this.add_message_handler(new MessageHandlerBuilder("oscaddress")
-            .with_getter(new Getter() {
+            .with_getter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
@@ -165,7 +165,7 @@ abstract public class Server implements MessagePasser, Subscriber {
                 }
             }).build(this));
         this.add_message_handler(new MessageHandlerBuilder("uniqueid")
-            .with_getter(new Getter() {
+            .with_getter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,

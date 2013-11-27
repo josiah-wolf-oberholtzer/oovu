@@ -10,7 +10,7 @@ import oovu.addresses.Environment;
 import oovu.addresses.OscAddressNode;
 import oovu.events.types.ModuleNameAcquiredEvent;
 import oovu.messaging.Atoms;
-import oovu.messaging.Getter;
+import oovu.messaging.MessageHandlerCallback;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.states.State;
@@ -67,7 +67,7 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
         this.dsp_settings_server = null;
         this.attach_to_parent_server(Environment.root_server);
         this.add_message_handler(new MessageHandlerBuilder("members")
-            .with_getter(new Getter() {
+            .with_getter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
@@ -83,7 +83,7 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
                 }
             }).build(this));
         this.add_message_handler(new MessageHandlerBuilder("methods")
-            .with_getter(new Getter() {
+            .with_getter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
@@ -99,7 +99,7 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
                 }
             }).build(this));
         this.add_message_handler(new MessageHandlerBuilder("name")
-            .with_getter(new Getter() {
+            .with_getter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
@@ -118,7 +118,7 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
                 }
             }).with_is_meta_relevant(true).build(this));
         this.add_message_handler(new MessageHandlerBuilder("properties")
-            .with_getter(new Getter() {
+            .with_getter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
@@ -134,7 +134,7 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
                 }
             }).build(this));
         this.add_message_handler(new MessageHandlerBuilder("returns")
-            .with_getter(new Getter() {
+            .with_getter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,

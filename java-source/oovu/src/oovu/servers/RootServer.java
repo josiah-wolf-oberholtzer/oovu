@@ -13,7 +13,7 @@ import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
 import oovu.clients.ServerClient;
 import oovu.eventscripts.EventScriptParser;
-import oovu.messaging.Getter;
+import oovu.messaging.MessageHandlerCallback;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.Request;
@@ -38,7 +38,7 @@ public class RootServer extends Server {
         // this.add_message_handler(new ReadEventScriptMessageHandler(this));
         // this.add_message_handler(new SetEventMessageHandler(this));
         this.add_message_handler(new MessageHandlerBuilder("state")
-            .with_getter(new Getter() {
+            .with_getter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,

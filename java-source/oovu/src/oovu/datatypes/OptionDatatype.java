@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import oovu.messaging.Atoms;
-import oovu.messaging.Getter;
+import oovu.messaging.MessageHandlerCallback;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.Setter;
@@ -55,7 +55,7 @@ public class OptionDatatype extends StringDatatype {
                             return null;
                         }
                     })
-                    .with_getter(new Getter() {
+                    .with_getter(new MessageHandlerCallback() {
                         @Override
                         public Atom[][] execute(
                             MessageHandler built_message_handler,

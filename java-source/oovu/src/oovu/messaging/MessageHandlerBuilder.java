@@ -4,7 +4,7 @@ import oovu.servers.Server;
 
 public class MessageHandlerBuilder {
     private Setter callback;
-    private Getter getter;
+    private MessageHandlerCallback getter;
     private Integer arity;
     private Setter setter;
     private String name;
@@ -53,7 +53,7 @@ public class MessageHandlerBuilder {
         return this;
     }
 
-    public MessageHandlerBuilder with_getter(Getter getter) {
+    public MessageHandlerBuilder with_getter(MessageHandlerCallback getter) {
         this.getter = getter;
         return this;
     }
