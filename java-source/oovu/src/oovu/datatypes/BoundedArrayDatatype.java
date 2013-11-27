@@ -3,10 +3,9 @@ package oovu.datatypes;
 import java.util.Map;
 
 import oovu.messaging.Atoms;
-import oovu.messaging.MessageHandlerCallback;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
-import oovu.messaging.Setter;
+import oovu.messaging.MessageHandlerCallback;
 import oovu.servers.AttributeServer;
 
 import com.cycling74.max.Atom;
@@ -20,7 +19,7 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
         super(client, argument_map);
         if (this.client != null) {
             this.client.add_message_handler(new MessageHandlerBuilder("length")
-                .with_callback(new Setter() {
+                .with_callback(new MessageHandlerCallback() {
                     @Override
                     public Atom[][] execute(
                         MessageHandler built_message_handler,
@@ -40,7 +39,7 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
                             BoundedArrayDatatype.this.get_length());
                     }
                 }).with_is_meta_relevant(true).with_is_state_relevant(true)
-                .with_setter(new Setter() {
+                .with_setter(new MessageHandlerCallback() {
                     @Override
                     public Atom[][] execute(
                         MessageHandler built_message_handler,

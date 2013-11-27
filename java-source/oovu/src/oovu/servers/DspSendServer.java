@@ -9,10 +9,9 @@ import oovu.events.PublisherFilter;
 import oovu.events.Subscription;
 import oovu.events.types.DspSettingsChangedEvent;
 import oovu.messaging.Atoms;
-import oovu.messaging.MessageHandlerCallback;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
-import oovu.messaging.Setter;
+import oovu.messaging.MessageHandlerCallback;
 import oovu.states.State;
 
 import com.cycling74.max.Atom;
@@ -74,7 +73,7 @@ public class DspSendServer extends ModuleMemberServer {
                 module_server.get_dsp_settings_server());
         this.source_subscription.subscribe();
         this.add_message_handler(new MessageHandlerBuilder("destination")
-            .with_callback(new Setter() {
+            .with_callback(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
@@ -94,7 +93,7 @@ public class DspSendServer extends ModuleMemberServer {
                     return Atoms.to_atoms(built_message_handler.get_name(),
                         server.get_destination_address_string());
                 }
-            }).with_setter(new Setter() {
+            }).with_setter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
@@ -117,7 +116,8 @@ public class DspSendServer extends ModuleMemberServer {
                 }
             }).build(this));
         this.add_message_handler(new MessageHandlerBuilder("destinationid")
-            .with_is_meta_relevant(true).with_getter(new MessageHandlerCallback() {
+            .with_is_meta_relevant(true)
+            .with_getter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
@@ -129,7 +129,8 @@ public class DspSendServer extends ModuleMemberServer {
                 }
             }).build(this));
         this.add_message_handler(new MessageHandlerBuilder("destinations")
-            .with_is_meta_relevant(true).with_getter(new MessageHandlerCallback() {
+            .with_is_meta_relevant(true)
+            .with_getter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
@@ -139,7 +140,8 @@ public class DspSendServer extends ModuleMemberServer {
                 }
             }).build(this));
         this.add_message_handler(new MessageHandlerBuilder("io")
-            .with_is_meta_relevant(true).with_getter(new MessageHandlerCallback() {
+            .with_is_meta_relevant(true)
+            .with_getter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
@@ -153,7 +155,8 @@ public class DspSendServer extends ModuleMemberServer {
                 }
             }).build(this));
         this.add_message_handler(new MessageHandlerBuilder("routing")
-            .with_is_meta_relevant(true).with_getter(new MessageHandlerCallback() {
+            .with_is_meta_relevant(true)
+            .with_getter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,

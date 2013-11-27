@@ -10,9 +10,9 @@ import oovu.addresses.Environment;
 import oovu.addresses.OscAddressNode;
 import oovu.events.types.ModuleNameAcquiredEvent;
 import oovu.messaging.Atoms;
-import oovu.messaging.MessageHandlerCallback;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
+import oovu.messaging.MessageHandlerCallback;
 import oovu.states.State;
 import oovu.states.StateComponentAggregate;
 

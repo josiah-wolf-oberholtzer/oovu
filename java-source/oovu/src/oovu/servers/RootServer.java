@@ -13,11 +13,10 @@ import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
 import oovu.clients.ServerClient;
 import oovu.eventscripts.EventScriptParser;
-import oovu.messaging.MessageHandlerCallback;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
+import oovu.messaging.MessageHandlerCallback;
 import oovu.messaging.Request;
-import oovu.messaging.Setter;
 import oovu.states.State;
 import oovu.states.StateComponentAggregate;
 
@@ -53,7 +52,7 @@ public class RootServer extends Server {
                 }
             }).build(this));
         this.add_message_handler(new MessageHandlerBuilder("events/list")
-            .with_setter(new Setter() {
+            .with_setter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
@@ -78,7 +77,8 @@ public class RootServer extends Server {
                 }
             }).build(this));
         this.add_message_handler(new MessageHandlerBuilder("events/next")
-            .with_is_binding_relevant(true).with_setter(new Setter() {
+            .with_is_binding_relevant(true)
+            .with_setter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
@@ -112,7 +112,8 @@ public class RootServer extends Server {
                 }
             }).build(this));
         this.add_message_handler(new MessageHandlerBuilder("events/previous")
-            .with_is_binding_relevant(true).with_setter(new Setter() {
+            .with_is_binding_relevant(true)
+            .with_setter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
@@ -142,7 +143,7 @@ public class RootServer extends Server {
                 }
             }).build(this));
         this.add_message_handler(new MessageHandlerBuilder("events/read")
-            .with_callback(new Setter() {
+            .with_callback(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
@@ -151,7 +152,7 @@ public class RootServer extends Server {
                         built_message_handler.client, "events/list", null);
                     return null;
                 }
-            }).with_setter(new Setter() {
+            }).with_setter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
@@ -172,7 +173,7 @@ public class RootServer extends Server {
                 }
             }).build(this));
         this.add_message_handler(new MessageHandlerBuilder("events/goto")
-            .with_setter(new Setter() {
+            .with_setter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,

@@ -3,10 +3,10 @@ package oovu.messaging;
 import oovu.servers.Server;
 
 public class MessageHandlerBuilder {
-    private Setter callback;
+    private MessageHandlerCallback callback;
     private MessageHandlerCallback getter;
     private Integer arity;
-    private Setter setter;
+    private MessageHandlerCallback MessageHandlerCallback;
     private String name;
     private boolean is_binding_relevant;
     private boolean is_meta_relevant;
@@ -26,7 +26,7 @@ public class MessageHandlerBuilder {
         this.is_rampable = false;
         this.is_state_relevant = false;
         this.name = name;
-        this.setter = null;
+        this.MessageHandlerCallback = null;
     }
 
     public MessageHandler build(Server client) {
@@ -34,7 +34,7 @@ public class MessageHandlerBuilder {
             this.callback, this.getter, this.is_binding_relevant,
             this.is_meta_relevant, this.is_meta_relevant_callback,
             this.is_rampable, this.is_rampable_callback,
-            this.is_state_relevant, this.name, this.setter);
+            this.is_state_relevant, this.name, this.MessageHandlerCallback);
     }
 
     public MessageHandlerBuilder with_arity(Integer arity) {
@@ -48,7 +48,7 @@ public class MessageHandlerBuilder {
         return this;
     }
 
-    public MessageHandlerBuilder with_callback(Setter callback) {
+    public MessageHandlerBuilder with_callback(MessageHandlerCallback callback) {
         this.callback = callback;
         return this;
     }
@@ -94,8 +94,9 @@ public class MessageHandlerBuilder {
         return this;
     }
 
-    public MessageHandlerBuilder with_setter(Setter setter) {
-        this.setter = setter;
+    public MessageHandlerBuilder with_setter(
+        MessageHandlerCallback MessageHandlerCallback) {
+        this.MessageHandlerCallback = MessageHandlerCallback;
         return this;
     }
 }

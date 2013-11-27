@@ -11,13 +11,12 @@ import oovu.datatypes.Datatype;
 import oovu.datatypes.GenericDatatype;
 import oovu.messaging.Atoms;
 import oovu.messaging.BooleanMessageHandlerCallback;
-import oovu.messaging.MessageHandlerCallback;
 import oovu.messaging.IntegerMessageHandlerCallback;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
+import oovu.messaging.MessageHandlerCallback;
 import oovu.messaging.Request;
 import oovu.messaging.Response;
-import oovu.messaging.Setter;
 import oovu.states.State;
 import oovu.states.StateComponent;
 import oovu.states.StateComponentAggregate;
@@ -46,7 +45,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                     attribute_server.get_priority());
             }
         });
-        priority_builder.with_setter(new Setter() {
+        priority_builder.with_setter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler built_message_handler,
@@ -72,7 +71,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                 return attribute_server.datatype.get_arity();
             }
         });
-        value_builder.with_callback(new Setter() {
+        value_builder.with_callback(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler built_message_handler,
@@ -114,7 +113,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                     return attribute_server.datatype.is_rampable();
                 }
             });
-        value_builder.with_setter(new Setter() {
+        value_builder.with_setter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler built_message_handler,
@@ -148,7 +147,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                         return result;
                     }
                 });
-            pattern_builder.with_setter(new Setter() {
+            pattern_builder.with_setter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,

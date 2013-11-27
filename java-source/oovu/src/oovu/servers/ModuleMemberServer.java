@@ -8,9 +8,9 @@ import java.util.Map;
 import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
 import oovu.messaging.Atoms;
-import oovu.messaging.MessageHandlerCallback;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
+import oovu.messaging.MessageHandlerCallback;
 
 import com.cycling74.max.Atom;
 

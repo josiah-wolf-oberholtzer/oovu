@@ -17,13 +17,12 @@ import oovu.events.Subscriber;
 import oovu.events.Subscription;
 import oovu.messaging.Atoms;
 import oovu.messaging.DeferredRequestCallback;
-import oovu.messaging.MessageHandlerCallback;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
+import oovu.messaging.MessageHandlerCallback;
 import oovu.messaging.MessagePasser;
 import oovu.messaging.Request;
 import oovu.messaging.Response;
-import oovu.messaging.Setter;
 import oovu.states.State;
 
 import com.cycling74.max.Atom;
@@ -44,7 +43,7 @@ abstract public class Server implements MessagePasser, Subscriber {
 
     public Server() {
         this.add_message_handler(new MessageHandlerBuilder("dumpmeta")
-            .with_setter(new Setter() {
+            .with_setter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
@@ -137,7 +136,7 @@ abstract public class Server implements MessagePasser, Subscriber {
                 }
             }).build(this));
         this.add_message_handler(new MessageHandlerBuilder("report")
-            .with_setter(new Setter() {
+            .with_setter(new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
@@ -151,7 +150,7 @@ abstract public class Server implements MessagePasser, Subscriber {
                 }
             }).build(this));
         this.add_message_handler(new MessageHandlerBuilder("show").with_setter(
-            new Setter() {
+            new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
@@ -186,7 +185,7 @@ abstract public class Server implements MessagePasser, Subscriber {
             this.message_handlers.put(message_handler.get_getter_name(),
                 message_handler);
         }
-        if (message_handler.setter != null) {
+        if (message_handler.MessageHandlerCallback != null) {
             this.message_handlers.put(message_handler.get_name(),
                 message_handler);
         }

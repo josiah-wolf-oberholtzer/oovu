@@ -22,7 +22,6 @@ public class GenericMaxAdapter extends MaxAdapter {
             response.get_relative_osc_address(this.max_peer
                 .get_osc_address_node());
         for (Atom[] output : response.payload) {
-
             if (output[0].equals(MaxAdapter.value_atom)) {
                 output = Atom.removeFirst(output);
                 if (relative_osc_address != null) {

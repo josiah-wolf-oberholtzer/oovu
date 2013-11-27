@@ -4,10 +4,9 @@ import java.util.Arrays;
 import java.util.Map;
 
 import oovu.messaging.Atoms;
-import oovu.messaging.MessageHandlerCallback;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
-import oovu.messaging.Setter;
+import oovu.messaging.MessageHandlerCallback;
 import oovu.servers.AttributeServer;
 import oovu.timing.EnvelopeHandler;
 import oovu.timing.MultiEnvelope;
@@ -27,7 +26,7 @@ abstract public class BoundedDatatype extends Datatype implements
         if (this.client != null) {
             this.client
                 .add_message_handler(new MessageHandlerBuilder("maximum")
-                    .with_callback(new Setter() {
+                    .with_callback(new MessageHandlerCallback() {
                         @Override
                         public Atom[][] execute(
                             MessageHandler built_message_handler,
@@ -46,7 +45,7 @@ abstract public class BoundedDatatype extends Datatype implements
                                 BoundedDatatype.this.get_maximum());
                         }
                     }).with_is_meta_relevant(true).with_is_state_relevant(true)
-                    .with_setter(new Setter() {
+                    .with_setter(new MessageHandlerCallback() {
                         @Override
                         public Atom[][] execute(
                             MessageHandler built_message_handler,
@@ -61,7 +60,7 @@ abstract public class BoundedDatatype extends Datatype implements
                     }).build(this.client));
             this.client
                 .add_message_handler(new MessageHandlerBuilder("minimum")
-                    .with_callback(new Setter() {
+                    .with_callback(new MessageHandlerCallback() {
                         @Override
                         public Atom[][] execute(
                             MessageHandler built_message_handler,
@@ -80,7 +79,7 @@ abstract public class BoundedDatatype extends Datatype implements
                                 BoundedDatatype.this.get_minimum());
                         }
                     }).with_is_meta_relevant(true).with_is_state_relevant(true)
-                    .with_setter(new Setter() {
+                    .with_setter(new MessageHandlerCallback() {
                         @Override
                         public Atom[][] execute(
                             MessageHandler built_message_handler,

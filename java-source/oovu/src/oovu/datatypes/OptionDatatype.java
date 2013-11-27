@@ -5,10 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import oovu.messaging.Atoms;
-import oovu.messaging.MessageHandlerCallback;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
-import oovu.messaging.Setter;
+import oovu.messaging.MessageHandlerCallback;
 import oovu.servers.AttributeServer;
 
 import com.cycling74.max.Atom;
@@ -27,7 +26,8 @@ public class OptionDatatype extends StringDatatype {
         super(client, argument_map);
         if (this.client != null) {
             this.client.add_message_handler(new MessageHandlerBuilder("next")
-                .with_arity(0).with_callback(new Setter() {
+                .with_arity(0)
+                .with_callback(new MessageHandlerCallback() {
                     @Override
                     public Atom[][] execute(
                         MessageHandler built_message_handler,
@@ -35,7 +35,8 @@ public class OptionDatatype extends StringDatatype {
                         OptionDatatype.this.client.reoutput_value();
                         return null;
                     }
-                }).with_is_binding_relevant(true).with_setter(new Setter() {
+                }).with_is_binding_relevant(true)
+                .with_setter(new MessageHandlerCallback() {
                     @Override
                     public Atom[][] execute(
                         MessageHandler built_message_handler,
@@ -46,7 +47,7 @@ public class OptionDatatype extends StringDatatype {
                 }).build(this.client));
             this.client
                 .add_message_handler(new MessageHandlerBuilder("options")
-                    .with_callback(new Setter() {
+                    .with_callback(new MessageHandlerCallback() {
                         @Override
                         public Atom[][] execute(
                             MessageHandler built_message_handler,
@@ -66,7 +67,7 @@ public class OptionDatatype extends StringDatatype {
                                     new String[0]));
                         }
                     }).with_is_meta_relevant(true).with_is_state_relevant(true)
-                    .with_setter(new Setter() {
+                    .with_setter(new MessageHandlerCallback() {
                         @Override
                         public Atom[][] execute(
                             MessageHandler built_message_handler,
@@ -79,23 +80,26 @@ public class OptionDatatype extends StringDatatype {
                         }
                     }).build(this.client));
             this.client.add_message_handler(new MessageHandlerBuilder(
-                "previous").with_arity(0).with_callback(new Setter() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    OptionDatatype.this.client.reoutput_value();
-                    return null;
-                }
-            }).with_is_binding_relevant(true).with_setter(new Setter() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    OptionDatatype.this.previous_option();
-                    return null;
-                }
-            }).build(this.client));
+                "previous")
+                .with_arity(0)
+                .with_callback(new MessageHandlerCallback() {
+                    @Override
+                    public Atom[][] execute(
+                        MessageHandler built_message_handler,
+                        Atom[] arguments) {
+                        OptionDatatype.this.client.reoutput_value();
+                        return null;
+                    }
+                }).with_is_binding_relevant(true)
+                .with_setter(new MessageHandlerCallback() {
+                    @Override
+                    public Atom[][] execute(
+                        MessageHandler built_message_handler,
+                        Atom[] arguments) {
+                        OptionDatatype.this.previous_option();
+                        return null;
+                    }
+                }).build(this.client));
         }
     }
 

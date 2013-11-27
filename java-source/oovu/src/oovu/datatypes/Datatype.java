@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import oovu.messaging.Atoms;
-import oovu.messaging.MessageHandlerCallback;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
+import oovu.messaging.MessageHandlerCallback;
 import oovu.servers.AttributeServer;
 
 import com.cycling74.max.Atom;
