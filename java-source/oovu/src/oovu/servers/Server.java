@@ -42,142 +42,148 @@ abstract public class Server implements MessagePasser, Subscriber {
     public final Set<ServerClient> server_clients = new HashSet<ServerClient>();
 
     public Server() {
-        this.add_message_handler(new MessageHandlerBuilder("dumpmeta")
-            .with_setter(new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    ArrayList<Atom[]> result = new ArrayList<Atom[]>();
-                    String message_name = "getmeta";
-                    MessageHandler getmeta_message_handler =
-                        built_message_handler.client.message_handlers
-                            .get(message_name);
-                    Atom[] meta =
-                        Atom.removeFirst(getmeta_message_handler
-                            .handle_message(message_name)[0]);
-                    for (Atom atom : meta) {
-                        String name = atom.getString();
-                        MessageHandler message_handler =
-                            built_message_handler.client.message_handlers
-                                .get(name);
-                        if (message_handler == null) {
-                            continue;
-                        }
-                        Atom[][] message_handler_run_result =
-                            message_handler.handle_message(name);
-                        if (message_handler_run_result != null) {
-                            for (Atom[] subresult : message_handler_run_result) {
-                                result.add(subresult);
-                            }
+        MessageHandlerBuilder dumpmeta_builder =
+            new MessageHandlerBuilder("dumpmeta");
+        dumpmeta_builder.with_setter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                ArrayList<Atom[]> result = new ArrayList<Atom[]>();
+                String message_name = "getmeta";
+                MessageHandler getmeta_message_handler =
+                    built_message_handler.client.message_handlers
+                        .get(message_name);
+                Atom[] meta =
+                    Atom.removeFirst(getmeta_message_handler
+                        .handle_message(message_name)[0]);
+                for (Atom atom : meta) {
+                    String name = atom.getString();
+                    MessageHandler message_handler =
+                        built_message_handler.client.message_handlers.get(name);
+                    if (message_handler == null) {
+                        continue;
+                    }
+                    Atom[][] message_handler_run_result =
+                        message_handler.handle_message(name);
+                    if (message_handler_run_result != null) {
+                        for (Atom[] subresult : message_handler_run_result) {
+                            result.add(subresult);
                         }
                     }
-                    return result.toArray(new Atom[0][]);
                 }
-            }).build(this));
-        this.add_message_handler(new MessageHandlerBuilder("interface")
-            .with_getter(new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
+                return result.toArray(new Atom[0][]);
+            }
+        });
+        this.add_message_handler(dumpmeta_builder.build(this));
+        MessageHandlerBuilder interface_builder =
+            new MessageHandlerBuilder("interface");
+        interface_builder.with_getter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                Atom[][] result = new Atom[1][];
+                String[] message_handler_names =
+                    Server.this.message_handlers.keySet()
+                        .toArray(new String[0]);
+                Arrays.sort(message_handler_names);
+                result[0] =
+                    Atom.newAtom(built_message_handler.get_name(),
+                        Atom.newAtom(message_handler_names));
+                return result;
+            }
+        });
+        this.add_message_handler(interface_builder.build(this));
+        MessageHandlerBuilder meta_builder = new MessageHandlerBuilder("meta");
+        meta_builder.with_getter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                ArrayList<String> getter_names = new ArrayList<String>();
+                Set<MessageHandler> message_handlers =
+                    new HashSet<MessageHandler>(
+                        built_message_handler.client.message_handlers.values());
+                for (MessageHandler message_handler : message_handlers) {
+                    if (!message_handler.get_is_meta_relevant()) {
+                        continue;
+                    }
+                    String getter_name = message_handler.get_getter_name();
+                    getter_names.add(getter_name);
+                }
+                return Atoms.to_atoms(built_message_handler.get_getter_name(),
+                    getter_names.toArray(new String[0]));
+            }
+        });
+        this.add_message_handler(meta_builder.build(this));
+        MessageHandlerBuilder oscaddress_builder =
+            new MessageHandlerBuilder("oscaddress");
+        oscaddress_builder.with_getter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                String osc_address_string =
+                    built_message_handler.client.get_osc_address_string();
+                if (osc_address_string != null) {
                     Atom[][] result = new Atom[1][];
-                    String[] message_handler_names =
-                        Server.this.message_handlers.keySet().toArray(
-                            new String[0]);
-                    Arrays.sort(message_handler_names);
-                    result[0] =
-                        Atom.newAtom(built_message_handler.get_name(),
-                            Atom.newAtom(message_handler_names));
+                    result[0] = Atom.newAtom(new String[] {
+                        built_message_handler.get_name(), osc_address_string
+                    });
                     return result;
                 }
-            }).build(this));
-        this.add_message_handler(new MessageHandlerBuilder("meta").with_getter(
-            new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    ArrayList<String> getter_names = new ArrayList<String>();
-                    Set<MessageHandler> message_handlers =
-                        new HashSet<MessageHandler>(
-                            built_message_handler.client.message_handlers
-                                .values());
-                    for (MessageHandler message_handler : message_handlers) {
-                        if (!message_handler.get_is_meta_relevant()) {
-                            continue;
-                        }
-                        String getter_name = message_handler.get_getter_name();
-                        getter_names.add(getter_name);
-                    }
-                    return Atoms.to_atoms(
-                        built_message_handler.get_getter_name(),
-                        getter_names.toArray(new String[0]));
+                return null;
+            }
+        });
+        this.add_message_handler(oscaddress_builder.build(this));
+        MessageHandlerBuilder report_builder =
+            new MessageHandlerBuilder("report");
+        report_builder.with_setter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                String[] report_pieces =
+                    built_message_handler.client.get_report_pieces();
+                for (String report_piece : report_pieces) {
+                    Environment.log(report_piece);
                 }
-            }).build(this));
-        this.add_message_handler(new MessageHandlerBuilder("oscaddress")
-            .with_getter(new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    String osc_address_string =
-                        built_message_handler.client.get_osc_address_string();
-                    if (osc_address_string != null) {
-                        Atom[][] result = new Atom[1][];
-                        result[0] =
-                            Atom.newAtom(new String[] {
-                                built_message_handler.get_name(),
-                                osc_address_string
-                            });
-                        return result;
-                    }
-                    return null;
+                return null;
+            }
+        });
+        this.add_message_handler(report_builder.build(this));
+        MessageHandlerBuilder show_builder = new MessageHandlerBuilder("show");
+        show_builder.with_setter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                for (ServerClient server_client : built_message_handler.client.server_clients) {
+                    MaxBox box = server_client.getMaxBox();
+                    MaxPatcher patcher = box.getPatcher();
+                    patcher.send("front", new Atom[0]);
                 }
-            }).build(this));
-        this.add_message_handler(new MessageHandlerBuilder("report")
-            .with_setter(new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    String[] report_pieces =
-                        built_message_handler.client.get_report_pieces();
-                    for (String report_piece : report_pieces) {
-                        Environment.log(report_piece);
-                    }
-                    return null;
-                }
-            }).build(this));
-        this.add_message_handler(new MessageHandlerBuilder("show").with_setter(
-            new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    for (ServerClient server_client : built_message_handler.client.server_clients) {
-                        MaxBox box = server_client.getMaxBox();
-                        MaxPatcher patcher = box.getPatcher();
-                        patcher.send("front", new Atom[0]);
-                    }
-                    return null;
-                }
-            }).build(this));
-        this.add_message_handler(new MessageHandlerBuilder("uniqueid")
-            .with_getter(new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    Atom[][] result = new Atom[1][2];
-                    result[0][0] =
-                        Atom.newAtom(built_message_handler.get_name());
-                    result[0][1] =
-                        Atom.newAtom(System
-                            .identityHashCode(built_message_handler.client));
-                    return result;
-                }
-            }).build(this));
+                return null;
+            }
+        });
+        this.add_message_handler(show_builder.build(this));
+        MessageHandlerBuilder uniqueid_builder =
+            new MessageHandlerBuilder("uniqueid");
+        uniqueid_builder.with_getter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                Atom[][] result = new Atom[1][2];
+                result[0][0] = Atom.newAtom(built_message_handler.get_name());
+                result[0][1] =
+                    Atom.newAtom(System
+                        .identityHashCode(built_message_handler.client));
+                return result;
+            }
+        });
+        this.add_message_handler(uniqueid_builder.build(this));
     }
 
     public void add_message_handler(MessageHandler message_handler) {
