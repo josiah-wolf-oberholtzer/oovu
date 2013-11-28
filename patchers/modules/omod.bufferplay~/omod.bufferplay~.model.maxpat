@@ -119,7 +119,6 @@
 						"description" : "",
 						"digest" : "",
 						"tags" : "",
-						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"fontname" : "Arial",
@@ -816,6 +815,60 @@
 					"source" : [ "obj-9", 0 ]
 				}
 
+			}
+ ],
+		"dependency_cache" : [ 			{
+				"name" : "oovu.bundle.dsp.sender.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/bundles",
+				"patcherrelativepath" : "../../abstractions/bundles",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.push.source.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/pushpull",
+				"patcherrelativepath" : "../../abstractions/pushpull",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.push.source.poly~.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/pushpull",
+				"patcherrelativepath" : "../../abstractions/pushpull",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.dsp.8chlevels.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/dsp",
+				"patcherrelativepath" : "../../abstractions/dsp",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.bufferplay~.voix.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/modules/omod.bufferplay~",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.bufferplay~.voix.kernel.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/modules/omod.bufferplay~",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.dsp.panner~.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/dsp",
+				"patcherrelativepath" : "../../abstractions/dsp",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "ambipanning~.mxo",
+				"type" : "iLaX"
 			}
  ]
 	}

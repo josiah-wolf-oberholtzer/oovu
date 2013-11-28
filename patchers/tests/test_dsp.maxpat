@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 83.0, 44.0, 796.0, 580.0 ],
+		"rect" : [ 665.0, 44.0, 796.0, 580.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -31,11 +31,38 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
+					"id" : "obj-61",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 205.0, 205.0, 73.0, 18.0 ],
+					"text" : "dumpmeta"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-56",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 205.0, 270.0, 100.0, 20.0 ],
+					"text" : "print dsp-receive"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
 					"id" : "obj-53",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 70.0, 380.0, 74.0, 20.0 ],
+					"patching_rect" : [ 70.0, 440.0, 74.0, 20.0 ],
 					"text" : "print routing"
 				}
 
@@ -50,7 +77,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 150.0, 455.0, 50.0, 20.0 ]
+					"patching_rect" : [ 150.0, 515.0, 50.0, 20.0 ]
 				}
 
 			}
@@ -63,7 +90,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 220.0, 460.0, 209.0, 20.0 ],
+					"patching_rect" : [ 220.0, 520.0, 209.0, 20.0 ],
 					"text" : "mxj oovu.Proxy 2002 dsp/:voicecount"
 				}
 
@@ -77,7 +104,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 400.0, 380.0, 50.0, 18.0 ],
+					"patching_rect" : [ 400.0, 440.0, 50.0, 18.0 ],
 					"text" : "8 0"
 				}
 
@@ -91,8 +118,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 205.0, 380.0, 50.0, 18.0 ],
-					"text" : "1 0"
+					"patching_rect" : [ 205.0, 440.0, 50.0, 18.0 ],
+					"text" : "2 0"
 				}
 
 			}
@@ -105,8 +132,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 15.0, 380.0, 50.0, 18.0 ],
-					"text" : "1 0"
+					"patching_rect" : [ 15.0, 440.0, 50.0, 18.0 ],
+					"text" : "1 2"
 				}
 
 			}
@@ -120,7 +147,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 610.0, 245.0, 50.0, 31.0 ],
+					"patching_rect" : [ 610.0, 305.0, 50.0, 31.0 ],
 					"text" : "getuniqueid"
 				}
 
@@ -134,7 +161,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 540.0, 235.0, 50.0, 18.0 ],
+					"patching_rect" : [ 540.0, 295.0, 50.0, 18.0 ],
 					"text" : "getio"
 				}
 
@@ -149,7 +176,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 595.0, 355.0, 110.0, 152.0 ],
+					"patching_rect" : [ 595.0, 415.0, 110.0, 152.0 ],
 					"text" : "destination dumpmeta getdestination getdestinationid getinterface getio getmeta getmodulename getoscaddress getrouting getuniqueid report show"
 				}
 
@@ -163,7 +190,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 595.0, 295.0, 100.0, 20.0 ],
+					"patching_rect" : [ 595.0, 355.0, 100.0, 20.0 ],
 					"text" : "route interface"
 				}
 
@@ -178,7 +205,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 400.0, 350.0, 40.0, 20.0 ]
+					"patching_rect" : [ 400.0, 410.0, 40.0, 20.0 ]
 				}
 
 			}
@@ -192,7 +219,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 205.0, 350.0, 40.0, 20.0 ]
+					"patching_rect" : [ 205.0, 410.0, 40.0, 20.0 ]
 				}
 
 			}
@@ -206,7 +233,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 15.0, 350.0, 40.0, 20.0 ]
+					"patching_rect" : [ 15.0, 410.0, 40.0, 20.0 ]
 				}
 
 			}
@@ -219,7 +246,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 400.0, 325.0, 169.0, 20.0 ],
+					"patching_rect" : [ 400.0, 385.0, 169.0, 20.0 ],
 					"text" : "route destinationid io"
 				}
 
@@ -233,7 +260,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 205.0, 325.0, 169.0, 20.0 ],
+					"patching_rect" : [ 205.0, 385.0, 169.0, 20.0 ],
 					"text" : "route destinationid io"
 				}
 
@@ -247,7 +274,7 @@
 					"numinlets" : 4,
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "" ],
-					"patching_rect" : [ 15.0, 325.0, 169.0, 20.0 ],
+					"patching_rect" : [ 15.0, 385.0, 169.0, 20.0 ],
 					"text" : "route destinationid io routing"
 				}
 
@@ -261,7 +288,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 400.0, 265.0, 85.0, 18.0 ],
+					"patching_rect" : [ 400.0, 325.0, 85.0, 18.0 ],
 					"text" : "destination $1"
 				}
 
@@ -277,7 +304,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "int", "", "" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 400.0, 235.0, 100.0, 20.0 ]
+					"patching_rect" : [ 400.0, 295.0, 100.0, 20.0 ]
 				}
 
 			}
@@ -290,7 +317,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 205.0, 265.0, 85.0, 18.0 ],
+					"patching_rect" : [ 205.0, 325.0, 85.0, 18.0 ],
 					"text" : "destination $1"
 				}
 
@@ -306,7 +333,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "int", "", "" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 205.0, 235.0, 100.0, 20.0 ]
+					"patching_rect" : [ 205.0, 295.0, 100.0, 20.0 ]
 				}
 
 			}
@@ -319,7 +346,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 15.0, 265.0, 85.0, 18.0 ],
+					"patching_rect" : [ 15.0, 325.0, 85.0, 18.0 ],
 					"text" : "destination $1"
 				}
 
@@ -335,7 +362,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "int", "", "" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 15.0, 235.0, 100.0, 20.0 ]
+					"patching_rect" : [ 15.0, 295.0, 100.0, 20.0 ]
 				}
 
 			}
@@ -348,7 +375,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 400.0, 295.0, 185.0, 20.0 ],
+					"patching_rect" : [ 400.0, 355.0, 185.0, 20.0 ],
 					"text" : "mxj oovu.DspSend 3003 out"
 				}
 
@@ -362,7 +389,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 205.0, 295.0, 185.0, 20.0 ],
+					"patching_rect" : [ 205.0, 355.0, 185.0, 20.0 ],
 					"text" : "mxj oovu.DspSend 2002 out"
 				}
 
@@ -376,7 +403,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 15.0, 295.0, 185.0, 20.0 ],
+					"patching_rect" : [ 15.0, 355.0, 185.0, 20.0 ],
 					"text" : "mxj oovu.DspSend 1001 out"
 				}
 
@@ -418,7 +445,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 205.0, 205.0, 185.0, 20.0 ],
+					"patching_rect" : [ 205.0, 235.0, 185.0, 20.0 ],
 					"text" : "mxj oovu.DspReceive 2002 in"
 				}
 
@@ -1223,6 +1250,15 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-56", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-5", 2 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-40", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -1255,6 +1291,15 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-60", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-5", 1 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-61", 0 ]
 				}
 
 			}
