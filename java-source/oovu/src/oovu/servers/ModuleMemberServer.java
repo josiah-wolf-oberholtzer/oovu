@@ -159,7 +159,8 @@ public abstract class ModuleMemberServer extends Server {
     public ModuleMemberServer(ModuleServer module_server) {
         super();
         this.attach_to_parent_server(module_server);
-        MessageHandlerBuilder modulename_builder = new MessageHandlerBuilder("modulename");
+        MessageHandlerBuilder modulename_builder =
+            new MessageHandlerBuilder("modulename");
         modulename_builder.with_getter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
