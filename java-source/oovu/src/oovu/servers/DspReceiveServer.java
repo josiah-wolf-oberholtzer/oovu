@@ -43,11 +43,12 @@ public class DspReceiveServer extends ModuleMemberServer {
             (DspReceiveServer) ModuleMemberServer.allocate_from_label(
                 "DspReceiveServer", module_id, desired_name);
         OscAddress osc_address = server.get_osc_address();
-        if ((osc_address != null)
-            && (!DspReceiveServer.dsp_receive_servers.containsKey(osc_address))) {
-            DspReceiveServer.dsp_receive_servers.put(osc_address, server);
-            Environment.event_service.publish(new DspReceiversChangedEvent(
-                server));
+        if (osc_address != null) {
+            DspReceiveServer registered = DspReceiveServer.dsp_receive_servers.get(osc_address);
+            if (registered != server) {
+                DspReceiveServer.dsp_receive_servers.put(osc_address, server);
+                Environment.event_service.publish(new DspReceiversChangedEvent(server));
+            }
         }
         return server;
     }

@@ -136,6 +136,7 @@ abstract public class Server implements MessagePasser, Subscriber {
                 return null;
             }
         });
+        oscaddress_builder.with_is_meta_relevant(true);
         this.add_message_handler(oscaddress_builder.build(this));
         MessageHandlerBuilder report_builder =
             new MessageHandlerBuilder("report");
@@ -183,6 +184,7 @@ abstract public class Server implements MessagePasser, Subscriber {
                 return result;
             }
         });
+        uniqueid_builder.with_is_meta_relevant(true);
         this.add_message_handler(uniqueid_builder.build(this));
     }
 

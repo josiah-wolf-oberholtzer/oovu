@@ -30,12 +30,6 @@ public class RootServer extends Server {
     public RootServer() {
         super();
         this.attach_to_osc_address_node(Environment.root_osc_address_node);
-        // this.add_message_handler(new GetStateMessageHandler(this));
-        // this.add_message_handler(new ListEventsMessageHandler(this));
-        // this.add_message_handler(new NextEventMessageHandler(this));
-        // this.add_message_handler(new PreviousEventMessageHandler(this));
-        // this.add_message_handler(new ReadEventScriptMessageHandler(this));
-        // this.add_message_handler(new SetEventMessageHandler(this));
         this.add_message_handler(new MessageHandlerBuilder("state")
             .with_getter(new MessageHandlerCallback() {
                 @Override

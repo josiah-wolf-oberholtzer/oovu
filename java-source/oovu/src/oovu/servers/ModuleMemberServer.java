@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
 import oovu.messaging.Atoms;
@@ -41,6 +42,7 @@ public abstract class ModuleMemberServer extends Server {
         Class<?> member_node_class =
             ModuleMemberServer.member_nodes_by_label.get(label);
         if (member_node_class == null) {
+            Environment.log("Bad label: " + label);
             member_node_class = PropertyServer.class;
         }
         ModuleServer module_server = ModuleServer.allocate(module_id);
@@ -157,22 +159,22 @@ public abstract class ModuleMemberServer extends Server {
     public ModuleMemberServer(ModuleServer module_server) {
         super();
         this.attach_to_parent_server(module_server);
-        // this.add_message_handler(new GetModuleNameMessageHandler(this));
-        this.add_message_handler(new MessageHandlerBuilder("modulename")
-            .with_getter(new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    ModuleMemberServer module_member_server =
-                        (ModuleMemberServer) built_message_handler.client;
-                    if (module_member_server.parent_server == null) {
-                        return null;
-                    }
-                    return Atoms.to_atoms(built_message_handler.get_name(),
-                        module_member_server.parent_server.get_name());
+        MessageHandlerBuilder modulename_builder = new MessageHandlerBuilder("modulename");
+        modulename_builder.with_getter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                ModuleMemberServer module_member_server =
+                    (ModuleMemberServer) built_message_handler.client;
+                if (module_member_server.parent_server == null) {
+                    return null;
                 }
-            }).build(this));
+                return Atoms.to_atoms(built_message_handler.get_name(),
+                    module_member_server.parent_server.get_name());
+            }
+        });
+        this.add_message_handler(modulename_builder.build(this));
         this.is_configured = false;
     }
 }
