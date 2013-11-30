@@ -112,6 +112,10 @@ abstract public class Server implements MessagePasser, Subscriber {
                     String getter_name = message_handler.get_getter_name();
                     getter_names.add(getter_name);
                 }
+                if (getter_names.contains("getvalue")) {
+                    getter_names.remove("getvalue");
+                    getter_names.add("getvalue");
+                }
                 return Atoms.to_atoms(built_message_handler.get_getter_name(),
                     getter_names.toArray(new String[0]));
             }
