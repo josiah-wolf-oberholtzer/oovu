@@ -193,24 +193,10 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
         if ((!has_receives) && (!has_sends)) {
             return null;
         }
-        MaxPatcher patcher = new MaxPatcher(0, 0, 100, 100);
-        patcher.newDefault(0, 0, "comment", Atom.parse("@text " + this.name));
-        if (has_receives) {
-            patcher.newDefault(0, 25, "panel", new Atom[0]);
-        }
-        if (has_sends) {
-            int send_count = dsp_settings.get_send_count();
-            patcher.newDefault(0, 50, "panel", new Atom[0]);
-            for (int i = 0; i < 8; i++) {
-                Atom[] args = null; 
-                if (i < send_count) {
-                    args = Atom.parse("@bgcolor 0. 0. 0. 1.");
-                } else {
-                    args = Atom.parse("");
-                }
-                patcher.newDefault(0, 75 + (25 * i), "panel", args);
-            }
-        }
+        MaxPatcher patcher = new MaxPatcher(0, 0, 200, 650);
+        patcher.setBackgroundColor(0, 0, 0);
+        patcher.newDefault(5, 5, "bpatcher", Atom.parse(
+            "@patching_rect 5 5 190 640 @name oovu.mixer @args " + this.module_id));
         return patcher;
     }
 

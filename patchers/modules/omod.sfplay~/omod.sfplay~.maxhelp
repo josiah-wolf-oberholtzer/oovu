@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 454.0, 134.0, 640.0, 480.0 ],
+		"rect" : [ 494.0, 144.0, 640.0, 480.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -31,13 +31,25 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
+					"id" : "obj-6",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 75.0, 345.0, 50.0, 18.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
 					"id" : "obj-3",
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 160.0, 10.0, 60.0, 18.0 ],
-					"presentation_rect" : [ 161.0, 10.0, 0.0, 0.0 ],
 					"text" : ":getmixer"
 				}
 
@@ -85,6 +97,15 @@
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
+					"destination" : [ "obj-6", 1 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-1", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-2", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -103,13 +124,13 @@
 			}
  ],
 		"parameters" : 		{
-			"obj-1::obj-13::obj-17" : [ "live.numbox", "live.numbox", 0 ],
-			"obj-2::obj-13::obj-6" : [ "live.slider[31]", "live.slider", 0 ],
-			"obj-1::obj-13::obj-18::obj-204" : [ "live.numbox[13]", "live.numbox", 0 ],
+			"obj-1::obj-13::obj-12" : [ "live.slider[1]", "live.slider", 0 ],
 			"obj-2::obj-13::obj-36" : [ "live.numbox[72]", "live.numbox[1]", 0 ],
+			"obj-1::obj-13::obj-18::obj-204" : [ "live.numbox[13]", "live.numbox", 0 ],
+			"obj-1::obj-13::obj-17" : [ "live.numbox", "live.numbox", 0 ],
 			"obj-2::obj-13::obj-204" : [ "live.numbox[73]", "live.numbox", 0 ],
-			"obj-1::obj-13::obj-18::obj-18::obj-4" : [ "live.slider", "live.slider", 0 ],
-			"obj-1::obj-13::obj-12" : [ "live.slider[1]", "live.slider", 0 ]
+			"obj-2::obj-13::obj-6" : [ "live.slider[31]", "live.slider", 0 ],
+			"obj-1::obj-13::obj-18::obj-18::obj-4" : [ "live.slider", "live.slider", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{
