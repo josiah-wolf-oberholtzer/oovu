@@ -10,7 +10,7 @@ var box_height = box.rect[3] - box.rect[1];
 var box_width = box.rect[2] - box.rect[0];
 var button_down = false;
 var current_time = 0.;
-var total_time = 1000.;
+var total_time = 0.;
 
 function msg_float(value) {
     if (inlet == 0) {

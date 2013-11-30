@@ -13,10 +13,12 @@ public class Return extends ModuleMemberServerClient {
     @Override
     public void bind(Atom[] arguments) {
         String desired_name = this.complete_lazy_name(arguments);
-        this.server =
-            ReturnServer.allocate(this.lazy_module_id, desired_name,
-                this.lazy_arguments);
-        this.server.server_clients.add(this);
-        this.server.make_deferred_request(this, "dumpmeta", null);
+        if (desired_name != null) {
+            this.server =
+                ReturnServer.allocate(this.lazy_module_id, desired_name,
+                    this.lazy_arguments);
+            this.server.server_clients.add(this);
+            this.server.make_deferred_request(this, "dumpmeta", null);
+        }
     }
 }

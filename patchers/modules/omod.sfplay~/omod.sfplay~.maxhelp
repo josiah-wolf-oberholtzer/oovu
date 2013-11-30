@@ -56,13 +56,13 @@
  ],
 		"lines" : [  ],
 		"parameters" : 		{
-			"obj-2::obj-13::obj-36" : [ "live.numbox[72]", "live.numbox[1]", 0 ],
+			"obj-1::obj-13::obj-18::obj-18::obj-4" : [ "live.slider", "live.slider", 0 ],
 			"obj-2::obj-13::obj-6" : [ "live.slider[31]", "live.slider", 0 ],
 			"obj-1::obj-13::obj-17" : [ "live.numbox", "live.numbox", 0 ],
 			"obj-1::obj-13::obj-12" : [ "live.slider[1]", "live.slider", 0 ],
-			"obj-2::obj-13::obj-204" : [ "live.numbox[73]", "live.numbox", 0 ],
 			"obj-1::obj-13::obj-18::obj-204" : [ "live.numbox[13]", "live.numbox", 0 ],
-			"obj-1::obj-13::obj-18::obj-18::obj-4" : [ "live.slider", "live.slider", 0 ]
+			"obj-2::obj-13::obj-204" : [ "live.numbox[73]", "live.numbox", 0 ],
+			"obj-2::obj-13::obj-36" : [ "live.numbox[72]", "live.numbox[1]", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{

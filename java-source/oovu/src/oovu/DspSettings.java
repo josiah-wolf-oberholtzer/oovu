@@ -15,6 +15,9 @@ public class DspSettings extends ModuleMemberServerClient {
 
     @Override
     public void bind(Atom[] arguments) {
+        if (this.lazy_module_id == null) {
+            return;
+        }
         ModuleServer module_server = ModuleServer.allocate(this.lazy_module_id);
         DspSettingsServer dsp_settings_server =
             module_server.get_dsp_settings_server();
