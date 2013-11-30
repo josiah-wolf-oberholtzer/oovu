@@ -48,7 +48,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 535.0, 460.0, 128.0, 128.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 0.0, 190.0, 70.0 ]
+					"presentation_rect" : [ 0.0, 0.0, 140.0, 70.0 ]
 				}
 
 			}
@@ -90,7 +90,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 730.0, 360.0, 137.0, 18.0 ],
-					"text" : "bgcolor 0.3 0.3 0.3 0.75"
+					"text" : "bgcolor 0. 0. 0. 0.75"
 				}
 
 			}
@@ -104,7 +104,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 590.0, 360.0, 123.0, 18.0 ],
-					"text" : "bgcolor 0.3 0.3 0.3 0."
+					"text" : "bgcolor 0. 0. 0. 0."
 				}
 
 			}
@@ -331,7 +331,7 @@
 					"parameter_enable" : 1,
 					"patching_rect" : [ 240.0, 285.0, 100.0, 18.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.0, 50.0, 180.0, 18.0 ],
+					"presentation_rect" : [ 5.0, 50.0, 130.0, 18.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_longname" : "live.slider[7]",
@@ -366,7 +366,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 90.0, 405.0, 56.0, 18.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.0, 30.0, 180.0, 18.0 ],
+					"presentation_rect" : [ 5.0, 30.0, 130.0, 18.0 ],
 					"varname" : "live.menu"
 				}
 
@@ -424,9 +424,9 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 30.0, 170.0, 190.0, 70.0 ],
+					"patching_rect" : [ 30.0, 170.0, 140.0, 70.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 0.0, 190.0, 70.0 ]
+					"presentation_rect" : [ 0.0, 0.0, 140.0, 70.0 ]
 				}
 
 			}

@@ -35,9 +35,9 @@
 					"name" : "oovu.mixer.title.maxpat",
 					"numinlets" : 0,
 					"numoutlets" : 0,
-					"patching_rect" : [ 0.0, 0.0, 190.0, 20.0 ],
+					"patching_rect" : [ 0.0, 0.0, 140.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 0.0, 190.0, 20.0 ]
+					"presentation_rect" : [ 0.0, 0.0, 140.0, 20.0 ]
 				}
 
 			}
@@ -49,24 +49,24 @@
 					"name" : "oovu.mixer.sends.maxpat",
 					"numinlets" : 0,
 					"numoutlets" : 0,
-					"patching_rect" : [ 0.0, 25.0, 190.0, 615.0 ],
+					"patching_rect" : [ 0.0, 25.0, 140.0, 615.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 25.0, 190.0, 615.0 ]
+					"presentation_rect" : [ 0.0, 25.0, 140.0, 615.0 ]
 				}
 
 			}
  ],
 		"lines" : [  ],
 		"parameters" : 		{
-			"obj-1::obj-15::obj-4" : [ "live.slider[4]", "live.slider", 0 ],
-			"obj-1::obj-14::obj-4" : [ "live.slider[5]", "live.slider", 0 ],
-			"obj-1::obj-13::obj-4" : [ "live.slider[2]", "live.slider", 0 ],
-			"obj-1::obj-6::obj-4" : [ "live.slider", "live.slider", 0 ],
-			"obj-1::obj-17::obj-4" : [ "live.slider[6]", "live.slider", 0 ],
+			"obj-1::obj-17::obj-4" : [ "live.slider[1]", "live.slider", 0 ],
+			"obj-1::obj-13::obj-4" : [ "live.slider[11]", "live.slider", 0 ],
+			"obj-1::obj-6::obj-4" : [ "live.slider[13]", "live.slider", 0 ],
 			"obj-1::obj-3" : [ "live.numbox", "live.numbox", 0 ],
-			"obj-1::obj-12::obj-4" : [ "live.slider[3]", "live.slider", 0 ],
+			"obj-1::obj-12::obj-4" : [ "live.slider[10]", "live.slider", 0 ],
 			"obj-1::obj-16::obj-4" : [ "live.slider[7]", "live.slider", 0 ],
-			"obj-1::obj-10::obj-4" : [ "live.slider[1]", "live.slider", 0 ]
+			"obj-1::obj-15::obj-4" : [ "live.slider[9]", "live.slider", 0 ],
+			"obj-1::obj-10::obj-4" : [ "live.slider[12]", "live.slider", 0 ],
+			"obj-1::obj-14::obj-4" : [ "live.slider[8]", "live.slider", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{

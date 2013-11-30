@@ -193,10 +193,10 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
         if ((!has_receives) && (!has_sends)) {
             return null;
         }
-        MaxPatcher patcher = new MaxPatcher(0, 0, 200, 650);
+        MaxPatcher patcher = new MaxPatcher(0, 0, 150, 650);
         patcher.setBackgroundColor(0, 0, 0);
         patcher.newDefault(5, 5, "bpatcher", Atom.parse(
-            "@patching_rect 5 5 190 640 @name oovu.mixer @args " + this.module_id));
+            "@patching_rect 5 5 140 640 @name oovu.mixer @args " + this.module_id));
         return patcher;
     }
 

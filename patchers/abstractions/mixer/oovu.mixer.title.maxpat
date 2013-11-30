@@ -58,6 +58,7 @@
 			}
 , 			{
 				"box" : 				{
+					"align" : 0,
 					"bgcolor" : [ 0.666667, 0.698039, 0.717647, 0.0 ],
 					"bgoncolor" : [ 0.666667, 0.698039, 0.717647, 0.0 ],
 					"bgovercolor" : [ 0.666667, 0.698039, 0.717647, 0.0 ],
@@ -77,7 +78,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 60.0, 195.0, 95.0, 25.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 0.0, 195.0, 25.0 ],
+					"presentation_rect" : [ 0.0, 0.0, 140.0, 25.0 ],
 					"prototypename" : "M4L.display",
 					"rounded" : 0.0,
 					"text" : "LOADING...",
