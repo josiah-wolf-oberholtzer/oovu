@@ -10,6 +10,9 @@ public class Module extends ServerClient {
     public Module(Atom[] arguments) {
         this.declareIO(2, 2);
         this.check_arguments(arguments);
+        if (arguments[0].isString() && arguments[0].getString().equals("#1")) {
+            return;
+        }
         this.max_adapter = new GenericMaxAdapter(this);
         Integer module_id = arguments[0].toInt();
         String desired_name = arguments[1].toString();

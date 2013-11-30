@@ -22,6 +22,8 @@ function msg_float(value) {
                 current_time = total_time;
             }
         }
+        mgraphics.redraw();
+        outlet(0, current_time);
     } else if (inlet == 1) {
         if (0 < value) {
             total_time = value; 
@@ -29,13 +31,26 @@ function msg_float(value) {
         if (total_time < current_time) {
             current_time = total_time;
         }
+        mgraphics.redraw();
     }
-    mgraphics.redraw();
-    outlet(0, current_time);
 }
 
 function msg_int(value) {
     msg_float(value)
+}
+
+function set(value) {
+    if (inlet == 0) {
+        if (!button_down) {
+            current_time = value;
+            if (current_time < 0) {
+                current_time = 0;
+            } else if (total_time < current_time) {
+                current_time = total_time;
+            }
+        }
+    }
+    mgraphics.redraw();
 }
 
 function onclick (x, y, button, mod1, shift, caps, opt, mod2) {
@@ -83,7 +98,7 @@ function paint() {
         ('0'  + seconds).slice(-2) + ':' +
         ('00' + milliseconds).slice(-3)
     mgraphics.set_line_width(2);
-	mgraphics.set_source_rgba(0.3, 0.3, 0.3, 1);
+	mgraphics.set_source_rgba(0.2, 0.2, 0.2, 1);
     mgraphics.rectangle_rounded(0, 0, box_width, box_height, 8, 8);
     mgraphics.fill();
 	mgraphics.set_source_rgba(0.8, 0.3, 0.3, 1);
