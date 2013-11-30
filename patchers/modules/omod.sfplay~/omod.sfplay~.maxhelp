@@ -29,6 +29,35 @@
 		"tags" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-3",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 160.0, 10.0, 60.0, 18.0 ],
+					"presentation_rect" : [ 161.0, 10.0, 0.0, 0.0 ],
+					"text" : ":getmixer"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-4",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 10.0, 10.0, 60.0, 18.0 ],
+					"text" : ":getmixer"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"args" : [ "output~" ],
 					"id" : "obj-2",
 					"maxclass" : "bpatcher",
@@ -36,7 +65,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 160.0, 10.0, 140.0, 210.0 ]
+					"patching_rect" : [ 160.0, 35.0, 140.0, 210.0 ]
 				}
 
 			}
@@ -49,20 +78,38 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 10.0, 10.0, 140.0, 210.0 ]
+					"patching_rect" : [ 10.0, 35.0, 140.0, 210.0 ]
 				}
 
 			}
  ],
-		"lines" : [  ],
+		"lines" : [ 			{
+				"patchline" : 				{
+					"destination" : [ "obj-2", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-3", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-1", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-4", 0 ]
+				}
+
+			}
+ ],
 		"parameters" : 		{
-			"obj-1::obj-13::obj-18::obj-18::obj-4" : [ "live.slider", "live.slider", 0 ],
-			"obj-2::obj-13::obj-6" : [ "live.slider[31]", "live.slider", 0 ],
 			"obj-1::obj-13::obj-17" : [ "live.numbox", "live.numbox", 0 ],
-			"obj-1::obj-13::obj-12" : [ "live.slider[1]", "live.slider", 0 ],
+			"obj-2::obj-13::obj-6" : [ "live.slider[31]", "live.slider", 0 ],
 			"obj-1::obj-13::obj-18::obj-204" : [ "live.numbox[13]", "live.numbox", 0 ],
+			"obj-2::obj-13::obj-36" : [ "live.numbox[72]", "live.numbox[1]", 0 ],
 			"obj-2::obj-13::obj-204" : [ "live.numbox[73]", "live.numbox", 0 ],
-			"obj-2::obj-13::obj-36" : [ "live.numbox[72]", "live.numbox[1]", 0 ]
+			"obj-1::obj-13::obj-18::obj-18::obj-4" : [ "live.slider", "live.slider", 0 ],
+			"obj-1::obj-13::obj-12" : [ "live.slider[1]", "live.slider", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{

@@ -17,6 +17,8 @@ import oovu.states.State;
 import oovu.states.StateComponentAggregate;
 
 import com.cycling74.max.Atom;
+import com.cycling74.max.MaxPatcher;
+import com.cycling74.max.MaxWindow;
 
 public class ModuleServer extends Server implements Comparable<ModuleServer> {
     public static ModuleServer allocate(Integer module_id) {
@@ -66,89 +68,114 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
         this.module_id = module_id;
         this.dsp_settings_server = null;
         this.attach_to_parent_server(Environment.root_server);
-        this.add_message_handler(new MessageHandlerBuilder("members")
-            .with_getter(new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    ModuleServer module_server =
-                        (ModuleServer) built_message_handler.client;
-                    List<Server> servers =
-                        new ArrayList<Server>(module_server.child_servers);
-                    String[] names =
-                        module_server.get_relative_server_names(servers);
-                    return Atoms.to_atoms(built_message_handler.get_name(),
-                        names);
+        // MEMBERS
+        MessageHandlerBuilder members_builder =
+            new MessageHandlerBuilder("members");
+        members_builder.with_getter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                ModuleServer module_server =
+                    (ModuleServer) built_message_handler.client;
+                List<Server> servers =
+                    new ArrayList<Server>(module_server.child_servers);
+                String[] names =
+                    module_server.get_relative_server_names(servers);
+                return Atoms.to_atoms(built_message_handler.get_name(), names);
+            }
+        });
+        this.add_message_handler(members_builder.build(this));
+        // METHODS
+        MessageHandlerBuilder methods_builder =
+            new MessageHandlerBuilder("methods");
+        methods_builder.with_getter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                ModuleServer module_server =
+                    (ModuleServer) built_message_handler.client;
+                List<? extends Server> servers =
+                    module_server.get_child_method_servers();
+                String[] names =
+                    module_server.get_relative_server_names(servers);
+                return Atoms.to_atoms(built_message_handler.get_name(), names);
+            }
+        });
+        this.add_message_handler(methods_builder.build(this));
+        // MIXER
+        MessageHandlerBuilder mixer_builder = new MessageHandlerBuilder("mixer");
+        mixer_builder.with_getter(new MessageHandlerCallback(){
+            @Override
+            public Atom[][] execute(
+                MessageHandler message_handler,
+                Atom[] arguments) {
+                ModuleServer server = (ModuleServer) message_handler.client;
+                MaxPatcher mixer_patcher = server.build_mixer_patcher();
+                mixer_patcher.send("front", new Atom[0]);
+                return null;
+            }
+        });
+        this.add_message_handler(mixer_builder.build(this));
+        // NAME
+        MessageHandlerBuilder name_builder = new MessageHandlerBuilder("name");
+        name_builder.with_getter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                ModuleServer module_server =
+                    (ModuleServer) built_message_handler.client;
+                String name = module_server.get_name();
+                if (name != null) {
+                    Atom[][] result = new Atom[1][];
+                    result[0] = Atom.newAtom(new String[] {
+                        built_message_handler.get_name(), name
+                    });
+                    return result;
                 }
-            }).build(this));
-        this.add_message_handler(new MessageHandlerBuilder("methods")
-            .with_getter(new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    ModuleServer module_server =
-                        (ModuleServer) built_message_handler.client;
-                    List<? extends Server> servers =
-                        module_server.get_child_method_servers();
-                    String[] names =
-                        module_server.get_relative_server_names(servers);
-                    return Atoms.to_atoms(built_message_handler.get_name(),
-                        names);
-                }
-            }).build(this));
-        this.add_message_handler(new MessageHandlerBuilder("name")
-            .with_getter(new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    ModuleServer module_server =
-                        (ModuleServer) built_message_handler.client;
-                    String name = module_server.get_name();
-                    if (name != null) {
-                        Atom[][] result = new Atom[1][];
-                        result[0] = Atom.newAtom(new String[] {
-                            built_message_handler.get_name(), name
-                        });
-                        return result;
-                    }
-                    return null;
-                }
-            }).with_is_meta_relevant(true).build(this));
-        this.add_message_handler(new MessageHandlerBuilder("properties")
-            .with_getter(new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    ModuleServer module_server =
-                        (ModuleServer) built_message_handler.client;
-                    List<? extends Server> servers =
-                        module_server.get_child_property_servers();
-                    String[] names =
-                        module_server.get_relative_server_names(servers);
-                    return Atoms.to_atoms(built_message_handler.get_name(),
-                        names);
-                }
-            }).build(this));
-        this.add_message_handler(new MessageHandlerBuilder("returns")
-            .with_getter(new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    ModuleServer module_server =
-                        (ModuleServer) built_message_handler.client;
-                    List<? extends Server> servers =
-                        module_server.get_child_return_servers();
-                    String[] names =
-                        module_server.get_relative_server_names(servers);
-                    return Atoms.to_atoms(built_message_handler.get_name(),
-                        names);
-                }
-            }).build(this));
+                return null;
+            }
+        });
+        name_builder.with_is_meta_relevant(true);
+        this.add_message_handler(name_builder.build(this));
+        // PROPERTIES
+        MessageHandlerBuilder properties_builder =
+            new MessageHandlerBuilder("properties");
+        properties_builder.with_getter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                ModuleServer module_server =
+                    (ModuleServer) built_message_handler.client;
+                List<? extends Server> servers =
+                    module_server.get_child_property_servers();
+                String[] names =
+                    module_server.get_relative_server_names(servers);
+                return Atoms.to_atoms(built_message_handler.get_name(), names);
+            }
+        });
+        this.add_message_handler(properties_builder.build(this));
+        // RETURNS
+        MessageHandlerBuilder returns_builder =
+            new MessageHandlerBuilder("returns");
+        returns_builder.with_getter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                ModuleServer module_server =
+                    (ModuleServer) built_message_handler.client;
+                List<? extends Server> servers =
+                    module_server.get_child_return_servers();
+                String[] names =
+                    module_server.get_relative_server_names(servers);
+                return Atoms.to_atoms(built_message_handler.get_name(), names);
+            }
+        });
+        this.add_message_handler(returns_builder.build(this));
     }
 
     public void acquire_name(String desired_name) {
@@ -157,6 +184,34 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
         }
         this.name = this.osc_address_node.acquire_name(desired_name);
         Environment.event_service.publish(new ModuleNameAcquiredEvent(this));
+    }
+
+    public MaxPatcher build_mixer_patcher() {
+        DspSettingsServer dsp_settings = this.get_dsp_settings_server();
+        boolean has_receives = dsp_settings.module_has_dsp_receives();
+        boolean has_sends = dsp_settings.module_has_dsp_sends();
+        if ((!has_receives) && (!has_sends)) {
+            return null;
+        }
+        MaxPatcher patcher = new MaxPatcher(0, 0, 100, 100);
+        patcher.newDefault(0, 0, "comment", Atom.parse("@text " + this.name));
+        if (has_receives) {
+            patcher.newDefault(0, 25, "panel", new Atom[0]);
+        }
+        if (has_sends) {
+            int send_count = dsp_settings.get_send_count();
+            patcher.newDefault(0, 50, "panel", new Atom[0]);
+            for (int i = 0; i < 8; i++) {
+                Atom[] args = null; 
+                if (i < send_count) {
+                    args = Atom.parse("@bgcolor 0. 0. 0. 1.");
+                } else {
+                    args = Atom.parse("");
+                }
+                patcher.newDefault(0, 75 + (25 * i), "panel", args);
+            }
+        }
+        return patcher;
     }
 
     @Override
