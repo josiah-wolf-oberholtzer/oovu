@@ -18,7 +18,6 @@ import oovu.states.StateComponentAggregate;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxPatcher;
-import com.cycling74.max.MaxWindow;
 
 public class ModuleServer extends Server implements Comparable<ModuleServer> {
     public static ModuleServer allocate(Integer module_id) {

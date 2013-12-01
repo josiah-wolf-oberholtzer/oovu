@@ -21,6 +21,7 @@ import oovu.states.State;
 import oovu.states.StateComponentAggregate;
 
 import com.cycling74.max.Atom;
+import com.cycling74.max.MaxPatcher;
 import com.cycling74.max.MaxSystem;
 
 public class RootServer extends Server {
@@ -30,6 +31,22 @@ public class RootServer extends Server {
     public RootServer() {
         super();
         this.attach_to_osc_address_node(Environment.root_osc_address_node);
+        // MIXER
+        MessageHandlerBuilder mixer_builder = new MessageHandlerBuilder("mixer");
+        mixer_builder.with_getter(new MessageHandlerCallback(){
+            @Override
+            public Atom[][] execute(
+                MessageHandler message_handler,
+                Atom[] arguments) {
+                Environment.log("Getmixer!");
+                RootServer server = (RootServer) message_handler.client;
+                MaxPatcher mixer_patcher = server.build_mixer_patcher();
+                mixer_patcher.send("front", new Atom[0]);
+                return null;
+            }
+        });
+        this.add_message_handler(mixer_builder.build(this));
+        // STATE
         this.add_message_handler(new MessageHandlerBuilder("state")
             .with_getter(new MessageHandlerCallback() {
                 @Override
@@ -45,6 +62,7 @@ public class RootServer extends Server {
                     return result;
                 }
             }).build(this));
+        // EVENTS/LIST
         this.add_message_handler(new MessageHandlerBuilder("events/list")
             .with_setter(new MessageHandlerCallback() {
                 @Override
@@ -70,6 +88,7 @@ public class RootServer extends Server {
                     return result;
                 }
             }).build(this));
+        // EVENTS/NEXT
         this.add_message_handler(new MessageHandlerBuilder("events/next")
             .with_is_binding_relevant(true)
             .with_setter(new MessageHandlerCallback() {
@@ -105,6 +124,7 @@ public class RootServer extends Server {
                     return null;
                 }
             }).build(this));
+        // EVENTS/PREVIOUS
         this.add_message_handler(new MessageHandlerBuilder("events/previous")
             .with_is_binding_relevant(true)
             .with_setter(new MessageHandlerCallback() {
@@ -136,6 +156,7 @@ public class RootServer extends Server {
                     return null;
                 }
             }).build(this));
+        // EVENTS/READ
         this.add_message_handler(new MessageHandlerBuilder("events/read")
             .with_callback(new MessageHandlerCallback() {
                 @Override
@@ -166,6 +187,7 @@ public class RootServer extends Server {
                     return null;
                 }
             }).build(this));
+        // EVENTS/GOTO
         this.add_message_handler(new MessageHandlerBuilder("events/goto")
             .with_setter(new MessageHandlerCallback() {
                 @Override
@@ -214,6 +236,109 @@ public class RootServer extends Server {
                     return null;
                 }
             }).build(this));
+    }
+
+    public MaxPatcher build_mixer_patcher() {
+        ArrayList<ModuleServer> effects_modules = new ArrayList<ModuleServer>();
+        ArrayList<ModuleServer> input_only_modules =
+            new ArrayList<ModuleServer>();
+        ArrayList<ModuleServer> output_only_modules =
+            new ArrayList<ModuleServer>();
+        for (Server child_server : this.child_servers) {
+            ModuleServer module = (ModuleServer) child_server;
+            DspSettingsServer dsp_settings = module.get_dsp_settings_server();
+            boolean has_receives = dsp_settings.module_has_dsp_receives();
+            boolean has_sends = dsp_settings.module_has_dsp_sends();
+            if ((!has_receives) && (!has_sends)) {
+                Environment.log("Skipping: " + module.toString());
+                continue;
+            } else if (has_receives && has_sends) {
+                Environment.log("Keeping [I/O]: " + module.toString());
+                effects_modules.add(module);
+            } else if (has_receives) {
+                Environment.log("Keeping [I/-]: " + module.toString());
+                input_only_modules.add(module);
+            } else {
+                Environment.log("Keeping [-/O]: " + module.toString());
+                output_only_modules.add(module);
+            }
+        }
+        int gutter = 10;
+        int step = 145;
+        int width = 5;
+        int sections = 0;
+        if (0 < input_only_modules.size()) {
+            width += (step * input_only_modules.size());
+            sections += 1;
+        }
+        if (0 < output_only_modules.size()) {
+            width += (step * output_only_modules.size());
+            sections += 1;
+        }
+        if (0 < effects_modules.size()) {
+            width += (step * effects_modules.size());
+            sections += 1;
+        }
+        if (sections == 0) {
+            return null;
+        } else if (sections == 2) {
+            width += gutter;
+        } else {
+            width += gutter * 2;
+        }
+        Environment.log("Width: " + width);
+        MaxPatcher patcher = new MaxPatcher(0, 0, width, 650);
+        int current_x = 5;
+        if (0 < input_only_modules.size()) {
+            for (ModuleServer module : output_only_modules) {
+                patcher.newDefault(
+                    current_x,
+                    5,
+                    "bpatcher",
+                    Atom.parse("@patching_rect " + current_x
+                        + " 5 140 640 @name oovu.mixer @args "
+                        + module.module_id));
+                current_x += step;
+            }
+            if ((0 < effects_modules.size())
+                || (0 < output_only_modules.size())) {
+                patcher.newDefault(current_x, 650, "live.line", Atom.parse("@patching_rect " + current_x
+                    + " 5 5 640 @border 2 @justification 1"));
+                current_x += gutter;
+            }
+        }
+        if (0 < effects_modules.size()) {
+            for (ModuleServer module : effects_modules) {
+                patcher.newDefault(
+                    current_x,
+                    5,
+                    "bpatcher",
+                    Atom.parse("@patching_rect " + current_x
+                        + " 5 140 640 @name oovu.mixer @args "
+                        + module.module_id));
+                current_x += step;
+            }
+            if (0 < output_only_modules.size()) {
+                patcher.newDefault(current_x, 650, "live.line", Atom.parse("@patching_rect " + current_x
+                    + " 5 5 640 @border 2 @justification 1"));
+                current_x += gutter;
+            }
+        }
+        if (0 < output_only_modules.size()) {
+            for (ModuleServer module : input_only_modules) {
+                patcher.newDefault(
+                    current_x,
+                    5,
+                    "bpatcher",
+                    Atom.parse("@patching_rect " + current_x
+                        + " 5 140 640 @name oovu.mixer @args "
+                        + module.module_id));
+                current_x += step;
+            }
+        }
+        patcher.setBackgroundColor(0, 0, 0);
+        patcher.getWindow().setTitle("OOVU Mixer");
+        return patcher;
     }
 
     @Override
