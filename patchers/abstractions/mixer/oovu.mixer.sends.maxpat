@@ -38,7 +38,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 10.0, 560.0, 190.0, 70.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 545.0, 140.0, 70.0 ]
+					"presentation_rect" : [ 0.0, 525.0, 140.0, 70.0 ]
 				}
 
 			}
@@ -52,7 +52,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 10.0, 485.0, 190.0, 70.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 470.0, 140.0, 70.0 ]
+					"presentation_rect" : [ 0.0, 450.0, 140.0, 70.0 ]
 				}
 
 			}
@@ -66,7 +66,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 10.0, 410.0, 190.0, 70.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 395.0, 140.0, 70.0 ]
+					"presentation_rect" : [ 0.0, 375.0, 140.0, 70.0 ]
 				}
 
 			}
@@ -80,7 +80,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 10.0, 335.0, 190.0, 70.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 320.0, 140.0, 70.0 ]
+					"presentation_rect" : [ 0.0, 300.0, 140.0, 70.0 ]
 				}
 
 			}
@@ -94,7 +94,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 10.0, 260.0, 190.0, 70.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 245.0, 140.0, 70.0 ]
+					"presentation_rect" : [ 0.0, 225.0, 140.0, 70.0 ]
 				}
 
 			}
@@ -108,7 +108,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 10.0, 185.0, 190.0, 70.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 170.0, 140.0, 70.0 ]
+					"presentation_rect" : [ 0.0, 150.0, 140.0, 70.0 ]
 				}
 
 			}
@@ -122,7 +122,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 10.0, 110.0, 190.0, 70.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 95.0, 140.0, 70.0 ]
+					"presentation_rect" : [ 0.0, 75.0, 140.0, 70.0 ]
 				}
 
 			}
@@ -136,36 +136,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 10.0, 35.0, 190.0, 70.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 20.0, 140.0, 70.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"appearance" : 2,
-					"id" : "obj-3",
-					"maxclass" : "live.numbox",
-					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "float" ],
-					"parameter_enable" : 1,
-					"patching_rect" : [ 10.0, 10.0, 45.0, 15.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 0.0, 140.0, 15.0 ],
-					"saved_attribute_attributes" : 					{
-						"valueof" : 						{
-							"parameter_longname" : "live.numbox",
-							"parameter_shortname" : "live.numbox",
-							"parameter_type" : 1,
-							"parameter_mmin" : 1.0,
-							"parameter_mmax" : 8.0,
-							"parameter_unitstyle" : 9,
-							"parameter_units" : "Sends"
-						}
-
-					}
-,
-					"varname" : "live.numbox"
+					"presentation_rect" : [ 0.0, 0.0, 140.0, 70.0 ]
 				}
 
 			}
@@ -184,35 +155,16 @@
 
 			}
  ],
-		"lines" : [ 			{
-				"patchline" : 				{
-					"destination" : [ "obj-3", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-1", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-1", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-3", 0 ]
-				}
-
-			}
- ],
+		"lines" : [  ],
 		"parameters" : 		{
-			"obj-14::obj-4" : [ "live.slider[8]", "live.slider", 0 ],
-			"obj-17::obj-4" : [ "live.slider[1]", "live.slider", 0 ],
-			"obj-3" : [ "live.numbox", "live.numbox", 0 ],
-			"obj-13::obj-4" : [ "live.slider[11]", "live.slider", 0 ],
-			"obj-6::obj-4" : [ "live.slider[13]", "live.slider", 0 ],
-			"obj-12::obj-4" : [ "live.slider[10]", "live.slider", 0 ],
-			"obj-16::obj-4" : [ "live.slider[7]", "live.slider", 0 ],
 			"obj-15::obj-4" : [ "live.slider[9]", "live.slider", 0 ],
-			"obj-10::obj-4" : [ "live.slider[12]", "live.slider", 0 ]
+			"obj-6::obj-4" : [ "live.slider[13]", "live.slider", 0 ],
+			"obj-14::obj-4" : [ "live.slider[8]", "live.slider", 0 ],
+			"obj-10::obj-4" : [ "live.slider[12]", "live.slider", 0 ],
+			"obj-13::obj-4" : [ "live.slider[11]", "live.slider", 0 ],
+			"obj-17::obj-4" : [ "live.slider[1]", "live.slider", 0 ],
+			"obj-16::obj-4" : [ "live.slider[7]", "live.slider", 0 ],
+			"obj-12::obj-4" : [ "live.slider[10]", "live.slider", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{

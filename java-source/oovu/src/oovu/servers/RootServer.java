@@ -32,8 +32,9 @@ public class RootServer extends Server {
         super();
         this.attach_to_osc_address_node(Environment.root_osc_address_node);
         // MIXER
-        MessageHandlerBuilder mixer_builder = new MessageHandlerBuilder("mixer");
-        mixer_builder.with_getter(new MessageHandlerCallback(){
+        MessageHandlerBuilder mixer_builder =
+            new MessageHandlerBuilder("mixer");
+        mixer_builder.with_getter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler message_handler,
@@ -302,8 +303,12 @@ public class RootServer extends Server {
             }
             if ((0 < effects_modules.size())
                 || (0 < output_only_modules.size())) {
-                patcher.newDefault(current_x, 650, "live.line", Atom.parse("@patching_rect " + current_x
-                    + " 5 5 640 @border 2 @justification 1"));
+                patcher.newDefault(
+                    current_x,
+                    650,
+                    "live.line",
+                    Atom.parse("@patching_rect " + current_x
+                        + " 5 5 640 @border 2 @justification 1"));
                 current_x += gutter;
             }
         }
@@ -319,8 +324,12 @@ public class RootServer extends Server {
                 current_x += step;
             }
             if (0 < output_only_modules.size()) {
-                patcher.newDefault(current_x, 650, "live.line", Atom.parse("@patching_rect " + current_x
-                    + " 5 5 640 @border 2 @justification 1"));
+                patcher.newDefault(
+                    current_x,
+                    650,
+                    "live.line",
+                    Atom.parse("@patching_rect " + current_x
+                        + " 5 5 640 @border 2 @justification 1"));
                 current_x += gutter;
             }
         }

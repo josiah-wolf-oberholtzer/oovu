@@ -104,8 +104,9 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
         });
         this.add_message_handler(methods_builder.build(this));
         // MIXER
-        MessageHandlerBuilder mixer_builder = new MessageHandlerBuilder("mixer");
-        mixer_builder.with_getter(new MessageHandlerCallback(){
+        MessageHandlerBuilder mixer_builder =
+            new MessageHandlerBuilder("mixer");
+        mixer_builder.with_getter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler message_handler,
@@ -192,10 +193,9 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
         if ((!has_receives) && (!has_sends)) {
             return null;
         }
-        MaxPatcher patcher = new MaxPatcher(0, 0, 150, 650);
+        MaxPatcher patcher = new MaxPatcher(0, 0, 150, 720);
         patcher.setBackgroundColor(0, 0, 0);
-        patcher.newDefault(5, 5, "bpatcher", Atom.parse(
-            "@patching_rect 5 5 140 640 @name oovu.mixer @args " + this.module_id));
+        this.fill_mixer_patcher(patcher, 5, 5);
         return patcher;
     }
 
@@ -203,6 +203,51 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
     public int compareTo(ModuleServer other) {
         return this.get_osc_address_string().compareTo(
             other.get_osc_address_string());
+    }
+
+    public void fill_mixer_patcher(
+        MaxPatcher patcher,
+        int x_offset,
+        int y_offset) {
+        DspSettingsServer dsp_settings = this.get_dsp_settings_server();
+        boolean has_receives = dsp_settings.module_has_dsp_receives();
+        boolean has_sends = dsp_settings.module_has_dsp_sends();
+        if (has_receives || has_sends) {
+            patcher.newDefault(
+                x_offset,
+                y_offset,
+                "bpatcher",
+                Atom.parse("@patching_rect " + x_offset + " " + y_offset
+                    + " 140 110 @name oovu.mixer.title.basic @args "
+                    + this.module_id));
+        }
+        if (has_receives) {
+            patcher.newDefault(
+                x_offset,
+                y_offset,
+                "bpatcher",
+                Atom.parse("@patching_rect " + x_offset + " " + y_offset
+                    + " 140 110 @name oovu.mixer.title.inputs @args "
+                    + this.module_id));
+        }
+        if (has_sends) {
+            patcher.newDefault(
+                x_offset,
+                y_offset,
+                "bpatcher",
+                Atom.parse("@patching_rect " + x_offset + " " + y_offset
+                    + " 140 110 @name oovu.mixer.title.outputs @args "
+                    + this.module_id));
+            patcher
+                .newDefault(
+                    x_offset,
+                    y_offset,
+                    "bpatcher",
+                    Atom.parse("@patching_rect " + x_offset + " "
+                        + (y_offset + 115)
+                        + " 140 595 @name oovu.mixer.sends @args "
+                        + this.module_id));
+        }
     }
 
     public List<MethodServer> get_child_method_servers() {
