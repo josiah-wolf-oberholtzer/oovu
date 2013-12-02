@@ -39,7 +39,6 @@ public class RootServer extends Server {
             public Atom[][] execute(
                 MessageHandler message_handler,
                 Atom[] arguments) {
-                Environment.log("Getmixer!");
                 RootServer server = (RootServer) message_handler.client;
                 MaxPatcher mixer_patcher = server.build_mixer_patcher();
                 mixer_patcher.send("front", new Atom[0]);
@@ -262,7 +261,7 @@ public class RootServer extends Server {
         }
         int gutter = 10;
         int step = 145;
-        int width = 5;
+        int width = 70;
         int sections = 0;
         if (0 < input_only_modules.size()) {
             width += (step * input_only_modules.size());
@@ -284,9 +283,16 @@ public class RootServer extends Server {
             width += gutter * 2;
         }
         MaxPatcher patcher = new MaxPatcher(0, 0, width, 745);
-        int current_x = 5;
+        int current_x = 70;
+        patcher.newDefault(5, 5, "bpatcher",
+            Atom.parse("@patching_rect 5 5 50 70 @name oovu.mixer.globals"));
+        patcher.newDefault(60, 735, "live.line",
+            Atom.parse("@patching_rect 60 5 5 735 @border 2 @justification 1"));
         if (0 < input_only_modules.size()) {
-            patcher.newDefault(current_x, 5, "comment", 
+            patcher.newDefault(
+                current_x,
+                5,
+                "comment",
                 Atom.parse("@text INPUTS @textcolor 1 1 1 1 @fontface 3 "
                     + "@patching_rect " + current_x + " 5 140 20"));
             for (ModuleServer module : output_only_modules) {
@@ -305,7 +311,10 @@ public class RootServer extends Server {
             }
         }
         if (0 < effects_modules.size()) {
-            patcher.newDefault(current_x, 5, "comment", 
+            patcher.newDefault(
+                current_x,
+                5,
+                "comment",
                 Atom.parse("@text TREATMENTS @textcolor 1 1 1 1 @fontface 3 "
                     + "@patching_rect " + current_x + " 5 140 20"));
             for (ModuleServer module : effects_modules) {
@@ -323,7 +332,10 @@ public class RootServer extends Server {
             }
         }
         if (0 < output_only_modules.size()) {
-            patcher.newDefault(current_x, 5, "comment", 
+            patcher.newDefault(
+                current_x,
+                5,
+                "comment",
                 Atom.parse("@text OUTPUTS @textcolor 1 1 1 1 @fontface 3 "
                     + "@patching_rect " + current_x + " 5 140 20"));
             for (ModuleServer module : input_only_modules) {
