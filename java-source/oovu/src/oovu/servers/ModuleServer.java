@@ -196,6 +196,8 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
         MaxPatcher patcher = new MaxPatcher(0, 0, 150, 720);
         patcher.setBackgroundColor(0, 0, 0);
         this.fill_mixer_patcher(patcher, 5, 5);
+        patcher.send("statusbarvisible", Atom.parse("0"));
+        patcher.send("toolbarvisible", Atom.parse("0"));
         return patcher;
     }
 
@@ -219,7 +221,7 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
                 "bpatcher",
                 Atom.parse("@patching_rect " + x_offset + " " + y_offset
                     + " 140 110 @name oovu.mixer.title.basic @args "
-                    + this.module_id));
+                    + this.module_id + " @clickthrough 1 @background 1"));
         }
         if (has_receives) {
             patcher.newDefault(
@@ -228,7 +230,7 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
                 "bpatcher",
                 Atom.parse("@patching_rect " + x_offset + " " + y_offset
                     + " 140 110 @name oovu.mixer.title.inputs @args "
-                    + this.module_id));
+                    + this.module_id + " @clickthrough 1"));
         }
         if (has_sends) {
             patcher.newDefault(
@@ -237,7 +239,7 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
                 "bpatcher",
                 Atom.parse("@patching_rect " + x_offset + " " + y_offset
                     + " 140 110 @name oovu.mixer.title.outputs @args "
-                    + this.module_id));
+                    + this.module_id + " @clickthrough 1"));
             patcher
                 .newDefault(
                     x_offset,
