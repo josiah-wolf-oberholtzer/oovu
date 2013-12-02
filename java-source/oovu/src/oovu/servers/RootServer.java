@@ -251,16 +251,12 @@ public class RootServer extends Server {
             boolean has_receives = dsp_settings.module_has_dsp_receives();
             boolean has_sends = dsp_settings.module_has_dsp_sends();
             if ((!has_receives) && (!has_sends)) {
-                Environment.log("Skipping: " + module.toString());
                 continue;
             } else if (has_receives && has_sends) {
-                Environment.log("Keeping [I/O]: " + module.toString());
                 effects_modules.add(module);
             } else if (has_receives) {
-                Environment.log("Keeping [I/-]: " + module.toString());
                 input_only_modules.add(module);
             } else {
-                Environment.log("Keeping [-/O]: " + module.toString());
                 output_only_modules.add(module);
             }
         }
@@ -287,65 +283,57 @@ public class RootServer extends Server {
         } else {
             width += gutter * 2;
         }
-        Environment.log("Width: " + width);
-        MaxPatcher patcher = new MaxPatcher(0, 0, width, 650);
+        MaxPatcher patcher = new MaxPatcher(0, 0, width, 745);
         int current_x = 5;
         if (0 < input_only_modules.size()) {
+            patcher.newDefault(current_x, 5, "comment", 
+                Atom.parse("@text INPUTS @textcolor 1 1 1 1 @fontface 3 "
+                    + "@patching_rect " + current_x + " 5 140 20"));
             for (ModuleServer module : output_only_modules) {
-                patcher.newDefault(
-                    current_x,
-                    5,
-                    "bpatcher",
-                    Atom.parse("@patching_rect " + current_x
-                        + " 5 140 640 @name oovu.mixer @args "
-                        + module.module_id));
+                module.fill_mixer_patcher(patcher, current_x, 30);
                 current_x += step;
             }
             if ((0 < effects_modules.size())
                 || (0 < output_only_modules.size())) {
                 patcher.newDefault(
                     current_x,
-                    650,
+                    735,
                     "live.line",
                     Atom.parse("@patching_rect " + current_x
-                        + " 5 5 640 @border 2 @justification 1"));
+                        + " 5 5 735 @border 2 @justification 1"));
                 current_x += gutter;
             }
         }
         if (0 < effects_modules.size()) {
+            patcher.newDefault(current_x, 5, "comment", 
+                Atom.parse("@text TREATMENTS @textcolor 1 1 1 1 @fontface 3 "
+                    + "@patching_rect " + current_x + " 5 140 20"));
             for (ModuleServer module : effects_modules) {
-                patcher.newDefault(
-                    current_x,
-                    5,
-                    "bpatcher",
-                    Atom.parse("@patching_rect " + current_x
-                        + " 5 140 640 @name oovu.mixer @args "
-                        + module.module_id));
+                module.fill_mixer_patcher(patcher, current_x, 30);
                 current_x += step;
             }
             if (0 < output_only_modules.size()) {
                 patcher.newDefault(
                     current_x,
-                    650,
+                    735,
                     "live.line",
                     Atom.parse("@patching_rect " + current_x
-                        + " 5 5 640 @border 2 @justification 1"));
+                        + " 5 5 735 @border 2 @justification 1"));
                 current_x += gutter;
             }
         }
         if (0 < output_only_modules.size()) {
+            patcher.newDefault(current_x, 5, "comment", 
+                Atom.parse("@text OUTPUTS @textcolor 1 1 1 1 @fontface 3 "
+                    + "@patching_rect " + current_x + " 5 140 20"));
             for (ModuleServer module : input_only_modules) {
-                patcher.newDefault(
-                    current_x,
-                    5,
-                    "bpatcher",
-                    Atom.parse("@patching_rect " + current_x
-                        + " 5 140 640 @name oovu.mixer @args "
-                        + module.module_id));
+                module.fill_mixer_patcher(patcher, current_x, 30);
                 current_x += step;
             }
         }
         patcher.setBackgroundColor(0, 0, 0);
+        patcher.send("statusbarvisible", Atom.parse("0"));
+        patcher.send("toolbarvisible", Atom.parse("0"));
         patcher.getWindow().setTitle("OOVU Mixer");
         return patcher;
     }
