@@ -58,7 +58,8 @@ public class OptionDatatype extends StringDatatype {
                     MessageHandler message_handler,
                     Atom[] arguments) {
                     OptionDatatype.this.client.make_request(
-                        OptionDatatype.this.client, message_handler.get_getter_name(), null);
+                        OptionDatatype.this.client,
+                        message_handler.get_getter_name(), null);
                     OptionDatatype.this.client.reoutput_value();
                     return null;
                 }

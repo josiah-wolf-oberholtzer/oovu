@@ -1,24 +1,17 @@
 package oovu.servers;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
-import oovu.addresses.OscAddressNode;
 import oovu.clients.ServerClient;
-import oovu.eventscripts.EventScriptParser;
+import oovu.eventscripts.EventManager;
 import oovu.messaging.Atoms;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.MessageHandlerCallback;
-import oovu.messaging.Request;
-import oovu.messaging.Response;
 import oovu.states.State;
 import oovu.states.StateComponentAggregate;
 
@@ -27,8 +20,7 @@ import com.cycling74.max.MaxPatcher;
 import com.cycling74.max.MaxSystem;
 
 public class RootServer extends Server {
-    private Map<String, State> events = null;
-    private String current_event_name = null;
+    private EventManager event_manager = new EventManager();
 
     public RootServer() {
         super();
@@ -49,7 +41,8 @@ public class RootServer extends Server {
         });
         this.add_message_handler(mixer_builder.build(this));
         // STATE
-        MessageHandlerBuilder state_builder = new MessageHandlerBuilder("state");
+        MessageHandlerBuilder state_builder =
+            new MessageHandlerBuilder("state");
         state_builder.with_getter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
@@ -71,25 +64,16 @@ public class RootServer extends Server {
         events_list_builder.with_setter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
-                MessageHandler built_message_handler,
+                MessageHandler message_handler,
                 Atom[] arguments) {
-                RootServer root_server =
-                    (RootServer) built_message_handler.client;
-                Atom[][] result = new Atom[1][];
-                if (root_server.events != null) {
-                    Set<Entry<String, State>> entry_set =
-                        root_server.events.entrySet();
-                    int counter = 0;
-                    result[0] = new Atom[entry_set.size()];
-                    for (Entry<String, State> entry : entry_set) {
-                        result[0][counter] = Atom.newAtom(entry.getKey());
-                        counter += 1;
-                    }
-                } else {
-                    result[0] = new Atom[0];
+                RootServer root_server = (RootServer) message_handler.client;
+                List<String> event_names =
+                    root_server.event_manager.get_event_names();
+                if (event_names == null) {
+                    return Atoms.to_atoms(message_handler.get_name());
                 }
-                result[0] = Atom.newAtom("events/list", result[0]);
-                return result;
+                return Atoms.to_atoms(message_handler.get_name(),
+                    event_names.toArray(new String[0]));
             }
         });
         this.add_message_handler(events_list_builder.build(this));
@@ -103,36 +87,16 @@ public class RootServer extends Server {
                 MessageHandler message_handler,
                 Atom[] arguments) {
                 RootServer root_server = (RootServer) message_handler.client;
-                if (root_server.events == null) {
-                    Environment.log("Events are null.");
-                    return null;
-                } else if (root_server.events.size() == 0) {
-                    Environment.log("Events are zero-length.");
+                String event_name =
+                    root_server.event_manager.get_next_event_name();
+                if (event_name == null) {
                     return null;
                 }
-                String[] event_names =
-                    root_server.events.keySet().toArray(new String[0]);
-                Environment.log("Events: "
-                    + Atom.toOneString(Atom.newAtom(event_names)));
-                Environment.log("Event: " + root_server.current_event_name);
-                int event_index =
-                    Arrays.asList(event_names).indexOf(
-                        root_server.current_event_name);
-                if (event_index == -1) {
-                    event_index = 0;
-                } else {
-                    event_index += 1;
-                }
-                if (event_index == event_names.length) {
-                    event_index -= 1;
-                }
-                Environment.log("Event Index: " + event_index);
-                Atom[] message_arguments = Atom.newAtom(new int[] {
-                    event_index
-                });
-                root_server.make_request(root_server, "events/goto",
-                    message_arguments);
-                return null;
+                State state =
+                    root_server.event_manager
+                        .set_current_event_by_name(event_name);
+                root_server.event_manager.execute_state(state, root_server);
+                return Atoms.to_atoms("events/current", event_name);
             }
         });
         this.add_message_handler(events_next_builder.build(this));
@@ -146,49 +110,68 @@ public class RootServer extends Server {
                 MessageHandler message_handler,
                 Atom[] arguments) {
                 RootServer root_server = (RootServer) message_handler.client;
-                if (root_server.events == null) {
-                    return null;
-                } else if (root_server.events.size() == 0) {
+                String event_name =
+                    root_server.event_manager.get_previous_event_name();
+                if (event_name == null) {
                     return null;
                 }
-                String[] event_names =
-                    root_server.events.keySet().toArray(new String[0]);
-                int event_index =
-                    Arrays.asList(event_names).indexOf(
-                        root_server.current_event_name);
-                event_index -= 1;
-                if (event_index < 0) {
-                    event_index = 0;
-                }
-                Atom[] message_arguments = Atom.newAtom(new int[] {
-                    event_index
-                });
-                root_server.make_request(root_server, "events/goto",
-                    message_arguments);
-                return null;
+                State state =
+                    root_server.event_manager
+                        .set_current_event_by_name(event_name);
+                root_server.event_manager.execute_state(state, root_server);
+                return Atoms.to_atoms("events/current", event_name);
             }
         });
         this.add_message_handler(events_previous_builder.build(this));
+        // EVENTS/GOTO
+        MessageHandlerBuilder events_goto_builder =
+            new MessageHandlerBuilder("events/goto");
+        events_goto_builder.with_setter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler message_handler,
+                Atom[] arguments) {
+                RootServer root_server = (RootServer) message_handler.client;
+                String event_name = null;
+                if ((arguments.length == 1) && arguments[0].isInt()) {
+                    event_name =
+                        root_server.event_manager
+                            .get_event_name_by_index(arguments[0].toInt());
+                } else if (0 < arguments.length) {
+                    event_name =
+                        root_server.event_manager.get_event_name_by_string(Atom
+                            .toOneString(arguments));
+                }
+                if (event_name == null) {
+                    return null;
+                }
+                State state =
+                    root_server.event_manager
+                        .set_current_event_by_name(event_name);
+                root_server.event_manager.execute_state(state, root_server);
+                return Atoms.to_atoms("events/current", event_name);
+            }
+        });
+        this.add_message_handler(events_goto_builder.build(this));
         // EVENTS/READ
         MessageHandlerBuilder events_read_builder =
             new MessageHandlerBuilder("events/read");
         events_read_builder.with_callback(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
-                MessageHandler built_message_handler,
+                MessageHandler message_handler,
                 Atom[] arguments) {
-                built_message_handler.client.make_request(
-                    built_message_handler.client, "events/list", null);
+                message_handler.client.make_request(message_handler.client,
+                    "events/list", null);
                 return null;
             }
         });
         events_read_builder.with_setter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
-                MessageHandler built_message_handler,
+                MessageHandler message_handler,
                 Atom[] arguments) {
-                RootServer root_server =
-                    (RootServer) built_message_handler.client;
+                RootServer root_server = (RootServer) message_handler.client;
                 String filename = null;
                 if (0 == arguments.length) {
                     filename = MaxSystem.openDialog();
@@ -196,77 +179,12 @@ public class RootServer extends Server {
                     filename = Atom.toOneString(arguments);
                 }
                 if (filename != null) {
-                    root_server.events =
-                        new EventScriptParser().parse_file(filename);
+                    root_server.event_manager.parse_file(filename);
                 }
                 return null;
             }
         });
         this.add_message_handler(events_read_builder.build(this));
-        // EVENTS/GOTO
-        MessageHandlerBuilder events_goto_builder =
-            new MessageHandlerBuilder("events/goto");
-        events_goto_builder.with_callback(new MessageHandlerCallback() {
-            @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
-                RootServer root_server = (RootServer) message_handler.client;
-                Response response =
-                    new Response(root_server, Atoms.to_atoms("event",
-                        root_server.current_event_name), null);
-                message_handler.client.handle_response(response);
-                return null;
-            }
-        });
-        events_goto_builder.with_setter(new MessageHandlerCallback() {
-            @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
-                RootServer root_server =
-                    (RootServer) built_message_handler.client;
-                if (root_server.events == null) {
-                    return null;
-                } else if (0 == arguments.length) {
-                    return null;
-                }
-                String cue_name = null;
-                if ((arguments.length == 1) && arguments[0].isInt()) {
-                    String[] cue_names =
-                        root_server.events.keySet().toArray(new String[0]);
-                    cue_name = cue_names[arguments[0].toInt()];
-                } else {
-                    cue_name = Atom.toOneString(arguments);
-                }
-                StateComponentAggregate cue =
-                    (StateComponentAggregate) root_server.events.get(cue_name);
-                if (cue == null) {
-                    return null;
-                }
-                for (Atom[] atoms : cue.toAtoms()) {
-                    String cue_address_string = atoms[0].getString();
-                    OscAddress cue_address =
-                        OscAddress.from_cache(cue_address_string);
-                    Atom[] cue_arguments = Atom.removeFirst(atoms);
-                    Request request =
-                        new Request(root_server, cue_address, cue_arguments,
-                            false);
-                    Set<OscAddressNode> osc_address_nodes =
-                        root_server.get_osc_address_node().search(
-                            request.destination);
-                    for (OscAddressNode osc_address_node : osc_address_nodes) {
-                        Server server = osc_address_node.get_server();
-                        if (server != null) {
-                            server.handle_request(request);
-                        }
-                    }
-                }
-                root_server.current_event_name = cue_name;
-                return null;
-            }
-        });
-        this.add_message_handler(events_goto_builder.build(this));
     }
 
     public MaxPatcher build_mixer_patcher() {
