@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 616.0, 44.0, 642.0, 659.0 ],
+		"rect" : [ 616.0, 44.0, 647.0, 710.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -31,12 +31,54 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
+					"id" : "obj-25",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "int", "", "" ],
+					"patching_rect" : [ 70.0, 65.0, 46.0, 20.0 ],
+					"text" : "t 1 l l"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-22",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "" ],
+					"patching_rect" : [ 20.0, 135.0, 44.0, 20.0 ],
+					"text" : "zl reg"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-17",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "bang" ],
+					"patching_rect" : [ 70.0, 105.0, 57.0, 20.0 ],
+					"text" : "filewatch"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
 					"id" : "obj-29",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "open" ],
-					"patching_rect" : [ 240.0, 100.0, 44.0, 20.0 ],
+					"patching_rect" : [ 240.0, 195.0, 44.0, 20.0 ],
 					"text" : "t open"
 				}
 
@@ -50,7 +92,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 150.0, 70.0, 82.0, 20.0 ],
+					"patching_rect" : [ 150.0, 165.0, 82.0, 20.0 ],
 					"text" : "prepend read"
 				}
 
@@ -64,7 +106,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "bang", "int" ],
-					"patching_rect" : [ 150.0, 130.0, 46.0, 20.0 ],
+					"patching_rect" : [ 150.0, 225.0, 46.0, 20.0 ],
 					"text" : "text"
 				}
 
@@ -78,7 +120,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 20.0, 475.0, 123.0, 20.0 ],
+					"patching_rect" : [ 20.0, 515.0, 123.0, 20.0 ],
 					"text" : "prepend :events/goto"
 				}
 
@@ -92,7 +134,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "bang", "int" ],
-					"patching_rect" : [ 20.0, 615.0, 46.0, 20.0 ],
+					"patching_rect" : [ 280.0, 595.0, 46.0, 20.0 ],
 					"text" : "text"
 				}
 
@@ -106,7 +148,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ ":getstate" ],
-					"patching_rect" : [ 20.0, 535.0, 63.0, 20.0 ],
+					"patching_rect" : [ 280.0, 515.0, 63.0, 20.0 ],
 					"text" : "t :getstate"
 				}
 
@@ -120,7 +162,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 20.0, 560.0, 100.0, 20.0 ],
+					"patching_rect" : [ 280.0, 540.0, 100.0, 20.0 ],
 					"text" : "mxj oovu.Root"
 				}
 
@@ -134,7 +176,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 20.0, 590.0, 67.0, 20.0 ],
+					"patching_rect" : [ 280.0, 570.0, 67.0, 20.0 ],
 					"text" : "route state"
 				}
 
@@ -148,7 +190,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
-					"patching_rect" : [ 190.0, 410.0, 24.0, 20.0 ],
+					"patching_rect" : [ 190.0, 450.0, 24.0, 20.0 ],
 					"text" : "t 0"
 				}
 
@@ -162,7 +204,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 190.0, 380.0, 259.0, 20.0 ],
+					"patching_rect" : [ 190.0, 420.0, 259.0, 20.0 ],
 					"text" : "mxj oovu.Method #1 rewind :datatype trigger"
 				}
 
@@ -176,7 +218,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 20.0, 70.0, 124.0, 20.0 ],
+					"patching_rect" : [ 20.0, 165.0, 124.0, 20.0 ],
 					"text" : "prepend :events/read"
 				}
 
@@ -190,7 +232,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "int" ],
-					"patching_rect" : [ 20.0, 40.0, 161.0, 20.0 ],
+					"patching_rect" : [ 70.0, 40.0, 139.0, 20.0 ],
 					"text" : "conformpath native boot"
 				}
 
@@ -204,7 +246,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 20.0, 300.0, 102.0, 20.0 ],
+					"patching_rect" : [ 20.0, 395.0, 102.0, 20.0 ],
 					"text" : "route events/list"
 				}
 
@@ -218,7 +260,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ ":events/previous" ],
-					"patching_rect" : [ 40.0, 185.0, 105.0, 20.0 ],
+					"patching_rect" : [ 40.0, 280.0, 105.0, 20.0 ],
 					"text" : "t :events/previous"
 				}
 
@@ -232,7 +274,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ ":events/next" ],
-					"patching_rect" : [ 60.0, 240.0, 82.0, 20.0 ],
+					"patching_rect" : [ 60.0, 335.0, 82.0, 20.0 ],
 					"text" : "t :events/next"
 				}
 
@@ -246,7 +288,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 20.0, 505.0, 279.0, 20.0 ],
+					"patching_rect" : [ 280.0, 485.0, 279.0, 20.0 ],
 					"text" : "mxj oovu.Method #1 getstate :datatype trigger"
 				}
 
@@ -260,7 +302,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 240.0, 70.0, 279.0, 20.0 ],
+					"patching_rect" : [ 240.0, 165.0, 279.0, 20.0 ],
 					"text" : "mxj oovu.Method #1 view :datatype trigger"
 				}
 
@@ -274,7 +316,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 20.0, 270.0, 100.0, 20.0 ],
+					"patching_rect" : [ 20.0, 365.0, 100.0, 20.0 ],
 					"text" : "mxj oovu.Root"
 				}
 
@@ -288,7 +330,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 20.0, 410.0, 97.0, 20.0 ],
+					"patching_rect" : [ 20.0, 450.0, 97.0, 20.0 ],
 					"text" : "prepend options"
 				}
 
@@ -316,7 +358,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 20.0, 445.0, 246.0, 20.0 ],
+					"patching_rect" : [ 20.0, 485.0, 246.0, 20.0 ],
 					"text" : "mxj oovu.Method #1 goto :datatype option"
 				}
 
@@ -330,7 +372,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 40.0, 155.0, 269.0, 20.0 ],
+					"patching_rect" : [ 40.0, 250.0, 269.0, 20.0 ],
 					"text" : "mxj oovu.Method #1 previous :datatype trigger"
 				}
 
@@ -344,7 +386,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 60.0, 210.0, 247.0, 20.0 ],
+					"patching_rect" : [ 60.0, 305.0, 247.0, 20.0 ],
 					"text" : "mxj oovu.Method #1 next :datatype trigger"
 				}
 
@@ -358,7 +400,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 20.0, 380.0, 166.0, 20.0 ],
+					"patching_rect" : [ 20.0, 420.0, 166.0, 20.0 ],
 					"text" : "mxj oovu.Return #1 events"
 				}
 
@@ -429,6 +471,16 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-22", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"midpoints" : [ 79.5, 130.0, 29.5, 130.0 ],
+					"source" : [ "obj-17", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-1", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -438,19 +490,9 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-20", 0 ],
+					"destination" : [ "obj-25", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"source" : [ "obj-19", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-28", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"midpoints" : [ 29.5, 64.0, 159.5, 64.0 ],
 					"source" : [ "obj-19", 0 ]
 				}
 
@@ -475,6 +517,25 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-20", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-22", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-28", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"midpoints" : [ 29.5, 160.0, 159.5, 160.0 ],
+					"source" : [ "obj-22", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-24", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -493,10 +554,39 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-17", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"midpoints" : [ 93.0, 97.0, 79.5, 97.0 ],
+					"source" : [ "obj-25", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-17", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-25", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-22", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"midpoints" : [ 106.5, 90.0, 29.5, 90.0 ],
+					"source" : [ "obj-25", 2 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-10", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 29.5, 502.0, 13.0, 502.0, 13.0, 262.0, 29.5, 262.0 ],
+					"midpoints" : [ 29.5, 542.0, 13.0, 542.0, 13.0, 359.0, 29.5, 359.0 ],
 					"source" : [ "obj-26", 0 ]
 				}
 
@@ -515,7 +605,7 @@
 					"destination" : [ "obj-27", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 249.5, 125.0, 159.5, 125.0 ],
+					"midpoints" : [ 249.5, 220.0, 159.5, 220.0 ],
 					"source" : [ "obj-29", 0 ]
 				}
 
