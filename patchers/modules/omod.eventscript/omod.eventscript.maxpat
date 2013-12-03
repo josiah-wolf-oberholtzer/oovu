@@ -33,7 +33,7 @@
 					"args" : [ "#0" ],
 					"id" : "obj-7",
 					"maxclass" : "bpatcher",
-					"name" : "omod.cuescript.view.maxpat",
+					"name" : "omod.eventscript.view.maxpat",
 					"numinlets" : 0,
 					"numoutlets" : 0,
 					"patching_rect" : [ 10.0, 120.0, 140.0, 210.0 ],
@@ -51,7 +51,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 0,
 					"patching_rect" : [ 10.0, 90.0, 165.0, 20.0 ],
-					"text" : "omod.cuescript.model #0"
+					"text" : "omod.eventscript.model #0"
 				}
 
 			}

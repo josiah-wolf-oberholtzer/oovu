@@ -115,7 +115,7 @@
 					"args" : [ "cues" ],
 					"id" : "obj-1",
 					"maxclass" : "bpatcher",
-					"name" : "omod.cuescript.maxpat",
+					"name" : "omod.eventscript.maxpat",
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
@@ -168,22 +168,22 @@
 		}
 ,
 		"dependency_cache" : [ 			{
-				"name" : "omod.cuescript.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/modules/omod.cuescript",
+				"name" : "omod.eventscript.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/modules/omod.eventscript",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "omod.cuescript.model.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/modules/omod.cuescript",
+				"name" : "omod.eventscript.model.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/modules/omod.eventscript",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "omod.cuescript.view.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/modules/omod.cuescript",
+				"name" : "omod.eventscript.view.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/modules/omod.eventscript",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
