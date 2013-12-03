@@ -34,7 +34,7 @@ public class EventManager {
                 OscAddress.from_cache(state_address_string);
             Atom[] state_arguments = Atom.removeFirst(atoms);
             Request request =
-                new Request(root_server, state_address, state_arguments, false);
+                new Request(root_server, state_address, state_arguments, true);
             Set<OscAddressNode> osc_address_nodes =
                 root_server.get_osc_address_node().search(request.destination);
             for (OscAddressNode osc_address_node : osc_address_nodes) {
@@ -61,9 +61,11 @@ public class EventManager {
     public String get_event_name_by_index(int input) {
         if (this.events == null) {
             return null;
-        } else if (input < 0) {
+        }
+        if (input < 0) {
             return null;
-        } else if (this.events.size() <= input) {
+        }
+        if (this.events.size() <= input) {
             return null;
         }
         return this.get_event_names().get(input);
@@ -72,9 +74,11 @@ public class EventManager {
     public String get_event_name_by_string(String input) {
         if (input == null) {
             return null;
-        } else if (this.events == null) {
+        }
+        if (this.events == null) {
             return null;
-        } else if (!this.get_event_names().contains(input)) {
+        }
+        if (!this.get_event_names().contains(input)) {
             return null;
         }
         return input;

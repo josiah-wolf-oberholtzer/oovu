@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 207.0, 44.0, 773.0, 710.0 ],
+		"rect" : [ 179.0, 44.0, 773.0, 710.0 ],
 		"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
@@ -562,7 +562,7 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-32",
-					"items" : [ "((options))", ",", "<separator>", ",", "---", ",", "One", ",", "Two" ],
+					"items" : [ "((options))", ",", "<separator>", ",", "---", ",", "One", ",", "Two", ",", "Three", ",", "Four" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -579,7 +579,7 @@
 					"fontname" : "Arial",
 					"fontsize" : 16.0,
 					"id" : "obj-16",
-					"items" : [ "((options))", ",", "<separator>", ",", "---", ",", "One", ",", "Two" ],
+					"items" : [ "((options))", ",", "<separator>", ",", "---", ",", "One", ",", "Two", ",", "Three", ",", "Four" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,

@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x86"
 		}
 ,
@@ -38,20 +38,6 @@
 					"outlettype" : [ "bang", "" ],
 					"patching_rect" : [ 10.0, 85.0, 56.0, 20.0 ],
 					"text" : "sel bang"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"id" : "obj-8",
-					"maxclass" : "newobj",
-					"numinlets" : 2,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 10.0, 115.0, 43.0, 20.0 ],
-					"text" : "zl sort"
 				}
 
 			}
@@ -116,7 +102,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 5,
-					"outlettype" : [ "", "---", "<separator>", "addresses", "clear" ],
+					"outlettype" : [ "", "---", "<separator>", "options", "clear" ],
 					"patching_rect" : [ 10.0, 60.0, 225.0, 20.0 ],
 					"text" : "t l --- <separator> #1 clear"
 				}
@@ -246,15 +232,6 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-4", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-8", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-8", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-9", 1 ]

@@ -1,7 +1,19 @@
 CUE One
 
     /output~/dac/active 0
+    /output~/dsp/input/gain 0.
 
 CUE Two
 
     /output~/dac/active 1
+    /output~/dsp/input/gain 0.333
+
+CUE Three
+
+    /output~/dac/active 0
+    /output~/dsp/input/gain 0.666
+
+CUE Four
+
+    /output~/dac/active 1
+    /output~/dsp/input/gain 1.
