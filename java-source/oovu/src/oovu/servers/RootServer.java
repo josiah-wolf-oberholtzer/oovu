@@ -12,6 +12,7 @@ import oovu.messaging.Atoms;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.MessageHandlerCallback;
+import oovu.messaging.Response;
 import oovu.states.State;
 import oovu.states.StateComponentAggregate;
 
@@ -96,7 +97,10 @@ public class RootServer extends Server {
                     root_server.event_manager
                         .set_current_event_by_name(event_name);
                 root_server.event_manager.execute_state(state, root_server);
-                return Atoms.to_atoms("events/current", event_name);
+                message_handler.client.handle_response(new Response(
+                    message_handler.client, Atoms.to_atoms("events/current",
+                        event_name), null));
+                return null;
             }
         });
         this.add_message_handler(events_next_builder.build(this));
@@ -119,7 +123,10 @@ public class RootServer extends Server {
                     root_server.event_manager
                         .set_current_event_by_name(event_name);
                 root_server.event_manager.execute_state(state, root_server);
-                return Atoms.to_atoms("events/current", event_name);
+                message_handler.client.handle_response(new Response(
+                    message_handler.client, Atoms.to_atoms("events/current",
+                        event_name), null));
+                return null;
             }
         });
         this.add_message_handler(events_previous_builder.build(this));
@@ -149,7 +156,10 @@ public class RootServer extends Server {
                     root_server.event_manager
                         .set_current_event_by_name(event_name);
                 root_server.event_manager.execute_state(state, root_server);
-                return Atoms.to_atoms("events/current", event_name);
+                message_handler.client.handle_response(new Response(
+                    message_handler.client, Atoms.to_atoms("events/current",
+                        event_name), null));
+                return null;
             }
         });
         this.add_message_handler(events_goto_builder.build(this));

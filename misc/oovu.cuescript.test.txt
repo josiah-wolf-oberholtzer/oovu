@@ -1,7 +1,7 @@
 CUE One
 
-    /out~/dac/active 0
+    /output~/dac/active 0
 
 CUE Two
 
-    /out~/dac/active 1
+    /output~/dac/active 1
