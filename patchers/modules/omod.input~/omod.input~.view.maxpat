@@ -4,13 +4,13 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 541.0, 44.0, 648.0, 663.0 ],
+		"rect" : [ 653.0, 44.0, 648.0, 663.0 ],
 		"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
-		"bglocked" : 0,
+		"bglocked" : 1,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
 		"default_fontface" : 0,
@@ -30,13 +30,15 @@
 		"tags" : "",
 		"boxes" : [ 			{
 				"box" : 				{
-					"id" : "obj-14",
-					"maxclass" : "ezdac~",
-					"numinlets" : 2,
-					"numoutlets" : 0,
-					"patching_rect" : [ 185.0, 150.0, 15.0, 15.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 120.0, 5.0, 15.0, 15.0 ]
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-50",
+					"maxclass" : "newobj",
+					"numinlets" : 3,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 25.0, 605.0, 196.0, 20.0 ],
+					"text" : "mxj oovu.Proxy #1 dsp/:sendcount"
 				}
 
 			}
@@ -44,26 +46,69 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
-					"id" : "obj-12",
+					"id" : "obj-18",
 					"maxclass" : "newobj",
-					"numinlets" : 2,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 10.0, 55.0, 100.0, 20.0 ],
-					"text" : "routepass name"
+					"numinlets" : 3,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 25.0, 545.0, 196.0, 20.0 ],
+					"text" : "mxj oovu.Proxy #1 dsp/:voicecount"
 				}
 
 			}
 , 			{
 				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"id" : "obj-11",
-					"maxclass" : "newobj",
+					"id" : "obj-60",
+					"maxclass" : "live.numbox",
 					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 280.0, 50.0, 168.0, 20.0 ],
-					"text" : "oovu.gui.send.dynamic #1"
+					"numoutlets" : 2,
+					"outlettype" : [ "", "float" ],
+					"parameter_enable" : 1,
+					"patching_rect" : [ 25.0, 585.0, 36.0, 15.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 5.0, 70.0, 70.0, 15.0 ],
+					"saved_attribute_attributes" : 					{
+						"valueof" : 						{
+							"parameter_longname" : "live.numbox[3]",
+							"parameter_shortname" : "live.numbox",
+							"parameter_type" : 1,
+							"parameter_mmin" : 1.0,
+							"parameter_mmax" : 8.0,
+							"parameter_unitstyle" : 9,
+							"parameter_units" : "SEND"
+						}
+
+					}
+,
+					"varname" : "live.numbox[1]"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-54",
+					"maxclass" : "live.numbox",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "float" ],
+					"parameter_enable" : 1,
+					"patching_rect" : [ 25.0, 525.0, 36.0, 15.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 5.0, 50.0, 70.0, 15.0 ],
+					"saved_attribute_attributes" : 					{
+						"valueof" : 						{
+							"parameter_longname" : "live.numbox",
+							"parameter_shortname" : "live.numbox",
+							"parameter_type" : 1,
+							"parameter_mmin" : 1.0,
+							"parameter_mmax" : 8.0,
+							"parameter_unitstyle" : 9,
+							"parameter_units" : "CH"
+						}
+
+					}
+,
+					"varname" : "live.numbox"
 				}
 
 			}
@@ -79,23 +124,63 @@
 					"fontface" : 1,
 					"fontname" : "Arial",
 					"fontsize" : 10.0,
-					"id" : "obj-8",
+					"id" : "obj-19",
 					"maxclass" : "textbutton",
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 240.0, 55.0, 32.0, 15.0 ],
+					"patching_rect" : [ 20.0, 480.0, 32.0, 15.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 75.0, 30.0, 60.0, 15.0 ],
+					"presentation_rect" : [ 5.0, 30.0, 70.0, 15.0 ],
 					"prototypename" : "M4L.toggle",
 					"rounded" : 0.0,
-					"text" : "Sends",
+					"text" : "Mixer",
 					"textcolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
 					"texton" : "Trig",
 					"textoncolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
 					"textovercolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
 					"textoveroncolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-16",
+					"maxclass" : "newobj",
+					"numinlets" : 3,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 20.0, 500.0, 169.0, 20.0 ],
+					"text" : "mxj oovu.Proxy #1 ./:getmixer"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-14",
+					"maxclass" : "ezdac~",
+					"numinlets" : 2,
+					"numoutlets" : 0,
+					"patching_rect" : [ 185.0, 150.0, 15.0, 15.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 80.0, 5.0, 15.0, 15.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-12",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "" ],
+					"patching_rect" : [ 10.0, 55.0, 100.0, 20.0 ],
+					"text" : "routepass name"
 				}
 
 			}
@@ -120,12 +205,12 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 240.0, 85.0, 40.0, 15.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 75.0, 5.0, 40.0, 15.0 ],
+					"presentation_rect" : [ 100.0, 5.0, 35.0, 15.0 ],
 					"prototypename" : "M4L.toggle-yellow",
 					"rounded" : 0.0,
-					"text" : "Muted",
+					"text" : "Off",
 					"textcolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
-					"texton" : "Active",
+					"texton" : "On",
 					"textoncolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
 					"textovercolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
 					"textoveroncolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ]
@@ -146,7 +231,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x86"
 						}
 ,
@@ -497,9 +582,9 @@
 					"name" : "omod.input~.view.adc.maxpat",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 15.0, 385.0, 130.0, 80.0 ],
+					"patching_rect" : [ 15.0, 385.0, 130.0, 75.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.0, 125.0, 130.0, 80.0 ],
+					"presentation_rect" : [ 5.0, 130.0, 130.0, 75.0 ],
 					"varname" : "adc"
 				}
 
@@ -513,9 +598,9 @@
 					"name" : "omod.input~.view.soundfile.maxpat",
 					"numinlets" : 0,
 					"numoutlets" : 0,
-					"patching_rect" : [ 155.0, 385.0, 130.0, 80.0 ],
+					"patching_rect" : [ 155.0, 385.0, 130.0, 75.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.0, 125.0, 130.0, 80.0 ],
+					"presentation_rect" : [ 5.0, 130.0, 130.0, 75.0 ],
 					"varname" : "soundfile"
 				}
 
@@ -529,9 +614,9 @@
 					"name" : "omod.input~.view.oscillator.maxpat",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 295.0, 385.0, 130.0, 80.0 ],
+					"patching_rect" : [ 295.0, 385.0, 130.0, 75.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.0, 125.0, 130.0, 80.0 ],
+					"presentation_rect" : [ 5.0, 130.0, 130.0, 75.0 ],
 					"varname" : "oscillator"
 				}
 
@@ -566,26 +651,29 @@
 			}
 , 			{
 				"box" : 				{
+					"border" : 1,
+					"bordercolor" : [ 0.572549, 0.615686, 0.658824, 1.0 ],
+					"borderoncolor" : [ 0.572549, 0.615686, 0.658824, 1.0 ],
+					"fontname" : "Arial",
+					"fontsize" : 10.0,
+					"hovertabcolor" : [ 0.572549, 0.615686, 0.658824, 1.0 ],
+					"hovertextcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
+					"htabcolor" : [ 0.572549, 0.615686, 0.658824, 1.0 ],
+					"htextcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"id" : "obj-9",
-					"maxclass" : "live.tab",
+					"maxclass" : "tab",
+					"mode" : 1,
+					"multiline" : 0,
 					"numinlets" : 1,
 					"numoutlets" : 3,
-					"outlettype" : [ "", "", "float" ],
-					"parameter_enable" : 1,
-					"patching_rect" : [ 240.0, 185.0, 100.0, 20.0 ],
+					"outlettype" : [ "int", "", "" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 235.0, 280.0, 200.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.0, 30.0, 65.0, 90.0 ],
-					"saved_attribute_attributes" : 					{
-						"valueof" : 						{
-							"parameter_longname" : "live.tab",
-							"parameter_shortname" : "live.tab",
-							"parameter_type" : 2,
-							"parameter_enum" : [ "adc", "oscillator", "soundfile" ],
-							"parameter_unitstyle" : 0
-						}
-
-					}
-,
+					"presentation_rect" : [ 5.0, 95.0, 130.0, 25.0 ],
+					"tabcolor" : [ 0.85098, 0.85098, 0.85098, 0.0 ],
+					"tabs" : [ "adc", "oscillator", "soundfile" ],
+					"textcolor" : [ 0.572549, 0.615686, 0.658824, 1.0 ],
 					"varname" : "live.tab"
 				}
 
@@ -601,41 +689,27 @@
 					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 240.0, 115.0, 40.0, 60.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 75.0, 50.0, 40.0, 65.0 ]
+					"presentation_rect" : [ 80.0, 30.0, 35.0, 55.0 ]
 				}
 
 			}
 , 			{
 				"box" : 				{
-					"focusbordercolor" : [ 0.0, 0.019608, 0.078431, 0.0 ],
+					"bgcolor" : [ 0.094118, 0.113725, 0.137255, 1.0 ],
+					"bordercolor" : [ 0.666667, 0.698039, 0.717647, 0.0 ],
+					"floatoutput" : 1,
 					"id" : "obj-6",
-					"maxclass" : "live.slider",
+					"knobcolor" : [ 1.0, 0.603922, 0.0, 1.0 ],
+					"maxclass" : "slider",
 					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "float" ],
-					"parameter_enable" : 1,
-					"patching_rect" : [ 290.0, 115.0, 20.0, 50.0 ],
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 290.0, 115.0, 16.0, 96.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 115.0, 50.0, 20.0, 65.0 ],
-					"prototypename" : "gain",
-					"saved_attribute_attributes" : 					{
-						"valueof" : 						{
-							"parameter_linknames" : 1,
-							"parameter_longname" : "live.slider[3]",
-							"parameter_shortname" : "live.slider",
-							"parameter_type" : 0,
-							"parameter_mmax" : 1.0,
-							"parameter_initial_enable" : 1,
-							"parameter_initial" : [ 0 ],
-							"parameter_unitstyle" : 1,
-							"parameter_speedlim" : 0.0
-						}
-
-					}
-,
-					"showname" : 0,
-					"shownumber" : 0,
-					"trioncolor" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"presentation_rect" : [ 120.0, 30.0, 15.0, 55.0 ],
+					"prototypename" : "M4L.black.H",
+					"size" : 1.0,
 					"varname" : "live.slider[3]"
 				}
 
@@ -650,7 +724,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 340.0, 115.0, 194.0, 33.0 ],
+					"patching_rect" : [ 340.0, 115.0, 192.0, 33.0 ],
 					"text" : "mxj oovu.Proxy #1 dsp/output/gain"
 				}
 
@@ -739,6 +813,25 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-54", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"midpoints" : [ 34.5, 570.0, 19.0, 570.0, 19.0, 519.0, 34.5, 519.0 ],
+					"source" : [ "obj-18", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-16", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-19", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-6", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -775,10 +868,38 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-60", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"midpoints" : [ 34.5, 631.0, 21.0, 631.0, 21.0, 579.0, 34.5, 579.0 ],
+					"source" : [ "obj-50", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-18", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-54", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-2", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-6", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-50", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-60", 0 ]
 				}
 
 			}
@@ -802,21 +923,87 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-11", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-8", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-10", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-9", 1 ]
 				}
 
+			}
+ ],
+		"parameters" : 		{
+			"obj-62::obj-36" : [ "live.numbox[1]", "live.numbox[1]", 0 ],
+			"obj-62::obj-51" : [ "live.numbox[4]", "live.numbox", 0 ],
+			"obj-56::obj-33" : [ "live.tab[6]", "live.tab[1]", 0 ],
+			"obj-60" : [ "live.numbox[3]", "live.numbox", 0 ],
+			"obj-56::obj-42" : [ "live.numbox[28]", "live.numbox", 0 ],
+			"obj-56::obj-41" : [ "live.numbox[29]", "live.numbox", 0 ],
+			"obj-58::obj-21" : [ "live.numbox[2]", "live.numbox", 0 ],
+			"obj-54" : [ "live.numbox", "live.numbox", 0 ]
+		}
+,
+		"dependency_cache" : [ 			{
+				"name" : "oovu.guibackground.js",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/jsui",
+				"patcherrelativepath" : "../../../jsui",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.gui.meters.8x.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/gui",
+				"patcherrelativepath" : "../../abstractions/gui",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.input~.view.oscillator.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/modules/omod.input~",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "sine.svg",
+				"bootpath" : "/Applications/Max 6.1/patches/picts/m4l-picts",
+				"patcherrelativepath" : "../../../../../../../../Applications/Max 6.1/patches/picts/m4l-picts",
+				"type" : "svg ",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "saw.svg",
+				"bootpath" : "/Applications/Max 6.1/patches/picts/m4l-picts",
+				"patcherrelativepath" : "../../../../../../../../Applications/Max 6.1/patches/picts/m4l-picts",
+				"type" : "svg ",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "square.svg",
+				"bootpath" : "/Applications/Max 6.1/patches/picts/m4l-picts",
+				"patcherrelativepath" : "../../../../../../../../Applications/Max 6.1/patches/picts/m4l-picts",
+				"type" : "svg ",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "random.svg",
+				"bootpath" : "/Applications/Max 6.1/patches/picts/m4l-picts",
+				"patcherrelativepath" : "../../../../../../../../Applications/Max 6.1/patches/picts/m4l-picts",
+				"type" : "svg ",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.input~.view.soundfile.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/modules/omod.input~",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.input~.view.adc.maxpat",
+				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/modules/omod.input~",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
 			}
  ]
 	}

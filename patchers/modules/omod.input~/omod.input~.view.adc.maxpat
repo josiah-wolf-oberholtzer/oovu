@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x86"
 		}
 ,
@@ -35,8 +35,8 @@
 					"id" : "obj-2",
 					"maxclass" : "newobj",
 					"numinlets" : 3,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "bang" ],
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 185.0, 80.0, 195.0, 20.0 ],
 					"text" : "mxj oovu.Proxy #1 dsp/:active"
 				}
@@ -56,7 +56,7 @@
 					"parameter_enable" : 1,
 					"patching_rect" : [ 270.0, 165.0, 43.0, 15.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 25.0, 185.0, 45.0, 15.0 ],
+					"presentation_rect" : [ 5.0, 55.0, 45.0, 15.0 ],
 					"prototypename" : "gain",
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
@@ -89,8 +89,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 185.0, 165.0, 41.0, 20.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 400.0, 225.0, 41.0, 20.0 ],
 					"text" : "atodb"
 				}
 
@@ -105,8 +103,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
 					"patching_rect" : [ 185.0, 110.0, 71.0, 20.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 400.0, 170.0, 71.0, 20.0 ],
 					"text" : "qmetro 100"
 				}
 
@@ -121,8 +117,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "float" ],
 					"patching_rect" : [ 185.0, 140.0, 67.0, 20.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 400.0, 200.0, 67.0, 20.0 ],
 					"text" : "peakamp~"
 				}
 
@@ -180,7 +174,7 @@
 					"peakcolor" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"peakcurvecolor" : [ 0.984314, 0.819608, 0.05098, 1.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 20.0, 130.0, 60.0 ],
+					"presentation_rect" : [ 0.0, 20.0, 130.0, 55.0 ],
 					"rounded" : 0,
 					"sonohicolor" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"sonolocolor" : [ 0.094118, 0.113725, 0.137255, 1.0 ],
@@ -198,7 +192,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 10.0, 10.0, 20.0, 20.0 ]
 				}
 
@@ -213,7 +207,7 @@
 					"parameter_enable" : 1,
 					"patching_rect" : [ 20.0, 275.0, 50.0, 15.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 80.0, 0.0, 50.0, 15.0 ],
+					"presentation_rect" : [ 75.0, 0.0, 55.0, 15.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_longname" : "live.numbox[4]",
@@ -238,8 +232,8 @@
 					"id" : "obj-49",
 					"maxclass" : "newobj",
 					"numinlets" : 3,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "bang" ],
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 80.0, 275.0, 195.0, 20.0 ],
 					"text" : "mxj oovu.Proxy #1 adc/channel"
 				}
@@ -308,47 +302,6 @@
 					"source" : [ "obj-51", 0 ]
 				}
 
-			}
- ],
-		"parameters" : 		{
-			"obj-36" : [ "live.numbox[1]", "live.numbox[1]", 0 ],
-			"obj-51" : [ "live.numbox[4]", "live.numbox", 0 ]
-		}
-,
-		"dependency_cache" : [ 			{
-				"name" : "mxj oovu.Proxy.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
-				"patcherrelativepath" : "../../abstractions/core",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.environment.js",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
-				"patcherrelativepath" : "../../abstractions/core",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.messaging.call.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/messaging",
-				"patcherrelativepath" : "../../abstractions/messaging",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.util.queue.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/utilities",
-				"patcherrelativepath" : "../../abstractions/utilities",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.updated.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Freelance/barroso/oovu/abstractions/core",
-				"patcherrelativepath" : "../../abstractions/core",
-				"type" : "JSON",
-				"implicit" : 1
 			}
  ]
 	}

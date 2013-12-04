@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x86"
 		}
 ,
@@ -48,8 +48,8 @@
 					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 3,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "bang" ],
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 185.0, 219.818359, 201.0, 20.0 ],
 					"text" : "mxj oovu.Proxy #1 oscillator/pulserate"
 				}
@@ -63,8 +63,8 @@
 					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 3,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "bang" ],
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 185.0, 189.818359, 201.0, 20.0 ],
 					"text" : "mxj oovu.Proxy #1 oscillator/frequency"
 				}
@@ -75,11 +75,10 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-46",
-					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 3,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "bang" ],
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 185.0, 159.818359, 201.0, 20.0 ],
 					"text" : "mxj oovu.Proxy #1 oscillator/pulsing"
 				}
@@ -107,8 +106,8 @@
 					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 3,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "bang" ],
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 185.0, 104.818359, 201.0, 20.0 ],
 					"text" : "mxj oovu.Proxy #1 oscillator/waveform"
 				}
@@ -125,7 +124,7 @@
 					"parameter_enable" : 1,
 					"patching_rect" : [ 125.0, 219.818359, 43.0, 15.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 35.0, 65.0, 95.0, 15.0 ],
+					"presentation_rect" : [ 35.0, 60.0, 95.0, 15.0 ],
 					"prototypename" : "time",
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
@@ -144,7 +143,7 @@
 					}
 ,
 					"textcolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
-					"varname" : "Time"
+					"varname" : "live.numbox[28]"
 				}
 
 			}
@@ -177,7 +176,7 @@
 
 					}
 ,
-					"varname" : "Freq"
+					"varname" : "live.numbox[29]"
 				}
 
 			}
@@ -202,7 +201,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 100.0, 159.818359, 32.0, 15.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 35.0, 20.0, 95.0, 40.0 ],
+					"presentation_rect" : [ 35.0, 20.0, 95.0, 35.0 ],
 					"prototypename" : "M4L.toggle1",
 					"rounded" : 0.0,
 					"text" : "Continuous",
@@ -219,6 +218,8 @@
 					"activebgoncolor" : [ 0.513726, 0.784314, 0.901961, 1.0 ],
 					"id" : "obj-33",
 					"maxclass" : "live.tab",
+					"num_lines_patching" : 0,
+					"num_lines_presentation" : 4,
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "float" ],
@@ -226,7 +227,7 @@
 					"patching_rect" : [ 50.0, 104.818359, 128.0, 16.702478 ],
 					"pictures" : [ "sine.svg", "saw.svg", "square.svg", "random.svg" ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 0.0, 30.0, 80.0 ],
+					"presentation_rect" : [ 0.0, 0.0, 30.0, 75.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_longname" : "live.tab[6]",

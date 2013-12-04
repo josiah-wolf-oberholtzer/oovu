@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x86"
 		}
 ,
@@ -50,7 +50,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 0.0, 22.0, 28.0, 16.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 20.0, 130.0, 20.0 ],
+					"presentation_rect" : [ 0.0, 20.0, 130.0, 15.0 ],
 					"prototypename" : "M4L.display",
 					"rounded" : 8.0,
 					"text" : "time",
@@ -144,7 +144,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 125.0, 300.0, 32.0, 15.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 70.0, 65.0, 60.0, 15.0 ],
+					"presentation_rect" : [ 70.0, 60.0, 60.0, 15.0 ],
 					"prototypename" : "M4L.toggle",
 					"rounded" : 0.0,
 					"text" : "Seek",
@@ -194,7 +194,7 @@
 					"parameter_enable" : 1,
 					"patching_rect" : [ 70.0, 300.0, 50.0, 15.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 70.0, 45.0, 60.0, 15.0 ],
+					"presentation_rect" : [ 70.0, 40.0, 60.0, 15.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_longname" : "live.numbox[2]",
@@ -217,8 +217,8 @@
 					"id" : "obj-19",
 					"maxclass" : "newobj",
 					"numinlets" : 3,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "bang" ],
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 200.0, 300.0, 195.0, 20.0 ],
 					"text" : "mxj oovu.Proxy #1 soundfile/seek"
 				}
@@ -231,8 +231,8 @@
 					"id" : "obj-18",
 					"maxclass" : "newobj",
 					"numinlets" : 3,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "bang" ],
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 200.0, 270.0, 207.0, 20.0 ],
 					"text" : "mxj oovu.Proxy #1 soundfile/looping"
 				}
@@ -245,8 +245,8 @@
 					"id" : "obj-17",
 					"maxclass" : "newobj",
 					"numinlets" : 3,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "bang" ],
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 200.0, 240.0, 207.0, 20.0 ],
 					"text" : "mxj oovu.Proxy #1 soundfile/playing"
 				}
@@ -259,8 +259,8 @@
 					"id" : "obj-16",
 					"maxclass" : "newobj",
 					"numinlets" : 3,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "bang" ],
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 200.0, 125.0, 207.0, 20.0 ],
 					"text" : "mxj oovu.Proxy #1 soundfile/filepath"
 				}
@@ -287,7 +287,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 95.0, 270.0, 75.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 65.0, 65.0, 15.0 ],
+					"presentation_rect" : [ 0.0, 60.0, 65.0, 15.0 ],
 					"prototypename" : "M4L.toggle-yellow",
 					"rounded" : 0.0,
 					"text" : "No Loop",
@@ -320,7 +320,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 95.0, 240.0, 75.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 45.0, 65.0, 15.0 ],
+					"presentation_rect" : [ 0.0, 40.0, 65.0, 15.0 ],
 					"prototypename" : "M4L.toggle-yellow",
 					"rounded" : 0.0,
 					"text" : "Stopped",
