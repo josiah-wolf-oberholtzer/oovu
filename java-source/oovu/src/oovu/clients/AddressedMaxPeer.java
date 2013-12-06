@@ -4,44 +4,15 @@ import java.util.Set;
 
 import oovu.addresses.Addressed;
 import oovu.addresses.Environment;
-import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
 import oovu.messaging.MessagePasser;
 import oovu.messaging.Request;
 import oovu.servers.Server;
 
-import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
 
 abstract public class AddressedMaxPeer extends MaxPeer implements Addressed,
     MessagePasser {
-    @Override
-    public void anything(String message, Atom[] arguments) {
-        OscAddress osc_address = null;
-        if (this.getInlet() == 1) {
-            osc_address = OscAddress.from_cache("./:" + message);
-        } else if ((1 < message.length()) && (message.charAt(0) == ':')) {
-            osc_address = OscAddress.from_cache("./" + message);
-        } else {
-            if (message.charAt(0) == '/') {
-                osc_address = OscAddress.from_cache("." + message);
-            } else {
-                osc_address = OscAddress.from_cache(message);
-            }
-            if (osc_address.message_handler_name == null) {
-                osc_address =
-                    OscAddress.from_cache(osc_address.toString() + "/:value");
-            }
-        }
-        Request request = new Request(this, osc_address, arguments, true);
-        this.handle_request(request);
-    }
-
-    @Override
-    public void bang() {
-        this.anything("bang", new Atom[0]);
-    }
-
     @Override
     public void dblclick() {
         for (String piece : Environment.root_osc_address_node

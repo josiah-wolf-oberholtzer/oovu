@@ -1,6 +1,5 @@
 package oovu.messaging;
 
-
 public interface MessagePasser {
     public void handle_request(Request request);
 
