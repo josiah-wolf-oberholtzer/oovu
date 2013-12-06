@@ -16,13 +16,14 @@ import com.cycling74.max.MaxObject;
 import com.cycling74.max.MaxSystem;
 
 public class Environment {
-    public static final MidiListener midi_listener = new MidiListener();
+    public static final MidiListener midi_listener;
     public static final ReentrantLock lock = new ReentrantLock();
     // private static final Logger logger;
     public static final RootServer root_server;
     public static final OscAddressNode root_osc_address_node;
     public static final EventService event_service;
     static {
+        midi_listener = new MidiListener();
         root_osc_address_node = new OscAddressNode("");
         root_server = new RootServer();
         event_service = new EventService();

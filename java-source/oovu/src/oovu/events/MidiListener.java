@@ -13,6 +13,8 @@ import javax.sound.midi.Transmitter;
 import oovu.addresses.Environment;
 import oovu.events.types.MidiEvent;
 
+import com.cycling74.max.Executable;
+
 public class MidiListener {
     private class MidiReceiver implements Receiver {
         public final String name;
@@ -48,7 +50,12 @@ public class MidiListener {
         new HashMap<String, MidiReceiver>();
 
     public MidiListener() {
-        this.update();
+        Environment.defer_low(new Executable() {
+            @Override
+            public void execute() {
+                MidiListener.this.update();
+            }
+        });
     }
 
     public void update() {
