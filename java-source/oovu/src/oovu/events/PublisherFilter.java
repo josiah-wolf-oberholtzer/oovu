@@ -1,5 +1,6 @@
 package oovu.events;
 
+import oovu.events.types.ServerEvent;
 import oovu.servers.Server;
 
 public class PublisherFilter extends Filter {
@@ -10,7 +11,7 @@ public class PublisherFilter extends Filter {
     }
 
     @Override
-    public boolean is_valid_event(Event event) {
+    public boolean is_valid_event(ServerEvent event) {
         if (event.publisher == this.publisher) {
             return true;
         }

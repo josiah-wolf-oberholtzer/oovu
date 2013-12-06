@@ -1,16 +1,17 @@
 package oovu.events;
 
 import oovu.addresses.Environment;
+import oovu.events.types.ServerEvent;
 import oovu.servers.Server;
 
 abstract public class Subscription {
     public final Server subscriber;
-    public final Class<? extends Event> event_class;
+    public final Class<? extends ServerEvent> event_class;
     public final Filter filter;
 
     public Subscription(
         Server subscriber,
-        Class<? extends Event> event_class,
+        Class<? extends ServerEvent> event_class,
         Filter filter) {
         this.subscriber = subscriber;
         this.event_class = event_class;
@@ -53,7 +54,7 @@ abstract public class Subscription {
         return true;
     }
 
-    abstract public void handle_event(Event event);
+    abstract public void handle_event(ServerEvent event);
 
     @Override
     public int hashCode() {
