@@ -12,10 +12,11 @@ public class EventService {
     private final Map<Class<? extends ServerEvent>, HashSet<Subscription>> subscriptions =
         new HashMap<Class<? extends ServerEvent>, HashSet<Subscription>>();
 
-    public void publish(ServerEvent event) {
+    public void publish(Event event) {
         // Environment.log(event.toString());
         Set<Class<? extends ServerEvent>> keys =
-            new HashSet<Class<? extends ServerEvent>>(this.subscriptions.keySet());
+            new HashSet<Class<? extends ServerEvent>>(
+                this.subscriptions.keySet());
         for (Class<? extends ServerEvent> event_type : keys) {
             if (!event_type.isInstance(event)) {
                 continue;
@@ -33,7 +34,8 @@ public class EventService {
     }
 
     public void reset() {
-        for (Class<? extends ServerEvent> event_type : this.subscriptions.keySet()) {
+        for (Class<? extends ServerEvent> event_type : this.subscriptions
+            .keySet()) {
             HashSet<Subscription> subscription_set =
                 this.subscriptions.get(event_type);
             subscription_set.clear();
@@ -53,7 +55,8 @@ public class EventService {
 
     public void unsubscribe(Server subscriber) {
         Set<Class<? extends ServerEvent>> keys =
-            new HashSet<Class<? extends ServerEvent>>(this.subscriptions.keySet());
+            new HashSet<Class<? extends ServerEvent>>(
+                this.subscriptions.keySet());
         for (Class<? extends ServerEvent> event_type : keys) {
             HashSet<Subscription> old_subscription_set =
                 this.subscriptions.get(event_type);

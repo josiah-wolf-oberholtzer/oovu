@@ -1,7 +1,5 @@
 package oovu.events;
 
-import java.util.List;
-
 import javax.sound.midi.MidiDevice;
 import javax.sound.midi.MidiMessage;
 import javax.sound.midi.MidiSystem;
@@ -11,8 +9,36 @@ import javax.sound.midi.ShortMessage;
 import javax.sound.midi.Transmitter;
 
 import oovu.addresses.Environment;
+import oovu.events.types.MidiEvent;
 
 public class MidiListener {
+    private class MidiReceiver implements Receiver {
+        public final String name;
+
+        public MidiReceiver(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public void close() {
+        }
+
+        @Override
+        public void send(MidiMessage message, long time_stamp) {
+            ShortMessage short_message = (ShortMessage) message;
+            MidiEvent midi_event =
+                new MidiEvent(short_message.getChannel(),
+                    short_message.getData1(), short_message.getData2());
+            Environment.log(midi_event.toString());
+            Environment.event_service.publish(midi_event);
+        }
+
+        @Override
+        public String toString() {
+            return "MidiReceiver ["
+                + (this.name != null ? "name=" + this.name : "") + "]";
+        }
+    }
 
     public MidiListener() {
         MidiDevice.Info[] infos = MidiSystem.getMidiDeviceInfo();
@@ -21,13 +47,6 @@ public class MidiListener {
                 MidiDevice device = MidiSystem.getMidiDevice(info);
                 String device_info = device.getDeviceInfo().toString();
                 Environment.log("Trying: " + info);
-//                List<Transmitter> transmitters = device.getTransmitters();
-//                Environment.log("Transmitters: " + transmitters.size());
-//                for (Transmitter transmitter : transmitters) {
-//                    Receiver receiver = new MidiReceiver(device_info);
-//                    transmitter.setReceiver(receiver);
-//                    Environment.log("\tTransmitter: " + transmitter.toString());
-//                }
                 Transmitter transmitter = device.getTransmitter();
                 Receiver receiver = new MidiReceiver(device_info);
                 transmitter.setReceiver(receiver);
@@ -38,24 +57,4 @@ public class MidiListener {
             }
         }
     }
-    
-    private class MidiReceiver implements Receiver {
-        public final String name;
-        public MidiReceiver(String name) {
-            this.name = name; 
-        }
-        public void send(MidiMessage message, long time_stamp) {
-            ShortMessage short_message = (ShortMessage) message;
-            Environment.log("Received [" + this.name + "]: "
-                + short_message.getChannel() + " "
-                + short_message.getCommand() + " "
-                + short_message.getStatus() + " "
-                + short_message.getData1() + " "
-                + short_message.getData2() + " "
-                );
-            //Environment.log("Received [" + this.name + "]: " + message.toString());
-        }
-        public void close() { }
-    }
-    
 }

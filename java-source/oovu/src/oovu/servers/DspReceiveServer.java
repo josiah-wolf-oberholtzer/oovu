@@ -5,11 +5,11 @@ import java.util.Map;
 
 import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
+import oovu.events.Event;
 import oovu.events.PublisherFilter;
 import oovu.events.Subscription;
 import oovu.events.types.DspReceiversChangedEvent;
 import oovu.events.types.ModuleNameAcquiredEvent;
-import oovu.events.types.ServerEvent;
 import oovu.states.State;
 
 import com.cycling74.max.Atom;
@@ -22,7 +22,7 @@ public class DspReceiveServer extends ModuleMemberServer {
         }
 
         @Override
-        public void handle_event(ServerEvent event) {
+        public void handle_event(Event event) {
             this.unsubscribe();
             DspReceiveServer.dsp_receive_servers.put(
                 this.subscriber.get_osc_address(),

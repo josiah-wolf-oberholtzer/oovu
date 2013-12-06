@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 import oovu.addresses.OscAddress;
 import oovu.datatypes.AudioSendDatatype;
+import oovu.events.Event;
 import oovu.events.PublisherFilter;
 import oovu.events.Subscription;
 import oovu.events.types.DspSettingsChangedEvent;
-import oovu.events.types.ServerEvent;
 import oovu.messaging.Atoms;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
@@ -26,7 +26,7 @@ public class DspSendServer extends ModuleMemberServer {
         }
 
         @Override
-        public void handle_event(ServerEvent event) {
+        public void handle_event(Event event) {
             this.subscriber.make_request(this.subscriber, "dumpmeta", null);
         }
     }

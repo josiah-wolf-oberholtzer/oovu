@@ -12,6 +12,7 @@ import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
 import oovu.clients.ServerClient;
+import oovu.events.Event;
 import oovu.events.Subscriber;
 import oovu.events.Subscription;
 import oovu.events.types.ServerEvent;
@@ -310,7 +311,7 @@ abstract public class Server implements MessagePasser, Subscriber {
     abstract public State get_state();
 
     @Override
-    public void handle_event(ServerEvent event) {
+    public void handle_event(Event event) {
         Subscription subscription = this.subscriptions.get(event.getClass());
         if (subscription != null) {
             subscription.handle_event(event);

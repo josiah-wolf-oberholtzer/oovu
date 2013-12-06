@@ -11,8 +11,12 @@ public class PublisherFilter extends Filter {
     }
 
     @Override
-    public boolean is_valid_event(ServerEvent event) {
-        if (event.publisher == this.publisher) {
+    public boolean is_valid_event(Event event) {
+        if (!(event instanceof ServerEvent)) {
+            return false;
+        }
+        ServerEvent server_event = (ServerEvent) event;
+        if (server_event.publisher == this.publisher) {
             return true;
         }
         return false;

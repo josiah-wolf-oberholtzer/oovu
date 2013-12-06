@@ -54,7 +54,7 @@ abstract public class Subscription {
         return true;
     }
 
-    abstract public void handle_event(ServerEvent event);
+    abstract public void handle_event(Event event);
 
     @Override
     public int hashCode() {
