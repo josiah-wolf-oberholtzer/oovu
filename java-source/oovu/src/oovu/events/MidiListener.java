@@ -46,12 +46,10 @@ public class MidiListener {
             try {
                 MidiDevice device = MidiSystem.getMidiDevice(info);
                 String device_info = device.getDeviceInfo().toString();
-                Environment.log("Trying: " + info);
                 Transmitter transmitter = device.getTransmitter();
                 Receiver receiver = new MidiReceiver(device_info);
                 transmitter.setReceiver(receiver);
                 device.open();
-                Environment.log("Opened: " + device_info);
             } catch (MidiUnavailableException e) {
                 Environment.log(e.toString());
             }
