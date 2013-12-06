@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.Map;
 
 import oovu.addresses.OscAddress;
-import oovu.events.Event;
 import oovu.events.Subscription;
 import oovu.events.types.DspReceiversChangedEvent;
+import oovu.events.types.ServerEvent;
 import oovu.messaging.Atoms;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
@@ -24,7 +24,7 @@ public class AudioSendDatatype extends OscAddressDatatype {
         }
 
         @Override
-        public void handle_event(Event event) {
+        public void handle_event(ServerEvent event) {
             AttributeServer client = (AttributeServer) this.subscriber;
             Atom[] value = client.datatype.get_value();
             client.datatype.set_value(value);
