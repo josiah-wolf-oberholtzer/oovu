@@ -1,15 +1,15 @@
 package oovu.adapters;
 
-import oovu.clients.AddressedMaxPeer;
+import oovu.clients.MaxPeer;
 import oovu.messaging.Response;
 
 import com.cycling74.max.Atom;
 
 public abstract class MaxAdapter {
     protected static final Atom value_atom = Atom.newAtom("value");
-    protected final AddressedMaxPeer max_peer;
+    protected final MaxPeer max_peer;
 
-    public MaxAdapter(AddressedMaxPeer max_peer) {
+    public MaxAdapter(MaxPeer max_peer) {
         this.max_peer = max_peer;
     }
 

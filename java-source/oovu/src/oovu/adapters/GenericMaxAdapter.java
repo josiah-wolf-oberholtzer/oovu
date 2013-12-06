@@ -1,12 +1,13 @@
 package oovu.adapters;
 
-import oovu.clients.AddressedMaxPeer;
+import oovu.addresses.Addressed;
+import oovu.clients.MaxPeer;
 import oovu.messaging.Response;
 
 import com.cycling74.max.Atom;
 
 public class GenericMaxAdapter extends MaxAdapter {
-    public GenericMaxAdapter(AddressedMaxPeer max_peer) {
+    public GenericMaxAdapter(MaxPeer max_peer) {
         super(max_peer);
     }
 
@@ -15,12 +16,13 @@ public class GenericMaxAdapter extends MaxAdapter {
         if (response == null) {
             return;
         }
-        if (this.max_peer.get_osc_address_node() == null) {
-            return;
+        String relative_osc_address = null;
+        if (this.max_peer instanceof Addressed) {
+            Addressed addressed = (Addressed) this.max_peer;
+            relative_osc_address =
+                response.get_relative_osc_address(addressed
+                    .get_osc_address_node());
         }
-        String relative_osc_address =
-            response.get_relative_osc_address(this.max_peer
-                .get_osc_address_node());
         for (Atom[] output : response.payload) {
             if (output[0].equals(MaxAdapter.value_atom)) {
                 output = Atom.removeFirst(output);

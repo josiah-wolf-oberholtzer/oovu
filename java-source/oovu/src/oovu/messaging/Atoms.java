@@ -46,6 +46,13 @@ public class Atoms {
         return Atoms.to_atoms(message, Atom.newAtom(argument));
     }
 
+    public static Atom[][] to_atoms(String message, double[] arguments) {
+        if (arguments == null) {
+            return Atoms.to_atoms(message);
+        }
+        return Atoms.to_atoms(message, Atom.newAtom(arguments));
+    }
+
     public static Atom[][] to_atoms(String message, Integer argument) {
         if (argument == null) {
             return Atoms.to_atoms(message);
