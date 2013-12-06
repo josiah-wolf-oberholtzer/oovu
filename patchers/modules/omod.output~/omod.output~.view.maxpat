@@ -8,9 +8,9 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 531.0, 44.0, 734.0, 710.0 ],
+		"rect" : [ 781.0, 44.0, 734.0, 710.0 ],
 		"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
-		"bglocked" : 0,
+		"bglocked" : 1,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
 		"default_fontface" : 0,
@@ -29,6 +29,78 @@
 		"digest" : "",
 		"tags" : "",
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-45",
+					"maxclass" : "ezdac~",
+					"numinlets" : 2,
+					"numoutlets" : 0,
+					"patching_rect" : [ 350.0, 400.0, 15.0, 15.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 5.0, 30.0, 15.0, 15.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-43",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 20.0, 335.0, 60.0, 18.0 ],
+					"text" : ":getmixer"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-40",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 20.0, 360.0, 100.0, 20.0 ],
+					"text" : "mxj oovu.Root"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 0.568627, 0.619608, 0.662745, 1.0 ],
+					"bgoncolor" : [ 1.0, 0.8, 0.4, 1.0 ],
+					"bgovercolor" : [ 0.568627, 0.619608, 0.662745, 1.0 ],
+					"bgoveroncolor" : [ 0.921569, 0.94902, 0.05098, 1.0 ],
+					"border" : 1,
+					"bordercolor" : [ 0.301961, 0.337255, 0.403922, 1.0 ],
+					"borderoncolor" : [ 0.301961, 0.337255, 0.403922, 1.0 ],
+					"fontface" : 1,
+					"fontname" : "Arial",
+					"fontsize" : 10.0,
+					"id" : "obj-37",
+					"maxclass" : "textbutton",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "int" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 20.0, 310.0, 55.0, 15.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 25.0, 30.0, 50.0, 15.0 ],
+					"prototypename" : "M4L.toggle",
+					"rounded" : 0.0,
+					"text" : "Mixer",
+					"textcolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
+					"texton" : "Trig",
+					"textoncolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
+					"textovercolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
+					"textoveroncolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ]
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
@@ -92,10 +164,10 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 420.0, 530.0, 28.0, 16.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.0, 120.0, 65.0, 20.0 ],
+					"presentation_rect" : [ 5.0, 110.0, 70.0, 20.0 ],
 					"prototypename" : "M4L.display",
 					"rounded" : 0.0,
-					"text" : "0%",
+					"text" : "27%",
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"texton" : "Text",
 					"textovercolor" : [ 1.0, 1.0, 1.0, 1.0 ],
@@ -116,7 +188,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 480.0, 635.0, 110.0, 40.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.0, 120.0, 65.0, 20.0 ],
+					"presentation_rect" : [ 5.0, 110.0, 70.0, 20.0 ],
 					"setminmax" : [ 0.0, 100.0 ],
 					"setstyle" : 3,
 					"slidercolor" : [ 0.501961, 0.501961, 0.501961, 1.0 ]
@@ -570,7 +642,7 @@
 					"parameter_enable" : 1,
 					"patching_rect" : [ 470.0, 210.0, 43.0, 15.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 10.0, 170.0, 45.0, 15.0 ],
+					"presentation_rect" : [ 10.0, 160.0, 45.0, 15.0 ],
 					"prototypename" : "gain",
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
@@ -711,7 +783,7 @@
 					"peakcolor" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"peakcurvecolor" : [ 0.984314, 0.819608, 0.05098, 1.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.0, 165.0, 130.0, 40.0 ],
+					"presentation_rect" : [ 5.0, 155.0, 130.0, 50.0 ],
 					"rounded" : 0,
 					"sonohicolor" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"sonolocolor" : [ 0.094118, 0.113725, 0.137255, 1.0 ],
@@ -743,7 +815,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 30.0, 560.0, 28.0, 16.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.0, 70.0, 65.0, 20.0 ],
+					"presentation_rect" : [ 5.0, 90.0, 70.0, 15.0 ],
 					"prototypename" : "M4L.display",
 					"rounded" : 8.0,
 					"text" : "0:00:00.000",
@@ -775,7 +847,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 30.0, 510.0, 55.0, 15.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.0, 50.0, 65.0, 15.0 ],
+					"presentation_rect" : [ 5.0, 70.0, 70.0, 15.0 ],
 					"prototypename" : "M4L.toggle",
 					"rounded" : 0.0,
 					"text" : "START",
@@ -807,7 +879,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 140.0, 385.0, 55.0, 15.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.0, 30.0, 65.0, 15.0 ],
+					"presentation_rect" : [ 5.0, 50.0, 70.0, 15.0 ],
 					"prototypename" : "M4L.toggle",
 					"rounded" : 0.0,
 					"text" : "SF OPEN",
@@ -891,39 +963,6 @@
 			}
 , 			{
 				"box" : 				{
-					"bgcolor" : [ 0.568627, 0.619608, 0.662745, 1.0 ],
-					"bgoncolor" : [ 0.921569, 0.94902, 0.05098, 1.0 ],
-					"bgovercolor" : [ 0.568627, 0.619608, 0.662745, 1.0 ],
-					"bgoveroncolor" : [ 0.921569, 0.94902, 0.05098, 1.0 ],
-					"border" : 1,
-					"bordercolor" : [ 0.301961, 0.337255, 0.403922, 1.0 ],
-					"borderoncolor" : [ 0.301961, 0.337255, 0.403922, 1.0 ],
-					"fontface" : 1,
-					"fontname" : "Arial",
-					"fontsize" : 10.0,
-					"id" : "obj-14",
-					"maxclass" : "textbutton",
-					"mode" : 1,
-					"numinlets" : 1,
-					"numoutlets" : 3,
-					"outlettype" : [ "", "", "int" ],
-					"parameter_enable" : 0,
-					"patching_rect" : [ 350.0, 400.0, 65.0, 15.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 75.0, 120.0, 60.0, 20.0 ],
-					"prototypename" : "M4L.toggle-yellow",
-					"rounded" : 0.0,
-					"text" : "DAC OFF",
-					"textcolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
-					"texton" : "DAC ON",
-					"textoncolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
-					"textovercolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
-					"textoveroncolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-16",
@@ -953,7 +992,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 305.0, 570.0, 103.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.0, 145.0, 130.0, 15.0 ],
+					"presentation_rect" : [ 5.0, 135.0, 130.0, 15.0 ],
 					"rounded" : 0.0,
 					"tabmode" : 0,
 					"text" : "1 2 3 4 5 6 7 8",
@@ -971,7 +1010,7 @@
 					"parameter_enable" : 1,
 					"patching_rect" : [ 335.0, 250.0, 115.0, 15.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 75.0, 30.0, 60.0, 15.0 ],
+					"presentation_rect" : [ 80.0, 30.0, 55.0, 15.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_longname" : "live.numbox[73]",
@@ -1037,7 +1076,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 255.0, 250.0, 35.0, 15.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.0, 95.0, 65.0, 20.0 ],
+					"presentation_rect" : [ 80.0, 110.0, 55.0, 20.0 ],
 					"prototypename" : "M4L.toggle",
 					"rounded" : 0.0,
 					"text" : "DSP INFO",
@@ -1070,7 +1109,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 220.0, 360.0, 15.0, 15.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 120.0, 5.0, 15.0, 15.0 ],
+					"presentation_rect" : [ 80.0, 5.0, 15.0, 15.0 ],
 					"prototypename" : "M4L.toggle",
 					"rounded" : 0.0,
 					"text" : "L",
@@ -1118,12 +1157,12 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 255.0, 55.0, 40.0, 15.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 75.0, 5.0, 40.0, 15.0 ],
+					"presentation_rect" : [ 100.0, 5.0, 35.0, 15.0 ],
 					"prototypename" : "M4L.toggle-yellow",
 					"rounded" : 0.0,
-					"text" : "Muted",
+					"text" : "Off",
 					"textcolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
-					"texton" : "Active",
+					"texton" : "On",
 					"textoncolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
 					"textovercolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
 					"textoveroncolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ]
@@ -1141,41 +1180,27 @@
 					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 255.0, 85.0, 40.0, 60.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 75.0, 50.0, 40.0, 65.0 ]
+					"presentation_rect" : [ 80.0, 50.0, 35.0, 55.0 ]
 				}
 
 			}
 , 			{
 				"box" : 				{
-					"focusbordercolor" : [ 0.0, 0.019608, 0.078431, 0.0 ],
+					"bgcolor" : [ 0.094118, 0.113725, 0.137255, 1.0 ],
+					"bordercolor" : [ 0.666667, 0.698039, 0.717647, 0.0 ],
+					"floatoutput" : 1,
 					"id" : "obj-6",
-					"maxclass" : "live.slider",
+					"knobcolor" : [ 1.0, 0.603922, 0.0, 1.0 ],
+					"maxclass" : "slider",
 					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "float" ],
-					"parameter_enable" : 1,
-					"patching_rect" : [ 405.0, 85.0, 20.0, 50.0 ],
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 405.0, 85.0, 16.0, 96.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 115.0, 50.0, 20.0, 65.0 ],
-					"prototypename" : "gain",
-					"saved_attribute_attributes" : 					{
-						"valueof" : 						{
-							"parameter_linknames" : 1,
-							"parameter_longname" : "live.slider[31]",
-							"parameter_shortname" : "live.slider",
-							"parameter_type" : 0,
-							"parameter_mmax" : 1.0,
-							"parameter_initial_enable" : 1,
-							"parameter_initial" : [ 0 ],
-							"parameter_unitstyle" : 1,
-							"parameter_speedlim" : 0.0
-						}
-
-					}
-,
-					"showname" : 0,
-					"shownumber" : 0,
-					"trioncolor" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"presentation_rect" : [ 120.0, 50.0, 15.0, 55.0 ],
+					"prototypename" : "M4L.black.H",
+					"size" : 1.0,
 					"varname" : "live.slider[31]"
 				}
 
@@ -1266,28 +1291,10 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-16", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-14", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-38", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-15", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-14", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-16", 0 ]
 				}
 
 			}
@@ -1482,6 +1489,15 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-43", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-37", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-39", 3 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -1540,6 +1556,15 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-41", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-40", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-43", 0 ]
 				}
 
 			}
@@ -1626,9 +1651,8 @@
 			}
  ],
 		"parameters" : 		{
-			"obj-204" : [ "live.numbox[73]", "live.numbox", 0 ],
-			"obj-6" : [ "live.slider[31]", "live.slider", 0 ],
-			"obj-36" : [ "live.numbox[72]", "live.numbox[1]", 0 ]
+			"obj-36" : [ "live.numbox[72]", "live.numbox[1]", 0 ],
+			"obj-204" : [ "live.numbox[73]", "live.numbox", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{
