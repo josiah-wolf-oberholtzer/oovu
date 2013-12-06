@@ -13,17 +13,17 @@ import oovu.messaging.Response;
 import com.cycling74.max.Atom;
 
 public class PartialTracker extends MaxPeer {
-    private class Partial implements Comparable<Partial> {
+    private class Peak implements Comparable<Peak> {
         public final Double frequency;
         public final Double amplitude;
 
-        public Partial(double frequency, double amplitude) {
+        public Peak(double frequency, double amplitude) {
             this.frequency = frequency;
             this.amplitude = amplitude;
         }
 
         @Override
-        public int compareTo(Partial expr) {
+        public int compareTo(Peak expr) {
             int comparison = this.amplitude.compareTo(expr.amplitude);
             return comparison;
         }
@@ -38,7 +38,7 @@ public class PartialTracker extends MaxPeer {
         }
     }
 
-    private List<Partial> partials = new ArrayList<Partial>();
+    private List<Peak> partials = new ArrayList<Peak>();
 
     public PartialTracker(Atom[] arguments) {
         this.declareIO(1, 1);
@@ -50,11 +50,11 @@ public class PartialTracker extends MaxPeer {
         if (request.payload.length < 2) {
             return;
         }
-        List<Partial> new_partials = new ArrayList<Partial>();
+        List<Peak> new_partials = new ArrayList<Peak>();
         for (int i = 0, j = request.payload.length; (i + 1) < j; i += 2) {
             Double frequency = request.payload[i].toDouble();
             Double amplitude = request.payload[i + 1].toDouble();
-            Partial new_partial = new Partial(frequency, amplitude);
+            Peak new_partial = new Peak(frequency, amplitude);
             new_partials.add(new_partial);
             // Environment.log(new_partial.toString());
         }
@@ -62,16 +62,16 @@ public class PartialTracker extends MaxPeer {
         Collections.reverse(new_partials);
         new_partials = new_partials.subList(0, 32);
         if (new_partials.size() != this.partials.size()) {
-            this.partials = new ArrayList<Partial>(new_partials);
+            this.partials = new ArrayList<Peak>(new_partials);
         } else {
-            List<Partial> prev_partials = new ArrayList<Partial>(this.partials);
+            List<Peak> prev_partials = new ArrayList<Peak>(this.partials);
             Collections.sort(prev_partials);
             Collections.reverse(prev_partials);
-            List<Partial> next_partials = new ArrayList<Partial>(this.partials);
-            for (Partial old_partial : prev_partials) {
+            List<Peak> next_partials = new ArrayList<Peak>(this.partials);
+            for (Peak old_partial : prev_partials) {
                 Double best_distance = null;
-                Partial best_new_partial = null;
-                for (Partial new_partial : new_partials) {
+                Peak best_new_partial = null;
+                for (Peak new_partial : new_partials) {
                     if (best_distance == null) {
                         best_distance =
                             Math.abs(old_partial.frequency
@@ -91,7 +91,7 @@ public class PartialTracker extends MaxPeer {
                 next_partials.set(index, best_new_partial);
                 new_partials.remove(best_new_partial);
             }
-            this.partials = new ArrayList<Partial>(next_partials);
+            this.partials = new ArrayList<Peak>(next_partials);
         }
         double[] frequencies = new double[this.partials.size()];
         for (int i = 0; i < this.partials.size(); i++) {
