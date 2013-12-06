@@ -1,9 +1,9 @@
 package oovu.adapters;
 
-import oovu.clients.MaxPeer;
+import oovu.clients.AddressedMaxPeer;
 
 abstract public class UmenuMaxAdapter extends MaxAdapter {
-    public UmenuMaxAdapter(MaxPeer max_peer) {
+    public UmenuMaxAdapter(AddressedMaxPeer max_peer) {
         super(max_peer);
     }
 }

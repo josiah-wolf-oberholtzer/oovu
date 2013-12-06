@@ -1,9 +1,9 @@
 package oovu.adapters;
 
-import oovu.clients.MaxPeer;
+import oovu.clients.AddressedMaxPeer;
 
 abstract public class RsliderMaxAdapter extends MaxAdapter {
-    public RsliderMaxAdapter(MaxPeer max_peer) {
+    public RsliderMaxAdapter(AddressedMaxPeer max_peer) {
         super(max_peer);
     }
 }

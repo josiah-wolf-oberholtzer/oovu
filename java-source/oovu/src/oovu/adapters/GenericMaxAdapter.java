@@ -1,12 +1,12 @@
 package oovu.adapters;
 
-import oovu.clients.MaxPeer;
+import oovu.clients.AddressedMaxPeer;
 import oovu.messaging.Response;
 
 import com.cycling74.max.Atom;
 
 public class GenericMaxAdapter extends MaxAdapter {
-    public GenericMaxAdapter(MaxPeer max_peer) {
+    public GenericMaxAdapter(AddressedMaxPeer max_peer) {
         super(max_peer);
     }
 

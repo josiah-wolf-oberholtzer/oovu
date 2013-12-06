@@ -4,8 +4,7 @@ import oovu.adapters.GenericMaxAdapter;
 import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
-import oovu.clients.MaxPeer;
-import oovu.messaging.MessagePasser;
+import oovu.clients.AddressedMaxPeer;
 import oovu.messaging.Request;
 import oovu.messaging.Response;
 import oovu.servers.ModuleMemberServer;
@@ -16,7 +15,7 @@ import com.cycling74.max.Executable;
 import com.cycling74.max.MaxObject;
 import com.cycling74.max.MaxSystem;
 
-public class Proxy extends MaxPeer implements MessagePasser {
+public class Proxy extends AddressedMaxPeer {
     private class RebindCallback implements Executable {
         public final Proxy client;
         public final Atom[] arguments;

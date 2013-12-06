@@ -274,7 +274,6 @@ abstract public class Server implements MessagePasser, Subscriber {
         return this.name;
     }
 
-    @Override
     public OscAddress get_osc_address() {
         if (this.get_osc_address_node() == null) {
             return null;
@@ -282,12 +281,10 @@ abstract public class Server implements MessagePasser, Subscriber {
         return this.get_osc_address_node().get_osc_address();
     }
 
-    @Override
     public OscAddressNode get_osc_address_node() {
         return this.osc_address_node;
     }
 
-    @Override
     public String get_osc_address_string() {
         OscAddress osc_address = this.get_osc_address();
         if (osc_address != null) {

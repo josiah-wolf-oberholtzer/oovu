@@ -7,7 +7,7 @@ import oovu.servers.Server;
 import com.cycling74.max.Atom;
 import com.cycling74.max.MaxObject;
 
-abstract public class ServerClient extends MaxPeer {
+abstract public class ServerClient extends AddressedMaxPeer {
     protected Server server;
 
     public void attach_to_server(Server server) {
