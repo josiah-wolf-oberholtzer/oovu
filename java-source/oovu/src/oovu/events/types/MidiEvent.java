@@ -5,12 +5,12 @@ import oovu.events.Event;
 public class MidiEvent extends Event {
     public int channel;
     public int controller;
-    public int value;
+    public double value;
 
     public MidiEvent(int channel, int controller, int value) {
         this.channel = channel;
         this.controller = controller;
-        this.value = value;
+        this.value = (value) / 127.;
     }
 
     @Override
