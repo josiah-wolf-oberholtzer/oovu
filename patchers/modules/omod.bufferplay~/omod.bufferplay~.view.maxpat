@@ -32,6 +32,34 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
+					"id" : "obj-14",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 10.0, 545.0, 100.0, 20.0 ],
+					"text" : "mxj oovu.Root"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-2",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ ":mixer/view" ],
+					"patching_rect" : [ 10.0, 520.0, 77.0, 20.0 ],
+					"text" : "t :mixer/view"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
 					"id" : "obj-1",
 					"maxclass" : "newobj",
 					"numinlets" : 2,
@@ -83,7 +111,7 @@
 					"parameter_enable" : 1,
 					"patching_rect" : [ 270.0, 110.0, 303.0, 17.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.0, 120.0, 130.0, 15.0 ],
+					"presentation_rect" : [ 5.0, 110.0, 130.0, 25.0 ],
 					"rounded" : 0.0,
 					"rows" : 1,
 					"saved_attribute_attributes" : 					{
@@ -184,7 +212,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 365.0, 430.0, 210.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.0, 70.0, 65.0, 25.0 ],
+					"presentation_rect" : [ 5.0, 65.0, 65.0, 25.0 ],
 					"prototypename" : "M4L.display",
 					"rounded" : 0.0,
 					"text" : "Panning Frequency",
@@ -230,7 +258,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 310.0, 170.0, 35.0, 15.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.0, 30.0, 65.0, 15.0 ],
+					"presentation_rect" : [ 5.0, 30.0, 70.0, 15.0 ],
 					"prototypename" : "M4L.toggle",
 					"rounded" : 0.0,
 					"text" : "Open",
@@ -276,7 +304,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 310.0, 235.0, 35.0, 15.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.0, 50.0, 65.0, 15.0 ],
+					"presentation_rect" : [ 5.0, 50.0, 70.0, 15.0 ],
 					"prototypename" : "M4L.toggle",
 					"rounded" : 0.0,
 					"text" : "Trigger",
@@ -464,7 +492,7 @@
 					"parameter_enable" : 1,
 					"patching_rect" : [ 310.0, 455.0, 43.0, 15.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.0, 100.0, 65.0, 15.0 ],
+					"presentation_rect" : [ 5.0, 90.0, 65.0, 15.0 ],
 					"prototypename" : "freq",
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
@@ -530,19 +558,6 @@
 			}
 , 			{
 				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"id" : "obj-18",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 50.0, 345.0, 168.0, 20.0 ],
-					"text" : "oovu.gui.send.dynamic #1"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"bgcolor" : [ 0.568627, 0.619608, 0.662745, 1.0 ],
 					"bgoncolor" : [ 1.0, 0.8, 0.4, 1.0 ],
 					"bgovercolor" : [ 0.568627, 0.619608, 0.662745, 1.0 ],
@@ -559,12 +574,12 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 10.0, 350.0, 32.0, 15.0 ],
+					"patching_rect" : [ 10.0, 500.0, 32.0, 15.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 75.0, 30.0, 60.0, 15.0 ],
+					"presentation_rect" : [ 80.0, 30.0, 55.0, 15.0 ],
 					"prototypename" : "M4L.toggle",
 					"rounded" : 0.0,
-					"text" : "Sends",
+					"text" : "Mixer",
 					"textcolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
 					"texton" : "Trig",
 					"textoncolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
@@ -584,41 +599,27 @@
 					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 10.0, 375.0, 40.0, 60.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 75.0, 50.0, 40.0, 65.0 ]
+					"presentation_rect" : [ 80.0, 50.0, 35.0, 55.0 ]
 				}
 
 			}
 , 			{
 				"box" : 				{
-					"focusbordercolor" : [ 0.0, 0.019608, 0.078431, 0.0 ],
+					"bgcolor" : [ 0.094118, 0.113725, 0.137255, 1.0 ],
+					"bordercolor" : [ 0.666667, 0.698039, 0.717647, 0.0 ],
+					"floatoutput" : 1,
 					"id" : "obj-12",
-					"maxclass" : "live.slider",
+					"knobcolor" : [ 1.0, 0.603922, 0.0, 1.0 ],
+					"maxclass" : "slider",
 					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "float" ],
-					"parameter_enable" : 1,
-					"patching_rect" : [ 60.0, 375.0, 20.0, 50.0 ],
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 60.0, 375.0, 16.0, 96.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 115.0, 50.0, 20.0, 65.0 ],
-					"prototypename" : "gain",
-					"saved_attribute_attributes" : 					{
-						"valueof" : 						{
-							"parameter_linknames" : 1,
-							"parameter_longname" : "live.slider[1]",
-							"parameter_shortname" : "live.slider",
-							"parameter_type" : 0,
-							"parameter_mmax" : 1.0,
-							"parameter_initial_enable" : 1,
-							"parameter_initial" : [ 0 ],
-							"parameter_unitstyle" : 1,
-							"parameter_speedlim" : 0.0
-						}
-
-					}
-,
-					"showname" : 0,
-					"shownumber" : 0,
-					"trioncolor" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"presentation_rect" : [ 120.0, 50.0, 15.0, 55.0 ],
+					"prototypename" : "M4L.black.H",
+					"size" : 1.0,
 					"varname" : "live.slider[1]"
 				}
 
@@ -658,12 +659,12 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 10.0, 320.0, 40.0, 15.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 75.0, 5.0, 40.0, 15.0 ],
+					"presentation_rect" : [ 105.0, 5.0, 30.0, 15.0 ],
 					"prototypename" : "M4L.toggle-yellow",
 					"rounded" : 0.0,
-					"text" : "Muted",
+					"text" : "Off",
 					"textcolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
-					"texton" : "Active",
+					"texton" : "On",
 					"textoncolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
 					"textovercolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
 					"textoveroncolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ]
@@ -754,10 +755,19 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-18", 0 ],
+					"destination" : [ "obj-2", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-19", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-14", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-2", 0 ]
 				}
 
 			}
@@ -934,9 +944,6 @@
 			}
  ],
 		"parameters" : 		{
-			"obj-18::obj-18::obj-4" : [ "live.slider", "live.slider", 0 ],
-			"obj-12" : [ "live.slider[1]", "live.slider", 0 ],
-			"obj-18::obj-204" : [ "live.numbox[13]", "live.numbox", 0 ],
 			"obj-31" : [ "live.numbox[6]", "live.numbox[4]", 0 ],
 			"obj-36" : [ "live.grid[3]", "live.grid", 0 ]
 		}
@@ -952,27 +959,6 @@
 				"name" : "oovu.gui.meters.8x.maxpat",
 				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/gui",
 				"patcherrelativepath" : "../../abstractions/gui",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.gui.send.dynamic.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/gui",
-				"patcherrelativepath" : "../../abstractions/gui",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.gui.send.1x.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/gui",
-				"patcherrelativepath" : "../../abstractions/gui",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.util.makeumenu.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/utilities",
-				"patcherrelativepath" : "../../abstractions/utilities",
 				"type" : "JSON",
 				"implicit" : 1
 			}

@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 440.0, 44.0, 831.0, 710.0 ],
+		"rect" : [ 17.0, 44.0, 320.0, 710.0 ],
 		"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
@@ -29,6 +29,20 @@
 		"digest" : "",
 		"tags" : "",
 		"boxes" : [ 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-53",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ ":mixer/view" ],
+					"patching_rect" : [ 115.0, 445.0, 77.0, 20.0 ],
+					"text" : "t :mixer/view"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
@@ -130,7 +144,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 55.0, 450.0, 32.0, 15.0 ],
+					"patching_rect" : [ 115.0, 420.0, 32.0, 15.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 180.0, 130.0, 55.0, 15.0 ],
 					"prototypename" : "M4L.toggle",
@@ -250,11 +264,11 @@
 					"fontsize" : 12.0,
 					"id" : "obj-16",
 					"maxclass" : "newobj",
-					"numinlets" : 3,
+					"numinlets" : 2,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 55.0, 470.0, 169.0, 20.0 ],
-					"text" : "mxj oovu.Proxy #1 ./:getmixer"
+					"patching_rect" : [ 115.0, 470.0, 169.0, 20.0 ],
+					"text" : "mxj oovu.Root"
 				}
 
 			}
@@ -1419,7 +1433,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-16", 0 ],
+					"destination" : [ "obj-53", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-19", 0 ]
@@ -1663,6 +1677,15 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-16", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-53", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-18", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -1699,15 +1722,15 @@
 			}
  ],
 		"parameters" : 		{
-			"obj-40" : [ "live.numbox[40]", "live.numbox[4]", 0 ],
-			"obj-38" : [ "live.numbox[41]", "live.numbox[4]", 0 ],
-			"obj-60" : [ "live.numbox[1]", "live.numbox", 0 ],
-			"obj-21" : [ "live.numbox[12]", "live.numbox[4]", 0 ],
-			"obj-49" : [ "live.numbox[39]", "live.numbox[4]", 0 ],
-			"obj-36" : [ "live.numbox[43]", "live.numbox[4]", 0 ],
+			"obj-54" : [ "live.numbox", "live.numbox", 0 ],
 			"obj-26" : [ "live.numbox[44]", "live.numbox[4]", 0 ],
 			"obj-31" : [ "live.numbox[42]", "live.numbox[4]", 0 ],
-			"obj-54" : [ "live.numbox", "live.numbox", 0 ]
+			"obj-21" : [ "live.numbox[12]", "live.numbox[4]", 0 ],
+			"obj-49" : [ "live.numbox[39]", "live.numbox[4]", 0 ],
+			"obj-40" : [ "live.numbox[40]", "live.numbox[4]", 0 ],
+			"obj-38" : [ "live.numbox[41]", "live.numbox[4]", 0 ],
+			"obj-36" : [ "live.numbox[43]", "live.numbox[4]", 0 ],
+			"obj-60" : [ "live.numbox[1]", "live.numbox", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{

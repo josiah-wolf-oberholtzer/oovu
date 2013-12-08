@@ -36,12 +36,12 @@ public class RootServer extends Server {
                 MessageHandler message_handler,
                 Atom[] arguments) {
                 RootServer root_server = (RootServer) message_handler.client;
-                MaxPatcher mixer_patcher = root_server.mixer_patcher;
                 if (root_server.mixer_patcher == null) {
-                    mixer_patcher = root_server.build_mixer_patcher();
-                    root_server.mixer_patcher = mixer_patcher;
+                    root_server.mixer_patcher = root_server.build_mixer_patcher();
                 }
-                mixer_patcher.send("front", new Atom[0]);
+                if (root_server.mixer_patcher != null) {
+                    root_server.mixer_patcher.send("front", new Atom[0]);
+                }
                 return null;
             }
         });
