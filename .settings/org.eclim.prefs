@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+org.eclim.java.doc.dest=java-docs
+org.eclim.java.doc.packagenames=oovu
+org.eclim.java.import.exclude=["^com.sun..*","^sunw?..*"]
+org.eclim.user.email=josiah.oberholtzer@gmail.com
+org.eclim.user.name=Josiah Wolf Oberholtzer

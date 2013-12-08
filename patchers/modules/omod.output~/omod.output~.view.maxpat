@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 781.0, 44.0, 734.0, 710.0 ],
+		"rect" : [ 326.0, 44.0, 734.0, 710.0 ],
 		"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 		"bglocked" : 1,
 		"openinpresentation" : 1,
@@ -49,8 +49,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 20.0, 335.0, 60.0, 18.0 ],
-					"text" : ":getmixer"
+					"patching_rect" : [ 20.0, 335.0, 71.0, 18.0 ],
+					"text" : ":mixer/view"
 				}
 
 			}
@@ -167,7 +167,7 @@
 					"presentation_rect" : [ 5.0, 110.0, 70.0, 20.0 ],
 					"prototypename" : "M4L.display",
 					"rounded" : 0.0,
-					"text" : "27%",
+					"text" : "0%",
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"texton" : "Text",
 					"textovercolor" : [ 1.0, 1.0, 1.0, 1.0 ],
@@ -1648,26 +1648,6 @@
 					"source" : [ "obj-9", 0 ]
 				}
 
-			}
- ],
-		"parameters" : 		{
-			"obj-36" : [ "live.numbox[72]", "live.numbox[1]", 0 ],
-			"obj-204" : [ "live.numbox[73]", "live.numbox", 0 ]
-		}
-,
-		"dependency_cache" : [ 			{
-				"name" : "oovu.guibackground.js",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/jsui",
-				"patcherrelativepath" : "../../../jsui",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.gui.meters.8x.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/gui",
-				"patcherrelativepath" : "../../abstractions/gui",
-				"type" : "JSON",
-				"implicit" : 1
 			}
  ]
 	}

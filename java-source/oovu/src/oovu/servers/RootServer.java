@@ -22,25 +22,44 @@ import com.cycling74.max.MaxSystem;
 
 public class RootServer extends Server {
     private EventManager event_manager = new EventManager();
+    private MaxPatcher mixer_patcher = null;
 
     public RootServer() {
         super();
         this.attach_to_osc_address_node(Environment.root_osc_address_node);
-        // MIXER
-        MessageHandlerBuilder mixer_builder =
-            new MessageHandlerBuilder("mixer");
-        mixer_builder.with_getter(new MessageHandlerCallback() {
+        // MIXER VIEW
+        MessageHandlerBuilder mixer_view_builder =
+            new MessageHandlerBuilder("mixer/view");
+        mixer_view_builder.with_setter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler message_handler,
                 Atom[] arguments) {
-                RootServer server = (RootServer) message_handler.client;
-                MaxPatcher mixer_patcher = server.build_mixer_patcher();
+                RootServer root_server = (RootServer) message_handler.client;
+                MaxPatcher mixer_patcher = root_server.mixer_patcher;
+                if (root_server.mixer_patcher == null) {
+                    mixer_patcher = root_server.build_mixer_patcher();
+                    root_server.mixer_patcher = mixer_patcher;
+                }
                 mixer_patcher.send("front", new Atom[0]);
                 return null;
             }
         });
-        this.add_message_handler(mixer_builder.build(this));
+        this.add_message_handler(mixer_view_builder.build(this));
+        // MIXER CLOSED
+        MessageHandlerBuilder mixer_closed_builder =
+            new MessageHandlerBuilder("mixer/closed");
+        mixer_closed_builder.with_setter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler message_handler,
+                Atom[] arguments) {
+                RootServer root_server = (RootServer) message_handler.client;
+                root_server.mixer_patcher = null;
+                return null;
+            }
+        });
+        this.add_message_handler(mixer_closed_builder.build(this));
         // STATE
         MessageHandlerBuilder state_builder =
             new MessageHandlerBuilder("state");
