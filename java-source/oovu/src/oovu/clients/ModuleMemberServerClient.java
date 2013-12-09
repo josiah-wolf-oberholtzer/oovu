@@ -1,7 +1,7 @@
 package oovu.clients;
 
-import oovu.adapters.GenericMaxAdapter;
 import oovu.addresses.OscAddress;
+import oovu.maxadapters.GenericMaxAdapter;
 import oovu.messaging.Request;
 
 import com.cycling74.max.Atom;

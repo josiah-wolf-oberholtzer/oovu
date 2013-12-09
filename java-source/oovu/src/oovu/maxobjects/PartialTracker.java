@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import oovu.adapters.GenericMaxAdapter;
 import oovu.clients.MaxPeer;
+import oovu.maxadapters.GenericMaxAdapter;
 import oovu.messaging.Atoms;
 import oovu.messaging.Request;
 import oovu.messaging.Response;

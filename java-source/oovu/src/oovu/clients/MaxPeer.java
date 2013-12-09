@@ -1,7 +1,7 @@
 package oovu.clients;
 
-import oovu.adapters.MaxAdapter;
 import oovu.addresses.OscAddress;
+import oovu.maxadapters.MaxAdapter;
 import oovu.messaging.MessagePasser;
 import oovu.messaging.Request;
 import oovu.messaging.Response;

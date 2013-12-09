@@ -1,7 +1,7 @@
 package oovu;
 
-import oovu.adapters.GenericMaxAdapter;
 import oovu.clients.ServerClient;
+import oovu.maxadapters.GenericMaxAdapter;
 import oovu.servers.ModuleServer;
 
 import com.cycling74.max.Atom;

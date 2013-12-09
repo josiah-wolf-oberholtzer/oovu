@@ -1,10 +1,10 @@
 package oovu;
 
-import oovu.adapters.GenericMaxAdapter;
 import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
 import oovu.clients.AddressedMaxPeer;
+import oovu.maxadapters.GenericMaxAdapter;
 import oovu.messaging.Request;
 import oovu.messaging.Response;
 import oovu.servers.ModuleMemberServer;
