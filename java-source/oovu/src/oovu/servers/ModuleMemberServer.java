@@ -156,9 +156,7 @@ public abstract class ModuleMemberServer extends Server {
 
     protected boolean is_configured;
 
-    public ModuleMemberServer(ModuleServer module_server) {
-        super();
-        this.attach_to_parent_server(module_server);
+    private void configure_modulename_message_handler() {
         MessageHandlerBuilder modulename_builder =
             new MessageHandlerBuilder("modulename");
         modulename_builder.with_getter(new MessageHandlerCallback() {
@@ -176,6 +174,12 @@ public abstract class ModuleMemberServer extends Server {
             }
         });
         this.add_message_handler(modulename_builder.build(this));
+    }
+    
+    public ModuleMemberServer(ModuleServer module_server) {
+        super();
+        this.attach_to_parent_server(module_server);
         this.is_configured = false;
+        this.configure_modulename_message_handler();
     }
 }

@@ -2,6 +2,7 @@ package oovu.servers;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -9,6 +10,7 @@ import java.util.Set;
 import oovu.addresses.OscAddress;
 import oovu.datatypes.Datatype;
 import oovu.datatypes.GenericDatatype;
+import oovu.events.Subscription;
 import oovu.messaging.Atoms;
 import oovu.messaging.BooleanMessageHandlerCallback;
 import oovu.messaging.IntegerMessageHandlerCallback;
@@ -29,9 +31,11 @@ abstract public class AttributeServer extends ModuleMemberServer implements
     protected Integer priority = 0;
     public Datatype datatype = null;
     protected Pattern pattern = null;
+    protected Map<String, Subscription> bindings = new HashMap<String, Subscription>();
 
     public AttributeServer(ModuleServer module_server) {
         super(module_server);
+        // PRIORITY
         MessageHandlerBuilder priority_builder =
             new MessageHandlerBuilder("priority");
         priority_builder.with_getter(new MessageHandlerCallback() {
@@ -61,6 +65,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
             }
         });
         this.add_message_handler(priority_builder.build(this));
+        // VALUE
         MessageHandlerBuilder value_builder =
             new MessageHandlerBuilder("value");
         value_builder.with_arity_callback(new IntegerMessageHandlerCallback() {
@@ -126,6 +131,11 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         });
         this.add_message_handler(value_builder.build(this));
         if (!(this instanceof ReturnServer)) {
+            // BIND/MIDI
+            // BIND/PARAMETER
+            // BIND/PATTERN
+            // UNBIND
+            // PATTERN
             MessageHandlerBuilder pattern_builder =
                 new MessageHandlerBuilder("pattern");
             pattern_builder.with_is_state_relevant(true).with_getter(
