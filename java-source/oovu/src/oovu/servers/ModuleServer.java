@@ -103,21 +103,6 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
             }
         });
         this.add_message_handler(methods_builder.build(this));
-        // MIXER
-        MessageHandlerBuilder mixer_builder =
-            new MessageHandlerBuilder("mixer");
-        mixer_builder.with_getter(new MessageHandlerCallback() {
-            @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
-                ModuleServer server = (ModuleServer) message_handler.client;
-                MaxPatcher mixer_patcher = server.build_mixer_patcher();
-                mixer_patcher.send("front", new Atom[0]);
-                return null;
-            }
-        });
-        this.add_message_handler(mixer_builder.build(this));
         // NAME
         MessageHandlerBuilder name_builder = new MessageHandlerBuilder("name");
         name_builder.with_getter(new MessageHandlerCallback() {
