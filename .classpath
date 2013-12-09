@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="lib" path="/home/josiah/git/oovu/java-source/oovu/lib/max.jar"/>
-	<classpathentry kind="lib" path="/home/josiah/git/oovu/java-source/oovu/lib/log4j-1.2.16.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="src" path="java-source/oovu/src"/>
+	<classpathentry kind="lib" path="java-source/oovu/lib/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="java-source/oovu/lib/max.jar"/>
 	<classpathentry kind="output" path="java-classes/oovu/bin"/>
 </classpath>
