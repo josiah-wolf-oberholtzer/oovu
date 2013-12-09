@@ -8,6 +8,7 @@ import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
 import oovu.clients.ServerClient;
 import oovu.eventscripts.EventManager;
+import oovu.maxguis.MixerGui;
 import oovu.messaging.Atoms;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
@@ -27,7 +28,7 @@ public class RootServer extends Server {
     public RootServer() {
         super();
         this.attach_to_osc_address_node(Environment.root_osc_address_node);
-        // MIXER VIEW
+        // MIXER/VIEW
         MessageHandlerBuilder mixer_view_builder =
             new MessageHandlerBuilder("mixer/view");
         mixer_view_builder.with_setter(new MessageHandlerCallback() {
@@ -37,7 +38,7 @@ public class RootServer extends Server {
                 Atom[] arguments) {
                 RootServer root_server = (RootServer) message_handler.client;
                 if (root_server.mixer_patcher == null) {
-                    root_server.mixer_patcher = root_server.build_mixer_patcher();
+                    root_server.mixer_patcher = MixerGui.build(root_server);
                 }
                 if (root_server.mixer_patcher != null) {
                     root_server.mixer_patcher.send("front", new Atom[0]);
@@ -46,7 +47,7 @@ public class RootServer extends Server {
             }
         });
         this.add_message_handler(mixer_view_builder.build(this));
-        // MIXER CLOSED
+        // MIXER/CLOSED
         MessageHandlerBuilder mixer_closed_builder =
             new MessageHandlerBuilder("mixer/closed");
         mixer_closed_builder.with_setter(new MessageHandlerCallback() {
@@ -214,118 +215,6 @@ public class RootServer extends Server {
             }
         });
         this.add_message_handler(events_read_builder.build(this));
-    }
-
-    public MaxPatcher build_mixer_patcher() {
-        ArrayList<ModuleServer> effects_modules = new ArrayList<ModuleServer>();
-        ArrayList<ModuleServer> input_only_modules =
-            new ArrayList<ModuleServer>();
-        ArrayList<ModuleServer> output_only_modules =
-            new ArrayList<ModuleServer>();
-        for (Server child_server : this.child_servers) {
-            ModuleServer module = (ModuleServer) child_server;
-            DspSettingsServer dsp_settings = module.get_dsp_settings_server();
-            boolean has_receives = dsp_settings.module_has_dsp_receives();
-            boolean has_sends = dsp_settings.module_has_dsp_sends();
-            if ((!has_receives) && (!has_sends)) {
-                continue;
-            } else if (has_receives && has_sends) {
-                effects_modules.add(module);
-            } else if (has_receives) {
-                input_only_modules.add(module);
-            } else {
-                output_only_modules.add(module);
-            }
-        }
-        int gutter = 10;
-        int step = 145;
-        int width = 70;
-        int sections = 0;
-        if (0 < input_only_modules.size()) {
-            width += (step * input_only_modules.size());
-            sections += 1;
-        }
-        if (0 < output_only_modules.size()) {
-            width += (step * output_only_modules.size());
-            sections += 1;
-        }
-        if (0 < effects_modules.size()) {
-            width += (step * effects_modules.size());
-            sections += 1;
-        }
-        if (sections == 0) {
-            return null;
-        } else if (sections == 2) {
-            width += gutter;
-        } else {
-            width += gutter * 2;
-        }
-        MaxPatcher patcher = new MaxPatcher(0, 0, width, 745);
-        int current_x = 70;
-        patcher.newDefault(5, 5, "bpatcher",
-            Atom.parse("@patching_rect 5 5 50 70 @name oovu.mixer.globals"));
-        patcher.newDefault(60, 735, "live.line",
-            Atom.parse("@patching_rect 60 5 5 735 @border 2 @justification 1"));
-        if (0 < input_only_modules.size()) {
-            patcher.newDefault(
-                current_x,
-                5,
-                "comment",
-                Atom.parse("@text INPUTS @textcolor 1 1 1 1 @fontface 3 "
-                    + "@patching_rect " + current_x + " 5 140 20"));
-            for (ModuleServer module : output_only_modules) {
-                module.fill_mixer_patcher(patcher, current_x, 30);
-                current_x += step;
-            }
-            if ((0 < effects_modules.size())
-                || (0 < output_only_modules.size())) {
-                patcher.newDefault(
-                    current_x,
-                    735,
-                    "live.line",
-                    Atom.parse("@patching_rect " + current_x
-                        + " 5 5 735 @border 2 @justification 1"));
-                current_x += gutter;
-            }
-        }
-        if (0 < effects_modules.size()) {
-            patcher.newDefault(
-                current_x,
-                5,
-                "comment",
-                Atom.parse("@text TREATMENTS @textcolor 1 1 1 1 @fontface 3 "
-                    + "@patching_rect " + current_x + " 5 140 20"));
-            for (ModuleServer module : effects_modules) {
-                module.fill_mixer_patcher(patcher, current_x, 30);
-                current_x += step;
-            }
-            if (0 < output_only_modules.size()) {
-                patcher.newDefault(
-                    current_x,
-                    735,
-                    "live.line",
-                    Atom.parse("@patching_rect " + current_x
-                        + " 5 5 735 @border 2 @justification 1"));
-                current_x += gutter;
-            }
-        }
-        if (0 < output_only_modules.size()) {
-            patcher.newDefault(
-                current_x,
-                5,
-                "comment",
-                Atom.parse("@text OUTPUTS @textcolor 1 1 1 1 @fontface 3 "
-                    + "@patching_rect " + current_x + " 5 140 20"));
-            for (ModuleServer module : input_only_modules) {
-                module.fill_mixer_patcher(patcher, current_x, 30);
-                current_x += step;
-            }
-        }
-        patcher.setBackgroundColor(0, 0, 0);
-        patcher.send("statusbarvisible", Atom.parse("0"));
-        patcher.send("toolbarvisible", Atom.parse("0"));
-        patcher.getWindow().setTitle("OOVU Mixer");
-        return patcher;
     }
 
     @Override

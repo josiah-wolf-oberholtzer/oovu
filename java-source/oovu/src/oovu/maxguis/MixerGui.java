@@ -12,10 +12,10 @@ import com.cycling74.max.MaxBox;
 import com.cycling74.max.MaxPatcher;
 
 public class MixerGui {
-    private final int gutter = 10;
-    private final int step = 145;
+    private static final int height = 745;
+    private static final int gutter = 5;
 
-    public MaxPatcher build(RootServer root_server) {
+    static public MaxPatcher build(RootServer root_server) {
         ArrayList<ModuleServer> effects_modules = new ArrayList<ModuleServer>();
         ArrayList<ModuleServer> input_modules = new ArrayList<ModuleServer>();
         ArrayList<ModuleServer> output_modules = new ArrayList<ModuleServer>();
@@ -35,16 +35,25 @@ public class MixerGui {
         }
         if ((0 < effects_modules.size()) || (0 < input_modules.size())
             || (0 < output_modules.size())) {
-            MaxPatcher patcher = new MaxPatcher(0, 0, 100, 100);
-            int x_offset = 5;
-            x_offset = this.fill_globals_section(patcher, x_offset);
+            MaxPatcher patcher = new MaxPatcher(10, 10, 670, MixerGui.height);
+            int x_offset = MixerGui.gutter;
+            x_offset = MixerGui.fill_globals_section(patcher, x_offset);
             x_offset =
-                this.fill_inputs_section(patcher, input_modules, x_offset);
+                MixerGui.fill_module_section("INPUTS", patcher, output_modules,
+                    x_offset);
             x_offset =
-                this.fill_effects_section(patcher, effects_modules, x_offset);
+                MixerGui.fill_module_section("THROUGHPUTS", patcher,
+                    effects_modules, x_offset);
             x_offset =
-                this.fill_outputs_section(patcher, output_modules, x_offset);
+                MixerGui.fill_module_section("OUTPUTS", patcher, input_modules,
+                    x_offset);
             patcher.setBackgroundColor(0, 0, 0);
+            patcher.send("enablevscroll", Atom.parse("0"));
+            patcher.send(
+                "window",
+                Atom.parse("size 50 50 " + (x_offset + 50) + " "
+                    + (MixerGui.height + 50)));
+            patcher.send("window", Atom.parse("exec"));
             patcher.send("statusbarvisible", Atom.parse("0"));
             patcher.send("toolbarvisible", Atom.parse("0"));
             patcher.getWindow().setTitle("Mixer");
@@ -54,25 +63,17 @@ public class MixerGui {
         }
     }
 
-    private int fill_effects_section(
-        MaxPatcher patcher,
-        List<ModuleServer> modules,
-        int x_offset) {
-        return 0;
+    private static int fill_globals_section(MaxPatcher patcher, int x_offset) {
+        patcher.newDefault(
+            x_offset,
+            MixerGui.gutter,
+            "bpatcher",
+            Atom.parse("@patching_rect " + MixerGui.gutter + " "
+                + MixerGui.gutter + " 50 70 @name oovu.mixer.globals"));
+        return x_offset + 50 + MixerGui.gutter;
     }
 
-    private int fill_globals_section(MaxPatcher patcher, int x_offset) {
-        return 0;
-    }
-
-    private int fill_inputs_section(
-        MaxPatcher patcher,
-        List<ModuleServer> modules,
-        int x_offset) {
-        return 0;
-    }
-
-    public void fill_mixer_patcher(
+    private static void fill_module_column(
         ModuleServer module,
         MaxPatcher patcher,
         int x_offset,
@@ -106,26 +107,43 @@ public class MixerGui {
                 Atom.parse("@patching_rect " + x_offset + " " + y_offset
                     + " 140 110 @name oovu.mixer.title.outputs @args "
                     + module.module_id + " @clickthrough 1"));
-            patcher
-                .newDefault(
-                    x_offset,
-                    y_offset,
-                    "bpatcher",
-                    Atom.parse("@patching_rect " + x_offset + " "
-                        + (y_offset + 115)
-                        + " 140 595 @name oovu.mixer.sends @args "
-                        + module.module_id));
+            patcher.newDefault(
+                x_offset,
+                y_offset,
+                "bpatcher",
+                Atom.parse("@patching_rect " + x_offset + " "
+                    + (y_offset + 115)
+                    + " 140 595 @name oovu.mixer.sends @args "
+                    + module.module_id));
         }
     }
 
-    private int fill_outputs_section(
+    private static int fill_module_section(
+        String comment_text,
         MaxPatcher patcher,
         List<ModuleServer> modules,
         int x_offset) {
-        return 0;
+        if (0 == modules.size()) {
+            return x_offset;
+        }
+        MixerGui.make_vertical_line(patcher, x_offset, 735);
+        x_offset += MixerGui.gutter + 5;
+        patcher.newDefault(
+            x_offset,
+            MixerGui.gutter,
+            "comment",
+            Atom.parse("@text " + comment_text
+                + " @fontface 3 @textcolor 1 1 1 1 @patching_rect " + x_offset
+                + " " + MixerGui.gutter + " 140 20"));
+        for (ModuleServer module : modules) {
+            MixerGui.fill_module_column(module, patcher, x_offset,
+                MixerGui.gutter + 25);
+            x_offset += 140 + MixerGui.gutter;
+        }
+        return x_offset;
     }
 
-    private MaxBox make_vertical_line(
+    private static MaxBox make_vertical_line(
         MaxPatcher patcher,
         int x_offset,
         int height) {
