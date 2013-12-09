@@ -15,7 +15,7 @@ import oovu.events.types.MidiEvent;
 
 import com.cycling74.max.Executable;
 
-public class MidiListener {
+public class MidiService {
     private class MidiReceiver implements Receiver {
         public final String name;
         public final MidiDevice device;
@@ -49,11 +49,11 @@ public class MidiListener {
     public final HashMap<String, MidiReceiver> receivers =
         new HashMap<String, MidiReceiver>();
 
-    public MidiListener() {
+    public MidiService() {
         Environment.defer_low(new Executable() {
             @Override
             public void execute() {
-                MidiListener.this.update();
+                MidiService.this.update();
             }
         });
     }
