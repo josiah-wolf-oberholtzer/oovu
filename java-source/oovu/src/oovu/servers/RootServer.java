@@ -28,129 +28,28 @@ public class RootServer extends Server {
     public RootServer() {
         super();
         this.attach_to_osc_address_node(Environment.root_osc_address_node);
-        // MIXER/VIEW
-        MessageHandlerBuilder mixer_view_builder =
-            new MessageHandlerBuilder("mixer/view");
-        mixer_view_builder.with_setter(new MessageHandlerCallback() {
-            @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
-                RootServer root_server = (RootServer) message_handler.client;
-                if (root_server.mixer_patcher == null) {
-                    root_server.mixer_patcher = MixerGui.build(root_server);
-                }
-                if (root_server.mixer_patcher != null) {
-                    root_server.mixer_patcher.send("front", new Atom[0]);
-                }
-                return null;
-            }
-        });
-        this.add_message_handler(mixer_view_builder.build(this));
-        // MIXER/CLOSED
-        MessageHandlerBuilder mixer_closed_builder =
-            new MessageHandlerBuilder("mixer/closed");
-        mixer_closed_builder.with_setter(new MessageHandlerCallback() {
-            @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
-                RootServer root_server = (RootServer) message_handler.client;
-                root_server.mixer_patcher = null;
-                return null;
-            }
-        });
-        this.add_message_handler(mixer_closed_builder.build(this));
-        // STATE
-        MessageHandlerBuilder state_builder =
-            new MessageHandlerBuilder("state");
-        state_builder.with_getter(new MessageHandlerCallback() {
-            @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
-                Atom[][] result = RootServer.this.get_formatted_state();
-                for (int i = 0, j = result.length; i < j; i++) {
-                    result[i] =
-                        Atom.newAtom(built_message_handler.get_name(),
-                            result[i]);
-                }
-                return result;
-            }
-        });
-        this.add_message_handler(state_builder.build(this));
-        // EVENTS/LIST
-        MessageHandlerBuilder events_list_builder =
-            new MessageHandlerBuilder("events/list");
-        events_list_builder.with_setter(new MessageHandlerCallback() {
-            @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
-                RootServer root_server = (RootServer) message_handler.client;
-                List<String> event_names =
-                    root_server.event_manager.get_event_names();
-                if (event_names == null) {
-                    return Atoms.to_atoms(message_handler.get_name());
-                }
-                return Atoms.to_atoms(message_handler.get_name(),
-                    event_names.toArray(new String[0]));
-            }
-        });
-        this.add_message_handler(events_list_builder.build(this));
-        // EVENTS/NEXT
-        MessageHandlerBuilder events_next_builder =
-            new MessageHandlerBuilder("events/next");
-        events_next_builder.with_is_binding_relevant(true);
-        events_next_builder.with_setter(new MessageHandlerCallback() {
-            @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
-                RootServer root_server = (RootServer) message_handler.client;
-                String event_name =
-                    root_server.event_manager.get_next_event_name();
-                if (event_name == null) {
-                    return null;
-                }
-                State state =
-                    root_server.event_manager
-                        .set_current_event_by_name(event_name);
-                root_server.event_manager.execute_state(state, root_server);
-                message_handler.client.handle_response(new Response(
-                    message_handler.client, Atoms.to_atoms("events/current",
-                        event_name), null));
-                return null;
-            }
-        });
-        this.add_message_handler(events_next_builder.build(this));
-        // EVENTS/PREVIOUS
-        MessageHandlerBuilder events_previous_builder =
-            new MessageHandlerBuilder("events/previous");
-        events_previous_builder.with_is_binding_relevant(true);
-        events_previous_builder.with_setter(new MessageHandlerCallback() {
-            @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
-                RootServer root_server = (RootServer) message_handler.client;
-                String event_name =
-                    root_server.event_manager.get_previous_event_name();
-                if (event_name == null) {
-                    return null;
-                }
-                State state =
-                    root_server.event_manager
-                        .set_current_event_by_name(event_name);
-                root_server.event_manager.execute_state(state, root_server);
-                message_handler.client.handle_response(new Response(
-                    message_handler.client, Atoms.to_atoms("events/current",
-                        event_name), null));
-                return null;
-            }
-        });
-        this.add_message_handler(events_previous_builder.build(this));
-        // EVENTS/GOTO
+        this.configure_events_goto_message_handler();
+        this.configure_events_list_message_handler();
+        this.configure_events_next_message_handler();
+        this.configure_events_previous_message_handler();
+        this.configure_events_read_message_handler();
+        this.configure_mixer_closed_message_handler();
+        this.configure_mixer_view_message_handler();
+        this.configure_state_message_handler();
+    }
+
+    @Override
+    public void clear() {
+        for (Server child_server : this.child_servers.toArray(new Server[0])) {
+            child_server.detach_from_parent_server();
+        }
+        this.detach_from_parent_server();
+        for (ServerClient server_client : this.server_clients) {
+            server_client.detach_from_server();
+        }
+    }
+
+    private void configure_events_goto_message_handler() {
         MessageHandlerBuilder events_goto_builder =
             new MessageHandlerBuilder("events/goto");
         events_goto_builder.with_setter(new MessageHandlerCallback() {
@@ -183,7 +82,86 @@ public class RootServer extends Server {
             }
         });
         this.add_message_handler(events_goto_builder.build(this));
-        // EVENTS/READ
+    }
+
+    private void configure_events_list_message_handler() {
+        MessageHandlerBuilder events_list_builder =
+            new MessageHandlerBuilder("events/list");
+        events_list_builder.with_setter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler message_handler,
+                Atom[] arguments) {
+                RootServer root_server = (RootServer) message_handler.client;
+                List<String> event_names =
+                    root_server.event_manager.get_event_names();
+                if (event_names == null) {
+                    return Atoms.to_atoms(message_handler.get_name());
+                }
+                return Atoms.to_atoms(message_handler.get_name(),
+                    event_names.toArray(new String[0]));
+            }
+        });
+        this.add_message_handler(events_list_builder.build(this));
+    }
+
+    private void configure_events_next_message_handler() {
+        MessageHandlerBuilder events_next_builder =
+            new MessageHandlerBuilder("events/next");
+        events_next_builder.with_is_binding_relevant(true);
+        events_next_builder.with_setter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler message_handler,
+                Atom[] arguments) {
+                RootServer root_server = (RootServer) message_handler.client;
+                String event_name =
+                    root_server.event_manager.get_next_event_name();
+                if (event_name == null) {
+                    return null;
+                }
+                State state =
+                    root_server.event_manager
+                        .set_current_event_by_name(event_name);
+                root_server.event_manager.execute_state(state, root_server);
+                message_handler.client.handle_response(new Response(
+                    message_handler.client, Atoms.to_atoms("events/current",
+                        event_name), null));
+                return null;
+            }
+        });
+        this.add_message_handler(events_next_builder.build(this));
+    }
+
+    private void configure_events_previous_message_handler() {
+        MessageHandlerBuilder events_previous_builder =
+            new MessageHandlerBuilder("events/previous");
+        events_previous_builder.with_is_binding_relevant(true);
+        events_previous_builder.with_setter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler message_handler,
+                Atom[] arguments) {
+                RootServer root_server = (RootServer) message_handler.client;
+                String event_name =
+                    root_server.event_manager.get_previous_event_name();
+                if (event_name == null) {
+                    return null;
+                }
+                State state =
+                    root_server.event_manager
+                        .set_current_event_by_name(event_name);
+                root_server.event_manager.execute_state(state, root_server);
+                message_handler.client.handle_response(new Response(
+                    message_handler.client, Atoms.to_atoms("events/current",
+                        event_name), null));
+                return null;
+            }
+        });
+        this.add_message_handler(events_previous_builder.build(this));
+    }
+
+    private void configure_events_read_message_handler() {
         MessageHandlerBuilder events_read_builder =
             new MessageHandlerBuilder("events/read");
         events_read_builder.with_callback(new MessageHandlerCallback() {
@@ -217,15 +195,61 @@ public class RootServer extends Server {
         this.add_message_handler(events_read_builder.build(this));
     }
 
-    @Override
-    public void clear() {
-        for (Server child_server : this.child_servers.toArray(new Server[0])) {
-            child_server.detach_from_parent_server();
-        }
-        this.detach_from_parent_server();
-        for (ServerClient server_client : this.server_clients) {
-            server_client.detach_from_server();
-        }
+    private void configure_mixer_closed_message_handler() {
+        MessageHandlerBuilder mixer_closed_builder =
+            new MessageHandlerBuilder("mixer/closed");
+        mixer_closed_builder.with_setter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler message_handler,
+                Atom[] arguments) {
+                RootServer root_server = (RootServer) message_handler.client;
+                root_server.mixer_patcher = null;
+                return null;
+            }
+        });
+        this.add_message_handler(mixer_closed_builder.build(this));
+    }
+
+    private void configure_mixer_view_message_handler() {
+        MessageHandlerBuilder mixer_view_builder =
+            new MessageHandlerBuilder("mixer/view");
+        mixer_view_builder.with_setter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler message_handler,
+                Atom[] arguments) {
+                RootServer root_server = (RootServer) message_handler.client;
+                if (root_server.mixer_patcher == null) {
+                    root_server.mixer_patcher = MixerGui.build(root_server);
+                }
+                if (root_server.mixer_patcher != null) {
+                    root_server.mixer_patcher.send("front", new Atom[0]);
+                }
+                return null;
+            }
+        });
+        this.add_message_handler(mixer_view_builder.build(this));
+    }
+
+    private void configure_state_message_handler() {
+        MessageHandlerBuilder state_builder =
+            new MessageHandlerBuilder("state");
+        state_builder.with_getter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                Atom[][] result = RootServer.this.get_formatted_state();
+                for (int i = 0, j = result.length; i < j; i++) {
+                    result[i] =
+                        Atom.newAtom(built_message_handler.get_name(),
+                            result[i]);
+                }
+                return result;
+            }
+        });
+        this.add_message_handler(state_builder.build(this));
     }
 
     public List<ModuleServer> get_child_module_servers() {
