@@ -66,7 +66,28 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
         this.module_id = module_id;
         this.dsp_settings_server = null;
         this.attach_to_parent_server(Environment.root_server);
-        // MEMBERS
+        this.configure_members_message_handler();
+        this.configure_methods_message_handler();
+        this.configure_name_message_handler();
+        this.configure_properties_message_handler();
+        this.configure_returns_message_handler();
+    }
+
+    public void acquire_name(String desired_name) {
+        if (this.name != null) {
+            return;
+        }
+        this.name = this.osc_address_node.acquire_name(desired_name);
+        Environment.event_service.publish(new ModuleNameAcquiredEvent(this));
+    }
+
+    @Override
+    public int compareTo(ModuleServer other) {
+        return this.get_osc_address_string().compareTo(
+            other.get_osc_address_string());
+    }
+
+    private void configure_members_message_handler() {
         MessageHandlerBuilder members_builder =
             new MessageHandlerBuilder("members");
         members_builder.with_getter(new MessageHandlerCallback() {
@@ -84,7 +105,9 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
             }
         });
         this.add_message_handler(members_builder.build(this));
-        // METHODS
+    }
+
+    private void configure_methods_message_handler() {
         MessageHandlerBuilder methods_builder =
             new MessageHandlerBuilder("methods");
         methods_builder.with_getter(new MessageHandlerCallback() {
@@ -102,7 +125,9 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
             }
         });
         this.add_message_handler(methods_builder.build(this));
-        // NAME
+    }
+
+    private void configure_name_message_handler() {
         MessageHandlerBuilder name_builder = new MessageHandlerBuilder("name");
         name_builder.with_getter(new MessageHandlerCallback() {
             @Override
@@ -124,7 +149,9 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
         });
         name_builder.with_is_meta_relevant(true);
         this.add_message_handler(name_builder.build(this));
-        // PROPERTIES
+    }
+
+    private void configure_properties_message_handler() {
         MessageHandlerBuilder properties_builder =
             new MessageHandlerBuilder("properties");
         properties_builder.with_getter(new MessageHandlerCallback() {
@@ -142,7 +169,9 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
             }
         });
         this.add_message_handler(properties_builder.build(this));
-        // RETURNS
+    }
+
+    private void configure_returns_message_handler() {
         MessageHandlerBuilder returns_builder =
             new MessageHandlerBuilder("returns");
         returns_builder.with_getter(new MessageHandlerCallback() {
@@ -160,20 +189,6 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
             }
         });
         this.add_message_handler(returns_builder.build(this));
-    }
-
-    public void acquire_name(String desired_name) {
-        if (this.name != null) {
-            return;
-        }
-        this.name = this.osc_address_node.acquire_name(desired_name);
-        Environment.event_service.publish(new ModuleNameAcquiredEvent(this));
-    }
-
-    @Override
-    public int compareTo(ModuleServer other) {
-        return this.get_osc_address_string().compareTo(
-            other.get_osc_address_string());
     }
 
     public List<MethodServer> get_child_method_servers() {
