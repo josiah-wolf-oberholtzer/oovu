@@ -13,46 +13,6 @@ import com.cycling74.max.Atom;
 abstract public class BoundedArrayDatatype extends BoundedDatatype {
     protected int length;
 
-    private void configure_length_message_handler() {
-        MessageHandlerBuilder builder = new MessageHandlerBuilder("length");
-            builder.with_callback(new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    AttributeServer server =
-                        (AttributeServer) built_message_handler.client;
-                    server.reoutput_value();
-                    return null;
-                }
-            });
-            builder.with_getter(new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    return Atoms.to_atoms(built_message_handler.get_name(),
-                        BoundedArrayDatatype.this.get_length());
-                }
-            });
-            builder.with_is_meta_relevant(true);
-            builder.with_is_state_relevant(true);
-            builder.with_setter(new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    int new_length = BoundedArrayDatatype.this.length;
-                    if (0 < arguments.length) {
-                        new_length = arguments[0].toInt();
-                    }
-                    BoundedArrayDatatype.this.set_length(new_length);
-                    return null;
-                }
-            });
-            this.client.add_message_handler(builder.build(this.client));
-    }
-    
     public BoundedArrayDatatype(
         AttributeServer client,
         Map<String, Atom[]> argument_map) {
@@ -60,6 +20,46 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
         if (this.client != null) {
             this.configure_length_message_handler();
         }
+    }
+
+    private void configure_length_message_handler() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("length");
+        builder.with_callback(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                AttributeServer server =
+                    (AttributeServer) built_message_handler.client;
+                server.reoutput_value();
+                return null;
+            }
+        });
+        builder.with_getter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                return Atoms.to_atoms(built_message_handler.get_name(),
+                    BoundedArrayDatatype.this.get_length());
+            }
+        });
+        builder.with_is_meta_relevant(true);
+        builder.with_is_state_relevant(true);
+        builder.with_setter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                int new_length = BoundedArrayDatatype.this.length;
+                if (0 < arguments.length) {
+                    new_length = arguments[0].toInt();
+                }
+                BoundedArrayDatatype.this.set_length(new_length);
+                return null;
+            }
+        });
+        this.client.add_message_handler(builder.build(this.client));
     }
 
     protected Atom[] ensure_length(Atom[] input) {

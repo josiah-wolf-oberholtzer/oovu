@@ -25,54 +25,8 @@ public class RangeDatatype extends BoundedDatatype {
         double[] center_width = this.range_to_center_width(range[0], range[1]);
         this.multi_envelope = new MultiEnvelope(this, center_width);
         if (this.client != null) {
-            this.client.add_message_handler(new MessageHandlerBuilder("center")
-                .with_arity(1)
-                .with_callback(new MessageHandlerCallback() {
-                    @Override
-                    public Atom[][] execute(
-                        MessageHandler built_message_handler,
-                        Atom[] arguments) {
-                        RangeDatatype.this.client.reoutput_value();
-                        return null;
-                    }
-                }).with_is_binding_relevant(true).with_is_rampable(true)
-                .with_setter(new MessageHandlerCallback() {
-                    @Override
-                    public Atom[][] execute(
-                        MessageHandler built_message_handler,
-                        Atom[] arguments) {
-                        if (0 == arguments.length) {
-                            return null;
-                        }
-                        double[] control_values = Atom.toDouble(arguments);
-                        RangeDatatype.this.apply_new_center(control_values);
-                        return null;
-                    }
-                }).build(this.client));
-            this.client.add_message_handler(new MessageHandlerBuilder("width")
-                .with_arity(1)
-                .with_callback(new MessageHandlerCallback() {
-                    @Override
-                    public Atom[][] execute(
-                        MessageHandler built_message_handler,
-                        Atom[] arguments) {
-                        RangeDatatype.this.client.reoutput_value();
-                        return null;
-                    }
-                }).with_is_binding_relevant(true).with_is_rampable(true)
-                .with_setter(new MessageHandlerCallback() {
-                    @Override
-                    public Atom[][] execute(
-                        MessageHandler built_message_handler,
-                        Atom[] arguments) {
-                        if (0 == arguments.length) {
-                            return null;
-                        }
-                        double[] control_values = Atom.toDouble(arguments);
-                        RangeDatatype.this.apply_new_width(control_values);
-                        return null;
-                    }
-                }).build(this.client));
+            this.configure_center_message_handler();
+            this.configure_width_message_handler();
         }
     }
 
@@ -100,6 +54,66 @@ public class RangeDatatype extends BoundedDatatype {
         return new double[] {
             center - width, center + width
         };
+    }
+
+    private void configure_center_message_handler() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("center");
+        builder.with_arity(1);
+        builder.with_callback(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                RangeDatatype.this.client.reoutput_value();
+                return null;
+            }
+        });
+        builder.with_is_binding_relevant(true);
+        builder.with_is_rampable(true);
+        builder.with_setter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                if (0 == arguments.length) {
+                    return null;
+                }
+                double[] control_values = Atom.toDouble(arguments);
+                RangeDatatype.this.apply_new_center(control_values);
+                return null;
+            }
+        });
+        this.client.add_message_handler(builder.build(this.client));
+    }
+
+    private void configure_width_message_handler() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("width");
+        builder.with_arity(1);
+        builder.with_callback(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                RangeDatatype.this.client.reoutput_value();
+                return null;
+            }
+        });
+        builder.with_is_binding_relevant(true);
+        builder.with_is_rampable(true);
+        builder.with_setter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                if (0 == arguments.length) {
+                    return null;
+                }
+                double[] control_values = Atom.toDouble(arguments);
+                RangeDatatype.this.apply_new_width(control_values);
+                return null;
+            }
+        });
+        this.client.add_message_handler(builder.build(this.client));
     }
 
     protected void fix_multi_envelope_values() {

@@ -49,23 +49,28 @@ public abstract class Datatype {
         this.initialize_prerequisites(argument_map);
         this.initialize_default_value(argument_map);
         if (this.client != null) {
-            this.client.add_message_handler(new MessageHandlerBuilder(
-                "datatype").with_getter(new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    AttributeServer server =
-                        (AttributeServer) built_message_handler.client;
-                    return Atoms.to_atoms(built_message_handler.get_name(),
-                        server.datatype.getClass().getSimpleName()
-                            .toLowerCase().replace("datatype", ""));
-                }
-            }).build(this.client));
+            this.configure_datatype_message_handler();
         }
     }
 
     public void cleanup_resources() {
+    }
+
+    private void configure_datatype_message_handler() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("datatype");
+        builder.with_getter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                AttributeServer server =
+                    (AttributeServer) built_message_handler.client;
+                return Atoms.to_atoms(built_message_handler.get_name(),
+                    server.datatype.getClass().getSimpleName().toLowerCase()
+                        .replace("datatype", ""));
+            }
+        });
+        this.client.add_message_handler(builder.build(this.client));
     }
 
     abstract public Integer get_arity();

@@ -25,96 +25,99 @@ public class OptionDatatype extends StringDatatype {
         Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {
-            // NEXT
-            MessageHandlerBuilder next_builder =
-                new MessageHandlerBuilder("next");
-            next_builder.with_arity(0);
-            next_builder.with_callback(new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    OptionDatatype.this.client.reoutput_value();
-                    return null;
-                }
-            });
-            next_builder.with_is_binding_relevant(true);
-            next_builder.with_setter(new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    OptionDatatype.this.next_option();
-                    return null;
-                }
-            });
-            this.client.add_message_handler(next_builder.build(this.client));
-            // OPTIONS
-            MessageHandlerBuilder options_builder =
-                new MessageHandlerBuilder("options");
-            options_builder.with_callback(new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler message_handler,
-                    Atom[] arguments) {
-                    OptionDatatype.this.client.make_request(
-                        OptionDatatype.this.client,
-                        message_handler.get_getter_name(), null);
-                    OptionDatatype.this.client.reoutput_value();
-                    return null;
-                }
-            });
-            options_builder.with_getter(new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    return Atoms.to_atoms(built_message_handler.get_name(),
-                        OptionDatatype.this.get_options()
-                            .toArray(new String[0]));
-                }
-            });
-            options_builder.with_is_meta_relevant(true);
-            options_builder.with_is_state_relevant(true);
-            options_builder.with_setter(new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    String[] options =
-                        OptionDatatype.this
-                            .extract_strings_from_atoms(arguments);
-                    OptionDatatype.this.set_options(options);
-                    return null;
-                }
-            });
-            this.client.add_message_handler(options_builder.build(this.client));
-            // PREVIOUS
-            MessageHandlerBuilder previous_builder =
-                new MessageHandlerBuilder("previous");
-            previous_builder.with_arity(0);
-            previous_builder.with_callback(new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    OptionDatatype.this.client.reoutput_value();
-                    return null;
-                }
-            });
-            previous_builder.with_is_binding_relevant(true);
-            previous_builder.with_setter(new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    OptionDatatype.this.previous_option();
-                    return null;
-                }
-            });
-            this.client
-                .add_message_handler(previous_builder.build(this.client));
+            this.configure_next_message_handler();
+            this.configure_options_message_handler();
+            this.configure_previous_message_handler();
         }
+    }
+
+    private void configure_next_message_handler() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("next");
+        builder.with_arity(0);
+        builder.with_callback(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                OptionDatatype.this.client.reoutput_value();
+                return null;
+            }
+        });
+        builder.with_is_binding_relevant(true);
+        builder.with_setter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                OptionDatatype.this.next_option();
+                return null;
+            }
+        });
+        this.client.add_message_handler(builder.build(this.client));
+    }
+
+    private void configure_options_message_handler() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("options");
+        builder.with_callback(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler message_handler,
+                Atom[] arguments) {
+                OptionDatatype.this.client.make_request(
+                    OptionDatatype.this.client,
+                    message_handler.get_getter_name(), null);
+                OptionDatatype.this.client.reoutput_value();
+                return null;
+            }
+        });
+        builder.with_getter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                return Atoms.to_atoms(built_message_handler.get_name(),
+                    OptionDatatype.this.get_options().toArray(new String[0]));
+            }
+        });
+        builder.with_is_meta_relevant(true);
+        builder.with_is_state_relevant(true);
+        builder.with_setter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                String[] options =
+                    OptionDatatype.this.extract_strings_from_atoms(arguments);
+                OptionDatatype.this.set_options(options);
+                return null;
+            }
+        });
+        this.client.add_message_handler(builder.build(this.client));
+    }
+
+    private void configure_previous_message_handler() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("previous");
+        builder.with_arity(0);
+        builder.with_callback(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                OptionDatatype.this.client.reoutput_value();
+                return null;
+            }
+        });
+        builder.with_is_binding_relevant(true);
+        builder.with_setter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                OptionDatatype.this.previous_option();
+                return null;
+            }
+        });
+        this.client.add_message_handler(builder.build(this.client));
     }
 
     public int get_option_index() {
