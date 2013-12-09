@@ -15,12 +15,14 @@ import oovu.events.types.MidiEvent;
 
 import com.cycling74.max.Executable;
 
-public class MidiService {
+public class MidiEventService {
     private class MidiReceiver implements Receiver {
         public final String name;
         public final MidiDevice device;
+        public final MidiEventService client;
 
-        public MidiReceiver(String name, MidiDevice device) {
+        public MidiReceiver(MidiEventService client, String name, MidiDevice device) {
+            this.client = client;
             this.device = device;
             this.name = name;
         }
@@ -36,7 +38,7 @@ public class MidiService {
                 new MidiEvent(short_message.getChannel(),
                     short_message.getData1(), short_message.getData2());
             Environment.log(midi_event.toString());
-            Environment.event_service.publish(midi_event);
+            this.client.client.publish(midi_event);
         }
 
         @Override
@@ -46,14 +48,16 @@ public class MidiService {
         }
     }
 
+    public final EventService client;
     public final HashMap<String, MidiReceiver> receivers =
         new HashMap<String, MidiReceiver>();
 
-    public MidiService() {
+    public MidiEventService(EventService client) {
+        this.client = client;
         Environment.defer_low(new Executable() {
             @Override
             public void execute() {
-                MidiService.this.update();
+                MidiEventService.this.update();
             }
         });
     }
@@ -69,7 +73,7 @@ public class MidiService {
                 MidiDevice device = MidiSystem.getMidiDevice(info);
                 String device_info = device.getDeviceInfo().toString();
                 Transmitter transmitter = device.getTransmitter();
-                MidiReceiver receiver = new MidiReceiver(device_info, device);
+                MidiReceiver receiver = new MidiReceiver(this, device_info, device);
                 this.receivers.put(device_info, receiver);
                 transmitter.setReceiver(receiver);
                 device.open();
