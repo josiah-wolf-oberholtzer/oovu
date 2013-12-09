@@ -108,9 +108,8 @@ abstract public class AttributeServer extends ModuleMemberServer implements
     }
 
     private void configure_pattern_message_handler() {
-        MessageHandlerBuilder pattern_builder =
-            new MessageHandlerBuilder("pattern");
-        pattern_builder.with_is_state_relevant(true).with_getter(
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("pattern");
+        builder.with_is_state_relevant(true).with_getter(
             new MessageHandlerCallback() {
                 @Override
                 public Atom[][] execute(
@@ -129,7 +128,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                     return result;
                 }
             });
-        pattern_builder.with_setter(new MessageHandlerCallback() {
+        builder.with_setter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler built_message_handler,
@@ -144,13 +143,12 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                 return null;
             }
         });
-        this.add_message_handler(pattern_builder.build(this));
+        this.add_message_handler(builder.build(this));
     }
 
     private void configure_priority_message_handler() {
-        MessageHandlerBuilder priority_builder =
-            new MessageHandlerBuilder("priority");
-        priority_builder.with_getter(new MessageHandlerCallback() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("priority");
+        builder.with_getter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler built_message_handler,
@@ -161,7 +159,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                     attribute_server.get_priority());
             }
         });
-        priority_builder.with_setter(new MessageHandlerCallback() {
+        builder.with_setter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler built_message_handler,
@@ -176,13 +174,12 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                 return null;
             }
         });
-        this.add_message_handler(priority_builder.build(this));
+        this.add_message_handler(builder.build(this));
     }
 
     private void configure_value_message_handler() {
-        MessageHandlerBuilder value_builder =
-            new MessageHandlerBuilder("value");
-        value_builder.with_arity_callback(new IntegerMessageHandlerCallback() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("value");
+        builder.with_arity_callback(new IntegerMessageHandlerCallback() {
             @Override
             public Integer execute(MessageHandler built_message_handler) {
                 AttributeServer attribute_server =
@@ -190,7 +187,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                 return attribute_server.datatype.get_arity();
             }
         });
-        value_builder.with_callback(new MessageHandlerCallback() {
+        builder.with_callback(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler built_message_handler,
@@ -200,8 +197,8 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                 return null;
             }
         });
-        value_builder.with_is_binding_relevant(true);
-        value_builder
+        builder.with_is_binding_relevant(true);
+        builder
             .with_is_meta_relevant_callback(new BooleanMessageHandlerCallback() {
                 @Override
                 public boolean execute(MessageHandler built_message_handler) {
@@ -211,7 +208,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                     return false;
                 }
             });
-        value_builder.with_getter(new MessageHandlerCallback() {
+        builder.with_getter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler built_message_handler,
@@ -223,16 +220,15 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                 return result;
             }
         });
-        value_builder
-            .with_is_rampable_callback(new BooleanMessageHandlerCallback() {
-                @Override
-                public boolean execute(MessageHandler built_message_handler) {
-                    AttributeServer attribute_server =
-                        (AttributeServer) built_message_handler.client;
-                    return attribute_server.datatype.is_rampable();
-                }
-            });
-        value_builder.with_setter(new MessageHandlerCallback() {
+        builder.with_is_rampable_callback(new BooleanMessageHandlerCallback() {
+            @Override
+            public boolean execute(MessageHandler built_message_handler) {
+                AttributeServer attribute_server =
+                    (AttributeServer) built_message_handler.client;
+                return attribute_server.datatype.is_rampable();
+            }
+        });
+        builder.with_setter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler built_message_handler,
@@ -243,7 +239,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                 return null;
             }
         });
-        this.add_message_handler(value_builder.build(this));
+        this.add_message_handler(builder.build(this));
     }
 
     @Override

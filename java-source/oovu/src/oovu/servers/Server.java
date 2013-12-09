@@ -95,9 +95,8 @@ abstract public class Server implements MessagePasser, Subscriber {
     }
 
     private void configure_dumpmeta_message_handler() {
-        MessageHandlerBuilder dumpmeta_builder =
-            new MessageHandlerBuilder("dumpmeta");
-        dumpmeta_builder.with_setter(new MessageHandlerCallback() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("dumpmeta");
+        builder.with_setter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler built_message_handler,
@@ -128,13 +127,12 @@ abstract public class Server implements MessagePasser, Subscriber {
                 return result.toArray(new Atom[0][]);
             }
         });
-        this.add_message_handler(dumpmeta_builder.build(this));
+        this.add_message_handler(builder.build(this));
     }
 
     private void configure_interface_message_handler() {
-        MessageHandlerBuilder interface_builder =
-            new MessageHandlerBuilder("interface");
-        interface_builder.with_getter(new MessageHandlerCallback() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("interface");
+        builder.with_getter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler built_message_handler,
@@ -150,12 +148,12 @@ abstract public class Server implements MessagePasser, Subscriber {
                 return result;
             }
         });
-        this.add_message_handler(interface_builder.build(this));
+        this.add_message_handler(builder.build(this));
     }
 
     private void configure_meta_message_handler() {
-        MessageHandlerBuilder meta_builder = new MessageHandlerBuilder("meta");
-        meta_builder.with_getter(new MessageHandlerCallback() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("meta");
+        builder.with_getter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler built_message_handler,
@@ -179,13 +177,12 @@ abstract public class Server implements MessagePasser, Subscriber {
                     getter_names.toArray(new String[0]));
             }
         });
-        this.add_message_handler(meta_builder.build(this));
+        this.add_message_handler(builder.build(this));
     }
 
     private void configure_oscaddress_message_handler() {
-        MessageHandlerBuilder oscaddress_builder =
-            new MessageHandlerBuilder("oscaddress");
-        oscaddress_builder.with_getter(new MessageHandlerCallback() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("oscaddress");
+        builder.with_getter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler built_message_handler,
@@ -202,14 +199,13 @@ abstract public class Server implements MessagePasser, Subscriber {
                 return null;
             }
         });
-        oscaddress_builder.with_is_meta_relevant(true);
-        this.add_message_handler(oscaddress_builder.build(this));
+        builder.with_is_meta_relevant(true);
+        this.add_message_handler(builder.build(this));
     }
 
     private void configure_report_message_handler() {
-        MessageHandlerBuilder report_builder =
-            new MessageHandlerBuilder("report");
-        report_builder.with_setter(new MessageHandlerCallback() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("report");
+        builder.with_setter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler built_message_handler,
@@ -222,12 +218,12 @@ abstract public class Server implements MessagePasser, Subscriber {
                 return null;
             }
         });
-        this.add_message_handler(report_builder.build(this));
+        this.add_message_handler(builder.build(this));
     }
 
     private void configure_show_message_handler() {
-        MessageHandlerBuilder show_builder = new MessageHandlerBuilder("show");
-        show_builder.with_setter(new MessageHandlerCallback() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("show");
+        builder.with_setter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler built_message_handler,
@@ -240,13 +236,12 @@ abstract public class Server implements MessagePasser, Subscriber {
                 return null;
             }
         });
-        this.add_message_handler(show_builder.build(this));
+        this.add_message_handler(builder.build(this));
     }
 
     private void configure_uniqueid_message_handler() {
-        MessageHandlerBuilder uniqueid_builder =
-            new MessageHandlerBuilder("uniqueid");
-        uniqueid_builder.with_getter(new MessageHandlerCallback() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("uniqueid");
+        builder.with_getter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler built_message_handler,
@@ -259,8 +254,8 @@ abstract public class Server implements MessagePasser, Subscriber {
                 return result;
             }
         });
-        uniqueid_builder.with_is_meta_relevant(true);
-        this.add_message_handler(uniqueid_builder.build(this));
+        builder.with_is_meta_relevant(true);
+        this.add_message_handler(builder.build(this));
     }
 
     protected void deallocate() {

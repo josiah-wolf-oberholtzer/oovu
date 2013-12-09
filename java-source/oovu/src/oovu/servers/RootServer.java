@@ -50,9 +50,9 @@ public class RootServer extends Server {
     }
 
     private void configure_events_goto_message_handler() {
-        MessageHandlerBuilder events_goto_builder =
+        MessageHandlerBuilder builder =
             new MessageHandlerBuilder("events/goto");
-        events_goto_builder.with_setter(new MessageHandlerCallback() {
+        builder.with_setter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler message_handler,
@@ -81,13 +81,13 @@ public class RootServer extends Server {
                 return null;
             }
         });
-        this.add_message_handler(events_goto_builder.build(this));
+        this.add_message_handler(builder.build(this));
     }
 
     private void configure_events_list_message_handler() {
-        MessageHandlerBuilder events_list_builder =
+        MessageHandlerBuilder builder =
             new MessageHandlerBuilder("events/list");
-        events_list_builder.with_setter(new MessageHandlerCallback() {
+        builder.with_setter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler message_handler,
@@ -102,14 +102,14 @@ public class RootServer extends Server {
                     event_names.toArray(new String[0]));
             }
         });
-        this.add_message_handler(events_list_builder.build(this));
+        this.add_message_handler(builder.build(this));
     }
 
     private void configure_events_next_message_handler() {
-        MessageHandlerBuilder events_next_builder =
+        MessageHandlerBuilder builder =
             new MessageHandlerBuilder("events/next");
-        events_next_builder.with_is_binding_relevant(true);
-        events_next_builder.with_setter(new MessageHandlerCallback() {
+        builder.with_is_binding_relevant(true);
+        builder.with_setter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler message_handler,
@@ -130,14 +130,14 @@ public class RootServer extends Server {
                 return null;
             }
         });
-        this.add_message_handler(events_next_builder.build(this));
+        this.add_message_handler(builder.build(this));
     }
 
     private void configure_events_previous_message_handler() {
-        MessageHandlerBuilder events_previous_builder =
+        MessageHandlerBuilder builder =
             new MessageHandlerBuilder("events/previous");
-        events_previous_builder.with_is_binding_relevant(true);
-        events_previous_builder.with_setter(new MessageHandlerCallback() {
+        builder.with_is_binding_relevant(true);
+        builder.with_setter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler message_handler,
@@ -158,13 +158,13 @@ public class RootServer extends Server {
                 return null;
             }
         });
-        this.add_message_handler(events_previous_builder.build(this));
+        this.add_message_handler(builder.build(this));
     }
 
     private void configure_events_read_message_handler() {
-        MessageHandlerBuilder events_read_builder =
+        MessageHandlerBuilder builder =
             new MessageHandlerBuilder("events/read");
-        events_read_builder.with_callback(new MessageHandlerCallback() {
+        builder.with_callback(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler message_handler,
@@ -174,7 +174,7 @@ public class RootServer extends Server {
                 return null;
             }
         });
-        events_read_builder.with_setter(new MessageHandlerCallback() {
+        builder.with_setter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler message_handler,
@@ -192,13 +192,13 @@ public class RootServer extends Server {
                 return null;
             }
         });
-        this.add_message_handler(events_read_builder.build(this));
+        this.add_message_handler(builder.build(this));
     }
 
     private void configure_mixer_closed_message_handler() {
-        MessageHandlerBuilder mixer_closed_builder =
+        MessageHandlerBuilder builder =
             new MessageHandlerBuilder("mixer/closed");
-        mixer_closed_builder.with_setter(new MessageHandlerCallback() {
+        builder.with_setter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler message_handler,
@@ -208,13 +208,12 @@ public class RootServer extends Server {
                 return null;
             }
         });
-        this.add_message_handler(mixer_closed_builder.build(this));
+        this.add_message_handler(builder.build(this));
     }
 
     private void configure_mixer_view_message_handler() {
-        MessageHandlerBuilder mixer_view_builder =
-            new MessageHandlerBuilder("mixer/view");
-        mixer_view_builder.with_setter(new MessageHandlerCallback() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("mixer/view");
+        builder.with_setter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler message_handler,
@@ -229,13 +228,12 @@ public class RootServer extends Server {
                 return null;
             }
         });
-        this.add_message_handler(mixer_view_builder.build(this));
+        this.add_message_handler(builder.build(this));
     }
 
     private void configure_state_message_handler() {
-        MessageHandlerBuilder state_builder =
-            new MessageHandlerBuilder("state");
-        state_builder.with_getter(new MessageHandlerCallback() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("state");
+        builder.with_getter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler built_message_handler,
@@ -249,7 +247,7 @@ public class RootServer extends Server {
                 return result;
             }
         });
-        this.add_message_handler(state_builder.build(this));
+        this.add_message_handler(builder.build(this));
     }
 
     public List<ModuleServer> get_child_module_servers() {

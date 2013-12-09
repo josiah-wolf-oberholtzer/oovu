@@ -67,9 +67,8 @@ public class DspSettingsServer extends ModuleMemberServer {
     }
 
     private void configure_active_message_handler() {
-        MessageHandlerBuilder active_builder =
-            new MessageHandlerBuilder("active");
-        active_builder.with_callback(new MessageHandlerCallback() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("active");
+        builder.with_callback(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler built_message_handler,
@@ -80,9 +79,9 @@ public class DspSettingsServer extends ModuleMemberServer {
                 return null;
             }
         });
-        active_builder.with_is_meta_relevant(true);
-        active_builder.with_is_state_relevant(true);
-        active_builder.with_getter(new MessageHandlerCallback() {
+        builder.with_is_meta_relevant(true);
+        builder.with_is_state_relevant(true);
+        builder.with_getter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler built_message_handler,
@@ -93,7 +92,7 @@ public class DspSettingsServer extends ModuleMemberServer {
                     server.get_is_active());
             }
         });
-        active_builder.with_setter(new MessageHandlerCallback() {
+        builder.with_setter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler built_message_handler,
@@ -107,14 +106,13 @@ public class DspSettingsServer extends ModuleMemberServer {
                 return null;
             }
         });
-        this.add_message_handler(active_builder.build(this));
+        this.add_message_handler(builder.build(this));
     }
 
     private void configure_inputcount_message_handler() {
-        MessageHandlerBuilder inputcount_builder =
-            new MessageHandlerBuilder("inputcount");
-        inputcount_builder.with_is_meta_relevant(true);
-        inputcount_builder.with_getter(new MessageHandlerCallback() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("inputcount");
+        builder.with_is_meta_relevant(true);
+        builder.with_getter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler built_message_handler,
@@ -125,13 +123,12 @@ public class DspSettingsServer extends ModuleMemberServer {
                     server.get_input_count());
             }
         });
-        this.add_message_handler(inputcount_builder.build(this));
+        this.add_message_handler(builder.build(this));
     }
 
     private void configure_limiting_message_handler() {
-        MessageHandlerBuilder limiting_builder =
-            new MessageHandlerBuilder("limiting");
-        limiting_builder.with_callback(new MessageHandlerCallback() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("limiting");
+        builder.with_callback(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler built_message_handler,
@@ -142,9 +139,9 @@ public class DspSettingsServer extends ModuleMemberServer {
                 return null;
             }
         });
-        limiting_builder.with_is_meta_relevant(true);
-        limiting_builder.with_is_state_relevant(true);
-        limiting_builder.with_getter(new MessageHandlerCallback() {
+        builder.with_is_meta_relevant(true);
+        builder.with_is_state_relevant(true);
+        builder.with_getter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler built_message_handler,
@@ -155,7 +152,7 @@ public class DspSettingsServer extends ModuleMemberServer {
                     server.get_limiting());
             }
         });
-        limiting_builder.with_setter(new MessageHandlerCallback() {
+        builder.with_setter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler built_message_handler,
@@ -169,14 +166,14 @@ public class DspSettingsServer extends ModuleMemberServer {
                 return null;
             }
         });
-        this.add_message_handler(limiting_builder.build(this));
+        this.add_message_handler(builder.build(this));
     }
 
     private void configure_outputcount_message_handler() {
-        MessageHandlerBuilder outputcount_builder =
+        MessageHandlerBuilder builder =
             new MessageHandlerBuilder("outputcount");
-        outputcount_builder.with_is_meta_relevant(true);
-        outputcount_builder.with_getter(new MessageHandlerCallback() {
+        builder.with_is_meta_relevant(true);
+        builder.with_getter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler built_message_handler,
@@ -187,13 +184,12 @@ public class DspSettingsServer extends ModuleMemberServer {
                     server.get_output_count());
             }
         });
-        this.add_message_handler(outputcount_builder.build(this));
+        this.add_message_handler(builder.build(this));
     }
 
     private void configure_sendcount_message_handler() {
-        MessageHandlerBuilder sendcount_builder =
-            new MessageHandlerBuilder("sendcount");
-        sendcount_builder.with_callback(new MessageHandlerCallback() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("sendcount");
+        builder.with_callback(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler built_message_handler,
@@ -204,9 +200,9 @@ public class DspSettingsServer extends ModuleMemberServer {
                 return null;
             }
         });
-        sendcount_builder.with_is_meta_relevant(true);
-        sendcount_builder.with_is_state_relevant(true);
-        sendcount_builder.with_getter(new MessageHandlerCallback() {
+        builder.with_is_meta_relevant(true);
+        builder.with_is_state_relevant(true);
+        builder.with_getter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler built_message_handler,
@@ -217,7 +213,7 @@ public class DspSettingsServer extends ModuleMemberServer {
                     server.get_send_count());
             }
         });
-        sendcount_builder.with_setter(new MessageHandlerCallback() {
+        builder.with_setter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler built_message_handler,
@@ -231,13 +227,12 @@ public class DspSettingsServer extends ModuleMemberServer {
                 return null;
             }
         });
-        this.add_message_handler(sendcount_builder.build(this));
+        this.add_message_handler(builder.build(this));
     }
 
     private void configure_voicecount_message_handler() {
-        MessageHandlerBuilder voicecount_builder =
-            new MessageHandlerBuilder("voicecount");
-        voicecount_builder.with_callback(new MessageHandlerCallback() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("voicecount");
+        builder.with_callback(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler built_message_handler,
@@ -253,9 +248,9 @@ public class DspSettingsServer extends ModuleMemberServer {
                 return null;
             }
         });
-        voicecount_builder.with_is_meta_relevant(true);
-        voicecount_builder.with_is_state_relevant(true);
-        voicecount_builder.with_getter(new MessageHandlerCallback() {
+        builder.with_is_meta_relevant(true);
+        builder.with_is_state_relevant(true);
+        builder.with_getter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler built_message_handler,
@@ -266,7 +261,7 @@ public class DspSettingsServer extends ModuleMemberServer {
                     server.get_voice_count());
             }
         });
-        voicecount_builder.with_setter(new MessageHandlerCallback() {
+        builder.with_setter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
                 MessageHandler built_message_handler,
@@ -280,7 +275,7 @@ public class DspSettingsServer extends ModuleMemberServer {
                 return null;
             }
         });
-        this.add_message_handler(voicecount_builder.build(this));
+        this.add_message_handler(builder.build(this));
     }
 
     public int get_input_count() {
