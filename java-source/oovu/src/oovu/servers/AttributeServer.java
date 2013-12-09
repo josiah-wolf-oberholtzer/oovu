@@ -31,11 +31,123 @@ abstract public class AttributeServer extends ModuleMemberServer implements
     protected Integer priority = 0;
     public Datatype datatype = null;
     protected Pattern pattern = null;
-    protected Map<String, Subscription> bindings = new HashMap<String, Subscription>();
+    protected Map<String, Subscription> bindings =
+        new HashMap<String, Subscription>();
 
     public AttributeServer(ModuleServer module_server) {
         super(module_server);
-        // PRIORITY
+        this.configure_priority_message_handler();
+        this.configure_value_message_handler();
+        // VALUE
+        if (!(this instanceof ReturnServer)) {
+            this.configure_pattern_message_handler();
+            // BIND/MIDI
+            // BIND/PARAMETER
+            // BIND/PATTERN
+            // UNBIND
+            // PATTERN
+        }
+    }
+
+    @Override
+    public int compareTo(AttributeServer other) {
+        int priority_comparison = this.priority.compareTo(other.priority);
+        if (priority_comparison == 0) {
+            return this.get_osc_address_string().compareTo(
+                other.get_osc_address_string());
+        } else {
+            return -1 * priority_comparison;
+        }
+    }
+
+    public void configure(Atom[] arguments) {
+        if (this.is_configured) {
+            return;
+        }
+        Map<String, Atom[]> argument_map = Atoms.to_map(arguments);
+        Atom[] datatype_arguments = argument_map.get("datatype");
+        String datatype_label = null;
+        if ((datatype_arguments != null) && (0 < datatype_arguments.length)) {
+            datatype_label = datatype_arguments[0].toString();
+        }
+        Class<?> datatype_class = Datatype.from_label(datatype_label);
+        Datatype datatype = null;
+        try {
+            datatype =
+                (Datatype) datatype_class.getDeclaredConstructor(
+                    AttributeServer.class, Map.class).newInstance(this,
+                    argument_map);
+        } catch (IllegalArgumentException e) {
+            // e.printStackTrace();
+        } catch (SecurityException e) {
+            // e.printStackTrace();
+        } catch (InstantiationException e) {
+            // e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            // e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            // e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            // e.printStackTrace();
+        }
+        if (datatype == null) {
+            datatype = new GenericDatatype(this, argument_map);
+        }
+        this.datatype = datatype;
+        if (argument_map.containsKey("priority")) {
+            this.set_priority(argument_map.get("priority")[0].getInt());
+        } else {
+            this.set_priority(0);
+        }
+        if (argument_map.containsKey("default")) {
+            this.set_value(argument_map.get("default"));
+        } else {
+            this.set_value(this.datatype.get_default());
+        }
+        this.is_configured = true;
+    }
+
+    private void configure_pattern_message_handler() {
+        MessageHandlerBuilder pattern_builder =
+            new MessageHandlerBuilder("pattern");
+        pattern_builder.with_is_state_relevant(true).with_getter(
+            new MessageHandlerCallback() {
+                @Override
+                public Atom[][] execute(
+                    MessageHandler built_message_handler,
+                    Atom[] arguments) {
+                    AttributeServer server =
+                        (AttributeServer) built_message_handler.client;
+                    Atom[][] result = new Atom[1][0];
+                    Pattern pattern = server.get_pattern();
+                    if (pattern != null) {
+                        result[0] = pattern.to_atoms();
+                    }
+                    result[0] =
+                        Atom.newAtom(built_message_handler.get_name(),
+                            result[0]);
+                    return result;
+                }
+            });
+        pattern_builder.with_setter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                AttributeServer attribute_server =
+                    (AttributeServer) built_message_handler.client;
+                Pattern pattern = null;
+                if (0 < arguments.length) {
+                    pattern = Pattern.from_atoms(attribute_server, arguments);
+                }
+                attribute_server.set_pattern(pattern);
+                return null;
+            }
+        });
+        this.add_message_handler(pattern_builder.build(this));
+    }
+
+    private void configure_priority_message_handler() {
         MessageHandlerBuilder priority_builder =
             new MessageHandlerBuilder("priority");
         priority_builder.with_getter(new MessageHandlerCallback() {
@@ -65,7 +177,9 @@ abstract public class AttributeServer extends ModuleMemberServer implements
             }
         });
         this.add_message_handler(priority_builder.build(this));
-        // VALUE
+    }
+
+    private void configure_value_message_handler() {
         MessageHandlerBuilder value_builder =
             new MessageHandlerBuilder("value");
         value_builder.with_arity_callback(new IntegerMessageHandlerCallback() {
@@ -130,109 +244,6 @@ abstract public class AttributeServer extends ModuleMemberServer implements
             }
         });
         this.add_message_handler(value_builder.build(this));
-        if (!(this instanceof ReturnServer)) {
-            // BIND/MIDI
-            // BIND/PARAMETER
-            // BIND/PATTERN
-            // UNBIND
-            // PATTERN
-            MessageHandlerBuilder pattern_builder =
-                new MessageHandlerBuilder("pattern");
-            pattern_builder.with_is_state_relevant(true).with_getter(
-                new MessageHandlerCallback() {
-                    @Override
-                    public Atom[][] execute(
-                        MessageHandler built_message_handler,
-                        Atom[] arguments) {
-                        AttributeServer server =
-                            (AttributeServer) built_message_handler.client;
-                        Atom[][] result = new Atom[1][0];
-                        Pattern pattern = server.get_pattern();
-                        if (pattern != null) {
-                            result[0] = pattern.to_atoms();
-                        }
-                        result[0] =
-                            Atom.newAtom(built_message_handler.get_name(),
-                                result[0]);
-                        return result;
-                    }
-                });
-            pattern_builder.with_setter(new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    AttributeServer attribute_server =
-                        (AttributeServer) built_message_handler.client;
-                    Pattern pattern = null;
-                    if (0 < arguments.length) {
-                        pattern =
-                            Pattern.from_atoms(attribute_server, arguments);
-                    }
-                    attribute_server.set_pattern(pattern);
-                    return null;
-                }
-            });
-            this.add_message_handler(pattern_builder.build(this));
-        }
-    }
-
-    @Override
-    public int compareTo(AttributeServer other) {
-        int priority_comparison = this.priority.compareTo(other.priority);
-        if (priority_comparison == 0) {
-            return this.get_osc_address_string().compareTo(
-                other.get_osc_address_string());
-        } else {
-            return -1 * priority_comparison;
-        }
-    }
-
-    public void configure(Atom[] arguments) {
-        if (this.is_configured) {
-            return;
-        }
-        Map<String, Atom[]> argument_map = Atoms.to_map(arguments);
-        Atom[] datatype_arguments = argument_map.get("datatype");
-        String datatype_label = null;
-        if ((datatype_arguments != null) && (0 < datatype_arguments.length)) {
-            datatype_label = datatype_arguments[0].toString();
-        }
-        Class<?> datatype_class = Datatype.from_label(datatype_label);
-        Datatype datatype = null;
-        try {
-            datatype =
-                (Datatype) datatype_class.getDeclaredConstructor(
-                    AttributeServer.class, Map.class).newInstance(this,
-                    argument_map);
-        } catch (IllegalArgumentException e) {
-            // e.printStackTrace();
-        } catch (SecurityException e) {
-            // e.printStackTrace();
-        } catch (InstantiationException e) {
-            // e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            // e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            // e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            // e.printStackTrace();
-        }
-        if (datatype == null) {
-            datatype = new GenericDatatype(this, argument_map);
-        }
-        this.datatype = datatype;
-        if (argument_map.containsKey("priority")) {
-            this.set_priority(argument_map.get("priority")[0].getInt());
-        } else {
-            this.set_priority(0);
-        }
-        if (argument_map.containsKey("default")) {
-            this.set_value(argument_map.get("default"));
-        } else {
-            this.set_value(this.datatype.get_default());
-        }
-        this.is_configured = true;
     }
 
     @Override

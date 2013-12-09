@@ -72,112 +72,143 @@ public class DspSendServer extends ModuleMemberServer {
             new DspSettingsChangedSubscription(this,
                 module_server.get_dsp_settings_server());
         this.source_subscription.subscribe();
-        this.add_message_handler(new MessageHandlerBuilder("destination")
-            .with_callback(new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    built_message_handler.client.make_request(
-                        built_message_handler.client, "dumpmeta", null);
-                    return null;
+        this.configure_destination_message_handler();
+        this.configure_destinationid_message_handler();
+        this.configure_destinations_message_handler();
+        this.configure_io_message_handler();
+        this.configure_routing_message_handler();
+    }
+
+    private void configure_destination_message_handler() {
+        MessageHandlerBuilder builder =
+            new MessageHandlerBuilder("destination");
+        builder.with_callback(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                built_message_handler.client.make_request(
+                    built_message_handler.client, "dumpmeta", null);
+                return null;
+            }
+        });
+        builder.with_is_meta_relevant(true);
+        builder.with_is_state_relevant(true);
+        builder.with_getter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                DspSendServer server =
+                    (DspSendServer) built_message_handler.client;
+                return Atoms.to_atoms(built_message_handler.get_name(),
+                    server.get_destination_address_string());
+            }
+        });
+        builder.with_setter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                DspSendServer server =
+                    (DspSendServer) built_message_handler.client;
+                if ((0 == arguments.length)
+                    || arguments[0].getString().equals("---")) {
+                    server.set_destination_server(null);
+                } else {
+                    String address_string = arguments[0].getString();
+                    OscAddress destination_address =
+                        OscAddress.from_cache(address_string);
+                    DspReceiveServer destination_server =
+                        DspReceiveServer.dsp_receive_servers
+                            .get(destination_address);
+                    server.set_destination_server(destination_server);
                 }
-            }).with_is_meta_relevant(true).with_is_state_relevant(true)
-            .with_getter(new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    DspSendServer server =
-                        (DspSendServer) built_message_handler.client;
-                    return Atoms.to_atoms(built_message_handler.get_name(),
-                        server.get_destination_address_string());
+                return null;
+            }
+        });
+        this.add_message_handler(builder.build(this));
+    }
+
+    private void configure_destinationid_message_handler() {
+        MessageHandlerBuilder builder =
+            new MessageHandlerBuilder("destinationid");
+        builder.with_is_meta_relevant(true);
+        builder.with_getter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                DspSendServer server =
+                    (DspSendServer) built_message_handler.client;
+                return Atoms.to_atoms(built_message_handler.get_name(),
+                    server.get_destination_id());
+            }
+        });
+        this.add_message_handler(builder.build(this));
+    }
+
+    private void configure_destinations_message_handler() {
+        MessageHandlerBuilder builder =
+            new MessageHandlerBuilder("destinations");
+        builder.with_is_meta_relevant(true);
+        builder.with_getter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                return Atoms.to_atoms("destinations",
+                    AudioSendDatatype.get_destinations());
+            }
+        });
+        this.add_message_handler(builder.build(this));
+    }
+
+    private void configure_io_message_handler() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("io");
+        builder.with_is_meta_relevant(true);
+        builder.with_getter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                DspSendServer server =
+                    (DspSendServer) built_message_handler.client;
+                Atom[][] result = new Atom[1][];
+                int[] io = server.get_io();
+                result[0] = Atom.newAtom("io", Atom.newAtom(io));
+                return result;
+            }
+        });
+        this.add_message_handler(builder.build(this));
+    }
+
+    private void configure_routing_message_handler() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("routing");
+        builder.with_is_meta_relevant(true);
+        builder.with_getter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler built_message_handler,
+                Atom[] arguments) {
+                DspSendServer server =
+                    (DspSendServer) built_message_handler.client;
+                Routing[] routing = server.get_routing();
+                if (0 == routing.length) {
+                    return Atoms.to_atoms("routing", "clear");
                 }
-            }).with_setter(new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    DspSendServer server =
-                        (DspSendServer) built_message_handler.client;
-                    if ((0 == arguments.length)
-                        || arguments[0].getString().equals("---")) {
-                        server.set_destination_server(null);
-                    } else {
-                        String address_string = arguments[0].getString();
-                        OscAddress destination_address =
-                            OscAddress.from_cache(address_string);
-                        DspReceiveServer destination_server =
-                            DspReceiveServer.dsp_receive_servers
-                                .get(destination_address);
-                        server.set_destination_server(destination_server);
-                    }
-                    return null;
+                ArrayList<Atom[]> result = new ArrayList<Atom[]>();
+                result.add(Atom.newAtom(new String[] {
+                    "routing", "clear"
+                }));
+                for (Routing element : routing) {
+                    Atom[] atoms = element.to_atoms();
+                    result.add(Atom.newAtom("routing", atoms));
                 }
-            }).build(this));
-        this.add_message_handler(new MessageHandlerBuilder("destinationid")
-            .with_is_meta_relevant(true)
-            .with_getter(new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    DspSendServer server =
-                        (DspSendServer) built_message_handler.client;
-                    return Atoms.to_atoms(built_message_handler.get_name(),
-                        server.get_destination_id());
-                }
-            }).build(this));
-        this.add_message_handler(new MessageHandlerBuilder("destinations")
-            .with_is_meta_relevant(true)
-            .with_getter(new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    return Atoms.to_atoms("destinations",
-                        AudioSendDatatype.get_destinations());
-                }
-            }).build(this));
-        this.add_message_handler(new MessageHandlerBuilder("io")
-            .with_is_meta_relevant(true)
-            .with_getter(new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    DspSendServer server =
-                        (DspSendServer) built_message_handler.client;
-                    Atom[][] result = new Atom[1][];
-                    int[] io = server.get_io();
-                    result[0] = Atom.newAtom("io", Atom.newAtom(io));
-                    return result;
-                }
-            }).build(this));
-        this.add_message_handler(new MessageHandlerBuilder("routing")
-            .with_is_meta_relevant(true)
-            .with_getter(new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    DspSendServer server =
-                        (DspSendServer) built_message_handler.client;
-                    Routing[] routing = server.get_routing();
-                    if (0 == routing.length) {
-                        return Atoms.to_atoms("routing", "clear");
-                    }
-                    ArrayList<Atom[]> result = new ArrayList<Atom[]>();
-                    result.add(Atom.newAtom(new String[] {
-                        "routing", "clear"
-                    }));
-                    for (Routing element : routing) {
-                        Atom[] atoms = element.to_atoms();
-                        result.add(Atom.newAtom("routing", atoms));
-                    }
-                    return result.toArray(new Atom[0][]);
-                }
-            }).build(this));
+                return result.toArray(new Atom[0][]);
+            }
+        });
+        this.add_message_handler(builder.build(this));
     }
 
     public String get_destination_address_string() {
