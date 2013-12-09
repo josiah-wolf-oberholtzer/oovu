@@ -13,7 +13,6 @@ import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
 import oovu.clients.ServerClient;
 import oovu.events.Event;
-import oovu.events.Subscriber;
 import oovu.events.Subscription;
 import oovu.events.types.ServerEvent;
 import oovu.messaging.Atoms;
@@ -31,7 +30,7 @@ import com.cycling74.max.MaxBox;
 import com.cycling74.max.MaxPatcher;
 import com.cycling74.max.MaxSystem;
 
-abstract public class Server implements MessagePasser, Subscriber {
+abstract public class Server implements MessagePasser {
     protected final Set<Server> child_servers = new HashSet<Server>();
     protected final Map<Class<? extends ServerEvent>, Subscription> subscriptions =
         new HashMap<Class<? extends ServerEvent>, Subscription>();
@@ -330,7 +329,6 @@ abstract public class Server implements MessagePasser, Subscriber {
 
     abstract public State get_state();
 
-    @Override
     public void handle_event(Event event) {
         Subscription subscription = this.subscriptions.get(event.getClass());
         if (subscription != null) {
