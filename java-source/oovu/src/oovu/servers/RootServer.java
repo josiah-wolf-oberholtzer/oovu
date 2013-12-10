@@ -7,6 +7,8 @@ import java.util.List;
 import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
 import oovu.clients.ServerClient;
+import oovu.events.types.KeyEvent;
+import oovu.events.types.MouseEvent;
 import oovu.eventscripts.EventManager;
 import oovu.maxguis.MixerGui;
 import oovu.messaging.Atoms;
@@ -19,7 +21,6 @@ import oovu.states.StateComponentAggregate;
 
 import com.cycling74.max.Atom;
 import com.cycling74.max.Executable;
-import com.cycling74.max.MaxBox;
 import com.cycling74.max.MaxPatcher;
 import com.cycling74.max.MaxSystem;
 
@@ -38,6 +39,7 @@ public class RootServer extends Server {
         this.configure_events_previous_message_handler();
         this.configure_events_read_message_handler();
         this.configure_key_message_handler();
+        this.configure_mouse_message_handler();
         this.configure_mixer_closed_message_handler();
         this.configure_mixer_view_message_handler();
         this.configure_state_message_handler();
@@ -46,14 +48,8 @@ public class RootServer extends Server {
             public void execute() {
                 try {
                     MaxPatcher patcher = new MaxPatcher(0, 0, 100, 100);
-                    MaxBox key_box =
-                        patcher.newDefault(0, 0, "key", new Atom[0]);
-                    MaxBox prepend_box =
-                        patcher.newDefault(0, 0, "prepend", Atom.parse(":key"));
-                    MaxBox mxj_box =
-                        patcher.newDefault(0, 0, "mxj", Atom.parse("oovu.Root"));
-                    patcher.connect(key_box, 0, prepend_box, 0);
-                    patcher.connect(prepend_box, 0, mxj_box, 0);
+                    patcher.newDefault(0, 0, "bpatcher",
+                        Atom.parse("@name oovu.core.input"));
                     RootServer.this.input_patcher = patcher;
                 } catch (UnsatisfiedLinkError e) {
                     Environment.log(e);
@@ -73,22 +69,6 @@ public class RootServer extends Server {
         }
     }
 
-    private void configure_key_message_handler() {
-        MessageHandlerBuilder builder = new MessageHandlerBuilder("key");
-        builder.with_setter(new MessageHandlerCallback(){
-            @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
-                if (0 < arguments.length && arguments[0].isInt()) {
-                    Environment.log("KEY: " + arguments[0].getInt());
-                }
-                return null;
-            }
-        });
-        this.add_message_handler(builder.build(this));
-    }
-    
     private void configure_events_goto_message_handler() {
         MessageHandlerBuilder builder =
             new MessageHandlerBuilder("events/goto");
@@ -235,6 +215,25 @@ public class RootServer extends Server {
         this.add_message_handler(builder.build(this));
     }
 
+    private void configure_key_message_handler() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("key");
+        builder.with_setter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler message_handler,
+                Atom[] arguments) {
+                if (arguments.length == 2) {
+                    int ascii_number = arguments[0].toInt();
+                    boolean depressed = arguments[1].toBoolean();
+                    KeyEvent event = new KeyEvent(ascii_number, depressed);
+                    Environment.event_service.publish(event);
+                }
+                return null;
+            }
+        });
+        this.add_message_handler(builder.build(this));
+    }
+
     private void configure_mixer_closed_message_handler() {
         MessageHandlerBuilder builder =
             new MessageHandlerBuilder("mixer/closed");
@@ -264,6 +263,31 @@ public class RootServer extends Server {
                 }
                 if (root_server.mixer_patcher != null) {
                     root_server.mixer_patcher.send("front", new Atom[0]);
+                }
+                return null;
+            }
+        });
+        this.add_message_handler(builder.build(this));
+    }
+
+    private void configure_mouse_message_handler() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("mouse");
+        builder.with_setter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler message_handler,
+                Atom[] arguments) {
+                if (arguments.length == 6) {
+                    boolean clicked = arguments[0].toBoolean();
+                    int delta_clicked = arguments[1].toInt();
+                    int x = arguments[2].toInt();
+                    int y = arguments[3].toInt();
+                    int delta_x = arguments[4].toInt();
+                    int delta_y = arguments[5].toInt();
+                    MouseEvent event =
+                        new MouseEvent(clicked, delta_clicked, x, y, delta_x,
+                            delta_y);
+                    Environment.event_service.publish(event);
                 }
                 return null;
             }

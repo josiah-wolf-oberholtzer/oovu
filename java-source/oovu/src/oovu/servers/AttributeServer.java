@@ -47,28 +47,6 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         }
     }
 
-    private void configure_bind_attribute_message_handler() {
-        MessageHandlerBuilder builder = new MessageHandlerBuilder("bind/attribute");
-        this.add_message_handler(builder.build(this));
-        
-    }
-    private void configure_bind_midi_message_handler() {
-        MessageHandlerBuilder builder = new MessageHandlerBuilder("bind/midi");
-        this.add_message_handler(builder.build(this));
-    }
-    
-    
-    private void configure_bind_pattern_message_handler() {
-        MessageHandlerBuilder builder = new MessageHandlerBuilder("bind/pattern");
-        this.add_message_handler(builder.build(this));
-        
-    }
-    
-    private void configure_unbind_message_handler() {
-        MessageHandlerBuilder builder = new MessageHandlerBuilder("unbind");
-        this.add_message_handler(builder.build(this));
-    }
-    
     @Override
     public int compareTo(AttributeServer other) {
         int priority_comparison = this.priority.compareTo(other.priority);
@@ -125,6 +103,23 @@ abstract public class AttributeServer extends ModuleMemberServer implements
             this.set_value(this.datatype.get_default());
         }
         this.is_configured = true;
+    }
+
+    private void configure_bind_attribute_message_handler() {
+        MessageHandlerBuilder builder =
+            new MessageHandlerBuilder("bind/attribute");
+        this.add_message_handler(builder.build(this));
+    }
+
+    private void configure_bind_midi_message_handler() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("bind/midi");
+        this.add_message_handler(builder.build(this));
+    }
+
+    private void configure_bind_pattern_message_handler() {
+        MessageHandlerBuilder builder =
+            new MessageHandlerBuilder("bind/pattern");
+        this.add_message_handler(builder.build(this));
     }
 
     private void configure_pattern_message_handler() {
@@ -194,6 +189,11 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                 return null;
             }
         });
+        this.add_message_handler(builder.build(this));
+    }
+
+    private void configure_unbind_message_handler() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("unbind");
         this.add_message_handler(builder.build(this));
     }
 
