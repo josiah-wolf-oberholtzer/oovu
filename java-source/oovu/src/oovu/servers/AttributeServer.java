@@ -38,17 +38,37 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         super(module_server);
         this.configure_priority_message_handler();
         this.configure_value_message_handler();
-        // VALUE
         if (!(this instanceof ReturnServer)) {
             this.configure_pattern_message_handler();
-            // BIND/MIDI
-            // BIND/PARAMETER
-            // BIND/PATTERN
-            // UNBIND
-            // PATTERN
+            this.configure_bind_attribute_message_handler();
+            this.configure_bind_midi_message_handler();
+            this.configure_bind_pattern_message_handler();
+            this.configure_unbind_message_handler();
         }
     }
 
+    private void configure_bind_attribute_message_handler() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("bind/attribute");
+        this.add_message_handler(builder.build(this));
+        
+    }
+    private void configure_bind_midi_message_handler() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("bind/midi");
+        this.add_message_handler(builder.build(this));
+    }
+    
+    
+    private void configure_bind_pattern_message_handler() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("bind/pattern");
+        this.add_message_handler(builder.build(this));
+        
+    }
+    
+    private void configure_unbind_message_handler() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("unbind");
+        this.add_message_handler(builder.build(this));
+    }
+    
     @Override
     public int compareTo(AttributeServer other) {
         int priority_comparison = this.priority.compareTo(other.priority);

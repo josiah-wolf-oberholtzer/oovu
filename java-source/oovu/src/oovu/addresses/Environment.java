@@ -2,6 +2,7 @@ package oovu.addresses;
 
 import java.util.concurrent.locks.ReentrantLock;
 
+import oovu.events.ClockEventService;
 import oovu.events.EventService;
 import oovu.events.MidiEventService;
 import oovu.servers.DspReceiveServer;
@@ -21,10 +22,14 @@ public class Environment {
     public static final RootServer root_server;
     public static final OscAddressNode root_osc_address_node;
     public static final EventService event_service;
+    public static final MidiEventService midi_event_service;
+    public static final ClockEventService clock_event_service;
     static {
         root_osc_address_node = new OscAddressNode("");
         root_server = new RootServer();
         event_service = new EventService();
+        clock_event_service = new ClockEventService(Environment.event_service);
+        midi_event_service = new MidiEventService(Environment.event_service);
         // BasicConfigurator.configure();
         // logger = Logger.getLogger("OOVU");
         // Environment.logger.setLevel(Level.ALL);

@@ -9,18 +9,11 @@ import oovu.events.types.ServerEvent;
 import oovu.servers.Server;
 
 public class EventService {
-    private final MidiEventService midi_event_service;
-    private final ClockEventService clock_event_service;
     private final Map<Class<? extends ServerEvent>, HashSet<Subscription>> subscriptions =
         new HashMap<Class<? extends ServerEvent>, HashSet<Subscription>>();
 
-    public EventService() {
-        this.clock_event_service = new ClockEventService(this);
-        this.midi_event_service = new MidiEventService(this);
-    }
-    
     public void publish(Event event) {
-        // Environment.log(event.toString());
+        // Environment.log("Published: " + event.toString());
         Set<Class<? extends ServerEvent>> keys =
             new HashSet<Class<? extends ServerEvent>>(
                 this.subscriptions.keySet());

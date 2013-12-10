@@ -18,12 +18,16 @@ import oovu.states.State;
 import oovu.states.StateComponentAggregate;
 
 import com.cycling74.max.Atom;
+import com.cycling74.max.Executable;
+import com.cycling74.max.MaxBox;
 import com.cycling74.max.MaxPatcher;
 import com.cycling74.max.MaxSystem;
 
 public class RootServer extends Server {
     private EventManager event_manager = new EventManager();
     private MaxPatcher mixer_patcher = null;
+    @SuppressWarnings("unused")
+    private MaxPatcher input_patcher = null;
 
     public RootServer() {
         super();
@@ -33,9 +37,29 @@ public class RootServer extends Server {
         this.configure_events_next_message_handler();
         this.configure_events_previous_message_handler();
         this.configure_events_read_message_handler();
+        this.configure_key_message_handler();
         this.configure_mixer_closed_message_handler();
         this.configure_mixer_view_message_handler();
         this.configure_state_message_handler();
+        Environment.defer_low(new Executable() {
+            @Override
+            public void execute() {
+                try {
+                    MaxPatcher patcher = new MaxPatcher(0, 0, 100, 100);
+                    MaxBox key_box =
+                        patcher.newDefault(0, 0, "key", new Atom[0]);
+                    MaxBox prepend_box =
+                        patcher.newDefault(0, 0, "prepend", Atom.parse(":key"));
+                    MaxBox mxj_box =
+                        patcher.newDefault(0, 0, "mxj", Atom.parse("oovu.Root"));
+                    patcher.connect(key_box, 0, prepend_box, 0);
+                    patcher.connect(prepend_box, 0, mxj_box, 0);
+                    RootServer.this.input_patcher = patcher;
+                } catch (UnsatisfiedLinkError e) {
+                    Environment.log(e);
+                }
+            }
+        });
     }
 
     @Override
@@ -49,6 +73,22 @@ public class RootServer extends Server {
         }
     }
 
+    private void configure_key_message_handler() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("key");
+        builder.with_setter(new MessageHandlerCallback(){
+            @Override
+            public Atom[][] execute(
+                MessageHandler message_handler,
+                Atom[] arguments) {
+                if (0 < arguments.length && arguments[0].isInt()) {
+                    Environment.log("KEY: " + arguments[0].getInt());
+                }
+                return null;
+            }
+        });
+        this.add_message_handler(builder.build(this));
+    }
+    
     private void configure_events_goto_message_handler() {
         MessageHandlerBuilder builder =
             new MessageHandlerBuilder("events/goto");
