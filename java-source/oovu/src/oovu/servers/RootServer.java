@@ -39,9 +39,9 @@ public class RootServer extends Server {
         this.configure_events_previous_message_handler();
         this.configure_events_read_message_handler();
         this.configure_key_message_handler();
-        this.configure_mouse_message_handler();
         this.configure_mixer_closed_message_handler();
         this.configure_mixer_view_message_handler();
+        this.configure_mouse_message_handler();
         this.configure_state_message_handler();
         Environment.defer_low(new Executable() {
             @Override

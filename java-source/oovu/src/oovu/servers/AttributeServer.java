@@ -22,7 +22,6 @@ import oovu.messaging.Response;
 import oovu.states.State;
 import oovu.states.StateComponent;
 import oovu.states.StateComponentAggregate;
-import oovu.timing.Pattern;
 
 import com.cycling74.max.Atom;
 
@@ -30,7 +29,6 @@ abstract public class AttributeServer extends ModuleMemberServer implements
     Comparable<AttributeServer> {
     protected Integer priority = 0;
     public Datatype datatype = null;
-    protected Pattern pattern = null;
     protected Map<String, Subscription> bindings =
         new HashMap<String, Subscription>();
 
@@ -39,10 +37,10 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         this.configure_priority_message_handler();
         this.configure_value_message_handler();
         if (!(this instanceof ReturnServer)) {
-            this.configure_pattern_message_handler();
             this.configure_bind_attribute_message_handler();
             this.configure_bind_midi_message_handler();
             this.configure_bind_pattern_message_handler();
+            this.configure_bindings_message_handler();
             this.configure_unbind_message_handler();
         }
     }
@@ -108,53 +106,54 @@ abstract public class AttributeServer extends ModuleMemberServer implements
     private void configure_bind_attribute_message_handler() {
         MessageHandlerBuilder builder =
             new MessageHandlerBuilder("bind/attribute");
+        builder.with_setter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler message_handler,
+                Atom[] arguments) {
+                return null;
+            }
+        });
         this.add_message_handler(builder.build(this));
     }
 
     private void configure_bind_midi_message_handler() {
         MessageHandlerBuilder builder = new MessageHandlerBuilder("bind/midi");
+        builder.with_setter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler message_handler,
+                Atom[] arguments) {
+                return null;
+            }
+        });
         this.add_message_handler(builder.build(this));
     }
 
     private void configure_bind_pattern_message_handler() {
         MessageHandlerBuilder builder =
             new MessageHandlerBuilder("bind/pattern");
-        this.add_message_handler(builder.build(this));
-    }
-
-    private void configure_pattern_message_handler() {
-        MessageHandlerBuilder builder = new MessageHandlerBuilder("pattern");
-        builder.with_is_state_relevant(true).with_getter(
-            new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    AttributeServer server =
-                        (AttributeServer) built_message_handler.client;
-                    Atom[][] result = new Atom[1][0];
-                    Pattern pattern = server.get_pattern();
-                    if (pattern != null) {
-                        result[0] = pattern.to_atoms();
-                    }
-                    result[0] =
-                        Atom.newAtom(built_message_handler.get_name(),
-                            result[0]);
-                    return result;
-                }
-            });
         builder.with_setter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(
-                MessageHandler built_message_handler,
+                MessageHandler message_handler,
                 Atom[] arguments) {
-                AttributeServer attribute_server =
-                    (AttributeServer) built_message_handler.client;
-                Pattern pattern = null;
-                if (0 < arguments.length) {
-                    pattern = Pattern.from_atoms(attribute_server, arguments);
-                }
-                attribute_server.set_pattern(pattern);
+                return null;
+            }
+        });
+        this.add_message_handler(builder.build(this));
+    }
+
+    private void configure_bindings_message_handler() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("bindings");
+        builder.with_getter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler message_handler,
+                Atom[] arguments) {
+                // bindings/count 0
+                // bind/xxx key: value
+                // bind/yyy key: value
                 return null;
             }
         });
@@ -194,6 +193,14 @@ abstract public class AttributeServer extends ModuleMemberServer implements
 
     private void configure_unbind_message_handler() {
         MessageHandlerBuilder builder = new MessageHandlerBuilder("unbind");
+        builder.with_setter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler message_handler,
+                Atom[] arguments) {
+                return null;
+            }
+        });
         this.add_message_handler(builder.build(this));
     }
 
@@ -268,10 +275,6 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         this.datatype.cleanup_resources();
     }
 
-    public Pattern get_pattern() {
-        return this.pattern;
-    }
-
     public Integer get_priority() {
         return this.priority;
     }
@@ -321,19 +324,6 @@ abstract public class AttributeServer extends ModuleMemberServer implements
     }
 
     abstract public void reoutput_value();
-
-    public void set_pattern(Pattern pattern) {
-        if (pattern != this.pattern) {
-            if (this.pattern != null) {
-                this.pattern.stop();
-            }
-            this.pattern = pattern;
-            if (this.pattern != null) {
-                this.pattern.set_next_event_time(System.currentTimeMillis());
-                this.pattern.start();
-            }
-        }
-    }
 
     public void set_priority(Integer priority) {
         if (priority == null) {

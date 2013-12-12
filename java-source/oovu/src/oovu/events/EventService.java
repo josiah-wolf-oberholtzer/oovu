@@ -7,21 +7,19 @@ import java.util.Set;
 
 import oovu.addresses.Environment;
 import oovu.events.types.ClockEvent;
-import oovu.events.types.ServerEvent;
 import oovu.servers.Server;
 
 public class EventService {
-    private final Map<Class<? extends ServerEvent>, HashSet<Subscription>> subscriptions =
-        new HashMap<Class<? extends ServerEvent>, HashSet<Subscription>>();
+    private final Map<Class<? extends Event>, HashSet<Subscription>> subscriptions =
+        new HashMap<Class<? extends Event>, HashSet<Subscription>>();
 
     public void publish(Event event) {
         if (!(event instanceof ClockEvent)) {
             Environment.log("Published: " + event.toString());
         }
-        Set<Class<? extends ServerEvent>> keys =
-            new HashSet<Class<? extends ServerEvent>>(
-                this.subscriptions.keySet());
-        for (Class<? extends ServerEvent> event_type : keys) {
+        Set<Class<? extends Event>> keys =
+            new HashSet<Class<? extends Event>>(this.subscriptions.keySet());
+        for (Class<? extends Event> event_type : keys) {
             if (!event_type.isInstance(event)) {
                 continue;
             }
@@ -29,17 +27,16 @@ public class EventService {
                 new HashSet<Subscription>(this.subscriptions.get(event_type));
             for (Subscription subscription : subscription_set) {
                 if (subscription.filter == null) {
-                    subscription.subscriber.handle_event(event);
+                    subscription.handle_event(event);
                 } else if (subscription.filter.is_valid_event(event)) {
-                    subscription.subscriber.handle_event(event);
+                    subscription.handle_event(event);
                 }
             }
         }
     }
 
     public void reset() {
-        for (Class<? extends ServerEvent> event_type : this.subscriptions
-            .keySet()) {
+        for (Class<? extends Event> event_type : this.subscriptions.keySet()) {
             HashSet<Subscription> subscription_set =
                 this.subscriptions.get(event_type);
             subscription_set.clear();
@@ -58,10 +55,9 @@ public class EventService {
     }
 
     public void unsubscribe(Server subscriber) {
-        Set<Class<? extends ServerEvent>> keys =
-            new HashSet<Class<? extends ServerEvent>>(
-                this.subscriptions.keySet());
-        for (Class<? extends ServerEvent> event_type : keys) {
+        Set<Class<? extends Event>> keys =
+            new HashSet<Class<? extends Event>>(this.subscriptions.keySet());
+        for (Class<? extends Event> event_type : keys) {
             HashSet<Subscription> old_subscription_set =
                 this.subscriptions.get(event_type);
             HashSet<Subscription> new_subscription_set =
