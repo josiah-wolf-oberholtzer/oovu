@@ -23,6 +23,7 @@ public class Pattern extends ClockWatcher {
         Server client,
         Map<String, Atom[]> arguments) {
         String message = null;
+        String name = null;
         ValueRange[] timings = null;
         ValueRange[] values = null;
         int arity = 0;
@@ -30,6 +31,11 @@ public class Pattern extends ClockWatcher {
             message = arguments.get("message")[0].toString();
         } else {
             message = "value";
+        }
+        if (arguments.containsKey("name")) {
+            name = arguments.get("name")[0].toString();
+        } else {
+            name = message;
         }
         MessageHandler message_handler = client.get_message_handler(message);
         if ((message_handler == null)
@@ -86,7 +92,14 @@ public class Pattern extends ClockWatcher {
         } else {
             values = new ValueRange[0];
         }
-        return new Pattern(client, message, timings, values, arity);
+        return new Pattern(
+             arity,
+             client,
+             message,
+             name,
+             timings,
+             values
+             );
     }
 
     public double next_event_time = 0;
@@ -97,18 +110,21 @@ public class Pattern extends ClockWatcher {
     public final ValueRange[] timings;
     public final ValueRange[] values;
     public final int arity;
+    public final String name;
 
     public Pattern(
+        int arity,
         Server client,
         String message,
+        String name,
         ValueRange[] timings,
-        ValueRange[] values,
-        int arity) {
+        ValueRange[] values) {
+        this.arity = arity;
         this.client = client;
         this.message = message;
+        this.name = name;
         this.timings = timings;
         this.values = values;
-        this.arity = arity;
     }
 
     @Override
