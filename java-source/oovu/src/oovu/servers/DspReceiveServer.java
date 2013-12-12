@@ -5,11 +5,11 @@ import java.util.Map;
 
 import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
+import oovu.events.DspReceiversChangedEvent;
 import oovu.events.Event;
+import oovu.events.ModuleNameAcquiredEvent;
 import oovu.events.PublisherFilter;
 import oovu.events.Subscription;
-import oovu.events.types.DspReceiversChangedEvent;
-import oovu.events.types.ModuleNameAcquiredEvent;
 import oovu.states.State;
 
 import com.cycling74.max.Atom;

@@ -1,6 +1,4 @@
-package oovu.events.types;
-
-import oovu.events.Event;
+package oovu.events;
 
 public class KeyEvent extends Event {
     public final int ascii_number;

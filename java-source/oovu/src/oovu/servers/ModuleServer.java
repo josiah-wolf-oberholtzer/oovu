@@ -8,7 +8,7 @@ import java.util.Map;
 import oovu.Proxy;
 import oovu.addresses.Environment;
 import oovu.addresses.OscAddressNode;
-import oovu.events.types.ModuleNameAcquiredEvent;
+import oovu.events.ModuleNameAcquiredEvent;
 import oovu.messaging.Atoms;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;

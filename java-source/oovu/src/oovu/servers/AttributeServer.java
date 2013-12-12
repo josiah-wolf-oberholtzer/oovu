@@ -7,10 +7,12 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
 import oovu.datatypes.Datatype;
 import oovu.datatypes.GenericDatatype;
 import oovu.events.Subscription;
+import oovu.events.ValueEvent;
 import oovu.messaging.Atoms;
 import oovu.messaging.BooleanMessageHandlerCallback;
 import oovu.messaging.IntegerMessageHandlerCallback;
@@ -334,5 +336,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
 
     public void set_value(Atom[] value) {
         this.datatype.set_value(value);
+        ValueEvent value_event = new ValueEvent(this, this.get_value());
+        Environment.event_service.publish(value_event);
     }
 }

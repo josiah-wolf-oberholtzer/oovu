@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 import oovu.addresses.OscAddress;
 import oovu.datatypes.AudioSendDatatype;
+import oovu.events.DspSettingsChangedEvent;
 import oovu.events.Event;
 import oovu.events.PublisherFilter;
 import oovu.events.Subscription;
-import oovu.events.types.DspSettingsChangedEvent;
 import oovu.messaging.Atoms;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;

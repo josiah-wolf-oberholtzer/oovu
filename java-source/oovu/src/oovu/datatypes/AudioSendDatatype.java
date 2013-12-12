@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.Map;
 
 import oovu.addresses.OscAddress;
+import oovu.events.DspReceiversChangedEvent;
 import oovu.events.Event;
 import oovu.events.Subscription;
-import oovu.events.types.DspReceiversChangedEvent;
 import oovu.messaging.Atoms;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;

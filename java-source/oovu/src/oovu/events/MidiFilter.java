@@ -1,7 +1,5 @@
 package oovu.events;
 
-import oovu.events.types.MidiEvent;
-
 public class MidiFilter extends Filter {
     public final Integer channel;
     public final Integer controller;

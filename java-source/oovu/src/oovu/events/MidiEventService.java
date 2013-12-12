@@ -11,7 +11,6 @@ import javax.sound.midi.ShortMessage;
 import javax.sound.midi.Transmitter;
 
 import oovu.addresses.Environment;
-import oovu.events.types.MidiEvent;
 
 import com.cycling74.max.Executable;
 

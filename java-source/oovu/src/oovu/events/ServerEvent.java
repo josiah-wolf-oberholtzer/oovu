@@ -1,6 +1,5 @@
-package oovu.events.types;
+package oovu.events;
 
-import oovu.events.Event;
 import oovu.servers.Server;
 
 public class ServerEvent extends Event {

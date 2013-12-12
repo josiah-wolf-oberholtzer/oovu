@@ -1,6 +1,4 @@
-package oovu.events.types;
-
-import oovu.events.Event;
+package oovu.events;
 
 public class MouseEvent extends Event {
     public final boolean clicked;

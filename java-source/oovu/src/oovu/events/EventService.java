@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Set;
 
 import oovu.addresses.Environment;
-import oovu.events.types.ClockEvent;
 import oovu.servers.Server;
 
 public class EventService {

@@ -1,6 +1,5 @@
 package oovu.events;
 
-import oovu.events.types.ServerEvent;
 import oovu.servers.Server;
 
 public class PublisherFilter extends Filter {

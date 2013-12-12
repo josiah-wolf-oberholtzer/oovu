@@ -1,7 +1,5 @@
 package oovu.events;
 
-import oovu.events.types.ClockEvent;
-
 import com.cycling74.max.Executable;
 import com.cycling74.max.MaxClock;
 

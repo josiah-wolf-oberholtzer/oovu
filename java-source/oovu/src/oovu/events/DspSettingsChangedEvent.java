@@ -1,4 +1,4 @@
-package oovu.events.types;
+package oovu.events;
 
 import oovu.servers.Server;
 

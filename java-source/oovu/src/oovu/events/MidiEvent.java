@@ -1,6 +1,4 @@
-package oovu.events.types;
-
-import oovu.events.Event;
+package oovu.events;
 
 public class MidiEvent extends Event {
     public int channel;

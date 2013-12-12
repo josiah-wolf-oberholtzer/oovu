@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import oovu.addresses.Environment;
-import oovu.events.types.DspSettingsChangedEvent;
+import oovu.events.DspSettingsChangedEvent;
 import oovu.messaging.Atoms;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;

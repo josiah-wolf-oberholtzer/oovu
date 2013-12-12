@@ -1,6 +1,4 @@
-package oovu.events.types;
-
-import oovu.events.Event;
+package oovu.events;
 
 public class ClockEvent extends Event {
     public final double current_time;
