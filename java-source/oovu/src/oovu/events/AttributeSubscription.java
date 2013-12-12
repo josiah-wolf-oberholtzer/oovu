@@ -1,12 +1,12 @@
 package oovu.events;
 
-import oovu.servers.Server;
+import oovu.servers.AttributeServer;
 
 import com.cycling74.max.Atom;
 
 public class AttributeSubscription extends BindingSubscription {
     public AttributeSubscription(
-        Server subscriber,
+        AttributeServer subscriber,
         Class<? extends Event> event_class,
         String osc_address_string,
         String message_name,
@@ -20,5 +20,11 @@ public class AttributeSubscription extends BindingSubscription {
     @Override
     public void handle_event(Event event) {
         // TODO Auto-generated method stub
+    }
+
+    @Override
+    public Atom[] to_atoms() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

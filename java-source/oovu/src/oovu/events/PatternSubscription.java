@@ -10,21 +10,20 @@ import oovu.messaging.Atoms;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.Request;
 import oovu.servers.AttributeServer;
-import oovu.servers.Server;
 import oovu.timing.ValueRange;
 
 import com.cycling74.max.Atom;
 
 public class PatternSubscription extends BindingSubscription {
-    public static
-        PatternSubscription
-        from_atoms(Server subscriber, Atom[] atoms) {
+    public static PatternSubscription from_atoms(
+        AttributeServer subscriber,
+        Atom[] atoms) {
         return PatternSubscription
             .from_mapping(subscriber, Atoms.to_map(atoms));
     }
 
     public static PatternSubscription from_mapping(
-        Server subscriber,
+        AttributeServer subscriber,
         Map<String, Atom[]> arguments) {
         String message_name = null;
         String subscription_name = null;
@@ -71,7 +70,7 @@ public class PatternSubscription extends BindingSubscription {
         }
         if (((values == null) || (0 == values.length)) && (0 < arity)) {
             if (subscriber instanceof AttributeServer) {
-                AttributeServer attribute = (AttributeServer) subscriber;
+                AttributeServer attribute = subscriber;
                 if (attribute.datatype instanceof BoundedDatatype) {
                     BoundedDatatype bounded_datatype =
                         (BoundedDatatype) attribute.datatype;
@@ -110,7 +109,7 @@ public class PatternSubscription extends BindingSubscription {
 
     public PatternSubscription(
         int arity,
-        Server subscriber,
+        AttributeServer subscriber,
         String message_name,
         ValueRange[] timings,
         ValueRange[] values,
@@ -157,6 +156,7 @@ public class PatternSubscription extends BindingSubscription {
         this.next_event_time = next_event_time;
     }
 
+    @Override
     public Atom[] to_atoms() {
         ArrayList<Atom> result = new ArrayList<Atom>();
         result.add(Atom.newAtom(":message"));

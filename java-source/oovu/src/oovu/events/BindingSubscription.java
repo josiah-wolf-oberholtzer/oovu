@@ -1,6 +1,6 @@
 package oovu.events;
 
-import oovu.servers.Server;
+import oovu.servers.AttributeServer;
 
 import com.cycling74.max.Atom;
 
@@ -9,12 +9,12 @@ abstract public class BindingSubscription extends Subscription {
         return null;
     }
 
-    String message_name;
-    String subscription_name;
-    Atom[] arguments;
+    public final String message_name;
+    public final String subscription_name;
+    public final Atom[] arguments;
 
     public BindingSubscription(
-        Server subscriber,
+        AttributeServer subscriber,
         Class<? extends Event> event_class,
         Filter filter,
         String message_name,
@@ -31,4 +31,6 @@ abstract public class BindingSubscription extends Subscription {
         this.message_name = message_name;
         this.subscription_name = subscription_name;
     }
+
+    abstract public Atom[] to_atoms();
 }

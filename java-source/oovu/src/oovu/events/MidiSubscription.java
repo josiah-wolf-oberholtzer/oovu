@@ -1,12 +1,12 @@
 package oovu.events;
 
-import oovu.servers.Server;
+import oovu.servers.AttributeServer;
 
 import com.cycling74.max.Atom;
 
 public class MidiSubscription extends BindingSubscription {
     public MidiSubscription(
-        Server subscriber,
+        AttributeServer subscriber,
         Integer channel_number,
         Integer controller_number,
         Integer mode,
@@ -20,5 +20,11 @@ public class MidiSubscription extends BindingSubscription {
     @Override
     public void handle_event(Event event) {
         // TODO Auto-generated method stub
+    }
+
+    @Override
+    public Atom[] to_atoms() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

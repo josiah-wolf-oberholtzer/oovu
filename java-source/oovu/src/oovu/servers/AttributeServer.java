@@ -48,6 +48,16 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         }
     }
 
+    public void add_binding(BindingSubscription binding) {
+        BindingSubscription previous_binding =
+            this.bindings.get(binding.subscription_name);
+        if (previous_binding != null) {
+            this.remove_binding(previous_binding);
+        }
+        this.bindings.put(binding.subscription_name, binding);
+        binding.subscribe();
+    }
+
     @Override
     public int compareTo(AttributeServer other) {
         int priority_comparison = this.priority.compareTo(other.priority);
@@ -114,8 +124,11 @@ abstract public class AttributeServer extends ModuleMemberServer implements
             public Atom[][] execute(
                 MessageHandler message_handler,
                 Atom[] arguments) {
-                BindingSubscription subscription =
+                BindingSubscription binding =
                     BindingSubscription.from_atoms(arguments);
+                AttributeServer server =
+                    (AttributeServer) message_handler.client;
+                server.add_binding(binding);
                 return null;
             }
         });
@@ -129,8 +142,11 @@ abstract public class AttributeServer extends ModuleMemberServer implements
             public Atom[][] execute(
                 MessageHandler message_handler,
                 Atom[] arguments) {
-                BindingSubscription subscription =
+                BindingSubscription binding =
                     BindingSubscription.from_atoms(arguments);
+                AttributeServer server =
+                    (AttributeServer) message_handler.client;
+                server.add_binding(binding);
                 return null;
             }
         });
@@ -144,8 +160,11 @@ abstract public class AttributeServer extends ModuleMemberServer implements
             public Atom[][] execute(
                 MessageHandler message_handler,
                 Atom[] arguments) {
-                BindingSubscription subscription =
+                BindingSubscription binding =
                     BindingSubscription.from_atoms(arguments);
+                AttributeServer server =
+                    (AttributeServer) message_handler.client;
+                server.add_binding(binding);
                 return null;
             }
         });
@@ -160,8 +179,11 @@ abstract public class AttributeServer extends ModuleMemberServer implements
             public Atom[][] execute(
                 MessageHandler message_handler,
                 Atom[] arguments) {
-                BindingSubscription subscription =
+                BindingSubscription binding =
                     BindingSubscription.from_atoms(arguments);
+                AttributeServer server =
+                    (AttributeServer) message_handler.client;
+                server.add_binding(binding);
                 return null;
             }
         });
@@ -175,10 +197,18 @@ abstract public class AttributeServer extends ModuleMemberServer implements
             public Atom[][] execute(
                 MessageHandler message_handler,
                 Atom[] arguments) {
-                // bindings/count 0
-                // bind/xxx key: value
-                // bind/yyy key: value
-                return null;
+                AttributeServer server =
+                    (AttributeServer) message_handler.client;
+                ArrayList<Atom[]> result = new ArrayList<Atom[]>();
+                result.add(Atom.parse("bindings/count "
+                    + server.bindings.size()));
+                BindingSubscription[] bindings =
+                    server.bindings.values()
+                        .toArray(new BindingSubscription[0]);
+                for (BindingSubscription binding : bindings) {
+                    result.add(binding.to_atoms());
+                }
+                return result.toArray(new Atom[0][]);
             }
         });
         this.add_message_handler(builder.build(this));
@@ -222,6 +252,25 @@ abstract public class AttributeServer extends ModuleMemberServer implements
             public Atom[][] execute(
                 MessageHandler message_handler,
                 Atom[] arguments) {
+                AttributeServer server =
+                    (AttributeServer) message_handler.client;
+                if (0 < arguments.length) {
+                    for (Atom atom : arguments) {
+                        String subscription_name = atom.getString();
+                        BindingSubscription binding =
+                            server.bindings.get(subscription_name);
+                        if (binding != null) {
+                            server.remove_binding(binding);
+                        }
+                    }
+                } else {
+                    BindingSubscription[] bindings =
+                        server.bindings.values().toArray(
+                            new BindingSubscription[0]);
+                    for (BindingSubscription binding : bindings) {
+                        server.remove_binding(binding);
+                    }
+                }
                 return null;
             }
         });
@@ -345,6 +394,13 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                 new Atom[0], true);
         Response response = new Response(this, payload, request);
         this.handle_response(response);
+    }
+
+    public void remove_binding(BindingSubscription binding) {
+        if (this.bindings.get(binding.subscription_name) == binding) {
+            this.bindings.remove(binding.subscription_name);
+        }
+        binding.unsubscribe();
     }
 
     abstract public void reoutput_value();
