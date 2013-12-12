@@ -42,6 +42,7 @@ public class RootServer extends Server {
         this.configure_mixer_closed_message_handler();
         this.configure_mixer_view_message_handler();
         this.configure_mouse_message_handler();
+        this.configure_refresh_midi_message_handler();
         this.configure_state_message_handler();
         Environment.defer_low(new Executable() {
             @Override
@@ -289,6 +290,21 @@ public class RootServer extends Server {
                             delta_y);
                     Environment.event_service.publish(event);
                 }
+                return null;
+            }
+        });
+        this.add_message_handler(builder.build(this));
+    }
+
+    private void configure_refresh_midi_message_handler() {
+        MessageHandlerBuilder builder =
+            new MessageHandlerBuilder("refreshmidi");
+        builder.with_setter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler message_handler,
+                Atom[] arguments) {
+                Environment.midi_event_service.update();
                 return null;
             }
         });
