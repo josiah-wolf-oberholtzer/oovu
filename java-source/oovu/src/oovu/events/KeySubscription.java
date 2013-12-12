@@ -4,7 +4,7 @@ import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
 
-abstract public class KeySubscription extends BindingSubscription {
+public class KeySubscription extends BindingSubscription {
     public KeySubscription(
         Server subscriber,
         int ascii_number,

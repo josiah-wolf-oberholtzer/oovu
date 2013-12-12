@@ -4,7 +4,7 @@ import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
 
-abstract public class MidiSubscription extends BindingSubscription {
+public class MidiSubscription extends BindingSubscription {
     public MidiSubscription(
         Server subscriber,
         Integer channel_number,

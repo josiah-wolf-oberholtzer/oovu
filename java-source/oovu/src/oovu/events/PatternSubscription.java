@@ -1,4 +1,4 @@
-package oovu.timing;
+package oovu.events;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -6,43 +6,45 @@ import java.util.Map;
 import oovu.addresses.OscAddress;
 import oovu.datatypes.BooleanDatatype;
 import oovu.datatypes.BoundedDatatype;
-import oovu.events.ClockEvent;
-import oovu.events.Event;
-import oovu.events.Subscription;
 import oovu.messaging.Atoms;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.Request;
 import oovu.servers.AttributeServer;
 import oovu.servers.Server;
+import oovu.timing.ValueRange;
 
 import com.cycling74.max.Atom;
 
-public class Pattern extends Subscription {
-    public static Pattern from_atoms(Server client, Atom[] atoms) {
-        return Pattern.from_mapping(client, Atoms.to_map(atoms));
+public class PatternSubscription extends BindingSubscription {
+    public static
+        PatternSubscription
+        from_atoms(Server subscriber, Atom[] atoms) {
+        return PatternSubscription
+            .from_mapping(subscriber, Atoms.to_map(atoms));
     }
 
-    public static Pattern from_mapping(
-        Server client,
+    public static PatternSubscription from_mapping(
+        Server subscriber,
         Map<String, Atom[]> arguments) {
-        String message = null;
-        String name = null;
+        String message_name = null;
+        String subscription_name = null;
         ValueRange[] timings = null;
         ValueRange[] values = null;
         int arity = 0;
         if (arguments.containsKey("message")) {
-            message = arguments.get("message")[0].toString();
+            message_name = arguments.get("message")[0].toString();
         } else {
-            message = "value";
+            message_name = "value";
         }
         if (arguments.containsKey("name")) {
-            name = arguments.get("name")[0].toString();
+            subscription_name = arguments.get("name")[0].toString();
         } else {
-            name = message;
+            subscription_name = message_name;
         }
-        MessageHandler message_handler = client.get_message_handler(message);
+        MessageHandler message_handler =
+            subscriber.get_message_handler(message_name);
         if ((message_handler == null)
-            || message.equals(message_handler.get_getter_name())) {
+            || message_name.equals(message_handler.get_getter_name())) {
             return null;
         } else if (!message_handler.get_is_binding_relevant()) {
             return null;
@@ -68,8 +70,8 @@ public class Pattern extends Subscription {
             }
         }
         if (((values == null) || (0 == values.length)) && (0 < arity)) {
-            if (client instanceof AttributeServer) {
-                AttributeServer attribute = (AttributeServer) client;
+            if (subscriber instanceof AttributeServer) {
+                AttributeServer attribute = (AttributeServer) subscriber;
                 if (attribute.datatype instanceof BoundedDatatype) {
                     BoundedDatatype bounded_datatype =
                         (BoundedDatatype) attribute.datatype;
@@ -95,29 +97,27 @@ public class Pattern extends Subscription {
         } else {
             values = new ValueRange[0];
         }
-        return new Pattern(arity, client, message, name, timings, values);
+        return new PatternSubscription(arity, subscriber, message_name,
+            timings, values, subscription_name);
     }
 
     public double next_event_time = 0;
     public int current_timing_step = 0;
     public int current_value_step = 0;
-    public final String message;
     public final ValueRange[] timings;
     public final ValueRange[] values;
     public final int arity;
-    public final String name;
 
-    public Pattern(
+    public PatternSubscription(
         int arity,
         Server subscriber,
-        String message,
-        String name,
+        String message_name,
         ValueRange[] timings,
-        ValueRange[] values) {
-        super(subscriber, ClockEvent.class, null);
+        ValueRange[] values,
+        String subscription_name) {
+        super(subscriber, ClockEvent.class, null, message_name, null,
+            subscription_name);
         this.arity = arity;
-        this.message = message;
-        this.name = name;
         this.timings = timings;
         this.values = values;
     }
@@ -147,7 +147,7 @@ public class Pattern extends Subscription {
             this.current_value_step =
                 (this.current_value_step + 1) % this.values.length;
         }
-        OscAddress osc_address = OscAddress.from_cache(":" + this.message);
+        OscAddress osc_address = OscAddress.from_cache(":" + this.message_name);
         Request request =
             new Request(this.subscriber, osc_address, payload, false);
         this.subscriber.handle_request(request);
@@ -160,7 +160,7 @@ public class Pattern extends Subscription {
     public Atom[] to_atoms() {
         ArrayList<Atom> result = new ArrayList<Atom>();
         result.add(Atom.newAtom(":message"));
-        result.add(Atom.newAtom(this.message));
+        result.add(Atom.newAtom(this.message_name));
         result.add(Atom.newAtom(":timings"));
         for (ValueRange value_range : this.timings) {
             result.add(value_range.to_atom());

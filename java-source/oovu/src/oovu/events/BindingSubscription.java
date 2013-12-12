@@ -5,6 +5,10 @@ import oovu.servers.Server;
 import com.cycling74.max.Atom;
 
 abstract public class BindingSubscription extends Subscription {
+    static public BindingSubscription from_atoms(Atom[] arguments) {
+        return null;
+    }
+
     String message_name;
     String subscription_name;
     Atom[] arguments;
@@ -27,6 +31,4 @@ abstract public class BindingSubscription extends Subscription {
         this.message_name = message_name;
         this.subscription_name = subscription_name;
     }
-
-    abstract public BindingSubscription from_atoms(Atom[] arguments);
 }

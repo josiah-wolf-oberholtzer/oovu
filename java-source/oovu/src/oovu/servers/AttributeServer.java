@@ -11,7 +11,7 @@ import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
 import oovu.datatypes.Datatype;
 import oovu.datatypes.GenericDatatype;
-import oovu.events.Subscription;
+import oovu.events.BindingSubscription;
 import oovu.events.ValueEvent;
 import oovu.messaging.Atoms;
 import oovu.messaging.BooleanMessageHandlerCallback;
@@ -31,8 +31,8 @@ abstract public class AttributeServer extends ModuleMemberServer implements
     Comparable<AttributeServer> {
     protected Integer priority = 0;
     public Datatype datatype = null;
-    protected Map<String, Subscription> bindings =
-        new HashMap<String, Subscription>();
+    protected Map<String, BindingSubscription> bindings =
+        new HashMap<String, BindingSubscription>();
 
     public AttributeServer(ModuleServer module_server) {
         super(module_server);
@@ -40,6 +40,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         this.configure_value_message_handler();
         if (!(this instanceof ReturnServer)) {
             this.configure_bind_attribute_message_handler();
+            this.configure_bind_key_message_handler();
             this.configure_bind_midi_message_handler();
             this.configure_bind_pattern_message_handler();
             this.configure_bindings_message_handler();
@@ -113,6 +114,23 @@ abstract public class AttributeServer extends ModuleMemberServer implements
             public Atom[][] execute(
                 MessageHandler message_handler,
                 Atom[] arguments) {
+                BindingSubscription subscription =
+                    BindingSubscription.from_atoms(arguments);
+                return null;
+            }
+        });
+        this.add_message_handler(builder.build(this));
+    }
+
+    private void configure_bind_key_message_handler() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("bind/key");
+        builder.with_setter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(
+                MessageHandler message_handler,
+                Atom[] arguments) {
+                BindingSubscription subscription =
+                    BindingSubscription.from_atoms(arguments);
                 return null;
             }
         });
@@ -126,6 +144,8 @@ abstract public class AttributeServer extends ModuleMemberServer implements
             public Atom[][] execute(
                 MessageHandler message_handler,
                 Atom[] arguments) {
+                BindingSubscription subscription =
+                    BindingSubscription.from_atoms(arguments);
                 return null;
             }
         });
@@ -140,6 +160,8 @@ abstract public class AttributeServer extends ModuleMemberServer implements
             public Atom[][] execute(
                 MessageHandler message_handler,
                 Atom[] arguments) {
+                BindingSubscription subscription =
+                    BindingSubscription.from_atoms(arguments);
                 return null;
             }
         });
