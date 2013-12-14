@@ -1,6 +1,6 @@
 package oovu.events;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import oovu.addresses.OscAddress;
@@ -18,13 +18,7 @@ public class PatternSubscription extends BindingSubscription {
     public static PatternSubscription from_atoms(
         AttributeServer subscriber,
         Atom[] atoms) {
-        return PatternSubscription
-            .from_mapping(subscriber, MaxIO.to_map(atoms));
-    }
-
-    public static PatternSubscription from_mapping(
-        AttributeServer subscriber,
-        Map<String, Atom[]> arguments) {
+        Map<String, Atom[]> arguments = MaxIO.to_map(atoms);
         String message_name = null;
         String subscription_name = null;
         ValueRange[] timings = null;
@@ -50,10 +44,10 @@ public class PatternSubscription extends BindingSubscription {
         }
         arity = message_handler.get_arity();
         if (arguments.containsKey("timings")) {
-            Atom[] atoms = arguments.get("timings");
-            timings = new ValueRange[atoms.length];
-            for (int i = 0, j = atoms.length; i < j; i++) {
-                timings[i] = new ValueRange(atoms[i]);
+            Atom[] current_atoms = arguments.get("timings");
+            timings = new ValueRange[current_atoms.length];
+            for (int i = 0, j = current_atoms.length; i < j; i++) {
+                timings[i] = new ValueRange(current_atoms[i]);
             }
         }
         if ((timings == null) || (0 == timings.length)) {
@@ -62,10 +56,10 @@ public class PatternSubscription extends BindingSubscription {
             };
         }
         if (arguments.containsKey("values")) {
-            Atom[] atoms = arguments.get("values");
-            values = new ValueRange[atoms.length];
-            for (int i = 0, j = atoms.length; i < j; i++) {
-                values[i] = new ValueRange(atoms[i]);
+            Atom[] current_atoms = arguments.get("values");
+            values = new ValueRange[current_atoms.length];
+            for (int i = 0, j = current_atoms.length; i < j; i++) {
+                values[i] = new ValueRange(current_atoms[i]);
             }
         }
         if (((values == null) || (0 == values.length)) && (0 < arity)) {
@@ -158,17 +152,22 @@ public class PatternSubscription extends BindingSubscription {
 
     @Override
     public Atom[] to_atoms() {
-        ArrayList<Atom> result = new ArrayList<Atom>();
-        result.add(Atom.newAtom(":message"));
-        result.add(Atom.newAtom(this.message_name));
-        result.add(Atom.newAtom(":timings"));
-        for (ValueRange value_range : this.timings) {
-            result.add(value_range.to_atom());
+        Map<String, Atom[]> map = new HashMap<String, Atom[]>();
+        if (0 < this.arguments.length) {
+            map.put("args", this.arguments);
         }
-        result.add(Atom.newAtom(":values"));
-        for (ValueRange value_range : this.values) {
-            result.add(value_range.to_atom());
+        map.put("name", Atom.parse(this.subscription_name));
+        map.put("message", Atom.parse(this.message_name));
+        Atom[] timings = new Atom[this.timings.length];
+        for (int i = 0, j = this.timings.length; i < j; i++) {
+            timings[i] = this.timings[i].to_atom();
         }
-        return result.toArray(new Atom[0]);
+        map.put("timings", timings);
+        Atom[] values = new Atom[this.values.length];
+        for (int i = 0, j = this.values.length; i < j; i++) {
+            values[i] = this.values[i].to_atom();
+        }
+        map.put("values", values);
+        return MaxIO.to_serialized_dict(map);
     }
 }
