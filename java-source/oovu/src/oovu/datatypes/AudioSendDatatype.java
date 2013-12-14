@@ -7,7 +7,7 @@ import oovu.addresses.OscAddress;
 import oovu.events.DspReceiversChangedEvent;
 import oovu.events.Event;
 import oovu.events.Subscription;
-import oovu.messaging.Atoms;
+import oovu.messaging.MaxIO;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.MessageHandlerCallback;
@@ -46,7 +46,7 @@ public class AudioSendDatatype extends OscAddressDatatype {
     }
 
     public AudioSendDatatype(Atom[] arguments) {
-        this(null, Atoms.to_map(arguments));
+        this(null, MaxIO.to_map(arguments));
     }
 
     public AudioSendDatatype(
@@ -63,7 +63,7 @@ public class AudioSendDatatype extends OscAddressDatatype {
                 public Atom[][] execute(
                     MessageHandler built_message_handler,
                     Atom[] arguments) {
-                    return Atoms.to_atoms(built_message_handler.get_name(),
+                    return MaxIO.to_atoms(built_message_handler.get_name(),
                         AudioSendDatatype.get_destinations());
                 }
             }).with_is_meta_relevant(true).build(this.client));

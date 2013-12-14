@@ -3,14 +3,14 @@ package oovu.datatypes;
 import java.util.ArrayList;
 import java.util.Map;
 
-import oovu.messaging.Atoms;
+import oovu.messaging.MaxIO;
 import oovu.servers.AttributeServer;
 
 import com.cycling74.max.Atom;
 
 public class StringDatatype extends GenericDatatype {
     public StringDatatype(Atom[] arguments) {
-        this(null, Atoms.to_map(arguments));
+        this(null, MaxIO.to_map(arguments));
     }
 
     public StringDatatype(

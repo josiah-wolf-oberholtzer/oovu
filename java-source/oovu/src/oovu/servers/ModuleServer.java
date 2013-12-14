@@ -9,7 +9,7 @@ import oovu.Proxy;
 import oovu.addresses.Environment;
 import oovu.addresses.OscAddressNode;
 import oovu.events.ModuleNameAcquiredEvent;
-import oovu.messaging.Atoms;
+import oovu.messaging.MaxIO;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.MessageHandlerCallback;
@@ -58,7 +58,7 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
     private DspSettingsServer dsp_settings_server;
 
     public ModuleServer(Atom[] arguments) {
-        this(arguments[0].getInt(), Atoms.to_map(Atom.removeFirst(arguments)));
+        this(arguments[0].getInt(), MaxIO.to_map(Atom.removeFirst(arguments)));
     }
 
     public ModuleServer(Integer module_id, Map<String, Atom[]> argument_map) {
@@ -101,7 +101,7 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
                     new ArrayList<Server>(module_server.child_servers);
                 String[] names =
                     module_server.get_relative_server_names(servers);
-                return Atoms.to_atoms(built_message_handler.get_name(), names);
+                return MaxIO.to_atoms(built_message_handler.get_name(), names);
             }
         });
         this.add_message_handler(members_builder.build(this));
@@ -121,7 +121,7 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
                     module_server.get_child_method_servers();
                 String[] names =
                     module_server.get_relative_server_names(servers);
-                return Atoms.to_atoms(built_message_handler.get_name(), names);
+                return MaxIO.to_atoms(built_message_handler.get_name(), names);
             }
         });
         this.add_message_handler(methods_builder.build(this));
@@ -165,7 +165,7 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
                     module_server.get_child_property_servers();
                 String[] names =
                     module_server.get_relative_server_names(servers);
-                return Atoms.to_atoms(built_message_handler.get_name(), names);
+                return MaxIO.to_atoms(built_message_handler.get_name(), names);
             }
         });
         this.add_message_handler(properties_builder.build(this));
@@ -185,7 +185,7 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
                     module_server.get_child_return_servers();
                 String[] names =
                     module_server.get_relative_server_names(servers);
-                return Atoms.to_atoms(built_message_handler.get_name(), names);
+                return MaxIO.to_atoms(built_message_handler.get_name(), names);
             }
         });
         this.add_message_handler(returns_builder.build(this));

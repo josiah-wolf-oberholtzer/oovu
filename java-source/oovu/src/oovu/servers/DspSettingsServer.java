@@ -7,7 +7,7 @@ import java.util.Map;
 
 import oovu.addresses.Environment;
 import oovu.events.DspSettingsChangedEvent;
-import oovu.messaging.Atoms;
+import oovu.messaging.MaxIO;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.MessageHandlerCallback;
@@ -37,7 +37,7 @@ public class DspSettingsServer extends ModuleMemberServer {
         if (this.is_configured) {
             return;
         }
-        Map<String, Atom[]> argument_map = Atoms.to_map(arguments);
+        Map<String, Atom[]> argument_map = MaxIO.to_map(arguments);
         List<Integer> valid_counts =
             new ArrayList<Integer>(Arrays.asList(0, 1, 2, 4, 8));
         if (argument_map.containsKey("inputs")) {
@@ -88,7 +88,7 @@ public class DspSettingsServer extends ModuleMemberServer {
                 Atom[] arguments) {
                 DspSettingsServer server =
                     (DspSettingsServer) built_message_handler.client;
-                return Atoms.to_atoms(built_message_handler.get_name(),
+                return MaxIO.to_atoms(built_message_handler.get_name(),
                     server.get_is_active());
             }
         });
@@ -119,7 +119,7 @@ public class DspSettingsServer extends ModuleMemberServer {
                 Atom[] arguments) {
                 DspSettingsServer server =
                     (DspSettingsServer) built_message_handler.client;
-                return Atoms.to_atoms(built_message_handler.get_name(),
+                return MaxIO.to_atoms(built_message_handler.get_name(),
                     server.get_input_count());
             }
         });
@@ -148,7 +148,7 @@ public class DspSettingsServer extends ModuleMemberServer {
                 Atom[] arguments) {
                 DspSettingsServer server =
                     (DspSettingsServer) built_message_handler.client;
-                return Atoms.to_atoms(built_message_handler.get_name(),
+                return MaxIO.to_atoms(built_message_handler.get_name(),
                     server.get_limiting());
             }
         });
@@ -180,7 +180,7 @@ public class DspSettingsServer extends ModuleMemberServer {
                 Atom[] arguments) {
                 DspSettingsServer server =
                     (DspSettingsServer) built_message_handler.client;
-                return Atoms.to_atoms(built_message_handler.get_name(),
+                return MaxIO.to_atoms(built_message_handler.get_name(),
                     server.get_output_count());
             }
         });
@@ -209,7 +209,7 @@ public class DspSettingsServer extends ModuleMemberServer {
                 Atom[] arguments) {
                 DspSettingsServer server =
                     (DspSettingsServer) built_message_handler.client;
-                return Atoms.to_atoms(built_message_handler.get_name(),
+                return MaxIO.to_atoms(built_message_handler.get_name(),
                     server.get_send_count());
             }
         });
@@ -257,7 +257,7 @@ public class DspSettingsServer extends ModuleMemberServer {
                 Atom[] arguments) {
                 DspSettingsServer server =
                     (DspSettingsServer) built_message_handler.client;
-                return Atoms.to_atoms(built_message_handler.get_name(),
+                return MaxIO.to_atoms(built_message_handler.get_name(),
                     server.get_voice_count());
             }
         });

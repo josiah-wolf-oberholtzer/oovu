@@ -6,7 +6,7 @@ import java.util.List;
 
 import oovu.clients.MaxPeer;
 import oovu.maxadapters.GenericMaxAdapter;
-import oovu.messaging.Atoms;
+import oovu.messaging.MaxIO;
 import oovu.messaging.Request;
 import oovu.messaging.Response;
 
@@ -98,7 +98,7 @@ public class PartialTracker extends MaxPeer {
             frequencies[i] = this.partials.get(i).frequency;
         }
         Response response =
-            new Response(null, Atoms.to_atoms("value", frequencies), request);
+            new Response(null, MaxIO.to_atoms("value", frequencies), request);
         this.handle_response(response);
     }
 }

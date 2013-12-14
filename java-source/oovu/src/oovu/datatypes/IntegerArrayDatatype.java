@@ -2,7 +2,7 @@ package oovu.datatypes;
 
 import java.util.Map;
 
-import oovu.messaging.Atoms;
+import oovu.messaging.MaxIO;
 import oovu.servers.AttributeServer;
 import oovu.timing.MultiEnvelope;
 
@@ -10,7 +10,7 @@ import com.cycling74.max.Atom;
 
 public class IntegerArrayDatatype extends BoundedArrayDatatype {
     public IntegerArrayDatatype(Atom[] arguments) {
-        this(null, Atoms.to_map(arguments));
+        this(null, MaxIO.to_map(arguments));
     }
 
     public IntegerArrayDatatype(

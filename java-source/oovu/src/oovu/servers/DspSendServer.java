@@ -8,7 +8,7 @@ import oovu.events.DspSettingsChangedEvent;
 import oovu.events.Event;
 import oovu.events.PublisherFilter;
 import oovu.events.Subscription;
-import oovu.messaging.Atoms;
+import oovu.messaging.MaxIO;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.MessageHandlerCallback;
@@ -101,7 +101,7 @@ public class DspSendServer extends ModuleMemberServer {
                 Atom[] arguments) {
                 DspSendServer server =
                     (DspSendServer) built_message_handler.client;
-                return Atoms.to_atoms(built_message_handler.get_name(),
+                return MaxIO.to_atoms(built_message_handler.get_name(),
                     server.get_destination_address_string());
             }
         });
@@ -141,7 +141,7 @@ public class DspSendServer extends ModuleMemberServer {
                 Atom[] arguments) {
                 DspSendServer server =
                     (DspSendServer) built_message_handler.client;
-                return Atoms.to_atoms(built_message_handler.get_name(),
+                return MaxIO.to_atoms(built_message_handler.get_name(),
                     server.get_destination_id());
             }
         });
@@ -157,7 +157,7 @@ public class DspSendServer extends ModuleMemberServer {
             public Atom[][] execute(
                 MessageHandler built_message_handler,
                 Atom[] arguments) {
-                return Atoms.to_atoms("destinations",
+                return MaxIO.to_atoms("destinations",
                     AudioSendDatatype.get_destinations());
             }
         });
@@ -195,7 +195,7 @@ public class DspSendServer extends ModuleMemberServer {
                     (DspSendServer) built_message_handler.client;
                 Routing[] routing = server.get_routing();
                 if (0 == routing.length) {
-                    return Atoms.to_atoms("routing", "clear");
+                    return MaxIO.to_atoms("routing", "clear");
                 }
                 ArrayList<Atom[]> result = new ArrayList<Atom[]>();
                 result.add(Atom.newAtom(new String[] {

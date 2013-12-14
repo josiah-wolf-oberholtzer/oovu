@@ -2,7 +2,7 @@ package oovu.datatypes;
 
 import java.util.Map;
 
-import oovu.messaging.Atoms;
+import oovu.messaging.MaxIO;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.MessageHandlerCallback;
@@ -40,7 +40,7 @@ abstract public class BoundedArrayDatatype extends BoundedDatatype {
             public Atom[][] execute(
                 MessageHandler built_message_handler,
                 Atom[] arguments) {
-                return Atoms.to_atoms(built_message_handler.get_name(),
+                return MaxIO.to_atoms(built_message_handler.get_name(),
                     BoundedArrayDatatype.this.get_length());
             }
         });

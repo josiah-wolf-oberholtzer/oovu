@@ -6,7 +6,7 @@ import java.util.Map;
 import oovu.addresses.OscAddress;
 import oovu.datatypes.BooleanDatatype;
 import oovu.datatypes.BoundedDatatype;
-import oovu.messaging.Atoms;
+import oovu.messaging.MaxIO;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.Request;
 import oovu.servers.AttributeServer;
@@ -19,7 +19,7 @@ public class PatternSubscription extends BindingSubscription {
         AttributeServer subscriber,
         Atom[] atoms) {
         return PatternSubscription
-            .from_mapping(subscriber, Atoms.to_map(atoms));
+            .from_mapping(subscriber, MaxIO.to_map(atoms));
     }
 
     public static PatternSubscription from_mapping(

@@ -3,7 +3,7 @@ package oovu.datatypes;
 import java.util.Arrays;
 import java.util.Map;
 
-import oovu.messaging.Atoms;
+import oovu.messaging.MaxIO;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.MessageHandlerCallback;
@@ -79,7 +79,7 @@ abstract public class BoundedDatatype extends Datatype implements
             public Atom[][] execute(
                 MessageHandler built_message_handler,
                 Atom[] arguments) {
-                return Atoms.to_atoms(built_message_handler.get_name(),
+                return MaxIO.to_atoms(built_message_handler.get_name(),
                     BoundedDatatype.this.get_maximum());
             }
         });
@@ -117,7 +117,7 @@ abstract public class BoundedDatatype extends Datatype implements
             public Atom[][] execute(
                 MessageHandler built_message_handler,
                 Atom[] arguments) {
-                return Atoms.to_atoms(built_message_handler.get_name(),
+                return MaxIO.to_atoms(built_message_handler.get_name(),
                     BoundedDatatype.this.get_minimum());
             }
         });

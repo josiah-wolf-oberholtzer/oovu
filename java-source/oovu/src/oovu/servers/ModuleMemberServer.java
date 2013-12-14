@@ -8,7 +8,7 @@ import java.util.Map;
 import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
-import oovu.messaging.Atoms;
+import oovu.messaging.MaxIO;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.MessageHandlerCallback;
@@ -175,7 +175,7 @@ public abstract class ModuleMemberServer extends Server {
                 if (module_member_server.parent_server == null) {
                     return null;
                 }
-                return Atoms.to_atoms(built_message_handler.get_name(),
+                return MaxIO.to_atoms(built_message_handler.get_name(),
                     module_member_server.parent_server.get_name());
             }
         });

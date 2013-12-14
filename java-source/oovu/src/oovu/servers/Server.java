@@ -13,8 +13,8 @@ import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
 import oovu.clients.ServerClient;
 import oovu.events.Subscription;
-import oovu.messaging.Atoms;
 import oovu.messaging.DeferredRequestCallback;
+import oovu.messaging.MaxIO;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.MessageHandlerCallback;
@@ -170,7 +170,7 @@ abstract public class Server implements MessagePasser {
                     getter_names.remove("getvalue");
                     getter_names.add("getvalue");
                 }
-                return Atoms.to_atoms(built_message_handler.get_getter_name(),
+                return MaxIO.to_atoms(built_message_handler.get_getter_name(),
                     getter_names.toArray(new String[0]));
             }
         });

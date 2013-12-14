@@ -11,7 +11,7 @@ import oovu.events.KeyEvent;
 import oovu.events.MouseEvent;
 import oovu.eventscripts.EventManager;
 import oovu.maxguis.MixerGui;
-import oovu.messaging.Atoms;
+import oovu.messaging.MaxIO;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.MessageHandlerCallback;
@@ -97,7 +97,7 @@ public class RootServer extends Server {
                         .set_current_event_by_name(event_name);
                 root_server.event_manager.execute_state(state, root_server);
                 message_handler.client.handle_response(new Response(
-                    message_handler.client, Atoms.to_atoms("events/current",
+                    message_handler.client, MaxIO.to_atoms("events/current",
                         event_name), null));
                 return null;
             }
@@ -117,9 +117,9 @@ public class RootServer extends Server {
                 List<String> event_names =
                     root_server.event_manager.get_event_names();
                 if (event_names == null) {
-                    return Atoms.to_atoms(message_handler.get_name());
+                    return MaxIO.to_atoms(message_handler.get_name());
                 }
-                return Atoms.to_atoms(message_handler.get_name(),
+                return MaxIO.to_atoms(message_handler.get_name(),
                     event_names.toArray(new String[0]));
             }
         });
@@ -146,7 +146,7 @@ public class RootServer extends Server {
                         .set_current_event_by_name(event_name);
                 root_server.event_manager.execute_state(state, root_server);
                 message_handler.client.handle_response(new Response(
-                    message_handler.client, Atoms.to_atoms("events/current",
+                    message_handler.client, MaxIO.to_atoms("events/current",
                         event_name), null));
                 return null;
             }
@@ -174,7 +174,7 @@ public class RootServer extends Server {
                         .set_current_event_by_name(event_name);
                 root_server.event_manager.execute_state(state, root_server);
                 message_handler.client.handle_response(new Response(
-                    message_handler.client, Atoms.to_atoms("events/current",
+                    message_handler.client, MaxIO.to_atoms("events/current",
                         event_name), null));
                 return null;
             }

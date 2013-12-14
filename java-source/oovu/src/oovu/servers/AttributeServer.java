@@ -13,9 +13,9 @@ import oovu.datatypes.Datatype;
 import oovu.datatypes.GenericDatatype;
 import oovu.events.BindingSubscription;
 import oovu.events.ValueEvent;
-import oovu.messaging.Atoms;
 import oovu.messaging.BooleanMessageHandlerCallback;
 import oovu.messaging.IntegerMessageHandlerCallback;
+import oovu.messaging.MaxIO;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.MessageHandlerCallback;
@@ -73,7 +73,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         if (this.is_configured) {
             return;
         }
-        Map<String, Atom[]> argument_map = Atoms.to_map(arguments);
+        Map<String, Atom[]> argument_map = MaxIO.to_map(arguments);
         Atom[] datatype_arguments = argument_map.get("datatype");
         String datatype_label = null;
         if ((datatype_arguments != null) && (0 < datatype_arguments.length)) {
@@ -223,7 +223,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                 Atom[] arguments) {
                 AttributeServer attribute_server =
                     (AttributeServer) built_message_handler.client;
-                return Atoms.to_atoms(built_message_handler.get_name(),
+                return MaxIO.to_atoms(built_message_handler.get_name(),
                     attribute_server.get_priority());
             }
         });

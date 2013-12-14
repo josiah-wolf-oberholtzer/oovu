@@ -2,7 +2,7 @@ package oovu.datatypes;
 
 import java.util.Map;
 
-import oovu.messaging.Atoms;
+import oovu.messaging.MaxIO;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.MessageHandlerCallback;
@@ -12,7 +12,7 @@ import com.cycling74.max.Atom;
 
 public class BooleanDatatype extends GenericDatatype {
     public BooleanDatatype(Atom[] arguments) {
-        this(null, Atoms.to_map(arguments));
+        this(null, MaxIO.to_map(arguments));
     }
 
     public BooleanDatatype(

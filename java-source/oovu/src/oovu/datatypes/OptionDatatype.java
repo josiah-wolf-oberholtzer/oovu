@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import oovu.messaging.Atoms;
+import oovu.messaging.MaxIO;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.MessageHandlerCallback;
@@ -17,7 +17,7 @@ public class OptionDatatype extends StringDatatype {
     protected List<String> options;
 
     public OptionDatatype(Atom[] arguments) {
-        this(null, Atoms.to_map(arguments));
+        this(null, MaxIO.to_map(arguments));
     }
 
     public OptionDatatype(
@@ -75,7 +75,7 @@ public class OptionDatatype extends StringDatatype {
             public Atom[][] execute(
                 MessageHandler built_message_handler,
                 Atom[] arguments) {
-                return Atoms.to_atoms(built_message_handler.get_name(),
+                return MaxIO.to_atoms(built_message_handler.get_name(),
                     OptionDatatype.this.get_options().toArray(new String[0]));
             }
         });

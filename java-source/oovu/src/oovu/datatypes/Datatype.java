@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import oovu.messaging.Atoms;
+import oovu.messaging.MaxIO;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
 import oovu.messaging.MessageHandlerCallback;
@@ -65,7 +65,7 @@ public abstract class Datatype {
                 Atom[] arguments) {
                 AttributeServer server =
                     (AttributeServer) built_message_handler.client;
-                return Atoms.to_atoms(built_message_handler.get_name(),
+                return MaxIO.to_atoms(built_message_handler.get_name(),
                     server.datatype.getClass().getSimpleName().toLowerCase()
                         .replace("datatype", ""));
             }
