@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import oovu.addresses.Environment;
 import oovu.servers.Server;
 
 public class EventService {
@@ -13,9 +12,9 @@ public class EventService {
         new HashMap<Class<? extends Event>, HashSet<Subscription>>();
 
     public void publish(Event event) {
-        if (!(event instanceof ClockEvent)) {
-            Environment.log("Published: " + event.toString());
-        }
+        // if (!(event instanceof ClockEvent)) {
+        // Environment.log("Published: " + event.toString());
+        // }
         Set<Class<? extends Event>> keys =
             new HashSet<Class<? extends Event>>(this.subscriptions.keySet());
         for (Class<? extends Event> event_type : keys) {

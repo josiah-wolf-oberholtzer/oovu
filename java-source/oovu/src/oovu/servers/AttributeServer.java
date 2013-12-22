@@ -73,7 +73,8 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         if (this.is_configured) {
             return;
         }
-        Map<String, Atom[]> argument_map = MaxIO.to_map(arguments);
+        Map<String, Atom[]> argument_map =
+            MaxIO.from_serialized_dict(arguments);
         Atom[] datatype_arguments = argument_map.get("datatype");
         String datatype_label = null;
         if ((datatype_arguments != null) && (0 < datatype_arguments.length)) {

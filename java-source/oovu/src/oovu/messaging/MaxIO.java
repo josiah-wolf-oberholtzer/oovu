@@ -9,7 +9,7 @@ import java.util.Map;
 import com.cycling74.max.Atom;
 
 public class MaxIO {
-    public static Map<String, Atom[]> from_serialized_dicct(Atom[] atoms) {
+    public static Map<String, Atom[]> from_serialized_dict(Atom[] atoms) {
         HashMap<String, Atom[]> map = new HashMap<String, Atom[]>();
         String current_key = null;
         ArrayList<Atom> current_atoms = new ArrayList<Atom>();
