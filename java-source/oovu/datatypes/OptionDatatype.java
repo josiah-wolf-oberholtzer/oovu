@@ -17,7 +17,7 @@ public class OptionDatatype extends StringDatatype {
     protected List<String> options;
 
     public OptionDatatype(Atom[] arguments) {
-        this(null, MaxIO.to_map(arguments));
+        this(null, MaxIO.from_serialized_dict(arguments));
     }
 
     public OptionDatatype(

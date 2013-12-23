@@ -9,7 +9,7 @@ import com.cycling74.max.Atom;
 
 public class TriggerDatatype extends Datatype {
     public TriggerDatatype(Atom[] arguments) {
-        this(null, MaxIO.to_map(arguments));
+        this(null, MaxIO.from_serialized_dict(arguments));
     }
 
     public TriggerDatatype(

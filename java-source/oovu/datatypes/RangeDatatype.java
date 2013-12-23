@@ -14,7 +14,7 @@ import com.cycling74.max.Atom;
 
 public class RangeDatatype extends BoundedDatatype {
     public RangeDatatype(Atom[] arguments) {
-        this(null, MaxIO.to_map(arguments));
+        this(null, MaxIO.from_serialized_dict(arguments));
     }
 
     public RangeDatatype(

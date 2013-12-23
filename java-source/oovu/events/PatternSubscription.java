@@ -18,7 +18,7 @@ public class PatternSubscription extends BindingSubscription {
     public static PatternSubscription from_atoms(
         AttributeServer subscriber,
         Atom[] atoms) {
-        Map<String, Atom[]> arguments = MaxIO.to_map(atoms);
+        Map<String, Atom[]> arguments = MaxIO.from_serialized_dict(atoms);
         String message_name = null;
         String subscription_name = null;
         ValueRange[] timings = null;

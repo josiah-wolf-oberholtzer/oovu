@@ -113,7 +113,8 @@ public class DspSendServer extends ModuleMemberServer {
                 DspSendServer server =
                     (DspSendServer) built_message_handler.client;
                 if ((0 == arguments.length)
-                    || arguments[0].getString().equals("---")) {
+                    || (arguments[0].isString() && arguments[0].getString()
+                        .equals("---"))) {
                     server.set_destination_server(null);
                 } else {
                     String address_string = arguments[0].getString();

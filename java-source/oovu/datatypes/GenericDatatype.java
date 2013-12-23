@@ -9,7 +9,7 @@ import com.cycling74.max.Atom;
 
 public class GenericDatatype extends Datatype {
     public GenericDatatype(Atom[] arguments) {
-        this(null, MaxIO.to_map(arguments));
+        this(null, MaxIO.from_serialized_dict(arguments));
     }
 
     public GenericDatatype(

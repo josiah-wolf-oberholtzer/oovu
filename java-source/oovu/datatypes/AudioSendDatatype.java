@@ -46,7 +46,7 @@ public class AudioSendDatatype extends OscAddressDatatype {
     }
 
     public AudioSendDatatype(Atom[] arguments) {
-        this(null, MaxIO.to_map(arguments));
+        this(null, MaxIO.from_serialized_dict(arguments));
     }
 
     public AudioSendDatatype(

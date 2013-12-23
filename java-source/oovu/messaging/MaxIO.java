@@ -2,7 +2,6 @@ package oovu.messaging;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,12 +22,14 @@ public class MaxIO {
                         current_atoms.toArray(new Atom[current_atoms.size()]));
                     current_atoms.clear();
                 }
-                current_key = argument.toString().substring(1);
+                current_key = argument.toString();
+                current_key =
+                    current_key.substring(0, current_key.length() - 1);
             } else {
                 current_atoms.add(argument);
             }
         }
-        if (0 < current_atoms.size()) {
+        if ((0 < current_atoms.size()) && (current_key != null)) {
             map.put(current_key,
                 current_atoms.toArray(new Atom[current_atoms.size()]));
         }
@@ -99,32 +100,6 @@ public class MaxIO {
             return MaxIO.to_atoms(message);
         }
         return MaxIO.to_atoms(message, Atom.newAtom(arguments));
-    }
-
-    public static Map<String, Atom[]> to_map(Atom[] arguments) {
-        HashMap<String, Atom[]> argument_map = new HashMap<String, Atom[]>();
-        String current_key = null;
-        ArrayList<Atom> current_list = new ArrayList<Atom>();
-        for (Atom argument : arguments) {
-            if ((current_key == null) && (argument.toString().charAt(0) != ':')) {
-                continue;
-            }
-            if (argument.toString().charAt(0) == ':') {
-                if ((current_key != null) && (0 < current_list.size())) {
-                    argument_map.put(current_key,
-                        current_list.toArray(new Atom[current_list.size()]));
-                    current_list.clear();
-                }
-                current_key = argument.toString().substring(1);
-            } else {
-                current_list.add(argument);
-            }
-        }
-        if (0 < current_list.size()) {
-            argument_map.put(current_key,
-                current_list.toArray(new Atom[current_list.size()]));
-        }
-        return Collections.unmodifiableMap(argument_map);
     }
 
     public static Atom[] to_serialized_dict(Map<String, Atom[]> map) {

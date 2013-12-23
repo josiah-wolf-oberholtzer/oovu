@@ -13,7 +13,7 @@ public class AttributeSubscription extends BindingSubscription {
     static public AttributeSubscription from_atoms(
         AttributeServer subscriber,
         Atom[] atoms) {
-        Map<String, Atom[]> map = MaxIO.to_map(atoms);
+        Map<String, Atom[]> map = MaxIO.from_serialized_dict(atoms);
         Atom[] args = new Atom[0];
         String message_name = null;
         String subscription_name = null;

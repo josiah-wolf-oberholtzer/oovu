@@ -58,7 +58,8 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
     private DspSettingsServer dsp_settings_server;
 
     public ModuleServer(Atom[] arguments) {
-        this(arguments[0].getInt(), MaxIO.to_map(Atom.removeFirst(arguments)));
+        this(arguments[0].getInt(), MaxIO.from_serialized_dict(Atom
+            .removeFirst(arguments)));
     }
 
     public ModuleServer(Integer module_id, Map<String, Atom[]> argument_map) {

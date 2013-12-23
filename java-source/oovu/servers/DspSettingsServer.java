@@ -37,7 +37,8 @@ public class DspSettingsServer extends ModuleMemberServer {
         if (this.is_configured) {
             return;
         }
-        Map<String, Atom[]> argument_map = MaxIO.to_map(arguments);
+        Map<String, Atom[]> argument_map =
+            MaxIO.from_serialized_dict(arguments);
         List<Integer> valid_counts =
             new ArrayList<Integer>(Arrays.asList(0, 1, 2, 4, 8));
         if (argument_map.containsKey("inputs")) {

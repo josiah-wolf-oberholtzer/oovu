@@ -10,7 +10,7 @@ import com.cycling74.max.Atom;
 
 public class DecimalDatatype extends BoundedDatatype {
     public DecimalDatatype(Atom[] arguments) {
-        this(null, MaxIO.to_map(arguments));
+        this(null, MaxIO.from_serialized_dict(arguments));
     }
 
     public DecimalDatatype(

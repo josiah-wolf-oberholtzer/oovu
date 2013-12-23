@@ -12,7 +12,7 @@ import com.cycling74.max.Atom;
 
 public class BooleanDatatype extends GenericDatatype {
     public BooleanDatatype(Atom[] arguments) {
-        this(null, MaxIO.to_map(arguments));
+        this(null, MaxIO.from_serialized_dict(arguments));
     }
 
     public BooleanDatatype(

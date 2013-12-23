@@ -1,6 +1,7 @@
 package oovu.maxadapters;
 
 import oovu.addresses.Addressed;
+import oovu.addresses.OscAddressNode;
 import oovu.clients.MaxPeer;
 import oovu.messaging.Response;
 
@@ -19,9 +20,15 @@ public class GenericMaxAdapter extends MaxAdapter {
         String relative_osc_address = null;
         if (this.max_peer instanceof Addressed) {
             Addressed addressed = (Addressed) this.max_peer;
+            if (addressed == null) {
+                return;
+            }
+            OscAddressNode osc_address_node = addressed.get_osc_address_node();
+            if (osc_address_node == null) {
+                return;
+            }
             relative_osc_address =
-                response.get_relative_osc_address(addressed
-                    .get_osc_address_node());
+                response.get_relative_osc_address(osc_address_node);
         }
         for (Atom[] output : response.payload) {
             if (output[0].equals(MaxAdapter.value_atom)) {
