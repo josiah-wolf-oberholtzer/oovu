@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="java-classes"/>
+	<classpathentry kind="src" path="java-source"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="java-classes/log4j-1.2.16.jar"/>
-	<classpathentry kind="lib" path="java-classes/max.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="java-source/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="java-source/max.jar"/>
 	<classpathentry kind="output" path="java-classes"/>
 </classpath>
