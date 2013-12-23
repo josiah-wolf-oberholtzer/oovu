@@ -205,7 +205,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 190.0, 420.0, 259.0, 20.0 ],
-					"text" : "mxj oovu.Method #1 rewind :datatype trigger"
+					"text" : "mxj oovu.Method #1 rewind datatype: trigger"
 				}
 
 			}
@@ -289,7 +289,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 280.0, 485.0, 279.0, 20.0 ],
-					"text" : "mxj oovu.Method #1 getstate :datatype trigger"
+					"text" : "mxj oovu.Method #1 getstate datatype: trigger"
 				}
 
 			}
@@ -303,7 +303,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 240.0, 165.0, 279.0, 20.0 ],
-					"text" : "mxj oovu.Method #1 view :datatype trigger"
+					"text" : "mxj oovu.Method #1 view datatype: trigger"
 				}
 
 			}
@@ -345,7 +345,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 20.0, 10.0, 291.0, 20.0 ],
-					"text" : "mxj oovu.Method #1 read :datatype filesystempath"
+					"text" : "mxj oovu.Method #1 read datatype: filesystempath"
 				}
 
 			}
@@ -359,7 +359,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 20.0, 485.0, 246.0, 20.0 ],
-					"text" : "mxj oovu.Method #1 goto :datatype option"
+					"text" : "mxj oovu.Method #1 goto datatype: option"
 				}
 
 			}
@@ -373,7 +373,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 40.0, 250.0, 269.0, 20.0 ],
-					"text" : "mxj oovu.Method #1 previous :datatype trigger"
+					"text" : "mxj oovu.Method #1 previous datatype: trigger"
 				}
 
 			}
@@ -387,7 +387,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 60.0, 305.0, 247.0, 20.0 ],
-					"text" : "mxj oovu.Method #1 next :datatype trigger"
+					"text" : "mxj oovu.Method #1 next datatype: trigger"
 				}
 
 			}

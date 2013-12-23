@@ -204,7 +204,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 10.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 dsp/output/gain :datatype decimal :range 0. 1. :default 1."
+					"text" : "mxj oovu.Property #1 dsp/output/gain datatype: decimal range: 0. 1. default: 1."
 				}
 
 			}

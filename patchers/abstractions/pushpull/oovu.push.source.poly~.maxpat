@@ -604,7 +604,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 590.0, 250.0, 353.0, 33.0 ],
-					"text" : "mxj oovu.Property #1 dsp/output.{}/destination :datatype audiosend :default ---"
+					"text" : "mxj oovu.Property #1 dsp/output.{}/destination datatype: audiosend default: ---"
 				}
 
 			}
@@ -618,7 +618,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 470.0, 170.0, 459.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 dsp/output.{}/amplitude :datatype decimal :default 0."
+					"text" : "mxj oovu.Property #1 dsp/output.{}/amplitude datatype: decimal default: 0."
 				}
 
 			}

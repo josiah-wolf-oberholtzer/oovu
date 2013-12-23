@@ -37,7 +37,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 290.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Return #1 finished :datatype trigger"
+					"text" : "mxj oovu.Return #1 finished datatype: trigger"
 				}
 
 			}
@@ -51,7 +51,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 265.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Return #1 time/current :datatype decimal"
+					"text" : "mxj oovu.Return #1 time/current datatype: decimal"
 				}
 
 			}
@@ -65,7 +65,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 240.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Return #1 time/total :datatype decimal"
+					"text" : "mxj oovu.Return #1 time/total datatype: decimal"
 				}
 
 			}
@@ -79,7 +79,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 140.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Method #1 seek :datatype decimal :range 0 NULL"
+					"text" : "mxj oovu.Method #1 seek datatype: decimal range: 0 NULL"
 				}
 
 			}
@@ -93,7 +93,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 10.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 transposition :datatype decimal :range -24 24 :default 0"
+					"text" : "mxj oovu.Property #1 transposition datatype: decimal range: -24 24 default: 0"
 				}
 
 			}
@@ -121,7 +121,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 115.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 looping :datatype boolean :default 0"
+					"text" : "mxj oovu.Property #1 looping datatype: boolean default: 0"
 				}
 
 			}
@@ -135,7 +135,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 90.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 playing :datatype boolean :priority 98 :default 0"
+					"text" : "mxj oovu.Property #1 playing datatype: boolean priority: 98 default: 0"
 				}
 
 			}
@@ -149,7 +149,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 35.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 filepath :datatype filesystempath :priority 99"
+					"text" : "mxj oovu.Property #1 filepath datatype: filesystempath priority: 99"
 				}
 
 			}
@@ -163,7 +163,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 215.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.DspSettings #1 dsp :outputs 8"
+					"text" : "mxj oovu.DspSettings #1 dsp outputs: 8"
 				}
 
 			}

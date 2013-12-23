@@ -51,7 +51,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 10.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Method #1 clear :datatype generic"
+					"text" : "mxj oovu.Method #1 clear datatype: generic"
 				}
 
 			}
@@ -120,7 +120,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 60.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 allpass/delay/range :datatype range :default 0. 0.1 :range 0. 1."
+					"text" : "mxj oovu.Property #1 allpass/delay/range datatype: range default: 0. 0.1 range: 0. 1."
 				}
 
 			}
@@ -134,7 +134,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 110.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 allpass/gain/range :datatype range :default 0.5 0.75 :range 0. 0.999"
+					"text" : "mxj oovu.Property #1 allpass/gain/range datatype: range default: 0.5 0.75 range: 0. 0.999"
 				}
 
 			}
@@ -148,7 +148,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 160.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 feedback/delay/range :datatype range :default 0. 0.1  :range 0. 1."
+					"text" : "mxj oovu.Property #1 feedback/delay/range datatype: range default: 0. 0.1  range: 0. 1."
 				}
 
 			}
@@ -162,7 +162,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 210.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 feedback/gain/range :datatype range :default 0.5 0.75 :range 0. 0.99"
+					"text" : "mxj oovu.Property #1 feedback/gain/range datatype: range default: 0.5 0.75 range: 0. 0.99"
 				}
 
 			}
@@ -176,7 +176,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 260.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 stutter/transposition :datatype decimal :range -24 24 :default -6 :unit semitones"
+					"text" : "mxj oovu.Property #1 stutter/transposition datatype: decimal range: -24 24 default: -6 unit: semitones"
 				}
 
 			}
@@ -190,7 +190,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 235.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 stutter/length :datatype decimal :range 0. 1000. :default 20 :unit milliseconds"
+					"text" : "mxj oovu.Property #1 stutter/length datatype: decimal range: 0. 1000. default: 20 unit: milliseconds"
 				}
 
 			}
@@ -204,7 +204,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 285.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 stutter/repeat :datatype decimal :range 0. 100. :default 30 :unit percentage"
+					"text" : "mxj oovu.Property #1 stutter/repeat datatype: decimal range: 0. 100. default: 30 unit: percentage"
 				}
 
 			}
@@ -218,7 +218,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 185.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 feedback/gain/frequency :datatype decimal :default 1 :range 0 20 :unit hertz"
+					"text" : "mxj oovu.Property #1 feedback/gain/frequency datatype: decimal default: 1 range: 0 20 unit: hertz"
 				}
 
 			}
@@ -232,7 +232,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 135.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 feedback/delay/frequency :datatype decimal :default 1 :range 0 20 :unit hertz"
+					"text" : "mxj oovu.Property #1 feedback/delay/frequency datatype: decimal default: 1 range: 0 20 unit: hertz"
 				}
 
 			}
@@ -246,7 +246,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 85.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 allpass/gain/frequency :datatype decimal :default 1 :range 0 20 :unit hertz"
+					"text" : "mxj oovu.Property #1 allpass/gain/frequency datatype: decimal default: 1 range: 0 20 unit: hertz"
 				}
 
 			}
@@ -260,7 +260,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 35.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 allpass/delay/frequency :datatype decimal :default 1 :range 0 20 :unit hertz"
+					"text" : "mxj oovu.Property #1 allpass/delay/frequency datatype: decimal default: 1 range: 0 20 unit: hertz"
 				}
 
 			}

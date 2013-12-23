@@ -51,7 +51,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 145.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.DspSettings #1 dsp :outputs 8"
+					"text" : "mxj oovu.DspSettings #1 dsp outputs: 8"
 				}
 
 			}
@@ -65,7 +65,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 10.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 panning/frequency :datatype decimal :range 0. 100. :default 0.5 :unit hertz"
+					"text" : "mxj oovu.Property #1 panning/frequency datatype: decimal range: 0. 100. default: 0.5 unit: hertz"
 				}
 
 			}

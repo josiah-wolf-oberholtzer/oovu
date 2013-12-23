@@ -371,7 +371,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 340.0, 520.0, 232.0, 31.0 ],
-					"text" : "/stutter/transposition/:pattern :timings 0:5000 :values -24:1"
+					"text" : "/stutter/transposition/:pattern timings: 0:5000 values: -24:1"
 				}
 
 			}
@@ -427,7 +427,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 645.0, 50.0, 236.0, 18.0 ],
-					"text" : "/allpass/delay/range/:pattern :timings 1000"
+					"text" : "/allpass/delay/range/:pattern timings: 1000"
 				}
 
 			}

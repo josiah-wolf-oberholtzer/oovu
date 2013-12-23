@@ -37,7 +37,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 45.0, 285.0, 271.0, 18.0 ],
-					"text" : "/dsp/output.1/amplitude/:pattern :timings 100:500"
+					"text" : "/dsp/output.1/amplitude/:pattern timings: 100:500"
 				}
 
 			}
@@ -51,7 +51,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 95.0, 10.0, 190.0, 18.0 ],
-					"text" : "/trigger/:pattern :timings 100:2000"
+					"text" : "/trigger/:pattern timings: 100:2000"
 				}
 
 			}

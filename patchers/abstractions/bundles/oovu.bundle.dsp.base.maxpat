@@ -37,7 +37,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 40.0, 506.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 dsp/:voicecount :datatype integer :default 2 :range 1 8 :priority 100"
+					"text" : "mxj oovu.Property #1 dsp/:voicecount datatype: integer default: 2 range: 1 8 priority: 100"
 				}
 
 			}
@@ -51,7 +51,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 10.0, 350.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 dsp/:active :datatype boolean :default 0"
+					"text" : "mxj oovu.Property #1 dsp/:active datatype: boolean default: 0"
 				}
 
 			}

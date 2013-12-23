@@ -432,7 +432,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 220.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 panning/frequency :datatype decimal :range 0. 100. :default 0.5 :unit hertz"
+					"text" : "mxj oovu.Property #1 panning/frequency datatype: decimal range: 0. 100. default: 0.5 unit: hertz"
 				}
 
 			}
@@ -520,7 +520,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 10.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Method #1 open :datatype filesystempath"
+					"text" : "mxj oovu.Method #1 open datatype: filesystempath"
 				}
 
 			}
@@ -534,7 +534,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 195.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 transposition/range :datatype range :range -24 24 :default 0. 0. :unit semitones"
+					"text" : "mxj oovu.Property #1 transposition/range datatype: range range: -24 24 default: 0. 0. unit: semitones"
 				}
 
 			}
@@ -562,7 +562,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 355.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.DspSettings #1 dsp :inputs 0 :outputs 8"
+					"text" : "mxj oovu.DspSettings #1 dsp inputs: 0 outputs: 8"
 				}
 
 			}
@@ -589,7 +589,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 170.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 amplitude/range :datatype range :range 0. 1. :default 1. 1. "
+					"text" : "mxj oovu.Property #1 amplitude/range datatype: range range: 0. 1. default: 1. 1. "
 				}
 
 			}
@@ -603,7 +603,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 245.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Method #1 trigger :datatype trigger"
+					"text" : "mxj oovu.Method #1 trigger datatype: trigger"
 				}
 
 			}

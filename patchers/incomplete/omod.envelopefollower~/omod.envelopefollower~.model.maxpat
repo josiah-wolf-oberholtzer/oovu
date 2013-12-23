@@ -37,7 +37,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 135.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.DspSettings #1 dsp :inputs 1 :outputs 0"
+					"text" : "mxj oovu.DspSettings #1 dsp inputs: 1 outputs: 0"
 				}
 
 			}
@@ -51,7 +51,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 110.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Return #1 attack :datatype trigger"
+					"text" : "mxj oovu.Return #1 attack datatype: trigger"
 				}
 
 			}
@@ -65,7 +65,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 85.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Return #1 envelope :datatype decimal :range 0. 1."
+					"text" : "mxj oovu.Return #1 envelope datatype: decimal range: 0. 1."
 				}
 
 			}

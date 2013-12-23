@@ -79,7 +79,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 75.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Return #1 record/time :datatype decimal"
+					"text" : "mxj oovu.Return #1 record/time datatype: decimal"
 				}
 
 			}
@@ -107,7 +107,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 235.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 dac/active :datatype boolean :default 0"
+					"text" : "mxj oovu.Property #1 dac/active datatype: boolean default: 0"
 				}
 
 			}
@@ -121,7 +121,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 315.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 dac/routing :datatype integerarray :length 8 :range 1 NULL :default 1 2 3 4 5 6 7 8"
+					"text" : "mxj oovu.Property #1 dac/routing datatype: integerarray length: 8 range: 1 NULL default: 1 2 3 4 5 6 7 8"
 				}
 
 			}
@@ -135,7 +135,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 50.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Method #1 record/recording :datatype boolean"
+					"text" : "mxj oovu.Method #1 record/recording datatype: boolean"
 				}
 
 			}
@@ -149,7 +149,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 25.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Method #1 record/open :datatype filesystempath"
+					"text" : "mxj oovu.Method #1 record/open datatype: filesystempath"
 				}
 
 			}

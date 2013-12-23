@@ -801,7 +801,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 595.0, 90.0, 185.0, 33.0 ],
-					"text" : "mxj oovu.DspSettings 4004 dsp :inputs 8 :outputs 0"
+					"text" : "mxj oovu.DspSettings 4004 dsp inputs: 8 outputs: 0"
 				}
 
 			}
@@ -816,7 +816,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 400.0, 90.0, 185.0, 33.0 ],
-					"text" : "mxj oovu.DspSettings 3003 dsp :outputs 8"
+					"text" : "mxj oovu.DspSettings 3003 dsp outputs: 8"
 				}
 
 			}
@@ -845,7 +845,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 15.0, 90.0, 185.0, 33.0 ],
-					"text" : "mxj oovu.DspSettings 1001 dsp :inputs 0 :outputs 1"
+					"text" : "mxj oovu.DspSettings 1001 dsp inputs: 0 outputs: 1"
 				}
 
 			}
