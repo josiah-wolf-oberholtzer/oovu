@@ -15,6 +15,21 @@ import oovu.addresses.Environment;
 import com.cycling74.max.Executable;
 
 public class MidiEventService {
+    private class MidiPublisher implements Executable {
+        public final MidiEvent midi_event;
+        public final EventService event_service;
+
+        public MidiPublisher(MidiEvent midi_event, EventService event_service) {
+            this.midi_event = midi_event;
+            this.event_service = event_service;
+        }
+
+        @Override
+        public void execute() {
+            this.event_service.publish(this.midi_event);
+        }
+    }
+
     private class MidiReceiver implements Receiver {
         public final String name;
         public final MidiDevice device;
@@ -36,7 +51,7 @@ public class MidiEventService {
             MidiEvent midi_event =
                 new MidiEvent(short_message.getChannel(), short_message.getData1(),
                     short_message.getData2());
-            this.client.client.publish(midi_event);
+            Environment.defer_low(new MidiPublisher(midi_event, this.client.client));
         }
 
         @Override
