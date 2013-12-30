@@ -3,8 +3,10 @@ package oovu.events;
 import java.util.HashMap;
 import java.util.Map;
 
+import oovu.datatypes.BoundedDatatype;
 import oovu.messaging.MaxIO;
 import oovu.messaging.MessageHandler;
+import oovu.servers.AttributeServer;
 import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
@@ -85,6 +87,21 @@ public class MidiSubscription extends BindingSubscription {
             Atom[] values = Atom.newAtom(new double[] {
                 midi_event.value
             });
+            if (this.subscriber instanceof AttributeServer) {
+                AttributeServer server = (AttributeServer) this.subscriber;
+                if (server.datatype instanceof BoundedDatatype) {
+                    BoundedDatatype datatype = (BoundedDatatype) server.datatype;
+                    Double minimum = datatype.get_minimum();
+                    Double maximum = datatype.get_maximum();
+                    if ((minimum != null) && (maximum != null)) {
+                        double result =
+                            (midi_event.value * (maximum - minimum)) + minimum;
+                        values = Atom.newAtom(new double[] {
+                            result
+                        });
+                    }
+                }
+            }
             this.subscriber.make_request(null, this.message_name, values);
         }
     }
