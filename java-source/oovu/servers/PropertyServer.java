@@ -1,5 +1,6 @@
 package oovu.servers;
 
+import oovu.messaging.MaxIO;
 import oovu.messaging.Response;
 
 import com.cycling74.max.Atom;
@@ -24,8 +25,7 @@ public class PropertyServer extends AttributeServer {
     public void reoutput_value() {
         Atom[] value = this.get_value();
         this.set_value(value);
-        Atom[][] payload = new Atom[1][];
-        payload[0] = this.get_value();
+        Atom[][] payload = MaxIO.to_atoms("value", this.get_value());
         Response response = new Response(this, payload, null);
         this.handle_response(response);
     }

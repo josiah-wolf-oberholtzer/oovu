@@ -1,5 +1,7 @@
 package oovu.events;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -101,6 +103,12 @@ public class MidiSubscription extends BindingSubscription {
                         });
                     }
                 }
+            }
+            if (this.arguments != null) {
+                ArrayList<Atom> atom_list = new ArrayList<Atom>();
+                atom_list.addAll(Arrays.asList(values));
+                atom_list.addAll(Arrays.asList(this.arguments));
+                values = atom_list.toArray(new Atom[0]);
             }
             this.subscriber.make_request(null, this.message_name, values);
         }
