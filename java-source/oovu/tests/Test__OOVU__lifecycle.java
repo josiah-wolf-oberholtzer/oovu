@@ -188,17 +188,15 @@ public class Test__OOVU__lifecycle {
         Property property_two = new Property(Atom.parse("2002 source"));
         Property property_three = new Property(Atom.parse("3003 source"));
         Proxy proxy = new Proxy(Atom.parse("/input~.1/source"));
-        Assert
-            .assertArrayEquals(
-                new String[] {
-                    "<Node '':null (server: RootServer)>",
-                    "....<Node 'input~':1001 (server: ModuleServer)>",
-                    "........<Node 'source':null (server: PropertyServer)>",
-                    "....<Node 'input~.1':2002 (server: ModuleServer)>",
-                    "........<Node 'source':null (proxies: 1, server: PropertyServer)>",
-                    "....<Node 'input~.2':3003 (server: ModuleServer)>",
-                    "........<Node 'source':null (server: PropertyServer)>"
-                }, Environment.root_osc_address_node.get_debug_pieces());
+        Assert.assertArrayEquals(new String[] {
+            "<Node '':null (server: RootServer)>",
+            "....<Node 'input~':1001 (server: ModuleServer)>",
+            "........<Node 'source':null (server: PropertyServer)>",
+            "....<Node 'input~.1':2002 (server: ModuleServer)>",
+            "........<Node 'source':null (proxies: 1, server: PropertyServer)>",
+            "....<Node 'input~.2':3003 (server: ModuleServer)>",
+            "........<Node 'source':null (server: PropertyServer)>"
+        }, Environment.root_osc_address_node.get_debug_pieces());
         proxy.notifyDeleted();
         property_one.notifyDeleted();
         property_two.notifyDeleted();
@@ -223,17 +221,15 @@ public class Test__OOVU__lifecycle {
         Property property_one = new Property(Atom.parse("1001 source"));
         Property property_two = new Property(Atom.parse("2002 source"));
         Property property_three = new Property(Atom.parse("3003 source"));
-        Assert
-            .assertArrayEquals(
-                new String[] {
-                    "<Node '':null (server: RootServer)>",
-                    "....<Node 'input~':1001 (server: ModuleServer)>",
-                    "........<Node 'source':null (server: PropertyServer)>",
-                    "....<Node 'input~.1':2002 (server: ModuleServer)>",
-                    "........<Node 'source':null (proxies: 1, server: PropertyServer)>",
-                    "....<Node 'input~.2':3003 (server: ModuleServer)>",
-                    "........<Node 'source':null (server: PropertyServer)>"
-                }, Environment.root_osc_address_node.get_debug_pieces());
+        Assert.assertArrayEquals(new String[] {
+            "<Node '':null (server: RootServer)>",
+            "....<Node 'input~':1001 (server: ModuleServer)>",
+            "........<Node 'source':null (server: PropertyServer)>",
+            "....<Node 'input~.1':2002 (server: ModuleServer)>",
+            "........<Node 'source':null (proxies: 1, server: PropertyServer)>",
+            "....<Node 'input~.2':3003 (server: ModuleServer)>",
+            "........<Node 'source':null (server: PropertyServer)>"
+        }, Environment.root_osc_address_node.get_debug_pieces());
         proxy.notifyDeleted();
         property_one.notifyDeleted();
         property_two.notifyDeleted();

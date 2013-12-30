@@ -10,9 +10,7 @@ import oovu.servers.Server;
 import com.cycling74.max.Atom;
 
 public class AttributeSubscription extends BindingSubscription {
-    static public AttributeSubscription from_atoms(
-        Server subscriber,
-        Atom[] atoms) {
+    static public AttributeSubscription from_atoms(Server subscriber, Atom[] atoms) {
         Map<String, Atom[]> map = MaxIO.from_serialized_dict(atoms);
         Atom[] args = new Atom[0];
         String message_name = null;
@@ -23,8 +21,7 @@ public class AttributeSubscription extends BindingSubscription {
         } else {
             message_name = "value";
         }
-        MessageHandler message_handler =
-            subscriber.get_message_handler(message_name);
+        MessageHandler message_handler = subscriber.get_message_handler(message_name);
         if ((message_handler == null)
             || message_name.equals(message_handler.get_getter_name())) {
             return null;
@@ -44,8 +41,8 @@ public class AttributeSubscription extends BindingSubscription {
         } else {
             source = map.get("source")[0].toString();
         }
-        return new AttributeSubscription(args, subscriber, message_name,
-            source, subscription_name);
+        return new AttributeSubscription(args, subscriber, message_name, source,
+            subscription_name);
     }
 
     public final String osc_address_string;
@@ -56,8 +53,8 @@ public class AttributeSubscription extends BindingSubscription {
         String message_name,
         String osc_address_string,
         String subscription_name) {
-        super(subscriber, ValueEvent.class, new OscAddressFilter(
-            osc_address_string), message_name, arguments, subscription_name);
+        super(subscriber, ValueEvent.class, new OscAddressFilter(osc_address_string),
+            message_name, arguments, subscription_name);
         this.osc_address_string = osc_address_string;
     }
 

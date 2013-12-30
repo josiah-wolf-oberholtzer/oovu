@@ -27,10 +27,8 @@ public class Request {
     public String toString() {
         return "Request ["
             + (this.source != null ? "source=" + this.source + ", " : "")
-            + (this.destination != null ? "destination=" + this.destination
-                + ", " : "")
-            + (this.payload != null ? "payload="
-                + Arrays.toString(this.payload) + ", " : "") + "call_after="
-            + this.call_after + "]";
+            + (this.destination != null ? "destination=" + this.destination + ", " : "")
+            + (this.payload != null ? "payload=" + Arrays.toString(this.payload) + ", "
+                : "") + "call_after=" + this.call_after + "]";
     }
 }

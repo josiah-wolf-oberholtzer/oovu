@@ -13,12 +13,9 @@ public class DecimalArrayDatatype extends BoundedArrayDatatype {
         this(null, MaxIO.from_serialized_dict(arguments));
     }
 
-    public DecimalArrayDatatype(
-        AttributeServer client,
-        Map<String, Atom[]> argument_map) {
+    public DecimalArrayDatatype(AttributeServer client, Map<String, Atom[]> argument_map) {
         super(client, argument_map);
-        this.multi_envelope =
-            new MultiEnvelope(this, Atom.toDouble(this.value));
+        this.multi_envelope = new MultiEnvelope(this, Atom.toDouble(this.value));
     }
 
     @Override

@@ -36,8 +36,7 @@ public class AudioSendDatatype extends OscAddressDatatype {
         String[] destination_names =
             new String[DspReceiveServer.dsp_receive_servers.size()];
         OscAddress[] osc_addresses =
-            DspReceiveServer.dsp_receive_servers.keySet().toArray(
-                new OscAddress[0]);
+            DspReceiveServer.dsp_receive_servers.keySet().toArray(new OscAddress[0]);
         for (int i = 0, j = osc_addresses.length; i < j; i++) {
             destination_names[i] = osc_addresses[i].toString();
         }
@@ -49,24 +48,21 @@ public class AudioSendDatatype extends OscAddressDatatype {
         this(null, MaxIO.from_serialized_dict(arguments));
     }
 
-    public AudioSendDatatype(
-        AttributeServer client,
-        Map<String, Atom[]> argument_map) {
+    public AudioSendDatatype(AttributeServer client, Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {
-            Subscription subscription =
-                new DspReceiversChangedSubscription(client);
+            Subscription subscription = new DspReceiversChangedSubscription(client);
             subscription.subscribe();
-            this.client.add_message_handler(new MessageHandlerBuilder(
-                "destinations").with_getter(new MessageHandlerCallback() {
-                @Override
-                public Atom[][] execute(
-                    MessageHandler built_message_handler,
-                    Atom[] arguments) {
-                    return MaxIO.to_atoms(built_message_handler.get_name(),
-                        AudioSendDatatype.get_destinations());
-                }
-            }).with_is_meta_relevant(true).build(this.client));
+            this.client.add_message_handler(new MessageHandlerBuilder("destinations")
+                .with_getter(new MessageHandlerCallback() {
+                    @Override
+                    public Atom[][] execute(
+                        MessageHandler built_message_handler,
+                        Atom[] arguments) {
+                        return MaxIO.to_atoms(built_message_handler.get_name(),
+                            AudioSendDatatype.get_destinations());
+                    }
+                }).with_is_meta_relevant(true).build(this.client));
         }
     }
 

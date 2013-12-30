@@ -29,21 +29,18 @@ public class Test__RootServer__get_formatted_state {
         filter_module.acquire_name("filter~");
         @SuppressWarnings("unused")
         PropertyServer filter_type =
-            PropertyServer
-                .allocate(1001, "type", Atom
-                    .parse(":datatype option :options hp lp bp br :default hp"));
+            PropertyServer.allocate(1001, "type",
+                Atom.parse(":datatype option :options hp lp bp br :default hp"));
         @SuppressWarnings("unused")
         PropertyServer filter_frequency =
-            PropertyServer
-                .allocate(1001, "frequency", Atom
-                    .parse(":datatype decimal :range 20. 22050. :default 1000"));
+            PropertyServer.allocate(1001, "frequency",
+                Atom.parse(":datatype decimal :range 20. 22050. :default 1000"));
         @SuppressWarnings("unused")
         PropertyServer filter_amplitude =
             PropertyServer.allocate(1001, "amplitude",
                 Atom.parse(":datatype decimal :range 0. 1. :default 1."));
         @SuppressWarnings("unused")
-        MethodServer filter_clear =
-            MethodServer.allocate(1001, "clear", Atom.parse(""));
+        MethodServer filter_clear = MethodServer.allocate(1001, "clear", Atom.parse(""));
         ModuleServer delay_module = ModuleServer.allocate(2002);
         delay_module.acquire_name("delay~");
         @SuppressWarnings("unused")

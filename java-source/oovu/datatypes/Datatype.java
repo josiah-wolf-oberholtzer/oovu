@@ -60,14 +60,12 @@ public abstract class Datatype {
         MessageHandlerBuilder builder = new MessageHandlerBuilder("datatype");
         builder.with_getter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
-                AttributeServer server =
-                    (AttributeServer) built_message_handler.client;
-                return MaxIO.to_atoms(built_message_handler.get_name(),
-                    server.datatype.getClass().getSimpleName().toLowerCase()
-                        .replace("datatype", ""));
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
+                AttributeServer server = (AttributeServer) built_message_handler.client;
+                return MaxIO.to_atoms(built_message_handler.get_name(), server.datatype
+                    .getClass().getSimpleName().toLowerCase().replace("datatype", ""));
             }
         });
         this.client.add_message_handler(builder.build(this.client));
@@ -76,8 +74,7 @@ public abstract class Datatype {
     abstract public Integer get_arity();
 
     public String get_datatype() {
-        return this.getClass().getSimpleName().toLowerCase()
-            .replace("datatype", "");
+        return this.getClass().getSimpleName().toLowerCase().replace("datatype", "");
     }
 
     abstract public Atom[] get_default();
@@ -96,8 +93,7 @@ public abstract class Datatype {
         this.set_value(default_value);
     }
 
-    abstract protected void initialize_prerequisites(
-        Map<String, Atom[]> argument_map);
+    abstract protected void initialize_prerequisites(Map<String, Atom[]> argument_map);
 
     abstract public boolean is_binding_relevant();
 

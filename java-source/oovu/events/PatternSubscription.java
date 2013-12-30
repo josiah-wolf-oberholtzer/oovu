@@ -16,9 +16,7 @@ import oovu.timing.ValueRange;
 import com.cycling74.max.Atom;
 
 public class PatternSubscription extends BindingSubscription {
-    public static
-        PatternSubscription
-        from_atoms(Server subscriber, Atom[] atoms) {
+    public static PatternSubscription from_atoms(Server subscriber, Atom[] atoms) {
         Map<String, Atom[]> arguments = MaxIO.from_serialized_dict(atoms);
         String message_name = null;
         String subscription_name = null;
@@ -35,8 +33,7 @@ public class PatternSubscription extends BindingSubscription {
         } else {
             subscription_name = message_name;
         }
-        MessageHandler message_handler =
-            subscriber.get_message_handler(message_name);
+        MessageHandler message_handler = subscriber.get_message_handler(message_name);
         if ((message_handler == null)
             || message_name.equals(message_handler.get_getter_name())) {
             return null;
@@ -91,8 +88,8 @@ public class PatternSubscription extends BindingSubscription {
         } else {
             values = new ValueRange[0];
         }
-        return new PatternSubscription(arity, subscriber, message_name,
-            timings, values, subscription_name);
+        return new PatternSubscription(arity, subscriber, message_name, timings, values,
+            subscription_name);
     }
 
     public double next_event_time = 0;
@@ -109,8 +106,7 @@ public class PatternSubscription extends BindingSubscription {
         ValueRange[] timings,
         ValueRange[] values,
         String subscription_name) {
-        super(subscriber, ClockEvent.class, null, message_name, null,
-            subscription_name);
+        super(subscriber, ClockEvent.class, null, message_name, null, subscription_name);
         this.arity = arity;
         this.timings = timings;
         this.values = values;
@@ -135,15 +131,12 @@ public class PatternSubscription extends BindingSubscription {
             payload = Atom.newAtom(values);
         }
         this.next_event_time = previous_event_time + timing;
-        this.current_timing_step =
-            (this.current_timing_step + 1) % this.timings.length;
+        this.current_timing_step = (this.current_timing_step + 1) % this.timings.length;
         if (0 < this.values.length) {
-            this.current_value_step =
-                (this.current_value_step + 1) % this.values.length;
+            this.current_value_step = (this.current_value_step + 1) % this.values.length;
         }
         OscAddress osc_address = OscAddress.from_cache(":" + this.message_name);
-        Request request =
-            new Request(this.subscriber, osc_address, payload, false);
+        Request request = new Request(this.subscriber, osc_address, payload, false);
         this.subscriber.handle_request(request);
     }
 

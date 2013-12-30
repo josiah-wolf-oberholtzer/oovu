@@ -23,15 +23,13 @@ public class MultiEnvelope extends ClockWatcher {
         }
     }
 
-    private void cleanup_time_points(
-        ArrayList<TimePoint> time_points,
-        double current_time) {
-        while ((1 < time_points.size())
-            && ((time_points.get(1).time) < current_time)) {
+    private
+        void
+        cleanup_time_points(ArrayList<TimePoint> time_points, double current_time) {
+        while ((1 < time_points.size()) && ((time_points.get(1).time) < current_time)) {
             time_points.remove(0);
         }
-        if ((time_points.size() == 2)
-            && (time_points.get(1).time < current_time)) {
+        if ((time_points.size() == 2) && (time_points.get(1).time < current_time)) {
             time_points.remove(0);
         }
     }
@@ -50,8 +48,7 @@ public class MultiEnvelope extends ClockWatcher {
                 this.unlace(control_values, current_time, this.envelopes.size());
             for (int i = 0, j = this.envelopes.size(); i < j; i++) {
                 ArrayList<TimePoint> envelope = this.envelopes.get(i);
-                double current_value =
-                    this.find_value_at_time(envelope, current_time);
+                double current_value = this.find_value_at_time(envelope, current_time);
                 envelope.clear();
                 envelope.add(new TimePoint(current_time, current_value));
                 for (TimePoint time_point : unlaced[i]) {
@@ -67,9 +64,7 @@ public class MultiEnvelope extends ClockWatcher {
         return this.get_current_values(current_time);
     }
 
-    public double[] control_one_envelope(
-        int envelope_index,
-        double[] control_values) {
+    public double[] control_one_envelope(int envelope_index, double[] control_values) {
         double current_time = System.currentTimeMillis();
         double time = current_time;
         ArrayList<TimePoint> envelope = this.envelopes.get(envelope_index);
@@ -77,10 +72,8 @@ public class MultiEnvelope extends ClockWatcher {
             envelope.clear();
             envelope.add(new TimePoint(time, control_values[0]));
         } else if (1 < control_values.length) {
-            TimePoint[][] unlaced =
-                this.unlace(control_values, current_time, 1);
-            double current_value =
-                this.find_value_at_time(envelope, current_time);
+            TimePoint[][] unlaced = this.unlace(control_values, current_time, 1);
+            double current_value = this.find_value_at_time(envelope, current_time);
             envelope.clear();
             envelope.add(new TimePoint(current_time, current_value));
             for (TimePoint time_point : unlaced[0]) {

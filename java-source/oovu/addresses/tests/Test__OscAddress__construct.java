@@ -100,11 +100,9 @@ public class Test__OscAddress__construct {
 
     @Test
     public void test_construct_11() {
-        OscAddress osc_address =
-            OscAddress.from_cache("/:attribute1/attribute2");
+        OscAddress osc_address = OscAddress.from_cache("/:attribute1/attribute2");
         Assert.assertEquals(osc_address.is_relative, false);
-        Assert.assertEquals(osc_address.message_handler_name,
-            "attribute1/attribute2");
+        Assert.assertEquals(osc_address.message_handler_name, "attribute1/attribute2");
         Assert.assertArrayEquals(osc_address.address_items, new String[0]);
     }
 
@@ -180,8 +178,7 @@ public class Test__OscAddress__construct {
 
     @Test
     public void test_construct_19() {
-        OscAddress osc_address =
-            OscAddress.from_cache("/foo.x/../baz/:quux.1/wux");
+        OscAddress osc_address = OscAddress.from_cache("/foo.x/../baz/:quux.1/wux");
         Assert.assertEquals(osc_address.is_relative, false);
         Assert.assertEquals(osc_address.message_handler_name, "quux.1/wux");
         Assert.assertArrayEquals(osc_address.address_items, new String[] {
@@ -201,8 +198,7 @@ public class Test__OscAddress__construct {
 
     @Test
     public void test_construct_21() {
-        OscAddress osc_address =
-            OscAddress.from_cache("/foo.x/./..//:quux.1/wux");
+        OscAddress osc_address = OscAddress.from_cache("/foo.x/./..//:quux.1/wux");
         Assert.assertEquals(osc_address.is_relative, false);
         Assert.assertEquals(osc_address.message_handler_name, "quux.1/wux");
         Assert.assertArrayEquals(osc_address.address_items, new String[] {

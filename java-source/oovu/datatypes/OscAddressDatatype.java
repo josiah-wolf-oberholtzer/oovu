@@ -12,9 +12,7 @@ public class OscAddressDatatype extends StringDatatype {
         this(null, MaxIO.from_serialized_dict(arguments));
     }
 
-    public OscAddressDatatype(
-        AttributeServer client,
-        Map<String, Atom[]> argument_map) {
+    public OscAddressDatatype(AttributeServer client, Map<String, Atom[]> argument_map) {
         super(client, argument_map);
     }
 

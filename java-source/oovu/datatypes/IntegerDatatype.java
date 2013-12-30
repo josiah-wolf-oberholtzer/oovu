@@ -13,12 +13,9 @@ public class IntegerDatatype extends BoundedDatatype {
         this(null, MaxIO.from_serialized_dict(arguments));
     }
 
-    public IntegerDatatype(
-        AttributeServer client,
-        Map<String, Atom[]> argument_map) {
+    public IntegerDatatype(AttributeServer client, Map<String, Atom[]> argument_map) {
         super(client, argument_map);
-        this.multi_envelope =
-            new MultiEnvelope(this, Atom.toDouble(this.value));
+        this.multi_envelope = new MultiEnvelope(this, Atom.toDouble(this.value));
     }
 
     @Override

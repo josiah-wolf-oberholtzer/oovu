@@ -23,8 +23,7 @@ public class MidiSubscription extends BindingSubscription {
         } else {
             message_name = "value";
         }
-        MessageHandler message_handler =
-            subscriber.get_message_handler(message_name);
+        MessageHandler message_handler = subscriber.get_message_handler(message_name);
         if ((message_handler == null)
             || message_name.equals(message_handler.get_getter_name())) {
             return null;
@@ -48,8 +47,8 @@ public class MidiSubscription extends BindingSubscription {
         if (map.containsKey("mode")) {
             mode = map.get("mode")[0].toInt();
         }
-        return new MidiSubscription(subscriber, channel_number,
-            controller_number, mode, message_name, args, subscription_name);
+        return new MidiSubscription(subscriber, channel_number, controller_number, mode,
+            message_name, args, subscription_name);
     }
 
     public final Integer channel_number;
@@ -68,12 +67,26 @@ public class MidiSubscription extends BindingSubscription {
             controller_number), message_name, arguments, subscription_name);
         this.channel_number = channel_number;
         this.controller_number = controller_number;
-        this.mode = mode;
+        if ((mode == 0) || (mode == 1) || (mode == 2)) {
+            this.mode = mode;
+        } else {
+            this.mode = 0;
+        }
     }
 
     @Override
     public void handle_event(Event event) {
-        // TODO Auto-generated method stub
+        MidiEvent midi_event = (MidiEvent) event;
+        if ((this.mode == 1) && (midi_event.value == 1.)) {
+            this.subscriber.make_request(null, this.message_name, this.arguments);
+        } else if ((this.mode == 2) && (midi_event.value == 0.)) {
+            this.subscriber.make_request(null, this.message_name, this.arguments);
+        } else {
+            Atom[] values = Atom.newAtom(new double[] {
+                midi_event.value
+            });
+            this.subscriber.make_request(null, this.message_name, values);
+        }
     }
 
     @Override

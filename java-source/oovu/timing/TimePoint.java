@@ -21,12 +21,10 @@ public class TimePoint {
             return false;
         }
         TimePoint other = (TimePoint) obj;
-        if (Double.doubleToLongBits(this.time) != Double
-            .doubleToLongBits(other.time)) {
+        if (Double.doubleToLongBits(this.time) != Double.doubleToLongBits(other.time)) {
             return false;
         }
-        if (Double.doubleToLongBits(this.value) != Double
-            .doubleToLongBits(other.value)) {
+        if (Double.doubleToLongBits(this.value) != Double.doubleToLongBits(other.value)) {
             return false;
         }
         return true;

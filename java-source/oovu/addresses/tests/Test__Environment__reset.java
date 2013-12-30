@@ -22,7 +22,6 @@ public class Test__Environment__reset {
     public void test_reset() {
         // assertEquals(Environment.osc_addresses.size(), 0);
         Assert.assertEquals(Environment.root_server.get_reference_count(), 0);
-        Assert.assertEquals(
-            Environment.root_osc_address_node.get_reference_count(), 1);
+        Assert.assertEquals(Environment.root_osc_address_node.get_reference_count(), 1);
     }
 }

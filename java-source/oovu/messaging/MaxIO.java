@@ -23,15 +23,13 @@ public class MaxIO {
                     current_atoms.clear();
                 }
                 current_key = argument.toString();
-                current_key =
-                    current_key.substring(0, current_key.length() - 1);
+                current_key = current_key.substring(0, current_key.length() - 1);
             } else {
                 current_atoms.add(argument);
             }
         }
         if ((0 < current_atoms.size()) && (current_key != null)) {
-            map.put(current_key,
-                current_atoms.toArray(new Atom[current_atoms.size()]));
+            map.put(current_key, current_atoms.toArray(new Atom[current_atoms.size()]));
         }
         return map;
     }

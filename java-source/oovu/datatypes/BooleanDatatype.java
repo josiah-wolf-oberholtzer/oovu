@@ -15,9 +15,7 @@ public class BooleanDatatype extends GenericDatatype {
         this(null, MaxIO.from_serialized_dict(arguments));
     }
 
-    public BooleanDatatype(
-        AttributeServer client,
-        Map<String, Atom[]> argument_map) {
+    public BooleanDatatype(AttributeServer client, Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {
             this.configure_toggle_message_handler();
@@ -29,11 +27,10 @@ public class BooleanDatatype extends GenericDatatype {
         builder.with_arity(0);
         builder.with_callback(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
-                AttributeServer server =
-                    (AttributeServer) built_message_handler.client;
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
+                AttributeServer server = (AttributeServer) built_message_handler.client;
                 server.reoutput_value();
                 return null;
             }
@@ -41,9 +38,9 @@ public class BooleanDatatype extends GenericDatatype {
         builder.with_is_binding_relevant(true);
         builder.with_setter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
                 BooleanDatatype.this.toggle();
                 return null;
             }

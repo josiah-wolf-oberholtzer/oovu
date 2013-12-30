@@ -20,10 +20,7 @@ public class MidiEventService {
         public final MidiDevice device;
         public final MidiEventService client;
 
-        public MidiReceiver(
-            MidiEventService client,
-            String name,
-            MidiDevice device) {
+        public MidiReceiver(MidiEventService client, String name, MidiDevice device) {
             this.client = client;
             this.device = device;
             this.name = name;
@@ -37,15 +34,15 @@ public class MidiEventService {
         public void send(MidiMessage message, long time_stamp) {
             ShortMessage short_message = (ShortMessage) message;
             MidiEvent midi_event =
-                new MidiEvent(short_message.getChannel(),
-                    short_message.getData1(), short_message.getData2());
+                new MidiEvent(short_message.getChannel(), short_message.getData1(),
+                    short_message.getData2());
             this.client.client.publish(midi_event);
         }
 
         @Override
         public String toString() {
-            return "MidiReceiver ["
-                + (this.name != null ? "name=" + this.name : "") + "]";
+            return "MidiReceiver [" + (this.name != null ? "name=" + this.name : "")
+                + "]";
         }
     }
 
@@ -74,8 +71,7 @@ public class MidiEventService {
                 MidiDevice device = MidiSystem.getMidiDevice(info);
                 String device_info = device.getDeviceInfo().toString();
                 Transmitter transmitter = device.getTransmitter();
-                MidiReceiver receiver =
-                    new MidiReceiver(this, device_info, device);
+                MidiReceiver receiver = new MidiReceiver(this, device_info, device);
                 this.receivers.put(device_info, receiver);
                 transmitter.setReceiver(receiver);
                 device.open();

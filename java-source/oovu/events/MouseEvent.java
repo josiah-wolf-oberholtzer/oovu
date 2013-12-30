@@ -26,7 +26,7 @@ public class MouseEvent extends Event {
     @Override
     public String toString() {
         return "MouseEvent [clicked=" + this.clicked + ", delta_clicked="
-            + this.delta_clicked + ", x=" + this.x + ", y=" + this.y
-            + ", delta_x=" + this.delta_x + ", delta_y=" + this.delta_y + "]";
+            + this.delta_clicked + ", x=" + this.x + ", y=" + this.y + ", delta_x="
+            + this.delta_x + ", delta_y=" + this.delta_y + "]";
     }
 }

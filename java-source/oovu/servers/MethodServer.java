@@ -8,8 +8,8 @@ public class MethodServer extends AttributeServer {
         String desired_name,
         Atom[] argument_list) {
         MethodServer method_server =
-            (MethodServer) ModuleMemberServer.allocate_from_label(
-                "MethodServer", module_id, desired_name);
+            (MethodServer) ModuleMemberServer.allocate_from_label("MethodServer",
+                module_id, desired_name);
         method_server.configure(argument_list);
         return method_server;
     }

@@ -6,9 +6,7 @@ public class DeferredResponseCallback implements Executable {
     public final MessagePasser message_passer;
     public final Response response;
 
-    public DeferredResponseCallback(
-        MessagePasser message_passer,
-        Response response) {
+    public DeferredResponseCallback(MessagePasser message_passer, Response response) {
         this.message_passer = message_passer;
         this.response = response;
     }

@@ -16,10 +16,9 @@ public class Response {
         this.original_request = original_request;
     }
 
-    public String get_relative_osc_address(
-        OscAddressNode relative_osc_address_node) {
-        return this.source.get_osc_address_node()
-            .get_relative_osc_address_string(relative_osc_address_node);
+    public String get_relative_osc_address(OscAddressNode relative_osc_address_node) {
+        return this.source.get_osc_address_node().get_relative_osc_address_string(
+            relative_osc_address_node);
     }
 
     @Override

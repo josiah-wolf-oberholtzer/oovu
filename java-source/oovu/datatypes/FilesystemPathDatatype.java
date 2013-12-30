@@ -12,9 +12,7 @@ public class FilesystemPathDatatype extends StringDatatype {
         this(null, MaxIO.from_serialized_dict(arguments));
     }
 
-    public FilesystemPathDatatype(
-        AttributeServer client,
-        Map<String, Atom[]> argument_map) {
+    public FilesystemPathDatatype(AttributeServer client, Map<String, Atom[]> argument_map) {
         super(client, argument_map);
     }
 }

@@ -13,9 +13,7 @@ import oovu.Proxy;
 import oovu.servers.Server;
 
 public class OscAddressNode implements Comparable<OscAddressNode> {
-    public static
-        String
-        find_unique_name(String desired_name, Set<String> names) {
+    public static String find_unique_name(String desired_name, Set<String> names) {
         if (!names.contains(desired_name)) {
             return desired_name;
         }
@@ -75,8 +73,7 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
                     names.add(name);
                 }
             }
-            String acquired_name =
-                OscAddressNode.find_unique_name(desired_name, names);
+            String acquired_name = OscAddressNode.find_unique_name(desired_name, names);
             if (this.parent.named_children.containsKey(acquired_name)) {
                 this.parent.named_children.get(acquired_name).merge_with(this);
             } else {
@@ -97,8 +94,7 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
         }
         if (child.name != null) {
             if (this.named_children.get(child.name) != null) {
-                throw new RuntimeException("Named child already exists!: "
-                    + child.name);
+                throw new RuntimeException("Named child already exists!: " + child.name);
             }
             this.named_children.put(child.name, child);
         }
@@ -142,15 +138,10 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
         }
     }
 
-    public OscAddressNode create_address(
-        OscAddress osc_address,
-        boolean uniquely) {
-        if (osc_address.has_wildcard_tokens
-            || osc_address.has_parent_path_tokens) {
-            throw new RuntimeException("OSC address is ambiguous: "
-                + osc_address);
-        } else if (osc_address.is_relative
-            && (osc_address.address_items.length == 0)) {
+    public OscAddressNode create_address(OscAddress osc_address, boolean uniquely) {
+        if (osc_address.has_wildcard_tokens || osc_address.has_parent_path_tokens) {
+            throw new RuntimeException("OSC address is ambiguous: " + osc_address);
+        } else if (osc_address.is_relative && (osc_address.address_items.length == 0)) {
             return this;
         }
         OscAddressNode parent = this;
@@ -205,8 +196,8 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
                 }
             }
             if (this.server != null) {
-                string_builder.append("server: "
-                    + this.server.getClass().getSimpleName());
+                string_builder
+                    .append("server: " + this.server.getClass().getSimpleName());
             }
             string_builder.append(")");
         }
@@ -302,10 +293,10 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
         return count;
     }
 
-    public String get_relative_osc_address_string(
-        OscAddressNode relative_osc_address_node) {
-        List<OscAddressNode> source_parentage =
-            Arrays.asList(this.get_parentage());
+    public
+        String
+        get_relative_osc_address_string(OscAddressNode relative_osc_address_node) {
+        List<OscAddressNode> source_parentage = Arrays.asList(this.get_parentage());
         List<OscAddressNode> relative_parentage =
             Arrays.asList(relative_osc_address_node.get_parentage());
         Collections.reverse(source_parentage);
@@ -313,8 +304,7 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
         int counter = 0;
         while ((counter < source_parentage.size())
             && (counter < relative_parentage.size())
-            && (source_parentage.get(counter) == relative_parentage
-                .get(counter))) {
+            && (source_parentage.get(counter) == relative_parentage.get(counter))) {
             counter += 1;
         }
         StringBuilder string_builder = new StringBuilder();
@@ -386,12 +376,10 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
             boolean[] matches = new boolean[] {
                 false, false
             };
-            if (token_parts[0].equals("*")
-                || token_parts[0].equals(name_parts[0])) {
+            if (token_parts[0].equals("*") || token_parts[0].equals(name_parts[0])) {
                 matches[0] = true;
             }
-            if (token_parts[1].equals("*")
-                || token_parts[1].equals(name_parts[1])) {
+            if (token_parts[1].equals("*") || token_parts[1].equals(name_parts[1])) {
                 matches[1] = true;
             }
             if (matches[0] && matches[1]) {
@@ -494,8 +482,7 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
                     && (current_cursor.get_parent() != null)) {
                     new_cursors.add(current_cursor.get_parent());
                 } else if (current_address_item.contains("*")) {
-                    for (OscAddressNode child : current_cursor.named_children
-                        .values()) {
+                    for (OscAddressNode child : current_cursor.named_children.values()) {
                         if (child.matches(current_address_item)) {
                             new_cursors.add(child);
                         }

@@ -17,15 +17,14 @@ import com.cycling74.max.Atom;
 public class DspReceiveServer extends ModuleMemberServer {
     private class ModuleNameAcquiredSubscription extends Subscription {
         public ModuleNameAcquiredSubscription(Server subscriber) {
-            super(subscriber, ModuleNameAcquiredEvent.class,
-                new PublisherFilter(subscriber.parent_server));
+            super(subscriber, ModuleNameAcquiredEvent.class, new PublisherFilter(
+                subscriber.parent_server));
         }
 
         @Override
         public void handle_event(Event event) {
             this.unsubscribe();
-            DspReceiveServer.dsp_receive_servers.put(
-                this.subscriber.get_osc_address(),
+            DspReceiveServer.dsp_receive_servers.put(this.subscriber.get_osc_address(),
                 (DspReceiveServer) this.subscriber);
             Environment.event_service.publish(new DspReceiversChangedEvent(
                 this.subscriber));
@@ -40,16 +39,15 @@ public class DspReceiveServer extends ModuleMemberServer {
         String desired_name,
         Atom[] argument_list) {
         DspReceiveServer server =
-            (DspReceiveServer) ModuleMemberServer.allocate_from_label(
-                "DspReceiveServer", module_id, desired_name);
+            (DspReceiveServer) ModuleMemberServer.allocate_from_label("DspReceiveServer",
+                module_id, desired_name);
         OscAddress osc_address = server.get_osc_address();
         if (osc_address != null) {
             DspReceiveServer registered =
                 DspReceiveServer.dsp_receive_servers.get(osc_address);
             if (registered != server) {
                 DspReceiveServer.dsp_receive_servers.put(osc_address, server);
-                Environment.event_service.publish(new DspReceiversChangedEvent(
-                    server));
+                Environment.event_service.publish(new DspReceiversChangedEvent(server));
             }
         }
         return server;
@@ -58,8 +56,7 @@ public class DspReceiveServer extends ModuleMemberServer {
     public DspReceiveServer(ModuleServer module_server) {
         super(module_server);
         if (module_server.get_name() == null) {
-            Subscription subscription =
-                new ModuleNameAcquiredSubscription(this);
+            Subscription subscription = new ModuleNameAcquiredSubscription(this);
             subscription.subscribe();
         }
     }
@@ -76,8 +73,7 @@ public class DspReceiveServer extends ModuleMemberServer {
         if (module_server == null) {
             return 0;
         }
-        DspSettingsServer dsp_settings_server =
-            module_server.get_dsp_settings_server();
+        DspSettingsServer dsp_settings_server = module_server.get_dsp_settings_server();
         if (dsp_settings_server == null) {
             return 1;
         }

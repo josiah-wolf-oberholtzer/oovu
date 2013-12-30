@@ -35,8 +35,7 @@ import com.cycling74.max.MaxSystem;
 
 abstract public class Server implements MessagePasser {
     protected final Set<Server> child_servers = new HashSet<Server>();
-    protected final Set<Subscription> subscriptions =
-        new HashSet<Subscription>();
+    protected final Set<Subscription> subscriptions = new HashSet<Subscription>();
     protected final Map<String, MessageHandler> message_handlers =
         new HashMap<String, MessageHandler>();
     protected String name = null;
@@ -76,12 +75,10 @@ abstract public class Server implements MessagePasser {
 
     public void add_message_handler(MessageHandler message_handler) {
         if (message_handler.getter != null) {
-            this.message_handlers.put(message_handler.get_getter_name(),
-                message_handler);
+            this.message_handlers.put(message_handler.get_getter_name(), message_handler);
         }
         if (message_handler.MessageHandlerCallback != null) {
-            this.message_handlers.put(message_handler.get_name(),
-                message_handler);
+            this.message_handlers.put(message_handler.get_name(), message_handler);
         }
     }
 
@@ -117,18 +114,13 @@ abstract public class Server implements MessagePasser {
     }
 
     private void configure_bind_attribute_message_handler() {
-        MessageHandlerBuilder builder =
-            new MessageHandlerBuilder("bind/attribute");
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("bind/attribute");
         builder.with_setter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
+            public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
                 AttributeSubscription binding =
-                    AttributeSubscription.from_atoms(message_handler.client,
-                        arguments);
-                AttributeServer server =
-                    (AttributeServer) message_handler.client;
+                    AttributeSubscription.from_atoms(message_handler.client, arguments);
+                AttributeServer server = (AttributeServer) message_handler.client;
                 server.add_binding(binding);
                 return null;
             }
@@ -140,14 +132,10 @@ abstract public class Server implements MessagePasser {
         MessageHandlerBuilder builder = new MessageHandlerBuilder("bind/key");
         builder.with_setter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
+            public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
                 KeySubscription binding =
-                    KeySubscription.from_atoms(message_handler.client,
-                        arguments);
-                AttributeServer server =
-                    (AttributeServer) message_handler.client;
+                    KeySubscription.from_atoms(message_handler.client, arguments);
+                AttributeServer server = (AttributeServer) message_handler.client;
                 server.add_binding(binding);
                 return null;
             }
@@ -159,14 +147,10 @@ abstract public class Server implements MessagePasser {
         MessageHandlerBuilder builder = new MessageHandlerBuilder("bind/midi");
         builder.with_setter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
+            public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
                 MidiSubscription binding =
-                    MidiSubscription.from_atoms(message_handler.client,
-                        arguments);
-                AttributeServer server =
-                    (AttributeServer) message_handler.client;
+                    MidiSubscription.from_atoms(message_handler.client, arguments);
+                AttributeServer server = (AttributeServer) message_handler.client;
                 server.add_binding(binding);
                 return null;
             }
@@ -175,18 +159,13 @@ abstract public class Server implements MessagePasser {
     }
 
     private void configure_bind_pattern_message_handler() {
-        MessageHandlerBuilder builder =
-            new MessageHandlerBuilder("bind/pattern");
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("bind/pattern");
         builder.with_setter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
+            public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
                 PatternSubscription binding =
-                    PatternSubscription.from_atoms(message_handler.client,
-                        arguments);
-                AttributeServer server =
-                    (AttributeServer) message_handler.client;
+                    PatternSubscription.from_atoms(message_handler.client, arguments);
+                AttributeServer server = (AttributeServer) message_handler.client;
                 server.add_binding(binding);
                 return null;
             }
@@ -198,17 +177,12 @@ abstract public class Server implements MessagePasser {
         MessageHandlerBuilder builder = new MessageHandlerBuilder("bindings");
         builder.with_getter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
-                AttributeServer server =
-                    (AttributeServer) message_handler.client;
+            public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
+                AttributeServer server = (AttributeServer) message_handler.client;
                 ArrayList<Atom[]> result = new ArrayList<Atom[]>();
-                result.add(Atom.parse("bindings/count "
-                    + server.bindings.size()));
+                result.add(Atom.parse("bindings/count " + server.bindings.size()));
                 BindingSubscription[] bindings =
-                    server.bindings.values()
-                        .toArray(new BindingSubscription[0]);
+                    server.bindings.values().toArray(new BindingSubscription[0]);
                 for (BindingSubscription binding : bindings) {
                     result.add(binding.to_atoms());
                 }
@@ -222,17 +196,15 @@ abstract public class Server implements MessagePasser {
         MessageHandlerBuilder builder = new MessageHandlerBuilder("dumpmeta");
         builder.with_setter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
                 ArrayList<Atom[]> result = new ArrayList<Atom[]>();
                 String message_name = "getmeta";
                 MessageHandler getmeta_message_handler =
-                    built_message_handler.client.message_handlers
-                        .get(message_name);
+                    built_message_handler.client.message_handlers.get(message_name);
                 Atom[] meta =
-                    Atom.removeFirst(getmeta_message_handler
-                        .handle_message(message_name)[0]);
+                    Atom.removeFirst(getmeta_message_handler.handle_message(message_name)[0]);
                 for (Atom atom : meta) {
                     String name = atom.getString();
                     MessageHandler message_handler =
@@ -258,13 +230,12 @@ abstract public class Server implements MessagePasser {
         MessageHandlerBuilder builder = new MessageHandlerBuilder("interface");
         builder.with_getter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
                 Atom[][] result = new Atom[1][];
                 String[] message_handler_names =
-                    Server.this.message_handlers.keySet()
-                        .toArray(new String[0]);
+                    Server.this.message_handlers.keySet().toArray(new String[0]);
                 Arrays.sort(message_handler_names);
                 result[0] =
                     Atom.newAtom(built_message_handler.get_name(),
@@ -279,9 +250,9 @@ abstract public class Server implements MessagePasser {
         MessageHandlerBuilder builder = new MessageHandlerBuilder("meta");
         builder.with_getter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
                 ArrayList<String> getter_names = new ArrayList<String>();
                 Set<MessageHandler> message_handlers =
                     new HashSet<MessageHandler>(
@@ -308,9 +279,9 @@ abstract public class Server implements MessagePasser {
         MessageHandlerBuilder builder = new MessageHandlerBuilder("oscaddress");
         builder.with_getter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
                 String osc_address_string =
                     built_message_handler.client.get_osc_address_string();
                 if (osc_address_string != null) {
@@ -331,11 +302,10 @@ abstract public class Server implements MessagePasser {
         MessageHandlerBuilder builder = new MessageHandlerBuilder("report");
         builder.with_setter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
-                String[] report_pieces =
-                    built_message_handler.client.get_report_pieces();
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
+                String[] report_pieces = built_message_handler.client.get_report_pieces();
                 for (String report_piece : report_pieces) {
                     Environment.log(report_piece);
                 }
@@ -349,9 +319,9 @@ abstract public class Server implements MessagePasser {
         MessageHandlerBuilder builder = new MessageHandlerBuilder("show");
         builder.with_setter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
                 for (ServerClient server_client : built_message_handler.client.server_clients) {
                     MaxBox box = server_client.getMaxBox();
                     MaxPatcher patcher = box.getPatcher();
@@ -367,11 +337,8 @@ abstract public class Server implements MessagePasser {
         MessageHandlerBuilder builder = new MessageHandlerBuilder("unbind");
         builder.with_setter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
-                AttributeServer server =
-                    (AttributeServer) message_handler.client;
+            public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
+                AttributeServer server = (AttributeServer) message_handler.client;
                 if (0 < arguments.length) {
                     for (Atom atom : arguments) {
                         String subscription_name = atom.getString();
@@ -383,8 +350,7 @@ abstract public class Server implements MessagePasser {
                     }
                 } else {
                     BindingSubscription[] bindings =
-                        server.bindings.values().toArray(
-                            new BindingSubscription[0]);
+                        server.bindings.values().toArray(new BindingSubscription[0]);
                     for (BindingSubscription binding : bindings) {
                         server.remove_binding(binding);
                     }
@@ -399,14 +365,13 @@ abstract public class Server implements MessagePasser {
         MessageHandlerBuilder builder = new MessageHandlerBuilder("uniqueid");
         builder.with_getter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
                 Atom[][] result = new Atom[1][2];
                 result[0][0] = Atom.newAtom(built_message_handler.get_name());
                 result[0][1] =
-                    Atom.newAtom(System
-                        .identityHashCode(built_message_handler.client));
+                    Atom.newAtom(System.identityHashCode(built_message_handler.client));
                 return result;
             }
         });
@@ -495,14 +460,12 @@ abstract public class Server implements MessagePasser {
         if (message_handler_name == null) {
             message_handler_name = "value";
         }
-        MessageHandler message_handler =
-            this.message_handlers.get(message_handler_name);
+        MessageHandler message_handler = this.message_handlers.get(message_handler_name);
         if (message_handler == null) {
             return;
         }
         Atom[][] payload =
-            message_handler.handle_message(message_handler_name,
-                request.payload);
+            message_handler.handle_message(message_handler_name, request.payload);
         Response response = new Response(this, payload, request);
         if ((payload != null) && (0 < payload.length)) {
             if (payload[0][0].equals(Atom.newAtom("value"))) {
@@ -513,8 +476,7 @@ abstract public class Server implements MessagePasser {
         }
         if (request.call_after) {
             if (message_handler.callback != null) {
-                if (!message_handler_name.equals(message_handler
-                    .get_getter_name())) {
+                if (!message_handler_name.equals(message_handler.get_getter_name())) {
                     message_handler.callback.execute(message_handler, null);
                 }
             }
@@ -531,8 +493,7 @@ abstract public class Server implements MessagePasser {
         }
         OscAddressNode osc_address_node = this.get_osc_address_node();
         if (osc_address_node != null) {
-            Set<Proxy> proxies =
-                new HashSet<Proxy>(osc_address_node.get_proxies());
+            Set<Proxy> proxies = new HashSet<Proxy>(osc_address_node.get_proxies());
             for (Proxy proxy : proxies) {
                 proxy.handle_response(response);
             }
@@ -550,10 +511,9 @@ abstract public class Server implements MessagePasser {
             return;
         }
         Request request =
-            new Request(source, OscAddress.from_cache("./:"
-                + message_handler_name), arguments, true);
-        DeferredRequestCallback callback =
-            new DeferredRequestCallback(this, request);
+            new Request(source, OscAddress.from_cache("./:" + message_handler_name),
+                arguments, true);
+        DeferredRequestCallback callback = new DeferredRequestCallback(this, request);
         try {
             MaxSystem.deferLow(callback);
         } catch (UnsatisfiedLinkError e) {
@@ -569,8 +529,8 @@ abstract public class Server implements MessagePasser {
             return;
         }
         Request request =
-            new Request(source, OscAddress.from_cache("./:"
-                + message_handler_name), arguments, true);
+            new Request(source, OscAddress.from_cache("./:" + message_handler_name),
+                arguments, true);
         this.handle_request(request);
     }
 
@@ -587,7 +547,7 @@ abstract public class Server implements MessagePasser {
 
     @Override
     public String toString() {
-        return "<" + this.getClass().getSimpleName() + ": "
-            + this.get_osc_address() + ">";
+        return "<" + this.getClass().getSimpleName() + ": " + this.get_osc_address()
+            + ">";
     }
 }

@@ -15,8 +15,7 @@ public abstract class ModuleMemberServerClient extends ServerClient {
     public ModuleMemberServerClient(Atom[] arguments) {
         this.declareIO(3, 2);
         if (arguments.length < 2) {
-            MaxObject
-                .bail("Lazy clients require a module ID and name template.");
+            MaxObject.bail("Lazy clients require a module ID and name template.");
         }
         if (arguments[0].isString() && arguments[0].getString().equals("#1")) {
             return;

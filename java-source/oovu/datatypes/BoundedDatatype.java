@@ -14,15 +14,12 @@ import oovu.timing.MultiEnvelope;
 
 import com.cycling74.max.Atom;
 
-abstract public class BoundedDatatype extends Datatype implements
-    EnvelopeHandler {
+abstract public class BoundedDatatype extends Datatype implements EnvelopeHandler {
     protected Double minimum;
     protected Double maximum;
     protected MultiEnvelope multi_envelope;
 
-    public BoundedDatatype(
-        AttributeServer client,
-        Map<String, Atom[]> argument_map) {
+    public BoundedDatatype(AttributeServer client, Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {
             this.configure_maximum_message_handler();
@@ -31,8 +28,7 @@ abstract public class BoundedDatatype extends Datatype implements
     }
 
     protected double[] bound_doubles(double[] doubles) {
-        return this.bound_doubles_by_minimum(this
-            .bound_doubles_by_maximum(doubles));
+        return this.bound_doubles_by_minimum(this.bound_doubles_by_maximum(doubles));
     }
 
     protected double[] bound_doubles_by_maximum(double[] doubles) {
@@ -68,18 +64,18 @@ abstract public class BoundedDatatype extends Datatype implements
         MessageHandlerBuilder builder = new MessageHandlerBuilder("maximum");
         builder.with_callback(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
                 BoundedDatatype.this.client.reoutput_value();
                 return null;
             }
         });
         builder.with_getter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
                 return MaxIO.to_atoms(built_message_handler.get_name(),
                     BoundedDatatype.this.get_maximum());
             }
@@ -88,9 +84,9 @@ abstract public class BoundedDatatype extends Datatype implements
         builder.with_is_state_relevant(true);
         builder.with_setter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
                 Double maximum = null;
                 if (0 < arguments.length) {
                     maximum = arguments[0].toDouble();
@@ -106,18 +102,18 @@ abstract public class BoundedDatatype extends Datatype implements
         MessageHandlerBuilder builder = new MessageHandlerBuilder("minimum");
         builder.with_callback(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
                 BoundedDatatype.this.client.reoutput_value();
                 return null;
             }
         });
         builder.with_getter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
                 return MaxIO.to_atoms(built_message_handler.get_name(),
                     BoundedDatatype.this.get_minimum());
             }
@@ -126,9 +122,9 @@ abstract public class BoundedDatatype extends Datatype implements
         builder.with_is_state_relevant(true);
         builder.with_setter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
                 Double minimum = null;
                 if (0 < arguments.length) {
                     minimum = arguments[0].toDouble();
@@ -161,15 +157,13 @@ abstract public class BoundedDatatype extends Datatype implements
     public void handle_envelope_response(double[] envelope_value) {
         Atom[] value = Atom.newAtom(envelope_value);
         this.value = value;
-        Environment
-            .log(this.client.get_name() + ": " + Atom.toOneString(value));
+        Environment.log(this.client.get_name() + ": " + Atom.toOneString(value));
         this.client.handle_asynchronous_datatype_value_output(value);
     }
 
     protected void initialize_extrema(Map<String, Atom[]> argument_map) {
         if (argument_map.containsKey("minimum")) {
-            this.set_minimum(this.extract_doubles_from_atoms(argument_map
-                .get("minimum"))[0]);
+            this.set_minimum(this.extract_doubles_from_atoms(argument_map.get("minimum"))[0]);
         } else {
             this.minimum = null;
         }

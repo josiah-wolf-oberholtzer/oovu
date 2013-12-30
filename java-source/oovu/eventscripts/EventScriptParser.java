@@ -19,8 +19,7 @@ public class EventScriptParser {
     public Map<String, State> parse_file(String filename) {
         Map<String, State> events = new LinkedHashMap<String, State>();
         String event_name = null;
-        ArrayList<StateComponent> event_components =
-            new ArrayList<StateComponent>();
+        ArrayList<StateComponent> event_components = new ArrayList<StateComponent>();
         for (String line : this.read_file(filename)) {
             line = line.trim();
             if (0 == line.length()) {
@@ -34,8 +33,8 @@ public class EventScriptParser {
             }
             if ((1 < atoms.length) && (atoms[0].getString().equals("CUE"))) {
                 if (event_name != null) {
-                    events.put(event_name, new StateComponentAggregate(
-                        event_name, event_components.toArray(new State[0])));
+                    events.put(event_name, new StateComponentAggregate(event_name,
+                        event_components.toArray(new State[0])));
                 }
                 event_components.clear();
                 event_name = Atom.toOneString(Atom.removeFirst(atoms));

@@ -39,16 +39,15 @@ public abstract class ModuleMemberServer extends Server {
         String label,
         Integer module_id,
         String desired_name) {
-        Class<?> member_node_class =
-            ModuleMemberServer.member_nodes_by_label.get(label);
+        Class<?> member_node_class = ModuleMemberServer.member_nodes_by_label.get(label);
         if (member_node_class == null) {
             Environment.log("Bad label: " + label);
             member_node_class = PropertyServer.class;
         }
         ModuleServer module_server = ModuleServer.allocate(module_id);
         OscAddress osc_address = OscAddress.from_cache(desired_name);
-        if (osc_address.has_parent_path_tokens
-            || osc_address.has_wildcard_tokens || !osc_address.is_relative) {
+        if (osc_address.has_parent_path_tokens || osc_address.has_wildcard_tokens
+            || !osc_address.is_relative) {
             throw new RuntimeException("Bad child address: " + desired_name);
         }
         ModuleMemberServer member_server = null;
@@ -58,18 +57,17 @@ public abstract class ModuleMemberServer extends Server {
         if (osc_address_node == null) {
             // address doesn't exist
             member_server =
-                ModuleMemberServer.allocate_new_from_label(module_server,
-                    label, module_id);
+                ModuleMemberServer.allocate_new_from_label(module_server, label,
+                    module_id);
             osc_address_node =
-                module_server.get_osc_address_node().create_address(
-                    osc_address, true);
+                module_server.get_osc_address_node().create_address(osc_address, true);
             member_server.attach_to_osc_address_node(osc_address_node);
             server_is_new = true;
         } else if (osc_address_node.get_server() == null) {
             // address does exist but no server is attached
             member_server =
-                ModuleMemberServer.allocate_new_from_label(module_server,
-                    label, module_id);
+                ModuleMemberServer.allocate_new_from_label(module_server, label,
+                    module_id);
             member_server.attach_to_osc_address_node(osc_address_node);
             server_is_new = true;
         } else {
@@ -82,11 +80,11 @@ public abstract class ModuleMemberServer extends Server {
             } else {
                 // server is not of the desired type, so acquire a new address
                 member_server =
-                    ModuleMemberServer.allocate_new_from_label(module_server,
-                        label, module_id);
+                    ModuleMemberServer.allocate_new_from_label(module_server, label,
+                        module_id);
                 osc_address_node =
-                    module_server.get_osc_address_node().create_address(
-                        osc_address, true);
+                    module_server.get_osc_address_node()
+                        .create_address(osc_address, true);
                 member_server.attach_to_osc_address_node(osc_address_node);
                 server_is_new = true;
             }
@@ -104,8 +102,7 @@ public abstract class ModuleMemberServer extends Server {
         ModuleServer module_server,
         String label,
         Integer module_id) {
-        Class<?> member_node_class =
-            ModuleMemberServer.member_nodes_by_label.get(label);
+        Class<?> member_node_class = ModuleMemberServer.member_nodes_by_label.get(label);
         ModuleMemberServer new_member_node = null;
         try {
             new_member_node =
@@ -134,8 +131,8 @@ public abstract class ModuleMemberServer extends Server {
         Class<? extends ModuleMemberServer> server_class) {
         ModuleServer module_server = ModuleServer.allocate(module_id);
         OscAddress osc_address = OscAddress.from_cache(desired_name);
-        if (osc_address.has_parent_path_tokens
-            || osc_address.has_wildcard_tokens || !osc_address.is_relative) {
+        if (osc_address.has_parent_path_tokens || osc_address.has_wildcard_tokens
+            || !osc_address.is_relative) {
             throw new RuntimeException("Bad child address: " + desired_name);
         }
         OscAddressNode osc_address_node =
@@ -167,9 +164,9 @@ public abstract class ModuleMemberServer extends Server {
         MessageHandlerBuilder builder = new MessageHandlerBuilder("modulename");
         builder.with_getter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
                 ModuleMemberServer module_member_server =
                     (ModuleMemberServer) built_message_handler.client;
                 if (module_member_server.parent_server == null) {

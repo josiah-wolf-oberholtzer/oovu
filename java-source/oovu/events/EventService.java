@@ -35,8 +35,7 @@ public class EventService {
 
     public void reset() {
         for (Class<? extends Event> event_type : this.subscriptions.keySet()) {
-            HashSet<Subscription> subscription_set =
-                this.subscriptions.get(event_type);
+            HashSet<Subscription> subscription_set = this.subscriptions.get(event_type);
             subscription_set.clear();
         }
         this.subscriptions.clear();
@@ -44,8 +43,7 @@ public class EventService {
 
     public void subscribe(Subscription subscription) {
         if (!this.subscriptions.containsKey(subscription.event_class)) {
-            this.subscriptions.put(subscription.event_class,
-                new HashSet<Subscription>());
+            this.subscriptions.put(subscription.event_class, new HashSet<Subscription>());
         }
         HashSet<Subscription> subscription_set =
             this.subscriptions.get(subscription.event_class);

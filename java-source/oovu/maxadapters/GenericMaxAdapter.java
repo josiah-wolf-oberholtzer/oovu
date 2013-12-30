@@ -27,8 +27,7 @@ public class GenericMaxAdapter extends MaxAdapter {
             if (osc_address_node == null) {
                 return;
             }
-            relative_osc_address =
-                response.get_relative_osc_address(osc_address_node);
+            relative_osc_address = response.get_relative_osc_address(osc_address_node);
         }
         for (Atom[] output : response.payload) {
             if (output[0].equals(MaxAdapter.value_atom)) {
@@ -42,9 +41,7 @@ public class GenericMaxAdapter extends MaxAdapter {
                 if (relative_osc_address != null) {
                     String message = output[0].getString();
                     output = Atom.removeFirst(output);
-                    output =
-                        Atom.newAtom(relative_osc_address + "/:" + message,
-                            output);
+                    output = Atom.newAtom(relative_osc_address + "/:" + message, output);
                     this.outlet(1, output);
                     this.outlet(0, Atom.newAtom("set", output));
                     // this.output_value_response_payload(output);

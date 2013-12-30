@@ -25,8 +25,8 @@ public class Test__OscAddressNode__prune_if_necessary {
     public void test_01() {
         OscAddress osc_address = OscAddress.from_cache("/foo/bar/baz/quux");
         OscAddressNode node =
-            Test__OscAddressNode__prune_if_necessary.root.create_address(
-                osc_address, false);
+            Test__OscAddressNode__prune_if_necessary.root.create_address(osc_address,
+                false);
         Assert.assertArrayEquals(
             Test__OscAddressNode__prune_if_necessary.root.get_summary_pieces(),
             new String[] {
@@ -42,8 +42,8 @@ public class Test__OscAddressNode__prune_if_necessary {
     public void test_02() {
         OscAddress osc_address = OscAddress.from_cache("/foo/bar/baz/quux");
         OscAddressNode node =
-            Test__OscAddressNode__prune_if_necessary.root.create_address(
-                osc_address, false);
+            Test__OscAddressNode__prune_if_necessary.root.create_address(osc_address,
+                false);
         Assert.assertArrayEquals(
             Test__OscAddressNode__prune_if_necessary.root.get_summary_pieces(),
             new String[] {

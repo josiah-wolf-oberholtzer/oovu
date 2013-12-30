@@ -15,9 +15,8 @@ public class ValueEvent extends ServerEvent {
     @Override
     public String toString() {
         return "ValueEvent ["
-            + (this.payload != null ? "payload="
-                + Atom.toOneString(this.payload) + ", " : "")
-            + (this.publisher != null ? "publisher=" + this.publisher : "")
+            + (this.payload != null ? "payload=" + Atom.toOneString(this.payload) + ", "
+                : "") + (this.publisher != null ? "publisher=" + this.publisher : "")
             + "]";
     }
 }

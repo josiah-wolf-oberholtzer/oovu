@@ -30,10 +30,9 @@ public class MessageHandlerBuilder {
     }
 
     public MessageHandler build(Server client) {
-        return new MessageHandler(client, this.arity, this.arity_callback,
-            this.callback, this.getter, this.is_binding_relevant,
-            this.is_meta_relevant, this.is_meta_relevant_callback,
-            this.is_rampable, this.is_rampable_callback,
+        return new MessageHandler(client, this.arity, this.arity_callback, this.callback,
+            this.getter, this.is_binding_relevant, this.is_meta_relevant,
+            this.is_meta_relevant_callback, this.is_rampable, this.is_rampable_callback,
             this.is_state_relevant, this.name, this.MessageHandlerCallback);
     }
 
@@ -58,15 +57,12 @@ public class MessageHandlerBuilder {
         return this;
     }
 
-    public MessageHandlerBuilder with_is_binding_relevant(
-        boolean is_binding_relevant) {
+    public MessageHandlerBuilder with_is_binding_relevant(boolean is_binding_relevant) {
         this.is_binding_relevant = is_binding_relevant;
         return this;
     }
 
-    public
-        MessageHandlerBuilder
-        with_is_meta_relevant(boolean is_meta_relevant) {
+    public MessageHandlerBuilder with_is_meta_relevant(boolean is_meta_relevant) {
         this.is_meta_relevant = is_meta_relevant;
         return this;
     }
@@ -88,14 +84,14 @@ public class MessageHandlerBuilder {
         return this;
     }
 
-    public MessageHandlerBuilder with_is_state_relevant(
-        boolean is_state_relevant) {
+    public MessageHandlerBuilder with_is_state_relevant(boolean is_state_relevant) {
         this.is_state_relevant = is_state_relevant;
         return this;
     }
 
-    public MessageHandlerBuilder with_setter(
-        MessageHandlerCallback MessageHandlerCallback) {
+    public
+        MessageHandlerBuilder
+        with_setter(MessageHandlerCallback MessageHandlerCallback) {
         this.MessageHandlerCallback = MessageHandlerCallback;
         return this;
     }

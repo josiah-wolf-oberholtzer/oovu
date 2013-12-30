@@ -40,8 +40,8 @@ abstract public class AttributeServer extends ModuleMemberServer implements
     public int compareTo(AttributeServer other) {
         int priority_comparison = this.priority.compareTo(other.priority);
         if (priority_comparison == 0) {
-            return this.get_osc_address_string().compareTo(
-                other.get_osc_address_string());
+            return this.get_osc_address_string()
+                .compareTo(other.get_osc_address_string());
         } else {
             return -1 * priority_comparison;
         }
@@ -51,8 +51,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         if (this.is_configured) {
             return;
         }
-        Map<String, Atom[]> argument_map =
-            MaxIO.from_serialized_dict(arguments);
+        Map<String, Atom[]> argument_map = MaxIO.from_serialized_dict(arguments);
         Atom[] datatype_arguments = argument_map.get("datatype");
         String datatype_label = null;
         if ((datatype_arguments != null) && (0 < datatype_arguments.length)) {
@@ -62,9 +61,8 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         Datatype datatype = null;
         try {
             datatype =
-                (Datatype) datatype_class.getDeclaredConstructor(
-                    AttributeServer.class, Map.class).newInstance(this,
-                    argument_map);
+                (Datatype) datatype_class.getDeclaredConstructor(AttributeServer.class,
+                    Map.class).newInstance(this, argument_map);
         } catch (IllegalArgumentException e) {
             // e.printStackTrace();
         } catch (SecurityException e) {
@@ -99,9 +97,9 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         MessageHandlerBuilder builder = new MessageHandlerBuilder("priority");
         builder.with_getter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
                 AttributeServer attribute_server =
                     (AttributeServer) built_message_handler.client;
                 return MaxIO.to_atoms(built_message_handler.get_name(),
@@ -110,9 +108,9 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         });
         builder.with_setter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
                 AttributeServer attribute_server =
                     (AttributeServer) built_message_handler.client;
                 Integer priority = null;
@@ -138,34 +136,32 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         });
         builder.with_callback(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
-                built_message_handler.client.make_request(
-                    built_message_handler.client, "getvalue", null);
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
+                built_message_handler.client.make_request(built_message_handler.client,
+                    "getvalue", null);
                 return null;
             }
         });
         builder.with_is_binding_relevant(true);
-        builder
-            .with_is_meta_relevant_callback(new BooleanMessageHandlerCallback() {
-                @Override
-                public boolean execute(MessageHandler built_message_handler) {
-                    if (built_message_handler.client instanceof PropertyServer) {
-                        return true;
-                    }
-                    return false;
+        builder.with_is_meta_relevant_callback(new BooleanMessageHandlerCallback() {
+            @Override
+            public boolean execute(MessageHandler built_message_handler) {
+                if (built_message_handler.client instanceof PropertyServer) {
+                    return true;
                 }
-            });
+                return false;
+            }
+        });
         builder.with_getter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
                 Atom[][] result = new Atom[1][];
                 result[0] = AttributeServer.this.get_value();
-                result[0] =
-                    Atom.newAtom(built_message_handler.get_name(), result[0]);
+                result[0] = Atom.newAtom(built_message_handler.get_name(), result[0]);
                 return result;
             }
         });
@@ -179,9 +175,9 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         });
         builder.with_setter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
                 AttributeServer attribute_server =
                     (AttributeServer) built_message_handler.client;
                 attribute_server.set_value(arguments);
@@ -203,8 +199,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
 
     @Override
     public State get_state() {
-        ArrayList<StateComponent> state_entries =
-            new ArrayList<StateComponent>();
+        ArrayList<StateComponent> state_entries = new ArrayList<StateComponent>();
         String osc_address_string = this.get_osc_address_string();
         Set<MessageHandler> message_handlers =
             new HashSet<MessageHandler>(this.message_handlers.values());
@@ -212,20 +207,18 @@ abstract public class AttributeServer extends ModuleMemberServer implements
             if (message_handler.get_is_state_relevant()
                 && (message_handler.getter != null)) {
                 Atom[][] getter_payload =
-                    message_handler.handle_message(
-                        message_handler.get_getter_name(), null);
+                    message_handler.handle_message(message_handler.get_getter_name(),
+                        null);
                 for (Atom[] substate : getter_payload) {
                     String substate_address =
                         osc_address_string + "/:" + substate[0].getString();
                     Atom[] payload = Atom.removeFirst(substate);
-                    state_entries.add(new StateComponent(substate_address,
-                        payload));
+                    state_entries.add(new StateComponent(substate_address, payload));
                 }
             }
         }
         if (this instanceof PropertyServer) {
-            state_entries.add(new StateComponent(osc_address_string, this
-                .get_value()));
+            state_entries.add(new StateComponent(osc_address_string, this.get_value()));
         }
         return new StateComponentAggregate(osc_address_string,
             state_entries.toArray(new StateComponent[0]));
@@ -239,8 +232,7 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         Atom[][] payload = new Atom[1][];
         payload[0] = Atom.newAtom("value", output);
         Request request =
-            new Request(this, OscAddress.from_cache("./:getvalue"),
-                new Atom[0], true);
+            new Request(this, OscAddress.from_cache("./:getvalue"), new Atom[0], true);
         Response response = new Response(this, payload, request);
         this.handle_response(response);
     }

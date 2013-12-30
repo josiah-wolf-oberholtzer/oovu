@@ -18,11 +18,9 @@ import com.cycling74.max.Atom;
 
 public class DspSendServer extends ModuleMemberServer {
     private class DspSettingsChangedSubscription extends Subscription {
-        public DspSettingsChangedSubscription(
-            Server subscriber,
-            Server publisher) {
-            super(subscriber, DspSettingsChangedEvent.class,
-                new PublisherFilter(publisher));
+        public DspSettingsChangedSubscription(Server subscriber, Server publisher) {
+            super(subscriber, DspSettingsChangedEvent.class, new PublisherFilter(
+                publisher));
         }
 
         @Override
@@ -57,8 +55,8 @@ public class DspSendServer extends ModuleMemberServer {
         Integer module_id,
         String desired_name,
         Atom[] argument_list) {
-        return (DspSendServer) ModuleMemberServer.allocate_from_label(
-            "DspSendServer", module_id, desired_name);
+        return (DspSendServer) ModuleMemberServer.allocate_from_label("DspSendServer",
+            module_id, desired_name);
     }
 
     private DspReceiveServer destination_server;
@@ -80,15 +78,14 @@ public class DspSendServer extends ModuleMemberServer {
     }
 
     private void configure_destination_message_handler() {
-        MessageHandlerBuilder builder =
-            new MessageHandlerBuilder("destination");
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("destination");
         builder.with_callback(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
-                built_message_handler.client.make_request(
-                    built_message_handler.client, "dumpmeta", null);
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
+                built_message_handler.client.make_request(built_message_handler.client,
+                    "dumpmeta", null);
                 return null;
             }
         });
@@ -96,33 +93,29 @@ public class DspSendServer extends ModuleMemberServer {
         builder.with_is_state_relevant(true);
         builder.with_getter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
-                DspSendServer server =
-                    (DspSendServer) built_message_handler.client;
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
+                DspSendServer server = (DspSendServer) built_message_handler.client;
                 return MaxIO.to_atoms(built_message_handler.get_name(),
                     server.get_destination_address_string());
             }
         });
         builder.with_setter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
-                DspSendServer server =
-                    (DspSendServer) built_message_handler.client;
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
+                DspSendServer server = (DspSendServer) built_message_handler.client;
                 if ((0 == arguments.length)
-                    || (arguments[0].isString() && arguments[0].getString()
-                        .equals("---"))) {
+                    || (arguments[0].isString() && arguments[0].getString().equals("---"))) {
                     server.set_destination_server(null);
                 } else {
                     String address_string = arguments[0].getString();
                     OscAddress destination_address =
                         OscAddress.from_cache(address_string);
                     DspReceiveServer destination_server =
-                        DspReceiveServer.dsp_receive_servers
-                            .get(destination_address);
+                        DspReceiveServer.dsp_receive_servers.get(destination_address);
                     server.set_destination_server(destination_server);
                 }
                 return null;
@@ -132,16 +125,14 @@ public class DspSendServer extends ModuleMemberServer {
     }
 
     private void configure_destinationid_message_handler() {
-        MessageHandlerBuilder builder =
-            new MessageHandlerBuilder("destinationid");
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("destinationid");
         builder.with_is_meta_relevant(true);
         builder.with_getter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
-                DspSendServer server =
-                    (DspSendServer) built_message_handler.client;
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
+                DspSendServer server = (DspSendServer) built_message_handler.client;
                 return MaxIO.to_atoms(built_message_handler.get_name(),
                     server.get_destination_id());
             }
@@ -150,14 +141,13 @@ public class DspSendServer extends ModuleMemberServer {
     }
 
     private void configure_destinations_message_handler() {
-        MessageHandlerBuilder builder =
-            new MessageHandlerBuilder("destinations");
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("destinations");
         builder.with_is_meta_relevant(true);
         builder.with_getter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
                 return MaxIO.to_atoms("destinations",
                     AudioSendDatatype.get_destinations());
             }
@@ -170,11 +160,10 @@ public class DspSendServer extends ModuleMemberServer {
         builder.with_is_meta_relevant(true);
         builder.with_getter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
-                DspSendServer server =
-                    (DspSendServer) built_message_handler.client;
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
+                DspSendServer server = (DspSendServer) built_message_handler.client;
                 Atom[][] result = new Atom[1][];
                 int[] io = server.get_io();
                 result[0] = Atom.newAtom("io", Atom.newAtom(io));
@@ -189,11 +178,10 @@ public class DspSendServer extends ModuleMemberServer {
         builder.with_is_meta_relevant(true);
         builder.with_getter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
-                DspSendServer server =
-                    (DspSendServer) built_message_handler.client;
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
+                DspSendServer server = (DspSendServer) built_message_handler.client;
                 Routing[] routing = server.get_routing();
                 if (0 == routing.length) {
                     return MaxIO.to_atoms("routing", "clear");
@@ -247,8 +235,7 @@ public class DspSendServer extends ModuleMemberServer {
         if (module_server == null) {
             return 0;
         }
-        DspSettingsServer dsp_settings_server =
-            module_server.get_dsp_settings_server();
+        DspSettingsServer dsp_settings_server = module_server.get_dsp_settings_server();
         if (dsp_settings_server == null) {
             return 1;
         }
@@ -414,8 +401,7 @@ public class DspSendServer extends ModuleMemberServer {
         }
         this.destination_server = destination;
         if (destination != null) {
-            ModuleServer target_module =
-                (ModuleServer) destination.get_parent_server();
+            ModuleServer target_module = (ModuleServer) destination.get_parent_server();
             Subscription target_subscription =
                 new DspSettingsChangedSubscription(this,
                     target_module.get_dsp_settings_server());

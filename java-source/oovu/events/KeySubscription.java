@@ -22,15 +22,11 @@ public class KeySubscription extends BindingSubscription {
         } else {
             message_name = "value";
         }
-        Environment.log("Message: " + message_name);
-        MessageHandler message_handler =
-            subscriber.get_message_handler(message_name);
+        MessageHandler message_handler = subscriber.get_message_handler(message_name);
         if ((message_handler == null)
             || message_name.equals(message_handler.get_getter_name())) {
-            Environment.log("Message: is getter");
             return null;
         } else if (!message_handler.get_is_binding_relevant()) {
-            Environment.log("Message: not bindable");
             return null;
         }
         if (map.containsKey("name")) {
@@ -53,9 +49,8 @@ public class KeySubscription extends BindingSubscription {
             Environment.log("Key: not specified");
             return null;
         }
-        Environment.log("Safe!");
-        return new KeySubscription(subscriber, ascii_number, message_name,
-            args, subscription_name);
+        return new KeySubscription(subscriber, ascii_number, message_name, args,
+            subscription_name);
     }
 
     public final int ascii_number;
@@ -66,8 +61,8 @@ public class KeySubscription extends BindingSubscription {
         String message_name,
         Atom[] arguments,
         String subscription_name) {
-        super(subscriber, KeyEvent.class, new KeyFilter(ascii_number),
-            message_name, arguments, subscription_name);
+        super(subscriber, KeyEvent.class, new KeyFilter(ascii_number), message_name,
+            arguments, subscription_name);
         this.ascii_number = ascii_number;
     }
 

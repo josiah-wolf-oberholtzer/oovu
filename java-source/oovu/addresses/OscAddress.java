@@ -10,8 +10,8 @@ import java.util.regex.Pattern;
 public class OscAddress {
     static final String osc_name_regex =
         "(\\*|(([a-z][a-z0-9~]*|\\*)(\\.([a-z0-9]+|\\*))?))";
-    static final String node_attribute_regex = ".*(:"
-        + OscAddress.osc_name_regex + "(/" + OscAddress.osc_name_regex + ")*)$";
+    static final String node_attribute_regex = ".*(:" + OscAddress.osc_name_regex + "(/"
+        + OscAddress.osc_name_regex + ")*)$";
     static final Pattern node_attribute_pattern = Pattern
         .compile(OscAddress.node_attribute_regex);
     static final Pattern osc_name_pattern = Pattern.compile("^"
@@ -29,8 +29,7 @@ public class OscAddress {
     }
 
     public static OscAddress from_cache(String osc_address_string) {
-        OscAddress osc_address =
-            OscAddress.cached_addresses.get(osc_address_string);
+        OscAddress osc_address = OscAddress.cached_addresses.get(osc_address_string);
         if (osc_address == null) {
             osc_address = new OscAddress(osc_address_string);
             OscAddress.cached_addresses.put(osc_address_string, osc_address);
@@ -80,8 +79,7 @@ public class OscAddress {
         if (matcher.matches()) {
             this.message_handler_name = matcher.group(1).substring(1);
             input = input.replace(matcher.group(1), "");
-            if ((0 < input.length())
-                && (input.charAt(input.length() - 1) != '/')) {
+            if ((0 < input.length()) && (input.charAt(input.length() - 1) != '/')) {
                 throw new RuntimeException("Bad address: " + input);
             }
         } else {
@@ -98,8 +96,7 @@ public class OscAddress {
         ArrayList<String> new_address_items = new ArrayList<String>();
         for (String address_item : old_address_items) {
             if (!OscAddress.is_valid_token(address_item)) {
-                throw new RuntimeException("Bad address item: '" + address_item
-                    + "'");
+                throw new RuntimeException("Bad address item: '" + address_item + "'");
             }
             if (!OscAddress.is_current_node_token(address_item)) {
                 new_address_items.add(address_item);

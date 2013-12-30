@@ -50,12 +50,10 @@ public class ValueRange {
             return false;
         }
         ValueRange other = (ValueRange) obj;
-        if (Double.doubleToLongBits(this.high) != Double
-            .doubleToLongBits(other.high)) {
+        if (Double.doubleToLongBits(this.high) != Double.doubleToLongBits(other.high)) {
             return false;
         }
-        if (Double.doubleToLongBits(this.low) != Double
-            .doubleToLongBits(other.low)) {
+        if (Double.doubleToLongBits(this.low) != Double.doubleToLongBits(other.low)) {
             return false;
         }
         return true;

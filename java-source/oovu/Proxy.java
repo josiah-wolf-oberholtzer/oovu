@@ -72,15 +72,13 @@ public class Proxy extends AddressedMaxPeer {
                         }
                         if (osc_address.message_handler_name == null) {
                             osc_address =
-                                OscAddress.from_cache(osc_address.toString()
-                                    + "/:value");
+                                OscAddress.from_cache(osc_address.toString() + "/:value");
                         }
                     }
                 }
             } else {
                 arguments = Atom.newAtom(message, arguments);
-                osc_address =
-                    OscAddress.from_cache("./:" + this.message_handler_name);
+                osc_address = OscAddress.from_cache("./:" + this.message_handler_name);
             }
             Request request = new Request(this, osc_address, arguments, true);
             this.handle_request(request);
@@ -102,8 +100,7 @@ public class Proxy extends AddressedMaxPeer {
             return;
         }
         OscAddressNode osc_address_node = Environment.root_osc_address_node;
-        if (arguments[0].isString()
-            && (arguments[0].getString().charAt(0) == '#')) {
+        if (arguments[0].isString() && (arguments[0].getString().charAt(0) == '#')) {
             return;
         } else if (arguments[0].isInt()) {
             int module_id = arguments[0].getInt();
@@ -128,8 +125,7 @@ public class Proxy extends AddressedMaxPeer {
         OscAddressNode found_osc_address_node =
             osc_address_node.create_address(osc_address, false);
         if (found_osc_address_node == null) {
-            MaxObject.error("Couldn't create address node: "
-                + osc_address.toString());
+            MaxObject.error("Couldn't create address node: " + osc_address.toString());
             return;
         }
         this.attach(found_osc_address_node);
@@ -139,8 +135,8 @@ public class Proxy extends AddressedMaxPeer {
             this.message_handler_name = null;
         }
         if (this.osc_address_node.get_server() != null) {
-            this.osc_address_node.get_server().make_deferred_request(this,
-                "dumpmeta", null);
+            this.osc_address_node.get_server().make_deferred_request(this, "dumpmeta",
+                null);
         }
     }
 
@@ -190,8 +186,7 @@ public class Proxy extends AddressedMaxPeer {
                 Atom[][] payload = new Atom[1][];
                 payload[0] = Atom.newAtom("value", Atom.removeFirst(atoms));
                 Response new_response =
-                    new Response(response.source, payload,
-                        response.original_request);
+                    new Response(response.source, payload, response.original_request);
                 this.max_adapter.handle_response(new_response);
             }
         }

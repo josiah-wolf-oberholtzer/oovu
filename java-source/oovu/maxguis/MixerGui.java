@@ -39,20 +39,16 @@ public class MixerGui {
             int x_offset = MixerGui.gutter;
             x_offset = MixerGui.fill_globals_section(patcher, x_offset);
             x_offset =
-                MixerGui.fill_module_section("INPUTS", patcher, output_modules,
+                MixerGui.fill_module_section("INPUTS", patcher, output_modules, x_offset);
+            x_offset =
+                MixerGui.fill_module_section("THROUGHPUTS", patcher, effects_modules,
                     x_offset);
             x_offset =
-                MixerGui.fill_module_section("THROUGHPUTS", patcher,
-                    effects_modules, x_offset);
-            x_offset =
-                MixerGui.fill_module_section("OUTPUTS", patcher, input_modules,
-                    x_offset);
+                MixerGui.fill_module_section("OUTPUTS", patcher, input_modules, x_offset);
             patcher.setBackgroundColor(0, 0, 0);
             patcher.send("enablevscroll", Atom.parse("0"));
-            patcher.send(
-                "window",
-                Atom.parse("size 50 50 " + (x_offset + 50) + " "
-                    + (MixerGui.height + 50)));
+            patcher.send("window", Atom.parse("size 50 50 " + (x_offset + 50) + " "
+                + (MixerGui.height + 50)));
             patcher.send("window", Atom.parse("exec"));
             patcher.send("statusbarvisible", Atom.parse("0"));
             patcher.send("toolbarvisible", Atom.parse("0"));
@@ -68,8 +64,8 @@ public class MixerGui {
             x_offset,
             MixerGui.gutter,
             "bpatcher",
-            Atom.parse("@patching_rect " + MixerGui.gutter + " "
-                + MixerGui.gutter + " 50 70 @name oovu.mixer.globals"));
+            Atom.parse("@patching_rect " + MixerGui.gutter + " " + MixerGui.gutter
+                + " 50 70 @name oovu.mixer.globals"));
         return x_offset + 50 + MixerGui.gutter;
     }
 
@@ -87,8 +83,8 @@ public class MixerGui {
                 y_offset,
                 "bpatcher",
                 Atom.parse("@patching_rect " + x_offset + " " + y_offset
-                    + " 140 110 @name oovu.mixer.title.basic @args "
-                    + module.module_id + " @clickthrough 1 @background 1"));
+                    + " 140 110 @name oovu.mixer.title.basic @args " + module.module_id
+                    + " @clickthrough 1 @background 1"));
         }
         if (has_receives) {
             patcher.newDefault(
@@ -96,8 +92,8 @@ public class MixerGui {
                 y_offset,
                 "bpatcher",
                 Atom.parse("@patching_rect " + x_offset + " " + y_offset
-                    + " 140 110 @name oovu.mixer.title.inputs @args "
-                    + module.module_id + " @clickthrough 1"));
+                    + " 140 110 @name oovu.mixer.title.inputs @args " + module.module_id
+                    + " @clickthrough 1"));
         }
         if (has_sends) {
             patcher.newDefault(
@@ -105,16 +101,14 @@ public class MixerGui {
                 y_offset,
                 "bpatcher",
                 Atom.parse("@patching_rect " + x_offset + " " + y_offset
-                    + " 140 110 @name oovu.mixer.title.outputs @args "
-                    + module.module_id + " @clickthrough 1"));
+                    + " 140 110 @name oovu.mixer.title.outputs @args " + module.module_id
+                    + " @clickthrough 1"));
             patcher.newDefault(
                 x_offset,
                 y_offset,
                 "bpatcher",
-                Atom.parse("@patching_rect " + x_offset + " "
-                    + (y_offset + 115)
-                    + " 140 595 @name oovu.mixer.sends @args "
-                    + module.module_id));
+                Atom.parse("@patching_rect " + x_offset + " " + (y_offset + 115)
+                    + " 140 595 @name oovu.mixer.sends @args " + module.module_id));
         }
     }
 
@@ -133,20 +127,18 @@ public class MixerGui {
             MixerGui.gutter,
             "comment",
             Atom.parse("@text " + comment_text
-                + " @fontface 3 @textcolor 1 1 1 1 @patching_rect " + x_offset
-                + " " + MixerGui.gutter + " 140 20"));
+                + " @fontface 3 @textcolor 1 1 1 1 @patching_rect " + x_offset + " "
+                + MixerGui.gutter + " 140 20"));
         for (ModuleServer module : modules) {
-            MixerGui.fill_module_column(module, patcher, x_offset,
-                MixerGui.gutter + 25);
+            MixerGui.fill_module_column(module, patcher, x_offset, MixerGui.gutter + 25);
             x_offset += 140 + MixerGui.gutter;
         }
         return x_offset;
     }
 
-    private static MaxBox make_vertical_line(
-        MaxPatcher patcher,
-        int x_offset,
-        int height) {
+    private static
+        MaxBox
+        make_vertical_line(MaxPatcher patcher, int x_offset, int height) {
         return patcher.newDefault(
             x_offset,
             height,

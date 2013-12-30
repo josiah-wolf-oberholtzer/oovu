@@ -38,8 +38,7 @@ public class Test__Datatype__construct {
     @Test
     public void test_01() {
         Module module = new Module(Atom.parse("1001 foo"));
-        Property property =
-            new Property(Atom.parse("1001 bar :datatype boolean"));
+        Property property = new Property(Atom.parse("1001 bar :datatype boolean"));
         AttributeServer server = (AttributeServer) property.get_server();
         Datatype datatype = server.datatype;
         Assert.assertEquals(BooleanDatatype.class, datatype.getClass());
@@ -50,8 +49,7 @@ public class Test__Datatype__construct {
     @Test
     public void test_02() {
         Module module = new Module(Atom.parse("1001 foo"));
-        Property property =
-            new Property(Atom.parse("1001 bar :datatype decimalarray"));
+        Property property = new Property(Atom.parse("1001 bar :datatype decimalarray"));
         AttributeServer server = (AttributeServer) property.get_server();
         Datatype datatype = server.datatype;
         Assert.assertEquals(DecimalArrayDatatype.class, datatype.getClass());
@@ -62,8 +60,7 @@ public class Test__Datatype__construct {
     @Test
     public void test_03() {
         Module module = new Module(Atom.parse("1001 foo"));
-        Property property =
-            new Property(Atom.parse("1001 bar :datatype decimal"));
+        Property property = new Property(Atom.parse("1001 bar :datatype decimal"));
         AttributeServer server = (AttributeServer) property.get_server();
         Datatype datatype = server.datatype;
         Assert.assertEquals(DecimalDatatype.class, datatype.getClass());
@@ -74,8 +71,7 @@ public class Test__Datatype__construct {
     @Test
     public void test_04() {
         Module module = new Module(Atom.parse("1001 foo"));
-        Property property =
-            new Property(Atom.parse("1001 bar :datatype filesystempath"));
+        Property property = new Property(Atom.parse("1001 bar :datatype filesystempath"));
         AttributeServer server = (AttributeServer) property.get_server();
         Datatype datatype = server.datatype;
         Assert.assertEquals(FilesystemPathDatatype.class, datatype.getClass());
@@ -86,8 +82,7 @@ public class Test__Datatype__construct {
     @Test
     public void test_05() {
         Module module = new Module(Atom.parse("1001 foo"));
-        Property property =
-            new Property(Atom.parse("1001 bar :datatype generic"));
+        Property property = new Property(Atom.parse("1001 bar :datatype generic"));
         AttributeServer server = (AttributeServer) property.get_server();
         Datatype datatype = server.datatype;
         Assert.assertEquals(GenericDatatype.class, datatype.getClass());
@@ -98,8 +93,7 @@ public class Test__Datatype__construct {
     @Test
     public void test_06() {
         Module module = new Module(Atom.parse("1001 foo"));
-        Property property =
-            new Property(Atom.parse("1001 bar :datatype integerarray"));
+        Property property = new Property(Atom.parse("1001 bar :datatype integerarray"));
         AttributeServer server = (AttributeServer) property.get_server();
         Datatype datatype = server.datatype;
         Assert.assertEquals(IntegerArrayDatatype.class, datatype.getClass());
@@ -110,8 +104,7 @@ public class Test__Datatype__construct {
     @Test
     public void test_07() {
         Module module = new Module(Atom.parse("1001 foo"));
-        Property property =
-            new Property(Atom.parse("1001 bar :datatype integer"));
+        Property property = new Property(Atom.parse("1001 bar :datatype integer"));
         AttributeServer server = (AttributeServer) property.get_server();
         Datatype datatype = server.datatype;
         Assert.assertEquals(IntegerDatatype.class, datatype.getClass());
@@ -122,8 +115,7 @@ public class Test__Datatype__construct {
     @Test
     public void test_08() {
         Module module = new Module(Atom.parse("1001 foo"));
-        Property property =
-            new Property(Atom.parse("1001 bar :datatype option"));
+        Property property = new Property(Atom.parse("1001 bar :datatype option"));
         AttributeServer server = (AttributeServer) property.get_server();
         Datatype datatype = server.datatype;
         Assert.assertEquals(OptionDatatype.class, datatype.getClass());
@@ -134,8 +126,7 @@ public class Test__Datatype__construct {
     @Test
     public void test_09() {
         Module module = new Module(Atom.parse("1001 foo"));
-        Property property =
-            new Property(Atom.parse("1001 bar :datatype oscaddress"));
+        Property property = new Property(Atom.parse("1001 bar :datatype oscaddress"));
         AttributeServer server = (AttributeServer) property.get_server();
         Datatype datatype = server.datatype;
         Assert.assertEquals(OscAddressDatatype.class, datatype.getClass());
@@ -146,8 +137,7 @@ public class Test__Datatype__construct {
     @Test
     public void test_10() {
         Module module = new Module(Atom.parse("1001 foo"));
-        Property property =
-            new Property(Atom.parse("1001 bar :datatype range"));
+        Property property = new Property(Atom.parse("1001 bar :datatype range"));
         AttributeServer server = (AttributeServer) property.get_server();
         Datatype datatype = server.datatype;
         Assert.assertEquals(RangeDatatype.class, datatype.getClass());
@@ -158,8 +148,7 @@ public class Test__Datatype__construct {
     @Test
     public void test_11() {
         Module module = new Module(Atom.parse("1001 foo"));
-        Property property =
-            new Property(Atom.parse("1001 bar :datatype string"));
+        Property property = new Property(Atom.parse("1001 bar :datatype string"));
         AttributeServer server = (AttributeServer) property.get_server();
         Datatype datatype = server.datatype;
         Assert.assertEquals(StringDatatype.class, datatype.getClass());

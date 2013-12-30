@@ -13,7 +13,7 @@ public class MidiEvent extends Event {
 
     @Override
     public String toString() {
-        return "MidiEvent [channel=" + this.channel + ", controller="
-            + this.controller + ", value=" + this.value + "]";
+        return "MidiEvent [channel=" + this.channel + ", controller=" + this.controller
+            + ", value=" + this.value + "]";
     }
 }

@@ -30,8 +30,7 @@ public class EventManager {
     public void execute_state(State state, RootServer root_server) {
         for (Atom[] atoms : state.toAtoms()) {
             String state_address_string = atoms[0].getString();
-            OscAddress state_address =
-                OscAddress.from_cache(state_address_string);
+            OscAddress state_address = OscAddress.from_cache(state_address_string);
             Atom[] state_arguments = Atom.removeFirst(atoms);
             Request request =
                 new Request(root_server, state_address, state_arguments, true);
@@ -133,8 +132,7 @@ public class EventManager {
     public void parse_file(String filename) {
         Map<String, State> events = new LinkedHashMap<String, State>();
         String event_name = null;
-        ArrayList<StateComponent> event_components =
-            new ArrayList<StateComponent>();
+        ArrayList<StateComponent> event_components = new ArrayList<StateComponent>();
         for (String line : this.read_file(filename)) {
             line = line.trim();
             if (0 == line.length()) {
@@ -148,8 +146,8 @@ public class EventManager {
             }
             if ((1 < atoms.length) && (atoms[0].getString().equals("CUE"))) {
                 if (event_name != null) {
-                    events.put(event_name, new StateComponentAggregate(
-                        event_name, event_components.toArray(new State[0])));
+                    events.put(event_name, new StateComponentAggregate(event_name,
+                        event_components.toArray(new State[0])));
                 }
                 event_components.clear();
                 event_name = Atom.toOneString(Atom.removeFirst(atoms));

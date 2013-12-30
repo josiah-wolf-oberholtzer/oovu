@@ -51,10 +51,7 @@ public class Environment {
         }
     }
 
-    public static void outlet(
-        MaxObject max_object,
-        int outlet_index,
-        Atom[] payload) {
+    public static void outlet(MaxObject max_object, int outlet_index, Atom[] payload) {
         try {
             max_object.outlet(outlet_index, payload);
         } catch (UnsatisfiedLinkError e) {
@@ -63,8 +60,7 @@ public class Environment {
     }
 
     public static void report() {
-        for (String piece : Environment.root_osc_address_node
-            .get_debug_pieces()) {
+        for (String piece : Environment.root_osc_address_node.get_debug_pieces()) {
             Environment.log(piece);
         }
     }

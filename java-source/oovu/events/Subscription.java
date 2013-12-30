@@ -62,9 +62,7 @@ abstract public class Subscription {
         result =
             (prime * result)
                 + ((this.event_class == null) ? 0 : this.event_class.hashCode());
-        result =
-            (prime * result)
-                + ((this.filter == null) ? 0 : this.filter.hashCode());
+        result = (prime * result) + ((this.filter == null) ? 0 : this.filter.hashCode());
         result =
             (prime * result)
                 + ((this.subscriber == null) ? 0 : this.subscriber.hashCode());
@@ -81,8 +79,7 @@ abstract public class Subscription {
     @Override
     public String toString() {
         return "Subscription [subscriber=" + this.subscriber + ", event_class="
-            + this.event_class.getSimpleName() + ", filter=" + this.filter
-            + "]";
+            + this.event_class.getSimpleName() + ", filter=" + this.filter + "]";
     }
 
     public Subscription unsubscribe() {

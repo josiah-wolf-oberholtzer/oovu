@@ -47,8 +47,7 @@ public class StateComponent extends State {
         final int prime = 31;
         int result = 1;
         result =
-            (prime * result)
-                + ((this.address == null) ? 0 : this.address.hashCode());
+            (prime * result) + ((this.address == null) ? 0 : this.address.hashCode());
         result = (prime * result) + Arrays.hashCode(this.arguments);
         return result;
     }

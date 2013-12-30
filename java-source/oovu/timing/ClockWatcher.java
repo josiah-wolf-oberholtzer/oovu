@@ -29,8 +29,7 @@ abstract public class ClockWatcher {
 
     protected static final Lock lock = new ReentrantLock();
     protected static MaxClock clock = null;
-    protected static final Set<ClockWatcher> clock_watchers =
-        new HashSet<ClockWatcher>();
+    protected static final Set<ClockWatcher> clock_watchers = new HashSet<ClockWatcher>();
     protected static final int output_granularity = 20;
     protected static ClockCallback clock_callback = null;
 
@@ -48,22 +47,19 @@ abstract public class ClockWatcher {
 
     protected void start_watching_clock(ClockWatcher clock_watcher) {
         synchronized (ClockWatcher.class) {
-            int original_clock_watchers_count =
-                ClockWatcher.clock_watchers.size();
+            int original_clock_watchers_count = ClockWatcher.clock_watchers.size();
             ClockWatcher.clock_watchers.add(clock_watcher);
             if (ClockWatcher.clock_callback == null) {
                 ClockWatcher.clock_callback = new ClockCallback();
             }
             if (ClockWatcher.clock == null) {
                 try {
-                    ClockWatcher.clock =
-                        new MaxClock(ClockWatcher.clock_callback);
+                    ClockWatcher.clock = new MaxClock(ClockWatcher.clock_callback);
                 } catch (UnsatisfiedLinkError e) {
                     // Environment.log(e);
                 }
             }
-            if ((original_clock_watchers_count == 0)
-                && (ClockWatcher.clock != null)) {
+            if ((original_clock_watchers_count == 0) && (ClockWatcher.clock != null)) {
                 ClockWatcher.clock.delay(ClockWatcher.output_granularity);
             }
         }
@@ -78,8 +74,7 @@ abstract public class ClockWatcher {
     protected void stop_watching_clock(ClockWatcher clock_watcher) {
         synchronized (ClockWatcher.class) {
             ClockWatcher.clock_watchers.remove(clock_watcher);
-            if ((ClockWatcher.clock_watchers.size() == 0)
-                && (ClockWatcher.clock != null)) {
+            if ((ClockWatcher.clock_watchers.size() == 0) && (ClockWatcher.clock != null)) {
                 ClockWatcher.clock.unset();
                 // ClockWatcher.clock.release();
                 // MaxObject.post("Freeing Clock");

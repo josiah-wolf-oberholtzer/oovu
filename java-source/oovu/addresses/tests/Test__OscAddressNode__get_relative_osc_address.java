@@ -20,15 +20,13 @@ public class Test__OscAddressNode__get_relative_osc_address {
     @Test
     public void test() {
         OscAddressNode root = new OscAddressNode("");
-        OscAddressNode foo =
-            root.create_address(OscAddress.from_cache("/foo"), false);
+        OscAddressNode foo = root.create_address(OscAddress.from_cache("/foo"), false);
         OscAddressNode bar =
             root.create_address(OscAddress.from_cache("/foo/bar"), false);
         Assert.assertNull(root.get_relative_osc_address_string(root));
         Assert.assertEquals("/foo", foo.get_relative_osc_address_string(root));
         Assert.assertNull(foo.get_relative_osc_address_string(foo));
-        Assert.assertEquals("/foo/bar",
-            bar.get_relative_osc_address_string(root));
+        Assert.assertEquals("/foo/bar", bar.get_relative_osc_address_string(root));
         Assert.assertEquals("/bar", bar.get_relative_osc_address_string(foo));
         Assert.assertNull(bar.get_relative_osc_address_string(bar));
     }

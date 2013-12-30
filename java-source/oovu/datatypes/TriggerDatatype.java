@@ -12,9 +12,7 @@ public class TriggerDatatype extends Datatype {
         this(null, MaxIO.from_serialized_dict(arguments));
     }
 
-    public TriggerDatatype(
-        AttributeServer client,
-        Map<String, Atom[]> argument_map) {
+    public TriggerDatatype(AttributeServer client, Map<String, Atom[]> argument_map) {
         super(client, argument_map);
     }
 

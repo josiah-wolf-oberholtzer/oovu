@@ -84,24 +84,19 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
 
     @Override
     public int compareTo(ModuleServer other) {
-        return this.get_osc_address_string().compareTo(
-            other.get_osc_address_string());
+        return this.get_osc_address_string().compareTo(other.get_osc_address_string());
     }
 
     private void configure_members_message_handler() {
-        MessageHandlerBuilder members_builder =
-            new MessageHandlerBuilder("members");
+        MessageHandlerBuilder members_builder = new MessageHandlerBuilder("members");
         members_builder.with_getter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
-                ModuleServer module_server =
-                    (ModuleServer) built_message_handler.client;
-                List<Server> servers =
-                    new ArrayList<Server>(module_server.child_servers);
-                String[] names =
-                    module_server.get_relative_server_names(servers);
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
+                ModuleServer module_server = (ModuleServer) built_message_handler.client;
+                List<Server> servers = new ArrayList<Server>(module_server.child_servers);
+                String[] names = module_server.get_relative_server_names(servers);
                 return MaxIO.to_atoms(built_message_handler.get_name(), names);
             }
         });
@@ -109,19 +104,15 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
     }
 
     private void configure_methods_message_handler() {
-        MessageHandlerBuilder methods_builder =
-            new MessageHandlerBuilder("methods");
+        MessageHandlerBuilder methods_builder = new MessageHandlerBuilder("methods");
         methods_builder.with_getter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
-                ModuleServer module_server =
-                    (ModuleServer) built_message_handler.client;
-                List<? extends Server> servers =
-                    module_server.get_child_method_servers();
-                String[] names =
-                    module_server.get_relative_server_names(servers);
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
+                ModuleServer module_server = (ModuleServer) built_message_handler.client;
+                List<? extends Server> servers = module_server.get_child_method_servers();
+                String[] names = module_server.get_relative_server_names(servers);
                 return MaxIO.to_atoms(built_message_handler.get_name(), names);
             }
         });
@@ -132,11 +123,10 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
         MessageHandlerBuilder name_builder = new MessageHandlerBuilder("name");
         name_builder.with_getter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
-                ModuleServer module_server =
-                    (ModuleServer) built_message_handler.client;
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
+                ModuleServer module_server = (ModuleServer) built_message_handler.client;
                 String name = module_server.get_name();
                 if (name != null) {
                     Atom[][] result = new Atom[1][];
@@ -157,15 +147,13 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
             new MessageHandlerBuilder("properties");
         properties_builder.with_getter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
-                ModuleServer module_server =
-                    (ModuleServer) built_message_handler.client;
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
+                ModuleServer module_server = (ModuleServer) built_message_handler.client;
                 List<? extends Server> servers =
                     module_server.get_child_property_servers();
-                String[] names =
-                    module_server.get_relative_server_names(servers);
+                String[] names = module_server.get_relative_server_names(servers);
                 return MaxIO.to_atoms(built_message_handler.get_name(), names);
             }
         });
@@ -173,19 +161,15 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
     }
 
     private void configure_returns_message_handler() {
-        MessageHandlerBuilder returns_builder =
-            new MessageHandlerBuilder("returns");
+        MessageHandlerBuilder returns_builder = new MessageHandlerBuilder("returns");
         returns_builder.with_getter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
-                ModuleServer module_server =
-                    (ModuleServer) built_message_handler.client;
-                List<? extends Server> servers =
-                    module_server.get_child_return_servers();
-                String[] names =
-                    module_server.get_relative_server_names(servers);
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
+                ModuleServer module_server = (ModuleServer) built_message_handler.client;
+                List<? extends Server> servers = module_server.get_child_return_servers();
+                String[] names = module_server.get_relative_server_names(servers);
                 return MaxIO.to_atoms(built_message_handler.get_name(), names);
             }
         });
@@ -204,8 +188,7 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
     }
 
     public List<PropertyServer> get_child_property_servers() {
-        ArrayList<PropertyServer> property_servers =
-            new ArrayList<PropertyServer>();
+        ArrayList<PropertyServer> property_servers = new ArrayList<PropertyServer>();
         for (Server child : this.child_servers) {
             if (child instanceof PropertyServer) {
                 property_servers.add((PropertyServer) child);
@@ -239,8 +222,7 @@ public class ModuleServer extends Server implements Comparable<ModuleServer> {
         for (Server server : servers) {
             OscAddressNode that_address_node = server.get_osc_address_node();
             String address_string =
-                that_address_node
-                    .get_relative_osc_address_string(this_address_node);
+                that_address_node.get_relative_osc_address_string(this_address_node);
             if (address_string != null) {
                 names.add(address_string);
             }

@@ -15,8 +15,7 @@ abstract public class AddressedMaxPeer extends MaxPeer implements Addressed,
     MessagePasser {
     @Override
     public void dblclick() {
-        for (String piece : Environment.root_osc_address_node
-            .get_debug_pieces()) {
+        for (String piece : Environment.root_osc_address_node.get_debug_pieces()) {
             MaxObject.post(piece);
         }
     }

@@ -12,9 +12,7 @@ public class GenericDatatype extends Datatype {
         this(null, MaxIO.from_serialized_dict(arguments));
     }
 
-    public GenericDatatype(
-        AttributeServer client,
-        Map<String, Atom[]> argument_map) {
+    public GenericDatatype(AttributeServer client, Map<String, Atom[]> argument_map) {
         super(client, argument_map);
     }
 

@@ -71,19 +71,16 @@ public class RootServer extends Server {
     }
 
     private void configure_events_goto_message_handler() {
-        MessageHandlerBuilder builder =
-            new MessageHandlerBuilder("events/goto");
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("events/goto");
         builder.with_setter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
+            public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
                 RootServer root_server = (RootServer) message_handler.client;
                 String event_name = null;
                 if ((arguments.length == 1) && arguments[0].isInt()) {
                     event_name =
-                        root_server.event_manager
-                            .get_event_name_by_index(arguments[0].toInt());
+                        root_server.event_manager.get_event_name_by_index(arguments[0]
+                            .toInt());
                 } else if (0 < arguments.length) {
                     event_name =
                         root_server.event_manager.get_event_name_by_string(Atom
@@ -93,12 +90,11 @@ public class RootServer extends Server {
                     return null;
                 }
                 State state =
-                    root_server.event_manager
-                        .set_current_event_by_name(event_name);
+                    root_server.event_manager.set_current_event_by_name(event_name);
                 root_server.event_manager.execute_state(state, root_server);
                 message_handler.client.handle_response(new Response(
-                    message_handler.client, MaxIO.to_atoms("events/current",
-                        event_name), null));
+                    message_handler.client, MaxIO.to_atoms("events/current", event_name),
+                    null));
                 return null;
             }
         });
@@ -106,16 +102,12 @@ public class RootServer extends Server {
     }
 
     private void configure_events_list_message_handler() {
-        MessageHandlerBuilder builder =
-            new MessageHandlerBuilder("events/list");
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("events/list");
         builder.with_setter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
+            public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
                 RootServer root_server = (RootServer) message_handler.client;
-                List<String> event_names =
-                    root_server.event_manager.get_event_names();
+                List<String> event_names = root_server.event_manager.get_event_names();
                 if (event_names == null) {
                     return MaxIO.to_atoms(message_handler.get_name());
                 }
@@ -127,27 +119,22 @@ public class RootServer extends Server {
     }
 
     private void configure_events_next_message_handler() {
-        MessageHandlerBuilder builder =
-            new MessageHandlerBuilder("events/next");
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("events/next");
         builder.with_is_binding_relevant(true);
         builder.with_setter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
+            public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
                 RootServer root_server = (RootServer) message_handler.client;
-                String event_name =
-                    root_server.event_manager.get_next_event_name();
+                String event_name = root_server.event_manager.get_next_event_name();
                 if (event_name == null) {
                     return null;
                 }
                 State state =
-                    root_server.event_manager
-                        .set_current_event_by_name(event_name);
+                    root_server.event_manager.set_current_event_by_name(event_name);
                 root_server.event_manager.execute_state(state, root_server);
                 message_handler.client.handle_response(new Response(
-                    message_handler.client, MaxIO.to_atoms("events/current",
-                        event_name), null));
+                    message_handler.client, MaxIO.to_atoms("events/current", event_name),
+                    null));
                 return null;
             }
         });
@@ -155,27 +142,22 @@ public class RootServer extends Server {
     }
 
     private void configure_events_previous_message_handler() {
-        MessageHandlerBuilder builder =
-            new MessageHandlerBuilder("events/previous");
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("events/previous");
         builder.with_is_binding_relevant(true);
         builder.with_setter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
+            public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
                 RootServer root_server = (RootServer) message_handler.client;
-                String event_name =
-                    root_server.event_manager.get_previous_event_name();
+                String event_name = root_server.event_manager.get_previous_event_name();
                 if (event_name == null) {
                     return null;
                 }
                 State state =
-                    root_server.event_manager
-                        .set_current_event_by_name(event_name);
+                    root_server.event_manager.set_current_event_by_name(event_name);
                 root_server.event_manager.execute_state(state, root_server);
                 message_handler.client.handle_response(new Response(
-                    message_handler.client, MaxIO.to_atoms("events/current",
-                        event_name), null));
+                    message_handler.client, MaxIO.to_atoms("events/current", event_name),
+                    null));
                 return null;
             }
         });
@@ -183,13 +165,10 @@ public class RootServer extends Server {
     }
 
     private void configure_events_read_message_handler() {
-        MessageHandlerBuilder builder =
-            new MessageHandlerBuilder("events/read");
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("events/read");
         builder.with_callback(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
+            public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
                 message_handler.client.make_request(message_handler.client,
                     "events/list", null);
                 return null;
@@ -197,9 +176,7 @@ public class RootServer extends Server {
         });
         builder.with_setter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
+            public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
                 RootServer root_server = (RootServer) message_handler.client;
                 String filename = null;
                 if (0 == arguments.length) {
@@ -220,9 +197,7 @@ public class RootServer extends Server {
         MessageHandlerBuilder builder = new MessageHandlerBuilder("key");
         builder.with_setter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
+            public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
                 if (arguments.length == 2) {
                     int ascii_number = arguments[0].toInt();
                     boolean depressed = arguments[1].toBoolean();
@@ -236,13 +211,10 @@ public class RootServer extends Server {
     }
 
     private void configure_mixer_closed_message_handler() {
-        MessageHandlerBuilder builder =
-            new MessageHandlerBuilder("mixer/closed");
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("mixer/closed");
         builder.with_setter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
+            public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
                 RootServer root_server = (RootServer) message_handler.client;
                 root_server.mixer_patcher = null;
                 return null;
@@ -255,9 +227,7 @@ public class RootServer extends Server {
         MessageHandlerBuilder builder = new MessageHandlerBuilder("mixer/view");
         builder.with_setter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
+            public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
                 RootServer root_server = (RootServer) message_handler.client;
                 if (root_server.mixer_patcher == null) {
                     root_server.mixer_patcher = MixerGui.build(root_server);
@@ -275,9 +245,7 @@ public class RootServer extends Server {
         MessageHandlerBuilder builder = new MessageHandlerBuilder("mouse");
         builder.with_setter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
+            public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
                 if (arguments.length == 6) {
                     boolean clicked = arguments[0].toBoolean();
                     int delta_clicked = arguments[1].toInt();
@@ -286,8 +254,7 @@ public class RootServer extends Server {
                     int delta_x = arguments[4].toInt();
                     int delta_y = arguments[5].toInt();
                     MouseEvent event =
-                        new MouseEvent(clicked, delta_clicked, x, y, delta_x,
-                            delta_y);
+                        new MouseEvent(clicked, delta_clicked, x, y, delta_x, delta_y);
                     Environment.event_service.publish(event);
                 }
                 return null;
@@ -297,13 +264,10 @@ public class RootServer extends Server {
     }
 
     private void configure_refresh_midi_message_handler() {
-        MessageHandlerBuilder builder =
-            new MessageHandlerBuilder("refreshmidi");
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("refreshmidi");
         builder.with_setter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
+            public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
                 Environment.midi_event_service.update();
                 return null;
             }
@@ -315,14 +279,12 @@ public class RootServer extends Server {
         MessageHandlerBuilder builder = new MessageHandlerBuilder("state");
         builder.with_getter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
                 Atom[][] result = RootServer.this.get_formatted_state();
                 for (int i = 0, j = result.length; i < j; i++) {
-                    result[i] =
-                        Atom.newAtom(built_message_handler.get_name(),
-                            result[i]);
+                    result[i] = Atom.newAtom(built_message_handler.get_name(), result[i]);
                 }
                 return result;
             }
@@ -343,8 +305,7 @@ public class RootServer extends Server {
 
     public Atom[][] get_formatted_state() {
         ArrayList<Atom[]> commands = new ArrayList<Atom[]>();
-        StateComponentAggregate global_state =
-            (StateComponentAggregate) this.get_state();
+        StateComponentAggregate global_state = (StateComponentAggregate) this.get_state();
         commands.add(Atom.parse("wclose"));
         commands.add(Atom.parse("clear"));
         commands.add(Atom.parse("CUE NewCue"));
@@ -353,8 +314,7 @@ public class RootServer extends Server {
             if (!(state instanceof StateComponentAggregate)) {
                 continue;
             }
-            StateComponentAggregate module_state =
-                (StateComponentAggregate) state;
+            StateComponentAggregate module_state = (StateComponentAggregate) state;
             commands.add(Atom.parse("cr"));
             commands.add(Atom.parse("tab"));
             commands.add(Atom.newAtom(new String[] {
@@ -388,7 +348,6 @@ public class RootServer extends Server {
         for (Server module_server : this.get_child_module_servers()) {
             global_state.add(module_server.get_state());
         }
-        return new StateComponentAggregate(null,
-            global_state.toArray(new State[0]));
+        return new StateComponentAggregate(null, global_state.toArray(new State[0]));
     }
 }

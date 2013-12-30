@@ -40,8 +40,7 @@ public class Test__RangeDatatype {
 
     @Test
     public void test_04() {
-        Atom[] arguments =
-            Atom.parse(":default 0.5 3.5 :minimum 1 :maximum 2.3");
+        Atom[] arguments = Atom.parse(":default 0.5 3.5 :minimum 1 :maximum 2.3");
         RangeDatatype datatype = new RangeDatatype(arguments);
         Assert.assertTrue(datatype.get_value()[0].isFloat());
         Assert.assertArrayEquals(Atom.newAtom(new double[] {
@@ -73,8 +72,7 @@ public class Test__RangeDatatype {
 
     @Test
     public void test_06() {
-        Atom[] arguments =
-            Atom.parse(":minimum 0. :maximum 1. :default 0.5 1.");
+        Atom[] arguments = Atom.parse(":minimum 0. :maximum 1. :default 0.5 1.");
         RangeDatatype datatype = new RangeDatatype(arguments);
         Assert.assertTrue(datatype.get_value()[0].isFloat());
         Assert.assertArrayEquals(Atom.newAtom(new double[] {

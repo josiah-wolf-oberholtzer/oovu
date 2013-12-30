@@ -31,10 +31,8 @@ public class PartialTracker extends MaxPeer {
         @Override
         public String toString() {
             return "Partial ["
-                + (this.frequency != null ? "frequency=" + this.frequency
-                    + ", " : "")
-                + (this.amplitude != null ? "amplitude=" + this.amplitude : "")
-                + "]";
+                + (this.frequency != null ? "frequency=" + this.frequency + ", " : "")
+                + (this.amplitude != null ? "amplitude=" + this.amplitude : "") + "]";
         }
     }
 
@@ -74,13 +72,11 @@ public class PartialTracker extends MaxPeer {
                 for (Peak new_partial : new_partials) {
                     if (best_distance == null) {
                         best_distance =
-                            Math.abs(old_partial.frequency
-                                - new_partial.frequency);
+                            Math.abs(old_partial.frequency - new_partial.frequency);
                         best_new_partial = new_partial;
                     } else {
                         double this_distance =
-                            Math.abs(old_partial.frequency
-                                - new_partial.frequency);
+                            Math.abs(old_partial.frequency - new_partial.frequency);
                         if (this_distance < best_distance) {
                             best_distance = this_distance;
                             best_new_partial = new_partial;

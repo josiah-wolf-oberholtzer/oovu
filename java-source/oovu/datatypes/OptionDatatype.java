@@ -20,9 +20,7 @@ public class OptionDatatype extends StringDatatype {
         this(null, MaxIO.from_serialized_dict(arguments));
     }
 
-    public OptionDatatype(
-        AttributeServer client,
-        Map<String, Atom[]> argument_map) {
+    public OptionDatatype(AttributeServer client, Map<String, Atom[]> argument_map) {
         super(client, argument_map);
         if (this.client != null) {
             this.configure_next_message_handler();
@@ -36,9 +34,9 @@ public class OptionDatatype extends StringDatatype {
         builder.with_arity(0);
         builder.with_callback(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
                 OptionDatatype.this.client.reoutput_value();
                 return null;
             }
@@ -46,9 +44,9 @@ public class OptionDatatype extends StringDatatype {
         builder.with_is_binding_relevant(true);
         builder.with_setter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
                 OptionDatatype.this.next_option();
                 return null;
             }
@@ -60,11 +58,8 @@ public class OptionDatatype extends StringDatatype {
         MessageHandlerBuilder builder = new MessageHandlerBuilder("options");
         builder.with_callback(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
-                OptionDatatype.this.client.make_request(
-                    OptionDatatype.this.client,
+            public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
+                OptionDatatype.this.client.make_request(OptionDatatype.this.client,
                     message_handler.get_getter_name(), null);
                 OptionDatatype.this.client.reoutput_value();
                 return null;
@@ -72,9 +67,9 @@ public class OptionDatatype extends StringDatatype {
         });
         builder.with_getter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
                 return MaxIO.to_atoms(built_message_handler.get_name(),
                     OptionDatatype.this.get_options().toArray(new String[0]));
             }
@@ -83,9 +78,9 @@ public class OptionDatatype extends StringDatatype {
         builder.with_is_state_relevant(true);
         builder.with_setter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
                 String[] options =
                     OptionDatatype.this.extract_strings_from_atoms(arguments);
                 OptionDatatype.this.set_options(options);
@@ -100,9 +95,9 @@ public class OptionDatatype extends StringDatatype {
         builder.with_arity(0);
         builder.with_callback(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
                 OptionDatatype.this.client.reoutput_value();
                 return null;
             }
@@ -110,9 +105,9 @@ public class OptionDatatype extends StringDatatype {
         builder.with_is_binding_relevant(true);
         builder.with_setter(new MessageHandlerCallback() {
             @Override
-            public Atom[][] execute(
-                MessageHandler built_message_handler,
-                Atom[] arguments) {
+            public
+                Atom[][]
+                execute(MessageHandler built_message_handler, Atom[] arguments) {
                 OptionDatatype.this.previous_option();
                 return null;
             }
@@ -131,8 +126,7 @@ public class OptionDatatype extends StringDatatype {
     protected void initialize_options(Map<String, Atom[]> argument_map) {
         String[] options = new String[0];
         if (argument_map.containsKey("options")) {
-            options =
-                this.extract_strings_from_atoms(argument_map.get("options"));
+            options = this.extract_strings_from_atoms(argument_map.get("options"));
         }
         this.set_options(options);
     }

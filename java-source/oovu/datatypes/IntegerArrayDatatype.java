@@ -13,12 +13,9 @@ public class IntegerArrayDatatype extends BoundedArrayDatatype {
         this(null, MaxIO.from_serialized_dict(arguments));
     }
 
-    public IntegerArrayDatatype(
-        AttributeServer client,
-        Map<String, Atom[]> argument_map) {
+    public IntegerArrayDatatype(AttributeServer client, Map<String, Atom[]> argument_map) {
         super(client, argument_map);
-        this.multi_envelope =
-            new MultiEnvelope(this, Atom.toDouble(this.value));
+        this.multi_envelope = new MultiEnvelope(this, Atom.toDouble(this.value));
     }
 
     @Override
