@@ -5,13 +5,13 @@ import java.util.Map;
 
 import oovu.messaging.MaxIO;
 import oovu.messaging.MessageHandler;
-import oovu.servers.AttributeServer;
+import oovu.servers.Server;
 
 import com.cycling74.max.Atom;
 
 public class AttributeSubscription extends BindingSubscription {
     static public AttributeSubscription from_atoms(
-        AttributeServer subscriber,
+        Server subscriber,
         Atom[] atoms) {
         Map<String, Atom[]> map = MaxIO.from_serialized_dict(atoms);
         Atom[] args = new Atom[0];
@@ -31,11 +31,6 @@ public class AttributeSubscription extends BindingSubscription {
         } else if (!message_handler.get_is_binding_relevant()) {
             return null;
         }
-        if (!map.containsKey("source")) {
-            return null;
-        } else {
-            source = map.get("source")[0].toString();
-        }
         if (map.containsKey("name")) {
             subscription_name = map.get("name")[0].toString();
         } else {
@@ -43,6 +38,11 @@ public class AttributeSubscription extends BindingSubscription {
         }
         if (map.containsKey("args")) {
             args = map.get("args");
+        }
+        if (!map.containsKey("source")) {
+            return null;
+        } else {
+            source = map.get("source")[0].toString();
         }
         return new AttributeSubscription(args, subscriber, message_name,
             source, subscription_name);
@@ -52,7 +52,7 @@ public class AttributeSubscription extends BindingSubscription {
 
     public AttributeSubscription(
         Atom[] arguments,
-        AttributeServer subscriber,
+        Server subscriber,
         String message_name,
         String osc_address_string,
         String subscription_name) {

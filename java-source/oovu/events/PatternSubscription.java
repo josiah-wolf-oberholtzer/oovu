@@ -10,14 +10,15 @@ import oovu.messaging.MaxIO;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.Request;
 import oovu.servers.AttributeServer;
+import oovu.servers.Server;
 import oovu.timing.ValueRange;
 
 import com.cycling74.max.Atom;
 
 public class PatternSubscription extends BindingSubscription {
-    public static PatternSubscription from_atoms(
-        AttributeServer subscriber,
-        Atom[] atoms) {
+    public static
+        PatternSubscription
+        from_atoms(Server subscriber, Atom[] atoms) {
         Map<String, Atom[]> arguments = MaxIO.from_serialized_dict(atoms);
         String message_name = null;
         String subscription_name = null;
@@ -64,7 +65,7 @@ public class PatternSubscription extends BindingSubscription {
         }
         if (((values == null) || (0 == values.length)) && (0 < arity)) {
             if (subscriber instanceof AttributeServer) {
-                AttributeServer attribute = subscriber;
+                AttributeServer attribute = (AttributeServer) subscriber;
                 if (attribute.datatype instanceof BoundedDatatype) {
                     BoundedDatatype bounded_datatype =
                         (BoundedDatatype) attribute.datatype;
@@ -103,7 +104,7 @@ public class PatternSubscription extends BindingSubscription {
 
     public PatternSubscription(
         int arity,
-        AttributeServer subscriber,
+        Server subscriber,
         String message_name,
         ValueRange[] timings,
         ValueRange[] values,

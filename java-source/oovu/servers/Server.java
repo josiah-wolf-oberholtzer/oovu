@@ -12,7 +12,11 @@ import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
 import oovu.addresses.OscAddressNode;
 import oovu.clients.ServerClient;
+import oovu.events.AttributeSubscription;
 import oovu.events.BindingSubscription;
+import oovu.events.KeySubscription;
+import oovu.events.MidiSubscription;
+import oovu.events.PatternSubscription;
 import oovu.events.Subscription;
 import oovu.messaging.DeferredRequestCallback;
 import oovu.messaging.MaxIO;
@@ -64,8 +68,10 @@ abstract public class Server implements MessagePasser {
         if (previous_binding != null) {
             this.remove_binding(previous_binding);
         }
-        this.bindings.put(binding.subscription_name, binding);
-        binding.subscribe();
+        if (binding != null) {
+            this.bindings.put(binding.subscription_name, binding);
+            binding.subscribe();
+        }
     }
 
     public void add_message_handler(MessageHandler message_handler) {
@@ -118,8 +124,9 @@ abstract public class Server implements MessagePasser {
             public Atom[][] execute(
                 MessageHandler message_handler,
                 Atom[] arguments) {
-                BindingSubscription binding =
-                    BindingSubscription.from_atoms(arguments);
+                AttributeSubscription binding =
+                    AttributeSubscription.from_atoms(message_handler.client,
+                        arguments);
                 AttributeServer server =
                     (AttributeServer) message_handler.client;
                 server.add_binding(binding);
@@ -136,8 +143,9 @@ abstract public class Server implements MessagePasser {
             public Atom[][] execute(
                 MessageHandler message_handler,
                 Atom[] arguments) {
-                BindingSubscription binding =
-                    BindingSubscription.from_atoms(arguments);
+                KeySubscription binding =
+                    KeySubscription.from_atoms(message_handler.client,
+                        arguments);
                 AttributeServer server =
                     (AttributeServer) message_handler.client;
                 server.add_binding(binding);
@@ -154,8 +162,9 @@ abstract public class Server implements MessagePasser {
             public Atom[][] execute(
                 MessageHandler message_handler,
                 Atom[] arguments) {
-                BindingSubscription binding =
-                    BindingSubscription.from_atoms(arguments);
+                MidiSubscription binding =
+                    MidiSubscription.from_atoms(message_handler.client,
+                        arguments);
                 AttributeServer server =
                     (AttributeServer) message_handler.client;
                 server.add_binding(binding);
@@ -173,8 +182,9 @@ abstract public class Server implements MessagePasser {
             public Atom[][] execute(
                 MessageHandler message_handler,
                 Atom[] arguments) {
-                BindingSubscription binding =
-                    BindingSubscription.from_atoms(arguments);
+                PatternSubscription binding =
+                    PatternSubscription.from_atoms(message_handler.client,
+                        arguments);
                 AttributeServer server =
                     (AttributeServer) message_handler.client;
                 server.add_binding(binding);
