@@ -132,6 +132,6 @@ public class MidiSubscription extends BindingSubscription {
         }
         map.put("message", Atom.parse(this.message_name));
         map.put("name", Atom.parse(this.subscription_name));
-        return MaxIO.to_serialized_dict(map);
+        return Atom.newAtom("bind/midi", MaxIO.to_serialized_dict(map));
     }
 }

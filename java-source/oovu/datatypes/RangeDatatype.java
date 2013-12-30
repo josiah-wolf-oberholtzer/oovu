@@ -58,7 +58,7 @@ public class RangeDatatype extends BoundedDatatype {
             public
                 Atom[][]
                 execute(MessageHandler built_message_handler, Atom[] arguments) {
-                RangeDatatype.this.client.reoutput_value();
+                // RangeDatatype.this.client.reoutput_value();
                 return null;
             }
         });
@@ -88,7 +88,7 @@ public class RangeDatatype extends BoundedDatatype {
             public
                 Atom[][]
                 execute(MessageHandler built_message_handler, Atom[] arguments) {
-                RangeDatatype.this.client.reoutput_value();
+                // RangeDatatype.this.client.reoutput_value();
                 return null;
             }
         });
