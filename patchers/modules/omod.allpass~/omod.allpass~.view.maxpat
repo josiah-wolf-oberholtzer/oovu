@@ -4,11 +4,11 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 5,
+			"revision" : 6,
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 17.0, 44.0, 320.0, 710.0 ],
+		"rect" : [ 457.0, 44.0, 789.0, 710.0 ],
 		"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
@@ -430,13 +430,11 @@
 					"prototypename" : "transp",
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_linknames" : 1,
-							"parameter_longname" : "live.numbox[39]",
+							"parameter_longname" : "live.numbox[40]",
 							"parameter_shortname" : "live.numbox[4]",
 							"parameter_type" : 0,
 							"parameter_mmin" : -24.0,
 							"parameter_mmax" : 24.0,
-							"parameter_initial_enable" : 1,
 							"parameter_initial" : [ 0.0 ],
 							"parameter_unitstyle" : 7,
 							"parameter_speedlim" : 0.0
@@ -444,7 +442,7 @@
 
 					}
 ,
-					"varname" : "live.numbox[39]"
+					"varname" : "live.numbox[25]"
 				}
 
 			}
@@ -477,12 +475,10 @@
 					"prototypename" : "amount",
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_linknames" : 1,
-							"parameter_longname" : "live.numbox[40]",
+							"parameter_longname" : "live.numbox[41]",
 							"parameter_shortname" : "live.numbox[4]",
 							"parameter_type" : 0,
 							"parameter_mmax" : 100.0,
-							"parameter_initial_enable" : 1,
 							"parameter_initial" : [ 0 ],
 							"parameter_unitstyle" : 5,
 							"parameter_speedlim" : 0.0
@@ -490,7 +486,7 @@
 
 					}
 ,
-					"varname" : "live.numbox[40]"
+					"varname" : "live.numbox[8]"
 				}
 
 			}
@@ -523,12 +519,10 @@
 					"prototypename" : "time",
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_linknames" : 1,
-							"parameter_longname" : "live.numbox[41]",
+							"parameter_longname" : "live.numbox[42]",
 							"parameter_shortname" : "live.numbox[4]",
 							"parameter_type" : 0,
 							"parameter_mmax" : 500.0,
-							"parameter_initial_enable" : 1,
 							"parameter_initial" : [ 0 ],
 							"parameter_unitstyle" : 2,
 							"parameter_exponent" : 3.333,
@@ -538,7 +532,7 @@
 					}
 ,
 					"textcolor" : [ 0.101961, 0.121569, 0.172549, 1.0 ],
-					"varname" : "live.numbox[41]"
+					"varname" : "live.numbox[9]"
 				}
 
 			}
@@ -615,12 +609,10 @@
 					"prototypename" : "freq",
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_linknames" : 1,
-							"parameter_longname" : "live.numbox[42]",
+							"parameter_longname" : "live.numbox[43]",
 							"parameter_shortname" : "live.numbox[4]",
 							"parameter_type" : 0,
 							"parameter_mmax" : 20.0,
-							"parameter_initial_enable" : 1,
 							"parameter_initial" : [ 0 ],
 							"parameter_unitstyle" : 3,
 							"parameter_exponent" : 3.333333,
@@ -629,7 +621,7 @@
 
 					}
 ,
-					"varname" : "live.numbox[42]"
+					"varname" : "live.numbox[10]"
 				}
 
 			}
@@ -704,12 +696,10 @@
 					"prototypename" : "freq",
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_linknames" : 1,
-							"parameter_longname" : "live.numbox[43]",
+							"parameter_longname" : "live.numbox[2]",
 							"parameter_shortname" : "live.numbox[4]",
 							"parameter_type" : 0,
 							"parameter_mmax" : 20.0,
-							"parameter_initial_enable" : 1,
 							"parameter_initial" : [ 0 ],
 							"parameter_unitstyle" : 3,
 							"parameter_exponent" : 3.333333,
@@ -718,7 +708,7 @@
 
 					}
 ,
-					"varname" : "live.numbox[43]"
+					"varname" : "live.numbox[1]"
 				}
 
 			}
@@ -781,12 +771,10 @@
 					"prototypename" : "freq",
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_linknames" : 1,
 							"parameter_longname" : "live.numbox[44]",
 							"parameter_shortname" : "live.numbox[4]",
 							"parameter_type" : 0,
 							"parameter_mmax" : 20.0,
-							"parameter_initial_enable" : 1,
 							"parameter_initial" : [ 0 ],
 							"parameter_unitstyle" : 3,
 							"parameter_exponent" : 3.333333,
@@ -795,7 +783,7 @@
 
 					}
 ,
-					"varname" : "live.numbox[44]"
+					"varname" : "live.numbox[12]"
 				}
 
 			}
@@ -870,12 +858,10 @@
 					"prototypename" : "freq",
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_linknames" : 1,
-							"parameter_longname" : "live.numbox[12]",
+							"parameter_longname" : "live.numbox[1]",
 							"parameter_shortname" : "live.numbox[4]",
 							"parameter_type" : 0,
 							"parameter_mmax" : 20.0,
-							"parameter_initial_enable" : 1,
 							"parameter_initial" : [ 0 ],
 							"parameter_unitstyle" : 3,
 							"parameter_exponent" : 3.333333,
@@ -884,7 +870,7 @@
 
 					}
 ,
-					"varname" : "live.numbox[12]"
+					"varname" : "live.numbox[44]"
 				}
 
 			}
@@ -1149,63 +1135,6 @@
 					"source" : [ "obj-9", 2 ]
 				}
 
-			}
- ],
-		"parameters" : 		{
-			"obj-31" : [ "live.numbox[42]", "live.numbox[4]", 0 ],
-			"obj-40" : [ "live.numbox[40]", "live.numbox[4]", 0 ],
-			"obj-26" : [ "live.numbox[44]", "live.numbox[4]", 0 ],
-			"obj-2::obj-18::obj-18::obj-4" : [ "live.slider", "live.slider", 0 ],
-			"obj-2::obj-60" : [ "live.numbox[1]", "live.numbox", 0 ],
-			"obj-38" : [ "live.numbox[41]", "live.numbox[4]", 0 ],
-			"obj-36" : [ "live.numbox[43]", "live.numbox[4]", 0 ],
-			"obj-2::obj-54" : [ "live.numbox", "live.numbox", 0 ],
-			"obj-49" : [ "live.numbox[39]", "live.numbox[4]", 0 ],
-			"obj-21" : [ "live.numbox[12]", "live.numbox[4]", 0 ],
-			"obj-2::obj-18::obj-204" : [ "live.numbox[13]", "live.numbox", 0 ]
-		}
-,
-		"dependency_cache" : [ 			{
-				"name" : "oovu.guibackground.js",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/jsui",
-				"patcherrelativepath" : "../../../jsui",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.gui.commonio.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/gui",
-				"patcherrelativepath" : "../../abstractions/gui",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.gui.meters.8x.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/gui",
-				"patcherrelativepath" : "../../abstractions/gui",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.gui.send.dynamic.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/gui",
-				"patcherrelativepath" : "../../abstractions/gui",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.gui.send.1x.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/gui",
-				"patcherrelativepath" : "../../abstractions/gui",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.util.makeumenu.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/utilities",
-				"patcherrelativepath" : "../../abstractions/utilities",
-				"type" : "JSON",
-				"implicit" : 1
 			}
  ]
 	}

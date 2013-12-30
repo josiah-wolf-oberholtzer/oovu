@@ -3,6 +3,7 @@ package oovu.datatypes;
 import java.util.Arrays;
 import java.util.Map;
 
+import oovu.addresses.Environment;
 import oovu.messaging.MaxIO;
 import oovu.messaging.MessageHandler;
 import oovu.messaging.MessageHandlerBuilder;
@@ -157,9 +158,11 @@ abstract public class BoundedDatatype extends Datatype implements
     }
 
     @Override
-    public void handle_envelope_response(double[] response) {
-        Atom[] value = Atom.newAtom(response);
+    public void handle_envelope_response(double[] envelope_value) {
+        Atom[] value = Atom.newAtom(envelope_value);
         this.value = value;
+        Environment
+            .log(this.client.get_name() + ": " + Atom.toOneString(value));
         this.client.handle_asynchronous_datatype_value_output(value);
     }
 

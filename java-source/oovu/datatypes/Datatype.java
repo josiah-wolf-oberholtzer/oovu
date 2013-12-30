@@ -23,7 +23,7 @@ public abstract class Datatype {
     }
 
     protected Atom[] value;
-    protected AttributeServer client;
+    public final AttributeServer client;
     private static final Map<String, Class<?>> datatype_classes_by_label;
     static {
         Map<String, Class<?>> map = new HashMap<String, Class<?>>();
@@ -87,11 +87,13 @@ public abstract class Datatype {
     }
 
     public void initialize_default_value(Map<String, Atom[]> argument_map) {
+        Atom[] default_value = null;
         if (argument_map.containsKey("default")) {
-            this.set_value(argument_map.get("default"));
+            default_value = argument_map.get("default");
         } else {
-            this.set_value(this.get_default());
+            default_value = this.get_default();
         }
+        this.set_value(default_value);
     }
 
     abstract protected void initialize_prerequisites(

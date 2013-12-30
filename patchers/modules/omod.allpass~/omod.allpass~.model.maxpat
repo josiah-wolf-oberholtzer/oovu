@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 299.0, 44.0, 617.0, 492.0 ],
+		"rect" : [ 498.0, 141.0, 617.0, 492.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -232,7 +232,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 135.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 feedback/delay/frequency datatype: decimal default: 0.5 range: 0 20 unit: hertz"
+					"text" : "mxj oovu.Property #1 feedback/delay/frequency datatype: decimal range: 0 20 default: 0.5 unit: hertz"
 				}
 
 			}
@@ -260,7 +260,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 35.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 allpass/delay/frequency datatype: decimal default: 0.5 range: 0 20 unit: hertz"
+					"text" : "mxj oovu.Property #1 allpass/delay/frequency datatype: decimal range: 0. 20. default: 0.5 unit: hertz"
 				}
 
 			}

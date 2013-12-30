@@ -44,6 +44,7 @@ public class MultiEnvelope extends ClockWatcher {
                 envelope.clear();
                 envelope.add(new TimePoint(current_time, control_values[i]));
             }
+            this.stop_watching_clock(this);
         } else if (this.envelopes.size() < control_values.length) {
             TimePoint[][] unlaced =
                 this.unlace(control_values, current_time, this.envelopes.size());
@@ -57,11 +58,11 @@ public class MultiEnvelope extends ClockWatcher {
                     envelope.add(time_point);
                 }
             }
-        }
-        if (this.has_active_envelopes()) {
-            this.start_watching_clock(this);
-        } else {
-            this.stop_watching_clock(this);
+            if (this.has_active_envelopes()) {
+                this.start_watching_clock(this);
+            } else {
+                this.stop_watching_clock(this);
+            }
         }
         return this.get_current_values(current_time);
     }
