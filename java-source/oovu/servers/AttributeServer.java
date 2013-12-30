@@ -2,7 +2,6 @@ package oovu.servers;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -11,7 +10,6 @@ import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
 import oovu.datatypes.Datatype;
 import oovu.datatypes.GenericDatatype;
-import oovu.events.BindingSubscription;
 import oovu.events.ValueEvent;
 import oovu.messaging.BooleanMessageHandlerCallback;
 import oovu.messaging.IntegerMessageHandlerCallback;
@@ -31,31 +29,11 @@ abstract public class AttributeServer extends ModuleMemberServer implements
     Comparable<AttributeServer> {
     protected Integer priority = 0;
     public Datatype datatype = null;
-    protected Map<String, BindingSubscription> bindings =
-        new HashMap<String, BindingSubscription>();
 
     public AttributeServer(ModuleServer module_server) {
         super(module_server);
         this.configure_priority_message_handler();
         this.configure_value_message_handler();
-        if (!(this instanceof ReturnServer)) {
-            this.configure_bind_attribute_message_handler();
-            this.configure_bind_key_message_handler();
-            this.configure_bind_midi_message_handler();
-            this.configure_bind_pattern_message_handler();
-            this.configure_bindings_message_handler();
-            this.configure_unbind_message_handler();
-        }
-    }
-
-    public void add_binding(BindingSubscription binding) {
-        BindingSubscription previous_binding =
-            this.bindings.get(binding.subscription_name);
-        if (previous_binding != null) {
-            this.remove_binding(previous_binding);
-        }
-        this.bindings.put(binding.subscription_name, binding);
-        binding.subscribe();
     }
 
     @Override
@@ -117,104 +95,6 @@ abstract public class AttributeServer extends ModuleMemberServer implements
         this.is_configured = true;
     }
 
-    private void configure_bind_attribute_message_handler() {
-        MessageHandlerBuilder builder =
-            new MessageHandlerBuilder("bind/attribute");
-        builder.with_setter(new MessageHandlerCallback() {
-            @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
-                BindingSubscription binding =
-                    BindingSubscription.from_atoms(arguments);
-                AttributeServer server =
-                    (AttributeServer) message_handler.client;
-                server.add_binding(binding);
-                return null;
-            }
-        });
-        this.add_message_handler(builder.build(this));
-    }
-
-    private void configure_bind_key_message_handler() {
-        MessageHandlerBuilder builder = new MessageHandlerBuilder("bind/key");
-        builder.with_setter(new MessageHandlerCallback() {
-            @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
-                BindingSubscription binding =
-                    BindingSubscription.from_atoms(arguments);
-                AttributeServer server =
-                    (AttributeServer) message_handler.client;
-                server.add_binding(binding);
-                return null;
-            }
-        });
-        this.add_message_handler(builder.build(this));
-    }
-
-    private void configure_bind_midi_message_handler() {
-        MessageHandlerBuilder builder = new MessageHandlerBuilder("bind/midi");
-        builder.with_setter(new MessageHandlerCallback() {
-            @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
-                BindingSubscription binding =
-                    BindingSubscription.from_atoms(arguments);
-                AttributeServer server =
-                    (AttributeServer) message_handler.client;
-                server.add_binding(binding);
-                return null;
-            }
-        });
-        this.add_message_handler(builder.build(this));
-    }
-
-    private void configure_bind_pattern_message_handler() {
-        MessageHandlerBuilder builder =
-            new MessageHandlerBuilder("bind/pattern");
-        builder.with_setter(new MessageHandlerCallback() {
-            @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
-                BindingSubscription binding =
-                    BindingSubscription.from_atoms(arguments);
-                AttributeServer server =
-                    (AttributeServer) message_handler.client;
-                server.add_binding(binding);
-                return null;
-            }
-        });
-        this.add_message_handler(builder.build(this));
-    }
-
-    private void configure_bindings_message_handler() {
-        MessageHandlerBuilder builder = new MessageHandlerBuilder("bindings");
-        builder.with_getter(new MessageHandlerCallback() {
-            @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
-                AttributeServer server =
-                    (AttributeServer) message_handler.client;
-                ArrayList<Atom[]> result = new ArrayList<Atom[]>();
-                result.add(Atom.parse("bindings/count "
-                    + server.bindings.size()));
-                BindingSubscription[] bindings =
-                    server.bindings.values()
-                        .toArray(new BindingSubscription[0]);
-                for (BindingSubscription binding : bindings) {
-                    result.add(binding.to_atoms());
-                }
-                return result.toArray(new Atom[0][]);
-            }
-        });
-        this.add_message_handler(builder.build(this));
-    }
-
     private void configure_priority_message_handler() {
         MessageHandlerBuilder builder = new MessageHandlerBuilder("priority");
         builder.with_getter(new MessageHandlerCallback() {
@@ -240,38 +120,6 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                     priority = arguments[0].toInt();
                 }
                 attribute_server.set_priority(priority);
-                return null;
-            }
-        });
-        this.add_message_handler(builder.build(this));
-    }
-
-    private void configure_unbind_message_handler() {
-        MessageHandlerBuilder builder = new MessageHandlerBuilder("unbind");
-        builder.with_setter(new MessageHandlerCallback() {
-            @Override
-            public Atom[][] execute(
-                MessageHandler message_handler,
-                Atom[] arguments) {
-                AttributeServer server =
-                    (AttributeServer) message_handler.client;
-                if (0 < arguments.length) {
-                    for (Atom atom : arguments) {
-                        String subscription_name = atom.getString();
-                        BindingSubscription binding =
-                            server.bindings.get(subscription_name);
-                        if (binding != null) {
-                            server.remove_binding(binding);
-                        }
-                    }
-                } else {
-                    BindingSubscription[] bindings =
-                        server.bindings.values().toArray(
-                            new BindingSubscription[0]);
-                    for (BindingSubscription binding : bindings) {
-                        server.remove_binding(binding);
-                    }
-                }
                 return null;
             }
         });
@@ -395,13 +243,6 @@ abstract public class AttributeServer extends ModuleMemberServer implements
                 new Atom[0], true);
         Response response = new Response(this, payload, request);
         this.handle_response(response);
-    }
-
-    public void remove_binding(BindingSubscription binding) {
-        if (this.bindings.get(binding.subscription_name) == binding) {
-            this.bindings.remove(binding.subscription_name);
-        }
-        binding.unsubscribe();
     }
 
     abstract public void reoutput_value();
