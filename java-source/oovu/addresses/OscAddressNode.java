@@ -10,7 +10,11 @@ import java.util.Map;
 import java.util.Set;
 
 import oovu.Proxy;
+import oovu.datatypes.Datatype;
+import oovu.servers.AttributeServer;
 import oovu.servers.Server;
+
+import com.cycling74.max.Atom;
 
 public class OscAddressNode implements Comparable<OscAddressNode> {
     public static String find_unique_name(String desired_name, Set<String> names) {
@@ -175,16 +179,14 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
     public String get_debug_piece() {
         StringBuilder string_builder = new StringBuilder();
         string_builder.append("<Node ");
-        if (this.name != null) {
-            string_builder.append("'" + this.name + "'");
-        } else {
-            string_builder.append("null");
+        if ((this.name != null) && (0 < this.name.length())) {
+            string_builder.append("\"" + this.name + "\"");
+            if (this.number != null) {
+                string_builder.append(":");
+            }
         }
-        string_builder.append(":");
         if (this.number != null) {
             string_builder.append(this.number);
-        } else {
-            string_builder.append("null");
         }
         if ((0 < this.proxies.size()) || (this.server != null)) {
             string_builder.append(" (");
@@ -198,6 +200,19 @@ public class OscAddressNode implements Comparable<OscAddressNode> {
             if (this.server != null) {
                 string_builder
                     .append("server: " + this.server.getClass().getSimpleName());
+                if (this.server instanceof AttributeServer) {
+                    AttributeServer attribute_server = (AttributeServer) this.server;
+                    Datatype datatype = attribute_server.datatype;
+                    String datatype_name =
+                        datatype.getClass().getSimpleName().replace("Datatype", "")
+                            .toLowerCase();
+                    string_builder.append("[");
+                    string_builder.append(datatype_name);
+                    string_builder.append(": ");
+                    string_builder.append(Atom.toOneString(attribute_server.datatype
+                        .get_value()));
+                    string_builder.append("]");
+                }
             }
             string_builder.append(")");
         }
