@@ -6,7 +6,8 @@ A modular performance framework for Max 6.
 What is it?
 -----------
 
-`oovu` is a collection of externals and patchers for Max 6.
+`oovu` is a collection of externals and patchers for Max 6. Open source, mostly
+written in Java. Inspired by Jamoma.
 
 What does it do?
 ----------------
@@ -19,6 +20,9 @@ What does it do?
   patterns.
 - `oovu` also allows for patching-free audio routing, and automatically handles
   up- and down-mixing between modules with different numbers of channels.
+- `oovu` helps you keep module logic completely separate from its user
+  interface; every built-in `oovu` module contains distinct model and view
+  subpatches.
 
 Installation
 ------------
