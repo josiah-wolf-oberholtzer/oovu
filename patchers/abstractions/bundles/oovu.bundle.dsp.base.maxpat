@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 3,
+			"revision" : 6,
 			"architecture" : "x86"
 		}
 ,
@@ -36,8 +36,8 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 40.0, 506.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 dsp/:voicecount datatype: integer default: 2 range: 1 8 priority: 100"
+					"patching_rect" : [ 10.0, 35.0, 350.0, 20.0 ],
+					"text" : "mxj oovu.Property #1 dsp/limiting datatype: boolean default: 1"
 				}
 
 			}
@@ -51,12 +51,13 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 10.0, 350.0, 20.0 ],
-					"text" : "mxj oovu.Property #1 dsp/:active datatype: boolean default: 0"
+					"text" : "mxj oovu.Property #1 dsp/active datatype: boolean default: 0"
 				}
 
 			}
  ],
-		"lines" : [  ]
+		"lines" : [  ],
+		"dependency_cache" : [  ]
 	}
 
 }
