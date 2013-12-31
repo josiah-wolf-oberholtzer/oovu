@@ -20,9 +20,8 @@ What does it do?
   patterns.
 - `oovu` also allows for patching-free audio routing, and automatically handles
   up- and down-mixing between modules with different numbers of channels.
-- `oovu` helps you keep module logic completely separate from its user
-  interface; every built-in `oovu` module contains distinct model and view
-  subpatches.
+- `oovu` helps you keep each module's logic completely separate from its user
+  interface.
 
 Installation
 ------------
