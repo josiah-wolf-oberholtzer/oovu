@@ -37,7 +37,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 20.0, 250.0, 135.0, 18.0 ],
-					"text" : "/dsp/:active 0"
+					"text" : "/dsp/active 0"
 				}
 
 			}

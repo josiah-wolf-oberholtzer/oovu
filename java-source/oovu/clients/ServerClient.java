@@ -36,17 +36,27 @@ abstract public class ServerClient extends AddressedMaxPeer {
 
     @Override
     public OscAddress get_osc_address() {
-        return this.server.get_osc_address();
+        if (this.server != null) {
+            return this.server.get_osc_address();
+        }
+        return null;
     }
 
     @Override
     public OscAddressNode get_osc_address_node() {
-        return this.server.get_osc_address_node();
+        if (this.server != null) {
+            return this.server.get_osc_address_node();
+        }
+        return null;
     }
 
     @Override
     public String get_osc_address_string() {
-        return this.get_osc_address().toString();
+        OscAddress osc_address = this.get_osc_address();
+        if (osc_address != null) {
+            return osc_address.toString();
+        }
+        return null;
     }
 
     public Server get_server() {

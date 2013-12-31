@@ -4,11 +4,11 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 5,
+			"revision" : 6,
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 357.0, 141.0, 644.0, 410.0 ],
+		"rect" : [ 155.0, 199.0, 644.0, 410.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -31,12 +31,25 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
+					"id" : "obj-5",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 0,
+					"patching_rect" : [ 10.0, 295.0, 600.0, 20.0 ],
+					"text" : "oovu.bundle.dsp.base #1"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
 					"id" : "obj-7",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "int", "int" ],
-					"patching_rect" : [ 10.0, 205.0, 64.0, 20.0 ],
+					"patching_rect" : [ 10.0, 165.0, 64.0, 20.0 ],
 					"text" : "change -1"
 				}
 
@@ -50,7 +63,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "int" ],
-					"patching_rect" : [ 10.0, 275.0, 100.0, 20.0 ],
+					"patching_rect" : [ 10.0, 220.0, 100.0, 20.0 ],
 					"text" : "adstatus switch"
 				}
 
@@ -64,7 +77,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 340.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 270.0, 600.0, 20.0 ],
 					"text" : "mxj oovu.DspSettings #1 dsp"
 				}
 
@@ -78,7 +91,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 75.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 60.0, 600.0, 20.0 ],
 					"text" : "mxj oovu.Return #1 record/time datatype: decimal"
 				}
 
@@ -92,7 +105,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "int" ],
-					"patching_rect" : [ 10.0, 175.0, 100.0, 20.0 ],
+					"patching_rect" : [ 10.0, 135.0, 100.0, 20.0 ],
 					"text" : "adstatus switch"
 				}
 
@@ -106,7 +119,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 235.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 190.0, 600.0, 20.0 ],
 					"text" : "mxj oovu.Property #1 dac/active datatype: boolean default: 0"
 				}
 
@@ -120,7 +133,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 315.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 245.0, 600.0, 20.0 ],
 					"text" : "mxj oovu.Property #1 dac/routing datatype: integerarray length: 8 range: 1 NULL default: 1 2 3 4 5 6 7 8"
 				}
 
@@ -134,7 +147,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 50.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 35.0, 600.0, 20.0 ],
 					"text" : "mxj oovu.Method #1 record/recording datatype: boolean"
 				}
 
@@ -148,7 +161,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 25.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 10.0, 600.0, 20.0 ],
 					"text" : "mxj oovu.Method #1 record/open datatype: filesystempath"
 				}
 
@@ -161,7 +174,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 8,
 					"numoutlets" : 0,
-					"patching_rect" : [ 10.0, 125.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 110.0, 600.0, 20.0 ],
 					"text" : "poly~ omod.output~.voix 1 @args #1"
 				}
 
@@ -175,7 +188,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 8,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 10.0, 100.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 85.0, 600.0, 20.0 ],
 					"text" : "oovu.bundle.dsp.receiver #1"
 				}
 
@@ -186,6 +199,7 @@
 					"destination" : [ "obj-8", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
+					"midpoints" : [ 310.0, 215.5, 19.5, 215.5 ],
 					"source" : [ "obj-2", 1 ]
 				}
 
@@ -267,7 +281,7 @@
 					"destination" : [ "obj-7", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 100.5, 199.5, 19.5, 199.5 ],
+					"midpoints" : [ 100.5, 159.5, 19.5, 159.5 ],
 					"source" : [ "obj-6", 1 ]
 				}
 
@@ -280,6 +294,49 @@
 					"source" : [ "obj-7", 0 ]
 				}
 
+			}
+ ],
+		"dependency_cache" : [ 			{
+				"name" : "oovu.bundle.dsp.receiver.maxpat",
+				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/bundles",
+				"patcherrelativepath" : "../../abstractions/bundles",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.push.destination.maxpat",
+				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/pushpull",
+				"patcherrelativepath" : "../../abstractions/pushpull",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.push.destination.poly~.maxpat",
+				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/pushpull",
+				"patcherrelativepath" : "../../abstractions/pushpull",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.dsp.8chlevels.maxpat",
+				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/dsp",
+				"patcherrelativepath" : "../../abstractions/dsp",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.output~.voix.maxpat",
+				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/modules/omod.output~",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.bundle.dsp.base.maxpat",
+				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/bundles",
+				"patcherrelativepath" : "../../abstractions/bundles",
+				"type" : "JSON",
+				"implicit" : 1
 			}
  ]
 	}

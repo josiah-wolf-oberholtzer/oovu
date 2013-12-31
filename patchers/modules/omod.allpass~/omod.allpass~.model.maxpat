@@ -31,6 +31,19 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
+					"id" : "obj-3",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 0,
+					"patching_rect" : [ 10.0, 415.0, 600.0, 20.0 ],
+					"text" : "oovu.bundle.dsp.base #1"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
 					"id" : "obj-2",
 					"maxclass" : "newobj",
 					"numinlets" : 3,
@@ -418,6 +431,98 @@
 					"source" : [ "obj-66", 0 ]
 				}
 
+			}
+ ],
+		"dependency_cache" : [ 			{
+				"name" : "oovu.bundle.dsp.sender.maxpat",
+				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/bundles",
+				"patcherrelativepath" : "../../abstractions/bundles",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.push.source.maxpat",
+				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/pushpull",
+				"patcherrelativepath" : "../../abstractions/pushpull",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.push.source.poly~.maxpat",
+				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/pushpull",
+				"patcherrelativepath" : "../../abstractions/pushpull",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.dsp.8chlevels.maxpat",
+				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/dsp",
+				"patcherrelativepath" : "../../abstractions/dsp",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.allpass~.voix.maxpat",
+				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/modules/omod.allpass~",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.allpass~.voix.kernelwrapper.maxpat",
+				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/modules/omod.allpass~",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omod.allpass~.voix.kernel.maxpat",
+				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/modules/omod.allpass~",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.dsp.poly.1x1.maxpat",
+				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/dsp",
+				"patcherrelativepath" : "../../abstractions/dsp",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.bundle.dsp.poly~.maxpat",
+				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/bundles",
+				"patcherrelativepath" : "../../abstractions/bundles",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.bundle.dsp.receiver.maxpat",
+				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/bundles",
+				"patcherrelativepath" : "../../abstractions/bundles",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.push.destination.maxpat",
+				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/pushpull",
+				"patcherrelativepath" : "../../abstractions/pushpull",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.push.destination.poly~.maxpat",
+				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/pushpull",
+				"patcherrelativepath" : "../../abstractions/pushpull",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "oovu.bundle.dsp.base.maxpat",
+				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/bundles",
+				"patcherrelativepath" : "../../abstractions/bundles",
+				"type" : "JSON",
+				"implicit" : 1
 			}
  ]
 	}

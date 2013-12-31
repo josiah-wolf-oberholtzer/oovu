@@ -3,6 +3,7 @@ package oovu.events;
 import java.util.HashMap;
 import java.util.Map;
 
+import oovu.addresses.Environment;
 import oovu.addresses.OscAddress;
 import oovu.datatypes.BooleanDatatype;
 import oovu.datatypes.BoundedDatatype;
@@ -18,6 +19,7 @@ import com.cycling74.max.Atom;
 public class PatternSubscription extends BindingSubscription {
     public static PatternSubscription from_atoms(Server subscriber, Atom[] atoms) {
         Map<String, Atom[]> arguments = MaxIO.from_serialized_dict(atoms);
+        Environment.log(Atom.toOneString(atoms));
         String message_name = null;
         String subscription_name = null;
         ValueRange[] timings = null;
@@ -60,8 +62,8 @@ public class PatternSubscription extends BindingSubscription {
                 values[i] = new ValueRange(current_atoms[i]);
             }
         }
-        if (((values == null) || (0 == values.length)) && (0 < arity)) {
-            if (subscriber instanceof AttributeServer) {
+        if ((values == null) || (0 == values.length)) {
+            if ((0 < arity) && (subscriber instanceof AttributeServer)) {
                 AttributeServer attribute = (AttributeServer) subscriber;
                 if (attribute.datatype instanceof BoundedDatatype) {
                     BoundedDatatype bounded_datatype =
@@ -85,11 +87,12 @@ public class PatternSubscription extends BindingSubscription {
                     new ValueRange(0)
                 };
             }
-        } else {
-            values = new ValueRange[0];
         }
-        return new PatternSubscription(arity, subscriber, message_name, timings, values,
-            subscription_name);
+        PatternSubscription subscription =
+            new PatternSubscription(arity, subscriber, message_name, timings, values,
+                subscription_name);
+        Environment.log(Atom.toOneString(subscription.to_atoms()));
+        return subscription;
     }
 
     public double next_event_time = 0;

@@ -288,7 +288,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 570.0, 370.0, 204.0, 20.0 ],
-					"text" : "mxj oovu.Proxy /allpass~/dsp/:active"
+					"text" : "mxj oovu.Proxy /allpass~/dsp/active"
 				}
 
 			}
@@ -328,7 +328,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 340.0, 615.0, 204.0, 20.0 ],
-					"text" : "mxj oovu.Proxy /allpass~/dsp/:active"
+					"text" : "mxj oovu.Proxy /allpass~/dsp/active"
 				}
 
 			}
@@ -511,7 +511,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 30.0, 420.0, 93.0, 18.0 ],
-					"text" : "/*/dsp/:active 1"
+					"text" : "/*/dsp/active 1"
 				}
 
 			}
@@ -578,7 +578,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 280.0, 365.0, 95.0, 18.0 ],
-					"text" : "/*/dsp/:active $1"
+					"text" : "/*/dsp/active $1"
 				}
 
 			}

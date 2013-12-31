@@ -37,7 +37,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 95.0, 390.0, 193.0, 20.0 ],
-					"text" : "mxj oovu.Proxy #1 dsp/:limiting"
+					"text" : "mxj oovu.Proxy #1 dsp/limiting"
 				}
 
 			}
@@ -167,7 +167,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 110.0, 300.0, 181.0, 20.0 ],
-					"text" : "mxj oovu.Proxy #1 dsp/:active"
+					"text" : "mxj oovu.Proxy #1 dsp/active"
 				}
 
 			}
