@@ -78,7 +78,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 10.0, 270.0, 600.0, 20.0 ],
-					"text" : "mxj oovu.DspSettings #1 dsp"
+					"text" : "mxj oovu.DspSettings #1 dsp outputs: 0"
 				}
 
 			}
@@ -294,49 +294,6 @@
 					"source" : [ "obj-7", 0 ]
 				}
 
-			}
- ],
-		"dependency_cache" : [ 			{
-				"name" : "oovu.bundle.dsp.receiver.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/bundles",
-				"patcherrelativepath" : "../../abstractions/bundles",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.push.destination.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/pushpull",
-				"patcherrelativepath" : "../../abstractions/pushpull",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.push.destination.poly~.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/pushpull",
-				"patcherrelativepath" : "../../abstractions/pushpull",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.dsp.8chlevels.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/dsp",
-				"patcherrelativepath" : "../../abstractions/dsp",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "omod.output~.voix.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/modules/omod.output~",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.bundle.dsp.base.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/bundles",
-				"patcherrelativepath" : "../../abstractions/bundles",
-				"type" : "JSON",
-				"implicit" : 1
 			}
  ]
 	}

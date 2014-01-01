@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 131.0, 44.0, 811.0, 426.0 ],
+		"rect" : [ 874.0, 44.0, 811.0, 426.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -35,7 +35,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 0,
 					"numoutlets" : 0,
-					"patching_rect" : [ 10.0, 380.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 355.0, 600.0, 20.0 ],
 					"text" : "oovu.bundle.dsp.base #1"
 				}
 
@@ -574,7 +574,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0, 355.0, 600.0, 20.0 ],
+					"patching_rect" : [ 10.0, 380.0, 600.0, 20.0 ],
 					"text" : "mxj oovu.DspSettings #1 dsp inputs: 0 outputs: 8"
 				}
 
@@ -885,6 +885,10 @@
 				"patcherrelativepath" : "../../abstractions/bundles",
 				"type" : "JSON",
 				"implicit" : 1
+			}
+, 			{
+				"name" : "ambipanning~.mxo",
+				"type" : "iLaX"
 			}
  ]
 	}
