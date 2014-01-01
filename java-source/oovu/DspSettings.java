@@ -23,7 +23,7 @@ public class DspSettings extends ModuleMemberServerClient {
         if (dsp_settings_server.get_osc_address_node() == null) {
             OscAddress osc_address = OscAddress.from_cache("dsp");
             OscAddressNode osc_address_node =
-                module_server.get_osc_address_node().create_address(osc_address, true);
+                module_server.get_osc_address_node().create_address(osc_address, false);
             dsp_settings_server.attach_to_osc_address_node(osc_address_node);
         }
         dsp_settings_server.configure(this.lazy_arguments);
