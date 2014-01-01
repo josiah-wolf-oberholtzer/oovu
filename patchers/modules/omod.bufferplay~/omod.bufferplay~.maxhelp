@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 339.0, 44.0, 765.0, 353.0 ],
+		"rect" : [ 584.0, 44.0, 700.0, 353.0 ],
 		"bgcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -38,7 +38,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 340.0, 228.0, 21.0, 20.0 ],
-					"presentation_rect" : [ 340.0, 230.0, 0.0, 0.0 ],
 					"text" : "7)",
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
 				}
@@ -54,7 +53,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 340.0, 203.0, 21.0, 20.0 ],
-					"presentation_rect" : [ 340.0, 204.0, 0.0, 0.0 ],
 					"text" : "6)",
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
 				}
@@ -70,7 +68,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 340.0, 178.0, 21.0, 20.0 ],
-					"presentation_rect" : [ 340.0, 178.0, 0.0, 0.0 ],
 					"text" : "5)",
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
 				}
@@ -86,7 +83,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 340.0, 153.0, 21.0, 20.0 ],
-					"presentation_rect" : [ 340.0, 155.0, 0.0, 0.0 ],
 					"text" : "4)",
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
 				}
@@ -102,7 +98,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 340.0, 128.0, 21.0, 20.0 ],
-					"presentation_rect" : [ 340.0, 131.0, 0.0, 0.0 ],
 					"text" : "3)",
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
 				}
@@ -118,7 +113,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 340.0, 103.0, 21.0, 20.0 ],
-					"presentation_rect" : [ 340.0, 105.0, 0.0, 0.0 ],
 					"text" : "2)",
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
 				}
@@ -149,7 +143,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 360.0, 130.0, 151.0, 18.0 ],
-					"presentation_rect" : [ 373.0, 129.0, 0.0, 0.0 ],
 					"text" : "/output~/dsp/:voicecount 2"
 				}
 
@@ -322,7 +315,7 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 0.0, 0.0, 730.0, 50.0 ],
+					"patching_rect" : [ 0.0, 0.0, 700.0, 50.0 ],
 					"prototypename" : "M4L.horizontal-black",
 					"rounded" : 0
 				}
