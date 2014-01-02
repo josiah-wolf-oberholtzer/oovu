@@ -4,11 +4,11 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 5,
+			"revision" : 6,
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 326.0, 44.0, 734.0, 710.0 ],
+		"rect" : [ 302.0, 44.0, 734.0, 710.0 ],
 		"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 		"bglocked" : 1,
 		"openinpresentation" : 1,
@@ -30,13 +30,20 @@
 		"tags" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"bgcolor" : [ 0.0, 0.0, 0.0, 0.0 ],
+					"border" : 2.0,
+					"bordercolor" : [ 0.0, 0.0, 0.0, 0.0 ],
 					"id" : "obj-45",
 					"maxclass" : "ezdac~",
 					"numinlets" : 2,
 					"numoutlets" : 0,
-					"patching_rect" : [ 350.0, 400.0, 15.0, 15.0 ],
+					"offgradcolor1" : [ 0.572549, 0.615686, 0.658824, 1.0 ],
+					"offgradcolor2" : [ 0.572549, 0.615686, 0.658824, 1.0 ],
+					"ongradcolor1" : [ 0.501961, 1.0, 0.0, 1.0 ],
+					"ongradcolor2" : [ 0.501961, 1.0, 0.0, 1.0 ],
+					"patching_rect" : [ 350.0, 400.0, 35.0, 35.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.0, 30.0, 15.0, 15.0 ]
+					"presentation_rect" : [ 0.0, 25.0, 25.0, 25.0 ]
 				}
 
 			}
@@ -167,7 +174,7 @@
 					"presentation_rect" : [ 5.0, 110.0, 70.0, 20.0 ],
 					"prototypename" : "M4L.display",
 					"rounded" : 0.0,
-					"text" : "0%",
+					"text" : "5%",
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"texton" : "Text",
 					"textovercolor" : [ 1.0, 1.0, 1.0, 1.0 ],
@@ -252,7 +259,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 5,
+							"revision" : 6,
 							"architecture" : "x86"
 						}
 ,
@@ -661,7 +668,7 @@
 					}
 ,
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
-					"varname" : "live.numbox[72]"
+					"varname" : "live.numbox[1]"
 				}
 
 			}

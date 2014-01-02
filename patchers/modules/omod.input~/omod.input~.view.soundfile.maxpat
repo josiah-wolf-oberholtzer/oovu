@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 5,
+			"revision" : 6,
 			"architecture" : "x86"
 		}
 ,
@@ -219,7 +219,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 200.0, 300.0, 195.0, 20.0 ],
+					"patching_rect" : [ 200.0, 300.0, 201.0, 20.0 ],
 					"text" : "mxj oovu.Proxy #1 soundfile/seek"
 				}
 
@@ -233,7 +233,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 200.0, 270.0, 207.0, 20.0 ],
+					"patching_rect" : [ 200.0, 270.0, 215.0, 20.0 ],
 					"text" : "mxj oovu.Proxy #1 soundfile/looping"
 				}
 
@@ -247,7 +247,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 200.0, 240.0, 207.0, 20.0 ],
+					"patching_rect" : [ 200.0, 240.0, 213.0, 20.0 ],
 					"text" : "mxj oovu.Proxy #1 soundfile/playing"
 				}
 
@@ -261,8 +261,8 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 200.0, 125.0, 207.0, 20.0 ],
-					"text" : "mxj oovu.Proxy #1 soundfile/filepath"
+					"patching_rect" : [ 200.0, 125.0, 215.0, 20.0 ],
+					"text" : "mxj oovu.Proxy #1 soundfile/open"
 				}
 
 			}

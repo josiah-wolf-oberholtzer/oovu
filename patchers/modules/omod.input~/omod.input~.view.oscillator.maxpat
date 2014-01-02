@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 5,
+			"revision" : 6,
 			"architecture" : "x86"
 		}
 ,
@@ -128,12 +128,10 @@
 					"prototypename" : "time",
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_linknames" : 1,
 							"parameter_longname" : "live.numbox[28]",
 							"parameter_shortname" : "live.numbox",
 							"parameter_type" : 0,
 							"parameter_mmax" : 1000.0,
-							"parameter_initial_enable" : 1,
 							"parameter_initial" : [ 0 ],
 							"parameter_unitstyle" : 2,
 							"parameter_steps" : 41,
@@ -162,12 +160,10 @@
 					"prototypename" : "freq",
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_linknames" : 1,
 							"parameter_longname" : "live.numbox[29]",
 							"parameter_shortname" : "live.numbox",
 							"parameter_type" : 0,
 							"parameter_mmax" : 10000.0,
-							"parameter_initial_enable" : 1,
 							"parameter_initial" : [ 0 ],
 							"parameter_unitstyle" : 3,
 							"parameter_exponent" : 3.333333,
@@ -326,6 +322,41 @@
 					"source" : [ "obj-48", 0 ]
 				}
 
+			}
+ ],
+		"parameters" : 		{
+			"obj-33" : [ "live.tab[6]", "live.tab[1]", 0 ],
+			"obj-42" : [ "live.numbox[28]", "live.numbox", 0 ],
+			"obj-41" : [ "live.numbox[29]", "live.numbox", 0 ]
+		}
+,
+		"dependency_cache" : [ 			{
+				"name" : "sine.svg",
+				"bootpath" : "/Applications/Max 6.1/patches/picts/m4l-picts",
+				"patcherrelativepath" : "../../../../../patches/picts/m4l-picts",
+				"type" : "svg ",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "saw.svg",
+				"bootpath" : "/Applications/Max 6.1/patches/picts/m4l-picts",
+				"patcherrelativepath" : "../../../../../patches/picts/m4l-picts",
+				"type" : "svg ",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "square.svg",
+				"bootpath" : "/Applications/Max 6.1/patches/picts/m4l-picts",
+				"patcherrelativepath" : "../../../../../patches/picts/m4l-picts",
+				"type" : "svg ",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "random.svg",
+				"bootpath" : "/Applications/Max 6.1/patches/picts/m4l-picts",
+				"patcherrelativepath" : "../../../../../patches/picts/m4l-picts",
+				"type" : "svg ",
+				"implicit" : 1
 			}
  ]
 	}

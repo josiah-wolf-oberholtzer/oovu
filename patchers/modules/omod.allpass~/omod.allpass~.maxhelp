@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 165.0, 44.0, 599.0, 539.0 ],
+		"rect" : [ 49.0, 44.0, 599.0, 539.0 ],
 		"bgcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -29,6 +29,32 @@
 		"digest" : "",
 		"tags" : "",
 		"boxes" : [ 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-11",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 440.0, 310.0, 85.0, 20.0 ],
+					"text" : "print /output~"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-10",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 20.0, 310.0, 85.0, 20.0 ],
+					"text" : "print /input~"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
@@ -337,7 +363,7 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 0.0, 0.0, 600.0, 50.0 ],
+					"patching_rect" : [ -10.0, 0.0, 600.0, 50.0 ],
 					"prototypename" : "M4L.horizontal-black",
 					"rounded" : 0
 				}
@@ -391,10 +417,28 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-11", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-19", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-12", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-20", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-10", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-35", 0 ]
 				}
 
 			}
@@ -409,25 +453,25 @@
 			}
  ],
 		"parameters" : 		{
-			"obj-35::obj-13::obj-62::obj-36" : [ "live.numbox[18]", "live.numbox[1]", 0 ],
-			"obj-35::obj-13::obj-54" : [ "live.numbox[14]", "live.numbox", 0 ],
-			"obj-1::obj-5::obj-49" : [ "live.numbox[39]", "live.numbox[4]", 0 ],
-			"obj-1::obj-5::obj-31" : [ "live.numbox[42]", "live.numbox[4]", 0 ],
-			"obj-35::obj-13::obj-60" : [ "live.numbox[13]", "live.numbox", 0 ],
-			"obj-19::obj-13::obj-36" : [ "live.numbox[72]", "live.numbox[1]", 0 ],
-			"obj-1::obj-5::obj-26" : [ "live.numbox[44]", "live.numbox[4]", 0 ],
 			"obj-1::obj-5::obj-2::obj-60" : [ "live.numbox[1]", "live.numbox", 0 ],
-			"obj-1::obj-5::obj-21" : [ "live.numbox[12]", "live.numbox[4]", 0 ],
-			"obj-35::obj-13::obj-58::obj-21" : [ "live.numbox[19]", "live.numbox", 0 ],
-			"obj-1::obj-5::obj-2::obj-54" : [ "live.numbox", "live.numbox", 0 ],
-			"obj-35::obj-13::obj-56::obj-33" : [ "live.tab[6]", "live.tab[1]", 0 ],
-			"obj-35::obj-13::obj-62::obj-51" : [ "live.numbox[4]", "live.numbox", 0 ],
-			"obj-35::obj-13::obj-56::obj-41" : [ "live.numbox[29]", "live.numbox", 0 ],
-			"obj-1::obj-5::obj-40" : [ "live.numbox[40]", "live.numbox[4]", 0 ],
-			"obj-1::obj-5::obj-36" : [ "live.numbox[43]", "live.numbox[4]", 0 ],
 			"obj-35::obj-13::obj-56::obj-42" : [ "live.numbox[28]", "live.numbox", 0 ],
 			"obj-19::obj-13::obj-204" : [ "live.numbox[73]", "live.numbox", 0 ],
-			"obj-1::obj-5::obj-38" : [ "live.numbox[41]", "live.numbox[4]", 0 ]
+			"obj-35::obj-13::obj-58::obj-21" : [ "live.numbox[19]", "live.numbox", 0 ],
+			"obj-1::obj-5::obj-40" : [ "live.numbox[40]", "live.numbox[4]", 0 ],
+			"obj-1::obj-5::obj-36" : [ "live.numbox[43]", "live.numbox[4]", 0 ],
+			"obj-1::obj-5::obj-49" : [ "live.numbox[39]", "live.numbox[4]", 0 ],
+			"obj-1::obj-5::obj-38" : [ "live.numbox[41]", "live.numbox[4]", 0 ],
+			"obj-1::obj-5::obj-2::obj-54" : [ "live.numbox", "live.numbox", 0 ],
+			"obj-1::obj-5::obj-31" : [ "live.numbox[42]", "live.numbox[4]", 0 ],
+			"obj-1::obj-5::obj-26" : [ "live.numbox[44]", "live.numbox[4]", 0 ],
+			"obj-1::obj-5::obj-21" : [ "live.numbox[12]", "live.numbox[4]", 0 ],
+			"obj-35::obj-13::obj-54" : [ "live.numbox[14]", "live.numbox", 0 ],
+			"obj-35::obj-13::obj-62::obj-51" : [ "live.numbox[4]", "live.numbox", 0 ],
+			"obj-35::obj-13::obj-62::obj-36" : [ "live.numbox[18]", "live.numbox[1]", 0 ],
+			"obj-19::obj-13::obj-36" : [ "live.numbox[72]", "live.numbox[1]", 0 ],
+			"obj-35::obj-13::obj-56::obj-33" : [ "live.tab[6]", "live.tab[1]", 0 ],
+			"obj-35::obj-13::obj-60" : [ "live.numbox[13]", "live.numbox", 0 ],
+			"obj-35::obj-13::obj-56::obj-41" : [ "live.numbox[29]", "live.numbox", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{

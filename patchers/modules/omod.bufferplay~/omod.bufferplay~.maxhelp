@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 176.0, 62.0, 700.0, 365.0 ],
+		"rect" : [ 538.0, 212.0, 700.0, 365.0 ],
 		"bgcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -29,6 +29,34 @@
 		"digest" : "",
 		"tags" : "",
 		"boxes" : [ 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-30",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 190.0, 310.0, 84.0, 20.0 ],
+					"text" : "print /output~"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"frgb" : 0.0,
+					"id" : "obj-26",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 625.0, 255.0, 33.0, 20.0 ],
+					"text" : "bind",
+					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
@@ -344,7 +372,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 360.0, 255.0, 263.0, 18.0 ],
-					"text" : "/buffers~/trigger/:bind/pattern timings: 100:5000"
+					"text" : "/buffers~/trigger/:bind/pattern timings: 100:1000"
 				}
 
 			}
@@ -528,6 +556,15 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-30", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-2", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-12", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -555,10 +592,10 @@
 			}
  ],
 		"parameters" : 		{
-			"obj-2::obj-13::obj-204" : [ "live.numbox[15]", "live.numbox", 0 ],
+			"obj-2::obj-13::obj-36" : [ "live.numbox[1]", "live.numbox[1]", 0 ],
 			"obj-1::obj-13::obj-36" : [ "live.grid[3]", "live.grid", 0 ],
-			"obj-1::obj-13::obj-31" : [ "live.numbox[6]", "live.numbox[4]", 0 ],
-			"obj-2::obj-13::obj-36" : [ "live.numbox[1]", "live.numbox[1]", 0 ]
+			"obj-2::obj-13::obj-204" : [ "live.numbox[15]", "live.numbox", 0 ],
+			"obj-1::obj-13::obj-31" : [ "live.numbox[6]", "live.numbox[4]", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{
