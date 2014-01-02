@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 627.0, 44.0, 420.0, 613.0 ],
+		"rect" : [ 627.0, 44.0, 420.0, 641.0 ],
 		"bgcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -32,13 +32,45 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
+					"frgb" : 0.0,
+					"id" : "obj-16",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 0.0, 580.0, 30.0, 20.0 ],
+					"presentation_rect" : [ 10.0, 579.0, 0.0, 0.0 ],
+					"text" : "10)",
+					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
+					"textjustification" : 2
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-1",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 30.0, 580.0, 166.0, 18.0 ],
+					"presentation_rect" : [ 29.0, 580.0, 0.0, 0.0 ],
+					"text" : "/sfplay~/transposition/:unbind"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
 					"id" : "obj-4",
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 30.0, 555.0, 370.0, 18.0 ],
-					"text" : "/sfplay~/transposition/:bind/pattern timings: 100:1000 values: -12:12"
+					"text" : "/sfplay~/transposition/:bind/pattern timings: 50:250 values: -12:12"
 				}
 
 			}
@@ -324,7 +356,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 30.0, 580.0, 87.0, 20.0 ],
+					"patching_rect" : [ 30.0, 605.0, 87.0, 20.0 ],
 					"text" : "mxj oovu.Root"
 				}
 
