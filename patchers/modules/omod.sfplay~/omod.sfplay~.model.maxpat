@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 640.0, 44.0, 620.0, 349.0 ],
+		"rect" : [ 63.0, 278.0, 620.0, 349.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -298,56 +298,6 @@
 					"source" : [ "obj-3", 0 ]
 				}
 
-			}
- ],
-		"dependency_cache" : [ 			{
-				"name" : "oovu.bundle.dsp.sender.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/bundles",
-				"patcherrelativepath" : "../../abstractions/bundles",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.push.source.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/pushpull",
-				"patcherrelativepath" : "../../abstractions/pushpull",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.push.source.poly~.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/pushpull",
-				"patcherrelativepath" : "../../abstractions/pushpull",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.dsp.8chlevels.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/dsp",
-				"patcherrelativepath" : "../../abstractions/dsp",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "omod.sfplay~.voix.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/modules/omod.sfplay~",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.dsp.thispoly~.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/dsp",
-				"patcherrelativepath" : "../../abstractions/dsp",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.bundle.dsp.base.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/oovu/patchers/abstractions/bundles",
-				"patcherrelativepath" : "../../abstractions/bundles",
-				"type" : "JSON",
-				"implicit" : 1
 			}
  ]
 	}

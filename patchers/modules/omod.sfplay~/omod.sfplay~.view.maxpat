@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 5,
+			"revision" : 6,
 			"architecture" : "x86"
 		}
 ,
@@ -154,6 +154,7 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-20",
+					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 3,
 					"numoutlets" : 3,
@@ -184,7 +185,6 @@
 							"parameter_type" : 0,
 							"parameter_mmin" : -24.0,
 							"parameter_mmax" : 24.0,
-							"parameter_initial_enable" : 1,
 							"parameter_initial" : [ 0 ],
 							"parameter_unitstyle" : 7,
 							"parameter_speedlim" : 0.0
@@ -234,6 +234,7 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-16",
+					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 3,
 					"numoutlets" : 3,
@@ -281,6 +282,7 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-9",
+					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 3,
 					"numoutlets" : 3,
@@ -309,6 +311,7 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-6",
+					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 3,
 					"numoutlets" : 3,
@@ -323,6 +326,7 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-5",
+					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 3,
 					"numoutlets" : 3,
@@ -481,6 +485,7 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-13",
+					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 3,
 					"numoutlets" : 3,
@@ -528,6 +533,7 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-10",
+					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 3,
 					"numoutlets" : 3,
@@ -556,6 +562,7 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-1",
+					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 3,
 					"numoutlets" : 3,
@@ -806,32 +813,6 @@
 					"source" : [ "obj-9", 0 ]
 				}
 
-			}
- ],
-		"parameters" : 		{
-			"obj-17" : [ "live.numbox", "live.numbox", 0 ]
-		}
-,
-		"dependency_cache" : [ 			{
-				"name" : "oovu.guibackground.js",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/jsui",
-				"patcherrelativepath" : "../../../jsui",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.gui.meters.8x.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/gui",
-				"patcherrelativepath" : "../../abstractions/gui",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.timeslider.js",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/jsui",
-				"patcherrelativepath" : "../../../jsui",
-				"type" : "TEXT",
-				"implicit" : 1
 			}
  ]
 	}

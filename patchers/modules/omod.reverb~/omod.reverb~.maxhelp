@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 363.0, 44.0, 501.0, 632.0 ],
+		"rect" : [ 164.0, 44.0, 501.0, 632.0 ],
 		"bgcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -150,7 +150,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 180.0, 310.0, 85.0, 20.0 ],
-					"text" : "print /allpass~"
+					"text" : "print /reverb~"
 				}
 
 			}

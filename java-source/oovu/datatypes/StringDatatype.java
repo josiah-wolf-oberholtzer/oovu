@@ -28,7 +28,7 @@ public class StringDatatype extends GenericDatatype {
     @Override
     public Atom[] get_default() {
         return Atom.newAtom(new String[] {
-            ""
+            "bang"
         });
     }
 

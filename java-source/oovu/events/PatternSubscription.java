@@ -3,6 +3,7 @@ package oovu.events;
 import java.util.HashMap;
 import java.util.Map;
 
+import oovu.addresses.Environment;
 import oovu.datatypes.BooleanDatatype;
 import oovu.datatypes.BoundedDatatype;
 import oovu.messaging.MaxIO;

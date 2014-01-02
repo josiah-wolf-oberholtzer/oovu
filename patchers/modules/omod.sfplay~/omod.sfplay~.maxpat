@@ -4,11 +4,12 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 5,
+			"revision" : 6,
 			"architecture" : "x86"
 		}
 ,
 		"rect" : [ 29.0, 69.0, 640.0, 480.0 ],
+		"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -138,7 +139,7 @@
 					"destination" : [ "obj-10", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"source" : [ "obj-3", 1 ]
+					"source" : [ "obj-3", 2 ]
 				}
 
 			}
@@ -147,115 +148,9 @@
 					"destination" : [ "obj-2", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"source" : [ "obj-3", 0 ]
+					"source" : [ "obj-3", 1 ]
 				}
 
-			}
- ],
-		"parameters" : 		{
-			"obj-13::obj-17" : [ "live.numbox", "live.numbox", 0 ],
-			"obj-13::obj-12" : [ "live.slider[1]", "live.slider", 0 ],
-			"obj-13::obj-18::obj-204" : [ "live.numbox[13]", "live.numbox", 0 ],
-			"obj-13::obj-18::obj-18::obj-4" : [ "live.slider", "live.slider", 0 ]
-		}
-,
-		"dependency_cache" : [ 			{
-				"name" : "omod.sfplay~.model.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/modules/omod.sfplay~",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.bundle.dsp.sender.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/bundles",
-				"patcherrelativepath" : "../../abstractions/bundles",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.push.source.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/pushpull",
-				"patcherrelativepath" : "../../abstractions/pushpull",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.push.source.poly~.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/pushpull",
-				"patcherrelativepath" : "../../abstractions/pushpull",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.dsp.8chlevels.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/dsp",
-				"patcherrelativepath" : "../../abstractions/dsp",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "omod.sfplay~.voix.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/modules/omod.sfplay~",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.dsp.thispoly~.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/dsp",
-				"patcherrelativepath" : "../../abstractions/dsp",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "omod.sfplay~.view.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/modules/omod.sfplay~",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.guibackground.js",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/jsui",
-				"patcherrelativepath" : "../../../jsui",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.gui.meters.8x.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/gui",
-				"patcherrelativepath" : "../../abstractions/gui",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.gui.send.dynamic.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/gui",
-				"patcherrelativepath" : "../../abstractions/gui",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.gui.send.1x.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/gui",
-				"patcherrelativepath" : "../../abstractions/gui",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.util.makeumenu.maxpat",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/patchers/abstractions/utilities",
-				"patcherrelativepath" : "../../abstractions/utilities",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "oovu.timeslider.js",
-				"bootpath" : "/Users/josiah/Documents/Development/oovu/jsui",
-				"patcherrelativepath" : "../../../jsui",
-				"type" : "TEXT",
-				"implicit" : 1
 			}
  ]
 	}
