@@ -37,7 +37,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 160.0, 473.0, 21.0, 20.0 ],
+					"patching_rect" : [ 160.0, 475.0, 21.0, 20.0 ],
 					"text" : "6)",
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
 				}
@@ -52,7 +52,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 160.0, 448.0, 21.0, 20.0 ],
+					"patching_rect" : [ 160.0, 450.0, 21.0, 20.0 ],
 					"text" : "5)",
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
 				}
@@ -67,7 +67,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 160.0, 423.0, 21.0, 20.0 ],
+					"patching_rect" : [ 160.0, 425.0, 21.0, 20.0 ],
 					"text" : "4)",
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
 				}
@@ -82,7 +82,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 160.0, 398.0, 21.0, 20.0 ],
+					"patching_rect" : [ 160.0, 400.0, 21.0, 20.0 ],
 					"text" : "3)",
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
 				}
@@ -97,7 +97,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 160.0, 373.0, 21.0, 20.0 ],
+					"patching_rect" : [ 160.0, 375.0, 21.0, 20.0 ],
 					"text" : "2)",
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
 				}
@@ -112,7 +112,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 160.0, 348.0, 21.0, 20.0 ],
+					"patching_rect" : [ 160.0, 350.0, 21.0, 20.0 ],
 					"text" : "1)",
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
 				}
@@ -127,7 +127,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 210.0, 400.0, 122.0, 18.0 ],
+					"patching_rect" : [ 180.0, 400.0, 122.0, 18.0 ],
 					"text" : "/output~/dac/active 1"
 				}
 
@@ -141,7 +141,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 255.0, 475.0, 153.0, 18.0 ],
+					"patching_rect" : [ 180.0, 475.0, 153.0, 18.0 ],
 					"text" : "/*/dsp/output.1/amplitude 1"
 				}
 
@@ -155,7 +155,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 240.0, 450.0, 292.0, 18.0 ],
+					"patching_rect" : [ 180.0, 450.0, 292.0, 18.0 ],
 					"text" : "/allpass~/dsp/output.1/destination /output~/dsp/input"
 				}
 
@@ -169,7 +169,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 225.0, 425.0, 287.0, 18.0 ],
+					"patching_rect" : [ 180.0, 425.0, 287.0, 18.0 ],
 					"text" : "/input~/dsp/output.1/destination /allpass~/dsp/input"
 				}
 
@@ -183,7 +183,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 195.0, 375.0, 122.0, 18.0 ],
+					"patching_rect" : [ 180.0, 375.0, 122.0, 18.0 ],
 					"text" : "/*/dsp/:voicecount 2"
 				}
 
@@ -211,7 +211,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 180.0, 505.0, 87.0, 20.0 ],
+					"patching_rect" : [ 180.0, 500.0, 87.0, 20.0 ],
 					"text" : "mxj oovu.Root"
 				}
 

@@ -167,6 +167,7 @@ abstract public class Server implements MessagePasser {
                     PatternSubscription.from_atoms(message_handler.client, arguments);
                 AttributeServer server = (AttributeServer) message_handler.client;
                 server.add_binding(binding);
+                binding.set_next_event_time(System.currentTimeMillis());
                 return null;
             }
         });

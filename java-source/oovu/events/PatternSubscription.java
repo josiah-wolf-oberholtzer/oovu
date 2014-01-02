@@ -3,13 +3,10 @@ package oovu.events;
 import java.util.HashMap;
 import java.util.Map;
 
-import oovu.addresses.Environment;
-import oovu.addresses.OscAddress;
 import oovu.datatypes.BooleanDatatype;
 import oovu.datatypes.BoundedDatatype;
 import oovu.messaging.MaxIO;
 import oovu.messaging.MessageHandler;
-import oovu.messaging.Request;
 import oovu.servers.AttributeServer;
 import oovu.servers.Server;
 import oovu.timing.ValueRange;
@@ -19,7 +16,6 @@ import com.cycling74.max.Atom;
 public class PatternSubscription extends BindingSubscription {
     public static PatternSubscription from_atoms(Server subscriber, Atom[] atoms) {
         Map<String, Atom[]> arguments = MaxIO.from_serialized_dict(atoms);
-        Environment.log(Atom.toOneString(atoms));
         String message_name = null;
         String subscription_name = null;
         ValueRange[] timings = null;
@@ -91,7 +87,6 @@ public class PatternSubscription extends BindingSubscription {
         PatternSubscription subscription =
             new PatternSubscription(arity, subscriber, message_name, timings, values,
                 subscription_name);
-        Environment.log(Atom.toOneString(subscription.to_atoms()));
         return subscription;
     }
 
@@ -118,12 +113,14 @@ public class PatternSubscription extends BindingSubscription {
     @Override
     public void handle_event(Event event) {
         ClockEvent clock_event = (ClockEvent) event;
-        if (clock_event.current_time < this.next_event_time) {
+        if (clock_event.current_time <= this.next_event_time) {
             return;
         }
         double previous_event_time = this.next_event_time;
         double timing = this.timings[this.current_timing_step].execute();
-        Atom[] payload = new Atom[0];
+        Atom[] payload = new Atom[] {
+            Atom.newAtom("bang")
+        };
         if (0 < this.arity) {
             double[] values = new double[this.arity + 1];
             ValueRange value = this.values[this.current_value_step];
@@ -138,9 +135,7 @@ public class PatternSubscription extends BindingSubscription {
         if (0 < this.values.length) {
             this.current_value_step = (this.current_value_step + 1) % this.values.length;
         }
-        OscAddress osc_address = OscAddress.from_cache(":" + this.message_name);
-        Request request = new Request(this.subscriber, osc_address, payload, false);
-        this.subscriber.handle_request(request);
+        this.subscriber.make_request(null, this.message_name, payload);
     }
 
     public void set_next_event_time(double next_event_time) {
