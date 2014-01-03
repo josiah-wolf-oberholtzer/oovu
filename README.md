@@ -3,6 +3,8 @@
 
 A modular performance framework for Max 6.
 
+![OOVU](https://raw.github.com/josiah-wolf-oberholtzer/oovu/master/misc/oovu.png "OOVU")
+
 What is it?
 -----------
 
