@@ -10,29 +10,84 @@ import com.cycling74.max.Atom;
 public class MaxIO {
     public static Map<String, Atom[]> from_serialized_dict(Atom[] atoms) {
         HashMap<String, Atom[]> map = new HashMap<String, Atom[]>();
+        if (atoms == null || atoms.length == 0) {
+            return map;
+        }
         String current_key = null;
-        ArrayList<Atom> current_atoms = new ArrayList<Atom>();
-        for (Atom argument : atoms) {
-            if ((current_key == null) && (!argument.toString().endsWith(":"))) {
-                continue;
-            }
-            if (argument.toString().endsWith(":")) {
-                if ((current_key != null) && (0 < current_atoms.size())) {
-                    map.put(current_key,
-                        current_atoms.toArray(new Atom[current_atoms.size()]));
-                    current_atoms.clear();
+        ArrayList<Atom> collected_atoms = new ArrayList<Atom>();
+        Atom previous_atom = atoms[0];
+        if (previous_atom.isString() && previous_atom.getString().endsWith(":")) {
+            current_key = previous_atom.getString();
+            current_key = current_key.substring(0, current_key.length() - 1);
+            previous_atom = null;
+        }
+        for (Atom current_atom : Atom.removeFirst(atoms)) {
+            if (current_atom.isString()) {
+                if (current_atom.getString().equals(":")) {
+                    if ((current_key != null) && (0 < collected_atoms.size())) {
+                        map.put(current_key, collected_atoms.toArray(new Atom[0]));
+                    }
+                    collected_atoms.clear();
+                    current_key = previous_atom.getString();
+                    previous_atom = null;
+                } else if (current_atom.getString().endsWith(":")) {
+                    if (previous_atom != null) {
+                       collected_atoms.add(previous_atom);  
+                    }
+                    if ((current_key != null) && (0 < collected_atoms.size())) {
+                        map.put(current_key, collected_atoms.toArray(new Atom[0]));
+                    }
+                    collected_atoms.clear();
+                    previous_atom = null;
+                    current_key = current_atom.getString();
+                    current_key = current_key.substring(0, current_key.length() - 1);
+                } else {
+                    if (previous_atom != null) {
+                        collected_atoms.add(previous_atom);  
+                    }
+                    previous_atom = current_atom;
                 }
-                current_key = argument.toString();
-                current_key = current_key.substring(0, current_key.length() - 1);
             } else {
-                current_atoms.add(argument);
+                if (previous_atom != null) {
+                    collected_atoms.add(previous_atom);  
+                }
+                previous_atom = current_atom;
             }
         }
-        if ((0 < current_atoms.size()) && (current_key != null)) {
-            map.put(current_key, current_atoms.toArray(new Atom[current_atoms.size()]));
+        if (previous_atom != null) {
+            collected_atoms.add(previous_atom);  
+        }
+        if ((current_key != null) && (0 < collected_atoms.size())) {
+            map.put(current_key, collected_atoms.toArray(new Atom[0]));
         }
         return map;
     }
+    
+//    public static Map<String, Atom[]> from_serialized_dict(Atom[] atoms) {
+//        HashMap<String, Atom[]> map = new HashMap<String, Atom[]>();
+//        String current_key = null;
+//        ArrayList<Atom> current_atoms = new ArrayList<Atom>();
+//        for (Atom argument : atoms) {
+//            if ((current_key == null) && (!argument.toString().endsWith(":"))) {
+//                continue;
+//            }
+//            if (argument.toString().endsWith(":")) {
+//                if ((current_key != null) && (0 < current_atoms.size())) {
+//                    map.put(current_key,
+//                        current_atoms.toArray(new Atom[current_atoms.size()]));
+//                    current_atoms.clear();
+//                }
+//                current_key = argument.toString();
+//                current_key = current_key.substring(0, current_key.length() - 1);
+//            } else {
+//                current_atoms.add(argument);
+//            }
+//        }
+//        if ((0 < current_atoms.size()) && (current_key != null)) {
+//            map.put(current_key, current_atoms.toArray(new Atom[current_atoms.size()]));
+//        }
+//        return map;
+//    }
 
     public static Atom[][] to_atoms(String message) {
         if (message == null) {

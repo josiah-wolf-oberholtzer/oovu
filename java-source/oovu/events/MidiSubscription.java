@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import oovu.addresses.Environment;
 import oovu.datatypes.BoundedDatatype;
 import oovu.messaging.MaxIO;
 import oovu.messaging.MessageHandler;
@@ -22,6 +23,10 @@ public class MidiSubscription extends BindingSubscription {
         String message_name = null;
         String subscription_name = null;
         Integer mode = 0;
+        for (String key : map.keySet()) {
+            Atom[] value = map.get(key);
+            Environment.log(key + ": " + Atom.toOneString(value));
+        }
         if (map.containsKey("message")) {
             message_name = map.get("message")[0].toString();
         } else {
