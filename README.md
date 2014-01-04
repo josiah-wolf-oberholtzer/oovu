@@ -5,7 +5,7 @@ A modular performance framework for Max 6.
 
 ![OOVU](https://raw.github.com/josiah-wolf-oberholtzer/oovu/master/misc/oovu.png "OOVU")
 
-<iframe src="//player.vimeo.com/video/83364622" width="500" height="313" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+[Introduction to OOVU (vimeo.com)](https://vimeo.com/83364622)
 
 What is it?
 -----------
