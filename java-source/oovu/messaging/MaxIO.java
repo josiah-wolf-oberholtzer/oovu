@@ -45,7 +45,11 @@ public class MaxIO {
                     if (previous_atom != null) {
                         collected_atoms.add(previous_atom);  
                     }
-                    previous_atom = current_atom;
+                    if (current_atom.getString().equals("*")) {
+                        previous_atom = null;
+                    } else {
+                        previous_atom = current_atom;
+                    }
                 }
             } else {
                 if (previous_atom != null) {
