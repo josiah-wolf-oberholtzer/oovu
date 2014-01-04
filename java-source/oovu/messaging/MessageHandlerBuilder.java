@@ -6,7 +6,7 @@ public class MessageHandlerBuilder {
     private MessageHandlerCallback callback;
     private MessageHandlerCallback getter;
     private Integer arity;
-    private MessageHandlerCallback MessageHandlerCallback;
+    private MessageHandlerCallback setter;
     private String name;
     private boolean is_binding_relevant;
     private boolean is_meta_relevant;
@@ -26,14 +26,14 @@ public class MessageHandlerBuilder {
         this.is_rampable = false;
         this.is_state_relevant = false;
         this.name = name;
-        this.MessageHandlerCallback = null;
+        this.setter = null;
     }
 
     public MessageHandler build(Server client) {
         return new MessageHandler(client, this.arity, this.arity_callback, this.callback,
             this.getter, this.is_binding_relevant, this.is_meta_relevant,
             this.is_meta_relevant_callback, this.is_rampable, this.is_rampable_callback,
-            this.is_state_relevant, this.name, this.MessageHandlerCallback);
+            this.is_state_relevant, this.name, this.setter);
     }
 
     public MessageHandlerBuilder with_arity(Integer arity) {
@@ -92,7 +92,7 @@ public class MessageHandlerBuilder {
     public
         MessageHandlerBuilder
         with_setter(MessageHandlerCallback MessageHandlerCallback) {
-        this.MessageHandlerCallback = MessageHandlerCallback;
+        this.setter = MessageHandlerCallback;
         return this;
     }
 }

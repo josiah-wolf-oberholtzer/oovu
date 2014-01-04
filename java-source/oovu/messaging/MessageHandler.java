@@ -12,7 +12,7 @@ public class MessageHandler {
     private final IntegerMessageHandlerCallback arity_callback;
     public final Server client;
     public final MessageHandlerCallback callback;
-    public final MessageHandlerCallback MessageHandlerCallback;
+    public final MessageHandlerCallback setter;
     private final String name;
     private final boolean is_binding_relevant;
     private final boolean is_meta_relevant;
@@ -32,7 +32,7 @@ public class MessageHandler {
         BooleanMessageHandlerCallback is_rampable_callback,
         boolean is_state_relevant,
         String name,
-        MessageHandlerCallback MessageHandlerCallback) {
+        MessageHandlerCallback setter) {
         this.arity = arity;
         this.arity_callback = arity_callback;
         this.callback = callback;
@@ -45,7 +45,7 @@ public class MessageHandler {
         this.is_rampable_callback = is_rampable_callback;
         this.is_state_relevant = is_state_relevant;
         this.name = name;
-        this.MessageHandlerCallback = MessageHandlerCallback;
+        this.setter = setter;
     }
 
     public Integer get_arity() {
@@ -94,7 +94,7 @@ public class MessageHandler {
         if (message.equals(this.get_getter_name())) {
             result = this.getter.execute(this, arguments);
         } else if (message.equals(this.get_name())) {
-            result = this.MessageHandlerCallback.execute(this, arguments);
+            result = this.setter.execute(this, arguments);
         }
         return result;
     }

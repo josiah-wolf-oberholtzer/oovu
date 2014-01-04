@@ -2,6 +2,7 @@ package oovu.servers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -50,6 +51,7 @@ abstract public class Server implements MessagePasser {
         this.configure_bind_key_message_handler();
         this.configure_bind_midi_message_handler();
         this.configure_bind_pattern_message_handler();
+        this.configure_bindables_message_handler();
         this.configure_bindings_message_handler();
         this.configure_dumpmeta_message_handler();
         this.configure_interface_message_handler();
@@ -77,7 +79,7 @@ abstract public class Server implements MessagePasser {
         if (message_handler.getter != null) {
             this.message_handlers.put(message_handler.get_getter_name(), message_handler);
         }
-        if (message_handler.MessageHandlerCallback != null) {
+        if (message_handler.setter != null) {
             this.message_handlers.put(message_handler.get_name(), message_handler);
         }
     }
@@ -174,16 +176,40 @@ abstract public class Server implements MessagePasser {
         this.add_message_handler(builder.build(this));
     }
 
+    private void configure_bindables_message_handler() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("bindables");
+        builder.with_is_meta_relevant(true);
+        builder.with_getter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
+                HashSet<String> result = new HashSet<String>();
+                Server server = message_handler.client;
+                for (MessageHandler current_message_handler : server.message_handlers
+                    .values()) {
+                    if (current_message_handler.get_is_binding_relevant()
+                        && (current_message_handler.setter != null)) {
+                        result.add(current_message_handler.get_name());
+                    }
+                }
+                String[] strings = result.toArray(new String[0]);
+                Arrays.sort(strings);
+                return MaxIO.to_atoms(message_handler.get_name(), strings);
+            }
+        });
+        this.add_message_handler(builder.build(this));
+    }
+
     private void configure_bindings_message_handler() {
         MessageHandlerBuilder builder = new MessageHandlerBuilder("bindings");
         builder.with_getter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
-                AttributeServer server = (AttributeServer) message_handler.client;
                 ArrayList<Atom[]> result = new ArrayList<Atom[]>();
-                result.add(Atom.parse("bindings/count " + server.bindings.size()));
+                result.add(Atom.parse("bindings/count "
+                    + message_handler.client.bindings.size()));
                 BindingSubscription[] bindings =
-                    server.bindings.values().toArray(new BindingSubscription[0]);
+                    message_handler.client.bindings.values().toArray(
+                        new BindingSubscription[0]);
                 for (BindingSubscription binding : bindings) {
                     result.add(binding.to_atoms());
                 }
