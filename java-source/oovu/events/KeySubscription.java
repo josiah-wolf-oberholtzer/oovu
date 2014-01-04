@@ -82,6 +82,7 @@ public class KeySubscription extends BindingSubscription {
         }));
         map.put("message", Atom.parse(this.message_name));
         map.put("name", Atom.parse(this.subscription_name));
-        return Atom.newAtom("bind/key", MaxIO.to_serialized_dict(map));
+        map.put("type", Atom.parse("key"));
+        return MaxIO.to_serialized_dict(map);
     }
 }

@@ -2,7 +2,6 @@ package oovu.servers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -210,9 +209,19 @@ abstract public class Server implements MessagePasser {
                 BindingSubscription[] bindings =
                     message_handler.client.bindings.values().toArray(
                         new BindingSubscription[0]);
+                ArrayList<Atom> binding_names = new ArrayList<Atom>();
+                binding_names.add(Atom.newAtom("bindings/names"));
+                ArrayList<Atom> binding_dict = new ArrayList<Atom>();
+                binding_dict.add(Atom.newAtom("bindings/dict"));
                 for (BindingSubscription binding : bindings) {
-                    result.add(binding.to_atoms());
+                    binding_names.add(Atom.newAtom(binding.subscription_name));
+                    binding_dict.add(Atom.newAtom(binding.subscription_name + ":"));
+                    binding_dict.add(Atom.newAtom("{"));
+                    binding_dict.addAll(Arrays.asList(binding.to_atoms()));
+                    binding_dict.add(Atom.newAtom("}"));
                 }
+                result.add(binding_names.toArray(new Atom[0]));
+                result.add(binding_dict.toArray(new Atom[0]));
                 return result.toArray(new Atom[0][]);
             }
         });

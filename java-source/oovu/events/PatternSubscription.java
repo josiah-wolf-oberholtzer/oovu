@@ -160,6 +160,7 @@ public class PatternSubscription extends BindingSubscription {
             values[i] = this.values[i].to_atom();
         }
         map.put("values", values);
-        return Atom.newAtom("bind/pattern", MaxIO.to_serialized_dict(map));
+        map.put("type", Atom.parse("pattern"));
+        return MaxIO.to_serialized_dict(map);
     }
 }

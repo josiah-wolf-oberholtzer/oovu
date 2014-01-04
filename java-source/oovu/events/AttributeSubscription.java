@@ -72,6 +72,7 @@ public class AttributeSubscription extends BindingSubscription {
         map.put("message", Atom.parse(this.message_name));
         map.put("name", Atom.parse(this.subscription_name));
         map.put("source", Atom.parse(this.osc_address_string));
-        return Atom.newAtom("bind/attribute", MaxIO.to_serialized_dict(map));
+        map.put("type", Atom.parse("attribute"));
+        return MaxIO.to_serialized_dict(map);
     }
 }
