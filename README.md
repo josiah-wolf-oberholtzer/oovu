@@ -5,6 +5,8 @@ A modular performance framework for Max 6.
 
 ![OOVU](https://raw.github.com/josiah-wolf-oberholtzer/oovu/master/misc/oovu.png "OOVU")
 
+<iframe src="//player.vimeo.com/video/83364622" width="500" height="313" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
 What is it?
 -----------
 
@@ -24,6 +26,8 @@ What does it do?
   up- and down-mixing between modules with different numbers of channels.
 - `oovu` helps you keep each module's logic completely separate from its user
   interface.
+
+
 
 Installation
 ------------
