@@ -116,6 +116,13 @@ abstract public class Server implements MessagePasser {
 
     private void configure_bind_attribute_message_handler() {
         MessageHandlerBuilder builder = new MessageHandlerBuilder("bind/attribute");
+        builder.with_callback(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
+                message_handler.client.make_request(message_handler.client, "getbindings", null);
+                return null;
+            }
+        });
         builder.with_setter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
@@ -131,6 +138,13 @@ abstract public class Server implements MessagePasser {
 
     private void configure_bind_key_message_handler() {
         MessageHandlerBuilder builder = new MessageHandlerBuilder("bind/key");
+        builder.with_callback(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
+                message_handler.client.make_request(message_handler.client, "getbindings", null);
+                return null;
+            }
+        });
         builder.with_setter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
@@ -146,6 +160,13 @@ abstract public class Server implements MessagePasser {
 
     private void configure_bind_midi_message_handler() {
         MessageHandlerBuilder builder = new MessageHandlerBuilder("bind/midi");
+        builder.with_callback(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
+                message_handler.client.make_request(message_handler.client, "getbindings", null);
+                return null;
+            }
+        });
         builder.with_setter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
@@ -161,6 +182,13 @@ abstract public class Server implements MessagePasser {
 
     private void configure_bind_pattern_message_handler() {
         MessageHandlerBuilder builder = new MessageHandlerBuilder("bind/pattern");
+        builder.with_callback(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
+                message_handler.client.make_request(message_handler.client, "getbindings", null);
+                return null;
+            }
+        });
         builder.with_setter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
@@ -371,6 +399,13 @@ abstract public class Server implements MessagePasser {
 
     private void configure_unbind_message_handler() {
         MessageHandlerBuilder builder = new MessageHandlerBuilder("unbind");
+        builder.with_callback(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
+                message_handler.client.make_request(message_handler.client, "getbindings", null);
+                return null;
+            }
+        });
         builder.with_setter(new MessageHandlerCallback() {
             @Override
             public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
