@@ -18,6 +18,7 @@ import oovu.events.KeySubscription;
 import oovu.events.MidiSubscription;
 import oovu.events.PatternSubscription;
 import oovu.events.Subscription;
+import oovu.maxguis.BindingsGui;
 import oovu.messaging.DeferredRequestCallback;
 import oovu.messaging.MaxIO;
 import oovu.messaging.MessageHandler;
@@ -34,6 +35,7 @@ import com.cycling74.max.MaxPatcher;
 import com.cycling74.max.MaxSystem;
 
 abstract public class Server implements MessagePasser {
+    private MaxPatcher bindings_patcher = null;
     protected final Set<Server> child_servers = new HashSet<Server>();
     protected final Set<Subscription> subscriptions = new HashSet<Subscription>();
     protected final Map<String, MessageHandler> message_handlers =
@@ -52,6 +54,8 @@ abstract public class Server implements MessagePasser {
         this.configure_bind_pattern_message_handler();
         this.configure_bindables_message_handler();
         this.configure_bindings_message_handler();
+        this.configure_bindings_closed_message_handler();
+        this.configure_bindings_view_message_handler();
         this.configure_dumpmeta_message_handler();
         this.configure_interface_message_handler();
         this.configure_meta_message_handler();
@@ -226,6 +230,35 @@ abstract public class Server implements MessagePasser {
         this.add_message_handler(builder.build(this));
     }
 
+    private void configure_bindings_view_message_handler() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("bindings/view");
+        builder.with_setter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
+                if (message_handler.client.bindings_patcher == null) {
+                    message_handler.client.bindings_patcher = BindingsGui.build(message_handler.client);
+                }
+                if (message_handler.client.bindings_patcher != null) {
+                    message_handler.client.bindings_patcher.send("front", new Atom[0]);
+                }
+                return null;
+            }
+        });
+        this.add_message_handler(builder.build(this));
+    }
+    
+    private void configure_bindings_closed_message_handler() {
+        MessageHandlerBuilder builder = new MessageHandlerBuilder("bindings/closed");
+        builder.with_setter(new MessageHandlerCallback() {
+            @Override
+            public Atom[][] execute(MessageHandler message_handler, Atom[] arguments) {
+                message_handler.client.bindings_patcher = null;
+                return null;
+            }
+        });
+        this.add_message_handler(builder.build(this));
+    }
+    
     private void configure_bindings_message_handler() {
         MessageHandlerBuilder builder = new MessageHandlerBuilder("bindings");
         builder.with_getter(new MessageHandlerCallback() {
