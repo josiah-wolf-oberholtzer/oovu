@@ -3,15 +3,17 @@
 
 A modular performance framework for Max 6.
 
+- [Introduction to OOVU (vimeo.com)](https://vimeo.com/83364622)
+
 ![OOVU](https://raw.github.com/josiah-wolf-oberholtzer/oovu/master/misc/oovu.png "OOVU")
 
-[Introduction to OOVU (vimeo.com)](https://vimeo.com/83364622)
 
 What is it?
 -----------
 
 `oovu` is a collection of externals and patchers for Max 6. Open source, mostly
 written in Java. Inspired by Jamoma.
+
 
 What does it do?
 ----------------
@@ -28,15 +30,21 @@ What does it do?
   interface.
 
 
+Requirements
+------------
+
+- [Max 6.1.6](http://cycling74.com/downloads/)
+
 
 Installation
 ------------
 
 Just copy the entire `oovu` project into your Max 6 `packages` directory.
 
+
 Start patching
 --------------
 
 Open the `oovu-overview` from Max's `extras` menu, and start exploring.
 
-Or right-click in any patcher and `Paste From` > `oovu`.
+Or right-click in any patcher to `Paste From` > `oovu`.
